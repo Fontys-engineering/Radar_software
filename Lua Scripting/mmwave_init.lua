@@ -30,6 +30,7 @@ function GetCOM()
         output = output:gsub('COM', '')
     else
         WriteToLog("Failed to retrieve COM ports. Error code: ", "red") WriteToLog(exit_code, "red")
+        return -1
     end
 
     --regex match to newline characters and add the substring to table comTable
@@ -41,6 +42,12 @@ end
 --function to connect to suitable COM port
 function ConnectToCOM()
     local comTable = GetCOM()
+
+    if comTable == -1 then
+        WriteToLog("\nNo COM ports found!", "red")
+        return 1
+    end
+
     local i = 1
 
     while i <= #comTable do
@@ -64,13 +71,13 @@ function ConnectToCOM()
     end
 
     if i > #comTable then
-        WriteToLog("\nNo COM found!", "red")
-        return 1
+        WriteToLog("\nNo connection established!", "red")
+        return 2
     else
         return 0
     end
-
 end
+
 
 -- Function to initialize and connect to the radar
 function InitRadar()
