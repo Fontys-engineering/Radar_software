@@ -8,3 +8,5 @@
 5. open Output (view -> Output) if you want to see the log output
 
 nLinChirpData.csv is an example lookup table generated with the matlab script in \MATLAB.
+
+# **add more in-depth documentation here**
