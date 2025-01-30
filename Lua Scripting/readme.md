@@ -18,7 +18,7 @@ Note that only the complex functions are documented in detail in this file, sinc
 This script initializes the radar and connects the radar boards to a computer.
 
 The DCA1000 is connected via ethernet on a specific IP address and port number that may be assigned by the user. The radar is initialized by first resetting the device, then connecting it to a COM port. When the connection is successful, the firmware is uploaded, the radar is powered up and default settings are loaded to the device.
-if anything goes wrong, an appropriate error message is printed to the Output console in MMWave, using `WriteToLog(message, colour)`. This is checked based on a `STATUS` variable. If any function does not return 0, then the status will become 1 and all functions afterwards will be terminated.
+If anything goes wrong, an appropriate error message is printed to the Output console in MMWave, using `WriteToLog(message, colour)`. This is checked based on a `STATUS` variable. If any function does not return 0, then the status will become 1 and all functions afterwards will be terminated.
 
 #### GetCOM()
 This function will get all available COM ports and returns them in an array for further processing.
@@ -26,7 +26,7 @@ This function will get all available COM ports and returns them in an array for 
 A list of all available COM ports is fetched using the Windows PowerShell command `powershell -Command "[System.IO.Ports.SerialPort]::GetPortNames()"`. Upon successful execution of this command, the list is edited using `gsub` to remove the "COM" substring from the entire table. Afterwards, a regex is used to only insert the actual numbers into an array, and the function returns this array. On failure, the function will return -1.
 
 #### ConnectToCOM()
-The result from `GetCOM()` is saved in a table, and this table is used to enter a loop. IF the `GetCom()` function returns -1, immediately terminate the function and return 1.
+The result from `GetCOM()` is saved in a table, and this table is used to enter a loop. If the `GetCom()` function returns -1, immediately terminate the function and return 1.
 
 Generally, picking any port below 10 (written in the software as a global constant `SYSTEM_COM`) will crash MMWave, and is used for system peripherals. These ports are therefore skipped in the loop. When the COM port is not a system port, a connection will attempt to be established. If a connection is established, the loop will end and the function will return 0. If no connection can be established, the function will return 2.
 
@@ -51,7 +51,7 @@ This Lua scipt imports a .csv lookup table containing a start frequency [GHz], s
 This low-level function imports the lookup table and converts it to an usable array for further processing in the code.
 
 When the lookup table is imported, the entire file is split into separate lines, which are saved in `lines[]`. Since the lines are interpreted as string literals, a regex is used to save each part before a `,` as a substring, and all numbers are converted to actual numbers.
-The file is closed, and all numbers in the lines are filtered to their correct array depending on the lookup table structure described in the software. These arrays are all saved in `chirpTable` and this array is returned.
+The file is closed, and all numbers in the lines are filtered to their correct array depending on the lookup table structure described in the software. These arrays are all saved as a 2D array `chirpTable[][]` which is returned.
 
 #### ProfileConfiguration()
 This high-level function is responsible for implementing the provided lookup table into MMWave using its built-in functions and converting it to a pseudo-non-linear chirp, consisting of several linear chirp segments that approximate a non-linear chirp. 
