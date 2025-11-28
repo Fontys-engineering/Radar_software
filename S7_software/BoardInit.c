@@ -12,6 +12,7 @@ void initUart()
 void deInitUart()
 {
     DebugP_log("UART is now de-initializing\r\n");
+    //hallo tim
 
     /* Close the UART drivers*/
     Board_driversClose();
