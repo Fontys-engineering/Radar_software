@@ -1,4 +1,6 @@
 hello_world_awr294x-evm_r5fss0-0_nortos_ti-arm-clang/
+uart_echo_callback_awr294x-evm_r5fss0-0_nortos_ti-arm-clang/
+uart_echo_callback_awr294x-evm_r5fss0-0_nortos_ti-arm-clang/
 .theia/launch.json
 S7_software/.cproject
 S7_software/.ccsproject
