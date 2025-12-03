@@ -1,6 +1,6 @@
 hello_world_awr294x-evm_r5fss0-0_nortos_ti-arm-clang/
 uart_echo_callback_awr294x-evm_r5fss0-0_nortos_ti-arm-clang/
-uart_echo_callback_awr294x-evm_r5fss0-0_nortos_ti-arm-clang/
+i2c_temperature_awr294x-evm_r5fss0-0_nortos_ti-arm-clang/
 .theia/launch.json
 S7_software/.cproject
 S7_software/.ccsproject
@@ -17,3 +17,4 @@ S7_software/S7_software.rprc
 S7_software/syscfg_c.rov.xs
 S7_software/targetConfigs/AWR2944.ccxml
 S7_software/targetConfigs/readme.txt
+
