@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?fileVersion 4.0.0?><cproject storage_type_id="org.eclipse.cdt.core.XmlProjectDescriptionStorage">
+    <storageModule moduleId="org.eclipse.cdt.core.settings">
+        <cconfiguration id="com.ti.ccstudio.buildDefinitions.C6000.Debug.910518759">
+            <storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="com.ti.ccstudio.buildDefinitions.C6000.Debug.910518759" moduleId="org.eclipse.cdt.core.settings" name="Debug">
+                <macros>
+                    <stringMacro name="MMWAVE_SDK_INSTALL_PATH" type="VALUE_PATH_ANY" value="${COM_TI_MMWAVE_MCUPLUS_SDK_INSTALL_DIR}"/>
+                    <stringMacro name="MMWAVE_AWR294X_DFP_INSTALL_PATH" type="VALUE_PATH_ANY" value="${COM_TI_MMWAVE_MCUPLUS_SDK_INSTALL_DIR}/../mmwave_dfp_02_04_18_01"/>
+                    <stringMacro name="MCU_PLUS_SDK_PATH" type="VALUE_PATH_ANY" value="${COM_TI_MCU_PLUS_SDK_AWR294X_INSTALL_DIR}"/>
+                    <stringMacro name="C66x_DSPLIB_INSTALL_PATH" type="VALUE_PATH_ANY" value="C:/ti/dsplib_c66x_3_4_0_0"/>
+                    <stringMacro name="C66x_MATHLIB_INSTALL_PATH" type="VALUE_PATH_ANY" value="C:/ti/mathlib_c66x_3_1_2_1"/>
+                </macros>
+                <externalSettings/>
+                <extensions>
+                    <extension id="org.eclipse.cdt.core.GmakeErrorParser" point="com.ti.ccs.project.ErrorParser"/>
+                    <extension id="com.ti.ccs.errorparser.SysConfigErrorParser" point="com.ti.ccs.project.ErrorParser"/>
+                    <extension id="com.ti.ccs.errorparser.CompilerErrorParser_TI" point="com.ti.ccs.project.ErrorParser"/>
+                </extensions>
+            </storageModule>
+            <storageModule moduleId="cdtBuildSystem" version="4.0.0">
+                <configuration artifactExtension="xe66" artifactName="${ProjName}" buildProperties="" cleanCommand="${CG_CLEAN_CMD}" description="" id="com.ti.ccstudio.buildDefinitions.C6000.Debug.910518759" name="Debug" parent="com.ti.ccstudio.buildDefinitions.C6000.Debug" postbuildStep="${CG_TOOL_ROOT}/bin/strip6x -p ${CCS_PROJECT_DIR}/${ConfigName}/${ProjName}.xe66 -o=${CCS_PROJECT_DIR}/${ConfigName}/${ProjName}_strip.xe66;                     ${SYSCONFIG_TOOL_ROOT}/nodejs/node.exe  ${COM_TI_MCU_PLUS_SDK_AWR294X_INSTALL_DIR}/tools/boot/out2rprc/elf2rprc.js ${CCS_PROJECT_DIR}/${ConfigName}/${ProjName}_strip.xe66;                     ${CCE_INSTALL_ROOT}/utils/cygwin/mv ${CCS_PROJECT_DIR}/${ConfigName}/${ProjName}_strip.rprc ${CCS_PROJECT_DIR}/${ConfigName}/${ProjName}.rprc;                     ${CCE_INSTALL_ROOT}/utils/cygwin/rm -f ${CCS_PROJECT_DIR}/${ConfigName}/${ProjName}_strip.rprc;                     ${CCE_INSTALL_ROOT}/utils/cygwin/rm -f ${CCS_PROJECT_DIR}/${ConfigName}/${ProjName}_strip.xe66;                     " prebuildStep="${CCE_INSTALL_ROOT}/utils/cygwin/rm -f ${CCS_PROJECT_DIR}/${ConfigName}/${ProjName}.rprc;                     ${SYSCONFIG_TOOL_ROOT}/nodejs/node ${SYSCONFIG_TOOL_ROOT}/dist/cli.js --product ${COM_TI_MCU_PLUS_SDK_AWR294X_INSTALL_DIR}/.metadata/product.json --script ../../out_of_box_2944_mss/mss/mss.syscfg --context r5fss0-0 --output ../../out_of_box_2944_mss/mss/mssgenerated/ --script ../dss/dss.syscfg --context c66ss0 --output ../dss/dssgenerated/;                     ">
+                    <folderInfo id="com.ti.ccstudio.buildDefinitions.C6000.Debug.910518759." name="/" resourcePath="">
+                        <toolChain id="com.ti.ccstudio.buildDefinitions.C6000_8.5.exe.DebugToolchain.1824999349" name="TI Build Tools" superClass="com.ti.ccstudio.buildDefinitions.C6000_8.5.exe.DebugToolchain" targetTool="com.ti.ccstudio.buildDefinitions.C6000_8.5.exe.linkerDebug.466662801">
+                            <option id="com.ti.ccstudio.buildDefinitions.core.OPT_TAGS.1819783219" superClass="com.ti.ccstudio.buildDefinitions.core.OPT_TAGS" valueType="stringList">
+                                <listOptionValue value="DEVICE_CONFIGURATION_ID=TMS320C66XX.AWR2944"/>
+                                <listOptionValue value="DEVICE_CORE_ID=C66xx_DSP"/>
+                                <listOptionValue value="DEVICE_ENDIANNESS=little"/>
+                                <listOptionValue value="OUTPUT_FORMAT=ELF"/>
+                                <listOptionValue value="CCS_MBS_VERSION=70.0.0"/>
+                                <listOptionValue value="RUNTIME_SUPPORT_LIBRARY="/>
+                                <listOptionValue value="OUTPUT_TYPE=executable"/>
+                                <listOptionValue value="PRODUCTS=sysconfig:1.23.0;com.ti.MCU_PLUS_SDK_AWR294X:10.1.0.04;com.ti.MMWAVE_MCUPLUS_SDK:4.7.1.04;"/>
+                                <listOptionValue value="PRODUCT_MACRO_IMPORTS={&quot;sysconfig&quot;:[&quot;${SYSCONFIG_TOOL_INCLUDE_PATH}&quot;,&quot;${SYSCONFIG_TOOL_LIBRARY_PATH}&quot;,&quot;${SYSCONFIG_TOOL_LIBRARIES}&quot;,&quot;${SYSCONFIG_TOOL_SYMBOLS}&quot;,&quot;${SYSCONFIG_TOOL_SYSCONFIG_MANIFEST}&quot;],&quot;com.ti.MCU_PLUS_SDK_AWR294X&quot;:[&quot;${COM_TI_MCU_PLUS_SDK_AWR294X_INCLUDE_PATH}&quot;,&quot;${COM_TI_MCU_PLUS_SDK_AWR294X_LIBRARY_PATH}&quot;,&quot;${COM_TI_MCU_PLUS_SDK_AWR294X_LIBRARIES}&quot;,&quot;${COM_TI_MCU_PLUS_SDK_AWR294X_SYMBOLS}&quot;,&quot;${COM_TI_MCU_PLUS_SDK_AWR294X_SYSCONFIG_MANIFEST}&quot;],&quot;com.ti.MMWAVE_MCUPLUS_SDK&quot;:[&quot;${COM_TI_MMWAVE_MCUPLUS_SDK_INCLUDE_PATH}&quot;,&quot;${COM_TI_MMWAVE_MCUPLUS_SDK_LIBRARY_PATH}&quot;,&quot;${COM_TI_MMWAVE_MCUPLUS_SDK_LIBRARIES}&quot;,&quot;${COM_TI_MMWAVE_MCUPLUS_SDK_SYMBOLS}&quot;,&quot;${COM_TI_MMWAVE_MCUPLUS_SDK_SYSCONFIG_MANIFEST}&quot;]}"/>
+                            </option>
+                            <option id="com.ti.ccstudio.buildDefinitions.core.OPT_CODEGEN_VERSION.1354537882" superClass="com.ti.ccstudio.buildDefinitions.core.OPT_CODEGEN_VERSION" value="8.5.0.LTS" valueType="string"/>
+                            <targetPlatform id="com.ti.ccstudio.buildDefinitions.C6000_8.5.exe.targetPlatformDebug.1579611877" name="Platform" superClass="com.ti.ccstudio.buildDefinitions.C6000_8.5.exe.targetPlatformDebug"/>
+                            <builder buildPath="${BuildDirectory}" id="com.ti.ccstudio.buildDefinitions.C6000_8.5.exe.builderDebug.199274994" name="GNU Make.Debug" parallelBuildOn="true" parallelizationNumber="optimal" superClass="com.ti.ccstudio.buildDefinitions.C6000_8.5.exe.builderDebug"/>
+                            <tool id="com.ti.ccstudio.buildDefinitions.C6000_8.5.exe.compilerDebug.2000928540" name="C6000 Compiler" superClass="com.ti.ccstudio.buildDefinitions.C6000_8.5.exe.compilerDebug">
+                                <option id="com.ti.ccstudio.buildDefinitions.C6000_8.5.compilerID.DEBUGGING_MODEL.1970172909" superClass="com.ti.ccstudio.buildDefinitions.C6000_8.5.compilerID.DEBUGGING_MODEL" value="com.ti.ccstudio.buildDefinitions.C6000_8.5.compilerID.DEBUGGING_MODEL.SYMDEBUG__DWARF" valueType="enumerated"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.C6000_8.5.compilerID.DISPLAY_ERROR_NUMBER.1731657309" superClass="com.ti.ccstudio.buildDefinitions.C6000_8.5.compilerID.DISPLAY_ERROR_NUMBER" value="true" valueType="boolean"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.C6000_8.5.compilerID.DIAG_WARNING.1319779788" superClass="com.ti.ccstudio.buildDefinitions.C6000_8.5.compilerID.DIAG_WARNING" valueType="stringList">
+                                    <listOptionValue value="225"/>
+                                </option>
+                                <option id="com.ti.ccstudio.buildDefinitions.C6000_8.5.compilerID.DIAG_WRAP.1495204542" superClass="com.ti.ccstudio.buildDefinitions.C6000_8.5.compilerID.DIAG_WRAP" value="com.ti.ccstudio.buildDefinitions.C6000_8.5.compilerID.DIAG_WRAP.off" valueType="enumerated"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.C6000_8.5.compilerID.INCLUDE_PATH.748548253" superClass="com.ti.ccstudio.buildDefinitions.C6000_8.5.compilerID.INCLUDE_PATH" valueType="includePath">
+                                    <listOptionValue value="${SYSCONFIG_TOOL_INCLUDE_PATH}"/>
+                                    <listOptionValue value="${COM_TI_MCU_PLUS_SDK_AWR294X_INCLUDE_PATH}"/>
+                                    <listOptionValue value="${COM_TI_MMWAVE_MCUPLUS_SDK_INCLUDE_PATH}"/>
+                                    <listOptionValue value="${CG_TOOL_ROOT}/include"/>
+                                    <listOptionValue value="${MCU_PLUS_SDK_PATH}/../mathlib_c66x_3_1_2_1/packages"/>
+                                    <listOptionValue value="${MCU_PLUS_SDK_PATH}/../dsplib_c66x_3_4_0_0/packages"/>
+                                    <listOptionValue value="${MCU_PLUS_SDK_PATH}/source"/>
+                                    <listOptionValue value="${MCU_PLUS_SDK_PATH}/source/kernel/freertos/FreeRTOS-Kernel/include"/>
+                                    <listOptionValue value="${MCU_PLUS_SDK_PATH}/source/kernel/freertos/portable/TI_CGT/DSP_C66"/>
+                                    <listOptionValue value="${MCU_PLUS_SDK_PATH}/source/kernel/freertos/config/awr294x/c66"/>
+                                    <listOptionValue value="${MMWAVE_SDK_INSTALL_PATH}/ti/datapath/dpc/objectdetection/objdethwaDDMA/src/"/>
+                                    <listOptionValue value="${MMWAVE_SDK_INSTALL_PATH}"/>
+                                    <listOptionValue value="${MMWAVE_AWR294X_DFP_INSTALL_PATH}"/>
+                                    <listOptionValue value="${PROJECT_ROOT}\dss\dssgenerated"/>
+                                    <listOptionValue value="${PROJECT_LOC}"/>
+                                </option>
+                                <option id="com.ti.ccstudio.buildDefinitions.C6000_8.5.compilerID.DEFINE.2071047175" superClass="com.ti.ccstudio.buildDefinitions.C6000_8.5.compilerID.DEFINE" valueType="definedSymbols">
+                                    <listOptionValue value="${SYSCONFIG_TOOL_SYMBOLS}"/>
+                                    <listOptionValue value="${COM_TI_MCU_PLUS_SDK_AWR294X_SYMBOLS}"/>
+                                    <listOptionValue value="${COM_TI_MMWAVE_MCUPLUS_SDK_SYMBOLS}"/>
+                                    <listOptionValue value="SUBSYS_DSS"/>
+                                    <listOptionValue value="SOC_AWR294X"/>
+                                    <listOptionValue value="_LITTLE_ENDIAN"/>
+                                    <listOptionValue value="DebugP_ASSERT_ENABLED"/>
+                                    <listOptionValue value="INCLUDE_DPM"/>
+                                    <listOptionValue value="DRIVERS_RADAR_HWA_V2"/>
+                                    <listOptionValue value="APP_RESOURCE_FILE='&lt;'ti/demo/awr294x/mmw/mmw_resDDM.h'&gt;'"/>
+                                    <listOptionValue value="SOC_AWR2944"/>
+                                    <listOptionValue value="_DEBUG_=1"/>
+                                </option>
+                                <option id="com.ti.ccstudio.buildDefinitions.C6000_8.5.compilerID.SILICON_VERSION.1464412783" superClass="com.ti.ccstudio.buildDefinitions.C6000_8.5.compilerID.SILICON_VERSION" value="6600" valueType="string"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.C6000_8.5.compilerID.ABI.1765566511" superClass="com.ti.ccstudio.buildDefinitions.C6000_8.5.compilerID.ABI" value="com.ti.ccstudio.buildDefinitions.C6000_8.5.compilerID.ABI.eabi" valueType="enumerated"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.C6000_8.5.compilerID.QUIET_LEVEL.5894107" superClass="com.ti.ccstudio.buildDefinitions.C6000_8.5.compilerID.QUIET_LEVEL" value="com.ti.ccstudio.buildDefinitions.C6000_8.5.compilerID.QUIET_LEVEL.QUIET" valueType="enumerated"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.C6000_8.5.compilerID.INTERRUPT_THRESHOLD.673114115" superClass="com.ti.ccstudio.buildDefinitions.C6000_8.5.compilerID.INTERRUPT_THRESHOLD" value="10" valueType="string"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.C6000_8.5.compilerID.GEN_FUNC_SUBSECTIONS.577328429" superClass="com.ti.ccstudio.buildDefinitions.C6000_8.5.compilerID.GEN_FUNC_SUBSECTIONS" value="com.ti.ccstudio.buildDefinitions.C6000_8.5.compilerID.GEN_FUNC_SUBSECTIONS.on" valueType="enumerated"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.C6000_8.5.compilerID.DIAG_SUPPRESS.1668388710" superClass="com.ti.ccstudio.buildDefinitions.C6000_8.5.compilerID.DIAG_SUPPRESS" valueType="stringList">
+                                    <listOptionValue value="238"/>
+                                    <listOptionValue value="880"/>
+                                    <listOptionValue value="1110"/>
+                                </option>
+                                <option id="com.ti.ccstudio.buildDefinitions.C6000_8.5.compilerID.GCC.549900182" superClass="com.ti.ccstudio.buildDefinitions.C6000_8.5.compilerID.GCC" value="true" valueType="boolean"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.C6000_8.5.compilerID.OPT_LEVEL.1932285959" superClass="com.ti.ccstudio.buildDefinitions.C6000_8.5.compilerID.OPT_LEVEL" value="com.ti.ccstudio.buildDefinitions.C6000_8.5.compilerID.OPT_LEVEL.3" valueType="enumerated"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.C6000_8.5.compilerID.OPT_FOR_SPEED.1901712408" superClass="com.ti.ccstudio.buildDefinitions.C6000_8.5.compilerID.OPT_FOR_SPEED" value="com.ti.ccstudio.buildDefinitions.C6000_8.5.compilerID.OPT_FOR_SPEED.3" valueType="enumerated"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.C6000_8.5.compilerID.EMIT_WARNINGS_AS_ERRORS.1405803606" superClass="com.ti.ccstudio.buildDefinitions.C6000_8.5.compilerID.EMIT_WARNINGS_AS_ERRORS" value="true" valueType="boolean"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.C6000_8.5.compilerID.PREPROC_WITH_COMPILE.1468474226" superClass="com.ti.ccstudio.buildDefinitions.C6000_8.5.compilerID.PREPROC_WITH_COMPILE" value="true" valueType="boolean"/>
+                            </tool>
+                            <tool id="com.ti.ccstudio.buildDefinitions.C6000_8.5.exe.linkerDebug.466662801" name="C6000 Linker" superClass="com.ti.ccstudio.buildDefinitions.C6000_8.5.exe.linkerDebug">
+                                <option id="com.ti.ccstudio.buildDefinitions.C6000_8.5.linkerID.OUTPUT_FILE.1385457577" superClass="com.ti.ccstudio.buildDefinitions.C6000_8.5.linkerID.OUTPUT_FILE" value="${ProjName}.xe66" valueType="string"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.C6000_8.5.linkerID.MAP_FILE.372243374" superClass="com.ti.ccstudio.buildDefinitions.C6000_8.5.linkerID.MAP_FILE" value="${ProjName}.${ConfigName}.map" valueType="string"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.C6000_8.5.linkerID.XML_LINK_INFO.1367854738" superClass="com.ti.ccstudio.buildDefinitions.C6000_8.5.linkerID.XML_LINK_INFO" value="${ProjName}_linkInfo.xml" valueType="string"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.C6000_8.5.linkerID.DISPLAY_ERROR_NUMBER.735174178" superClass="com.ti.ccstudio.buildDefinitions.C6000_8.5.linkerID.DISPLAY_ERROR_NUMBER" value="true" valueType="boolean"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.C6000_8.5.linkerID.DIAG_WRAP.1634326541" superClass="com.ti.ccstudio.buildDefinitions.C6000_8.5.linkerID.DIAG_WRAP" value="com.ti.ccstudio.buildDefinitions.C6000_8.5.linkerID.DIAG_WRAP.off" valueType="enumerated"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.C6000_8.5.linkerID.REREAD_LIBS.570301887" superClass="com.ti.ccstudio.buildDefinitions.C6000_8.5.linkerID.REREAD_LIBS" value="true" valueType="boolean"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.C6000_8.5.linkerID.SEARCH_PATH.706300504" superClass="com.ti.ccstudio.buildDefinitions.C6000_8.5.linkerID.SEARCH_PATH" valueType="libPaths">
+                                    <listOptionValue value="${SYSCONFIG_TOOL_LIBRARY_PATH}"/>
+                                    <listOptionValue value="${COM_TI_MCU_PLUS_SDK_AWR294X_LIBRARY_PATH}"/>
+                                    <listOptionValue value="${COM_TI_MMWAVE_MCUPLUS_SDK_LIBRARY_PATH}"/>
+                                    <listOptionValue value="${MCU_PLUS_SDK_PATH}/source/board/lib"/>
+                                    <listOptionValue value="${MCU_PLUS_SDK_PATH}/source/kernel/freertos/lib"/>
+                                    <listOptionValue value="${MCU_PLUS_SDK_PATH}/source/drivers/lib"/>
+                                    <listOptionValue value="${CG_TOOL_ROOT}/lib"/>
+                                    <listOptionValue value="${MMWAVE_SDK_INSTALL_PATH}/ti/control/dpm/lib"/>
+                                    <listOptionValue value="${MMWAVE_SDK_INSTALL_PATH}/ti/utils/mathutils/lib"/>
+                                    <listOptionValue value="${MCU_PLUS_SDK_PATH}/../mathlib_c66x_3_1_2_1/packages/ti/mathlib/lib"/>
+                                    <listOptionValue value="${MCU_PLUS_SDK_PATH}/../dsplib_c66x_3_4_0_0/packages/ti/dsplib/lib"/>
+                                    <listOptionValue value="${MMWAVE_SDK_INSTALL_PATH}/ti/datapath/dpu/rangecfarprocDDMA/lib"/>
+                                    <listOptionValue value="${MMWAVE_SDK_INSTALL_PATH}/ti/datapath/dpu/rangeprocDDMA/lib"/>
+                                    <listOptionValue value="${MMWAVE_SDK_INSTALL_PATH}/ti/datapath/dpu/dopplerprocDDMA/lib"/>
+                                    <listOptionValue value="${MMWAVE_SDK_INSTALL_PATH}/ti/datapath/dpedma/lib"/>
+                                    <listOptionValue value="${PROJECT_LOC}"/>
+                                    <listOptionValue value="${PROJECT_LOC}/dss/dssgenerated"/>
+                                </option>
+                                <option id="com.ti.ccstudio.buildDefinitions.C6000_8.5.linkerID.LIBRARY.1552385077" superClass="com.ti.ccstudio.buildDefinitions.C6000_8.5.linkerID.LIBRARY" valueType="libs">
+                                    <listOptionValue value="${SYSCONFIG_TOOL_LIBRARIES}"/>
+                                    <listOptionValue value="${COM_TI_MCU_PLUS_SDK_AWR294X_LIBRARIES}"/>
+                                    <listOptionValue value="${COM_TI_MMWAVE_MCUPLUS_SDK_LIBRARIES}"/>
+                                    <listOptionValue value="libdpm_awr2944.ae66"/>
+                                    <listOptionValue value="libmathutils.ae66"/>
+                                    <listOptionValue value="librangeproc_hwa_ddma_awr2944.ae66"/>
+                                    <listOptionValue value="libdopplerproc_hwa_ddma_awr2944.ae66"/>
+                                    <listOptionValue value="libdpedma_hwa_awr2944.ae66"/>
+                                    <listOptionValue value="mathlib.ae66"/>
+                                    <listOptionValue value="dsplib.ae66"/>
+                                    <listOptionValue value="librangecfarproc_hwa_ddma_awr2944.ae66"/>
+                                    <listOptionValue value="freertos.awr294x.c66.ti-c6000.release.lib"/>
+                                    <listOptionValue value="drivers.awr294x.c66.ti-c6000.release.lib"/>
+                                    <listOptionValue value="board.awr294x.c66.ti-c6000.release.lib"/>
+                                    <listOptionValue value="libc.a"/>
+                                </option>
+                                <option id="com.ti.ccstudio.buildDefinitions.C6000_8.5.linkerID.DIAG_WARNING.266606526" superClass="com.ti.ccstudio.buildDefinitions.C6000_8.5.linkerID.DIAG_WARNING" valueType="stringList">
+                                    <listOptionValue value="225"/>
+                                </option>
+                                <option id="com.ti.ccstudio.buildDefinitions.C6000_8.5.linkerID.INITIALIZATION_MODEL.1021071226" superClass="com.ti.ccstudio.buildDefinitions.C6000_8.5.linkerID.INITIALIZATION_MODEL" value="com.ti.ccstudio.buildDefinitions.C6000_8.5.linkerID.INITIALIZATION_MODEL.ROM_MODEL" valueType="enumerated"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.C6000_8.5.linkerID.EMIT_WARNINGS_AS_ERRORS.2087145298" superClass="com.ti.ccstudio.buildDefinitions.C6000_8.5.linkerID.EMIT_WARNINGS_AS_ERRORS" value="true" valueType="boolean"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.C6000_8.5.linkerID.DIAG_ERROR.1277170005" superClass="com.ti.ccstudio.buildDefinitions.C6000_8.5.linkerID.DIAG_ERROR" valueType="stringList">
+                                    <listOptionValue value="10015"/>
+                                </option>
+                            </tool>
+                            <tool id="com.ti.ccstudio.buildDefinitions.C6000_8.5.hex.1420328464" name="C6000 Hex Utility" superClass="com.ti.ccstudio.buildDefinitions.C6000_8.5.hex"/>
+                            <tool id="com.ti.ccstudio.buildDefinitions.sysConfig.1528949889" name="SysConfig" superClass="com.ti.ccstudio.buildDefinitions.sysConfig">
+                                <option id="com.ti.ccstudio.buildDefinitions.sysConfig.PRODUCTS.400931838" superClass="com.ti.ccstudio.buildDefinitions.sysConfig.PRODUCTS" valueType="stringList">
+                                    <listOptionValue value="${SYSCONFIG_TOOL_SYSCONFIG_MANIFEST}"/>
+                                    <listOptionValue value="${COM_TI_MCU_PLUS_SDK_AWR294X_SYSCONFIG_MANIFEST}"/>
+                                    <listOptionValue value="${COM_TI_MMWAVE_MCUPLUS_SDK_SYSCONFIG_MANIFEST}"/>
+                                </option>
+                                <option id="com.ti.ccstudio.buildDefinitions.sysConfig.OUTPUT_DIR__MANUAL.1159672200" superClass="com.ti.ccstudio.buildDefinitions.sysConfig.OUTPUT_DIR__MANUAL" value="${PROJECT_LOC}/dss/dssgenerated" valueType="string"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.sysConfig.DIRECTORY_MODE.893178715" superClass="com.ti.ccstudio.buildDefinitions.sysConfig.DIRECTORY_MODE" value="com.ti.ccstudio.buildDefinitions.sysConfig.DIRECTORY_MODE.manual" valueType="enumerated"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.sysConfig.CONTEXT.186735570" superClass="com.ti.ccstudio.buildDefinitions.sysConfig.CONTEXT" value="c66ss0" valueType="string"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.sysConfig.PART.93999833" superClass="com.ti.ccstudio.buildDefinitions.sysConfig.PART" value="Default" valueType="string"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.sysConfig.PACKAGE.2094286308" superClass="com.ti.ccstudio.buildDefinitions.sysConfig.PACKAGE" value="LOP" valueType="string"/>
+                            </tool>
+                        </toolChain>
+                    </folderInfo>
+                </configuration>
+            </storageModule>
+            <storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
+        </cconfiguration>
+        <cconfiguration id="com.ti.ccstudio.buildDefinitions.C6000.Release.759179269">
+            <storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="com.ti.ccstudio.buildDefinitions.C6000.Release.759179269" moduleId="org.eclipse.cdt.core.settings" name="Release">
+                <macros>
+                    <stringMacro name="MMWAVE_SDK_INSTALL_PATH" type="VALUE_PATH_ANY" value="${COM_TI_MMWAVE_MCUPLUS_SDK_INSTALL_DIR}"/>
+                    <stringMacro name="MMWAVE_AWR294X_DFP_INSTALL_PATH" type="VALUE_PATH_ANY" value="${COM_TI_MMWAVE_MCUPLUS_SDK_INSTALL_DIR}/../mmwave_dfp_02_04_18_01"/>
+                    <stringMacro name="MCU_PLUS_SDK_PATH" type="VALUE_PATH_ANY" value="${COM_TI_MCU_PLUS_SDK_AWR294X_INSTALL_DIR}"/>
+                    <stringMacro name="C66x_DSPLIB_INSTALL_PATH" type="VALUE_PATH_ANY" value="C:/ti/dsplib_c66x_3_4_0_0"/>
+                    <stringMacro name="C66x_MATHLIB_INSTALL_PATH" type="VALUE_PATH_ANY" value="C:/ti/mathlib_c66x_3_1_2_1"/>
+                </macros>
+                <externalSettings/>
+                <extensions>
+                    <extension id="org.eclipse.cdt.core.GmakeErrorParser" point="com.ti.ccs.project.ErrorParser"/>
+                    <extension id="com.ti.ccs.errorparser.SysConfigErrorParser" point="com.ti.ccs.project.ErrorParser"/>
+                    <extension id="com.ti.ccs.errorparser.CompilerErrorParser_TI" point="com.ti.ccs.project.ErrorParser"/>
+                </extensions>
+            </storageModule>
+            <storageModule moduleId="cdtBuildSystem" version="4.0.0">
+                <configuration artifactExtension="xe66" artifactName="${ProjName}" buildProperties="" cleanCommand="${CG_CLEAN_CMD}" description="" id="com.ti.ccstudio.buildDefinitions.C6000.Release.759179269" name="Release" parent="com.ti.ccstudio.buildDefinitions.C6000.Release" postbuildStep="${CG_TOOL_ROOT}/bin/strip6x -p ${CCS_PROJECT_DIR}/${ConfigName}/${ProjName}.xe66 -o=${CCS_PROJECT_DIR}/${ConfigName}/${ProjName}_strip.xe66;                     ${SYSCONFIG_TOOL_ROOT}/nodejs/node.exe  ${COM_TI_MCU_PLUS_SDK_AWR294X_INSTALL_DIR}/tools/boot/out2rprc/elf2rprc.js ${CCS_PROJECT_DIR}/${ConfigName}/${ProjName}_strip.xe66;                     ${CCE_INSTALL_ROOT}/utils/cygwin/mv ${CCS_PROJECT_DIR}/${ConfigName}/${ProjName}_strip.rprc ${CCS_PROJECT_DIR}/${ConfigName}/${ProjName}.rprc;                     ${CCE_INSTALL_ROOT}/utils/cygwin/rm -f ${CCS_PROJECT_DIR}/${ConfigName}/${ProjName}_strip.rprc;                     ${CCE_INSTALL_ROOT}/utils/cygwin/rm -f ${CCS_PROJECT_DIR}/${ConfigName}/${ProjName}_strip.xe66;                     " prebuildStep="${CCE_INSTALL_ROOT}/utils/cygwin/rm -f ${CCS_PROJECT_DIR}/${ConfigName}/${ProjName}.rprc;                     ${SYSCONFIG_TOOL_ROOT}/nodejs/node ${SYSCONFIG_TOOL_ROOT}/dist/cli.js --product ${COM_TI_MCU_PLUS_SDK_AWR294X_INSTALL_DIR}/.metadata/product.json --script ../../out_of_box_2944_mss/mss/mss.syscfg --context r5fss0-0 --output ../../out_of_box_2944_mss/mss/mssgenerated/ --script ../dss/dss.syscfg --context c66ss0 --output ../dss/dssgenerated/;                     ">
+                    <folderInfo id="com.ti.ccstudio.buildDefinitions.C6000.Release.759179269." name="/" resourcePath="">
+                        <toolChain id="com.ti.ccstudio.buildDefinitions.C6000_8.5.exe.ReleaseToolchain.368295328" name="TI Build Tools" superClass="com.ti.ccstudio.buildDefinitions.C6000_8.5.exe.ReleaseToolchain" targetTool="com.ti.ccstudio.buildDefinitions.C6000_8.5.exe.linkerRelease.963467222">
+                            <option id="com.ti.ccstudio.buildDefinitions.core.OPT_TAGS.1023971968" superClass="com.ti.ccstudio.buildDefinitions.core.OPT_TAGS" valueType="stringList">
+                                <listOptionValue value="DEVICE_CONFIGURATION_ID=TMS320C66XX.AWR2944"/>
+                                <listOptionValue value="DEVICE_CORE_ID=C66xx_DSP"/>
+                                <listOptionValue value="DEVICE_ENDIANNESS=little"/>
+                                <listOptionValue value="OUTPUT_FORMAT=ELF"/>
+                                <listOptionValue value="CCS_MBS_VERSION=70.0.0"/>
+                                <listOptionValue value="RUNTIME_SUPPORT_LIBRARY="/>
+                                <listOptionValue value="OUTPUT_TYPE=executable"/>
+                                <listOptionValue value="PRODUCTS=sysconfig:1.23.0;com.ti.MCU_PLUS_SDK_AWR294X:10.1.0.04;com.ti.MMWAVE_MCUPLUS_SDK:4.7.1.04;"/>
+                                <listOptionValue value="PRODUCT_MACRO_IMPORTS={&quot;sysconfig&quot;:[&quot;${SYSCONFIG_TOOL_INCLUDE_PATH}&quot;,&quot;${SYSCONFIG_TOOL_LIBRARY_PATH}&quot;,&quot;${SYSCONFIG_TOOL_LIBRARIES}&quot;,&quot;${SYSCONFIG_TOOL_SYMBOLS}&quot;,&quot;${SYSCONFIG_TOOL_SYSCONFIG_MANIFEST}&quot;],&quot;com.ti.MCU_PLUS_SDK_AWR294X&quot;:[&quot;${COM_TI_MCU_PLUS_SDK_AWR294X_INCLUDE_PATH}&quot;,&quot;${COM_TI_MCU_PLUS_SDK_AWR294X_LIBRARY_PATH}&quot;,&quot;${COM_TI_MCU_PLUS_SDK_AWR294X_LIBRARIES}&quot;,&quot;${COM_TI_MCU_PLUS_SDK_AWR294X_SYMBOLS}&quot;,&quot;${COM_TI_MCU_PLUS_SDK_AWR294X_SYSCONFIG_MANIFEST}&quot;],&quot;com.ti.MMWAVE_MCUPLUS_SDK&quot;:[&quot;${COM_TI_MMWAVE_MCUPLUS_SDK_INCLUDE_PATH}&quot;,&quot;${COM_TI_MMWAVE_MCUPLUS_SDK_LIBRARY_PATH}&quot;,&quot;${COM_TI_MMWAVE_MCUPLUS_SDK_LIBRARIES}&quot;,&quot;${COM_TI_MMWAVE_MCUPLUS_SDK_SYMBOLS}&quot;,&quot;${COM_TI_MMWAVE_MCUPLUS_SDK_SYSCONFIG_MANIFEST}&quot;]}"/>
+                            </option>
+                            <option id="com.ti.ccstudio.buildDefinitions.core.OPT_CODEGEN_VERSION.1132210820" superClass="com.ti.ccstudio.buildDefinitions.core.OPT_CODEGEN_VERSION" value="8.5.0.LTS" valueType="string"/>
+                            <targetPlatform id="com.ti.ccstudio.buildDefinitions.C6000_8.5.exe.targetPlatformRelease.1749175222" name="Platform" superClass="com.ti.ccstudio.buildDefinitions.C6000_8.5.exe.targetPlatformRelease"/>
+                            <builder buildPath="${BuildDirectory}" id="com.ti.ccstudio.buildDefinitions.C6000_8.5.exe.builderRelease.1964484995" name="GNU Make.Release" parallelBuildOn="true" parallelizationNumber="optimal" superClass="com.ti.ccstudio.buildDefinitions.C6000_8.5.exe.builderRelease"/>
+                            <tool id="com.ti.ccstudio.buildDefinitions.C6000_8.5.exe.compilerRelease.521754197" name="C6000 Compiler" superClass="com.ti.ccstudio.buildDefinitions.C6000_8.5.exe.compilerRelease">
+                                <option id="com.ti.ccstudio.buildDefinitions.C6000_8.5.compilerID.DISPLAY_ERROR_NUMBER.1780385971" superClass="com.ti.ccstudio.buildDefinitions.C6000_8.5.compilerID.DISPLAY_ERROR_NUMBER" value="true" valueType="boolean"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.C6000_8.5.compilerID.DIAG_WARNING.1695758874" superClass="com.ti.ccstudio.buildDefinitions.C6000_8.5.compilerID.DIAG_WARNING" valueType="stringList">
+                                    <listOptionValue value="225"/>
+                                </option>
+                                <option id="com.ti.ccstudio.buildDefinitions.C6000_8.5.compilerID.DIAG_WRAP.1347482704" superClass="com.ti.ccstudio.buildDefinitions.C6000_8.5.compilerID.DIAG_WRAP" value="com.ti.ccstudio.buildDefinitions.C6000_8.5.compilerID.DIAG_WRAP.off" valueType="enumerated"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.C6000_8.5.compilerID.OPT_LEVEL.release.230450771" superClass="com.ti.ccstudio.buildDefinitions.C6000_8.5.compilerID.OPT_LEVEL.release" value="com.ti.ccstudio.buildDefinitions.C6000_8.5.compilerID.OPT_LEVEL.3" valueType="enumerated"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.C6000_8.5.compilerID.INCLUDE_PATH.407907133" superClass="com.ti.ccstudio.buildDefinitions.C6000_8.5.compilerID.INCLUDE_PATH" valueType="includePath">
+                                    <listOptionValue value="${SYSCONFIG_TOOL_INCLUDE_PATH}"/>
+                                    <listOptionValue value="${COM_TI_MCU_PLUS_SDK_AWR294X_INCLUDE_PATH}"/>
+                                    <listOptionValue value="${COM_TI_MMWAVE_MCUPLUS_SDK_INCLUDE_PATH}"/>
+                                    <listOptionValue value="${CG_TOOL_ROOT}/include"/>
+                                    <listOptionValue value="${MCU_PLUS_SDK_PATH}/../mathlib_c66x_3_1_2_1/packages"/>
+                                    <listOptionValue value="${MCU_PLUS_SDK_PATH}/../dsplib_c66x_3_4_0_0/packages"/>
+                                    <listOptionValue value="${MCU_PLUS_SDK_PATH}/source"/>
+                                    <listOptionValue value="${MCU_PLUS_SDK_PATH}/source/kernel/freertos/FreeRTOS-Kernel/include"/>
+                                    <listOptionValue value="${MCU_PLUS_SDK_PATH}/source/kernel/freertos/portable/TI_CGT/DSP_C66"/>
+                                    <listOptionValue value="${MCU_PLUS_SDK_PATH}/source/kernel/freertos/config/awr294x/c66"/>
+                                    <listOptionValue value="${MMWAVE_SDK_INSTALL_PATH}/ti/datapath/dpc/objectdetection/objdethwaDDMA/src/"/>
+                                    <listOptionValue value="${MMWAVE_SDK_INSTALL_PATH}"/>
+                                    <listOptionValue value="${MMWAVE_AWR294X_DFP_INSTALL_PATH}"/>
+                                    <listOptionValue value="${PROJECT_ROOT}\dss\dssgenerated"/>
+                                    <listOptionValue value="${PROJECT_LOC}"/>
+                                </option>
+                                <option id="com.ti.ccstudio.buildDefinitions.C6000_8.5.compilerID.DEFINE.1107622414" superClass="com.ti.ccstudio.buildDefinitions.C6000_8.5.compilerID.DEFINE" valueType="definedSymbols">
+                                    <listOptionValue value="${SYSCONFIG_TOOL_SYMBOLS}"/>
+                                    <listOptionValue value="${COM_TI_MCU_PLUS_SDK_AWR294X_SYMBOLS}"/>
+                                    <listOptionValue value="${COM_TI_MMWAVE_MCUPLUS_SDK_SYMBOLS}"/>
+                                    <listOptionValue value="SUBSYS_DSS"/>
+                                    <listOptionValue value="SOC_AWR294X"/>
+                                    <listOptionValue value="_LITTLE_ENDIAN"/>
+                                    <listOptionValue value="DebugP_ASSERT_ENABLED"/>
+                                    <listOptionValue value="INCLUDE_DPM"/>
+                                    <listOptionValue value="DRIVERS_RADAR_HWA_V2"/>
+                                    <listOptionValue value="APP_RESOURCE_FILE='&lt;'ti/demo/awr294x/mmw/mmw_resDDM.h'&gt;'"/>
+                                    <listOptionValue value="SOC_AWR2944"/>
+                                </option>
+                                <option id="com.ti.ccstudio.buildDefinitions.C6000_8.5.compilerID.SILICON_VERSION.1601362630" superClass="com.ti.ccstudio.buildDefinitions.C6000_8.5.compilerID.SILICON_VERSION" value="6600" valueType="string"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.C6000_8.5.compilerID.ABI.1253006242" superClass="com.ti.ccstudio.buildDefinitions.C6000_8.5.compilerID.ABI" value="com.ti.ccstudio.buildDefinitions.C6000_8.5.compilerID.ABI.eabi" valueType="enumerated"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.C6000_8.5.compilerID.QUIET_LEVEL.758206808" superClass="com.ti.ccstudio.buildDefinitions.C6000_8.5.compilerID.QUIET_LEVEL" value="com.ti.ccstudio.buildDefinitions.C6000_8.5.compilerID.QUIET_LEVEL.QUIET" valueType="enumerated"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.C6000_8.5.compilerID.INTERRUPT_THRESHOLD.1387480292" superClass="com.ti.ccstudio.buildDefinitions.C6000_8.5.compilerID.INTERRUPT_THRESHOLD" value="10" valueType="string"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.C6000_8.5.compilerID.GEN_FUNC_SUBSECTIONS.940955058" superClass="com.ti.ccstudio.buildDefinitions.C6000_8.5.compilerID.GEN_FUNC_SUBSECTIONS" value="com.ti.ccstudio.buildDefinitions.C6000_8.5.compilerID.GEN_FUNC_SUBSECTIONS.on" valueType="enumerated"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.C6000_8.5.compilerID.DIAG_SUPPRESS.1593141607" superClass="com.ti.ccstudio.buildDefinitions.C6000_8.5.compilerID.DIAG_SUPPRESS" valueType="stringList">
+                                    <listOptionValue value="238"/>
+                                    <listOptionValue value="880"/>
+                                    <listOptionValue value="1110"/>
+                                </option>
+                                <option id="com.ti.ccstudio.buildDefinitions.C6000_8.5.compilerID.GCC.1865643155" superClass="com.ti.ccstudio.buildDefinitions.C6000_8.5.compilerID.GCC" value="true" valueType="boolean"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.C6000_8.5.compilerID.DEBUGGING_MODEL.1770090377" superClass="com.ti.ccstudio.buildDefinitions.C6000_8.5.compilerID.DEBUGGING_MODEL" value="com.ti.ccstudio.buildDefinitions.C6000_8.5.compilerID.DEBUGGING_MODEL.SYMDEBUG__DWARF" valueType="enumerated"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.C6000_8.5.compilerID.OPT_FOR_SPEED.456098333" superClass="com.ti.ccstudio.buildDefinitions.C6000_8.5.compilerID.OPT_FOR_SPEED" value="com.ti.ccstudio.buildDefinitions.C6000_8.5.compilerID.OPT_FOR_SPEED.3" valueType="enumerated"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.C6000_8.5.compilerID.EMIT_WARNINGS_AS_ERRORS.1215489751" superClass="com.ti.ccstudio.buildDefinitions.C6000_8.5.compilerID.EMIT_WARNINGS_AS_ERRORS" value="true" valueType="boolean"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.C6000_8.5.compilerID.PREPROC_WITH_COMPILE.682681659" superClass="com.ti.ccstudio.buildDefinitions.C6000_8.5.compilerID.PREPROC_WITH_COMPILE" value="true" valueType="boolean"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.C6000_8.5.compilerID.PROGRAM_LEVEL_COMPILE.241568037" superClass="com.ti.ccstudio.buildDefinitions.C6000_8.5.compilerID.PROGRAM_LEVEL_COMPILE" value="true" valueType="boolean"/>
+                            </tool>
+                            <tool id="com.ti.ccstudio.buildDefinitions.C6000_8.5.exe.linkerRelease.963467222" name="C6000 Linker" superClass="com.ti.ccstudio.buildDefinitions.C6000_8.5.exe.linkerRelease">
+                                <option id="com.ti.ccstudio.buildDefinitions.C6000_8.5.linkerID.OUTPUT_FILE.1439185207" superClass="com.ti.ccstudio.buildDefinitions.C6000_8.5.linkerID.OUTPUT_FILE" value="${ProjName}.xe66" valueType="string"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.C6000_8.5.linkerID.MAP_FILE.1497650127" superClass="com.ti.ccstudio.buildDefinitions.C6000_8.5.linkerID.MAP_FILE" value="${ProjName}.${ConfigName}.map" valueType="string"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.C6000_8.5.linkerID.XML_LINK_INFO.446032471" superClass="com.ti.ccstudio.buildDefinitions.C6000_8.5.linkerID.XML_LINK_INFO" value="${ProjName}_linkInfo.xml" valueType="string"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.C6000_8.5.linkerID.DISPLAY_ERROR_NUMBER.1382677528" superClass="com.ti.ccstudio.buildDefinitions.C6000_8.5.linkerID.DISPLAY_ERROR_NUMBER" value="true" valueType="boolean"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.C6000_8.5.linkerID.DIAG_WRAP.343478853" superClass="com.ti.ccstudio.buildDefinitions.C6000_8.5.linkerID.DIAG_WRAP" value="com.ti.ccstudio.buildDefinitions.C6000_8.5.linkerID.DIAG_WRAP.off" valueType="enumerated"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.C6000_8.5.linkerID.REREAD_LIBS.1191137460" superClass="com.ti.ccstudio.buildDefinitions.C6000_8.5.linkerID.REREAD_LIBS" value="true" valueType="boolean"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.C6000_8.5.linkerID.SEARCH_PATH.1737403484" superClass="com.ti.ccstudio.buildDefinitions.C6000_8.5.linkerID.SEARCH_PATH" valueType="libPaths">
+                                    <listOptionValue value="${SYSCONFIG_TOOL_LIBRARY_PATH}"/>
+                                    <listOptionValue value="${COM_TI_MCU_PLUS_SDK_AWR294X_LIBRARY_PATH}"/>
+                                    <listOptionValue value="${COM_TI_MMWAVE_MCUPLUS_SDK_LIBRARY_PATH}"/>
+                                    <listOptionValue value="${MCU_PLUS_SDK_PATH}/source/board/lib"/>
+                                    <listOptionValue value="${MCU_PLUS_SDK_PATH}/source/kernel/freertos/lib"/>
+                                    <listOptionValue value="${MCU_PLUS_SDK_PATH}/source/drivers/lib"/>
+                                    <listOptionValue value="${CG_TOOL_ROOT}/lib"/>
+                                    <listOptionValue value="${MMWAVE_SDK_INSTALL_PATH}/ti/control/dpm/lib"/>
+                                    <listOptionValue value="${MMWAVE_SDK_INSTALL_PATH}/ti/utils/mathutils/lib"/>
+                                    <listOptionValue value="${MCU_PLUS_SDK_PATH}/../mathlib_c66x_3_1_2_1/packages/ti/mathlib/lib"/>
+                                    <listOptionValue value="${MCU_PLUS_SDK_PATH}/../dsplib_c66x_3_4_0_0/packages/ti/dsplib/lib"/>
+                                    <listOptionValue value="${MMWAVE_SDK_INSTALL_PATH}/ti/datapath/dpu/rangecfarprocDDMA/lib"/>
+                                    <listOptionValue value="${MMWAVE_SDK_INSTALL_PATH}/ti/datapath/dpu/rangeprocDDMA/lib"/>
+                                    <listOptionValue value="${MMWAVE_SDK_INSTALL_PATH}/ti/datapath/dpu/dopplerprocDDMA/lib"/>
+                                    <listOptionValue value="${MMWAVE_SDK_INSTALL_PATH}/ti/datapath/dpedma/lib"/>
+                                    <listOptionValue value="${PROJECT_LOC}"/>
+                                    <listOptionValue value="${PROJECT_LOC}/dss/dssgenerated"/>
+                                </option>
+                                <option id="com.ti.ccstudio.buildDefinitions.C6000_8.5.linkerID.LIBRARY.407730171" superClass="com.ti.ccstudio.buildDefinitions.C6000_8.5.linkerID.LIBRARY" valueType="libs">
+                                    <listOptionValue value="${SYSCONFIG_TOOL_LIBRARIES}"/>
+                                    <listOptionValue value="${COM_TI_MCU_PLUS_SDK_AWR294X_LIBRARIES}"/>
+                                    <listOptionValue value="${COM_TI_MMWAVE_MCUPLUS_SDK_LIBRARIES}"/>
+                                    <listOptionValue value="libdpm_awr2944.ae66"/>
+                                    <listOptionValue value="libmathutils.ae66"/>
+                                    <listOptionValue value="librangeproc_hwa_ddma_awr2944.ae66"/>
+                                    <listOptionValue value="libdopplerproc_hwa_ddma_awr2944.ae66"/>
+                                    <listOptionValue value="libdpedma_hwa_awr2944.ae66"/>
+                                    <listOptionValue value="mathlib.ae66"/>
+                                    <listOptionValue value="dsplib.ae66"/>
+                                    <listOptionValue value="librangecfarproc_hwa_ddma_awr2944.ae66"/>
+                                    <listOptionValue value="freertos.awr294x.c66.ti-c6000.release.lib"/>
+                                    <listOptionValue value="drivers.awr294x.c66.ti-c6000.release.lib"/>
+                                    <listOptionValue value="board.awr294x.c66.ti-c6000.release.lib"/>
+                                    <listOptionValue value="libc.a"/>
+                                </option>
+                                <option id="com.ti.ccstudio.buildDefinitions.C6000_8.5.linkerID.DIAG_WARNING.1468485365" superClass="com.ti.ccstudio.buildDefinitions.C6000_8.5.linkerID.DIAG_WARNING" valueType="stringList">
+                                    <listOptionValue value="225"/>
+                                </option>
+                                <option id="com.ti.ccstudio.buildDefinitions.C6000_8.5.linkerID.INITIALIZATION_MODEL.746567525" superClass="com.ti.ccstudio.buildDefinitions.C6000_8.5.linkerID.INITIALIZATION_MODEL" value="com.ti.ccstudio.buildDefinitions.C6000_8.5.linkerID.INITIALIZATION_MODEL.ROM_MODEL" valueType="enumerated"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.C6000_8.5.linkerID.EMIT_WARNINGS_AS_ERRORS.1995573813" superClass="com.ti.ccstudio.buildDefinitions.C6000_8.5.linkerID.EMIT_WARNINGS_AS_ERRORS" value="true" valueType="boolean"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.C6000_8.5.linkerID.DIAG_ERROR.1276281719" superClass="com.ti.ccstudio.buildDefinitions.C6000_8.5.linkerID.DIAG_ERROR" valueType="stringList">
+                                    <listOptionValue value="10015"/>
+                                </option>
+                            </tool>
+                            <tool id="com.ti.ccstudio.buildDefinitions.C6000_8.5.hex.1393313890" name="C6000 Hex Utility" superClass="com.ti.ccstudio.buildDefinitions.C6000_8.5.hex"/>
+                            <tool id="com.ti.ccstudio.buildDefinitions.sysConfig.1215509988" name="SysConfig" superClass="com.ti.ccstudio.buildDefinitions.sysConfig">
+                                <option id="com.ti.ccstudio.buildDefinitions.sysConfig.PRODUCTS.210888927" superClass="com.ti.ccstudio.buildDefinitions.sysConfig.PRODUCTS" valueType="stringList">
+                                    <listOptionValue value="${SYSCONFIG_TOOL_SYSCONFIG_MANIFEST}"/>
+                                    <listOptionValue value="${COM_TI_MCU_PLUS_SDK_AWR294X_SYSCONFIG_MANIFEST}"/>
+                                    <listOptionValue value="${COM_TI_MMWAVE_MCUPLUS_SDK_SYSCONFIG_MANIFEST}"/>
+                                </option>
+                                <option id="com.ti.ccstudio.buildDefinitions.sysConfig.OUTPUT_DIR__MANUAL.1960099230" superClass="com.ti.ccstudio.buildDefinitions.sysConfig.OUTPUT_DIR__MANUAL" value="${PROJECT_LOC}/dss/dssgenerated" valueType="string"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.sysConfig.DIRECTORY_MODE.1724771256" superClass="com.ti.ccstudio.buildDefinitions.sysConfig.DIRECTORY_MODE" value="com.ti.ccstudio.buildDefinitions.sysConfig.DIRECTORY_MODE.manual" valueType="enumerated"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.sysConfig.CONTEXT.917022252" superClass="com.ti.ccstudio.buildDefinitions.sysConfig.CONTEXT" value="c66ss0" valueType="string"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.sysConfig.PART.1996414931" superClass="com.ti.ccstudio.buildDefinitions.sysConfig.PART" value="Default" valueType="string"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.sysConfig.PACKAGE.856515059" superClass="com.ti.ccstudio.buildDefinitions.sysConfig.PACKAGE" value="LOP" valueType="string"/>
+                            </tool>
+                        </toolChain>
+                    </folderInfo>
+                </configuration>
+            </storageModule>
+            <storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>
+        </cconfiguration>
+    </storageModule>
+    <storageModule moduleId="cdtBuildSystem" version="4.0.0">
+        <project id="out_of_box_2944_dss.com.ti.ccstudio.buildDefinitions.C6000.ProjectType.650043543" name="C6000" projectType="com.ti.ccstudio.buildDefinitions.C6000.ProjectType"/>
+    </storageModule>
+</cproject>
