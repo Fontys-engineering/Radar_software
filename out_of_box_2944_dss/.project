@@ -27,6 +27,10 @@
 			<value>file:/C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mathlib_c66x_3_1_2_1</value>
 		</variable>
 		<variable>
+			<name>DPU_DATA_PATH</name>
+			<value>$%7BMMWAVE_SDK_INSTALL_PATH%7D/ti/datapath/dpu</value>
+		</variable>
+		<variable>
 			<name>MCU_PLUS_SDK_PATH</name>
 			<value>$%7BCOM_TI_MCU_PLUS_SDK_AWR294X_INSTALL_DIR%7D</value>
 		</variable>

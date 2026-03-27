@@ -152,12 +152,12 @@ dss/data_path.obj: C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_
 dss/data_path.obj: C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/freertos/FreeRTOS-Kernel/include/task.h
 dss/data_path.obj: C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/freertos/FreeRTOS-Kernel/include/list.h
 dss/data_path.obj: C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/common/mmwave_error.h
-dss/data_path.obj: C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/demo/awr294x/mmw/mmw_resDDM.h
+dss/data_path.obj: C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/demo/awr294x/mmw/mmw_resTDM.h
 dss/data_path.obj: C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/common/syscommon.h
 dss/data_path.obj: C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/common/sys_types.h
 dss/data_path.obj: C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/common/sys_defs.h
 dss/data_path.obj: C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/common/sys_common_awr2944.h
-dss/data_path.obj: C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/datapath/dpu/rangeprocDDMA/rangeprochwaDDMA.h
+dss/data_path.obj: C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/datapath/dpu/rangeproc/rangeprochwa.h
 dss/data_path.obj: C:/ti/ccs2041/ccs/tools/compiler/ti-cgt-c6000_8.5.0.LTS/include/stdlib.h
 dss/data_path.obj: C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/datapath/dpif/dpif_adcdata.h
 dss/data_path.obj: C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/datapath/dpif/dpif_types.h
@@ -165,23 +165,27 @@ dss/data_path.obj: C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07
 dss/data_path.obj: C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/datapath/dpif/dp_error.h
 dss/data_path.obj: C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/datapath/dpedma/dpedmahwa.h
 dss/data_path.obj: C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/datapath/dpedma/dpedma.h
-dss/data_path.obj: C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/datapath/dpu/rangeprocDDMA/rangeproc_common.h
+dss/data_path.obj: C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/datapath/dpu/rangeproc/rangeproc_common.h
 dss/data_path.obj: C:/ti/ccs2041/ccs/tools/compiler/ti-cgt-c6000_8.5.0.LTS/include/stdlib.h
-dss/data_path.obj: C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/datapath/dpu/dopplerprocDDMA/dopplerprochwaDDMA.h
+dss/data_path.obj: C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/datapath/dpu/dopplerproc/dopplerprochwa.h
 dss/data_path.obj: C:/ti/ccs2041/ccs/tools/compiler/ti-cgt-c6000_8.5.0.LTS/include/stdlib.h
 dss/data_path.obj: C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/datapath/dpif/dpif_detmatrix.h
+dss/data_path.obj: C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/datapath/dpu/dopplerproc/dopplerproccommon.h
+dss/data_path.obj: C:/ti/ccs2041/ccs/tools/compiler/ti-cgt-c6000_8.5.0.LTS/include/stdlib.h
+dss/data_path.obj: C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/datapath/dpu/cfarproc/cfarprochwa.h
+dss/data_path.obj: C:/ti/ccs2041/ccs/tools/compiler/ti-cgt-c6000_8.5.0.LTS/include/stdlib.h
 dss/data_path.obj: C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/datapath/dpif/dpif_pointcloud.h
-dss/data_path.obj: C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/datapath/dpu/dopplerprocDDMA/dopplerprocDDMAcommon.h
+dss/data_path.obj: C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/datapath/dpu/cfarproc/cfarproccommon.h
 dss/data_path.obj: C:/ti/ccs2041/ccs/tools/compiler/ti-cgt-c6000_8.5.0.LTS/include/stdlib.h
-dss/data_path.obj: C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/datapath/dpu/rangecfarprocDDMA/rangecfarprochwa.h
+dss/data_path.obj: C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/datapath/dpu/aoaproc/aoaprochwa.h
 dss/data_path.obj: C:/ti/ccs2041/ccs/tools/compiler/ti-cgt-c6000_8.5.0.LTS/include/stdlib.h
-dss/data_path.obj: C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/datapath/dpu/rangecfarprocDDMA/rangecfarproccommon.h
+dss/data_path.obj: C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/board/antenna_geometry.h
 dss/data_path.obj: C:/ti/ccs2041/ccs/tools/compiler/ti-cgt-c6000_8.5.0.LTS/include/stdlib.h
-dss/data_path.obj: C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/datapath/dpc/objectdetection/objdethwaDDMA/objectdetection.h
+dss/data_path.obj: C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/board/antenna_geometry.h
+dss/data_path.obj: C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/datapath/dpu/aoaproc/aoaproc_common.h
+dss/data_path.obj: C:/ti/ccs2041/ccs/tools/compiler/ti-cgt-c6000_8.5.0.LTS/include/stdlib.h
+dss/data_path.obj: C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/datapath/dpc/objectdetection/objdethwa/objectdetection.h
 dss/data_path.obj: C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/control/dpm/dpm.h
-dss/data_path.obj: C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/board/antenna_geometry.h
-dss/data_path.obj: C:/ti/ccs2041/ccs/tools/compiler/ti-cgt-c6000_8.5.0.LTS/include/stdlib.h
-dss/data_path.obj: C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/board/antenna_geometry.h
 dss/data_path.obj: C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/demo/awr294x/mmw/include/mmw_output.h
 dss/data_path.obj: C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_dfp_02_04_18_01/ti/control/mmwavelink/mmwavelink.h
 dss/data_path.obj: C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_dfp_02_04_18_01/ti/control/mmwavelink/include/rl_datatypes.h
@@ -519,7 +523,7 @@ C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/ker
 
 C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/common/mmwave_error.h:
 
-C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/demo/awr294x/mmw/mmw_resDDM.h:
+C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/demo/awr294x/mmw/mmw_resTDM.h:
 
 C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/common/syscommon.h:
 
@@ -529,7 +533,7 @@ C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/common/sy
 
 C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/common/sys_common_awr2944.h:
 
-C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/datapath/dpu/rangeprocDDMA/rangeprochwaDDMA.h:
+C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/datapath/dpu/rangeproc/rangeprochwa.h:
 
 C:/ti/ccs2041/ccs/tools/compiler/ti-cgt-c6000_8.5.0.LTS/include/stdlib.h:
 
@@ -545,39 +549,47 @@ C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/datapath/
 
 C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/datapath/dpedma/dpedma.h:
 
-C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/datapath/dpu/rangeprocDDMA/rangeproc_common.h:
+C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/datapath/dpu/rangeproc/rangeproc_common.h:
 
 C:/ti/ccs2041/ccs/tools/compiler/ti-cgt-c6000_8.5.0.LTS/include/stdlib.h:
 
-C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/datapath/dpu/dopplerprocDDMA/dopplerprochwaDDMA.h:
+C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/datapath/dpu/dopplerproc/dopplerprochwa.h:
 
 C:/ti/ccs2041/ccs/tools/compiler/ti-cgt-c6000_8.5.0.LTS/include/stdlib.h:
 
 C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/datapath/dpif/dpif_detmatrix.h:
 
+C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/datapath/dpu/dopplerproc/dopplerproccommon.h:
+
+C:/ti/ccs2041/ccs/tools/compiler/ti-cgt-c6000_8.5.0.LTS/include/stdlib.h:
+
+C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/datapath/dpu/cfarproc/cfarprochwa.h:
+
+C:/ti/ccs2041/ccs/tools/compiler/ti-cgt-c6000_8.5.0.LTS/include/stdlib.h:
+
 C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/datapath/dpif/dpif_pointcloud.h:
 
-C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/datapath/dpu/dopplerprocDDMA/dopplerprocDDMAcommon.h:
+C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/datapath/dpu/cfarproc/cfarproccommon.h:
 
 C:/ti/ccs2041/ccs/tools/compiler/ti-cgt-c6000_8.5.0.LTS/include/stdlib.h:
 
-C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/datapath/dpu/rangecfarprocDDMA/rangecfarprochwa.h:
+C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/datapath/dpu/aoaproc/aoaprochwa.h:
 
 C:/ti/ccs2041/ccs/tools/compiler/ti-cgt-c6000_8.5.0.LTS/include/stdlib.h:
 
-C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/datapath/dpu/rangecfarprocDDMA/rangecfarproccommon.h:
+C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/board/antenna_geometry.h:
 
 C:/ti/ccs2041/ccs/tools/compiler/ti-cgt-c6000_8.5.0.LTS/include/stdlib.h:
 
-C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/datapath/dpc/objectdetection/objdethwaDDMA/objectdetection.h:
+C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/board/antenna_geometry.h:
+
+C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/datapath/dpu/aoaproc/aoaproc_common.h:
+
+C:/ti/ccs2041/ccs/tools/compiler/ti-cgt-c6000_8.5.0.LTS/include/stdlib.h:
+
+C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/datapath/dpc/objectdetection/objdethwa/objectdetection.h:
 
 C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/control/dpm/dpm.h:
-
-C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/board/antenna_geometry.h:
-
-C:/ti/ccs2041/ccs/tools/compiler/ti-cgt-c6000_8.5.0.LTS/include/stdlib.h:
-
-C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/board/antenna_geometry.h:
 
 C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/demo/awr294x/mmw/include/mmw_output.h:
 

@@ -29,16 +29,18 @@ ORDERED_OBJS += \
 $(GEN_CMDS__FLAG) \
 -llibdpm_awr2944.ae66 \
 -llibmathutils.ae66 \
--llibrangeproc_hwa_ddma_awr2944.ae66 \
--llibdopplerproc_hwa_ddma_awr2944.ae66 \
--llibdpedma_hwa_awr2944.ae66 \
 -lmathlib.ae66 \
 -ldsplib.ae66 \
--llibrangecfarproc_hwa_ddma_awr2944.ae66 \
 -lfreertos.awr294x.c66.ti-c6000.release.lib \
 -ldrivers.awr294x.c66.ti-c6000.release.lib \
 -lboard.awr294x.c66.ti-c6000.release.lib \
 -llibc.a \
+-l"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/datapath/dpu/rangeproc/lib/librangeproc_hwa_awr2944.ae66" \
+-l"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/datapath/dpu/dopplerproc/lib/libdopplerproc_hwa_awr2944.ae66" \
+-l"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/datapath/dpu/cfarproc/lib/libcfarproc_hwa_awr2944.ae66" \
+-l"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/datapath/dpu/aoaproc/lib/libaoaproc_hwa_awr2944.ae66" \
+-l"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/datapath/dpedma/lib/libdpedma_hwa_awr2944.ae66" \
+-l"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/datapath/dpu/dopplerprocDDMA/lib/libdopplerproc_hwa_ddma_awr2944.ae66" \
 
 -include ../makefile.init
 
@@ -49,10 +51,8 @@ RMDIR := RMDIR /S/Q
 -include sources.mk
 -include subdir_vars.mk
 -include dss/subdir_vars.mk
--include dss/dssgenerated/subdir_vars.mk
 -include subdir_rules.mk
 -include dss/subdir_rules.mk
--include dss/dssgenerated/subdir_rules.mk
 -include objects.mk
 
 ifneq ($(MAKECMDGOALS),clean)
@@ -162,7 +162,7 @@ main-build: $(OBJS) $(CMD_SRCS) $(GEN_CMDS)
 out_of_box_2944_dss.xe66: $(OBJS) $(CMD_SRCS) $(GEN_CMDS)
 	@echo 'Building target: "$@"'
 	@echo 'Invoking: C6000 Linker'
-	"C:/ti/ccs2041/ccs/tools/compiler/ti-cgt-c6000_8.5.0.LTS/bin/cl6x" -mv6600 --abi=eabi -O3 --opt_for_speed=3 --define=SUBSYS_DSS --define=SOC_AWR294X --define=_LITTLE_ENDIAN --define=DebugP_ASSERT_ENABLED --define=INCLUDE_DPM --define=DRIVERS_RADAR_HWA_V2 --define=APP_RESOURCE_FILE='<'ti/demo/awr294x/mmw/mmw_resDDM.h'>' --define=SOC_AWR2944 --define=_DEBUG_=1 -g --gcc --diag_suppress=238 --diag_suppress=880 --diag_suppress=1110 --diag_warning=225 --diag_wrap=off --display_error_number --emit_warnings_as_errors --quiet --gen_func_subsections=on --interrupt_threshold=10 -z -m"out_of_box_2944_dss.Debug.map" -i"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/board/lib" -i"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/freertos/lib" -i"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/drivers/lib" -i"C:/ti/ccs2041/ccs/tools/compiler/ti-cgt-c6000_8.5.0.LTS/lib" -i"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/control/dpm/lib" -i"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/utils/mathutils/lib" -i"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mathlib_c66x_3_1_2_1/packages/ti/mathlib/lib" -i"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/dsplib_c66x_3_4_0_0/packages/ti/dsplib/lib" -i"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/datapath/dpu/rangecfarprocDDMA/lib" -i"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/datapath/dpu/rangeprocDDMA/lib" -i"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/datapath/dpu/dopplerprocDDMA/lib" -i"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/datapath/dpedma/lib" -i"C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_dss" -i"C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_dss/dss/dssgenerated" --reread_libs --diag_error=10015 --diag_warning=225 --diag_wrap=off --display_error_number --emit_warnings_as_errors --warn_sections --xml_link_info="out_of_box_2944_dss_linkInfo.xml" --rom_model -o "out_of_box_2944_dss.xe66" $(ORDERED_OBJS)
+	"C:/ti/ccs2041/ccs/tools/compiler/ti-cgt-c6000_8.5.0.LTS/bin/cl6x" -mv6600 --abi=eabi -O3 --opt_for_speed=3 --define=SUBSYS_DSS --define=SOC_AWR294X --define=_LITTLE_ENDIAN --define=DebugP_ASSERT_ENABLED --define=INCLUDE_DPM --define=DRIVERS_RADAR_HWA_V2 --define=APP_RESOURCE_FILE='<'ti/demo/awr294x/mmw/mmw_resTDM.h'>' --define=SOC_AWR2944 --define=_DEBUG_=1 --define=MMWDEMO_TDM -g --gcc --diag_suppress=238 --diag_suppress=880 --diag_suppress=1110 --diag_warning=225 --diag_wrap=off --display_error_number --emit_warnings_as_errors --quiet --gen_func_subsections=on --interrupt_threshold=10 -z -m"out_of_box_2944_dss.Debug.map" -i"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/board/lib" -i"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/freertos/lib" -i"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/drivers/lib" -i"C:/ti/ccs2041/ccs/tools/compiler/ti-cgt-c6000_8.5.0.LTS/lib" -i"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/control/dpm/lib" -i"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/utils/mathutils/lib" -i"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mathlib_c66x_3_1_2_1/packages/ti/mathlib/lib" -i"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/dsplib_c66x_3_4_0_0/packages/ti/dsplib/lib" -i"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/datapath/dpu/cfarproc/lib" -i"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/datapath/dpu/rangeproc" -i"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/datapath/dpu/dopplerproc/lib" -i"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/datapath/dpedma/lib" -i"C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_dss" -i"C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_dss/dss/dssgenerated" --reread_libs --diag_error=10015 --diag_warning=225 --diag_wrap=off --display_error_number --emit_warnings_as_errors --warn_sections --xml_link_info="out_of_box_2944_dss_linkInfo.xml" --rom_model -o "out_of_box_2944_dss.xe66" $(ORDERED_OBJS)
 	@echo 'Finished building target: "$@"'
 	@echo ' '
 	@$(MAKE) --no-print-directory post-build
@@ -171,12 +171,11 @@ out_of_box_2944_dss.xe66: $(OBJS) $(CMD_SRCS) $(GEN_CMDS)
 clean:
 	-$(RM) $(GEN_MISC_FILES__QUOTED)$(GEN_FILES__QUOTED)$(EXE_OUTPUTS__QUOTED)
 	-$(RM) "objectdetection.obj" "dss\data_path.obj" "dss\dssgenerated\ti_dpl_config.obj" "dss\dssgenerated\ti_drivers_config.obj" "dss\dssgenerated\ti_drivers_open_close.obj" "dss\dssgenerated\ti_pinmux_config.obj" "dss\dssgenerated\ti_power_clock_config.obj" "dss\dssgenerated\ti_board_config.obj" "dss\dssgenerated\ti_board_open_close.obj" "dss\dssgenerated\ti_enet_config.obj" "dss\dssgenerated\ti_enet_open_close.obj" "dss\dssgenerated\ti_enet_soc.obj" "dss\dssgenerated\ti_enet_lwipif.obj" "dss\dss_main.obj" 
-	-$(RM) "objectdetection.d" "dss\data_path.d" "dss\dssgenerated\ti_dpl_config.d" "dss\dssgenerated\ti_drivers_config.d" "dss\dssgenerated\ti_drivers_open_close.d" "dss\dssgenerated\ti_pinmux_config.d" "dss\dssgenerated\ti_power_clock_config.d" "dss\dssgenerated\ti_board_config.d" "dss\dssgenerated\ti_board_open_close.d" "dss\dssgenerated\ti_enet_config.d" "dss\dssgenerated\ti_enet_open_close.d" "dss\dssgenerated\ti_enet_soc.d" "dss\dssgenerated\ti_enet_lwipif.d" "dss\dss_main.d" "dss\dssgenerated\ti_board_config.d" "dss\dssgenerated\ti_board_open_close.d" "dss\dssgenerated\ti_dpl_config.d" "dss\dssgenerated\ti_drivers_config.d" "dss\dssgenerated\ti_drivers_open_close.d" "dss\dssgenerated\ti_enet_config.d" "dss\dssgenerated\ti_enet_lwipif.d" "dss\dssgenerated\ti_enet_open_close.d" "dss\dssgenerated\ti_enet_soc.d" "dss\dssgenerated\ti_pinmux_config.d" "dss\dssgenerated\ti_power_clock_config.d" 
+	-$(RM) "objectdetection.d" "dss\data_path.d" "dss\dssgenerated\ti_dpl_config.d" "dss\dssgenerated\ti_drivers_config.d" "dss\dssgenerated\ti_drivers_open_close.d" "dss\dssgenerated\ti_pinmux_config.d" "dss\dssgenerated\ti_power_clock_config.d" "dss\dssgenerated\ti_board_config.d" "dss\dssgenerated\ti_board_open_close.d" "dss\dssgenerated\ti_enet_config.d" "dss\dssgenerated\ti_enet_open_close.d" "dss\dssgenerated\ti_enet_soc.d" "dss\dssgenerated\ti_enet_lwipif.d" "dss\dss_main.d" 
 	-@echo 'Finished clean'
 	-@echo ' '
 
 pre-build:
-	-C:/ti/ccs2041/ccs//utils/cygwin/rm -f C:\Users\petri\OneDrive\Asiakirjat\GitHub\Radar_software\out_of_box_2944_dss/Debug/out_of_box_2944_dss.rprc
 	-C:/ti/sysconfig_1.23.0/nodejs/node C:/ti/sysconfig_1.23.0/dist/cli.js --product C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/.metadata/product.json --script ../../out_of_box_2944_mss/mss/mss.syscfg --context r5fss0-0 --output ../../out_of_box_2944_mss/mss/mssgenerated/ --script ../dss/dss.syscfg --context c66ss0 --output ../dss/dssgenerated/
 	-@echo ' '
 

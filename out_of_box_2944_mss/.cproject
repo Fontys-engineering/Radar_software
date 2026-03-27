@@ -58,11 +58,11 @@
                                     <listOptionValue value="DRIVERS_RADAR_HWA_V2"/>
                                     <listOptionValue value="DebugP_LOG_ENABLED"/>
                                     <listOptionValue value="INCLUDE_DPM"/>
-                                    <listOptionValue value="MMWDEMO_DDM"/>
+                                    <listOptionValue value="MMWDEMO_TDM"/>
                                     <listOptionValue value="SOC_AWR294X"/>
                                     <listOptionValue value="SOC_AWR2944"/>
                                     <listOptionValue value="_LITTLE_ENDIAN"/>
-                                    <listOptionValue value="APP_RESOURCE_FILE='&lt;'ti/demo/awr294x/mmw/mmw_resDDM.h'&gt;'"/>
+                                    <listOptionValue value="APP_RESOURCE_FILE='&lt;'ti/demo/awr294x/mmw/mmw_resTDM.h'&gt;'"/>
                                     <listOptionValue value="MMWAVE_SDK_DEVICE=awr2944"/>
                                     <listOptionValue value="SUBSYS_MSS"/>
                                     <listOptionValue value="_DEBUG_=1"/>
@@ -82,6 +82,9 @@
                                     <listOptionValue value="-MMD"/>
                                 </option>
                                 <option id="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_4.0.compilerID.SELECT_PROCESSOR_MODE__ARM_THUMB.1121222925" superClass="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_4.0.compilerID.SELECT_PROCESSOR_MODE__ARM_THUMB" value="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_4.0.compilerID.SELECT_PROCESSOR_MODE__ARM_THUMB.MTHUMB" valueType="enumerated"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_4.0.compilerID.U.1296808808" superClass="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_4.0.compilerID.U" valueType="stringList">
+                                    <listOptionValue value="MMWDEMO_DDM"/>
+                                </option>
                             </tool>
                             <tool id="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_4.0.exe.linkerDebug.362937017" name="Arm Linker" superClass="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_4.0.exe.linkerDebug">
                                 <option id="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_4.0.linkerID.OUTPUT_FILE.1292516986" superClass="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_4.0.linkerID.OUTPUT_FILE" value="${ProjName}.xer5f" valueType="string"/>

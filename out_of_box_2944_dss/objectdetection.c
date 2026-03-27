@@ -6,7 +6,7 @@
  *
  *  \par
  *  NOTE:
- *      (C) Copyright 2017 - 2026 Texas Instruments, Inc.
+ *      (C) Copyright 2017 - 2025 Texas Instruments, Inc.
  *
  *  Redistribution and use in source and binary forms, with or without
  *  modification, are permitted provided that the following conditions
@@ -43,27 +43,31 @@
 #include <stdint.h>
 #include <string.h>
 
+#define DBG_DPC_OBJDET
+
 /* MCU+SDK include files */
 #include <kernel/dpl/HeapP.h>
-#include <kernel/dpl/ClockP.h>
 #include <kernel/dpl/CycleCounterP.h>
 #include <kernel/dpl/CacheP.h>
-#ifdef SOC_AWR294X
-#include <drivers/hw_include/cslr_soc.h>
-#endif
+#include <kernel/dpl/ClockP.h>
+
 /* mmWave SDK Include Files: */
 #include <ti/common/syscommon.h>
 #include <ti/utils/mathutils/mathutils.h>
-/* HWA_SOC Include files */
-#include <drivers/soc.h>
-#ifdef INCLUDE_DPM
 #include <ti/control/dpm/dpm.h>
+
+#if defined(USE_2D_AOA_DPU)
+#include <ti/datapath/dpu/aoa2dproc/aoa2dprochwa.h>
+#else
+#include <ti/datapath/dpu/aoaproc/aoaprochwa.h>
+#endif
+
+
+#if defined (USE_2D_AOA_DPU)
+#define OVERLAY_RANGE_HWA_PARAMS
 #endif
 
 #ifdef SUBSYS_DSS
-/* DSP Mathlib include files */
-#include <ti/mathlib/src/cossp/c66/cossp.h>
-#include <ti/dsplib/src/DSPF_sp_dotp_cplx/DSPF_sp_dotp_cplx.h>
 
 /* C66x mathlib */
 /* Suppress the mathlib.h warnings
@@ -86,39 +90,32 @@
 #include APP_RESOURCE_FILE
 
 /* Obj Det instance etc */
-#include <ti/datapath/dpc/objectdetection/objdethwaDDMA/include/objectdetectioninternal.h>
-#include <ti/datapath/dpc/objectdetection/objdethwaDDMA/objectdetection.h>
+#include <ti/datapath/dpc/objectdetection/objdethwa/include/objectdetectioninternal.h>
+#include <ti/datapath/dpc/objectdetection/objdethwa/objectdetection.h>
 
-/* Power Optimization configurations */
-#if defined(SOC_AWR2X44P)
-#define DPC_OBJDET_HWA_CG_ENABLE                  (0x2U)
-#define DPC_OBJDET_HWA_CLOCK_GATE                 (0x7U)
-#define DPC_OBJDET_HWA_CLOCK_UNGATE               (0x0U)
-#define DPC_OBJDET_DSP_PG_ENABLE                  (0x1U)
-#define DPC_OBJDET_DSP_CLK_SRC_DSP_PLL_MUX        (0x222U)
-#define DPC_OBJDET_DSP_UC_ENABLE                  (0x2U)
-#define DPC_OBJDET_DSP_POWERED_UP                 (0x30U)
-#define DPC_OBJDET_DSP_POWERED_DOWN               (0x0U)
-#define DPC_OBJDET_DSP_PD_STATUS_MASK             (0x30U)
+#if defined(SOC_AWR294X) && defined(POWER_MEAS)
+#include <ti/demo/awr294x/power_measurement/dss/mmw_dss.h>
 #endif
 
-/******************************************************************************/
-/* Local definitions */
-
-#define DOUBLEWORD_ALIGNED    (8U)
-
-#ifdef SUBSYS_DSS
-#define QVALUE_NOISE          (11U)
-#define QVALUE_SIGNAL         (11U)
+#if defined(SOC_AWR2X44P) && defined(POWER_MEAS)
+#include <ti/demo/awr2x44P/mmw_tdm/dss/mmw_dss.h>
+#include <kernel/nortos/dpl/c66/Context_c66.h>
 #endif
+
+#ifdef DBG_DPC_OBJDET
+ObjDetObj     *gObjDetObj;
+#endif
+
+#define DPC_HWA_MEM_BANK_INDX_CFARDETMAT   0
+#define DPC_HWA_MEM_BANK_INDX_DOPPLEROUT   4
+#define DPC_HWA_MEM_BANK_INDX_RANGEOUT     6
 
 /*! Radar cube data buffer alignment in bytes. */
-#if defined(SUBSYS_MSS) || defined (SUBSYS_M4)
+#ifdef SUBSYS_MSS
 #define DPC_OBJDET_RADAR_CUBE_DATABUF_BYTE_ALIGNMENT      DPU_RANGEPROCHWA_RADARCUBE_BYTE_ALIGNMENT_R5F
 #else
 #define DPC_OBJDET_RADAR_CUBE_DATABUF_BYTE_ALIGNMENT      DPU_RANGEPROCHWA_RADARCUBE_BYTE_ALIGNMENT_DSP
 #endif
-
 
 /*! Detection matrix alignment is declared by CFAR dpu, we size to
  *  the max of this and CPU alignment for accessing detection matrix
@@ -128,218 +125,150 @@
  *  generality of alignments should be done.
  */
 #define DPC_OBJDET_DET_MATRIX_DATABUF_BYTE_ALIGNMENT       (CSL_MAX(sizeof(uint16_t), \
-                                                                DPU_DOPPLER_DET_MATRIX_BYTE_ALIGNMENT))
+                                                                DPU_CFARPROCHWA_DET_MATRIX_BYTE_ALIGNMENT))
+
+/*! CFAR dpu detection list byte alignment common define used temporarily in next define */
+#ifdef SUBSYS_MSS
+#define DPU_CFARPROCHWA_CFAR_DET_LIST_BYTE_ALIGNMENT  \
+        DPU_CFARPROCHWA_CFAR_DET_LIST_BYTE_ALIGNMENT_R5F
+#define DPU_AOAPROCHWA_CFAR_DET_LIST_BYTE_ALIGNMENT  \
+        DPU_AOAPROCHWA_CFAR_DET_LIST_BYTE_ALIGNMENT_R5F
+#else
+#define DPU_CFARPROCHWA_CFAR_DET_LIST_BYTE_ALIGNMENT  \
+        DPU_CFARPROCHWA_CFAR_DET_LIST_BYTE_ALIGNMENT_DSP
+#define DPU_AOAPROCHWA_CFAR_DET_LIST_BYTE_ALIGNMENT  \
+        DPU_AOAPROCHWA_CFAR_DET_LIST_BYTE_ALIGNMENT_DSP
+#endif
+
+/*! cfar list alignment is declared by cfar and AoA dpu, for debug purposes we size to
+ *  the max of these and CPU alignment for accessing cfar list for debug purposes.
+ *  Note currently the dpu alignments are the same as CPU alignment so these max are
+ *  redundant but it is more to illustrate the generality of alignments should be done.
+ */
+#define DPC_OBJDET_CFAR_DET_LIST_BYTE_ALIGNMENT     (CSL_MAX(CSL_MAX(DPU_CFARPROCHWA_CFAR_DET_LIST_BYTE_ALIGNMENT,  \
+                                                                     DPU_AOAPROCHWA_CFAR_DET_LIST_BYTE_ALIGNMENT),\
+                                                             DPIF_CFAR_DET_LIST_CPU_BYTE_ALIGNMENT))
+
+/*! Point cloud cartesian byte alignment common define used temporarily in next define */
+#ifdef SUBSYS_MSS
+#define DPU_AOAPROCHWA_POINT_CLOUD_CARTESIAN_BYTE_ALIGNMENT  \
+        DPU_AOAPROCHWA_POINT_CLOUD_CARTESIAN_BYTE_ALIGNMENT_R5F
+#else
+#define DPU_AOAPROCHWA_POINT_CLOUD_CARTESIAN_BYTE_ALIGNMENT  \
+        DPU_AOAPROCHWA_POINT_CLOUD_CARTESIAN_BYTE_ALIGNMENT_DSP
+#endif
+
+/*! Point cloud cartesian alignment is declared by AoA dpu, we size to
+ *  the max of this and CPU alignment for accessing this as it is exported out as result of
+ *  processing and so may be accessed by the CPU during post-DPC processing.
+ *  Note currently the AoA alignment is the same as CPU alignment so this max is
+ *  redundant but it is more to illustrate the generality of alignments should be done.
+ */
+#define DPC_OBJDET_POINT_CLOUD_CARTESIAN_BYTE_ALIGNMENT       (CSL_MAX(DPU_AOAPROCHWA_POINT_CLOUD_CARTESIAN_BYTE_ALIGNMENT, \
+                                                                   DPIF_POINT_CLOUD_CARTESIAN_CPU_BYTE_ALIGNMENT))
+
+/*! Point cloud side info byte alignment common define used temporarily in next define */
+#ifdef SUBSYS_MSS
+#define DPU_AOAPROCHWA_POINT_CLOUD_SIDE_INFO_BYTE_ALIGNMENT  \
+        DPU_AOAPROCHWA_POINT_CLOUD_SIDE_INFO_BYTE_ALIGNMENT_R5F
+#else
+#define DPU_AOAPROCHWA_POINT_CLOUD_SIDE_INFO_BYTE_ALIGNMENT  \
+        DPU_AOAPROCHWA_POINT_CLOUD_SIDE_INFO_BYTE_ALIGNMENT_DSP
+#endif
+
+/*! Point cloud side info alignment is declared by AoA dpu, we size to
+ *  the max of this and CPU alignment for accessing this as it is exported out as result of
+ *  processing and so may be accessed by the CPU during post-DPC processing.
+ *  Note currently the AoA alignment is the same as CPU alignment so this max is
+ *  redundant but it is more to illustrate the generality of alignments should be done.
+ */
+#define DPC_OBJDET_POINT_CLOUD_SIDE_INFO_BYTE_ALIGNMENT       (CSL_MAX(DPU_AOAPROCHWA_POINT_CLOUD_SIDE_INFO_BYTE_ALIGNMENT, \
+                                                                   DPIF_POINT_CLOUD_SIDE_INFO_CPU_BYTE_ALIGNMENT))
+
+/*! AoA DPU  azimuth static heat map byte alignment common define used temporarily in next define */
+#ifdef SUBSYS_MSS
+#define DPU_AOAPROCHWA_AZIMUTH_STATIC_HEAT_MAP_BYTE_ALIGNMENT  \
+        DPU_AOAPROCHWA_AZIMUTH_STATIC_HEAT_MAP_BYTE_ALIGNMENT_R5F
+#else
+#define DPU_AOAPROCHWA_AZIMUTH_STATIC_HEAT_MAP_BYTE_ALIGNMENT  \
+        DPU_AOAPROCHWA_AZIMUTH_STATIC_HEAT_MAP_BYTE_ALIGNMENT_DSP
+#endif
+
+/*! Azimuth static heat map alignment is declared by AoA dpu, we size to
+ *  the max of this and CPU alignment for accessing this as it is exported out as result of
+ *  processing and so may be accessed by the CPU during post-DPC processing.
+ */
+#define DPC_OBJDET_AZIMUTH_STATIC_HEAT_MAP_BYTE_ALIGNMENT     (CSL_MAX(DPU_AOAPROCHWA_AZIMUTH_STATIC_HEAT_MAP_BYTE_ALIGNMENT, \
+                                                                   sizeof(int16_t)))
+
+/*! Elevation angle byte alignment common define used temporarily in next define */
+#ifdef SUBSYS_MSS
+#define DPU_AOAPROCHWA_DET_OBJ_ELEVATION_ANGLE_BYTE_ALIGNMENT  \
+        DPU_AOAPROCHWA_DET_OBJ_ELEVATION_ANGLE_BYTE_ALIGNMENT_R5F
+#else
+#define DPU_AOAPROCHWA_DET_OBJ_ELEVATION_ANGLE_BYTE_ALIGNMENT  \
+        DPU_AOAPROCHWA_DET_OBJ_ELEVATION_ANGLE_BYTE_ALIGNMENT_DSP
+#endif
+
+/*! Elevation angle alignment is declared by AoA dpu, we size to
+ *  the max of this and CPU alignment for accessing this as it is exported out as result of
+ *  processing and so may be accessed by the CPU during post-DPC processing.
+ *  Note currently the AoA alignment is the same as CPU alignment so this max is
+ *  redundant but it is more to illustrate the generality of alignments should be done.
+ */
+#define DPC_OBJDET_DET_OBJ_ELEVATION_ANGLE_BYTE_ALIGNMENT     (CSL_MAX(DPU_AOAPROCHWA_DET_OBJ_ELEVATION_ANGLE_BYTE_ALIGNMENT, \
+                                                                   sizeof(float)))
+
+/**
+@}
+*/
 
 #define DPC_OBJDET_HWA_MAX_WINDOW_RAM_SIZE_IN_SAMPLES    (CSL_DSS_HWA_WINDOW_RAM_U_SIZE >> 3)
+#define DPC_OBJDET_HWA_NUM_PARAM_SETS                    SOC_HWA_NUM_PARAM_SETS
+
+/******************************************************************************/
+/* Local definitions */
 
 #define DPC_USE_SYMMETRIC_WINDOW_RANGE_DPU
 #define DPC_USE_SYMMETRIC_WINDOW_DOPPLER_DPU
-#define DPC_DPU_RANGEPROC_FFT_WINDOW_TYPE                  MATHUTILS_WIN_HANNING
-#define DPC_DPU_RANGEPROC_INTERFMITIG_WINDOW_TYPE          MATHUTILS_WIN_HANNING
-#define DPC_DPU_DOPPLERPROC_FFT_WINDOW_TYPE                MATHUTILS_WIN_HANNING
+#define DPC_DPU_RANGEPROC_FFT_WINDOW_TYPE            MATHUTILS_WIN_BLACKMAN
+#define DPC_DPU_DOPPLERPROC_FFT_WINDOW_TYPE          MATHUTILS_WIN_HANNING
 
-/*! Number of interference mitigation window samples. Used 16 as the size
-    instead of 14 because mathUtils generates the first and the last samples
-    as 0, which are not useful. */
-#define DPC_OBJDET_RANGEPROC_NUM_INTFMITIG_WIN_SIZE_TOTAL       (16U)
+#define OBJECT_DETECTION_HEAP_SIZE  (DPU_RANGEPROC_SIGNATURE_COMP_MAX_BIN_SIZE * \
+                                    SYS_COMMON_NUM_TX_ANTENNAS * \
+                                    SYS_COMMON_NUM_RX_CHANNEL * \
+                                    sizeof(cmplx32ImRe_t))
 
-/*! Interference mitigation window type */
-#define DPC_OBJDET_RANGEPROC_INTERFMITIG_WINDOW_TYPE            MATHUTILS_WIN_HANNING
+/* User defined heap memory and handle */
+#define OBJECTDETECTION_HEAP_MEM_SIZE  (RL_MAX_SUBFRAMES * (uint32_t)sizeof(ObjDetObj) + OBJECT_DETECTION_HEAP_SIZE)
 
-/*! Q Format of interference mitigation window */
-#define DPC_OBJDET_QFORMAT_RANGEPROC_INTERFMITIG_WINDOW         (5U)
+static uint8_t gObjectDetectionHeapMem[OBJECTDETECTION_HEAP_MEM_SIZE] __attribute__((aligned(HeapP_BYTE_ALIGNMENT)));
+static HeapP_Object gObjectDetectionHeapObj;
 
-#define DPC_OBJDET_QFORMAT_RANGE_FFT 17
-#define DPC_OBJDET_QFORMAT_DOPPLER_FFT 17
+#if defined POWER_MEAS
 
-/* Number of Azim FFT Bins */
-#define OBJECTDETECTION_NUM_AZIM_FFT_BINS (32U)
+#define DPC_OBJDET_DSP_CLK_SRC_XTAL               (0x111U)
+#define DPC_OBJDET_DSP_CLK_SRC_DSP_PLL_MUX        (0x222U)
+#define DPC_OBJDET_DSS_UC_ENABLE                  (0x2U)
+#define DPC_OBJDET_DSS_PG_ENABLE                  (0x1U)
+#define DPC_OBJDET_HWA_CG_ENABLE                  (0x2U)
+#define DPC_OBJDET_HWA_CLOCK_GATE                 (0x7U)
 
-#ifdef SOC_AWR294X
-#define OBJECTDETHWA_TIMING_CPU_CLK_FREQ_KHZ    360000
+
 #endif
 
-// #define OBJECTDETHWA_PRINT_DPC_TIMING_INFO
-#ifdef OBJECTDETHWA_PRINT_DPC_TIMING_INFO
-#define OBJECTDETHWA_NUM_FRAME_TIMING_TO_STORE 10U
-/* As and when frames come in, these variables will store the actual timestamps.
-   As soon as the last frame processing is completed, they will be replaced by
-   time values in milliseconds, with respect to the start of the first frame of
-   the OBJECTDETHWA_NUM_FRAME_TIMING_TO_STORE set. */
-typedef struct timingInfo
-{
-    uint32_t frameStartTimes[OBJECTDETHWA_NUM_FRAME_TIMING_TO_STORE];
-    uint32_t rangeEndTimes[OBJECTDETHWA_NUM_FRAME_TIMING_TO_STORE];
-    uint32_t dopEndTimes[OBJECTDETHWA_NUM_FRAME_TIMING_TO_STORE];
-    uint32_t aoaStartTimes[OBJECTDETHWA_NUM_FRAME_TIMING_TO_STORE];
-    uint32_t aoaEndTimes[OBJECTDETHWA_NUM_FRAME_TIMING_TO_STORE];
-    uint32_t resEndTimes[OBJECTDETHWA_NUM_FRAME_TIMING_TO_STORE];
-    uint32_t rangeEndCnt, dopEndCnt, aoaStartCnt, aoaEndCnt, frameCnt, resEndCnt;
-}timingInfo;
 
-timingInfo gTimingInfo;
-#endif
-
-/* CFAR Threshold LUT programmed by Common Config based on the maximum number of range bins acrosss frames */
-static uint32_t *gCfarThreshScaleLUT = NULL;
-
-ObjDetObj gObjDetObj __attribute__((aligned(HeapP_BYTE_ALIGNMENT))) 
-#if SUBSYS_M4
-__attribute__((section(".dpcGlobals")))
-#endif
-;
-
-/* Buffer for storing fast access data
- * Current uses for this buffer are:
- * A. This buffer is used in below rangeProcChain modes:
- * 1. DPU_RANGEPROCHWA_PREVIOUS_FRAME_DC_MODE
- *    Size is 1(DC Estimation) * RL_MAX_SUBFRAMES (numSubframes) * 4 (numRx) * sizeof(uint32_t) (numBytesPerSample)
- * 2. DPU_RANGEPROCHWA_PREVIOUS_NTH_CHIRP_ESTIMATES_MODE
- *    Size is (1(DC Estimation) + 2(Interference Statistics)) * RL_MAX_SUBFRAMES (numSubframes) * 6 (numBandsTotal) * 4 (numRx) * sizeof(uint32_t) (numBytesPerSample) 
- * But, for DPU_RANGEPROCHWA_DEFAULT_MODE mode, this buffer is not required. 
- *
- * B. Doppler Max Subband Buffer storage only used during Doppler DPU
- *
- */
-uint8_t gFastRamBuffer[1536U] __attribute__((section(".preProcBuf")));
-
-/*  This semaphore is initialized by OOB Demo and is used to 
-    wait for XYZ estimation from previous frame to finish before starting this frame's
-    doppler processing or doppler-range CFAR intersection.
-*/
-#if !defined(OBJ_DETECTION_DDMA_TEST) && defined(SOC_AWR2X44P)
-extern SemaphoreP_Object gDPCStateSemHandle;
-#endif
-
-/**************************************************************************
- ************************** Local Functions Declarations ******************
- **************************************************************************/
-static int32_t DPC_ObjDet_preStartCommonConfig
-(
-    ObjDetObj *ptrObjDetObj,
-    DPC_ObjectDetection_PreStartCommonCfg *commonCfg,
-    BiDirMemPoolObj *L3ramObj
-);
-
-
-static int32_t DPC_ObjDet_rangeConfig(DPU_RangeProcHWA_Handle dpuHandle,
-                   DPC_ObjectDetection_StaticCfg *staticCfg,
-#if 0
-                   DPC_ObjectDetection_DynCfg    *dynCfg,
-#endif
-                   EDMA_Handle                   edmaHandle,
-                   DPIF_RadarCube                *radarCube,
-                   MemPoolObj                    *CoreLocalRamObj,
-                   BiDirMemPoolObj               *L3ramObj,
-                   uint32_t                      *windowOffset,
-                   uint32_t                      *CoreLocalRamScratchUsage,
-                   DPU_RangeProcHWA_Config       *cfgSave,
-                   ObjDetObj                     *ptrObjDetObj) 
-#ifdef SUBSYS_M4                   
-                   __attribute__((section(".customCode")))
-#endif
-;
-
-static int32_t DPC_ObjDet_dopplerConfig(SubFrameObj *obj,
-                   DPU_DopplerProcHWA_Handle dpuHandle,
-                   DPC_ObjectDetection_StaticCfg *staticCfg,
-                   uint8_t log2NumDopplerBins,
-                   float *                       antennaCalibParamsPtr,
-                   EDMA_Handle                   edmaHandle,
-                   uint32_t                      radarCubeDecompressedSizeInBytes,
-                   DPIF_RadarCube                *radarCube,
-                   DPIF_DetMatrix                *detMatrix,
-                   MemPoolObj                    *CoreLocalRamObj,
-                   BiDirMemPoolObj               *L3ramObj,
-                   void *                        CoreLocalScratchStartPoolAddr,
-                   volatile void *               CoreLocalScratchStartPoolAddrNextDPU,
-                   volatile void *               l3RamStartPoolAddrNextDPU,
-                   uint32_t                      *windowOffset,
-                   uint32_t                      *CoreLocalRamScratchUsage,
-                   DPU_DopplerProcHWA_Config     *cfgSave,
-                   ObjDetObj                     *objDetObj) 
-#ifdef SUBSYS_M4                     
-                   __attribute__((section(".customCode")))
-#endif
-;
-
-static int32_t DPC_ObjDet_rangeCfarConfig(DPU_RangeCFARProcHWA_Handle dpuHandle,
-                   DPC_ObjectDetection_StaticCfg *staticCfg,
-                   EDMA_Handle                   edmaHandle,
-                   DPIF_DetMatrix                *detMatrix,
-                   MemPoolObj                    *CoreLocalRamObj,
-                   BiDirMemPoolObj               *L3ramObj,
-                   void                          *CoreLocalScratchStartPoolAddrNextDPU,
-                   void                          *l3RamStartPoolAddrNextDPU,
-                   DPU_RangeCfarProcHWA_Config   *cfgSave,
-                   ObjDetObj                     *ptrObjDetObj) 
-#ifdef SUBSYS_M4                      
-                   __attribute__((section(".customCode")))
-#endif
-;
-
-static int32_t DPC_ObjDet_reconfigSubFrame(ObjDetObj *objDetObj, uint8_t subFrameIndx);
-
-static void DPC_ObjDet_EDMAChannelConfigAssist(EDMA_Handle handle, uint32_t chNum, uint32_t shadowParam, uint32_t eventQueue, DPEDMA_ChanCfg *chanCfg);
-
-static void DPC_ObjectDetection_ConfigureADCBuf(uint16_t rxChannelEn, uint32_t chanDataSize);
-
-static void checkFFTClipStatus(ObjDetObj *objDetObj, uint32_t* clipCount);
-
-#ifdef INCLUDE_DPM
-static DPM_DPCHandle DPC_ObjectDetection_init(
-    DPM_Handle dpmHandle,
-    DPM_InitCfg *ptrInitCfg,
-    int32_t *errCode);
-
-static int32_t DPC_ObjectDetection_execute(
-    DPM_DPCHandle handle,
-    DPM_Buffer *ptrResult);
-
-static int32_t DPC_ObjectDetection_ioctl(
-    DPM_DPCHandle handle,
-    uint32_t cmd,
-    void *arg,
-    uint32_t argLen);
-
-static int32_t DPC_ObjectDetection_start(DPM_DPCHandle handle);
-static int32_t DPC_ObjectDetection_stop(DPM_DPCHandle handle);
-static int32_t DPC_ObjectDetection_deinit(DPM_DPCHandle handle);
-static void DPC_ObjectDetection_frameStart(DPM_DPCHandle handle);
-/**
-@}
-*/
-
-/**************************************************************************
- ************************* Global Declarations ****************************
- **************************************************************************/
-
-/** @addtogroup DPC_OBJDET__GLOBAL
- @{ */
-
-/**
- * @brief   Global used to register Object Detection DPC in DPM
- */
-DPM_ProcChainCfg gDPC_ObjectDetectionCfg =
-    {
-        DPC_ObjectDetection_init,      /* Initialization Function:         */
-        DPC_ObjectDetection_start,     /* Start Function:                  */
-        DPC_ObjectDetection_execute,   /* Execute Function:                */
-        DPC_ObjectDetection_ioctl,     /* Configuration Function:          */
-        DPC_ObjectDetection_stop,      /* Stop Function:                   */
-        DPC_ObjectDetection_deinit,    /* Deinitialization Function:       */
-        NULL,                          /* Inject Data Function:            */
-        NULL,                          /* Chirp Available Function:        */
-        DPC_ObjectDetection_frameStart /* Frame Start Function:            */
-};
-
-/**
-@}
-*/
-#endif
 /**************************************************************************
  ************************** Local Functions *******************************
  **************************************************************************/
+
+/* Function to compare two elements for qsort */
+static int compare(const void *a, const void *b) {
+    Element *element1 = (Element *)a;
+    Element *element2 = (Element *)b;
+    return element1->value - element2->value;
+}
+
 /**
  *  @b Description
  *  @n
@@ -460,142 +389,67 @@ static void *DPC_ObjDet_MemPoolAlloc(MemPoolObj *pool,
         pool->maxCurrAddr = CSL_MAX(pool->currAddr, pool->maxCurrAddr);
     }
 
-    return (retAddr);
+    return(retAddr);
 }
 
-/**
- *  @b Description
- *  @n
- *      Utility function for getting maximum memory pool usage.
- *
- *  @param[in]  pool Handle to pool object.
- *
- *  \ingroup DPC_OBJDET__INTERNAL_FUNCTION
- *
- *  @retval
- *      Amount of pool used in bytes.
- */
-static uint32_t DPC_ObjDet_BiDirMemPoolGetMaxUsage(BiDirMemPoolObj *pool)
-{
-    return ((uint32_t)(pool->maxCurrAddr - (uintptr_t)pool->cfg.addr)) + 
-        ((uint32_t)pool->cfg.size - (uint32_t)pool->currBottomAddr);
-}
-
-/**
- *  @b Description
- *  @n
- *      Utility function for getting memory pool current top address.
- *
- *  @param[in]  pool Handle to pool object.
- *
- *  \ingroup DPC_OBJDET__INTERNAL_FUNCTION
- *
- *  @retval
- *      pointer to current address of the pool (from which next allocation will
- *      allocate to the desired alignment).
- */
-static void *DPC_ObjDet_BiDirMemPoolGetTop(BiDirMemPoolObj *pool)
-{
-    return((void *)pool->currTopAddr);
-}
-
-/**
- *  @b Description
- *  @n
- *      Utility function for reseting L3 memory pool top part.
- *
- *  @param[in]  pool Handle to pool object.
- *
- *  \ingroup DPC_OBJDET__INTERNAL_FUNCTION
- *
- *  @retval
- *      none.
- */
-static void DPC_ObjDet_BiDirMemPoolReset(BiDirMemPoolObj *pool)
-{
-    pool->currTopAddr = (uintptr_t)pool->cfg.addr;
-    pool->currBottomAddr = (uintptr_t)pool->cfg.addr + pool->cfg.size;
-    pool->maxCurrAddr = pool->currTopAddr;
-}
-
-/**
- *  @b Description
- *  @n
- *      Utility function for reseting L3 memory pool top part.
- *
- *  @param[in]  pool Handle to pool object.
- *
- *  \ingroup DPC_OBJDET__INTERNAL_FUNCTION
- *
- *  @retval
- *      none.
- */
-static void DPC_ObjDet_BiDirMemPoolResetTop(BiDirMemPoolObj *pool)
-{
-    pool->currTopAddr = (uintptr_t)pool->cfg.addr;
-}
-
-/**
- *  @b Description
- *  @n
- *      Utility function for allocating from a static memory pool.
- *
- *  @param[in]  pool Handle to pool object.
- *  @param[in]  size Size in bytes to be allocated.
- *  @param[in]  align Alignment in bytes
- *
- *  \ingroup DPC_OBJDET__INTERNAL_FUNCTION
- *
- *  @retval
- *      pointer to beginning of allocated block. NULL indicates could not
- *      allocate.
- */
-static void *DPC_ObjDet_BiDirMemPoolAlloc
+static DPM_DPCHandle DPC_ObjectDetection_init
 (
-    BiDirMemPoolObj *pool,
-    uint32_t size,
-    uint8_t align,
-    bool isPersistent
-)
+    DPM_Handle          dpmHandle,
+    DPM_InitCfg*        ptrInitCfg,
+    int32_t*            errCode
+);
+
+static int32_t DPC_ObjectDetection_execute
+(
+    DPM_DPCHandle handle,
+    DPM_Buffer*       ptrResult
+);
+
+static int32_t DPC_ObjectDetection_ioctl
+(
+    DPM_DPCHandle   handle,
+    uint32_t            cmd,
+    void*               arg,
+    uint32_t            argLen
+);
+
+static int32_t DPC_ObjectDetection_start  (DPM_DPCHandle handle);
+static int32_t DPC_ObjectDetection_stop   (DPM_DPCHandle handle);
+static int32_t DPC_ObjectDetection_deinit (DPM_DPCHandle handle);
+static void    DPC_ObjectDetection_frameStart (DPM_DPCHandle handle);
+
+#ifdef POWER_MEAS
+static inline void DPC_ObjectDetection_HwaDspUngate (DPM_DPCHandle handle);
+static inline void DPC_ObjectDetection_HwaDspGate (DPM_DPCHandle handle);
+#endif
+
+/**************************************************************************
+ ************************* Global Declarations ****************************
+ **************************************************************************/
+
+/** @addtogroup DPC_OBJDET__GLOBAL
+ @{ */
+
+/**
+ * @brief   Global used to register Object Detection DPC in DPM
+ */
+DPM_ProcChainCfg gDPC_ObjectDetectionCfg =
 {
-    void *retAddr = NULL;
-    uintptr_t addr;
+    DPC_ObjectDetection_init,            /* Initialization Function:         */
+    DPC_ObjectDetection_start,           /* Start Function:                  */
+    DPC_ObjectDetection_execute,         /* Execute Function:                */
+    DPC_ObjectDetection_ioctl,           /* Configuration Function:          */
+    DPC_ObjectDetection_stop,            /* Stop Function:                   */
+    DPC_ObjectDetection_deinit,          /* Deinitialization Function:       */
+    NULL,                                /* Inject Data Function:            */
+    NULL,                                /* Chirp Available Function:        */
+    DPC_ObjectDetection_frameStart       /* Frame Start Function:            */
+};
 
-    if(isPersistent)
-    {
-        uint32_t availableSize = CSL_MIN(pool->cfg.endSize, pool->cfg.size - pool->maxCurrAddr);
-        if (size <= availableSize)
-        {
-            addr = pool->currBottomAddr - size;
-            if(CSL_MEM_IS_NOT_ALIGN(addr, align))
-            {
-                /* Due to allocation moving towards smaller address, need to reduce the alignment difference
-                 * CSL_MEM_ALIGN adds alignment difference, after reducing by align 
-                 */
-                addr = CSL_MEM_ALIGN(addr - align, align);
-            }
-            if((pool->currBottomAddr - addr) <= availableSize)
-            {
-                retAddr = (void *)addr;
-                pool->currBottomAddr = addr;
-            }
-        }
-    }
-    else
-    {
-        addr = CSL_MEM_ALIGN(pool->currTopAddr, align);
-        if ((addr + size) <= ((uintptr_t)pool->cfg.addr + pool->cfg.size))
-        {
-            retAddr = (void *)addr;
-            pool->currTopAddr = addr + size;
-            pool->maxCurrAddr = CSL_MAX(pool->currTopAddr, pool->maxCurrAddr);
-        }
-    }
+/**
+@}
+*/
 
-    return (retAddr);
-}
-
-#ifdef INCLUDE_DPM
 
 /**
  *  @b Description
@@ -608,23 +462,22 @@ static void *DPC_ObjDet_BiDirMemPoolAlloc
 void _DPC_Objdet_Assert(DPM_Handle handle, int32_t expression,
                         const char *file, int32_t line)
 {
-    DPM_DPCAssert fault;
+    DPM_DPCAssert       fault;
 
-    if (!expression)
+    if (expression == 0)
     {
         fault.lineNum = (uint32_t)line;
-        fault.arg0 = 0U;
-        fault.arg1 = 0U;
-        strncpy(fault.fileName, file, (DPM_MAX_FILE_NAME_LEN - 1));
+        fault.arg0    = 0U;
+        fault.arg1    = 0U;
+        (void)strncpy (fault.fileName, file, (DPM_MAX_FILE_NAME_LEN-1));
 
         /* Report the fault to the DPM entities */
-        DPM_ioctl(handle,
-                  DPM_CMD_DPC_ASSERT,
-                  (void *)&fault,
-                  sizeof(DPM_DPCAssert));
+        (void)DPM_ioctl (handle,
+                   DPM_CMD_DPC_ASSERT,
+                   (void*)&fault,
+                   sizeof(DPM_DPCAssert));
     }
 }
-#endif
 
 /**
  *  @b Description
@@ -641,53 +494,210 @@ void _DPC_Objdet_Assert(DPM_Handle handle, int32_t expression,
  *  @retval
  *      Not applicable
  */
-void DPC_ObjectDetection_frameStart(DPM_DPCHandle handle)
+static void DPC_ObjectDetection_frameStart (DPM_DPCHandle handle)
 {
-    ObjDetObj *objDetObj = (ObjDetObj *)handle;
+    ObjDetObj     *objDetObj = (ObjDetObj *) handle;
+
+#ifdef POWER_MEAS
+    (void)DPC_ObjectDetection_HwaDspUngate(handle);
+#endif
 
     objDetObj->stats.frameStartTimeStamp = CycleCounterP_getCount32();
-#ifdef OBJECTDETHWA_PRINT_DPC_TIMING_INFO
-    gTimingInfo.frameStartTimes[gTimingInfo.frameCnt % OBJECTDETHWA_NUM_FRAME_TIMING_TO_STORE] = CycleCounterP_getCount32();
-    gTimingInfo.frameCnt++;
-#endif
-
-#ifdef SOC_AWR2X44P
-    CSL_dss_rcmRegs *ptrDssRcmRegs = (CSL_dss_rcmRegs *)CSL_CM4_DSS_RCM_U_BASE;
-
-    if(objDetObj->subFrameObj[0].staticCfg.powerOptCfg.hwaStateAfterFrameProc == DPC_OBJDET_HWA_CG_ENABLE)
-    {
-        
-        ptrDssRcmRegs->DSS_HWA_CLK_GATE = DPC_OBJDET_HWA_CLOCK_UNGATE;
-    }
-#endif
 
     DebugP_logInfo("ObjDet DPC: Frame Start, frameIndx = %d, subFrameIndx = %d\n",
-                   objDetObj->stats.frameStartIntCounter, objDetObj->subFrameIndx);
+                objDetObj->stats.frameStartIntCounter, objDetObj->subFrameIndx);
 
-#ifdef INCLUDE_DPM
-    /* Perform DPM_notifyExecute only if the previous frame's/subFrame's result has been exported,
-       i.e., the result exported ioctl has been received from the MSS. Otherwise,
-       DPM_notifyExecute will be performed in the result exported ioctl */
-    if (objDetObj->numTimesResultExported == objDetObj->stats.subframeStartIntCounter)
-    {
-        DebugP_assert(DPM_notifyExecute(objDetObj->dpmHandle, handle) == 0);
-    }
-    else
-    {
-        /* Do Nothing */
-    }
-#else
-    /* Start the DPC Execution for this frame. */
-    SemaphoreP_post (&objDetObj->dpcExecSemHandle);
-#endif
+    /* Check if previous frame (sub-frame) processing has completed */
+    DPC_Objdet_Assert(objDetObj->dpmHandle, (int32_t)(objDetObj->interSubFrameProcToken == 0));
+    objDetObj->interSubFrameProcToken++;
 
-    /* Increment interrupt counter for debugging, sync, and reporting purpose */
+    /* Increment interrupt counter for debugging and reporting purpose */
     if (objDetObj->subFrameIndx == 0U)
     {
         objDetObj->stats.frameStartIntCounter++;
     }
 
-    objDetObj->stats.subframeStartIntCounter++;
+    /* Notify the DPM Module that the DPC is ready for execution */
+    DebugP_assert (DPM_notifyExecute (objDetObj->dpmHandle, handle) == 0);
+    return;
+}
+
+/**
+ *  @b Description
+ *  @n
+ *      Utility function to do a parabolic/quadratic fit on 3 input points
+ *      and return the coordinates of the peak. This is used to accurately estimate
+ *      range bias.
+ *
+ *  @param[in]  x Pointer to array of 3 elements representing the x-coordinate
+ *              of the points to fit
+ *  @param[in]  y Pointer to array of 3 elements representing the y-coordinate
+ *              of the points to fit
+ *  @param[out] xv Pointer to output x-coordinate of the peak value
+ *  @param[out] yv Pointer to output y-coordinate of the peak value
+ *
+ *  @retval   None
+ *
+ * \ingroup DPC_OBJDET__INTERNAL_FUNCTION
+ */
+static void DPC_ObjDet_quadFit(float *x, float*y, float *xv, float *yv)
+{
+    float a, b, c, denom;
+    float x0 = x[0];
+    float x1 = x[1];
+    float x2 = x[2];
+    float y0 = y[0];
+    float y1 = y[1];
+    float y2 = y[2];
+
+    denom = (x0 - x1)*(x0 - x2)*(x1 - x2);
+    a = (x2 * (y1 - y0) + x1 * (y0 - y2) + x0 * (y2 - y1)) / denom;
+    b = (x2*x2 * (y0 - y1) + x1*x1 * (y2 - y0) + x0*x0 * (y1 - y2)) / denom;
+    c = (x1 * x2 * (x1 - x2) * y0 + x2 * x0 * (x2 - x0) * y1 + x0 * x1 * (x0 - x1) * y2) / denom;
+
+    *xv = -b/(2.0F*a);
+    *yv = c - b*b/(4.0F*a);
+}
+
+/**
+ *  @b Description
+ *  @n
+ *      Computes the range bias and rx phase compensation from the detection matrix
+ *      during calibration measurement procedure of these parameters.
+ *
+ *  @param[in]  staticCfg Pointer to static configuration
+ *  @param[in]  targetDistance Target distance in meters
+ *  @param[in]  searchWinSize Search window size in meters
+ *  @param[in] detMatrix Pointer to detection matrix
+ *  @param[in] symbolMatrix Pointer to symbol matrix
+ *  @param[out] compRxChanCfg computed output range bias and rx phase comp vector
+ *
+ *  @retval   None
+ *
+ * \ingroup DPC_OBJDET__INTERNAL_FUNCTION
+ */
+static void DPC_ObjDet_rangeBiasRxChPhaseMeasure
+(
+    DPC_ObjectDetection_StaticCfg       *staticCfg,
+    float                   targetDistance,
+    float                   searchWinSize,
+    uint16_t                *detMatrix,
+    uint32_t                *symbolMatrix,
+    DPU_AoAProc_compRxChannelBiasCfg *compRxChanCfg
+)
+{
+    cmplx16ImRe_t rxSym[SYS_COMMON_NUM_TX_ANTENNAS * SYS_COMMON_NUM_RX_CHANNEL];
+    cmplx16ImRe_t *tempPtr;
+    float sumSqr;
+    float xMagSq[SYS_COMMON_NUM_TX_ANTENNAS * SYS_COMMON_NUM_RX_CHANNEL];
+    int32_t iMax;
+    float xMagSqMin;
+    float scal;
+    float truePosition;
+    int32_t truePositionIndex;
+    float y[3];
+    float x[3];
+    int32_t halfWinSize ;
+    float estPeakPos;
+    float estPeakVal;
+    int32_t i;
+    uint32_t ind;
+    uint32_t txIdx, rxIdx;
+    float temp_f;
+
+    uint32_t numRxAntennas = staticCfg->ADCBufData.dataProperty.numRxAntennas;
+    uint32_t numTxAntennas = staticCfg->numTxAntennas;
+    uint32_t numRangeBins = staticCfg->numRangeBins;
+    uint32_t numDopplerChirps = staticCfg->numDopplerChirps;
+    uint32_t numSymPerTxAnt = numDopplerChirps * numRxAntennas * numRangeBins;
+    uint32_t symbolMatrixIndx;
+
+    uint16_t maxVal = 0;
+
+    truePosition = targetDistance / staticCfg->rangeStep;
+    temp_f = truePosition + 0.5;
+    truePositionIndex = (int32_t) (temp_f);
+
+    temp_f = 0.5 * searchWinSize / staticCfg->rangeStep + 0.5;
+    halfWinSize = (int32_t) (temp_f);
+
+    /**** Range calibration ****/
+    iMax = truePositionIndex;
+    for (i = truePositionIndex - halfWinSize; i <= truePositionIndex + halfWinSize; i++)
+    {
+        if (detMatrix[(uint32_t)i * (uint32_t)staticCfg->numDopplerBins] > maxVal)
+        {
+            maxVal = detMatrix[(uint32_t)i * (uint32_t)staticCfg->numDopplerBins];
+            iMax = i;
+        }
+    }
+
+    /* Fine estimate of the peak position using quadratic fit */
+    ind = 0;
+    for (i = iMax-1; i <= iMax+1; i++)
+    {
+        sumSqr = 0.0F;
+        for (txIdx=0; txIdx < numTxAntennas; txIdx++)
+        {
+            for (rxIdx=0; rxIdx < numRxAntennas; rxIdx++)
+            {
+                symbolMatrixIndx = txIdx * numSymPerTxAnt + rxIdx * numRangeBins + (uint32_t)i;
+                tempPtr = (cmplx16ImRe_t *) &symbolMatrix[symbolMatrixIndx];
+                sumSqr += (float) tempPtr->real * (float) tempPtr->real +
+                          (float) tempPtr->imag * (float) tempPtr->imag;
+            }
+        }
+#ifdef SUBSYS_DSS
+        y[ind] = sqrtsp(sumSqr);
+#else
+        y[ind] = sqrt(sumSqr);
+#endif
+        x[ind] = (float)i;
+        ind++;
+    }
+    DPC_ObjDet_quadFit(x, y, &estPeakPos, &estPeakVal);
+    compRxChanCfg->rangeBias = (estPeakPos - truePosition) * staticCfg->rangeStep;
+
+    /*** Calculate Rx channel phase/gain compensation coefficients ***/
+    for (txIdx = 0; txIdx < numTxAntennas; txIdx++)
+    {
+        for (rxIdx = 0; rxIdx < numRxAntennas; rxIdx++)
+        {
+            ind = txIdx * numRxAntennas + rxIdx;
+            xMagSq[ind] = (float) rxSym[ind].real * (float) rxSym[ind].real +
+                        (float) rxSym[ind].imag * (float) rxSym[ind].imag;
+        }
+    }
+    xMagSqMin = xMagSq[0];
+    for (ind = 1; ind < staticCfg->numVirtualAntennas; ind++)
+    {
+        if (xMagSq[ind] < xMagSqMin)
+        {
+            xMagSqMin = xMagSq[ind];
+        }
+    }
+
+    for (txIdx=0; txIdx < staticCfg->numTxAntennas; txIdx++)
+    {
+        for (rxIdx=0; rxIdx < numRxAntennas; rxIdx++)
+        {
+            int32_t temp;
+            ind = txIdx * numRxAntennas + rxIdx;
+            scal = 32768.F/ xMagSq[ind] * (float)sqrt(xMagSqMin);
+
+            temp_f = MATHUTILS_ROUND_FLOAT(scal * (float)rxSym[ind].real);
+            temp = (int32_t) temp_f;
+            MATHUTILS_SATURATE16(temp);
+            compRxChanCfg->rxChPhaseComp[staticCfg->txAntOrder[txIdx] * numRxAntennas +
+                                         rxIdx].real = (int16_t) (temp);
+
+            temp_f = MATHUTILS_ROUND_FLOAT(-scal * (float)rxSym[ind].imag);
+            temp = (int32_t) temp_f;
+            MATHUTILS_SATURATE16(temp);
+            compRxChanCfg->rxChPhaseComp[staticCfg->txAntOrder[txIdx] * numRxAntennas
+                                         + rxIdx].imag = (int16_t) (temp);
+        }
+    }
 }
 
 /**
@@ -709,12 +719,15 @@ static uint32_t DPC_ObjDet_GetRangeWinGenLen(DPU_RangeProcHWA_Config *cfg)
     numAdcSamples = cfg->staticCfg.ADCBufData.dataProperty.numAdcSamples;
 
 #ifdef DPC_USE_SYMMETRIC_WINDOW_RANGE_DPU
-    winGenLen = ((uint32_t)numAdcSamples + 1U) / 2U;
+    winGenLen = ((uint32_t)numAdcSamples + 1U)/2U;
 #else
-    winGenLen = numAdcSamples;
+    winGenLen = (uint32_t)numAdcSamples;
 #endif
-    return (winGenLen);
+    return(winGenLen);
 }
+
+#define DPC_OBJDET_QFORMAT_RANGE_FFT 17
+#define DPC_OBJDET_QFORMAT_DOPPLER_FFT 17
 
 /**
  *  @b Description
@@ -730,25 +743,6 @@ static uint32_t DPC_ObjDet_GetRangeWinGenLen(DPU_RangeProcHWA_Config *cfg)
  */
 static void DPC_ObjDet_GenRangeWindow(DPU_RangeProcHWA_Config *cfg)
 {
-
-    /* Symmetric window */
-    uint32_t interfMitigWindow[DPC_OBJDET_RANGEPROC_NUM_INTFMITIG_WIN_SIZE_TOTAL >> 1];
-    uint8_t idx;
-
-    mathUtils_genWindow((uint32_t *)interfMitigWindow,
-                        DPC_OBJDET_RANGEPROC_NUM_INTFMITIG_WIN_SIZE_TOTAL,
-                        DPC_OBJDET_RANGEPROC_NUM_INTFMITIG_WIN_SIZE_TOTAL >> 1,
-                        DPC_DPU_RANGEPROC_INTERFMITIG_WINDOW_TYPE,
-                        DPC_OBJDET_QFORMAT_RANGEPROC_INTERFMITIG_WINDOW);
-
-    /* Only 5 win samples are supported by the HWA */
-    for (idx = 0; idx < DPU_RANGEPROCHWADDMA_NUM_INTFMITIG_WIN_HWACOMMONCFG_SIZE; idx++)
-    {
-        cfg->hwRes.hwaCfg.hwaInterfMitigWindow[DPU_RANGEPROCHWADDMA_NUM_INTFMITIG_WIN_HWACOMMONCFG_SIZE - 1U - idx] =
-            (uint8_t)interfMitigWindow[(DPC_OBJDET_RANGEPROC_NUM_INTFMITIG_WIN_SIZE_TOTAL >> 1U) - 2U - idx];
-    }
-
-    /* Range FFT window */
     mathUtils_genWindow((uint32_t *)cfg->staticCfg.window,
                         cfg->staticCfg.ADCBufData.dataProperty.numAdcSamples,
                         DPC_ObjDet_GetRangeWinGenLen(cfg),
@@ -772,14 +766,14 @@ static uint32_t DPC_ObjDet_GetDopplerWinGenLen(DPU_DopplerProcHWA_Config *cfg)
     uint16_t numDopplerChirps;
     uint32_t winGenLen;
 
-    numDopplerChirps = cfg->staticCfg.numChirps;
+    numDopplerChirps = cfg->staticCfg.numDopplerChirps;
 
 #ifdef DPC_USE_SYMMETRIC_WINDOW_DOPPLER_DPU
-    winGenLen = ((uint32_t)numDopplerChirps + 1U) / 2U;
+    winGenLen = ((uint32_t)numDopplerChirps + 1U)/2U;
 #else
-    winGenLen = numDopplerChirps;
+    winGenLen = (uint32_t)numDopplerChirps;
 #endif
-    return (winGenLen);
+    return(winGenLen);
 }
 
 /**
@@ -800,7 +794,7 @@ static uint32_t DPC_ObjDet_GenDopplerWindow(DPU_DopplerProcHWA_Config *cfg)
 
     /* For too small window, force rectangular window to avoid loss of information
      * due to small window values (e.g. hanning has first and last coefficients 0) */
-    if (cfg->staticCfg.numChirps <= 4U)
+    if (cfg->staticCfg.numDopplerChirps <= 4U)
     {
         winType = MATHUTILS_WIN_RECT;
     }
@@ -810,988 +804,176 @@ static uint32_t DPC_ObjDet_GenDopplerWindow(DPU_DopplerProcHWA_Config *cfg)
     }
 
     mathUtils_genWindow((uint32_t *)cfg->hwRes.hwaCfg.window,
-                        cfg->staticCfg.numChirps,
+                        cfg->staticCfg.numDopplerChirps,
                         DPC_ObjDet_GetDopplerWinGenLen(cfg),
                         winType,
                         DPC_OBJDET_QFORMAT_DOPPLER_FFT);
 
-    return (winType);
+    return(winType);
 }
 
 /**
  *  @b Description
  *  @n
- *      Allocates Shawdow paramset
- */
-static void allocateEDMAShadowChannel(EDMA_Handle edmaHandle, uint32_t *param)
-{
-    int32_t             testStatus = SystemP_SUCCESS;
-    EDMA_Config        *config;
-    EDMA_Object        *object;
-
-    config = (EDMA_Config *) edmaHandle;
-    object = config->object;
-
-    if(*param < SOC_EDMA_NUM_PARAMSETS)
-    {
-        if((object->allocResource.paramSet[*param/32U] & ((uint32_t)1U << *param%32U)) != ((uint32_t)1U << *param%32U))
-        {
-            testStatus = EDMA_allocParam(edmaHandle, param);
-            DebugP_assert(testStatus == SystemP_SUCCESS);
-        }
-    }
-    else
-    {
-        DebugP_assert(false);
-    }
-
-    return;
-}
-
-/**
- *  @b Description
- *  @n
- *     Function calls EDMA param, channel, tcc allocation.
- *     DDMA Datapath assumes paramsetNumber = channelNumber = TCC
- *
- *  @param[in]  handle   EDMA handle
- *  @param[in]  chNum    DMA channel number
- *  @param[in]  shadowParam    DMA shadow paramId
- *  @param[in]  eventQueue    Event queue num
- *  @param[out]  chanCfg    Stores channel configuration
- *  @retval   None
- *
- * \ingroup DPC_OBJDET__INTERNAL_FUNCTION
- */
-static void DPC_ObjDet_EDMAChannelConfigAssist(EDMA_Handle handle, uint32_t chNum, uint32_t shadowParam, uint32_t eventQueue, DPEDMA_ChanCfg *chanCfg)
-{
-
-    DebugP_assert(chanCfg != NULL);
-
-    DPEDMA_allocateEDMAChannel(handle, &chNum, &chNum, &chNum);
-
-    chanCfg->channel = chNum;
-    chanCfg->tcc = chNum;
-    chanCfg->paramId = chNum;
-
-    chanCfg->shadowPramId = shadowParam;
-
-    allocateEDMAShadowChannel(handle, &shadowParam);
-
-    chanCfg->eventQueue = eventQueue;
-
-    return;
-
-}
-
-
-/**
- *  @b Description
- *  @n
- *     EDMA configuration that sens intersected objects between
- *    Doppler DPU and Range CFAR stage to L2 scratch buffer from L3
- *    memory.
- *
- *  @param[in]  edmaHandle   EDMA handle
- *  @param[in]  hwRes    Dop DPU hw resources
- *  @param[in]  edmaDetObjs    Channel Configuration
- *  @retval   Error Code
- *
- * \ingroup DPC_OBJDET__INTERNAL_FUNCTION
- */
-static int32_t DPC_ObjectDetection_configEdmaDetObjsOut
-(
-    EDMA_Handle                   edmaHandle,
-    DPU_DopplerProcHWA_HW_Resources *hwRes,
-    DPEDMA_ChanCfg *edmaDetObjs
-)
-{
-    DPEDMA_syncABCfg            syncABCfg;
-    DPEDMA_ChainingCfg          chainingCfg;
-    int32_t                     retVal;
-
-    syncABCfg.aCount = (uint16_t)sizeof(DetObjParams);
-    syncABCfg.bCount = 1U;
-    syncABCfg.cCount = 1U;
-    syncABCfg.srcAddress = (uint32_t)hwRes->detObjList;
-    syncABCfg.destAddress = (uint32_t)hwRes->finalDetObjList;
-    syncABCfg.srcBIdx = (int32_t)sizeof(DetObjParams); // doesn't matter
-    syncABCfg.dstBIdx = (int32_t)sizeof(DetObjParams); // doesn't matter
-    syncABCfg.srcCIdx = (int16_t)sizeof(DetObjParams); // doesn't matter
-    syncABCfg.dstCIdx = (int16_t)sizeof(DetObjParams); // doesn't matter
-
-    chainingCfg.chainingChannel  = (uint8_t)edmaDetObjs->channel;
-    chainingCfg.isIntermediateChainingEnabled = false;
-    chainingCfg.isFinalChainingEnabled        = false;
-
-     retVal =  DPEDMA_configSyncAB(edmaHandle,
-                        edmaDetObjs,
-                        &chainingCfg,
-                        &syncABCfg,
-                        false,//isEventTriggered
-                        false, //isIntermediateTransferCompletionEnabled
-                        true,//isTransferCompletionEnabled
-                        NULL, //transferCompletionCallbackFxn
-                        NULL,
-                        NULL);//transferCompletionCallbackFxnArg
-
-    if (retVal != SystemP_SUCCESS)
-    {
-        goto exit;
-    }
-exit:
-    return retVal;
-}
-
-/**
- *  @b Description
- *  @n
- *     Function checks if the same object is present
- *     in both the rangeCFAR detected object list and the
- *     dopplerProc detected object list (also called doppler
- *     list)
- *
- *  @param[in]  rangeIdx  range index of the object (from the doppler list)
- *  @param[in]  dopIdx    doppler index of the object (from the doppler list)
- *  @param[in]  rangeCfarList list of rangeCFAR detected objects.
- *  @param[in]  numObjToSearch number of Objects to search.
- *  @retval   boolean indicating presence (true) or absence (false).
- *
- * \ingroup DPC_OBJDET__INTERNAL_FUNCTION
- */
-static inline uint32_t isObjInRangeAndDopplerList(const uint32_t rangeIdx,
-                                          const uint32_t dopIdx,
-                                            RangeCfarListObj *rangeCfarList,
-                                            uint32_t numObjToSearch)
-{
-    uint32_t idx;
-    for (idx = 0; idx < numObjToSearch; idx++)
-    {
-        if (rangeCfarList[idx].rangeIdx == rangeIdx)
-        {
-            if (rangeCfarList[idx].dopIdx == dopIdx)
-            {
-                return 1;
-            }
-        }
-    }
-
-    return 0;
-}
-
-#ifdef SUBSYS_DSS
-
-
-/**
- *  @b Description
- *  @n
- *     Function performs quadratic interpolation around a peak
- *
- *  @param[in]  y A Three sample array ([y0,y1,y2]) where
- *              (y1 > y2) and (y1 > y0)
- *
- *  @retval   location of the interpolated peak, relative to y1.
- *
- * \ingroup DPC_OBJDET__INTERNAL_FUNCTION
- */
-static inline float DPC_ObjDet_quadInterpAroundPeak(const uint32_t * restrict y)
-{
-
-    float ym1, y0, yp1;
-    float thetapk; //, yOut;
-
-    ym1 = (float) y[0]; /* y(peak-1) */
-    y0  = (float) y[1]; /* y(peak) */
-    yp1 = (float) y[2]; /* y(peak+1) */
-
-    thetapk = divsp((yp1 - ym1), (2 * (2 * y0 - yp1 - ym1)));
-    /* yOut = y0 + (((yp1 - ym1) / 4) * thetapk); */
-
-    return thetapk;
-
-}
-
-/**
- *  This routine calculates the dot product of 2 single-precision complex
- *  float vectors. The even numbered locations hold the real parts of the
- *  complex numbers while the odd numbered locations contain the imaginary
- *  portions. It is an exact copy of the DSPF_sp_dotp_cmplx function from
- *  the DSPLIB.
- *
- *         @param x   Pointer to array holding the first floating-point vector
- *         @param y   Pointer to array holding the second floating-point vector
- *         @param nx  Number of values in the x and y vectors
- *         @param re  Pointer to the location storing the real part of the result
- *         @param im  Pointer to the location storing the imaginary part of the result
- *
- * @par Assumptions:
- *   Loop counter must be multiple of 4 and > 0. <BR>
- *   The x and y arrays must be double-word aligned. <BR>
- *
- *
- */
-static inline void dotpCmplxf(const float * restrict x, const float * restrict y, int nx,
-                       float * restrict re, float * restrict im)
-{
-    int i;
-    __float2_t x0_im_re, y0_im_re, result0 = 0;
-    __float2_t x1_im_re, y1_im_re, result1 = 0;
-    __float2_t x2_im_re, y2_im_re, result2 = 0;
-    __float2_t x3_im_re, y3_im_re, result3 = 0;
-    __float2_t result;
-
-    _nassert(nx % 4 == 0);
-    _nassert(nx > 0);
-    _nassert((int)x % 8 == 0);
-    _nassert((int)y % 8 == 0);
-
-    for(i = 0; i < 2 * nx; i += 8)
-    {
-        /* load 4 sets of input data */
-        x0_im_re = _amem8_f2((void*)&x[i]);
-        y0_im_re = _amem8_f2((void*)&y[i]);
-
-        x1_im_re = _amem8_f2((void*)&x[i+2]);
-        y1_im_re = _amem8_f2((void*)&y[i+2]);
-
-        x2_im_re = _amem8_f2((void*)&x[i+4]);
-        y2_im_re = _amem8_f2((void*)&y[i+4]);
-
-        x3_im_re = _amem8_f2((void*)&x[i+6]);
-        y3_im_re = _amem8_f2((void*)&y[i+6]);
-
-        /* calculate 4 running sums */
-        result0 = _daddsp(_complex_mpysp(x0_im_re, y0_im_re), result0);
-        result1 = _daddsp(_complex_mpysp(x1_im_re, y1_im_re), result1);
-        result2 = _daddsp(_complex_mpysp(x2_im_re, y2_im_re), result2);
-        result3 = _daddsp(_complex_mpysp(x3_im_re, y3_im_re), result3);
-    }
-
-    result = _daddsp(_daddsp(result0,result1),_daddsp(result2,result3));
-    *re =  _hif2(result);
-    *im =  _lof2(result);
-}
-
-/*! @brief  Complex data type, natural for C66x complex
- * multiplication instructions. */
-typedef struct cmplxfImRe_t_
-{
-    float imag; /*!< @brief imaginary part */
-    float real; /*!< @brief real part */
-} cmplxfImRe_t;
-/*! @brief  Complex union type, natural for C66x intrinsic
- * instructions. */
-typedef union cmplxfUnion_t_
-{
-	cmplxfImRe_t cmplx;
-	float dat[2];
-	double ddat;
-}cmplxfUnion_t;
-
-/*! @brief  Unsigned round (for floats). */
-#define ROUND_UNSIGNED(x) ((x) + 0.5f)
-#define AOA_DFT_LEN (128)
-/* A simple sin-cos LUT used for the DFT computations in
- * DPC_ObjDet_estimateXYZ */
-cmplxfImRe_t dftSinCosTable[AOA_DFT_LEN] __attribute__((aligned(8))) = {
-#include "cossintable.c"
-};
-
-/**
- *  @b Description
- *  @n
- *     Function estimates XYZ coordinates of objects in the object list
- *
- *  @param[in]  subFrmObj   subframe object
- *  @param[in]  objDetObj   DPC object detection object
- *  @param[in]  detObjList  Detected object list
- *  @param[out] objOut      List with x, y, z coordinates populated for each object
- *  @param[in]  numObjOut   Number of detected objects
- *  @param[out] finalNumObjOut  Number of validated objects
+ *      Extracts the sub-frame specific vector from the common (full vector for all antennnas)
+ *      input vector of the range bias and rx phase compensation. Uses the antenna order of
+ *      the sub-frame.
+ *  @param[in]  staticCfg Static configuration of the sub-frame
+ *  @param[in]  inpCfg The full vector.
+ *  @param[out] outCfg Sub-frame specific compensation vector that will be used during processing
  *
  *  @retval   None
  *
  * \ingroup DPC_OBJDET__INTERNAL_FUNCTION
  */
-int32_t DPC_ObjDet_estimateXYZ(SubFrameObj * restrict subFrmObj,
-                               ObjDetObj * restrict objDetObj,
-                               const DetObjParams * restrict detObjList,
-                               DPIF_PointCloudCartesian * restrict objOut,
-                               uint32_t numObjOut,
-                               uint32_t * restrict finalNumObjOut)
+static void DPC_ObjDet_GetRxChPhaseComp(DPC_ObjectDetection_StaticCfg *staticCfg,
+                                 DPU_AoAProc_compRxChannelBiasCfg *inpCfg,
+                                 DPU_AoAProc_compRxChannelBiasCfg *outCfg)
 {
+    uint32_t tx, rx, numTxAnt, numRxAnt;
+    uint8_t *txAntOrder, *rxAntOrder;
+    cmplx16ImRe_t one;
 
-    uint16_t azimFFTSize = subFrmObj->dpuCfg.dopplerCfg.staticCfg.numAzimFFTBins;
-    const float invAzimFFTSize = divsp(1.0f,(float) azimFFTSize);
-    uint32_t objIdx, sampIdx, idx;
-    uint32_t maxAzimMaskWidth = 8*sizeof(objDetObj->commonCfg.zeroInsrtMaskCfg.zeroInsrtMaskAzim);
-    uint32_t maxElevMaskWidth = 8*sizeof(objDetObj->commonCfg.zeroInsrtMaskCfg.zeroInsrtMaskElev);
-    int32_t currLoc;
-    float noisedB, signaldB, snrdB;
-    float peakIdxOffset, peakIdxFlt;
-    int32_t peakLoc;
-    float    azimSinPhase;
-    cmplxfUnion_t DFTValAzim, DFTValElev, elevOutput;
-    float  elevSinPhase, elevCosPhase;
-    float rangeStep, range, dopplerStep, x, ySquared, z;
-    float wz,peakLocFlt, peakIdxFlt_DFT;
-    int32_t dopIdx;
-    uint32_t numDopplerBins = subFrmObj->staticCfg.numDopplerBins;
-    int16_t ValidObjIdx;
+    one.imag = 0;
+    one.real = 0x7fff;
 
-    /* Alignment is to be done because we use the antenna calib params for
-     * multiplication, using optimized DSP routines, which require a 8 byte alignment */
-    cmplxfImRe_t samplesCalib[MAX_NUM_VIRT_ANT] __attribute__((aligned(8)));
-    cmplx32ImRe_t rearrangedAzimSamples[MAX_NUM_AZIM_VIRT_ANT] __attribute__((aligned(8)));
-    cmplx32ImRe_t rearrangedElevSamples[MAX_NUM_ELEV_VIRT_ANT] __attribute__((aligned(8)));
+    numTxAnt = staticCfg->numTxAntennas;
+    numRxAnt = staticCfg->ADCBufData.dataProperty.numRxAntennas;
+    txAntOrder = staticCfg->txAntOrder;
+    rxAntOrder = staticCfg->rxAntOrder;
+    outCfg->rangeBias = inpCfg->rangeBias;
 
-    int32_t retVal = 0;
-    cmplxfImRe_t dftFactorsAzim[MAX_NUM_AZIM_VIRT_ANT] __attribute__((aligned(8)));
-    cmplxfImRe_t dftFactorsElev[MAX_NUM_ELEV_VIRT_ANT] __attribute__((aligned(8)));
-    double * azimSamplesCalib = (double *)&samplesCalib[0];
-    double * elevSamplesCalib = (double *)&samplesCalib[MAX_NUM_AZIM_VIRT_ANT];
-    int64_t  * restrict azimSamples;
-    int64_t  * restrict elevSamples;
-    double samplesFlt2;
-    double *antennaCalibParams = (double *)&objDetObj->commonCfg.antennaCalibParams[0];
-
-    rangeStep = subFrmObj->staticCfg.rangeStep;
-    dopplerStep = subFrmObj->staticCfg.dopplerStep;
-
-    /* This variable will index the final object list */
-    ValidObjIdx = 0;
-
-    for (objIdx = 0; objIdx < numObjOut; objIdx++)
+    for(tx = 0; tx < numTxAnt; tx++)
     {
-        /* 1. Interpolate around peak to get fractional estimate of Azimuth index */
-        peakIdxOffset = DPC_ObjDet_quadInterpAroundPeak(detObjList[objIdx].azimPeakSamples);
-
-        /* Correct peak index with the fractional index*/
-        peakIdxFlt = (float)detObjList[objIdx].azimIdx + peakIdxOffset;
-        peakIdxFlt_DFT = peakIdxFlt * (invAzimFFTSize * AOA_DFT_LEN);
-        peakLoc = ROUND_UNSIGNED(peakIdxFlt_DFT);
-
-
-        /* 2a. Calculate DFT Factors corresponding to wx for Row 1.
-            *  i.e. calculate \f$\e^{j wx}\f$
-            */
-        idx = 0;
-        for (sampIdx = 0; sampIdx < maxAzimMaskWidth; sampIdx ++)
+        for(rx = 0; rx < numRxAnt; rx++)
         {
-            if((objDetObj->commonCfg.zeroInsrtMaskCfg.zeroInsrtMaskAzim >> sampIdx) & 0x1U)
+            if (staticCfg->isValidProfileHasOneTxPerChirp == 1U)
             {
-                currLoc = (peakLoc*sampIdx)%AOA_DFT_LEN;
-                dftFactorsAzim[idx++] = dftSinCosTable[currLoc];
-            }
-
-            /* Break the loop after computing all dft factors in azimuth dimension */
-            if(idx == MAX_NUM_AZIM_VIRT_ANT)
-                break;
-        }
-
-        /* 2b. Calculate DFT Factors corresponding to wx for Row 0.
-            *  i.e. calculate \f$\e^{j wx}\f$
-            */
-        idx = 0;
-        for (sampIdx = 0; sampIdx < maxElevMaskWidth; sampIdx ++)
-        {
-            if((objDetObj->commonCfg.zeroInsrtMaskCfg.zeroInsrtMaskElev >> sampIdx) & 0x1U)
-            {
-                currLoc = (peakLoc*sampIdx)%AOA_DFT_LEN;
-                dftFactorsElev[idx++] = dftSinCosTable[currLoc];
-            }
-
-            /* Break the loop after computing all dft factors in elevation dimension */
-            if(idx == MAX_NUM_ELEV_VIRT_ANT)
-                break;
-        }
-
-        /* 2c. Rearrange the antenna samples according to the virtual antenna mapping. */
-        for (sampIdx = 0; sampIdx < MAX_NUM_AZIM_VIRT_ANT; sampIdx ++)
-        {
-            rearrangedAzimSamples[sampIdx] = detObjList[objIdx].azimSamples[objDetObj->commonCfg.antennaGeometryCfg[sampIdx]];
-        }
-
-        for (sampIdx = 0; sampIdx < MAX_NUM_ELEV_VIRT_ANT; sampIdx ++)
-        {
-            rearrangedElevSamples[sampIdx] = detObjList[objIdx].elevSamples[objDetObj->commonCfg.antennaGeometryCfg[MAX_NUM_AZIM_VIRT_ANT+sampIdx]];
-        }
-
-        azimSamples = (int64_t*) rearrangedAzimSamples;
-        elevSamples = (int64_t*) rearrangedElevSamples;
-
-        /* 3. Azimuth Antenna Calibration:
-            * Multiply azimuth samples (azimSamples) of Doppler FFT with antenna calib params (antennaCalibParams)
-            */
-
-        for (sampIdx = 0; sampIdx < MAX_NUM_AZIM_VIRT_ANT; sampIdx++)
-        {
-            samplesFlt2 = _dintsp(azimSamples[sampIdx]);
-            azimSamplesCalib[sampIdx] =  _complex_mpysp(samplesFlt2,antennaCalibParams[sampIdx]);
-        }
-
-        /* 4. Elevation Antenna calibration
-            * Multiply elev samples with antenna calib params  */
-        for (sampIdx = MAX_NUM_AZIM_VIRT_ANT; sampIdx < MAX_NUM_VIRT_ANT ; sampIdx++ )
-        {
-            samplesFlt2 = _dintsp(elevSamples[sampIdx - MAX_NUM_AZIM_VIRT_ANT]);
-            elevSamplesCalib[sampIdx-MAX_NUM_AZIM_VIRT_ANT] = _complex_mpysp(samplesFlt2, antennaCalibParams[sampIdx]);
-        }
-
-        /* 5. Single Bin DFT on the azimuth antennas to estimate phase at peak.
-            *
-            \f[
-            X_{azim} (\omega_x) = \sum_{k=0}^{N_{azim} - 1} azimSample(k)  e^{-j k \omega_x}
-            \f]
-            * Multiply DFT factors with azimuth of Doppler FFT samples corrected for antenna calibration.
-            */
-        dotpCmplxf((float *)&azimSamplesCalib[0], (float *)&dftFactorsAzim[0], MAX_NUM_AZIM_VIRT_ANT, &DFTValAzim.cmplx.real, &DFTValAzim.cmplx.imag);
-
-
-        /* 6.  Single Bin DFT on the elevation antennas to estimate phase at peak.
-            *
-            \f[
-            X_{elev} (\omega_x) = \sum_{k=0}^{N_{elev} - 1} elevSample(k)  e^{-j (k+2) \omega_x}
-            \f]
-            * The elevation antennas (essentially the 4 virtual antennas corresponding to the
-            * elevation offset Tx antenna) are 4 in number and offset by 3 positions from the
-            * azimuth virtual array. Hence when the DFT is computed, begin from the 3rd DFT parameter.
-            *
-            * Both elevSamplesCalib and cosValSinVal[4] are double-word aligned. */
-        dotpCmplxf((float *)&elevSamplesCalib[0], (float *)&dftFactorsElev[0], MAX_NUM_ELEV_VIRT_ANT, &DFTValElev.cmplx.real, &DFTValElev.cmplx.imag);
-
-        /* 7. Estimate phase difference between the peak location at azimuth antennas and elevation antennas at peak.
-            *  - 1. compute the conjugate product to get the phase difference (i.e. AzimVal * conj(ElevVal)) */
-        elevOutput.ddat =  _complex_conjugate_mpysp (DFTValElev.ddat, DFTValAzim.ddat);
-
-
-        /* - 2. Compute the angle of the product to estimate the phase change in elevation.
-            \f[
-            \omega_z = angle (\ X_{elev} (\omega_x)' \times X_{azim} (\omega_x) )\
-            \f]
-        */
-        if (fabsf(elevOutput.cmplx.imag) < (0.15f*fabsf(elevOutput.cmplx.real)))
-        {
-            // small angle approximation.
-            wz = divsp(elevOutput.cmplx.imag, elevOutput.cmplx.real);
-        }
-        else
-        {
-            wz = atan2sp(elevOutput.cmplx.imag, elevOutput.cmplx.real);
-            if (wz > PI_)
-            {
-                    wz -= 2.0f*PI_;
-            }
-        }
-
-        /* 8. Obtain range using the range resolution and the range Index  */
-        range = rangeStep * (float)detObjList[objIdx].rangeIdx;
-
-        /* 9. Obtain z, x coordinates.
-            \f[
-            \Phi = asin(\frac{\omega_z}{2 \pi d_z})
-            \f]
-
-        \f[
-            z = range \times sin(\phi) = range * \frac{\omega_z}{2 \pi d_z}
-        \f]
-
-        */
-        elevSinPhase = wz * (1.0f / (2.0f * PI_ * objDetObj->commonCfg.antennaSpacing.zSpacingByLambda));
-        if ((elevSinPhase > subFrmObj->aoaFovSinVal.minElevationSinVal) && (elevSinPhase < subFrmObj->aoaFovSinVal.maxElevationSinVal))
-        {
-            z = range * elevSinPhase;
-
-            /*
-            \f[
-                x = range  cos(\phi)  sin(\theta) =  range  /frac{\omega_x}{2 \pi d_x}
-            \f]
-
-            */
-            peakLocFlt = peakLoc * (1.0f/ AOA_DFT_LEN);
-            if (peakLocFlt > 0.5f)
-            {
-                peakLocFlt -= 1.0f;
-            }
-
-            x = range * peakLocFlt * (1.0f / objDetObj->commonCfg.antennaSpacing.xSpacingByLambda);
-
-            /* Obtain 'square of y' coordinate
-                \f[
-                y^2 = range^2 -x^2 - z^2
-            \f]
-            */
-            ySquared = (range * range) - (z * z) - (x * x);
-
-            /* It is possible that ySquared is less than zero (i.e. a degenerate case). In such a case ignore the object.
-                * If the case is not degenerate, proceed to check if the object is in the field of view (FoV).
-                * If so , store the newly validated object in the final object list.*/
-            if (ySquared > 0)
-            {
-                /* Estimate azimuth phase.
-                    \f[
-                    sin(\Theta) = \frac{x}{range \times cos(\Phi)}
-                    \f]
-                */
-                elevCosPhase = sqrtsp(1 - (elevSinPhase * elevSinPhase));
-                azimSinPhase = divsp(x, (range * elevCosPhase));
-
-                /* Check if object is in azimuth FoV, If object is in FoV, proceed to store the coordinates in the final object list */
-                if ((azimSinPhase > subFrmObj->aoaFovSinVal.minAzimuthSinVal) && (azimSinPhase < subFrmObj->aoaFovSinVal.maxAzimuthSinVal))
-                {
-
-                    /* Store x, y, z values */
-                    objOut[ValidObjIdx].z = z;
-                    objOut[ValidObjIdx].x = x;
-                    objOut[ValidObjIdx].y = sqrtsp(ySquared);
-
-                    /* Obtain and store Velocity */
-                    if (detObjList[objIdx].dopIdxActual > numDopplerBins / 2)
-                    {
-                        dopIdx = detObjList[objIdx].dopIdxActual - numDopplerBins;
-                    }
-                    else
-                    {
-                        dopIdx = detObjList[objIdx].dopIdxActual;
-                    }
-                    objOut[ValidObjIdx].velocity = dopIdx * dopplerStep;
-
-                    /* Calcute the side info of final detected object */
-                    /* output is 20*log10(2)*value/2^(QVALUE) */
-                    noisedB = 6.0 * ((float)detObjList[objIdx].dopCfarNoise) * (1.0f/(1 << QVALUE_NOISE));
-                    signaldB = 6.0 * ((float)detObjList[objIdx].azimPeakSamples[1]) * (1.0f/(1<<QVALUE_SIGNAL));
-                    snrdB = signaldB - noisedB;
-
-                    subFrmObj->detObjOutSideInfo[ValidObjIdx].snr = (int)(10*snrdB);
-                    subFrmObj->detObjOutSideInfo[ValidObjIdx].noise = (int)(10*noisedB);
-
-                    /* Increment output list index */
-                    ValidObjIdx++;
-                }
-            }
-        } /* End of elevation FoV check cond */
-    }
-    *finalNumObjOut = ValidObjIdx;
-
-    goto exit;
-exit:
-    return retVal;
-}
-#endif
-
-/**
- *  @b Description
- *  @n
- *      Function to configure the ADC Buffer register bits
- *      as per the the RX channel offset.
- *
- *  @param[in]  channel   RX Channel (0/1/2/3)
- *  @param[in]  offset    offset for the received data
- *
- */
-static void channelOffsetConfig(uint8_t channel, uint16_t offset)
-{
-#if defined(SOC_AWR2X44P)
-    CSL_rss_ctrlRegs *ptrrssCtrlRegs = (CSL_rss_ctrlRegs *)CSL_CM4_RSS_CTRL_U_BASE;
-#else
-    CSL_rss_ctrlRegs *ptrrssCtrlRegs = (CSL_rss_ctrlRegs *)CSL_RSS_CTRL_U_BASE;
-#endif
-
-    switch (channel)
-    {
-    case 0U:
-
-        /* Setup the offset */
-        CSL_REG32_FINS_RAW(&ptrrssCtrlRegs->ADCBUFCFG2,
-                           CSL_RSS_CTRL_ADCBUFCFG2_ADCBUFCFG2_ADCBUFADDRX0_MASK,
-                           CSL_RSS_CTRL_ADCBUFCFG2_ADCBUFCFG2_ADCBUFADDRX0_SHIFT,
-                           ((uint32_t)offset >> 4U));
-        break;
-    case 1U:
-
-        /* Setup the offset */
-        CSL_REG32_FINS_RAW(&ptrrssCtrlRegs->ADCBUFCFG2,
-                           CSL_RSS_CTRL_ADCBUFCFG2_ADCBUFCFG2_ADCBUFADDRX1_MASK,
-                           CSL_RSS_CTRL_ADCBUFCFG2_ADCBUFCFG2_ADCBUFADDRX1_SHIFT,
-                           ((uint32_t)offset >> 4U));
-        break;
-    case 2U:
-
-        /* Setup the offset */
-        CSL_REG32_FINS_RAW(&ptrrssCtrlRegs->ADCBUFCFG3,
-                           CSL_RSS_CTRL_ADCBUFCFG3_ADCBUFCFG3_ADCBUFADDRX2_MASK,
-                           CSL_RSS_CTRL_ADCBUFCFG3_ADCBUFCFG3_ADCBUFADDRX2_SHIFT,
-                           ((uint32_t)offset >> 4U));
-        break;
-    case 3U:
-
-        /* Setup the offset */
-        CSL_REG32_FINS_RAW(&ptrrssCtrlRegs->ADCBUFCFG3,
-                           CSL_RSS_CTRL_ADCBUFCFG3_ADCBUFCFG3_ADCBUFADDRX3_MASK,
-                           CSL_RSS_CTRL_ADCBUFCFG3_ADCBUFCFG3_ADCBUFADDRX3_SHIFT,
-                           ((uint32_t)offset >> 4U));
-        break;
-
-    default:
-        /* Not  supported channels, code should not end up here */
-        DebugP_assert(false);
-        break;
-    }
-}
-
-/**
- *  @b Description
- *  @n
- *      Function to calculate the RX channel offeset based
- *      on the data size of the channel.
- *
- *  @param[in]  rxChannelEn   RX Channel Bitmap b[3:0]=>RX4:RX1
- *  @param[in]  chanDataSize  Number of bytes per RX channel
- *
- */
-static void DPC_ObjectDetection_ConfigureADCBuf(
-    uint16_t rxChannelEn,
-    uint32_t chanDataSize)
-{
-    uint8_t channel;
-    uint16_t offset = 0;
-
-    /* channel offset reconfigure */
-
-    for (channel = 0; channel < SYS_COMMON_NUM_RX_CHANNEL; channel++)
-    {
-        if ((rxChannelEn & ((uint16_t)0x1U << channel)) != 0U)
-        {
-            channelOffsetConfig(channel, offset);
-            /* Calculate offset for the next channel */
-            offset += (uint16_t)chanDataSize;
-        }
-    }
-}
-
-
-/**
- *  @b Description
- *  @n
- *      Computes the rx phase compensation from the detection matrix
- *      during calibration measurement procedure of these parameters.
- *
- *  @param[in]  staticCfg Pointer to static configuration
- *  @param[in]  targetDistance Target distance in meters
- *  @param[in]  searchWinSize Search window size in meters
- *  @param[in]  detMatrix Pointer to detection matrix
- *  @param[in]  detObjList Pointer to detected object list
- *  @param[in]  numObjOut Number of detected objects
- *  @param[out] compRxChanCfg computed output range bias and rx phase comp vector
- *
- *  @retval   None
- *
- * \ingroup DPC_OBJDET__INTERNAL_FUNCTION
- */
-
-
-static void DPC_ObjDet_RxChPhaseMeasure
-(
-    DPC_ObjectDetection_StaticCfg       *staticCfg,
-    float                   targetDistance,
-    float                   searchWinSize,
-    uint16_t                *detMatrix,
-    DetObjParams            *detObjList,
-    uint32_t                numObjOut,
-    Measure_compRxChannelBiasCfg *compRxChanCfg
-)
-{
-    float antMagSq[SYS_COMMON_NUM_RX_CHANNEL * SYS_COMMON_NUM_TX_ANTENNAS];
-    float antMagSqMin;
-    float scal;
-    float truePosition;
-    int32_t truePositionIndex;
-    int32_t halfWinSize;
-    uint8_t antennaIdx, elevIdx;
-    uint32_t objIdx, rangeidx;
-    int32_t iMaxPos =-1, objIdxMax =-1;
-    int32_t temp;
-    float temp_f;
-
-    uint16_t numDopFFTSubBins = staticCfg->numDopplerBins / staticCfg->numBandsTotal;
-    uint16_t maxVal = 0;
-
-    truePosition = targetDistance / staticCfg->rangeStep;
-    temp_f = truePosition + 0.5F;
-    truePositionIndex = (int32_t) (temp_f);
-
-    temp_f = 0.5F * searchWinSize / staticCfg->rangeStep + 0.5F;
-    halfWinSize = (int32_t) (temp_f);
-
-    /**** Strongest target position index ****/
-    for(objIdx=0; objIdx< numObjOut; objIdx++){
-        /** for all detected objects, if object is in the target distance range,
-         * find object with maximum SNR in that range */
-        rangeidx = detObjList[objIdx].rangeIdx;
-
-        if(( (int32_t)rangeidx >= (truePositionIndex - halfWinSize)) && ((int32_t)rangeidx <= (truePositionIndex + halfWinSize))){
-            /* doppler bin =0 ; considering target at zero velocity*/
-            if (detMatrix[rangeidx*numDopFFTSubBins] > maxVal)
-            {
-                maxVal = detMatrix[rangeidx * numDopFFTSubBins];
-                iMaxPos = (int32_t)rangeidx;
-                objIdxMax = (int32_t)objIdx;
-            }
-        }
-    }
-
-    /*should not be first range bin (0) or -1 (error) */
-    if(iMaxPos>0){
-     /*** Calculate antenna normalization coefficients ***/
-        for (antennaIdx = 0; antennaIdx < staticCfg->numVirtualAntennas; antennaIdx++)
-        {
-            if(antennaIdx < staticCfg->numVirtualAntAzim){
-                antMagSq[antennaIdx] = (float) detObjList[objIdxMax].azimSamples[antennaIdx].real * (float) detObjList[objIdxMax].azimSamples[antennaIdx].real +
-                            (float) detObjList[objIdxMax].azimSamples[antennaIdx].imag * (float) detObjList[objIdxMax].azimSamples[antennaIdx].imag;
-            }
-            else{
-                elevIdx = antennaIdx - staticCfg->numVirtualAntAzim;
-                antMagSq[antennaIdx] = (float) detObjList[objIdxMax].elevSamples[elevIdx].real * (float) detObjList[objIdxMax].elevSamples[elevIdx].real +
-                            (float) detObjList[objIdxMax].elevSamples[elevIdx].imag * (float) detObjList[objIdxMax].elevSamples[elevIdx].imag;
-            }
-        }
-
-        if(staticCfg->numVirtualAntennas > 0U)
-        {
-            antMagSqMin = antMagSq[0];
-            for (antennaIdx = 1; antennaIdx < staticCfg->numVirtualAntennas; antennaIdx++)
-            {
-                if (antMagSq[antennaIdx] < antMagSqMin)
-                {
-                    antMagSqMin = antMagSq[antennaIdx];
-                }
-            }
-
-            for (antennaIdx = 0; antennaIdx < staticCfg->numVirtualAntennas; antennaIdx++)
-            {
-                scal = 16384.0F/ antMagSq[antennaIdx] * (float)sqrt((float)antMagSqMin);
-
-                if(antennaIdx < staticCfg->numVirtualAntAzim){
-                    temp_f = MATHUTILS_ROUND_FLOAT(scal * (float)detObjList[objIdxMax].azimSamples[antennaIdx].real);
-                    temp = (int32_t) (temp_f);
-                    MATHUTILS_SATURATE16(temp);
-                    compRxChanCfg->rxChPhaseComp[antennaIdx].real = (int16_t) (temp);
-
-                    temp_f = MATHUTILS_ROUND_FLOAT(-scal * (float)detObjList[objIdxMax].azimSamples[antennaIdx].imag);
-                    temp = (int32_t) (temp_f);
-                    MATHUTILS_SATURATE16(temp);
-                    compRxChanCfg->rxChPhaseComp[antennaIdx].imag = (int16_t) (temp);
-                }
-
-                else{
-                    elevIdx = antennaIdx - staticCfg->numVirtualAntAzim;
-                    temp_f = MATHUTILS_ROUND_FLOAT(scal * (float)detObjList[objIdxMax].elevSamples[elevIdx].real);
-                    temp = (int32_t) (temp_f);
-                    MATHUTILS_SATURATE16(temp);
-                    compRxChanCfg->rxChPhaseComp[antennaIdx].real = (int16_t) (temp);
-
-                    temp_f = MATHUTILS_ROUND_FLOAT(-scal * (float)detObjList[objIdxMax].elevSamples[elevIdx].imag);
-                    temp = (int32_t) (temp_f);
-                    MATHUTILS_SATURATE16(temp);
-                    compRxChanCfg->rxChPhaseComp[antennaIdx].imag = (int16_t) (temp);
-                }
-            }
-            compRxChanCfg->targetRange = (float)detObjList[objIdxMax].rangeIdx * staticCfg->rangeStep;
-            compRxChanCfg->peakVal = maxVal;
-        }
-    }
-    else{
-        /* target object not found */
-        for (antennaIdx = 0; antennaIdx < staticCfg->numVirtualAntennas; antennaIdx++)
-        {
-                compRxChanCfg->rxChPhaseComp[antennaIdx].real = 16384;
-                compRxChanCfg->rxChPhaseComp[antennaIdx].imag = 0;
-        }
-        compRxChanCfg->targetRange = -1.0F;
-        compRxChanCfg->peakVal = 0;
-    }
-}
-
-/**
- *  @b Description
- *  @n
- *     Check the FFT clip status.
- *
- *  @param[in]  objDetObj Pointer to DPC object
- *  @param[out] clipCount FFT Clip Count
- *
- *  @retval   None
- *
- * \ingroup DPC_OBJDET__INTERNAL_FUNCTION
- */
-
-static void checkFFTClipStatus(ObjDetObj *objDetObj, uint32_t* clipCount)
-{
-    uint16_t clipStatusResult = 0U;
-
-    /* Check the FFT clip Register after range fft */
-    (void)HWA_readClipStatus(objDetObj->hwaHandle, &clipStatusResult, HWA_CLIPREG_TYPE_FFT);
-    /* Is FFT clipped? Yes: increment the clip count */
-    if(clipStatusResult!=0U)
-    {
-        (*clipCount)++;
-    }
-    /* Clear the FFT clip register */
-    (void)HWA_clearClipStatus(objDetObj->hwaHandle, HWA_CLIPREG_TYPE_FFT);
-}
-
-/**
- *  @b Description
- *  @n
- *      Creates the final detected object list with the objects that
- *     are present in both doppler nad range cfar detection list.
- *
- *  @param[in]  objDetObj Pointer to DPC object
- *  @param[in]  subFrmObj Pointer to subframe object
- *  @param[in]  dopNumObjOut Number of detected objects by Doppler DPU
- *  @param[in]  detObjList Pointer to detected object list by Doppler DPU
- *  @param[out] finalNumDetObjs Final number of detected objects after intersection
- *
- *  @retval
- *      Success -   0
- *  @retval
- *      Error   -   <0
- *
- * \ingroup DPC_OBJDET__INTERNAL_FUNCTION
- */
-static int32_t DPC_ObjDet_intersectDopAndRangeCFAR(
-    ObjDetObj *objDetObj,
-    SubFrameObj *subFrmObj,
-    uint32_t dopNumObjOut,
-    DetObjParams *detObjList,
-    uint32_t *finalNumDetObjs
-)
-{
-    int32_t retVal=0;
-    uint16_t valSubBinObj, cfarListStartIdx;
-    uint32_t isValidObj, objIdx, dopIdx, finalNumObjs = 0;
-    uint16_t * rangeCfarObjPerDopList;
-    uint32_t baseAddr = EDMA_getBaseAddr(objDetObj->edmaHandle[0]);
-    uint32_t edmaSrcAddr, edmaDstAddr, edmaTrigReg, edmaIntrStatusReg, edmaClrIntrStatusReg, channelMask;
-    edmaSrcAddr = baseAddr + EDMA_TPCC_OPT(objDetObj->edmaDetObjs.channel) + 0x4U;
-    edmaDstAddr = edmaSrcAddr + 0x8U;
-    edmaTrigReg = baseAddr + EDMA_TPCC_ESR_RN(0U);
-    edmaIntrStatusReg =  baseAddr + EDMA_TPCC_IPR_RN(0U);
-    edmaClrIntrStatusReg = baseAddr + EDMA_TPCC_ICR_RN(0U);
-    channelMask = (uint32_t)1U << objDetObj->edmaDetObjs.channel;
-
-    /* As the detected object list is written on radar cube, find the intersection of range-cfar
-       and doppler proc stage here, and copy the result to Local Scratch Buf before triggering range proc.
-       As range processing will result in overwritten of detObjList by the radar cube.
-       This step is required as Elev Estimation has to happen in parallel with Range Proc. */
-    if(subFrmObj->staticCfg.rangeCfarCfg.cfg.isEnabled)
-    {
-        rangeCfarObjPerDopList = (uint16_t *)subFrmObj->dpuCfg.rangeCfarCfg.res.rangeCfarNumObjPerDopplerBinBuf;
-        for (objIdx = 0; objIdx < dopNumObjOut; objIdx++)
-        {
-            dopIdx = detObjList[objIdx].dopIdx;
-
-            if (dopIdx > 0U)
-            {
-                /* Obtain the number of objects for a sub bin in the Range CFAR list by
-                * subtracting two consecutive elements from the cummulative distribution */
-                valSubBinObj = rangeCfarObjPerDopList[dopIdx] - rangeCfarObjPerDopList[dopIdx - 1U];
-                cfarListStartIdx = rangeCfarObjPerDopList[dopIdx - 1U];
+                /* AOP ant: it will always come here
+                 * STD ant: it will come here for MIMO cases
+                 */
+                outCfg->rxChPhaseComp[tx * numRxAnt + rx] =
+                    inpCfg->rxChPhaseComp[txAntOrder[tx] * SYS_COMMON_NUM_RX_CHANNEL +
+                                          rxAntOrder[rx]];
             }
             else
             {
-                /* For the 0th sub bin, do not perform a subtraction */
-                valSubBinObj = rangeCfarObjPerDopList[dopIdx];
-                cfarListStartIdx = 0;
+                outCfg->rxChPhaseComp[tx * numRxAnt + rx] = one;
             }
-
-            /* If the sub bin has valid objects in the range CFAR list, check whether the
-            * object currently being looked at (from the Doppler CFAR list), is also available
-            * in the range CFAR list. cfarListStartIdx tells us where to start searching for in
-            * the range CFAR list, and valSubBinObj tells us how many elements to search in.
-            * This saves computation time. */
-            if (valSubBinObj)
-            {
-                isValidObj = isObjInRangeAndDopplerList((uint32_t)detObjList[objIdx].rangeIdx,
-                                                        detObjList[objIdx].dopIdx,
-                                                        (RangeCfarListObj *)&subFrmObj->dpuCfg.rangeCfarCfg.res.rangeCfarList[cfarListStartIdx],
-                                                        valSubBinObj);
-
-                if(isValidObj)
-                {
-                    /* Check the completion of previous transfer before triggering the next. */
-                    if(finalNumObjs > 0U)
-                    {
-                        while(((*(volatile uint32_t*)((uint32_t)edmaIntrStatusReg)) & (channelMask)) != (channelMask))
-                        {
-                            /* wait */
-                        }
-                        *(volatile uint32_t*)((uint32_t)edmaClrIntrStatusReg) = channelMask;
-                    }
-
-
-                    /* EDMA this obj to L2 for further processing */
-
-                    /* update src address */
-                    *(volatile uint32_t*)((uint32_t)edmaSrcAddr) = (uint32_t)SOC_virtToPhy((void*)&subFrmObj->dpuCfg.dopplerCfg.hwRes.detObjList[objIdx]);
-
-                    /* update dst address */
-                    *(volatile uint32_t*)((uint32_t)edmaDstAddr) = (uint32_t)SOC_virtToPhy((void*)&subFrmObj->dpuCfg.dopplerCfg.hwRes.finalDetObjList[finalNumObjs]);
-
-                    /* trigger */
-                    *(volatile uint32_t*)((uint32_t)edmaTrigReg) = channelMask;
-
-                    finalNumObjs++;
-                    if(finalNumObjs >= subFrmObj->dpuCfg.dopplerCfg.hwRes.finalMaxNumDetObjs)
-                    {
-                        break;
-                    }
-                }
-            }
-        }
-
-        /* Monitor the completion of last transfer here. */
-        if(finalNumObjs > 0U)
-        {
-            while(((*(volatile uint32_t*)((uint32_t)edmaIntrStatusReg)) & (channelMask)) != (channelMask))
-            {
-                /* wait */
-            }
-            *(volatile uint32_t*)((uint32_t)edmaClrIntrStatusReg) = channelMask;
         }
     }
-    else
+}
+
+
+/**
+ *  @b Description
+ *  @n
+ *     Function transfers antenna geometry definition from the common area which holds all
+ *     antennas, to the area per subframe according to subframe antenna usage (antena order
+ *     and number of used antennas)
+ *
+ *  @param[in]  staticCfg Static configuration of the sub-frame
+ *  @param[in]  antDef Full antenna geometry definition
+ *
+ *  @retval   None
+ *
+ * \ingroup DPC_OBJDET__INTERNAL_FUNCTION
+ */
+static void DPC_ObjDet_GetAntGeometryDef(DPC_ObjectDetection_StaticCfg *staticCfg,
+                                         ANTDEF_AntGeometry *antDef)
+{
+    uint32_t tx, rx, numTxAnt, numRxAnt;
+    uint8_t *txAntOrder, *rxAntOrder;
+
+    numTxAnt = staticCfg->numTxAntennas;
+    numRxAnt = staticCfg->ADCBufData.dataProperty.numRxAntennas;
+    txAntOrder = staticCfg->txAntOrder;
+    rxAntOrder = staticCfg->rxAntOrder;
+
+    for(tx = 0; tx < numTxAnt; tx++)
     {
-        /* Copy the entire detected object list to L2.
-           We can copy only a limited number of objects (set to finalMaxNumDetObjs).
-           This constraint is due to limited available L2 buffer memory. */
-        finalNumObjs = (dopNumObjOut > subFrmObj->dpuCfg.dopplerCfg.hwRes.finalMaxNumDetObjs)? subFrmObj->dpuCfg.dopplerCfg.hwRes.finalMaxNumDetObjs : dopNumObjOut;
-
-        /* Check if only A-dim transfer is sufficient to do this. If not, increase the number of B-dim transfers. */
-        uint32_t acnt = finalNumObjs * sizeof(DetObjParams);
-        uint32_t bcnt = 1;
-        while( acnt > 65535U )
-        {
-            acnt /= 2U;
-            bcnt *= 2U;
-        }
-
-        uint32_t bcnt_acnt = ((uint32_t)bcnt << 16U) | (uint32_t)acnt;
-        EDMA_dmaSetPaRAMEntry(baseAddr, objDetObj->edmaDetObjs.channel, EDMACC_PARAM_ENTRY_ACNT_BCNT, bcnt_acnt);
-        uint32_t dstBidx_srcBidx = ((uint32_t)acnt << 16U) | (uint32_t)acnt;
-        EDMA_dmaSetPaRAMEntry(baseAddr, objDetObj->edmaDetObjs.channel, EDMACC_PARAM_ENTRY_SRC_DST_BIDX, dstBidx_srcBidx);
-
-        *(volatile uint32_t*)((uint32_t)edmaTrigReg) = channelMask;
-        while(((*(volatile uint32_t*)((uint32_t)edmaIntrStatusReg)) & (channelMask)) != (channelMask))
-        {
-            /* wait */
-        }
-        *(volatile uint32_t*)((uint32_t)edmaClrIntrStatusReg) = channelMask;
+        staticCfg->antDef.txAnt[tx] = antDef->txAnt[txAntOrder[tx]];
     }
+    for(rx = 0; rx < numRxAnt; rx++)
+    {
+        staticCfg->antDef.rxAnt[rx] = antDef->rxAnt[rxAntOrder[rx]];
+    }
+}
 
-    *finalNumDetObjs = finalNumObjs;
+static int32_t DPC_ObjDet_elevFFTCfg
+(
+    DPU_AoAProcHWA_StaticConfig *DPParams
+)
+{
+    int32_t retVal = 0;
+    uint32_t zeroMask = DPParams->zeroInsrtMaskCfg.zeroInsrtMaskElev;
+    uint8_t numElemVirtualAntELev = mathUtils_ceilLog2(DPParams->zeroInsrtMaskCfg.zeroInsrtMaskElev);
+    uint8_t idx, k=0;
+    uint8_t numParams = 0, elements = 0;
 
-    return retVal;
+    if(numElemVirtualAntELev == DPParams->numVirtualAntElev)
+    {
+        /* zero insertion is not required */
+        DPParams->numElevFFTParams = 0U;
+        (void)memset(DPParams->elevFFTParamCfg, 0, sizeof(DPParams->elevFFTParamCfg));
+    }
+    else{
+        uint8_t bitPos[MAX_NUM_ELEV_VIRT_ANT] = {0};
+        uint8_t bitPosDiff[MAX_NUM_ELEV_VIRT_ANT - 1U] = {0};
+
+        for(idx= 0; idx < numElemVirtualAntELev; idx++){
+            if(((zeroMask >> idx) & 0x1U) != 0U)
+            {
+                bitPos[k++] = idx;
+            }
+        }
+
+        /* difference between two positions */
+        for(k = 1; k < DPParams->numVirtualAntElev; k++)
+        {
+            bitPosDiff[k-1U] = bitPos[k] - bitPos[k-1U];
+        }
+
+        /* at least one param is required */
+        DPParams->elevFFTParamCfg[0].srcAddOffset = 0;
+        DPParams->elevFFTParamCfg[0].dstAddOffset = bitPos[0];
+        DPParams->elevFFTParamCfg[0].acnt = ((DPParams->numVirtualAntElev - elements) >= 2U) ? (2U - 1U) : (1U - 1U);
+        DPParams->elevFFTParamCfg[0].dstAidx = bitPosDiff[0];
+        elements +=  DPParams->elevFFTParamCfg[0].acnt + 1U;
+
+        for(k=1; k < (DPParams->numVirtualAntElev - 1U); k++)
+        {
+            if(bitPosDiff[k] == bitPosDiff[k-1U])
+            {
+                DPParams->elevFFTParamCfg[numParams].acnt++;
+                elements++;
+            }
+            else
+            {
+                numParams++;
+                if(numParams + 1U > DPU_AOAPROCHWA_MAX_ELEVFFTPARAMS_FOR_ZERO_INSERTION)
+                {
+                    retVal = DPU_AOAPROCHWA_EEXCEED_ELEVPARAMS;
+                    goto exit;
+                }
+
+                DPParams->elevFFTParamCfg[numParams].srcAddOffset = (DPParams->elevFFTParamCfg[numParams-1U].acnt+1U);
+                DPParams->elevFFTParamCfg[numParams].dstAddOffset = bitPos[elements];
+                DPParams->elevFFTParamCfg[numParams].acnt = (DPParams->numVirtualAntElev-elements) >= 2U ? (2U - 1U) : (1U-1U);
+                DPParams->elevFFTParamCfg[numParams].dstAidx = bitPosDiff[k+1U];
+                elements += DPParams->elevFFTParamCfg[numParams].acnt + 1U;
+            }
+
+            /* break the lopp if all params are exhausted */
+            if(elements == DPParams->numVirtualAntElev)
+            {
+                break;
+            }
+        }
+    }
+    DPParams->numElevFFTParams = numParams+1U;
+exit:
+    return (retVal);
 }
 
 /**
@@ -1812,19 +994,18 @@ static int32_t DPC_ObjDet_intersectDopAndRangeCFAR(
  *  @retval
  *      Error   -   <0
  */
-
-int32_t DPC_ObjectDetection_execute(
+static int32_t DPC_ObjectDetection_execute
+(
     DPM_DPCHandle   handle,
-    DPM_Buffer *ptrResult)
+    DPM_Buffer*     ptrResult
+)
 {
     ObjDetObj   *objDetObj;
     SubFrameObj *subFrmObj;
     DPU_RangeProcHWA_OutParams outRangeProc;
     DPU_DopplerProcHWA_OutParams outDopplerProc;
-    DPU_RangeCFARProcHWA_OutParams outRangeCfarProc;
-    DetObjParams * detObjList;
-    DPIF_PointCloudCartesian * objOut;
-    uint32_t saveRestoreDataSize;
+    DPU_CFARProcHWA_OutParams outCfarProc;
+    DPU_AoAProcHWA_OutParams outAoaProc;
     int32_t retVal;
     DPC_ObjectDetection_ExecuteResult *result;
     DPC_ObjectDetection_ProcessCallBackCfg *processCallBack;
@@ -1834,9 +1015,7 @@ int32_t DPC_ObjectDetection_execute(
     DebugP_assert (objDetObj != NULL);
     DebugP_assert (ptrResult != NULL);
 
-#ifndef INCLUDE_DPM
-    (void)SemaphoreP_pend(&objDetObj->dpcExecSemHandle, SystemP_WAIT_FOREVER);
-#endif
+    DebugP_logInfo("ObjDet DPC: Processing sub-frame %d\n", objDetObj->subFrameIndx);
 
     processCallBack = &objDetObj->processCallBackCfg;
 
@@ -1849,18 +1028,12 @@ int32_t DPC_ObjectDetection_execute(
 
     subFrmObj = &objDetObj->subFrameObj[objDetObj->subFrameIndx];
 
-    /* Cache invalidation is required to mitigate incoherency
-     * issues associated with EDMA transfer from/to L3. */
-    CacheP_wbInvAll(CacheP_TYPE_ALL);
-
-    retVal = DPU_RangeProcHWA_process(subFrmObj->dpuRangeObj,  &subFrmObj->dpuCfg.rangeCfg, &outRangeProc);
+    retVal = DPU_RangeProcHWA_process(subFrmObj->dpuRangeObj, &outRangeProc);
     if (retVal != 0)
     {
         goto exit;
     }
     DebugP_assert(outRangeProc.endOfChirp == true);
-
-    checkFFTClipStatus(objDetObj, &result->FFTClipCount[0]);
 
     if (processCallBack->processInterFrameBeginCallBackFxn != NULL)
     {
@@ -1869,170 +1042,81 @@ int32_t DPC_ObjectDetection_execute(
 
     objDetObj->stats.interFrameStartTimeStamp = CycleCounterP_getCount32();
 
-#ifdef INCLUDE_DPM
-    DPC_Objdet_Assert(objDetObj->dpmHandle, (objDetObj->interSubFrameProcToken == 0));
-#else
-    DebugP_assert(objDetObj->interSubFrameProcToken == 0);
-#endif
-    objDetObj->interSubFrameProcToken++;
+    DebugP_logInfo("ObjDet DPC: Range Proc Done\n");
 
-#ifdef OBJECTDETHWA_PRINT_DPC_TIMING_INFO
-    gTimingInfo.rangeEndTimes[gTimingInfo.rangeEndCnt % OBJECTDETHWA_NUM_FRAME_TIMING_TO_STORE] = CycleCounterP_getCount32();
-    gTimingInfo.rangeEndCnt++;
-#endif
-
-#ifdef SOC_AWR2X44P
-    CSL_dss_rcmRegs *ptrDssRcmRegs = (CSL_dss_rcmRegs *)CSL_CM4_DSS_RCM_U_BASE;
-
-    if (subFrmObj->staticCfg.powerOptCfg.dspStateAfterFrameProc == DPC_OBJDET_DSP_PG_ENABLE)
-    {
-        if ((ptrDssRcmRegs->DSP_PD_STATUS & DPC_OBJDET_DSP_PD_STATUS_MASK) == DPC_OBJDET_DSP_POWERED_DOWN)
-        {
-            /* Trigger Wakeup */
-            ptrDssRcmRegs->DSP_PD_TRIGGER_WAKUP |= 0x1U;
-            while((ptrDssRcmRegs->DSP_PD_STATUS & DPC_OBJDET_DSP_PD_STATUS_MASK) != DPC_OBJDET_DSP_POWERED_UP)
-            {
-                /* Wait for DSP power up */
-            }
-        }
-    }
-    else if (subFrmObj->staticCfg.powerOptCfg.dspStateAfterFrameProc == DPC_OBJDET_DSP_UC_ENABLE)
-    {
-        /* Switch DSP core clock back to normal rate */
-        ptrDssRcmRegs->DSS_DSP_CLK_SRC_SEL = DPC_OBJDET_DSP_CLK_SRC_DSP_PLL_MUX;
-    }
-#endif
-    retVal = DPU_DopplerProcHWA_process(subFrmObj->dpuDopplerObj, &subFrmObj->dpuCfg.dopplerCfg, &outDopplerProc);
+    (void)DPC_ObjDet_GenDopplerWindow(&subFrmObj->dpuCfg.dopplerCfg);
+    retVal = DPU_DopplerProcHWA_config(subFrmObj->dpuDopplerObj, &subFrmObj->dpuCfg.dopplerCfg);
     if (retVal != 0)
     {
         goto exit;
     }
-#ifdef OBJECTDETHWA_PRINT_DPC_TIMING_INFO
-    gTimingInfo.dopEndTimes[gTimingInfo.dopEndCnt % OBJECTDETHWA_NUM_FRAME_TIMING_TO_STORE] = CycleCounterP_getCount32();
-    gTimingInfo.dopEndCnt++;
-#endif
-
-    checkFFTClipStatus(objDetObj, &result->FFTClipCount[1]);
-
-    if (subFrmObj->staticCfg.rangeCfarCfg.cfg.isEnabled)
+    retVal = DPU_DopplerProcHWA_process(subFrmObj->dpuDopplerObj, &outDopplerProc);
+    if (retVal != 0)
     {
-        retVal = DPU_RangeCFARProcHWA_process(subFrmObj->dpuRangeCfarObj, &subFrmObj->dpuCfg.rangeCfarCfg, &outRangeCfarProc);
+        goto exit;
+    }
+
+    /* Procedure for range bias measurement and Rx channels gain/phase offset measurement */
+    if(objDetObj->commonCfg.measureRxChannelBiasCfg.enabled != 0U)
+    {
+        DPC_ObjDet_rangeBiasRxChPhaseMeasure(&subFrmObj->staticCfg,
+            objDetObj->commonCfg.measureRxChannelBiasCfg.targetDistance,
+            objDetObj->commonCfg.measureRxChannelBiasCfg.searchWinSize,
+            subFrmObj->dpuCfg.dopplerCfg.hwRes.detMatrix.data,
+            (uint32_t *) subFrmObj->dpuCfg.rangeCfg.hwRes.radarCube.data,
+            &objDetObj->compRxChanCfgMeasureOut);
+    }
+
+    if (subFrmObj->isAoAHWAparamSetOverlappedWithCFAR == true)
+    {
+        retVal = DPU_CFARProcHWA_config(subFrmObj->dpuCFARObj, &subFrmObj->dpuCfg.cfarCfg);
         if (retVal != 0)
         {
             goto exit;
         }
     }
 
-    detObjList = subFrmObj->dpuCfg.dopplerCfg.hwRes.detObjList;
-    objOut     = subFrmObj->dpuCfg.dopplerCfg.hwRes.objOut;
-
-    /* Procedure for Rx channels gain/phase offset measurement */
-    if(objDetObj->commonCfg.measureRxChannelBiasCfg.enabled)
-    {
-        DPC_ObjDet_RxChPhaseMeasure(&subFrmObj->staticCfg,
-            objDetObj->commonCfg.measureRxChannelBiasCfg.targetDistance,
-            objDetObj->commonCfg.measureRxChannelBiasCfg.searchWinSize,
-            subFrmObj->dpuCfg.dopplerCfg.hwRes.detMatrix.data,
-            detObjList,
-            outDopplerProc.numObjOut,
-            &objDetObj->compRxChanCfgMeasureOut);
-    }
-
-#if !defined(OBJ_DETECTION_DDMA_TEST) && defined(SOC_AWR2X44P)
-    SemaphoreP_pend(&gDPCStateSemHandle, SystemP_WAIT_FOREVER);
-#endif
-
-    retVal = DPC_ObjDet_intersectDopAndRangeCFAR(objDetObj, subFrmObj, outDopplerProc.numObjOut, detObjList, &result->dopNumObjOut) ;
-    if (retVal < 0)
-    {
-        goto exit;
-    }
-
-    /********************************
-     * Prepare for subFrame switch
-     *******************************/
-    if (objDetObj->commonCfg.numSubFrames > 1U)
-    {
-        uint8_t nextSubFrameIdx;
-        SubFrameObj *nextSubFrmObj;
-
-        DPC_ObjectDetection_ADCBufConfig nextSubFrameADCBufConfig;
-
-        if (objDetObj->subFrameIndx == (objDetObj->commonCfg.numSubFrames - 1U))
-        {
-            nextSubFrameIdx = 0;
-        }
-        else
-        {
-            nextSubFrameIdx = objDetObj->subFrameIndx + 1U;
-        }
-        /* get next subframe objDetObj */
-        nextSubFrmObj = &objDetObj->subFrameObj[nextSubFrameIdx];
-
-        if(objDetObj->commonCfg.rangeProcCfg.rangeProcChain == DPU_RANGEPROCHWA_PREVIOUS_FRAME_DC_MODE)
-        {
-            /* In this rangeProcChain, if subframe switching is happening, 
-             * corresponding subframe indices' DC Estimation statistics need to be loaded and stored. */
-            saveRestoreDataSize = (uint32_t)subFrmObj->staticCfg.ADCBufData.dataProperty.numRxAntennas * 4U;
-            if(objDetObj->commonCfg.rangeProcCfg.isReal2XEnabled)
-            {
-                /* In Real2X mode, number of elements is halved */
-                saveRestoreDataSize >>= 1;
-            }
-            rangeProcHWA_storePreProcStats(&subFrmObj->dpuCfg.rangeCfg, saveRestoreDataSize, 0, 0);
-            rangeProcHWA_loadPreProcStats(&nextSubFrmObj->dpuCfg.rangeCfg, saveRestoreDataSize, 0, 0);
-        }
-
-        nextSubFrameADCBufConfig = nextSubFrmObj->staticCfg.ADCBufConfig;
-        /* Configure ADC for next sub-frame */
-        DPC_ObjectDetection_ConfigureADCBuf(
-            nextSubFrameADCBufConfig.rxChannelEn,
-            nextSubFrameADCBufConfig.adcBufChanDataSize);
-        (void)DPC_ObjDet_reconfigSubFrame(objDetObj, nextSubFrameIdx);
-
-        /* Trigger Range DPU for the next sub frame */
-        retVal = DPU_RangeProcHWA_control(nextSubFrmObj->dpuRangeObj, &nextSubFrmObj->dpuCfg.rangeCfg,
-                                          DPU_RangeProcHWA_Cmd_triggerProc, NULL, 0);
-        if (retVal < 0)
-        {
-            goto exit;
-        }
-    }
-    else
-    {
-        /* Trigger Range DPU for the next frame */
-        retVal = DPU_RangeProcHWA_control(subFrmObj->dpuRangeObj, &subFrmObj->dpuCfg.rangeCfg,
-                                          DPU_RangeProcHWA_Cmd_triggerProc, NULL, 0);
-        if (retVal < 0)
-        {
-            goto exit;
-        }
-    }
-
-#ifdef SUBSYS_DSS
-#ifdef OBJECTDETHWA_PRINT_DPC_TIMING_INFO
-    gTimingInfo.aoaStartTimes[gTimingInfo.aoaStartCnt % OBJECTDETHWA_NUM_FRAME_TIMING_TO_STORE] = CycleCounterP_getCount32();
-    gTimingInfo.aoaStartCnt++;
-#endif
-
-    retVal = DPC_ObjDet_estimateXYZ(subFrmObj, objDetObj, subFrmObj->dpuCfg.dopplerCfg.hwRes.finalDetObjList, objOut, result->dopNumObjOut, &result->numObjOut);
+    retVal = DPU_CFARProcHWA_process(subFrmObj->dpuCFARObj, &outCfarProc);
     if (retVal != 0)
     {
         goto exit;
     }
-#endif
-#ifdef OBJECTDETHWA_PRINT_DPC_TIMING_INFO
-    gTimingInfo.aoaEndTimes[gTimingInfo.aoaEndCnt % OBJECTDETHWA_NUM_FRAME_TIMING_TO_STORE] = CycleCounterP_getCount32();
-    gTimingInfo.aoaEndCnt++;
-#endif
 
-	/* Set DPM result */
+    DebugP_logInfo("ObjDet DPC: number of detected objects after CFAR = %d\n",
+                outCfarProc.numCfarDetectedPoints);
+
+    if (subFrmObj->isAoAHWAparamSetOverlappedWithCFAR == true)
+    {
+        DPU_AoAProc_compRxChannelBiasCfg outCompRxCfg;
+
+        /* Generate FFT window, note doppler window is used for AoA */
+        (void)DPC_ObjDet_GenDopplerWindow(&subFrmObj->dpuCfg.dopplerCfg);
+        DPC_ObjDet_GetRxChPhaseComp(&subFrmObj->staticCfg,
+                                    &objDetObj->commonCfg.compRxChanCfg, &outCompRxCfg);
+        subFrmObj->dpuCfg.aoaCfg.dynCfg.compRxChanCfg = &outCompRxCfg;
+        retVal = DPU_AoAProcHWA_config(subFrmObj->dpuAoAObj, &subFrmObj->dpuCfg.aoaCfg);
+        if (retVal != 0)
+        {
+            goto exit;
+        }
+    }
+
+    retVal = DPU_AoAProcHWA_process(subFrmObj->dpuAoAObj,
+                 outCfarProc.numCfarDetectedPoints, &outAoaProc);
+    if (retVal != 0)
+    {
+        goto exit;
+    }
+
+    /* Set DPM result with measure (bias, phase) and detection info */
+    result->numObjOut = outAoaProc.numAoADetectedPoints;
     result->subFrameIdx = objDetObj->subFrameIndx;
-    result->objOut      = objOut;
-    result->objOutSideInfo  = subFrmObj->detObjOutSideInfo;
-    result->detMatrix   = subFrmObj->dpuCfg.dopplerCfg.hwRes.detMatrix;
-    result->detObjList = subFrmObj->dpuCfg.dopplerCfg.hwRes.finalDetObjList;
-
+    result->objOut               = subFrmObj->dpuCfg.aoaCfg.res.detObjOut;
+    result->objOutSideInfo       = subFrmObj->dpuCfg.aoaCfg.res.detObjOutSideInfo;
+    result->azimuthStaticHeatMap = subFrmObj->dpuCfg.aoaCfg.res.azimuthStaticHeatMap;
+    result->azimuthStaticHeatMapSize = subFrmObj->dpuCfg.aoaCfg.res.azimuthStaticHeatMapSize;
+    result->radarCube            = subFrmObj->dpuCfg.aoaCfg.res.radarCube;
+    result->detMatrix            = subFrmObj->dpuCfg.dopplerCfg.hwRes.detMatrix;
     if (objDetObj->commonCfg.measureRxChannelBiasCfg.enabled == 1U)
     {
         result->compRxChanBiasMeasurement = &objDetObj->compRxChanCfgMeasureOut;
@@ -2046,7 +1130,7 @@ int32_t DPC_ObjectDetection_execute(
     objDetObj->stats.interChirpProcessingMargin = 0;
 
     objDetObj->stats.interFrameEndTimeStamp = CycleCounterP_getCount32();
-    result->stats = (DPC_ObjectDetection_Stats *)((uint32_t)SOC_virtToPhy((void*)&objDetObj->stats));
+    result->stats = &objDetObj->stats;
 
     /* populate DPM_resultBuf - first pointer and size are for results of the
      * processing */
@@ -2060,31 +1144,8 @@ int32_t DPC_ObjectDetection_execute(
         ptrResult->size[i] = 0;
     }
 
-#ifndef INCLUDE_DPM
-#ifdef SOC_AWR2X44P
-    /* HWA Clk Gate */
-    subFrmObj = &objDetObj->subFrameObj[objDetObj->subFrameIndx];
-    if (subFrmObj->staticCfg.powerOptCfg.hwaStateAfterFrameProc == DPC_OBJDET_HWA_CG_ENABLE)
-    {
-        /* Gate HWA Peripheral Clock */
-        ptrDssRcmRegs->DSS_HWA_CLK_GATE = DPC_OBJDET_HWA_CLOCK_GATE;
-    }
-#endif
-    /* Increment the subframe index to get the next subrame object */
-    if (objDetObj->commonCfg.numSubFrames > 1U)
-    {
-        /* Next sub-frame */
-        objDetObj->subFrameIndx++;
-        if (objDetObj->subFrameIndx == objDetObj->commonCfg.numSubFrames)
-        {
-            objDetObj->subFrameIndx = 0;
-        }
-    }
-    /* Mark the end of DPC Processing for the current frame/ subframe. */
-    objDetObj->interSubFrameProcToken--;
-#endif
-
 exit:
+
     return retVal;
 }
 
@@ -2108,35 +1169,39 @@ exit:
 static int32_t DPC_ObjDet_reconfigSubFrame(ObjDetObj *objDetObj, uint8_t subFrameIndx)
 {
     int32_t retVal = 0;
+    DPU_AoAProc_compRxChannelBiasCfg outCompRxCfg;
     SubFrameObj *subFrmObj;
 
     subFrmObj = &objDetObj->subFrameObj[subFrameIndx];
 
+    DPC_ObjDet_GenRangeWindow(&subFrmObj->dpuCfg.rangeCfg);
     retVal = DPU_RangeProcHWA_config(subFrmObj->dpuRangeObj, &subFrmObj->dpuCfg.rangeCfg);
     if (retVal != 0)
     {
         goto exit;
     }
 
-    retVal = DPU_DopplerProcHWA_config(subFrmObj->dpuDopplerObj, &subFrmObj->dpuCfg.dopplerCfg, 1);
+    retVal = DPU_CFARProcHWA_config(subFrmObj->dpuCFARObj, &subFrmObj->dpuCfg.cfarCfg);
     if (retVal != 0)
     {
         goto exit;
     }
 
-    if (subFrmObj->staticCfg.rangeCfarCfg.cfg.isEnabled)
+    (void)DPC_ObjDet_GenDopplerWindow(&subFrmObj->dpuCfg.dopplerCfg);
+    retVal = DPU_DopplerProcHWA_config(subFrmObj->dpuDopplerObj, &subFrmObj->dpuCfg.dopplerCfg);
+    if (retVal != 0)
     {
-        retVal = DPU_RangeCFARProcHWA_config(subFrmObj->dpuRangeCfarObj, &subFrmObj->dpuCfg.rangeCfarCfg);
-        if (retVal != 0)
-        {
-            goto exit;
-        }
+        goto exit;
     }
 
-    retVal = DPC_ObjectDetection_configEdmaDetObjsOut(objDetObj->edmaHandle[DPC_OBJDET_DPU_DOPPLERPROC_EDMA_INST_ID],
-                                                    &subFrmObj->dpuCfg.dopplerCfg.hwRes,
-                                                    &objDetObj->edmaDetObjs);
-    if(retVal != 0)
+    /* Note doppler window will be used for AoA, so maintain the sequence as in
+     * pre-start config. We need to regenerate the rxChPhaseComp because it was
+     * temporary (note DPUs get pointers to dynamic configs) */
+    DPC_ObjDet_GetRxChPhaseComp(&subFrmObj->staticCfg,
+                                &objDetObj->commonCfg.compRxChanCfg, &outCompRxCfg);
+    subFrmObj->dpuCfg.aoaCfg.dynCfg.compRxChanCfg = &outCompRxCfg;
+    retVal = DPU_AoAProcHWA_config(subFrmObj->dpuAoAObj, &subFrmObj->dpuCfg.aoaCfg);
+    if (retVal != 0)
     {
         goto exit;
     }
@@ -2160,24 +1225,16 @@ exit:
  *  @retval
  *      Error   -   <0
  */
-int32_t DPC_ObjectDetection_start (DPM_DPCHandle handle)
+static int32_t DPC_ObjectDetection_start (DPM_DPCHandle handle)
 {
     ObjDetObj   *objDetObj;
     SubFrameObj *subFrmObj;
-    uint32_t dcEstBufSize = 0;
     int32_t retVal = 0;
 
     objDetObj = (ObjDetObj *) handle;
     DebugP_assert (objDetObj != NULL);
 
     objDetObj->stats.frameStartIntCounter = 0;
-    objDetObj->stats.subframeStartIntCounter = 0;
-    objDetObj->numTimesResultExported = 0;
-    (void)memset((void*)&objDetObj->executeResult.FFTClipCount[0], 0, sizeof(objDetObj->executeResult.FFTClipCount));
-
-#ifdef OBJECTDETHWA_PRINT_DPC_TIMING_INFO
-    (void)memset((void*)&gTimingInfo, 0, sizeof(timingInfo));
-#endif
 
     /* Start marks consumption of all pre-start configs, reset the flag to check
      * if pre-starts were issued only after common config was issued for the next
@@ -2192,38 +1249,33 @@ int32_t DPC_ObjectDetection_start (DPM_DPCHandle handle)
      * to ensure we reconfig for the current (0) sub-frame before starting */
     (void)DPC_ObjDet_reconfigSubFrame(objDetObj, objDetObj->subFrameIndx);
 
-    /* Initialize HWA DC estimate register for the first subframe
-     * For subsequent subframes, this is done in the DPU.
-    */
-    if((objDetObj->commonCfg.rangeProcCfg.rangeProcChain == DPU_RANGEPROCHWA_PREVIOUS_FRAME_DC_MODE)
-        && (objDetObj->commonCfg.numSubFrames > 1U))
-    {
-        dcEstBufSize = objDetObj->subFrameObj[0].staticCfg.ADCBufData.dataProperty.numRxAntennas * sizeof(uint32_t);
-        if(objDetObj->commonCfg.rangeProcCfg.isReal2XEnabled)
-        {
-            dcEstBufSize >>= 1;
-        }
-        rangeProcHWA_loadPreProcStats(&objDetObj->subFrameObj[0].dpuCfg.rangeCfg, dcEstBufSize, 0, 0);
-    }
-
     /* Trigger Range DPU, related to reconfig above */
     subFrmObj = &objDetObj->subFrameObj[objDetObj->subFrameIndx];
-
-    retVal = DPU_RangeProcHWA_control(subFrmObj->dpuRangeObj, &subFrmObj->dpuCfg.rangeCfg,
+#ifdef OVERLAY_RANGE_HWA_PARAMS
+    if (DPU_AoAProcHWA_getNumHwaParamSets(subFrmObj->staticCfg.numTxAntennas,
+                                          subFrmObj->staticCfg.numVirtualAntElev) >
+                                          (16-DPU_RANGEPROCHWA_NUM_HWA_PARAM_SETS))
+    {
+        DPC_ObjDet_GenRangeWindow(&subFrmObj->dpuCfg.rangeCfg);
+        retVal = DPU_RangeProcHWA_config(subFrmObj->dpuRangeObj, &subFrmObj->dpuCfg.rangeCfg);
+        if (retVal != 0)
+        {
+            goto exit;
+        }
+    }
+#endif
+    retVal = DPU_RangeProcHWA_control(subFrmObj->dpuRangeObj,
                  DPU_RangeProcHWA_Cmd_triggerProc, NULL, 0);
     if(retVal < 0)
     {
         goto exit;
     }
 
-#if !defined(OBJ_DETECTION_DDMA_TEST) && defined(SOC_AWR2X44P)
-    SemaphoreP_post(&gDPCStateSemHandle);
-#endif
-
     DebugP_logInfo("ObjDet DPC: Start done\n");
 exit:
     return(retVal);
 }
+
 
 static void ObjectDetection_freeDmaChannels(EDMA_Handle  edmaHandle)
 {
@@ -2265,61 +1317,105 @@ static void ObjectDetection_freeDmaChannels(EDMA_Handle  edmaHandle)
  *  @retval
  *      Error   -   <0
  */
-int32_t DPC_ObjectDetection_stop (DPM_DPCHandle handle)
+static int32_t DPC_ObjectDetection_stop (DPM_DPCHandle handle)
 {
     ObjDetObj   *objDetObj;
 
     objDetObj = (ObjDetObj *) handle;
     DebugP_assert (objDetObj != NULL);
 
-    /* print the FFT clip status */
-    if(objDetObj->executeResult.FFTClipCount[0]>0U)
-    {
-        DebugP_log("Warning! FFT clipping happened for %d times in Range FFT Stage. \n", objDetObj->executeResult.FFTClipCount[0]);
-    }
-    if(objDetObj->executeResult.FFTClipCount[1]>0U)
-    {
-        DebugP_log("Warning! FFT clipping happened for %d times in Doppler or Azimuth FFT Stage. \n", objDetObj->executeResult.FFTClipCount[1]);
-    }
-
-#ifdef OBJECTDETHWA_PRINT_DPC_TIMING_INFO
-    uint32_t i, frame0StartTime;
-    frame0StartTime = gTimingInfo.frameStartTimes[(gTimingInfo.frameCnt) % OBJECTDETHWA_NUM_FRAME_TIMING_TO_STORE];
-    for (i = 0; i < OBJECTDETHWA_NUM_FRAME_TIMING_TO_STORE; i++)
-    {
-        gTimingInfo.frameStartTimes[i] -= frame0StartTime;
-        gTimingInfo.frameStartTimes[i] /= OBJECTDETHWA_TIMING_CPU_CLK_FREQ_KHZ;
-        gTimingInfo.rangeEndTimes[i] -= frame0StartTime;
-        gTimingInfo.rangeEndTimes[i] /= OBJECTDETHWA_TIMING_CPU_CLK_FREQ_KHZ;
-        gTimingInfo.dopEndTimes[i] -= frame0StartTime;
-        gTimingInfo.dopEndTimes[i] /= OBJECTDETHWA_TIMING_CPU_CLK_FREQ_KHZ;
-        gTimingInfo.aoaStartTimes[i] -= frame0StartTime;
-        gTimingInfo.aoaStartTimes[i] /= OBJECTDETHWA_TIMING_CPU_CLK_FREQ_KHZ;
-        gTimingInfo.aoaEndTimes[i] -= frame0StartTime;
-        gTimingInfo.aoaEndTimes[i] /= OBJECTDETHWA_TIMING_CPU_CLK_FREQ_KHZ;
-        gTimingInfo.resEndTimes[i] -= frame0StartTime;
-        gTimingInfo.resEndTimes[i] /= OBJECTDETHWA_TIMING_CPU_CLK_FREQ_KHZ;
-    }
-
-    DebugP_logInfo("\n");
-    DebugP_logInfo("----DPU Timing Info (ms)----\n");
-    DebugP_logInfo("%10s|%10s|%10s|%10s|%10s|%10s\n","FrameStart","RangeEnd","DopEnd","AoAStart","AoAEnd","ResEnd");
-
-    // CacheP_wbInv((void *)&gDpc[0], sizeof(gFrameStartTimes), CacheP_TYPE_ALL);
-    for (i = 0; i < OBJECTDETHWA_NUM_FRAME_TIMING_TO_STORE; i++)
-    {
-        DebugP_logInfo("%10d|%10d|%10d|%10d|%10d|%10d\n", gTimingInfo.frameStartTimes[i], gTimingInfo.rangeEndTimes[i], gTimingInfo.dopEndTimes[i], gTimingInfo.aoaStartTimes[i], gTimingInfo.aoaEndTimes[i], gTimingInfo.resEndTimes[i]);
-    }
-    DebugP_logInfo("-----------\n");
-#endif
-
-#if !defined(OBJ_DETECTION_DDMA_TEST) && defined(SOC_AWR2X44P)
-    SemaphoreP_pend(&gDPCStateSemHandle, SystemP_WAIT_FOREVER);
-#endif
-
     /* We can be here only after complete frame processing is done, which means
      * processing token must be 0 and subFrameIndx also 0  */
+    DebugP_assert((objDetObj->interSubFrameProcToken == 0) && (objDetObj->subFrameIndx == 0U));
+
+    DebugP_logInfo("ObjDet DPC: Stop done\n");
     return(0);
+}
+
+/**
+ *  @b Description
+ *  @n
+ *      Configures DPC for static clutter removal.
+ *
+ *  @param[in]  obj
+ *      Pointer to sub-frame object
+ *  @param[in] cfg
+ *      Pointer to static clutter removal configuration
+ *
+ *  \ingroup DPC_OBJDET__INTERNAL_FUNCTION
+ *
+ *  @retval  None
+ */
+static void DPC_ObjDet_Config_StaticClutterRemovalCfg(SubFrameObj *obj,
+                   DPC_ObjectDetection_StaticClutterRemovalCfg_Base *cfg)
+{
+    obj->dynCfg.staticClutterRemovalCfg = *cfg;
+}
+
+/**
+ *  @b Description
+ *  @n
+ *      Configures DPC for Range Bias and Phase Comp measurement.
+ *
+ *  @param[in]  obj
+ *      Pointer to DPC object
+ *  @param[in] cfg
+ *      Pointer to Range Bias and Phase Comp measurement configuration
+ *
+ *  \ingroup DPC_OBJDET__INTERNAL_FUNCTION
+ *
+ *  @retval
+ *      Success -   0
+ *  @retval
+ *      Error   -   <0
+ */
+static int32_t DPC_ObjDet_Config_MeasureRxChannelBiasCfg(ObjDetObj *obj,
+                   DPC_ObjectDetection_MeasureRxChannelBiasCfg *cfg)
+{
+    int32_t retVal = 0;
+
+    if (cfg->enabled == 1U)
+    {
+        if ((-cfg->searchWinSize/2.0f + cfg->targetDistance) <= 0.0f)
+        {
+            retVal = DPC_OBJECTDETECTION_EINVAL__MEASURE_RX_CHANNEL_BIAS_CFG;
+            goto exit;
+        }
+    }
+    obj->commonCfg.measureRxChannelBiasCfg = *cfg;
+
+exit:
+    return retVal;
+}
+
+/**
+ *  @b Description
+ *  @n
+ *      Allocates Shawdow paramset
+ */
+static void allocateEDMAShadowChannel(EDMA_Handle edmaHandle, uint32_t *param)
+{
+    int32_t             testStatus = SystemP_SUCCESS;
+    EDMA_Config        *config;
+    EDMA_Object        *object;
+
+    config = (EDMA_Config *) edmaHandle;
+    object = config->object;
+
+    if(*param < 256U)
+    {
+        if((object->allocResource.paramSet[*param/32U] & ((uint32_t)1U << *param%32U)) != (1U << *param%32U))
+        {
+            testStatus = EDMA_allocParam(edmaHandle, param);
+            DebugP_assert(testStatus == SystemP_SUCCESS);
+        }
+    }
+    else
+    {
+        DebugP_assert(false);
+    }
+
+    return;
 }
 
 /**
@@ -2329,6 +1425,7 @@ int32_t DPC_ObjectDetection_stop (DPM_DPCHandle handle)
  *
  *  @param[in]  dpuHandle Handle to DPU
  *  @param[in]  staticCfg Pointer to static configuration of the sub-frame
+ *  @param[in]  dynCfg    Pointer to dynamic configuration of the sub-frame
  *  @param[in]  edmaHandle Handle to edma driver to be used for the DPU
  *  @param[in]  radarCube Pointer to DPIF radar cube, which is output of range
  *                        processing.
@@ -2345,7 +1442,7 @@ int32_t DPC_ObjectDetection_stop (DPM_DPCHandle handle)
  *                      (stack) variable is saved here. This is for facilitating
  *                      quick reconfiguration later without having to go through
  *                      the construction of the configuration.
- *  @param[in]  ptrObjDetObj Pointer to object detection object
+ *  @param[in]  ptrObjDetObj Pointer to ObjDetObj
  *
  *  @retval
  *      Success -   0
@@ -2356,10 +1453,10 @@ int32_t DPC_ObjectDetection_stop (DPM_DPCHandle handle)
  */
 static int32_t DPC_ObjDet_rangeConfig(DPU_RangeProcHWA_Handle dpuHandle,
                    DPC_ObjectDetection_StaticCfg *staticCfg,
+                   DPC_ObjectDetection_DynCfg    *dynCfg,
                    EDMA_Handle                   edmaHandle,
                    DPIF_RadarCube                *radarCube,
                    MemPoolObj                    *CoreLocalRamObj,
-                   BiDirMemPoolObj               *L3ramObj,
                    uint32_t                      *windowOffset,
                    uint32_t                      *CoreLocalRamScratchUsage,
                    DPU_RangeProcHWA_Config       *cfgSave,
@@ -2371,10 +1468,21 @@ static int32_t DPC_ObjDet_rangeConfig(DPU_RangeProcHWA_Handle dpuHandle,
     DPU_RangeProcHWA_EDMAOutputConfig *edmaOut = &hwRes->edmaOutCfg;
     DPU_RangeProcHWA_HwaConfig *hwaCfg = &hwRes->hwaCfg;
     int32_t *windowBuffer;
-    uint32_t winGenLen;
-    uint32_t dcEstNumSamples, interfStatsNumSamples;
+    uint32_t numRxAntennas, winGenLen;
+    uint32_t dmaCh, tcc, param;
 
     (void)memset(cfgSave, 0, sizeof(DPU_RangeProcHWA_Config));
+
+    cfgSave->hwRes.intrObj = &ptrObjDetObj->rangProcIntrObj;
+
+    numRxAntennas = staticCfg->ADCBufData.dataProperty.numRxAntennas;
+
+    /* Even though Range DPU supports both modes,
+     * object detection DPC only supports non-interleaved at present */
+    DebugP_assert(staticCfg->ADCBufData.dataProperty.interleave == DPIF_RXCHAN_NON_INTERLEAVE_MODE);
+
+    /* dynamic configuration */
+    cfgSave->dynCfg.calibDcRangeSigCfg = &dynCfg->calibDcRangeSigCfg;
 
     /* static configuration */
     cfgSave->staticCfg.ADCBufData         = staticCfg->ADCBufData;
@@ -2383,19 +1491,15 @@ static int32_t DPC_ObjDet_rangeConfig(DPU_RangeProcHWA_Handle dpuHandle,
     cfgSave->staticCfg.numFFTBins         = staticCfg->numRangeFFTBins;
     cfgSave->staticCfg.numTxAntennas      = staticCfg->numTxAntennas;
     cfgSave->staticCfg.numVirtualAntennas = staticCfg->numVirtualAntennas;
-    cfgSave->staticCfg.numBandsTotal      = staticCfg->numBandsTotal;
 
-    if (cfgSave->staticCfg.numRangeBins == cfgSave->staticCfg.numFFTBins)
-    {
+    if(cfgSave->staticCfg.numRangeBins == cfgSave->staticCfg.numFFTBins){
         cfgSave->staticCfg.isChirpDataReal    = 0;
     }
-    else if (cfgSave->staticCfg.numRangeBins == cfgSave->staticCfg.numFFTBins / 2U)
-    {
+    else if (cfgSave->staticCfg.numRangeBins == cfgSave->staticCfg.numFFTBins / 2U){
         cfgSave->staticCfg.isChirpDataReal    = 1;
     }
-    else
-    {
-        retVal = DPC_OBJECTDETECTION_RANGE_BINS_ERR;
+    else{
+        retVal = -1;
         goto exit;
     }
     cfgSave->staticCfg.resetDcRangeSigMeanBuffer = 1;
@@ -2404,21 +1508,14 @@ static int32_t DPC_ObjDet_rangeConfig(DPU_RangeProcHWA_Handle dpuHandle,
     cfgSave->staticCfg.rangeFFTtuning.numLastButterflyStagesToScale =
                                     staticCfg->rangeFFTtuning.numLastButterflyStagesToScale;
 
-    (void)memcpy(&cfgSave->staticCfg.compressionCfg,
-            &staticCfg->compressionCfg,
-            sizeof(DPU_RangeProcHWA_CompressionCfg));
-    (void)memcpy(&cfgSave->staticCfg.rangeProcCfg, 
-            &ptrObjDetObj->commonCfg.rangeProcCfg, 
-            sizeof(DPU_RangeProcHWADDMA_rangeProcCfg));
-
     /* radarCube */
     cfgSave->hwRes.radarCube = *radarCube;
 
-    /* static configuration - windows */
+    /* static configuration - window */
     /* Generating 1D window, allocate first */
     winGenLen = DPC_ObjDet_GetRangeWinGenLen(cfgSave);
     cfgSave->staticCfg.windowSize = winGenLen * sizeof(uint32_t);
-    windowBuffer = (int32_t *)DPC_ObjDet_BiDirMemPoolAlloc(L3ramObj, cfgSave->staticCfg.windowSize, (uint8_t)sizeof(uint32_t), true);
+    windowBuffer = (int32_t *)DPC_ObjDet_MemPoolAlloc(CoreLocalRamObj, cfgSave->staticCfg.windowSize, (uint8_t)sizeof(uint32_t));
     if (windowBuffer == NULL)
     {
         retVal = DPC_OBJECTDETECTION_ENOMEM__CORE_LOCAL_RAM_RANGE_HWA_WINDOW;
@@ -2427,154 +1524,325 @@ static int32_t DPC_ObjDet_rangeConfig(DPU_RangeProcHWA_Handle dpuHandle,
     cfgSave->staticCfg.window = windowBuffer;
     DPC_ObjDet_GenRangeWindow(cfgSave);
 
+    /* hwres */
+    /* hwres - dcRangeSig, allocate from heap, this needs to persist within sub-frame/frame
+     * processing and across sub-frames */
+    hwRes->dcRangeSigMeanSize = DPU_RANGEPROC_SIGNATURE_COMP_MAX_BIN_SIZE *
+               staticCfg->numTxAntennas * numRxAntennas * sizeof(cmplx32ImRe_t);
+#ifdef SUBSYS_MSS
+    /*hwRes->dcRangeSigMean = (cmplx32ImRe_t *) MemoryP_ctrlAlloc (hwRes->dcRangeSigMeanSize,
+                            DPU_RANGEPROCHWA_DCRANGESIGMEAN_BYTE_ALIGNMENT_R5F);*/
+
+    hwRes->dcRangeSigMean = HeapP_alloc(&gObjectDetectionHeapObj, hwRes->dcRangeSigMeanSize);
+#else
+    /*hwRes->dcRangeSigMean = (cmplx32ImRe_t *) MemoryP_ctrlAlloc (hwRes->dcRangeSigMeanSize,
+                            DPU_RANGEPROCHWA_DCRANGESIGMEAN_BYTE_ALIGNMENT_DSP);*/
+
+    hwRes->dcRangeSigMean = HeapP_alloc(&gObjectDetectionHeapObj, hwRes->dcRangeSigMeanSize);
+#endif
+    DebugP_assert(cfgSave->hwRes.dcRangeSigMeanSize == hwRes->dcRangeSigMeanSize);
+
     /* hwres - edma */
     hwRes->edmaHandle = edmaHandle;
     /* We have choosen ISOLATE mode, so we have to fill in dataIn */
+    dmaCh = DPC_OBJDET_DPU_RANGEPROC_EDMAIN_CH;
+    tcc   = DPC_OBJDET_DPU_RANGEPROC_EDMAIN_CH;
+    param = DPC_OBJDET_DPU_RANGEPROC_EDMAIN_CH;
+    DPEDMA_allocateEDMAChannel(edmaHandle, &dmaCh, &tcc, &param);
+    edmaIn->dataIn.channel                  = dmaCh;
+    edmaIn->dataIn.paramId                  = param;
+    edmaIn->dataIn.tcc                      = tcc;
 
-    DPC_ObjDet_EDMAChannelConfigAssist(edmaHandle,
-                                       DPC_OBJDET_DPU_RANGEPROC_EDMAIN_CH,
-                                       DPC_OBJDET_DPU_RANGEPROC_EDMAIN_SHADOW,
-                                       DPC_OBJDET_DPU_RANGEPROC_EDMAIN_EVENT_QUE,
-                                       &edmaIn->dataIn);
-    DPC_ObjDet_EDMAChannelConfigAssist(edmaHandle,
-                                       DPC_OBJDET_DPU_RANGEPROC_EDMAIN_SIG_CH,
-                                       DPC_OBJDET_DPU_RANGEPROC_EDMAIN_SIG_SHADOW,
-                                       DPC_OBJDET_DPU_RANGEPROC_EDMAIN_SIG_EVENT_QUE,
-                                       &edmaIn->dataInSignature);
+    param = DPC_OBJDET_DPU_RANGEPROC_EDMAIN_SHADOW;
+    allocateEDMAShadowChannel(edmaHandle, &param);
+    edmaIn->dataIn.shadowPramId             = param;
+    edmaIn->dataIn.eventQueue               = DPC_OBJDET_DPU_RANGEPROC_EDMAIN_EVENT_QUE;
 
+    dmaCh = DPC_OBJDET_DPU_RANGEPROC_EDMAIN_SIG_CH;
+    tcc   = DPC_OBJDET_DPU_RANGEPROC_EDMAIN_SIG_CH;
+    param = DPC_OBJDET_DPU_RANGEPROC_EDMAIN_SIG_CH;
+    DPEDMA_allocateEDMAChannel(edmaHandle, &dmaCh, &tcc, &param);
+    edmaIn->dataInSignature.channel         = dmaCh;
+    edmaIn->dataInSignature.paramId         = param;
+    edmaIn->dataInSignature.tcc             = tcc;
 
+    param = DPC_OBJDET_DPU_RANGEPROC_EDMAIN_SIG_SHADOW;
+    allocateEDMAShadowChannel(edmaHandle, &param);
+    edmaIn->dataInSignature.shadowPramId    = param;
+    edmaIn->dataInSignature.eventQueue      = DPC_OBJDET_DPU_RANGEPROC_EDMAIN_SIG_EVENT_QUE;
 
-    DPC_ObjDet_EDMAChannelConfigAssist(edmaHandle,
-                                       DPC_OBJDET_DPU_RANGEPROC_EDMAOUT_SIG_CH,
-                                       DPC_OBJDET_DPU_RANGEPROC_EDMAOUT_SIG_SHADOW,
-                                       DPC_OBJDET_DPU_RANGEPROC_EDMAOUT_SIG_EVENT_QUE,
-                                       &edmaOut->dataOutSignature);
-
-    /* Ping */
-    DPC_ObjDet_EDMAChannelConfigAssist(edmaHandle,
-                                       DPC_OBJDET_DPU_RANGEPROC_EDMAOUT_FMT1_PING_CH,
-                                       DPC_OBJDET_DPU_RANGEPROC_EDMAOUT_FMT1_PING_SHADOW,
-                                       DPC_OBJDET_DPU_RANGEPROC_EDMAOUT_FMT1_PING_EVENT_QUE,
-                                       &edmaOut->u.fmt1.dataOutPing);
-
-    /* Pong */
-    DPC_ObjDet_EDMAChannelConfigAssist(edmaHandle,
-                                       DPC_OBJDET_DPU_RANGEPROC_EDMAOUT_FMT1_PONG_CH,
-                                       DPC_OBJDET_DPU_RANGEPROC_EDMAOUT_FMT1_PONG_SHADOW,
-                                       DPC_OBJDET_DPU_RANGEPROC_EDMAOUT_FMT1_PONG_EVENT_QUE,
-                                       &edmaOut->u.fmt1.dataOutPong);
-
+    /* We are radar Cube FORMAT1 and non-interleaved ADC, so for 3 tx antenna case, we have to
+     * fill format2, otherwise format1
+     */
+    if (staticCfg->numTxAntennas == 3U)
     {
-        {
+        /* Ping */
+        /* Ping - dataOutPing */
+        dmaCh = DPC_OBJDET_DPU_RANGEPROC_EDMAOUT_FMT2_PING_CH;
+        tcc   = DPC_OBJDET_DPU_RANGEPROC_EDMAOUT_FMT2_PING_CH;
+        param = DPC_OBJDET_DPU_RANGEPROC_EDMAOUT_FMT2_PING_CH;
+        DPEDMA_allocateEDMAChannel(edmaHandle, &dmaCh, &tcc, &param);
+        edmaOut->u.fmt2.dataOutPing.channel              = dmaCh;
+        edmaOut->u.fmt2.dataOutPing.paramId              = param;
+        edmaOut->u.fmt2.dataOutPing.tcc                  = tcc;
 
-        uint32_t intrIdx = 0;
+        param = DPC_OBJDET_DPU_RANGEPROC_EDMAOUT_FMT2_PING_SHADOW_0;
+        allocateEDMAShadowChannel(edmaHandle, &param);
+        edmaOut->u.fmt2.dataOutPing.ShadowPramId[0]     = param;
 
-        /* Allocate interrupt object */
-        cfgSave->hwRes.edmaTransferCompleteIntrObj = &ptrObjDetObj->rangProcIntrObj[intrIdx++];
-        }
+        param = DPC_OBJDET_DPU_RANGEPROC_EDMAOUT_FMT2_PING_SHADOW_1;
+        allocateEDMAShadowChannel(edmaHandle, &param);
+        edmaOut->u.fmt2.dataOutPing.ShadowPramId[1]      = param;
+
+        param = DPC_OBJDET_DPU_RANGEPROC_EDMAOUT_FMT2_PING_SHADOW_2;
+        allocateEDMAShadowChannel(edmaHandle, &param);
+        edmaOut->u.fmt2.dataOutPing.ShadowPramId[2]      = param;
+        edmaOut->u.fmt2.dataOutPing.eventQueue           = DPC_OBJDET_DPU_RANGEPROC_EDMAOUT_FMT2_PING_EVENT_QUE;
+
+        /* Ping - dataOutPingData */
+        dmaCh = DPC_OBJDET_DPU_RANGEPROC_EDMAOUT_FMT2_PINGDATA_0_CH;
+        tcc   = DPC_OBJDET_DPU_RANGEPROC_EDMAOUT_FMT2_PINGDATA_0_CH;
+        param = DPC_OBJDET_DPU_RANGEPROC_EDMAOUT_FMT2_PINGDATA_0_CH;
+        DPEDMA_allocateEDMAChannel(edmaHandle, &dmaCh, &tcc, &param);
+        edmaOut->u.fmt2.dataOutPingData[0].channel       = dmaCh;
+        edmaOut->u.fmt2.dataOutPingData[0].paramId       = param;
+        edmaOut->u.fmt2.dataOutPingData[0].tcc           = tcc;
+
+        param = DPC_OBJDET_DPU_RANGEPROC_EDMAOUT_FMT2_PINGDATA_0_SHADOW;
+        allocateEDMAShadowChannel(edmaHandle, &param);
+        edmaOut->u.fmt2.dataOutPingData[0].shadowPramId = param;
+        edmaOut->u.fmt2.dataOutPingData[0].eventQueue    = DPC_OBJDET_DPU_RANGEPROC_EDMAOUT_FMT2_PINGDATA_0_EVENT_QUE;
+
+        dmaCh = DPC_OBJDET_DPU_RANGEPROC_EDMAOUT_FMT2_PINGDATA_1_CH;
+        tcc   = DPC_OBJDET_DPU_RANGEPROC_EDMAOUT_FMT2_PINGDATA_1_CH;
+        param = DPC_OBJDET_DPU_RANGEPROC_EDMAOUT_FMT2_PINGDATA_1_CH;
+        DPEDMA_allocateEDMAChannel(edmaHandle, &dmaCh, &tcc, &param);
+        edmaOut->u.fmt2.dataOutPingData[1].channel       = dmaCh;
+        edmaOut->u.fmt2.dataOutPingData[1].paramId       = param;
+        edmaOut->u.fmt2.dataOutPingData[1].tcc           = tcc;
+
+        param = DPC_OBJDET_DPU_RANGEPROC_EDMAOUT_FMT2_PINGDATA_1_SHADOW;
+        allocateEDMAShadowChannel(edmaHandle, &param);
+        edmaOut->u.fmt2.dataOutPingData[1].shadowPramId  = param;
+        edmaOut->u.fmt2.dataOutPingData[1].eventQueue    = DPC_OBJDET_DPU_RANGEPROC_EDMAOUT_FMT2_PINGDATA_1_EVENT_QUE;
+
+        dmaCh = DPC_OBJDET_DPU_RANGEPROC_EDMAOUT_FMT2_PINGDATA_2_CH;
+        tcc   = DPC_OBJDET_DPU_RANGEPROC_EDMAOUT_FMT2_PINGDATA_2_CH;
+        param = DPC_OBJDET_DPU_RANGEPROC_EDMAOUT_FMT2_PINGDATA_2_CH;
+        DPEDMA_allocateEDMAChannel(edmaHandle, &dmaCh, &tcc, &param);
+        edmaOut->u.fmt2.dataOutPingData[2].channel       = dmaCh;
+        edmaOut->u.fmt2.dataOutPingData[2].paramId       = param;
+        edmaOut->u.fmt2.dataOutPingData[2].tcc           = tcc;
+
+        param = DPC_OBJDET_DPU_RANGEPROC_EDMAOUT_FMT2_PINGDATA_2_SHADOW;
+        allocateEDMAShadowChannel(edmaHandle, &param);
+        edmaOut->u.fmt2.dataOutPingData[2].shadowPramId  = param;
+        edmaOut->u.fmt2.dataOutPingData[2].eventQueue    = DPC_OBJDET_DPU_RANGEPROC_EDMAOUT_FMT2_PINGDATA_2_EVENT_QUE;
+
+        /* Pong */
+        /* Pong - dataOutPong */
+        dmaCh = DPC_OBJDET_DPU_RANGEPROC_EDMAOUT_FMT2_PONG_CH;
+        tcc   = DPC_OBJDET_DPU_RANGEPROC_EDMAOUT_FMT2_PONG_CH;
+        param = DPC_OBJDET_DPU_RANGEPROC_EDMAOUT_FMT2_PONG_CH;
+        DPEDMA_allocateEDMAChannel(edmaHandle, &dmaCh, &tcc, &param);
+        edmaOut->u.fmt2.dataOutPong.channel              = dmaCh;
+        edmaOut->u.fmt2.dataOutPong.paramId              = param;
+        edmaOut->u.fmt2.dataOutPong.tcc                  = tcc;
+
+        param = DPC_OBJDET_DPU_RANGEPROC_EDMAOUT_FMT2_PONG_SHADOW_0;
+        allocateEDMAShadowChannel(edmaHandle, &param);
+        edmaOut->u.fmt2.dataOutPong.ShadowPramId[0]     = param;
+
+        param = DPC_OBJDET_DPU_RANGEPROC_EDMAOUT_FMT2_PONG_SHADOW_1;
+        allocateEDMAShadowChannel(edmaHandle, &param);
+        edmaOut->u.fmt2.dataOutPong.ShadowPramId[1]      = param;
+
+        param = DPC_OBJDET_DPU_RANGEPROC_EDMAOUT_FMT2_PONG_SHADOW_2;
+        allocateEDMAShadowChannel(edmaHandle, &param);
+        edmaOut->u.fmt2.dataOutPong.ShadowPramId[2]      = param;
+        edmaOut->u.fmt2.dataOutPong.eventQueue           = DPC_OBJDET_DPU_RANGEPROC_EDMAOUT_FMT2_PONG_EVENT_QUE;
+
+        /* Pong - dataOutPongData */
+        dmaCh = DPC_OBJDET_DPU_RANGEPROC_EDMAOUT_FMT2_PONGDATA_0_CH;
+        tcc   = DPC_OBJDET_DPU_RANGEPROC_EDMAOUT_FMT2_PONGDATA_0_CH;
+        param = DPC_OBJDET_DPU_RANGEPROC_EDMAOUT_FMT2_PONGDATA_0_CH;
+        DPEDMA_allocateEDMAChannel(edmaHandle, &dmaCh, &tcc, &param);
+        edmaOut->u.fmt2.dataOutPongData[0].channel       = dmaCh;
+        edmaOut->u.fmt2.dataOutPongData[0].paramId       = param;
+        edmaOut->u.fmt2.dataOutPongData[0].tcc           = tcc;
+
+        param = DPC_OBJDET_DPU_RANGEPROC_EDMAOUT_FMT2_PONGDATA_0_SHADOW;
+        allocateEDMAShadowChannel(edmaHandle, &param);
+        edmaOut->u.fmt2.dataOutPongData[0].shadowPramId  = param;
+        edmaOut->u.fmt2.dataOutPongData[0].eventQueue    = DPC_OBJDET_DPU_RANGEPROC_EDMAOUT_FMT2_PONGDATA_0_EVENT_QUE;
+
+        dmaCh = DPC_OBJDET_DPU_RANGEPROC_EDMAOUT_FMT2_PONGDATA_1_CH;
+        tcc   = DPC_OBJDET_DPU_RANGEPROC_EDMAOUT_FMT2_PONGDATA_1_CH;
+        param = DPC_OBJDET_DPU_RANGEPROC_EDMAOUT_FMT2_PONGDATA_1_CH;
+        DPEDMA_allocateEDMAChannel(edmaHandle, &dmaCh, &tcc, &param);
+        edmaOut->u.fmt2.dataOutPongData[1].channel       = dmaCh;
+        edmaOut->u.fmt2.dataOutPongData[1].paramId       = param;
+        edmaOut->u.fmt2.dataOutPongData[1].tcc           = tcc;
+
+        param = DPC_OBJDET_DPU_RANGEPROC_EDMAOUT_FMT2_PONGDATA_1_SHADOW;
+        allocateEDMAShadowChannel(edmaHandle, &param);
+        edmaOut->u.fmt2.dataOutPongData[1].shadowPramId = param;
+        edmaOut->u.fmt2.dataOutPongData[1].eventQueue    = DPC_OBJDET_DPU_RANGEPROC_EDMAOUT_FMT2_PONGDATA_1_EVENT_QUE;
+
+        dmaCh = DPC_OBJDET_DPU_RANGEPROC_EDMAOUT_FMT2_PONGDATA_2_CH;
+        tcc   = DPC_OBJDET_DPU_RANGEPROC_EDMAOUT_FMT2_PONGDATA_2_CH;
+        param = DPC_OBJDET_DPU_RANGEPROC_EDMAOUT_FMT2_PONGDATA_2_CH;
+        DPEDMA_allocateEDMAChannel(edmaHandle, &dmaCh, &tcc, &param);
+        edmaOut->u.fmt2.dataOutPongData[2].channel       = dmaCh;
+        edmaOut->u.fmt2.dataOutPongData[2].paramId       = param;
+        edmaOut->u.fmt2.dataOutPongData[2].tcc           = tcc;
+
+        param = DPC_OBJDET_DPU_RANGEPROC_EDMAOUT_FMT2_PONGDATA_2_SHADOW;
+        allocateEDMAShadowChannel(edmaHandle, &param);
+        edmaOut->u.fmt2.dataOutPongData[2].shadowPramId  = param;
+        edmaOut->u.fmt2.dataOutPongData[2].eventQueue    = DPC_OBJDET_DPU_RANGEPROC_EDMAOUT_FMT2_PONGDATA_2_EVENT_QUE;
     }
+    else if (staticCfg->numTxAntennas == 4U)
+    {
+        /* Ping */
+        /* Ping - dataOutPing */
+        dmaCh = DPC_OBJDET_DPU_RANGEPROC_EDMAOUT_FMT2_PING_CH;
+        tcc   = DPC_OBJDET_DPU_RANGEPROC_EDMAOUT_FMT2_PING_CH;
+        param = DPC_OBJDET_DPU_RANGEPROC_EDMAOUT_FMT2_PING_CH;
+        DPEDMA_allocateEDMAChannel(edmaHandle, &dmaCh, &tcc, &param);
+        edmaOut->u.fmt2.dataOutPing.channel              = dmaCh;
+        edmaOut->u.fmt2.dataOutPing.paramId              = param;
+        edmaOut->u.fmt2.dataOutPing.tcc                  = tcc;
 
-    dcEstNumSamples = cfgSave->staticCfg.ADCBufData.dataProperty.numAdcSamples;
-    if(ptrObjDetObj->commonCfg.rangeProcCfg.rangeProcChain == DPU_RANGEPROCHWA_PREVIOUS_FRAME_DC_MODE)
-    {
-        dcEstNumSamples *= staticCfg->numChirpsPerFrame;
-    }
-    /* DC Est shift and scale */
-    retVal = DPU_RangeProcHWA_findDCEstStaticParams(dcEstNumSamples,
-                                                    &cfgSave->staticCfg.dcEstShiftScaleCfg.scale, &cfgSave->staticCfg.dcEstShiftScaleCfg.shift);
-    if (retVal != 0)
-    {
-        goto exit;
-    }
+        param = DPC_OBJDET_DPU_RANGEPROC_EDMAOUT_FMT2_PING_SHADOW_0;
+        allocateEDMAShadowChannel(edmaHandle, &param);
+        edmaOut->u.fmt2.dataOutPing.ShadowPramId[0]      = param;
 
-    interfStatsNumSamples = cfgSave->staticCfg.ADCBufData.dataProperty.numAdcSamples;
-    if(ptrObjDetObj->commonCfg.rangeProcCfg.isReal2XEnabled)
-    {
-        interfStatsNumSamples *= staticCfg->ADCBufData.dataProperty.numRxAntennas;
-    }
+        param = DPC_OBJDET_DPU_RANGEPROC_EDMAOUT_FMT2_PING_SHADOW_1;
+        allocateEDMAShadowChannel(edmaHandle, &param);
+        edmaOut->u.fmt2.dataOutPing.ShadowPramId[1]      = param;
+        edmaOut->u.fmt2.dataOutPing.eventQueue           = DPC_OBJDET_DPU_RANGEPROC_EDMAOUT_FMT2_PING_EVENT_QUE;
 
-    /* Interf config */
-    retVal = DPU_RangeProcHWA_findIntfStatsStaticParams(interfStatsNumSamples,
-                                                        staticCfg->intfStatsdBCfg.intfMitgMagSNRdB,
-                                                        &cfgSave->staticCfg.intfStatsMagShiftScaleCfg.scale, &cfgSave->staticCfg.intfStatsMagShiftScaleCfg.shift);
-    if (retVal != 0)
-    {
-        goto exit;
-    }
-    retVal = DPU_RangeProcHWA_findIntfStatsStaticParams(interfStatsNumSamples,
-                                                        staticCfg->intfStatsdBCfg.intfMitgMagDiffSNRdB,
-                                                        &cfgSave->staticCfg.intfStatsMagDiffShiftScaleCfg.scale, &cfgSave->staticCfg.intfStatsMagDiffShiftScaleCfg.shift);
-    if (retVal != 0)
-    {
-        goto exit;
-    }
+        /* Ping - dataOutPingData */
+        dmaCh = DPC_OBJDET_DPU_RANGEPROC_EDMAOUT_FMT2_PINGDATA_0_CH;
+        tcc   = DPC_OBJDET_DPU_RANGEPROC_EDMAOUT_FMT2_PINGDATA_0_CH;
+        param = DPC_OBJDET_DPU_RANGEPROC_EDMAOUT_FMT2_PINGDATA_0_CH;
+        DPEDMA_allocateEDMAChannel(edmaHandle, &dmaCh, &tcc, &param);
+        edmaOut->u.fmt2.dataOutPingData[0].channel       = dmaCh;
+        edmaOut->u.fmt2.dataOutPingData[0].paramId       = param;
+        edmaOut->u.fmt2.dataOutPingData[0].tcc           = tcc;
 
-    uint32_t dcEstBufSize, intfThresBufSize;
-    if((ptrObjDetObj->commonCfg.rangeProcCfg.rangeProcChain == DPU_RANGEPROCHWA_PREVIOUS_FRAME_DC_MODE)
-        && (ptrObjDetObj->commonCfg.numSubFrames > 1U))
-    {
-        /* In 1st RangeProcChain, only DC estimates of every subframe index's last subframe is stored */
-        dcEstBufSize = staticCfg->ADCBufData.dataProperty.numRxAntennas * sizeof(uint32_t);
-        if(ptrObjDetObj->commonCfg.rangeProcCfg.isReal2XEnabled)
-        {
-            dcEstBufSize >>= 1; /* In Real 2X Mode, the DC estimate of other half of channels is stored as imaginary part of complex estimate */
-        }
-    }
-    else if(ptrObjDetObj->commonCfg.rangeProcCfg.rangeProcChain == DPU_RANGEPROCHWA_PREVIOUS_NTH_CHIRP_ESTIMATES_MODE)
-    {
-        /* In 2nd RangeProcChain, DC estimates and interference statistics are stored for every subbands last chirp */
-        dcEstBufSize = (uint32_t)staticCfg->numBandsTotal * (uint32_t)staticCfg->ADCBufData.dataProperty.numRxAntennas * sizeof(uint32_t);
-        intfThresBufSize = dcEstBufSize; /* Interference Thresholds are stored only in 2nd RangeProcChain */
-    }
+        param = DPC_OBJDET_DPU_RANGEPROC_EDMAOUT_FMT2_PINGDATA_0_SHADOW;
+        allocateEDMAShadowChannel(edmaHandle, &param);
+        edmaOut->u.fmt2.dataOutPingData[0].shadowPramId = param;
+        edmaOut->u.fmt2.dataOutPingData[0].eventQueue    = DPC_OBJDET_DPU_RANGEPROC_EDMAOUT_FMT2_PINGDATA_0_EVENT_QUE;
 
-    if(((ptrObjDetObj->commonCfg.rangeProcCfg.rangeProcChain == DPU_RANGEPROCHWA_PREVIOUS_FRAME_DC_MODE)
-        && (ptrObjDetObj->commonCfg.numSubFrames > 1U))
-        || (ptrObjDetObj->commonCfg.rangeProcCfg.rangeProcChain == DPU_RANGEPROCHWA_PREVIOUS_NTH_CHIRP_ESTIMATES_MODE))
-    {
-        hwRes->dcEstIVal = (uint32_t *)DPC_ObjDet_BiDirMemPoolAlloc(&ptrObjDetObj->FastRamBufObj, dcEstBufSize, (uint8_t)sizeof(uint32_t), true);
-        if (hwRes->dcEstIVal == NULL)
-        {
-            retVal = DPC_OBJECTDETECTION_PREPROCBUF_ERR;
-            goto exit;
-        }
-        (void)memset(hwRes->dcEstIVal, 0, dcEstBufSize);
-        if(ptrObjDetObj->commonCfg.rangeProcCfg.isReal2XEnabled)
-        {
-            hwRes->dcEstQVal = (uint32_t *)DPC_ObjDet_BiDirMemPoolAlloc(&ptrObjDetObj->FastRamBufObj, dcEstBufSize, (uint8_t)sizeof(uint32_t), true);
-            if (hwRes->dcEstQVal == NULL)
-            {
-                retVal = DPC_OBJECTDETECTION_PREPROCBUF_ERR;
-                goto exit;
-            }
-            (void)memset(hwRes->dcEstQVal, 0, dcEstBufSize);
-        }
+        dmaCh = DPC_OBJDET_DPU_RANGEPROC_EDMAOUT_FMT2_PINGDATA_1_CH;
+        tcc   = DPC_OBJDET_DPU_RANGEPROC_EDMAOUT_FMT2_PINGDATA_1_CH;
+        param = DPC_OBJDET_DPU_RANGEPROC_EDMAOUT_FMT2_PINGDATA_1_CH;
+        DPEDMA_allocateEDMAChannel(edmaHandle, &dmaCh, &tcc, &param);
+        edmaOut->u.fmt2.dataOutPingData[1].channel       = dmaCh;
+        edmaOut->u.fmt2.dataOutPingData[1].paramId       = param;
+        edmaOut->u.fmt2.dataOutPingData[1].tcc           = tcc;
+
+        param = DPC_OBJDET_DPU_RANGEPROC_EDMAOUT_FMT2_PINGDATA_1_SHADOW;
+        allocateEDMAShadowChannel(edmaHandle, &param);
+        edmaOut->u.fmt2.dataOutPingData[1].shadowPramId = param;
+        edmaOut->u.fmt2.dataOutPingData[1].eventQueue    = DPC_OBJDET_DPU_RANGEPROC_EDMAOUT_FMT2_PINGDATA_1_EVENT_QUE;
+
+        /* Pong */
+        /* Pong - dataOutPong */
+        dmaCh = DPC_OBJDET_DPU_RANGEPROC_EDMAOUT_FMT2_PONG_CH;
+        tcc   = DPC_OBJDET_DPU_RANGEPROC_EDMAOUT_FMT2_PONG_CH;
+        param = DPC_OBJDET_DPU_RANGEPROC_EDMAOUT_FMT2_PONG_CH;
+        DPEDMA_allocateEDMAChannel(edmaHandle, &dmaCh, &tcc, &param);
+        edmaOut->u.fmt2.dataOutPong.channel              = dmaCh;
+        edmaOut->u.fmt2.dataOutPong.paramId              = param;
+        edmaOut->u.fmt2.dataOutPong.tcc                  = tcc;
+
+        param = DPC_OBJDET_DPU_RANGEPROC_EDMAOUT_FMT2_PONG_SHADOW_0;
+        allocateEDMAShadowChannel(edmaHandle, &param);
+        edmaOut->u.fmt2.dataOutPong.ShadowPramId[0]     = param;
+
+        param = DPC_OBJDET_DPU_RANGEPROC_EDMAOUT_FMT2_PONG_SHADOW_1;
+        allocateEDMAShadowChannel(edmaHandle, &param);
+        edmaOut->u.fmt2.dataOutPong.ShadowPramId[1]      = param;
+        edmaOut->u.fmt2.dataOutPong.eventQueue           = DPC_OBJDET_DPU_RANGEPROC_EDMAOUT_FMT2_PONG_EVENT_QUE;
+
+        /* Pong - dataOutPongData */
+        dmaCh = DPC_OBJDET_DPU_RANGEPROC_EDMAOUT_FMT2_PONGDATA_0_CH;
+        tcc   = DPC_OBJDET_DPU_RANGEPROC_EDMAOUT_FMT2_PONGDATA_0_CH;
+        param = DPC_OBJDET_DPU_RANGEPROC_EDMAOUT_FMT2_PONGDATA_0_CH;
+        DPEDMA_allocateEDMAChannel(edmaHandle, &dmaCh, &tcc, &param);
+        edmaOut->u.fmt2.dataOutPongData[0].channel       = dmaCh;
+        edmaOut->u.fmt2.dataOutPongData[0].paramId       = param;
+        edmaOut->u.fmt2.dataOutPongData[0].tcc           = tcc;
+
+        param = DPC_OBJDET_DPU_RANGEPROC_EDMAOUT_FMT2_PONGDATA_0_SHADOW;
+        allocateEDMAShadowChannel(edmaHandle, &param);
+        edmaOut->u.fmt2.dataOutPongData[0].shadowPramId = param;
+        edmaOut->u.fmt2.dataOutPongData[0].eventQueue    = DPC_OBJDET_DPU_RANGEPROC_EDMAOUT_FMT2_PONGDATA_0_EVENT_QUE;
+
+        dmaCh = DPC_OBJDET_DPU_RANGEPROC_EDMAOUT_FMT2_PONGDATA_1_CH;
+        tcc   = DPC_OBJDET_DPU_RANGEPROC_EDMAOUT_FMT2_PONGDATA_1_CH;
+        param = DPC_OBJDET_DPU_RANGEPROC_EDMAOUT_FMT2_PONGDATA_1_CH;
+        DPEDMA_allocateEDMAChannel(edmaHandle, &dmaCh, &tcc, &param);
+        edmaOut->u.fmt2.dataOutPongData[1].channel       = dmaCh;
+        edmaOut->u.fmt2.dataOutPongData[1].paramId       = param;
+        edmaOut->u.fmt2.dataOutPongData[1].tcc           = tcc;
+
+        param = DPC_OBJDET_DPU_RANGEPROC_EDMAOUT_FMT2_PONGDATA_1_SHADOW;
+        allocateEDMAShadowChannel(edmaHandle, &param);
+        edmaOut->u.fmt2.dataOutPongData[1].shadowPramId = param;
+        edmaOut->u.fmt2.dataOutPongData[1].eventQueue    = DPC_OBJDET_DPU_RANGEPROC_EDMAOUT_FMT2_PONGDATA_1_EVENT_QUE;
     }
     else
     {
-        hwRes->dcEstIVal = NULL;
-        hwRes->dcEstQVal = NULL;
+        /* Ping */
+        dmaCh = DPC_OBJDET_DPU_RANGEPROC_EDMAOUT_FMT1_PING_CH;
+        tcc   = DPC_OBJDET_DPU_RANGEPROC_EDMAOUT_FMT1_PING_CH;
+        param = DPC_OBJDET_DPU_RANGEPROC_EDMAOUT_FMT1_PING_CH;
+        DPEDMA_allocateEDMAChannel(edmaHandle, &dmaCh, &tcc, &param);
+        edmaOut->u.fmt1.dataOutPing.channel              = dmaCh;
+        edmaOut->u.fmt1.dataOutPing.paramId              = param;
+        edmaOut->u.fmt1.dataOutPing.tcc                  = tcc;
+
+        param = DPC_OBJDET_DPU_RANGEPROC_EDMAOUT_FMT1_PING_SHADOW;
+        allocateEDMAShadowChannel(edmaHandle, &param);
+        edmaOut->u.fmt1.dataOutPing.shadowPramId         = param;
+        edmaOut->u.fmt1.dataOutPing.eventQueue           = DPC_OBJDET_DPU_RANGEPROC_EDMAOUT_FMT1_PING_EVENT_QUE;
+
+        /* Pong */
+        dmaCh = DPC_OBJDET_DPU_RANGEPROC_EDMAOUT_FMT1_PONG_CH;
+        tcc   = DPC_OBJDET_DPU_RANGEPROC_EDMAOUT_FMT1_PONG_CH;
+        param = DPC_OBJDET_DPU_RANGEPROC_EDMAOUT_FMT1_PONG_CH;
+        DPEDMA_allocateEDMAChannel(edmaHandle, &dmaCh, &tcc, &param);
+        edmaOut->u.fmt1.dataOutPong.channel              = dmaCh;
+        edmaOut->u.fmt1.dataOutPong.paramId              = param;
+        edmaOut->u.fmt1.dataOutPong.tcc                  = tcc;
+
+        param = DPC_OBJDET_DPU_RANGEPROC_EDMAOUT_FMT1_PONG_SHADOW;
+        allocateEDMAShadowChannel(edmaHandle, &param);
+        edmaOut->u.fmt1.dataOutPong.shadowPramId         = param;
+        edmaOut->u.fmt1.dataOutPong.eventQueue           = DPC_OBJDET_DPU_RANGEPROC_EDMAOUT_FMT1_PONG_EVENT_QUE;
+
     }
 
-    if(ptrObjDetObj->commonCfg.rangeProcCfg.rangeProcChain == DPU_RANGEPROCHWA_PREVIOUS_NTH_CHIRP_ESTIMATES_MODE)
-    {
-        hwRes->intfThresMagVal = (uint32_t *)DPC_ObjDet_BiDirMemPoolAlloc(&ptrObjDetObj->FastRamBufObj, intfThresBufSize, (uint8_t)sizeof(uint32_t), true);
-        if (hwRes->intfThresMagVal == NULL)
-        {
-            retVal = DPC_OBJECTDETECTION_PREPROCBUF_ERR;
-            goto exit;
-        }
+    dmaCh = DPC_OBJDET_DPU_RANGEPROC_EDMAOUT_SIG_CH;
+    tcc   = DPC_OBJDET_DPU_RANGEPROC_EDMAOUT_SIG_CH;
+    param = DPC_OBJDET_DPU_RANGEPROC_EDMAOUT_SIG_CH;
+    DPEDMA_allocateEDMAChannel(edmaHandle, &dmaCh, &tcc, &param);
+    edmaOut->dataOutSignature.channel                    = dmaCh;
+    edmaOut->dataOutSignature.paramId                    = param;
+    edmaOut->dataOutSignature.tcc                        = tcc;
 
-        hwRes->intfThresMagDiffVal = (uint32_t *)DPC_ObjDet_BiDirMemPoolAlloc(&ptrObjDetObj->FastRamBufObj, intfThresBufSize, (uint8_t)sizeof(uint32_t), true);
-        if (hwRes->intfThresMagDiffVal == NULL)
-        {
-            retVal = DPC_OBJECTDETECTION_PREPROCBUF_ERR;
-            goto exit;
-        }
+    param = DPC_OBJDET_DPU_RANGEPROC_EDMAOUT_SIG_SHADOW;
+    allocateEDMAShadowChannel(edmaHandle, &param);
+    edmaOut->dataOutSignature.shadowPramId               = param;
+    edmaOut->dataOutSignature.eventQueue                 = DPC_OBJDET_DPU_RANGEPROC_EDMAOUT_SIG_EVENT_QUE;
 
-        (void)memset(hwRes->intfThresMagVal, 0, intfThresBufSize);
-        (void)memset(hwRes->intfThresMagDiffVal, 0, intfThresBufSize);
-    }
-    
+    CacheP_wbInv(hwRes, sizeof(DPU_RangeProcHWA_HW_Resources), CacheP_TYPE_ALL);
+
     /* In this case HWA hardware trigger source is equal to HWA param index value*/
     hwaCfg->dataInputMode = DPU_RangeProcHWA_InputMode_ISOLATED;
 
@@ -2591,9 +1859,7 @@ static int32_t DPC_ObjDet_rangeConfig(DPU_RangeProcHWA_Handle dpuHandle,
     }
     *windowOffset += winGenLen;
 
-    hwaCfg->numParamSet = DPU_RANGEPROCHWADDMA_NUM_HWA_PARAM_SETS + staticCfg->compressionCfg.bfpCompExtraParamSets;
-    /* Twice the value of rangeProcChain equals the number of paramsets saved compared to the default mode */
-    hwaCfg->numParamSet -= ptrObjDetObj->commonCfg.rangeProcCfg.rangeProcChain * 2U;
+    hwaCfg->numParamSet = DPU_RANGEPROCHWA_NUM_HWA_PARAM_SETS;
     hwaCfg->paramSetStartIdx = DPC_OBJDET_DPU_RANGEPROC_PARAMSET_START_IDX;
 
     retVal = DPU_RangeProcHWA_config(dpuHandle, cfgSave);
@@ -2601,11 +1867,6 @@ static int32_t DPC_ObjDet_rangeConfig(DPU_RangeProcHWA_Handle dpuHandle,
     {
         goto exit;
     }
-
-    /* store configuration for use in intra-sub-frame processing and
-     * inter-sub-frame switching, although window will need to be regenerated and
-     * dc range sig should not be reset. */
-    cfgSave->staticCfg.resetDcRangeSigMeanBuffer = 0;
 
     /* report scratch usage */
     *CoreLocalRamScratchUsage = cfgSave->staticCfg.windowSize;
@@ -2619,24 +1880,17 @@ exit:
  *  @n
  *     Configure Doppler DPU.
  *
- *  @param[in]  obj Pointer to sub-frame object
  *  @param[in]  dpuHandle Handle to DPU
  *  @param[in]  staticCfg Pointer to static configuration of the sub-frame
  *  @param[in]  log2NumDopplerBins log2 of numDopplerBins of the static config.
- *  @param[in]  antennaCalibParamsPtr Pointer to antenna calibration parameters
+ *  @param[in]  dynCfg Pointer to dynamic configuration of the sub-frame
  *  @param[in]  edmaHandle Handle to edma driver to be used for the DPU
- *  @param[in]  radarCubeDecompressedSizeInBytes Size of radar cube if it were
- *              not compressed
  *  @param[in]  radarCube Pointer to DPIF radar cube, which will be the input
  *              to doppler processing
  *  @param[in]  detMatrix Pointer to DPIF detection matrix, which will be the output
  *              of doppler processing
  *  @param[in]  CoreLocalRamObj Pointer to core local RAM object to allocate local memory
  *              for the DPU, only for scratch purposes
- *  @param[in]  L3ramObj Pointer to L3 RAM memory pool object
- *  @param[in]  CoreLocalScratchStartPoolAddr Core Local RAM's scratch start address
- *  @param[out] CoreLocalScratchStartPoolAddrNextDPU Core Local RAM's scratch start address for Next DPU
- *  @param[out] l3RamStartPoolAddrNextDPU L3 RAM's start address for Next DPU
  *  @param[in,out]  windowOffset Window coefficients that are generated by this function
  *                               (in heap memory) are passed to DPU configuration API to
  *                               configure the HWA window RAM starting from this offset.
@@ -2648,7 +1902,7 @@ exit:
  *                      (stack) variable is saved here. This is for facilitating
  *                      quick reconfiguration later without having to go through
  *                      the construction of the configuration.
- *  @param[in]  objDetObj Pointer to DPC object
+ *  @param[in]  ptrObjDetObj Pointer to ObjDetObj
  *
  *  @retval
  *      Success -   0
@@ -2657,103 +1911,145 @@ exit:
  *
  *  \ingroup DPC_OBJDET__INTERNAL_FUNCTION
  */
-static int32_t DPC_ObjDet_dopplerConfig(SubFrameObj *obj,
-                   DPU_DopplerProcHWA_Handle dpuHandle,
+static int32_t DPC_ObjDet_dopplerConfig(DPU_DopplerProcHWA_Handle dpuHandle,
                    DPC_ObjectDetection_StaticCfg *staticCfg,
-                   uint8_t log2NumDopplerBins,
-                   float *                       antennaCalibParamsPtr,
+                   uint8_t                       log2NumDopplerBins,
+                   DPC_ObjectDetection_DynCfg    *dynCfg,
                    EDMA_Handle                   edmaHandle,
-                   uint32_t                      radarCubeDecompressedSizeInBytes,
                    DPIF_RadarCube                *radarCube,
                    DPIF_DetMatrix                *detMatrix,
                    MemPoolObj                    *CoreLocalRamObj,
-                   BiDirMemPoolObj               *L3ramObj,
-                   void *                        CoreLocalScratchStartPoolAddr,
-                   volatile void *               CoreLocalScratchStartPoolAddrNextDPU,
-                   volatile void *               l3RamStartPoolAddrNextDPU,
                    uint32_t                      *windowOffset,
                    uint32_t                      *CoreLocalRamScratchUsage,
                    DPU_DopplerProcHWA_Config     *cfgSave,
-                   ObjDetObj                     *objDetObj)
+                   ObjDetObj                     *ptrObjDetObj)
 {
-
     int32_t retVal = 0;
-    DPU_DopplerProcHWA_Config *dopCfg = cfgSave;
     DPU_DopplerProcHWA_HW_Resources  *hwRes;
     DPU_DopplerProcHWA_StaticConfig  *dopStaticCfg;
     DPU_DopplerProcHWA_EdmaCfg *edmaCfg;
     DPU_DopplerProcHWA_HwaCfg *hwaCfg;
     uint32_t *windowBuffer, winGenLen, winType;
-    uint32_t detObjListSizeInBytes, dopMaxSubBandScratchBufferSizeBytes;
-    uint32_t objOutSizeInBytes, sideInfoSizeInBytes;
-    void * scratchBufMem;
-    uint8_t pingPongIdx;
-    uint8_t *dopMaxSubBandScratchBuf;
+    uint32_t dmaCh, tcc, param;
 
-    hwRes = &dopCfg->hwRes;
-    dopStaticCfg = &dopCfg->staticCfg;
+    (void)memset((void*)cfgSave, 0, sizeof(DPU_DopplerProcHWA_Config));
+
+    hwRes = &cfgSave->hwRes;
+    dopStaticCfg = &cfgSave->staticCfg;
     edmaCfg = &hwRes->edmaCfg;
     hwaCfg = &hwRes->hwaCfg;
 
-    (void)memset((void*)dopCfg, 0, sizeof(DPU_DopplerProcHWA_Config));
+    cfgSave->hwRes.edmaCfg.intrObj = &ptrObjDetObj->dopplerProcIntrObj;
 
-    dopStaticCfg->numTxAntennas         = staticCfg->numTxAntennas;
-    dopStaticCfg->numAzimTxAntennas     = staticCfg->numVirtualAntAzim / staticCfg->ADCBufData.dataProperty.numRxAntennas;
-    dopStaticCfg->numRxAntennas         = staticCfg->ADCBufData.dataProperty.numRxAntennas;
-    dopStaticCfg->numVirtualAntennas    = staticCfg->numVirtualAntennas;
-    dopStaticCfg->numRangeBins          = staticCfg->numRangeBins;
-    dopStaticCfg->numChirps             = staticCfg->numChirps;
-    dopStaticCfg->numDopplerFFTBins     = staticCfg->numDopplerBins;
-    dopStaticCfg->numBandsTotal         = staticCfg->numBandsTotal;
-    dopStaticCfg->log2NumDopplerBins    = log2NumDopplerBins;
-    dopStaticCfg->isSumTxEnabled        = staticCfg->isSumTxEnabled;
+    dopStaticCfg->numDopplerChirps   = staticCfg->numDopplerChirps;
+    dopStaticCfg->numDopplerBins     = staticCfg->numDopplerBins;
+    dopStaticCfg->numRangeBins       = staticCfg->numRangeBins;
+    dopStaticCfg->numRxAntennas      = staticCfg->ADCBufData.dataProperty.numRxAntennas;
+    dopStaticCfg->numVirtualAntennas = staticCfg->numVirtualAntennas;
+    dopStaticCfg->log2NumDopplerBins = log2NumDopplerBins;
+    dopStaticCfg->numTxAntennas      = staticCfg->numTxAntennas;
 
-#ifdef OBJ_DETECTION_DDMA_TEST
-    dopStaticCfg->numAzimFFTBins = 4 * mathUtils_getValidFFTSize(staticCfg->ADCBufData.dataProperty.numRxAntennas *\
-                                                staticCfg->numVirtualAntAzim / \
-                                                staticCfg->ADCBufData.dataProperty.numRxAntennas);
+    /* hwRes */
+    hwRes->radarCube = *radarCube;
+    hwRes->detMatrix = *detMatrix;
 
-#else
-    /* Setting numAzimFFTBins to 32 for 3 Azim Tx (as opposed to 48) as well as 2 Azim Tx case for optimization
-       (instead of using the following formula:) */
-    dopStaticCfg->numAzimFFTBins = OBJECTDETECTION_NUM_AZIM_FFT_BINS;
-#endif
-
-#ifdef ENABLE_HISTOGRAM_BASED_DOP_AZIM_DETECTION
-    /* HWA supports maximum 64 number of histograms, thus, azimfft size should <=64 if this feature is enabled.*/
-    if(dopStaticCfg->numAzimFFTBins > 64U)
-    {
-        retVal = DPC_OBJECTDETECTION_HIST_AZIMFFT_SIZE;
-        goto exit;
-    }
-#endif
-    /* Zero Insertion Mask in Azimuth dimension */
-    dopStaticCfg->zeroInsrtMaskAzim = objDetObj->commonCfg.zeroInsrtMaskCfg.zeroInsrtMaskAzim;
-
-    /* The compression config structure in rangeproc and decompression config
-       structure in dopplerproc are the same. */
-    (void)memcpy((void*)&dopStaticCfg->decompCfg, (void*)&staticCfg->compressionCfg, sizeof(DPU_DopplerProc_DecompressionCfg));
-
-#ifndef ENABLE_HISTOGRAM_BASED_DOP_AZIM_DETECTION
-    /* Cfar Cfg */
-    (void)memcpy((void*)&dopStaticCfg->cfarCfg, (void*)&staticCfg->cfarCfg.cfg, sizeof(DPU_DopplerProc_CfarCfg));
-#endif
-
-    /* Local Max cfg */
-    (void)memcpy((void*)&dopStaticCfg->localMaxCfg, (void*)&staticCfg->localMaxCfg, sizeof(DPU_DopplerProc_LocalMaxCfg));
-
-    /* Antenna Calib Cfg */
-    (void)memcpy((void*)&dopStaticCfg->antennaCalibParams, (void*)antennaCalibParamsPtr, sizeof(dopStaticCfg->antennaCalibParams));
-
-    /* Antenna Geometry Pattern */
-    (void)memcpy((void*)&dopStaticCfg->antennaGeometryCfg, (void*)objDetObj->commonCfg.antennaGeometryCfg, sizeof(objDetObj->commonCfg.antennaGeometryCfg));
-
+    /* hwRes - edmaCfg */
     edmaCfg->edmaHandle = edmaHandle;
 
+    /* edmaIn - ping */
+    dmaCh = DPC_OBJDET_DPU_DOPPLERPROC_EDMAIN_PING_CH;
+    tcc   = DPC_OBJDET_DPU_DOPPLERPROC_EDMAIN_PING_CH;
+    param = DPC_OBJDET_DPU_DOPPLERPROC_EDMAIN_PING_CH;
+    DPEDMA_allocateEDMAChannel(edmaHandle, &dmaCh, &tcc, &param);
+    edmaCfg->edmaIn.pingPong[0].channel        = dmaCh;
+    edmaCfg->edmaIn.pingPong[0].paramId        = param;
+    edmaCfg->edmaIn.pingPong[0].tcc            = tcc;
+
+    param = DPC_OBJDET_DPU_DOPPLERPROC_EDMAIN_PING_SHADOW;
+    allocateEDMAShadowChannel(edmaHandle, &param);
+    edmaCfg->edmaIn.pingPong[0].shadowPramId   = param;
+    edmaCfg->edmaIn.pingPong[0].eventQueue     = DPC_OBJDET_DPU_DOPPLERPROC_EDMAIN_PING_EVENT_QUE;
+
+    /* edmaIn - pong */
+    dmaCh = DPC_OBJDET_DPU_DOPPLERPROC_EDMAIN_PONG_CH;
+    tcc   = DPC_OBJDET_DPU_DOPPLERPROC_EDMAIN_PONG_CH;
+    param = DPC_OBJDET_DPU_DOPPLERPROC_EDMAIN_PONG_CH;
+    DPEDMA_allocateEDMAChannel(edmaHandle, &dmaCh, &tcc, &param);
+    edmaCfg->edmaIn.pingPong[1].channel        = dmaCh;
+    edmaCfg->edmaIn.pingPong[1].paramId        = param;
+    edmaCfg->edmaIn.pingPong[1].tcc            = tcc;
+
+    param = DPC_OBJDET_DPU_DOPPLERPROC_EDMAIN_PONG_SHADOW;
+    allocateEDMAShadowChannel(edmaHandle, &param);
+    edmaCfg->edmaIn.pingPong[1].shadowPramId   = param;
+    edmaCfg->edmaIn.pingPong[1].eventQueue     = DPC_OBJDET_DPU_DOPPLERPROC_EDMAIN_PONG_EVENT_QUE;
+
+    /* edmaOut - ping */
+    dmaCh = DPC_OBJDET_DPU_DOPPLERPROC_EDMAOUT_PING_CH;
+    tcc   = DPC_OBJDET_DPU_DOPPLERPROC_EDMAOUT_PING_CH;
+    param = DPC_OBJDET_DPU_DOPPLERPROC_EDMAOUT_PING_CH;
+    DPEDMA_allocateEDMAChannel(edmaHandle, &dmaCh, &tcc, &param);
+    edmaCfg->edmaOut.pingPong[0].channel       = dmaCh;
+    edmaCfg->edmaOut.pingPong[0].paramId       = param;
+    edmaCfg->edmaOut.pingPong[0].tcc           = tcc;
+
+    param = DPC_OBJDET_DPU_DOPPLERPROC_EDMAOUT_PING_SHADOW;
+    allocateEDMAShadowChannel(edmaHandle, &param);
+    edmaCfg->edmaOut.pingPong[0].shadowPramId  = param;
+    edmaCfg->edmaOut.pingPong[0].eventQueue    = DPC_OBJDET_DPU_DOPPLERPROC_EDMAOUT_PING_EVENT_QUE;
+
+    /* edmaOut - pong */
+    dmaCh = DPC_OBJDET_DPU_DOPPLERPROC_EDMAOUT_PONG_CH;
+    tcc   = DPC_OBJDET_DPU_DOPPLERPROC_EDMAOUT_PONG_CH;
+    param = DPC_OBJDET_DPU_DOPPLERPROC_EDMAOUT_PONG_CH;
+    DPEDMA_allocateEDMAChannel(edmaHandle, &dmaCh, &tcc, &param);
+    edmaCfg->edmaOut.pingPong[1].channel        = dmaCh;
+    edmaCfg->edmaOut.pingPong[1].paramId        = param;
+    edmaCfg->edmaOut.pingPong[1].tcc            = tcc;
+
+    param = DPC_OBJDET_DPU_DOPPLERPROC_EDMAOUT_PONG_SHADOW;
+    allocateEDMAShadowChannel(edmaHandle, &param);
+    edmaCfg->edmaOut.pingPong[1].shadowPramId   = param;
+    edmaCfg->edmaOut.pingPong[1].eventQueue     = DPC_OBJDET_DPU_DOPPLERPROC_EDMAOUT_PONG_EVENT_QUE;
+
+    /* edmaHotSig - ping */
+    dmaCh = DPC_OBJDET_DPU_DOPPLERPROC_EDMA_PING_SIG_CH;
+    tcc   = DPC_OBJDET_DPU_DOPPLERPROC_EDMA_PING_SIG_CH;
+    param = DPC_OBJDET_DPU_DOPPLERPROC_EDMA_PING_SIG_CH;
+    DPEDMA_allocateEDMAChannel(edmaHandle, &dmaCh, &tcc, &param);
+    edmaCfg->edmaHotSig.pingPong[0].channel      = dmaCh;
+    edmaCfg->edmaHotSig.pingPong[0].paramId      = param;
+    edmaCfg->edmaHotSig.pingPong[0].tcc          = tcc;
+
+    param = DPC_OBJDET_DPU_DOPPLERPROC_EDMA_PING_SIG_SHADOW;
+    allocateEDMAShadowChannel(edmaHandle, &param);
+    edmaCfg->edmaHotSig.pingPong[0].shadowPramId  = param;
+    edmaCfg->edmaHotSig.pingPong[0].eventQueue    = DPC_OBJDET_DPU_DOPPLERPROC_EDMA_PING_SIG_EVENT_QUE;
+
+    /* edmaHotSig - pong */
+    dmaCh = DPC_OBJDET_DPU_DOPPLERPROC_EDMA_PONG_SIG_CH;
+    tcc   = DPC_OBJDET_DPU_DOPPLERPROC_EDMA_PONG_SIG_CH;
+    param = DPC_OBJDET_DPU_DOPPLERPROC_EDMA_PONG_SIG_CH;
+    DPEDMA_allocateEDMAChannel(edmaHandle, &dmaCh, &tcc, &param);
+    edmaCfg->edmaHotSig.pingPong[1].channel      = dmaCh;
+    edmaCfg->edmaHotSig.pingPong[1].paramId      = param;
+    edmaCfg->edmaHotSig.pingPong[1].tcc          = tcc;
+
+    param = DPC_OBJDET_DPU_DOPPLERPROC_EDMA_PONG_SIG_SHADOW;
+    allocateEDMAShadowChannel(edmaHandle, &param);
+    edmaCfg->edmaHotSig.pingPong[1].shadowPramId = param;
+    edmaCfg->edmaHotSig.pingPong[1].eventQueue   =     DPC_OBJDET_DPU_DOPPLERPROC_EDMA_PONG_SIG_EVENT_QUE;
+
+    CacheP_wbInv(hwRes, sizeof(DPU_RangeProcHWA_HW_Resources), CacheP_TYPE_ALL);
+
+    /* hwaCfg */
+    hwaCfg->numParamSets = 2U * staticCfg->numTxAntennas + 2U;
+    hwaCfg->paramSetStartIdx = DPC_OBJDET_DPU_DOPPLERPROC_PARAMSET_START_IDX;
+
     /* hwaCfg - window */
-    winGenLen = DPC_ObjDet_GetDopplerWinGenLen(dopCfg);
+    winGenLen = DPC_ObjDet_GetDopplerWinGenLen(cfgSave);
     hwaCfg->windowSize = winGenLen * sizeof(int32_t);
-    windowBuffer = DPC_ObjDet_BiDirMemPoolAlloc(L3ramObj, hwaCfg->windowSize, (uint8_t)sizeof(uint32_t), true);
+    windowBuffer = DPC_ObjDet_MemPoolAlloc(CoreLocalRamObj, hwaCfg->windowSize, (uint8_t)sizeof(uint32_t));
     if (windowBuffer == NULL)
     {
         retVal = DPC_OBJECTDETECTION_ENOMEM__CORE_LOCAL_RAM_DOPPLER_HWA_WINDOW;
@@ -2761,12 +2057,7 @@ static int32_t DPC_ObjDet_dopplerConfig(SubFrameObj *obj,
     }
     hwaCfg->window = (int32_t *)windowBuffer;
     hwaCfg->winRamOffset = (uint16_t) *windowOffset;
-    winType = DPC_ObjDet_GenDopplerWindow(dopCfg);
-    if (winType != DPC_DPU_DOPPLERPROC_FFT_WINDOW_TYPE)
-    {
-        retVal = DPC_OBJECTDETECTION_WIN_ERR;
-        goto exit;
-    }
+    winType = DPC_ObjDet_GenDopplerWindow(cfgSave);
 
 #ifdef DPC_USE_SYMMETRIC_WINDOW_DOPPLER_DPU
     hwaCfg->winSym = HWA_FFT_WINDOW_SYMMETRIC;
@@ -2780,288 +2071,241 @@ static int32_t DPC_ObjDet_dopplerConfig(SubFrameObj *obj,
     }
     *windowOffset += winGenLen;
 
-    /********************************************
-     * Allocating memory resources              *
-     *******************************************/
-    /* DPU Output Resource */
-
-    /* Max Size of objects list that can be stored per range gate. */
-    hwRes->maxObjListPerRGateSize = (radarCube->dataSize/staticCfg->numRangeBins);
-    dopStaticCfg->maxNumObj = radarCube->dataSize / sizeof(DetObjParams);
-
-    /* Doppler stage output - List of detected objects is stored on the radar cube. */
-    hwRes->detObjList = (DetObjParams *)radarCube->data;
-
-    /* Maximum number of objects that can be stored on L2 for angle processing - after intersection with range CFAR. */
-    hwRes->finalMaxNumDetObjs = (CoreLocalRamObj->cfg.size)/sizeof(DetObjParams);
-
-    /* If Range CFAR is not enabled, limit the maximum number of objects after doppler stage to finalMaxNumDetObjs*/
-    if(obj->staticCfg.rangeCfarCfg.cfg.isEnabled == 0U)
+    /* Disable first stage scaling if window type is Hanning because Hanning scales
+       by half */
+    if (winType == MATHUTILS_WIN_HANNING)
     {
-        dopStaticCfg->maxNumObj = hwRes->finalMaxNumDetObjs;
-    }
-
-    /* Allocate an intersected shorter list in L2 RAM. */
-    detObjListSizeInBytes = sizeof(DetObjParams) * hwRes->finalMaxNumDetObjs;
-    DPC_ObjDet_MemPoolSet(CoreLocalRamObj, CoreLocalScratchStartPoolAddr);
-    scratchBufMem = DPC_ObjDet_MemPoolAlloc(CoreLocalRamObj, detObjListSizeInBytes, (uint8_t)sizeof(uint32_t));
-    if (scratchBufMem == NULL)
-    {
-        retVal = DPC_OBJECTDETECTION_ENOMEM__OBJ_PARAMS_RAM_DOPPLER_DECOMP_BUF;
-        goto exit;
-    }
-    DPC_ObjDet_MemPoolSet(CoreLocalRamObj, CoreLocalScratchStartPoolAddr);
-    hwRes->finalDetObjList = (DetObjParams *)scratchBufMem;
-
-    objOutSizeInBytes = sizeof(DPIF_PointCloudCartesian) * hwRes->finalMaxNumDetObjs;
-    scratchBufMem = DPC_ObjDet_BiDirMemPoolAlloc(L3ramObj, objOutSizeInBytes, (uint8_t)sizeof(uint32_t), false);
-    if (scratchBufMem == NULL)
-    {
-        retVal = DPC_OBJECTDETECTION_ENOMEM__OBJ_PARAMS_RAM_DOPPLER_DECOMP_BUF;
-        goto exit;
-    }
-    hwRes->objOut = (DPIF_PointCloudCartesian *)scratchBufMem;
-
-    sideInfoSizeInBytes = sizeof(DPIF_PointCloudSideInfo) * hwRes->finalMaxNumDetObjs;
-    scratchBufMem = DPC_ObjDet_BiDirMemPoolAlloc(L3ramObj, sideInfoSizeInBytes, (uint8_t)DOUBLEWORD_ALIGNED, false);
-    if (scratchBufMem == NULL){
-        retVal = DPC_OBJECTDETECTION_ENOMEM__OBJ_PARAMS_SIDEINFO;
-        goto exit;
-    }
-    obj->detObjOutSideInfo = (DPIF_PointCloudSideInfo *)scratchBufMem;
-
-    l3RamStartPoolAddrNextDPU = DPC_ObjDet_BiDirMemPoolGetTop(L3ramObj);
-    if (l3RamStartPoolAddrNextDPU == NULL)
-    {
-        retVal = DPC_OBJECTDETECTION_EINVAL;
-        goto exit;
-    }
-
-    /* Resetting to buffer start */
-    DPC_ObjDet_MemPoolSet(CoreLocalRamObj, CoreLocalScratchStartPoolAddr);
-
-    /* We don't need any L2 resources to be retained till the end of the next DPU */
-    CoreLocalScratchStartPoolAddrNextDPU = DPC_ObjDet_MemPoolGet(CoreLocalRamObj);
-    if (CoreLocalScratchStartPoolAddrNextDPU == NULL)
-    {
-        retVal = DPC_OBJECTDETECTION_EINVAL;
-        goto exit;
-    }
-    /* Resources to be saved through the doppler stage */
-{{
-
-    /* This resource needs to be saved through the doppler stage */
-    if (staticCfg->compressionCfg.rangeBinsPerBlock < 8U)
-    {
-         hwRes->decompScratchBufferSizeBytes = radarCubeDecompressedSizeInBytes /
-                                ((uint32_t)staticCfg->numRangeBins / 8U);
+        hwaCfg->firstStageScaling = DPU_DOPPLERPROCHWA_FIRST_SCALING_DISABLED;
     }
     else
     {
-        hwRes->decompScratchBufferSizeBytes = radarCubeDecompressedSizeInBytes /
-                                ((uint32_t)staticCfg->numRangeBins / (uint32_t)staticCfg->compressionCfg.rangeBinsPerBlock);
+        hwaCfg->firstStageScaling = DPU_DOPPLERPROCHWA_FIRST_SCALING_ENABLED;
     }
 
-    scratchBufMem = DPC_ObjDet_BiDirMemPoolAlloc(L3ramObj, hwRes->decompScratchBufferSizeBytes, (uint8_t)sizeof(uint32_t), false);
-    if (scratchBufMem == NULL)
-    {
-        retVal = DPC_OBJECTDETECTION_ENOMEM__CORE_LOCAL_RAM_DOPPLER_DECOMP_BUF;
-        goto exit;
-    }
-    hwRes->decompScratchBuf = (uint8_t *)scratchBufMem;
-
-    /* Allocate memory for Max Doppler Sub Band Buffers */
-    dopMaxSubBandScratchBufferSizeBytes = ((uint32_t)staticCfg->numDopplerBins / (uint32_t)staticCfg->numBandsTotal) * (uint32_t)sizeof(uint8_t) * 2U; /* Ping and Pong */
-    dopMaxSubBandScratchBuf = (uint8_t *)DPC_ObjDet_BiDirMemPoolAlloc(&objDetObj->FastRamBufObj, dopMaxSubBandScratchBufferSizeBytes, (uint8_t)sizeof(uint32_t), false);
-    if(dopMaxSubBandScratchBuf == NULL) 
-    {
-        retVal = DPC_OBJECTDETECTION_ENOMEM__RAM_DOPPLER_MAXDOP_SUBBAND;
-        goto exit;
-    }
-    for (pingPongIdx = 0; pingPongIdx < 2U; pingPongIdx++)
-    {
-        hwRes->dopMaxSubBandScratchBuf[pingPongIdx] = (uint8_t *)dopMaxSubBandScratchBuf + pingPongIdx * dopMaxSubBandScratchBufferSizeBytes / 2U;
-    }
-
-#ifndef ENABLE_HISTOGRAM_BASED_DOP_AZIM_DETECTION
-    hwRes->maxCfarPeaksToDetect = DPC_OBJDET_MAX_NUM_CFAR_PEAKS;
-
-    hwRes->cfarThreshScaleLUT = gCfarThreshScaleLUT;
-#endif
-
-    /* Assign the detection matrix, radar cube */
-    hwRes->detMatrix = *detMatrix;
-    hwRes->radarCube = *radarCube;
-
-}}
-    /********************************************
-     * Allocating hw resources (decomp stage)   *
-     *******************************************/
-{{
-	DPC_ObjDet_EDMAChannelConfigAssist(edmaHandle,
-                                       EDMA_DOPPLERPROC_DECOMP_IN_PING,
-                                       EDMA_DOPPLERPROC_DECOMP_IN_PING_SHADOW,
-                                       0,
-                                       &edmaCfg->decompEdmaCfg.edmaIn.pingPong[0]);
-    DPC_ObjDet_EDMAChannelConfigAssist(edmaHandle,
-                                       EDMA_DOPPLERPROC_DECOMP_IN_PONG,
-                                       EDMA_DOPPLERPROC_DECOMP_IN_PONG_SHADOW,
-                                       0,
-                                       &edmaCfg->decompEdmaCfg.edmaIn.pingPong[1]);
-
-    DPC_ObjDet_EDMAChannelConfigAssist(edmaHandle,
-                                       EDMA_DOPPLERPROC_DECOMP_OUT_PING,
-                                       EDMA_DOPPLERPROC_DECOMP_OUT_PING_SHADOW,
-                                       0,
-                                       &edmaCfg->decompEdmaCfg.edmaOut.pingPong[0]);
-    DPC_ObjDet_EDMAChannelConfigAssist(edmaHandle,
-                                       EDMA_DOPPLERPROC_DECOMP_OUT_PONG,
-                                       EDMA_DOPPLERPROC_DECOMP_OUT_PONG_SHADOW,
-                                       0,
-                                       &edmaCfg->decompEdmaCfg.edmaOut.pingPong[1]);
-
-    DPC_ObjDet_EDMAChannelConfigAssist(edmaHandle,
-                                       EDMA_DOPPLERPROC_DECOMP_IN_HOTSIG_PING,
-                                       EDMA_DOPPLERPROC_DECOMP_IN_HOTSIG_PING_SHADOW,
-                                       0,
-                                       &edmaCfg->decompEdmaCfg.edmaInSignature.pingPong[0]);
-    DPC_ObjDet_EDMAChannelConfigAssist(edmaHandle,
-                                       EDMA_DOPPLERPROC_DECOMP_IN_HOTSIG_PONG,
-                                       EDMA_DOPPLERPROC_DECOMP_IN_HOTSIG_PONG_SHADOW,
-                                       0,
-                                       &edmaCfg->decompEdmaCfg.edmaInSignature.pingPong[1]);
-
-    hwaCfg->decompStageHwaStateMachineCfg.paramSetStartIdx = DPC_OBJDET_DPU_DOPPLERPROCHWADDMA_PARAMSET_START_IDX + staticCfg->compressionCfg.bfpCompExtraParamSets;
-    hwaCfg->decompStageHwaStateMachineCfg.paramSetStartIdx -= objDetObj->commonCfg.rangeProcCfg.rangeProcChain * 2U;
-    hwaCfg->decompStageHwaStateMachineCfg.numParamSets = DPU_DOPPLERPOCHWADDMA_DECOMP_NUM_HWA_PARAMSETS + staticCfg->compressionCfg.bfpCompExtraParamSets;
-}}
-
-
-    /********************************************
-     * Allocating hw resources (doppler stage)  *
-     *******************************************/
-    {{
-
-    DPC_ObjDet_EDMAChannelConfigAssist(edmaHandle,
-                                       EDMA_DOPPLERPROC_DOPPLER_IN_PING,
-                                       EDMA_DOPPLERPROC_DOPPLER_IN_PING_SHADOW,
-                                       0,
-                                       &edmaCfg->dopplerEdmaCfg.edmaIn.pingPong[0]);
-    DPC_ObjDet_EDMAChannelConfigAssist(edmaHandle,
-                                       EDMA_DOPPLERPROC_DOPPLER_IN_PONG,
-                                       EDMA_DOPPLERPROC_DOPPLER_IN_PONG_SHADOW,
-                                       0,
-                                       &edmaCfg->dopplerEdmaCfg.edmaIn.pingPong[1]);
-
-    DPC_ObjDet_EDMAChannelConfigAssist(edmaHandle,
-                                       EDMA_DOPPLERPROC_DOPPLER_IN_HOTSIG_PING,
-                                       EDMA_DOPPLERPROC_DOPPLER_IN_HOTSIG_PING_SHADOW,
-                                       0,
-                                       &edmaCfg->dopplerEdmaCfg.edmaInSignature.pingPong[0]);
-    DPC_ObjDet_EDMAChannelConfigAssist(edmaHandle,
-                                       EDMA_DOPPLERPROC_DOPPLER_IN_HOTSIG_PONG,
-                                       EDMA_DOPPLERPROC_DOPPLER_IN_HOTSIG_PONG_SHADOW,
-                                       0,
-                                       &edmaCfg->dopplerEdmaCfg.edmaInSignature.pingPong[1]);
-
-    DPC_ObjDet_EDMAChannelConfigAssist(edmaHandle,
-                                       EDMA_DOPPLERPROC_MAXSUBBAND_OUT_PING,
-                                       EDMA_DOPPLERPROC_MAXSUBBAND_OUT_PING_SHADOW,
-                                       0,
-                                       &edmaCfg->dopplerEdmaCfg.edmaMaxSubbandOut.pingPong[0]);
-    DPC_ObjDet_EDMAChannelConfigAssist(edmaHandle,
-                                       EDMA_DOPPLERPROC_MAXSUBBAND_OUT_PONG,
-                                       EDMA_DOPPLERPROC_MAXSUBBAND_OUT_PONG_SHADOW,
-                                       0,
-                                       &edmaCfg->dopplerEdmaCfg.edmaMaxSubbandOut.pingPong[1]);
-
-	if (dopStaticCfg->isSumTxEnabled)
-	{
-        DPC_ObjDet_EDMAChannelConfigAssist(edmaHandle,
-                                        EDMA_DOPPLERPROC_SUMTX_OUT_PING,
-                                        EDMA_DOPPLERPROC_SUMTX_OUT_PING_SHADOW,
-                                        0,
-                                        &edmaCfg->dopplerEdmaCfg.edmaSumLogAbsOut.pingPong[0]);
-        DPC_ObjDet_EDMAChannelConfigAssist(edmaHandle,
-                                        EDMA_DOPPLERPROC_SUMTX_OUT_PONG,
-                                        EDMA_DOPPLERPROC_SUMTX_OUT_PONG_SHADOW,
-                                        0,
-                                        &edmaCfg->dopplerEdmaCfg.edmaSumLogAbsOut.pingPong[1]);
-    }
-
-	hwaCfg->dopplerStageHwaStateMachineCfg.paramSetStartIdx = hwaCfg->decompStageHwaStateMachineCfg.paramSetStartIdx + hwaCfg->decompStageHwaStateMachineCfg.numParamSets;
-	if (dopStaticCfg->isSumTxEnabled)
-	{
-        hwaCfg->dopplerStageHwaStateMachineCfg.numParamSets = DPU_DOPPLERPOCHWADDMA_DOPPLER_NUM_HWA_PARAMSETS;
-    }
-	else
-	{
-        hwaCfg->dopplerStageHwaStateMachineCfg.numParamSets = DPU_DOPPLERPOCHWADDMA_DOPPLER_NUM_HWA_PARAMSETS - DPU_DOPPLERPOCHWADDMA_SUMTX_NUM_HWA_PARAMSETS;
-    }
-
-    }}
-
-    /********************************************
-     * Allocating hw resources (azim stage)     *
-     *******************************************/
-    {{
-    hwaCfg->azimCfarStageHwaStateMachineCfg.paramSetStartIdx = hwaCfg->dopplerStageHwaStateMachineCfg.paramSetStartIdx + hwaCfg->dopplerStageHwaStateMachineCfg.numParamSets;
-    hwaCfg->azimCfarStageHwaStateMachineCfg.numParamSets = DPU_DOPPLERPOCHWADDMA_AZIM_NUM_HWA_PARAMSETS + 2U * (dopStaticCfg->numRxAntennas - MAX_NUM_RX);
-
-    /* Allocate the EDMA channel to copy the antenna samples of detected object. */
-    DPC_ObjDet_EDMAChannelConfigAssist(edmaHandle,
-                                    EDMA_DOPPLERPROC_EXTRACT_OBJECT_LIST,
-                                    EDMA_DOPPLERPROC_EXTRACT_OBJECT_LIST_SHADOW,
-                                    0,
-                                    &edmaCfg->edmaDetObjAntSamples);
-    }}
-
-{
-    {
-
-        uint32_t intrIdx = 0;
-
-        /* Allocating interrupt objects */
-        edmaCfg->decompEdmaCfg.edmaIntrObjDecompOut                  = &objDetObj->dopplerProcIntrObj[intrIdx++];
-
-        edmaCfg->dopplerEdmaCfg.edmaIntrObjMaxSubbandOut.pingPong[0] = &objDetObj->dopplerProcIntrObj[intrIdx++];
-        edmaCfg->dopplerEdmaCfg.edmaIntrObjMaxSubbandOut.pingPong[1] = &objDetObj->dopplerProcIntrObj[intrIdx++];
-    }
-}
-	retVal = DPU_DopplerProcHWA_config(dpuHandle, dopCfg, 1); // 1 ->  full config
+    retVal = DPU_DopplerProcHWA_config(dpuHandle, cfgSave);
     if (retVal != 0)
     {
         goto exit;
     }
+
     /* report scratch usage */
     *CoreLocalRamScratchUsage = hwaCfg->windowSize;
-
-    /* Reset non-persisent data allocation in Fast RAM Buffer, because only used by Doppler DPU */
-    DPC_ObjDet_BiDirMemPoolResetTop(&objDetObj->FastRamBufObj);
-
 exit:
+
     return retVal;
 }
 
 /**
  *  @b Description
  *  @n
- *     Configure range cfar DPU.
+ *     Configure CFAR DPU.
  *
  *  @param[in]  dpuHandle Handle to DPU
  *  @param[in]  staticCfg Pointer to static configuration of the sub-frame
+ *  @param[in]  log2NumDopplerBins log2 of numDopplerBins of the static config.
+ *  @param[in]  dynCfg Pointer to dynamic configuration of the sub-frame
  *  @param[in]  edmaHandle Handle to edma driver to be used for the DPU
- *  @param[in]  detMatrix Pointer to detection matrix, which will be the output
+ *  @param[in]  detMatrix Pointer to DPIF detection matrix, which will be the input
+ *              to the CFAR
+ *  @param[in]  cfarRngDopSnrList Pointer to range-doppler SNR list, which will be
+ *              the output of CFAR
+ *  @param[in]  cfarRngDopSnrListSize Range-doppler SNR List Size to which the list will be
+ *              capped.
  *  @param[in]  CoreLocalRamObj Pointer to core local RAM object to allocate local memory
  *              for the DPU, only for scratch purposes
- *  @param[in]  L3ramObj Pointer to L3 RAM object to allocate L3 memory for the DPU
- *  @param[out] CoreLocalScratchStartPoolAddrNextDPU Core Local RAM's scratch start address for Next DPU
- *  @param[out] l3RamStartPoolAddrNextDPU L3 RAM's start address for Next DPU
+ *  @param[in]  hwaMemBankAddr pointer to HWA Memory Bank addresses that will be used
+ *              to allocate various scratch areas for the DPU processing
+ *  @param[in]  hwaMemBankSize Size in bytes of each of HWA memory banks
+ *  @param[in]  rangeBias  Range Bias which will be used to adjust fov min value.
+ *  @param[out]  CoreLocalRamScratchUsage Core Local RAM's scratch usage in bytes
  *  @param[out] cfgSave Configuration that is built in local
  *                      (stack) variable is saved here. This is for facilitating
  *                      quick reconfiguration later without having to go through
  *                      the construction of the configuration.
- *  @param[in]  ptrObjDetObj Pointer to object detection object
+ *  @retval
+ *      Success -   0
+ *  @retval
+ *      Error   -   <0
+ *
+ *  \ingroup DPC_OBJDET__INTERNAL_FUNCTION
+ */
+static int32_t DPC_ObjDet_CFARconfig(DPU_CFARProcHWA_Handle dpuHandle,
+                   DPC_ObjectDetection_StaticCfg *staticCfg,
+                   uint8_t                       log2NumDopplerBins,
+                   DPC_ObjectDetection_DynCfg    *dynCfg,
+                   EDMA_Handle                   edmaHandle,
+                   DPIF_DetMatrix                *detMatrix,
+                   DPIF_CFARDetList              *cfarRngDopSnrList,
+                   uint32_t                      cfarRngDopSnrListSize,
+                   MemPoolObj                    *CoreLocalRamObj,
+                   uint32_t                      *hwaMemBankAddr,
+                   uint16_t                      hwaMemBankSize,
+                   float                         rangeBias,
+                   uint32_t                      *CoreLocalRamScratchUsage,
+                   DPU_CFARProcHWA_Config      *cfgSave)
+{
+    int32_t retVal = 0;
+    DPU_CFARProcHWA_Config cfarCfg;
+    DPU_CFARProcHWA_HW_Resources *hwRes;
+    uint32_t bitMaskCoreLocalRamSize;
+    uint32_t dmaCh, tcc, param;
+
+    hwRes = &cfarCfg.res;
+    (void)memset(&cfarCfg, 0, sizeof(cfarCfg));
+
+    /* static config */
+    cfarCfg.staticCfg.log2NumDopplerBins = log2NumDopplerBins;
+    cfarCfg.staticCfg.numDopplerBins     = staticCfg->numDopplerBins;
+    cfarCfg.staticCfg.numRangeBins       = staticCfg->numRangeBins;
+    cfarCfg.staticCfg.rangeStep          = staticCfg->rangeStep;
+    cfarCfg.staticCfg.dopplerStep        = staticCfg->dopplerStep;
+
+    /* dynamic config */
+    cfarCfg.dynCfg.cfarCfgDoppler = &dynCfg->cfarCfgDoppler;
+    cfarCfg.dynCfg.cfarCfgRange   = &dynCfg->cfarCfgRange;
+    cfarCfg.dynCfg.fovDoppler     = &dynCfg->fovDoppler;
+    cfarCfg.dynCfg.fovRange       = &dynCfg->fovRange;
+
+    /* need to adjust min by range bias */
+    cfarCfg.dynCfg.fovRange->min  += rangeBias;
+
+    /* hwres config */
+    hwRes->detMatrix = *detMatrix;
+
+    hwRes->edmaHandle = edmaHandle;
+
+    dmaCh = DPC_OBJDET_DPU_CFAR_PROC_EDMAIN_CH;
+    tcc   = DPC_OBJDET_DPU_CFAR_PROC_EDMAIN_CH;
+    param = DPC_OBJDET_DPU_CFAR_PROC_EDMAIN_CH;
+    DPEDMA_allocateEDMAChannel(edmaHandle, &dmaCh, &tcc, &param);
+    hwRes->edmaHwaIn.channel           = dmaCh;
+    hwRes->edmaHwaIn.paramId           = param;
+    hwRes->edmaHwaIn.tcc               = tcc;
+
+    param = DPC_OBJDET_DPU_CFAR_PROC_EDMAIN_SHADOW;
+    allocateEDMAShadowChannel(edmaHandle, &param);
+    hwRes->edmaHwaIn.shadowPramId      = param;
+    hwRes->edmaHwaIn.eventQueue        = DPC_OBJDET_DPU_CFAR_PROC_EDMAIN_EVENT_QUE;
+
+    dmaCh = DPC_OBJDET_DPU_CFAR_PROC_EDMAIN_SIG_CH;
+    tcc   = DPC_OBJDET_DPU_CFAR_PROC_EDMAIN_SIG_CH;
+    param = DPC_OBJDET_DPU_CFAR_PROC_EDMAIN_SIG_CH;
+    DPEDMA_allocateEDMAChannel(edmaHandle, &dmaCh, &tcc, &param);
+    hwRes->edmaHwaInSignature.channel      = dmaCh;
+    hwRes->edmaHwaInSignature.paramId      = param;
+    hwRes->edmaHwaInSignature.tcc          = tcc;
+
+    param = DPC_OBJDET_DPU_CFAR_PROC_EDMAIN_SIG_SHADOW;
+    allocateEDMAShadowChannel(edmaHandle, &param);
+    hwRes->edmaHwaInSignature.shadowPramId = param;
+    hwRes->edmaHwaInSignature.eventQueue   = DPC_OBJDET_DPU_CFAR_PROC_EDMAIN_SIG_EVENT_QUE;
+
+    hwRes->hwaCfg.numParamSet = DPU_CFARPROCHWA_NUM_HWA_PARAM_SETS;
+    hwRes->hwaCfg.paramSetStartIdx = DPC_OBJDET_DPU_CFAR_PROC_PARAMSET_START_IDX(staticCfg->numTxAntennas);
+
+    /* Give M0 and M1 memory banks for detection matrix scratch. */
+    hwRes->hwaMemInp = (uint16_t *) hwaMemBankAddr[DPC_HWA_MEM_BANK_INDX_CFARDETMAT];
+    hwRes->hwaMemInpSize = (hwaMemBankSize * 4U) / (uint16_t)sizeof(uint16_t);
+
+    /* Entire M2 bank for doppler output */
+    hwRes->hwaMemOutDoppler = (DPU_CFARProcHWA_CfarDetOutput *) hwaMemBankAddr[DPC_HWA_MEM_BANK_INDX_DOPPLEROUT];
+    hwRes->hwaMemOutDopplerSize = (hwaMemBankSize * 2U)/
+                                  (uint16_t)sizeof(DPU_CFARProcHWA_CfarDetOutput);
+
+    /* Entire M3 bank for range output */
+    hwRes->hwaMemOutRange = (DPU_CFARProcHWA_CfarDetOutput *) hwaMemBankAddr[DPC_HWA_MEM_BANK_INDX_RANGEOUT];
+    hwRes->hwaMemOutRangeSize = (hwaMemBankSize * 2U) /
+                                (uint16_t)sizeof(DPU_CFARProcHWA_CfarDetOutput);
+
+    hwRes->cfarDopplerDetOutBitMaskSize = ((uint32_t)staticCfg->numRangeBins * (uint32_t)staticCfg->numDopplerBins) / 32U;
+
+    /* Avoid cfarDopplerDetOutBitMaskSize to round down if (numRangeBins * numDopplerBins) is not a multiple of 32 */
+    if(0U != ((staticCfg->numRangeBins * staticCfg->numDopplerBins) % 32U))
+    {
+        hwRes->cfarDopplerDetOutBitMaskSize += 1U;
+    }
+
+    bitMaskCoreLocalRamSize = hwRes->cfarDopplerDetOutBitMaskSize * sizeof(uint32_t);
+#ifdef SUBSYS_MSS
+    hwRes->cfarDopplerDetOutBitMask = (uint32_t *) DPC_ObjDet_MemPoolAlloc(CoreLocalRamObj,
+        bitMaskCoreLocalRamSize,
+        (uint8_t)DPU_CFARPROCHWA_DOPPLER_DET_OUT_BIT_MASK_BYTE_ALIGNMENT_R5F);
+#else
+    hwRes->cfarDopplerDetOutBitMask = (uint32_t *) DPC_ObjDet_MemPoolAlloc(CoreLocalRamObj,
+        bitMaskCoreLocalRamSize,
+        (uint8_t)DPU_CFARPROCHWA_DOPPLER_DET_OUT_BIT_MASK_BYTE_ALIGNMENT_DSP);
+#endif
+    if (hwRes->cfarDopplerDetOutBitMask == NULL)
+    {
+        retVal = DPC_OBJECTDETECTION_ENOMEM__CORE_LOCAL_RAM_CFAR_DOPPLER_DET_OUT_BIT_MASK;
+        goto exit;
+    }
+
+    hwRes->cfarRngDopSnrList = cfarRngDopSnrList;
+    hwRes->cfarRngDopSnrListSize = cfarRngDopSnrListSize;
+
+    retVal = DPU_CFARProcHWA_config(dpuHandle, &cfarCfg);
+    if (retVal != 0)
+    {
+        goto exit;
+    }
+
+    /* store configuration for use in intra-sub-frame processing and
+     * inter-sub-frame switching, although window will need to be regenerated */
+    *cfgSave = cfarCfg;
+
+    /* report scratch usage */
+    *CoreLocalRamScratchUsage = bitMaskCoreLocalRamSize;
+
+exit:
+        return retVal;
+}
+
+/**
+ *  @b Description
+ *  @n
+ *     Configure AoA DPU. Note window information is passed to this function that
+ *     is expected to be the same that was used in doppler processing because
+ *     the AoA recomputes the doppler (2D) FFT. The reason for this recompute
+ *     is because doppler does not update the radar cube (radar cube is range (1D) output).
+ *     The window is used in AoA only for doppler FFT recompute, no window
+ *     (in other words rectangular) is used for angle (3D) FFT computation.
+ *     Note no DPIF info is passed here for AoA output because these DPIF buffers
+ *     are not required to be shared with any other DPUs (but only at the exit
+ *     f DPC's processing chain which will be consumed by the app) hence they are
+ *     allocated within this function, this way more allocation remains localized
+ *     in this function instead of being managed by the caller.
+ *
+ *  @param[in]  dpuHandle Handle to DPU
+ *  @param[in]  commonCfg Pointer to pre-start common configuration
+ *  @param[in]  staticCfg Pointer to static configuration of the sub-frame
+ *  @param[in]  dynCfg Pointer to dynamic configuration of the sub-frame
+ *  @param[in]  edmaHandle Handle to edma driver to be used for the DPU
+ *  @param[in]  radarCube Pointer to DPIF radar cube, which will be the
+ *              input for AoA processing
+ *  @param[in]  cfarRngDopSnrList Pointer to range-doppler SNR list, which will be
+ *              input for AoA processing
+ *  @param[in]  cfarRngDopSnrListSize Range-doppler SNR List Size to which the list
+ *              was capped by cfar processing
+ *  @param[in]  CoreLocalRamObj Pointer to core local RAM object to allocate local memory
+ *              for the DPU, all allocated memory will be permanent (within frame/sub-frame)
+ *  @param[in]  L3RamObj Pointer to L3 RAM object to allocate L3RAM memory
+ *              for the DPU, all allocated memory will be permanent (within frame/sub-frame)
+ *  @param[in]  dopplerWindowSym Flag to indicate if HWA windowing is symmetric
+ *                               see HWA_WINDOW_SYMM definitions in HWA driver's doxygen documentation
+ *  @param[in]  dopplerWinSize Doppler FFT window size in bytes. See doppler DPU
+ *                             configuration for more information.
+ *  @param[in]  dopplerWindow Pointer to doppler FFT window coefficients
+ *  @param[in]  dopplerWinRamOffset HWA window RAM offset of doppler FFT
+ *  @param[in]  cfarParamSetStartIdx  Start index of the cfar param set, will be used
+ *                                    as the start of AoA's param set if overlap with
+ *                                    CFAR is needed based on configuration.
+ *  @param[out]  isAoAHWAparamSetOverlappedWithCFAR true if AoA's param set overlaps
+ *               with CFAR (depends on the configuration input)
+ *  @param[out] cfgSave Configuration that is built in local
+ *                      (stack) variable is saved here. This is for facilitating
+ *                      quick reconfiguration later without having to go through
+ *                      the construction of the configuration.
  *
  *  @retval
  *      Success -   0
@@ -3070,210 +2314,429 @@ exit:
  *
  *  \ingroup DPC_OBJDET__INTERNAL_FUNCTION
  */
-static int32_t DPC_ObjDet_rangeCfarConfig(DPU_RangeCFARProcHWA_Handle dpuHandle,
-                   DPC_ObjectDetection_StaticCfg *staticCfg,
-                   EDMA_Handle                   edmaHandle,
-                   DPIF_DetMatrix                *detMatrix,
-                   MemPoolObj                    *CoreLocalRamObj,
-                   BiDirMemPoolObj               *L3ramObj,
-                   void                          *CoreLocalScratchStartPoolAddrNextDPU,
-                   void                          *l3RamStartPoolAddrNextDPU,
-                   DPU_RangeCfarProcHWA_Config   *cfgSave,
-                   ObjDetObj                     *ptrObjDetObj)
+static int32_t DPC_ObjDet_AoAconfig(DPU_AoAProcHWA_Handle dpuHandle,
+                   DPC_ObjectDetection_PreStartCommonCfg *commonCfg,
+                   DPC_ObjectDetection_StaticCfg    *staticCfg,
+                   DPC_ObjectDetection_DynCfg       *dynCfg,
+                   EDMA_Handle                      edmaHandle,
+                   DPIF_RadarCube                   *radarCube,
+                   DPIF_CFARDetList                 *cfarRngDopSnrList,
+                   uint32_t                         cfarRngDopSnrListSize,
+                   MemPoolObj                       *CoreLocalRamObj,
+                   MemPoolObj                       *L3RamObj,
+
+                   /* doppler window parameters */
+                   uint8_t                          dopplerWindowSym,
+                   uint32_t                         dopplerWinSize,
+                   int32_t                          *dopplerWindow,
+                   uint32_t                         dopplerWinRamOffset,
+
+                   uint8_t                          cfarParamSetStartIdx,
+                   bool                             *isAoAHWAparamSetOverlappedWithCFAR,
+                   DPU_AoAProcHWA_Config            *cfgSave)
 {
     int32_t retVal = 0;
-    void * scratchBufMem;
-    DPU_RangeCFARProcHWA_HW_Resources *res = &cfgSave->res;
+    DPU_AoAProcHWA_Config aoaCfg;
+    DPU_AoAProcHWA_HW_Resources *res;
+    DPU_AoAProc_compRxChannelBiasCfg outCompRxCfg;
+    uint32_t i;
+    uint32_t dmaCh, tcc, param;
+    uint8_t txAntIdx, rxAntIdx, valIdx, azimElemIdx=0, elevElemIdx = 0;
+    Element antArr[MAX_NUM_VIRT_ANT] = {0};
+    Element *elevAntArr = &antArr[MAX_NUM_AZIM_VIRT_ANT];
+    uint32_t zeroInsrtMaskAzim = 0, zeroInsrtMaskElev = 0;
 
-    (void)memset(cfgSave, 0, sizeof(DPU_RangeCfarProcHWA_Config));
+    res = &aoaCfg.res;
+    (void)memset((void*)&aoaCfg, 0, sizeof(aoaCfg));
 
-    cfgSave->staticCfg.numDopplerBins     = staticCfg->numChirpsPerFrame;
-    cfgSave->staticCfg.numRangeBins       = staticCfg->numRangeBins;
-    cfgSave->staticCfg.numSubBandsTotal   = staticCfg->numBandsTotal;
-    (void)memcpy(&cfgSave->staticCfg.cfarCfg,
-            &staticCfg->rangeCfarCfg.cfg,
-            sizeof(DPU_CFARProc_CfarCfg));
+    /* Static config */
+    aoaCfg.staticCfg.numDopplerChirps   = staticCfg->numDopplerChirps;
+    aoaCfg.staticCfg.numDopplerBins     = staticCfg->numDopplerBins;
+    aoaCfg.staticCfg.numRangeBins       = staticCfg->numRangeBins;
+    aoaCfg.staticCfg.numRxAntennas      = staticCfg->ADCBufData.dataProperty.numRxAntennas;
+    aoaCfg.staticCfg.dopplerStep        = staticCfg->dopplerStep;
+    aoaCfg.staticCfg.rangeStep          = staticCfg->rangeStep;
+    aoaCfg.staticCfg.numTxAntennas      = staticCfg->numTxAntennas;
+#if defined(USE_2D_AOA_DPU)
+    aoaCfg.staticCfg.numVirtualAnt  = staticCfg->numVirtualAntennas;
+#else
+    aoaCfg.staticCfg.numVirtualAntAzim  = staticCfg->numVirtualAntAzim;
+    aoaCfg.staticCfg.numVirtualAntElev  = staticCfg->numVirtualAntElev;
+#endif
 
-    /********************************************
-     * Allocating memory resources              *
-     *******************************************/
+    /* antenna geometry definition */
+    /* antDef is not used in the DPU - and may be incorrect in case of LOP antena. */
+    DPC_ObjDet_GetAntGeometryDef(staticCfg, &commonCfg->antDef);
+	aoaCfg.staticCfg.antDef = &staticCfg->antDef;
+
+    /* Copy the antenna spacing */
+    aoaCfg.staticCfg.antennaSpacing = commonCfg->antennaSpacing;
+
+    /* Get the antenna Geometry Cfg */
+    for(txAntIdx = 0; txAntIdx < staticCfg->numTxAntennas; txAntIdx++)
     {
+        for(rxAntIdx = 0; rxAntIdx < staticCfg->ADCBufData.dataProperty.numRxAntennas; rxAntIdx++)
         {
-
-    /* DPU Output Resource */
-    res->rangeCfarListSizeBytes = sizeof(RangeCfarListObj) * DPC_OBJDET_RANGECFAR_MAX_NUM_OBJECTS;
-    scratchBufMem = DPC_ObjDet_BiDirMemPoolAlloc(L3ramObj, res->rangeCfarListSizeBytes, (uint8_t)sizeof(uint32_t), false);
-    if (scratchBufMem == NULL)
-    {
-        retVal = DPC_OBJECTDETECTION_ENOMEM__OBJ_PARAMS_RAM_RANGE_CFAR_BUF;
-        goto exit;
-    }
-    res->rangeCfarList = (RangeCfarListObj *)scratchBufMem;
-
-    l3RamStartPoolAddrNextDPU = DPC_ObjDet_BiDirMemPoolGetTop(L3ramObj);
-    if (l3RamStartPoolAddrNextDPU == NULL)
-    {
-        retVal = DPC_OBJECTDETECTION_EINVAL;
-        goto exit;
-    }
-
-    CoreLocalScratchStartPoolAddrNextDPU = DPC_ObjDet_MemPoolGet(CoreLocalRamObj);
-    if (CoreLocalScratchStartPoolAddrNextDPU == NULL)
-    {
-        retVal = DPC_OBJECTDETECTION_EINVAL;
-        goto exit;
-    }
-
-    res->rangeCfarScratchBufSizeBytes = sizeof(cmplx32ImRe_t) * DPC_OBJDET_RANGECFAR_MAX_NUM_OBJECTS;
-
-    scratchBufMem = DPC_ObjDet_MemPoolAlloc(CoreLocalRamObj, res->rangeCfarScratchBufSizeBytes / 2U, (uint8_t)sizeof(uint32_t));
-    if (scratchBufMem == NULL)
-    {
-        retVal = DPC_OBJECTDETECTION_ENOMEM__CORE_LOCAL_RAM_RANGECFAR_SCRATCH_BUF;
-        goto exit;
-    }
-    res->rangeCfarScratchBuf[0] = (uint8_t *)scratchBufMem;
-
-    scratchBufMem = DPC_ObjDet_MemPoolAlloc(CoreLocalRamObj, res->rangeCfarScratchBufSizeBytes / 2U, (uint8_t)sizeof(uint32_t));
-    if (scratchBufMem == NULL)
-    {
-        retVal = DPC_OBJECTDETECTION_ENOMEM__CORE_LOCAL_RAM_RANGECFAR_SCRATCH_BUF;
-        goto exit;
-    }
-    res->rangeCfarScratchBuf[1] = (uint8_t *)scratchBufMem;
-
-    res->rangeCfarNumObjPerDopplerBinSizeBytes = sizeof(uint16_t) * staticCfg->numChirpsPerFrame / staticCfg->numBandsTotal;
-
-    /* Allocating in L3 as this is required till the doppler and range CFAR intersecton stage.*/
-    scratchBufMem = DPC_ObjDet_BiDirMemPoolAlloc(L3ramObj, res->rangeCfarNumObjPerDopplerBinSizeBytes, (uint8_t)sizeof(uint32_t), false);
-    if (scratchBufMem == NULL)
-    {
-        retVal = DPC_OBJECTDETECTION_ENOMEM__CORE_LOCAL_RAM_RANGECFAR_NUMOBJ_PER_DOPPLER_BUF;
-        goto exit;
-    }
-    res->rangeCfarNumObjPerDopplerBinBuf = (uint8_t *)scratchBufMem;
-
-    /* Assign the detection matrix */
-    res->detMatrix = *detMatrix;
-	    }
-	}
-
-    /* hwres - edma */
-    res->edmaHandle = edmaHandle;
-    res->detMatBytesPerSample = sizeof(uint16_t);
-    res->maxNumCFARObj = DPC_OBJDET_RANGECFAR_MAX_NUM_OBJECTS;
-
-    DPC_ObjDet_EDMAChannelConfigAssist(edmaHandle,
-                                       EDMA_RANGECFARPROC_CFAR_IN_PING,
-                                       EDMA_RANGECFARPROC_CFAR_IN_PING_SHADOW,
-                                       DPC_OBJDET_DPU_RANGECFARPROC_EVENT_QUE,
-                                       &res->edmaIn.pingPong[0]);
-    DPC_ObjDet_EDMAChannelConfigAssist(edmaHandle,
-                                       EDMA_RANGECFARPROC_CFAR_IN_HOTSIG_PING,
-                                       EDMA_RANGECFARPROC_CFAR_IN_HOTSIG_PING_SHADOW,
-                                       DPC_OBJDET_DPU_RANGECFARPROC_EVENT_QUE,
-                                       &res->edmaInSignature.pingPong[0]);
-
-    DPC_ObjDet_EDMAChannelConfigAssist(edmaHandle,
-                                       EDMA_RANGECFARPROC_CFAR_IN_PONG,
-                                       EDMA_RANGECFARPROC_CFAR_IN_PONG_SHADOW,
-                                       DPC_OBJDET_DPU_RANGECFARPROC_EVENT_QUE,
-                                       &res->edmaIn.pingPong[1]);
-    DPC_ObjDet_EDMAChannelConfigAssist(edmaHandle,
-                                       EDMA_RANGECFARPROC_CFAR_IN_HOTSIG_PONG,
-                                       EDMA_RANGECFARPROC_CFAR_IN_HOTSIG_PONG_SHADOW,
-                                       DPC_OBJDET_DPU_RANGECFARPROC_EVENT_QUE,
-                                       &res->edmaInSignature.pingPong[1]);
-
-    DPC_ObjDet_EDMAChannelConfigAssist(edmaHandle,
-                                       EDMA_RANGECFARPROC_CFAR_OUT_PING,
-                                       EDMA_RANGECFARPROC_CFAR_OUT_PING_SHADOW,
-                                       DPC_OBJDET_DPU_RANGECFARPROC_EVENT_QUE,
-                                       &res->edmaOut.pingPong[0]);
-
-    DPC_ObjDet_EDMAChannelConfigAssist(edmaHandle,
-                                       EDMA_RANGECFARPROC_CFAR_OUT_PONG,
-                                       EDMA_RANGECFARPROC_CFAR_OUT_PONG_SHADOW,
-                                       DPC_OBJDET_DPU_RANGECFARPROC_EVENT_QUE,
-                                       &res->edmaOut.pingPong[1]);
-
-    {
-        {
-
-        uint32_t intrIdx = 0;
-
-        /* Allocate interrupt object */
-        cfgSave->res.edmaIntrObj.pingPong[0] = &ptrObjDetObj->rangeCfarProcIntrObj[intrIdx++];
-        cfgSave->res.edmaIntrObj.pingPong[1] = &ptrObjDetObj->rangeCfarProcIntrObj[intrIdx++];
+            valIdx = staticCfg->rxAntOrder[rxAntIdx] + staticCfg->txAntOrder[txAntIdx] * SYS_COMMON_NUM_RX_CHANNEL;
+            if(commonCfg->antGeometryCfg[valIdx].row == 0U)
+            {
+                /* Elevation Antenna Sample */
+                antArr[MAX_NUM_AZIM_VIRT_ANT + elevElemIdx].value = (int)commonCfg->antGeometryCfg[valIdx].col;
+                antArr[MAX_NUM_AZIM_VIRT_ANT + elevElemIdx].index = (int)elevElemIdx;
+                elevElemIdx++;
+            }
+            else if(commonCfg->antGeometryCfg[valIdx].row == 1U)
+            {
+                /* Azimuth Antenna Sample */
+                antArr[azimElemIdx].value = (int)commonCfg->antGeometryCfg[valIdx].col;
+                antArr[azimElemIdx].index = (int)azimElemIdx;
+                azimElemIdx++;
+            }
+            else
+            {
+               retVal = DPC_OBJECTDETECTION_EINVAL_ANT_PATTERN;
+               goto exit;
+            }
         }
     }
 
-    res->hwaCfg.numParamSet = DPU_RANGECFARPROCHWADDMA_NUM_HWA_PARAMSETS;
-    res->hwaCfg.paramSetStartIdx = (uint8_t)DPC_OBJDET_DPU_RANGECFARPROCHWADDMA_PARAMSET_START_IDX + 2U * staticCfg->compressionCfg.bfpCompExtraParamSets;
+    /* Sort the azimuth array of structures based on value */
+    qsort(antArr, staticCfg->numVirtualAntAzim, sizeof(antArr[0]), compare);
 
-    retVal = DPU_RangeCFARProcHWA_config(dpuHandle, cfgSave);
+    /* Sort the elevation array of structures based on value */
+    qsort(elevAntArr, staticCfg->numVirtualAntElev, sizeof(elevAntArr[0]), compare);
+
+    /* Store the rearrangement Order */
+    for (i = 0; i < MAX_NUM_VIRT_ANT; i++)
+    {
+        aoaCfg.staticCfg.antennaGeometryCfg[i] = (uint8_t) antArr[i].index;
+    }
+
+    /* Find the zero insertion mask */
+    for(i=0; i < staticCfg->numVirtualAntAzim; i++)
+    {
+        zeroInsrtMaskAzim |= (uint32_t)1U << (uint8_t)antArr[i].value;
+    }
+
+    aoaCfg.staticCfg.zeroInsrtMaskCfg.zeroInsrtMaskAzim = zeroInsrtMaskAzim;
+    /* Check the number of set bits in azimuth array zero insertion mask */
+    if(mathUtils_countSetBits(aoaCfg.staticCfg.zeroInsrtMaskCfg.zeroInsrtMaskAzim) != staticCfg->numVirtualAntAzim)
+    {
+        retVal = DPC_OBJECTDETECTION_EINVAL_ANT_PATTERN;
+        goto exit;
+    }
+
+    for(i=0; i< staticCfg->numVirtualAntElev; i++)
+    {
+        zeroInsrtMaskElev |= (uint32_t)1U << (uint8_t)elevAntArr[i].value;
+    }
+    aoaCfg.staticCfg.zeroInsrtMaskCfg.zeroInsrtMaskElev= zeroInsrtMaskElev;
+    /* Check the number of set bits in elevation array  zero insertion mask */
+    if(mathUtils_countSetBits(aoaCfg.staticCfg.zeroInsrtMaskCfg.zeroInsrtMaskElev) != staticCfg->numVirtualAntElev)
+    {
+        retVal= DPC_OBJECTDETECTION_EINVAL_ANT_PATTERN;
+        goto exit;
+    }
+
+    /* Find the number of elevation FFT params required for zero insertion and populate their cfg. */
+    if(aoaCfg.staticCfg.numVirtualAntElev > 0U){
+        retVal = DPC_ObjDet_elevFFTCfg(&aoaCfg.staticCfg);
+        if (retVal != 0)
+        {
+            goto exit;
+        }
+    }
+
+    /* dynamic config */
+    DPC_ObjDet_GetRxChPhaseComp(staticCfg, &commonCfg->compRxChanCfg, &outCompRxCfg);
+    aoaCfg.dynCfg.compRxChanCfg              = &commonCfg->compRxChanCfg;
+    aoaCfg.dynCfg.fovAoaCfg                  = &dynCfg->fovAoaCfg;
+    aoaCfg.dynCfg.multiObjBeamFormingCfg     = &dynCfg->multiObjBeamFormingCfg;
+    aoaCfg.dynCfg.prepareRangeAzimuthHeatMap = dynCfg->prepareRangeAzimuthHeatMap;
+    aoaCfg.dynCfg.extMaxVelCfg               = &dynCfg->extMaxVelCfg;
+
+    /* res */
+    res->radarCube = *radarCube;
+    res->cfarRngDopSnrList = cfarRngDopSnrList;
+    res->cfarRngDopSnrListSize = (uint16_t)cfarRngDopSnrListSize;
+
+    res->detObjOutMaxSize = DPC_OBJDET_MAX_NUM_OBJECTS;
+
+    res->detObjOut = DPC_ObjDet_MemPoolAlloc(CoreLocalRamObj,
+                         res->detObjOutMaxSize *sizeof(DPIF_PointCloudCartesian),
+                         (uint8_t)DPC_OBJDET_POINT_CLOUD_CARTESIAN_BYTE_ALIGNMENT);
+    if (res->detObjOut == NULL)
+    {
+        retVal = DPC_OBJECTDETECTION_ENOMEM__CORE_LOCAL_RAM_AOA_DET_OBJ_OUT;
+        goto exit;
+    }
+
+    res->detObjOutSideInfo = DPC_ObjDet_MemPoolAlloc(CoreLocalRamObj,
+                                 res->detObjOutMaxSize *sizeof(DPIF_PointCloudSideInfo),
+                                 (uint8_t)DPC_OBJDET_POINT_CLOUD_SIDE_INFO_BYTE_ALIGNMENT);
+    if (res->detObjOutSideInfo == NULL)
+    {
+        retVal = DPC_OBJECTDETECTION_ENOMEM__CORE_LOCAL_RAM_AOA_DET_OBJ_OUT_SIDE_INFO;
+        goto exit;
+    }
+
+#ifdef SUBSYS_MSS
+    res->detObj2dAzimIdx = DPC_ObjDet_MemPoolAlloc(CoreLocalRamObj,
+                               res->detObjOutMaxSize *sizeof(uint8_t),
+                               (uint8_t)DPU_AOAPROCHWA_DET_OBJ2_AZIM_IDX_BYTE_ALIGNMENT_R5F);
+#else
+    res->detObj2dAzimIdx = DPC_ObjDet_MemPoolAlloc(CoreLocalRamObj,
+                               res->detObjOutMaxSize *sizeof(uint8_t),
+                               (uint8_t)DPU_AOAPROCHWA_DET_OBJ2_AZIM_IDX_BYTE_ALIGNMENT_DSP);
+#endif
+    if (res->detObj2dAzimIdx == NULL)
+    {
+        retVal = DPC_OBJECTDETECTION_ENOMEM__CORE_LOCAL_RAM_AOA_DET_OBJ_2_AZIM_IDX;
+        goto exit;
+    }
+
+    res->detObjElevationAngle = DPC_ObjDet_MemPoolAlloc(CoreLocalRamObj,
+                                    res->detObjOutMaxSize *sizeof(float),
+                                    (uint8_t)DPC_OBJDET_DET_OBJ_ELEVATION_ANGLE_BYTE_ALIGNMENT);
+    if (res->detObjElevationAngle == NULL)
+    {
+        retVal = DPC_OBJECTDETECTION_ENOMEM__CORE_LOCAL_RAM_AOA_DET_OBJ_ELEVATION_ANGLE;
+        goto exit;
+    }
+
+	/* Allocate buffers for ping and pong paths: */
+    res->localScratchBufferSizeBytes = DPU_AOAPROCHWA_NUM_LOCAL_SCRATCH_BUFFER_SIZE_BYTES(aoaCfg.staticCfg.numTxAntennas);
+    for (i = 0; i < DPU_AOAPROCHWA_NUM_LOCAL_SCRATCH_BUFFERS; i++)
+    {
+#ifdef SUBSYS_MSS
+        res->localScratchBuffer[i] = DPC_ObjDet_MemPoolAlloc(CoreLocalRamObj,
+                                         res->localScratchBufferSizeBytes,
+                                         (uint8_t)DPU_AOAPROCHWA_LOCAL_SCRATCH_BYTE_ALIGNMENT_R5F);
+#else
+        res->localScratchBuffer[i] = DPC_ObjDet_MemPoolAlloc(CoreLocalRamObj,
+                                         res->localScratchBufferSizeBytes,
+                                         (uint8_t)DPU_AOAPROCHWA_LOCAL_SCRATCH_BYTE_ALIGNMENT_DSP);
+#endif
+
+       if (res->localScratchBuffer[i] == NULL)
+       {
+           retVal = DPC_OBJECTDETECTION_ENOMEM__CORE_LOCAL_RAM_AOA_SCRATCH_BUFFER;
+           goto exit;
+       }
+    }
+
+    if(aoaCfg.dynCfg.prepareRangeAzimuthHeatMap)
+    {
+
+        res->azimuthStaticHeatMapSize = (uint32_t)staticCfg->numRangeBins * (uint32_t)staticCfg->numVirtualAntAzim;
+
+#if defined(SUBSYS_MSS)
+        res->azimuthStaticHeatMap = DPC_ObjDet_MemPoolAlloc(
+                                         CoreLocalRamObj,
+                                         res->azimuthStaticHeatMapSize *sizeof(cmplx16ImRe_t),
+                                         (uint8_t)DPC_OBJDET_AZIMUTH_STATIC_HEAT_MAP_BYTE_ALIGNMENT);
+#elif  defined(SUBSYS_DSS)
+        res->azimuthStaticHeatMap = DPC_ObjDet_MemPoolAlloc(
+                                         L3RamObj,
+                                         res->azimuthStaticHeatMapSize *sizeof(cmplx16ImRe_t),
+                                         (uint8_t)DPC_OBJDET_AZIMUTH_STATIC_HEAT_MAP_BYTE_ALIGNMENT);
+#else
+#error "Error: Unknown subsystem"
+#endif
+
+        if (res->azimuthStaticHeatMap == NULL)
+        {
+            retVal = DPC_OBJECTDETECTION_ENOMEM__CORE_LOCAL_RAM_AOA_AZIMUTH_STATIC_HEAT_MAP;
+            goto exit;
+        }
+    }
+
+    res->edmaHandle = edmaHandle;
+    /* For Azimuth Heatmap ping/pong paths */
+    dmaCh = DPC_OBJECT_DPU_AOA_PROC_EDMA_CH_4;
+    tcc   = DPC_OBJECT_DPU_AOA_PROC_EDMA_CH_4;
+    param = DPC_OBJECT_DPU_AOA_PROC_EDMA_CH_4;
+    DPEDMA_allocateEDMAChannel(edmaHandle, &dmaCh, &tcc, &param);
+    res->edmaHwa[0].in.channel            = dmaCh;
+    res->edmaHwa[0].in.paramId            = param;
+    res->edmaHwa[0].in.tcc                = tcc;
+
+    param = DPC_OBJDET_DPU_AOA_PROC_EDMA_VIRT_CH_0;
+    allocateEDMAShadowChannel(edmaHandle, &param);
+    res->edmaHwa[0].in.shadowPramId       = param;
+    res->edmaHwa[0].in.eventQueue         = DPC_OBJDET_DPU_AOA_PROC_EDMAIN_PING_EVENT_QUE;
+
+    dmaCh = DPC_OBJDET_DPU_AOA_PROC_EDMA_CH_1;
+    tcc   = DPC_OBJDET_DPU_AOA_PROC_EDMA_CH_1;
+    param = DPC_OBJDET_DPU_AOA_PROC_EDMA_CH_1;
+    DPEDMA_allocateEDMAChannel(edmaHandle, &dmaCh, &tcc, &param);
+    res->edmaHwa[0].inSignature.channel   = dmaCh;
+    res->edmaHwa[0].inSignature.paramId   = param;
+    res->edmaHwa[0].inSignature.tcc       = tcc;
+
+    param = DPC_OBJDET_DPU_AOA_PROC_EDMA_VIRT_CH_1;
+    allocateEDMAShadowChannel(edmaHandle, &param);
+    res->edmaHwa[0].inSignature.shadowPramId = param;
+    res->edmaHwa[0].inSignature.eventQueue = DPC_OBJDET_DPU_AOA_PROC_EDMAIN_PING_EVENT_QUE;
+
+    dmaCh = DPC_OBJDET_DPU_AOA_PROC_EDMA_HWA_OUTPUT_CH_3;
+    tcc   = DPC_OBJDET_DPU_AOA_PROC_EDMA_HWA_OUTPUT_CH_3;
+    param = DPC_OBJDET_DPU_AOA_PROC_EDMA_HWA_OUTPUT_CH_3;
+    DPEDMA_allocateEDMAChannel(edmaHandle, &dmaCh, &tcc, &param);
+    res->edmaHwa[0].out.channel            = dmaCh;
+    res->edmaHwa[0].out.paramId            = param;
+    res->edmaHwa[0].out.tcc                = tcc;
+
+    param = DPC_OBJDET_DPU_AOA_PROC_EDMA_VIRT_CH_2;
+    allocateEDMAShadowChannel(edmaHandle, &param);
+    res->edmaHwa[0].out.shadowPramId       = param;
+    res->edmaHwa[0].out.eventQueue         = DPC_OBJDET_DPU_AOA_PROC_EDMAOUT_PING_EVENT_QUE;
+
+    dmaCh = DPC_OBJDET_DPU_AOA_PROC_EDMA_CH_2;
+    tcc   = DPC_OBJDET_DPU_AOA_PROC_EDMA_CH_2;
+    param = DPC_OBJDET_DPU_AOA_PROC_EDMA_CH_2;
+    DPEDMA_allocateEDMAChannel(edmaHandle, &dmaCh, &tcc, &param);
+    res->edmaHwa[1].in.channel =                dmaCh;
+    res->edmaHwa[1].in.paramId =                param;
+    res->edmaHwa[1].in.tcc     =                tcc;
+
+    param = DPC_OBJDET_DPU_AOA_PROC_EDMA_VIRT_CH_3;
+    allocateEDMAShadowChannel(edmaHandle, &param);
+    res->edmaHwa[1].in.shadowPramId =          param;
+    res->edmaHwa[1].in.eventQueue =             DPC_OBJDET_DPU_AOA_PROC_EDMAIN_PONG_EVENT_QUE;
+
+    dmaCh = DPC_OBJDET_DPU_AOA_PROC_EDMA_CH_3;
+    tcc   = DPC_OBJDET_DPU_AOA_PROC_EDMA_CH_3;
+    param = DPC_OBJDET_DPU_AOA_PROC_EDMA_CH_3;
+    DPEDMA_allocateEDMAChannel(edmaHandle, &dmaCh, &tcc, &param);
+    res->edmaHwa[1].inSignature.channel =       dmaCh;
+    res->edmaHwa[1].inSignature.paramId =       param;
+    res->edmaHwa[1].inSignature.tcc     =       tcc;
+
+    param = DPC_OBJDET_DPU_AOA_PROC_EDMA_VIRT_CH_4;
+    allocateEDMAShadowChannel(edmaHandle, &param);
+    res->edmaHwa[1].inSignature.shadowPramId = param;
+    res->edmaHwa[1].inSignature.eventQueue =    DPC_OBJDET_DPU_AOA_PROC_EDMAIN_PONG_EVENT_QUE;
+
+    dmaCh = DPC_OBJDET_DPU_AOA_PROC_EDMA_HWA_OUTPUT_CH_1;
+    tcc   = DPC_OBJDET_DPU_AOA_PROC_EDMA_HWA_OUTPUT_CH_1;
+    param = DPC_OBJDET_DPU_AOA_PROC_EDMA_HWA_OUTPUT_CH_1;
+    DPEDMA_allocateEDMAChannel(edmaHandle, &dmaCh, &tcc, &param);
+    res->edmaHwa[1].out.channel =               dmaCh;
+    res->edmaHwa[1].out.paramId =               param;
+    res->edmaHwa[1].out.tcc     =               tcc;
+
+    param = DPC_OBJDET_DPU_AOA_PROC_EDMA_VIRT_CH_5;
+    allocateEDMAShadowChannel(edmaHandle, &param);
+    res->edmaHwa[1].out.shadowPramId =         param;
+    res->edmaHwa[1].out.eventQueue =            DPC_OBJDET_DPU_AOA_PROC_EDMAOUT_PONG_EVENT_QUE;
+
+    /* For main data processing ping/pong paths */
+    dmaCh = DPC_OBJDET_DPU_AOA_PROC_EDMA_CH_0;
+    tcc   = DPC_OBJDET_DPU_AOA_PROC_EDMA_CH_0;
+    param = DPC_OBJDET_DPU_AOA_PROC_EDMA_CH_0;
+    DPEDMA_allocateEDMAChannel(edmaHandle, &dmaCh, &tcc, &param);
+    res->edmaHwaExt[0].chIn.channel =               (uint8_t)dmaCh;
+
+    res->edmaHwaExt[0].chIn.eventQueue =            DPC_OBJDET_DPU_AOA_PROC_EDMAIN_PING_EVENT_QUE;
+
+    dmaCh = DPC_OBJDET_DPU_AOA_PROC_EDMA_HWA_OUTPUT_CH_0;
+    tcc   = DPC_OBJDET_DPU_AOA_PROC_EDMA_HWA_OUTPUT_CH_0;
+    param = DPC_OBJDET_DPU_AOA_PROC_EDMA_HWA_OUTPUT_CH_0;
+    DPEDMA_allocateEDMAChannel(edmaHandle, &dmaCh, &tcc, &param);
+    res->edmaHwaExt[0].chOut.channel =              (uint8_t)dmaCh;
+    res->edmaHwaExt[0].chOut.eventQueue =           DPC_OBJDET_DPU_AOA_PROC_EDMAOUT_PING_EVENT_QUE;
+
+    param = DPC_OBJDET_DPU_AOA_PROC_EDMA_VIRT_CH_16;
+    allocateEDMAShadowChannel(edmaHandle, &param);
+    res->edmaHwaExt[0].stage[0].paramIn =           (uint16_t)param;
+
+    param = DPC_OBJDET_DPU_AOA_PROC_EDMA_VIRT_CH_17;
+    allocateEDMAShadowChannel(edmaHandle, &param);
+    res->edmaHwaExt[0].stage[0].paramInSignature =  (uint16_t)param;
+
+    param = DPC_OBJDET_DPU_AOA_PROC_EDMA_VIRT_CH_18;
+    allocateEDMAShadowChannel(edmaHandle, &param);
+    res->edmaHwaExt[0].stage[0].paramOut =          (uint16_t)param;
+
+    param = DPC_OBJDET_DPU_AOA_PROC_EDMA_VIRT_CH_19;
+    allocateEDMAShadowChannel(edmaHandle, &param);
+    res->edmaHwaExt[0].stage[1].paramIn =           (uint16_t)param;
+
+    param = DPC_OBJDET_DPU_AOA_PROC_EDMA_VIRT_CH_20;
+    allocateEDMAShadowChannel(edmaHandle, &param);
+    res->edmaHwaExt[0].stage[1].paramInSignature =  (uint16_t)param;
+
+    param = DPC_OBJDET_DPU_AOA_PROC_EDMA_VIRT_CH_21;
+    allocateEDMAShadowChannel(edmaHandle, &param);
+    res->edmaHwaExt[0].stage[1].paramOut =          (uint16_t)param;
+    res->edmaHwaExt[0].stage[1].paramPeakCnt =      DPC_OBJDET_DPU_AOA_PROC_EDMA_VIRT_CH_12;
+    res->edmaHwaExt[0].stage[1].paramHwaContinue =  DPC_OBJDET_DPU_AOA_PROC_EDMA_VIRT_CH_14;
+    res->edmaHwaExt[0].eventQueue = 0;
+
+    dmaCh = DPC_OBJECT_DPU_AOA_PROC_EDMA_CH_5;
+    tcc   = DPC_OBJECT_DPU_AOA_PROC_EDMA_CH_5;
+    param = DPC_OBJECT_DPU_AOA_PROC_EDMA_CH_5;
+    DPEDMA_allocateEDMAChannel(edmaHandle, &dmaCh, &tcc, &param);
+    res->edmaHwaExt[1].chIn.channel =               (uint8_t)dmaCh;
+    res->edmaHwaExt[1].chIn.eventQueue =            DPC_OBJDET_DPU_AOA_PROC_EDMAIN_PONG_EVENT_QUE;
+
+    dmaCh = DPC_OBJDET_DPU_AOA_PROC_EDMA_HWA_OUTPUT_CH_4;
+    tcc   = DPC_OBJDET_DPU_AOA_PROC_EDMA_HWA_OUTPUT_CH_4;
+    param = DPC_OBJDET_DPU_AOA_PROC_EDMA_HWA_OUTPUT_CH_4;
+    DPEDMA_allocateEDMAChannel(edmaHandle, &dmaCh, &tcc, &param);
+    res->edmaHwaExt[1].chOut.channel =              (uint8_t)dmaCh;
+    res->edmaHwaExt[1].chOut.eventQueue =           DPC_OBJDET_DPU_AOA_PROC_EDMAOUT_PONG_EVENT_QUE;
+
+    param = DPC_OBJDET_DPU_AOA_PROC_EDMA_VIRT_CH_6;
+    allocateEDMAShadowChannel(edmaHandle, &param);
+    res->edmaHwaExt[1].stage[0].paramIn =           (uint16_t)param;
+
+    param = DPC_OBJDET_DPU_AOA_PROC_EDMA_VIRT_CH_7;
+    allocateEDMAShadowChannel(edmaHandle, &param);
+    res->edmaHwaExt[1].stage[0].paramInSignature =  (uint16_t)param;
+
+    param = DPC_OBJDET_DPU_AOA_PROC_EDMA_VIRT_CH_8;
+    allocateEDMAShadowChannel(edmaHandle, &param);
+    res->edmaHwaExt[1].stage[0].paramOut =          (uint16_t)param;
+
+    param = DPC_OBJDET_DPU_AOA_PROC_EDMA_VIRT_CH_9;
+    allocateEDMAShadowChannel(edmaHandle, &param);
+    res->edmaHwaExt[1].stage[1].paramIn =           (uint16_t)param;
+
+    param = DPC_OBJDET_DPU_AOA_PROC_EDMA_VIRT_CH_10;
+    allocateEDMAShadowChannel(edmaHandle, &param);
+    res->edmaHwaExt[1].stage[1].paramInSignature =  (uint16_t)param;
+
+    param = DPC_OBJDET_DPU_AOA_PROC_EDMA_VIRT_CH_11;
+    allocateEDMAShadowChannel(edmaHandle, &param);
+    res->edmaHwaExt[1].stage[1].paramOut =          (uint16_t)param;
+    res->edmaHwaExt[1].stage[1].paramPeakCnt =      DPC_OBJDET_DPU_AOA_PROC_EDMA_VIRT_CH_13;
+    res->edmaHwaExt[1].stage[1].paramHwaContinue =  DPC_OBJDET_DPU_AOA_PROC_EDMA_VIRT_CH_15;
+    res->edmaHwaExt[1].eventQueue = 0;
+
+    res->hwaCfg.numParamSet = (uint8_t)DPU_AoAProcHWA_getNumHwaParamSets(staticCfg->numTxAntennas,
+                                                                staticCfg->numVirtualAntElev,
+                                                                aoaCfg.staticCfg.numElevFFTParams,
+                                                                dynCfg->staticClutterRemovalCfg.enabled);
+
+    res->hwaCfg.paramSetStartIdx = cfarParamSetStartIdx;
+    *isAoAHWAparamSetOverlappedWithCFAR = true;
+
+    res->hwaCfg.window = dopplerWindow;
+    res->hwaCfg.winSym = dopplerWindowSym;
+    res->hwaCfg.winRamOffset = dopplerWinRamOffset;
+    res->hwaCfg.windowSize = dopplerWinSize;
+
+    retVal = DPU_AoAProcHWA_config(dpuHandle, &aoaCfg);
     if (retVal != 0)
     {
         goto exit;
     }
 
-exit:
-
-    return retVal;
-}
-
-static int32_t DPC_ObjDet_preStartCommonConfig
-(
-    ObjDetObj *ptrObjDetObj,
-    DPC_ObjectDetection_PreStartCommonCfg *commonCfg,
-    BiDirMemPoolObj *L3ramObj
-)
-{
-    int32_t retVal = SystemP_SUCCESS;
-    uint8_t subFrameIndx;
-    DPU_RangeProcHWA_InitParams rangeInitParams;
-    DPU_DopplerProcHWA_InitParams dopplerInitParams;
-    DPU_RangeCFARProcHWA_InitParams rangeCfarInitParams;
-    DPU_RangeProcHWA_Handle dpuRangeHandle;
-    DPU_DopplerProcHWA_Handle dpuDopplerHandle;
-    DPU_RangeCFARProcHWA_Handle dpuRangeCfarHandle;
-
-    rangeInitParams.hwaHandle = ptrObjDetObj->hwaHandle;
-    dopplerInitParams.hwaHandle = ptrObjDetObj->hwaHandle;
-    rangeCfarInitParams.hwaHandle = ptrObjDetObj->hwaHandle;
-    
-    dpuRangeHandle = DPU_RangeProcHWA_init(&rangeInitParams, 0U, &retVal);
-    if (retVal != 0)
-    {
-        goto exit;
-    }
-
-    dpuDopplerHandle = DPU_DopplerProcHWA_init(&dopplerInitParams, 0U, &retVal);
-    if (retVal != 0)
-    {
-        goto exit;
-    }
-
-    dpuRangeCfarHandle = DPU_RangeCFARProcHWA_init(&rangeCfarInitParams, 0U, &retVal);
-    if (retVal != 0)
-    {
-        goto exit;
-    }
-
-    for(subFrameIndx = 0; subFrameIndx < commonCfg->numSubFrames; subFrameIndx++)
-    {
-        ptrObjDetObj->subFrameObj[subFrameIndx].dpuRangeObj = dpuRangeHandle;
-        ptrObjDetObj->subFrameObj[subFrameIndx].dpuDopplerObj = dpuDopplerHandle;
-        ptrObjDetObj->subFrameObj[subFrameIndx].dpuRangeCfarObj = dpuRangeCfarHandle;
-    }
-
-    /* Configure log2 LUT for range gate based CFAR Thresholds */
-    {
-        uint16_t maxRangeBins = commonCfg->maxAdcSamples / 2U;
-        gCfarThreshScaleLUT = DPC_ObjDet_BiDirMemPoolAlloc(L3ramObj, maxRangeBins * sizeof(uint32_t),
-                                                (uint8_t)sizeof(uint32_t), true);
-        /* Configure the CFAR Thresh Scale LUT here, if it is common across subframes */
-    }
+    /* store configuration for use in intra-sub-frame processing and
+     * inter-sub-frame switching, although window and compRx will need to be regenerated */
+    *cfgSave = aoaCfg;
 
 exit:
     return retVal;
@@ -3301,6 +2764,7 @@ exit:
  *  @param[in]  obj Pointer to sub-frame object
  *  @param[in]  commonCfg Pointer to pre-start common configuration
  *  @param[in]  staticCfg Pointer to static configuration of the sub-frame
+ *  @param[in]  dynCfg Pointer to dynamic configuration of the sub-frame
  *  @param[in]  edmaHandle Pointer to array of EDMA handles for the device, this
  *              can be distributed among the DPUs, although presently we only
  *              use the first handle for all DPUs.
@@ -3325,31 +2789,27 @@ exit:
 static int32_t DPC_ObjDet_preStartConfig(SubFrameObj *obj,
                   DPC_ObjectDetection_PreStartCommonCfg *commonCfg,
                    DPC_ObjectDetection_StaticCfg *staticCfg,
+                   DPC_ObjectDetection_DynCfg    *dynCfg,
                    EDMA_Handle                   edmaHandle[EDMA_NUM_CC],
-                   BiDirMemPoolObj               *L3ramObj,
+                   MemPoolObj                    *L3ramObj,
                    MemPoolObj                    *CoreLocalRamObj,
                    uint32_t                      *hwaMemBankAddr,
                    uint16_t                      hwaMemBankSize,
                    uint32_t                      *L3RamUsage,
                    uint32_t                      *CoreLocalRamUsage,
-                   ObjDetObj                    *ptrObjDetObj)
+                   ObjDetObj                     *ptrObjDetObj)
 {
     int32_t retVal = 0;
     DPIF_RadarCube radarCube;
     DPIF_DetMatrix detMatrix;
     uint32_t hwaWindowOffset;
     uint32_t rangeCoreLocalRamScratchUsage,
-             dopplerCoreLocalRamScratchUsage;
+             dopplerCoreLocalRamScratchUsage, cfarCoreLocalRamScratchUsage;
+    DPIF_CFARDetList *cfarRngDopSnrList;
+    uint32_t cfarRngDopSnrListSize;
     void *CoreLocalScratchStartPoolAddr;
-    float achievedCompressionRatio;
-    uint32_t outputBytesPerBlock, inputBytesPerBlock;
-    uint32_t radarCubeDecompressedSizeInBytes;
-    void *CoreLocalScratchStartPoolAddrNextDPU = NULL;
-    void *l3RamStartPoolAddrNextDPU = NULL;
-    float temp;
-#ifdef SUBSYS_DSS
-    float radConversionFactor;
-    radConversionFactor = PI_/180.0f;
+#ifdef POWER_MEAS
+    DSSHWACCRegs *ctrlBaseAddr = (DSSHWACCRegs *)CSL_DSS_HWA_CFG_U_BASE;
 #endif
 
     /* save configs to object. We need to pass this stored config (instead of
@@ -3359,64 +2819,87 @@ static int32_t DPC_ObjDet_preStartConfig(SubFrameObj *obj,
        reused during re-configuration (intra sub-frame or inter sub-frame)
      */
     obj->staticCfg = *staticCfg;
+    obj->dynCfg = *dynCfg;
 
     hwaWindowOffset = DPC_OBJDET_HWA_WINDOW_RAM_OFFSET;
 
     /* derived config */
     obj->log2NumDopplerBins = mathUtils_floorLog2(staticCfg->numDopplerBins);
 
-    DPC_ObjDet_BiDirMemPoolResetTop(L3ramObj);
+    DPC_ObjDet_MemPoolReset(L3ramObj);
     DPC_ObjDet_MemPoolReset(CoreLocalRamObj);
+
+    /* Allocate DPIF stuff (intra sub-frame buffers) first, except the last AoA output
+     * DPIF stuff (see comments before call to AoA's config in this function */
 
     /* L3 allocations */
     /* L3 - radar cube */
-    /* Input and output samples out of the rangeproc/compression DPU */
-    if(staticCfg->compressionCfg.compressionMethod==HWA_COMPRESS_METHOD_BFP)
-    {
-        inputBytesPerBlock = 4U * (uint32_t)staticCfg->compressionCfg.rangeBinsPerBlock;
-    }
-    else
-    {
-        inputBytesPerBlock = 4U * (uint32_t)staticCfg->compressionCfg.numRxAntennaPerBlock * (uint32_t)staticCfg->compressionCfg.rangeBinsPerBlock;
-    }
-    temp = (((staticCfg->compressionCfg.compressionRatio * (float)inputBytesPerBlock) + 3.99F) / 4.0F);
-    outputBytesPerBlock = (uint32_t)temp * 4U; /* Word aligned */
-    achievedCompressionRatio = (float) outputBytesPerBlock / (float) inputBytesPerBlock;
-
-    radarCubeDecompressedSizeInBytes = (uint32_t)staticCfg->numRangeBins * (uint32_t)staticCfg->numChirps *
-                                        (uint32_t)staticCfg->ADCBufData.dataProperty.numRxAntennas * sizeof(cmplx16ReIm_t);
-    temp = (float) radarCubeDecompressedSizeInBytes * achievedCompressionRatio;
-    radarCube.dataSize = (uint32_t)temp;
-    radarCube.data = DPC_ObjDet_BiDirMemPoolAlloc(L3ramObj, radarCube.dataSize,
-                                            (uint8_t)DPC_OBJDET_RADAR_CUBE_DATABUF_BYTE_ALIGNMENT, false);
+    radarCube.dataSize = (uint32_t)staticCfg->numRangeBins * (uint32_t)staticCfg->numDopplerChirps *
+                         (uint32_t)staticCfg->numVirtualAntennas * (uint32_t)sizeof(cmplx16ReIm_t);
+    radarCube.data = DPC_ObjDet_MemPoolAlloc(L3ramObj, radarCube.dataSize,
+                                             (uint8_t)DPC_OBJDET_RADAR_CUBE_DATABUF_BYTE_ALIGNMENT);
 
     if (radarCube.data == NULL)
     {
         retVal = DPC_OBJECTDETECTION_ENOMEM__L3_RAM_RADAR_CUBE;
         goto exit;
     }
-    radarCube.datafmt = DPIF_RADARCUBE_FORMAT_2;
+    radarCube.datafmt = DPIF_RADARCUBE_FORMAT_1;
 
-    if (staticCfg->isSumTxEnabled)
+    /* L3 - detection matrix */
+    detMatrix.dataSize = (uint32_t)staticCfg->numRangeBins * (uint32_t)staticCfg->numDopplerBins * (uint32_t)sizeof(uint16_t);
+    detMatrix.data = DPC_ObjDet_MemPoolAlloc(L3ramObj, detMatrix.dataSize,
+                                             (uint8_t)DPC_OBJDET_DET_MATRIX_DATABUF_BYTE_ALIGNMENT);
+    if (detMatrix.data == NULL)
     {
-        /* L3 - detection matrix */
-        detMatrix.dataSize = (uint32_t)staticCfg->numRangeBins * ((uint32_t)staticCfg->numDopplerBins / (uint32_t)staticCfg->numBandsTotal) * sizeof(uint16_t);
-        detMatrix.data = DPC_ObjDet_BiDirMemPoolAlloc(L3ramObj, detMatrix.dataSize,
-                                                (uint8_t)DPC_OBJDET_DET_MATRIX_DATABUF_BYTE_ALIGNMENT, false);
-        if (detMatrix.data == NULL)
-        {
-            retVal = DPC_OBJECTDETECTION_ENOMEM__L3_RAM_DET_MATRIX;
-            goto exit;
-        }
-        detMatrix.datafmt = DPIF_DETMATRIX_FORMAT_1;
+        retVal = DPC_OBJECTDETECTION_ENOMEM__L3_RAM_DET_MATRIX;
+        goto exit;
     }
+    detMatrix.datafmt = DPIF_DETMATRIX_FORMAT_1;
+
+    /* Core Local - CFAR output list */
+    cfarRngDopSnrListSize = DPC_OBJDET_MAX_NUM_OBJECTS;
+
+    cfarRngDopSnrList = DPC_ObjDet_MemPoolAlloc(CoreLocalRamObj,
+                            cfarRngDopSnrListSize * sizeof(DPIF_CFARDetList),
+                            (uint8_t)DPC_OBJDET_CFAR_DET_LIST_BYTE_ALIGNMENT);
+    if (cfarRngDopSnrList == NULL)
+    {
+        retVal = DPC_OBJECTDETECTION_ENOMEM__CORE_LOCAL_RAM_CFAR_OUT_DET_LIST;
+        goto exit;
+    }
+
+#ifdef POWER_MEAS
+
+#ifdef SOC_AWR294X 
+    gMmwDssMCB.powerMeas.dspLoading = obj->staticCfg.isDspLoading;
+    gMmwDssMCB.powerMeas.dspTimeToLoad = obj->staticCfg.dspTimeToLoad;
+    gMmwDssMCB.powerMeas.dspClkReduce = obj->staticCfg.dspStateAfterFrameProc;
+#endif
+
+#ifdef SOC_AWR2X44P
+    /* For DSP Sleep Time Computation */
+    gMmwDssMCB.framePeriod = obj->staticCfg.framePeriod;
+#endif
+
+#endif
 
     /* Remember pool position */
     CoreLocalScratchStartPoolAddr = DPC_ObjDet_MemPoolGet(CoreLocalRamObj);
 
-    retVal = DPC_ObjDet_rangeConfig(obj->dpuRangeObj, &obj->staticCfg,
-                 edmaHandle[DPC_OBJDET_DPU_RANGEPROC_EDMA_INST_ID],
-                 &radarCube, CoreLocalRamObj, L3ramObj, &hwaWindowOffset,
+#ifdef POWER_MEAS
+    if(obj->staticCfg.isHwaDynamicClkGate != 0U)
+    {
+        CSL_FINSR(ctrlBaseAddr->HWA_ENABLE,
+                    HWA_ENABLE_HWA_DYN_CLK_EN_END,
+                    HWA_ENABLE_HWA_DYN_CLK_EN_START,
+                    (bool)(obj->staticCfg.isHwaDynamicClkGate));
+    }
+#endif
+
+    retVal = DPC_ObjDet_rangeConfig(obj->dpuRangeObj, &obj->staticCfg, &obj->dynCfg,
+                 edmaHandle[0],
+                 &radarCube, CoreLocalRamObj, &hwaWindowOffset,
                  &rangeCoreLocalRamScratchUsage, &obj->dpuCfg.rangeCfg,
                  ptrObjDetObj);
     if (retVal != 0)
@@ -3424,41 +2907,36 @@ static int32_t DPC_ObjDet_preStartConfig(SubFrameObj *obj,
         goto exit;
     }
 
-    if (obj->staticCfg.rangeCfarCfg.cfg.isEnabled)
+    /* Rewind to the scratch beginning */
+    DPC_ObjDet_MemPoolSet(CoreLocalRamObj, CoreLocalScratchStartPoolAddr);
+
+    retVal = DPC_ObjDet_CFARconfig(obj->dpuCFARObj, &obj->staticCfg,
+                 obj->log2NumDopplerBins, &obj->dynCfg,
+                 edmaHandle[0],
+                 &detMatrix,
+                 cfarRngDopSnrList,
+                 cfarRngDopSnrListSize,
+                 CoreLocalRamObj,
+                 &hwaMemBankAddr[0],
+                 hwaMemBankSize,
+                 commonCfg->compRxChanCfg.rangeBias,
+                 &cfarCoreLocalRamScratchUsage,
+                 &obj->dpuCfg.cfarCfg);
+    if (retVal != 0)
     {
-        /* allocating range cfar resources after range DPU resource allocation because of the following reasons:
-         * 1. range DPU resources + range cfar resources are mostly less than dppler DPU resources size; so,
-         * instead of allocating at the end of doppler dpu, allocating here, will save around 4-5KB of L2RAM.
-         */
-        retVal = DPC_ObjDet_rangeCfarConfig(obj->dpuRangeCfarObj, &obj->staticCfg,
-                                    edmaHandle[DPC_OBJDET_DPU_RANGECFARPROC_EDMA_INST_ID],
-                                    &detMatrix,
-                                    CoreLocalRamObj,
-                                    L3ramObj,
-                                    CoreLocalScratchStartPoolAddrNextDPU,
-                                    l3RamStartPoolAddrNextDPU,
-                                    &obj->dpuCfg.rangeCfarCfg,
-                                    ptrObjDetObj);
-        if (retVal != 0)
-        {
-            goto exit;
-        }
+        goto exit;
     }
 
     /* Rewind to the scratch beginning */
     DPC_ObjDet_MemPoolSet(CoreLocalRamObj, CoreLocalScratchStartPoolAddr);
-    CoreLocalScratchStartPoolAddrNextDPU = CoreLocalScratchStartPoolAddr;
-    l3RamStartPoolAddrNextDPU = DPC_ObjDet_BiDirMemPoolGetTop(L3ramObj);
 
-    retVal = DPC_ObjDet_dopplerConfig(obj, obj->dpuDopplerObj, &obj->staticCfg,
-                 obj->log2NumDopplerBins,
-                 commonCfg->antennaCalibParams,
+    /* Note doppler will generate window (that will be used by AoA next)
+     * in core local scratch memory, so scratch should not be reset after this point
+     * (AoA itself does not need scratch) */
+    retVal = DPC_ObjDet_dopplerConfig(obj->dpuDopplerObj, &obj->staticCfg,
+                 obj->log2NumDopplerBins, &obj->dynCfg,
                  edmaHandle[DPC_OBJDET_DPU_DOPPLERPROC_EDMA_INST_ID],
-                 radarCubeDecompressedSizeInBytes,
-                 &radarCube, &detMatrix, CoreLocalRamObj, L3ramObj,
-                 CoreLocalScratchStartPoolAddr,
-                 (volatile void *)CoreLocalScratchStartPoolAddrNextDPU,
-                 (volatile void *)l3RamStartPoolAddrNextDPU, &hwaWindowOffset,
+                 &radarCube, &detMatrix, CoreLocalRamObj, &hwaWindowOffset,
                  &dopplerCoreLocalRamScratchUsage, &obj->dpuCfg.dopplerCfg,
                  ptrObjDetObj);
     if (retVal != 0)
@@ -3466,32 +2944,41 @@ static int32_t DPC_ObjDet_preStartConfig(SubFrameObj *obj,
         goto exit;
     }
 
-    /* Allocate the EDMA channel to copy the object found in both doppler and range cfar list from L3 to L2. */
-    DPC_ObjDet_EDMAChannelConfigAssist(edmaHandle[DPC_OBJDET_DPU_DOPPLERPROC_EDMA_INST_ID],
-                                    EDMA_OBJECTDETECTIONDPC_INTERSECT_DETOBJS,
-                                    EDMA_OBJECTDETECTIONDPC_INTERSECT_DETOBJS_SHADOW,
-                                    0,
-                                    &ptrObjDetObj->edmaDetObjs);
+    /* Presently AoA does not use Core Local scratch because window is fed from doppler above
+     * and all its allocation is persistent within sub-frame processing. Given also that AoA
+     * is the last module to be called, its DPIF type buffers can be overlaid with
+     * scratch buffers used in previous modules in the processing chain. So unlike radarCube
+     * and detMatrix, the DPIF buffers of AoA don't need to be allocated up-front like
+     * radarCube and detMatrix. There are also some debug buffers in AoA that are tied
+     * to the DPIF which are conveniently localized in this function.
+     * Given we are feeding doppler window generated in the dopplerConfig call above,
+     * we cannot reset the Core Local RAM to the scratchStartPoolAddr.
+     */
+    retVal = DPC_ObjDet_AoAconfig(obj->dpuAoAObj,
+                 commonCfg,
+                 &obj->staticCfg,
+                 &obj->dynCfg,
+                 edmaHandle[DPC_OBJDET_DPU_AOA_PROC_EDMA_INST_ID],
+                 &radarCube,
+                 cfarRngDopSnrList, cfarRngDopSnrListSize,
+                 CoreLocalRamObj,
+                 L3ramObj,
+                 obj->dpuCfg.dopplerCfg.hwRes.hwaCfg.winSym,
+                 obj->dpuCfg.dopplerCfg.hwRes.hwaCfg.windowSize,
+                 obj->dpuCfg.dopplerCfg.hwRes.hwaCfg.window,
+                 obj->dpuCfg.dopplerCfg.hwRes.hwaCfg.winRamOffset,
+                 (uint8_t)DPC_OBJDET_DPU_CFAR_PROC_PARAMSET_START_IDX(staticCfg->numTxAntennas),
+                 &obj->isAoAHWAparamSetOverlappedWithCFAR,
+                 &obj->dpuCfg.aoaCfg);
 
-    retVal = DPC_ObjectDetection_configEdmaDetObjsOut(edmaHandle[DPC_OBJDET_DPU_DOPPLERPROC_EDMA_INST_ID],
-                                                    &obj->dpuCfg.dopplerCfg.hwRes,
-                                                    &ptrObjDetObj->edmaDetObjs);
-    if(retVal != 0)
+    if (retVal != 0)
     {
         goto exit;
     }
 
-#ifdef SUBSYS_DSS
-    /* Sin values of FOV */
-    obj->aoaFovSinVal.minAzimuthSinVal   = sinsp(radConversionFactor * obj->staticCfg.aoaFovCfg.minAzimuthDeg);
-    obj->aoaFovSinVal.maxAzimuthSinVal   = sinsp(radConversionFactor * obj->staticCfg.aoaFovCfg.maxAzimuthDeg);
-    obj->aoaFovSinVal.minElevationSinVal = sinsp(radConversionFactor * obj->staticCfg.aoaFovCfg.minElevationDeg);
-    obj->aoaFovSinVal.maxElevationSinVal = sinsp(radConversionFactor * obj->staticCfg.aoaFovCfg.maxElevationDeg);
-#endif
-
     /* Report RAM usage */
     *CoreLocalRamUsage = DPC_ObjDet_MemPoolGetMaxUsage(CoreLocalRamObj);
-    *L3RamUsage = DPC_ObjDet_BiDirMemPoolGetMaxUsage(L3ramObj);
+    *L3RamUsage = DPC_ObjDet_MemPoolGetMaxUsage(L3ramObj);
 
 exit:
     return retVal;
@@ -3515,11 +3002,13 @@ exit:
  *  @retval
  *      Error   -   <0
  */
-int32_t DPC_ObjectDetection_ioctl(
+static int32_t DPC_ObjectDetection_ioctl
+(
     DPM_DPCHandle   handle,
     uint32_t            cmd,
     void*               arg,
-    uint32_t argLen)
+    uint32_t            argLen
+)
 {
     ObjDetObj   *objDetObj;
     SubFrameObj *subFrmObj;
@@ -3538,40 +3027,78 @@ int32_t DPC_ObjectDetection_ioctl(
     else if (cmd == DPC_OBJDET_IOCTL__STATIC_PRE_START_COMMON_CFG)
     {
         DPC_ObjectDetection_PreStartCommonCfg *cfg;
+        uint32_t indx;
 
         DebugP_assert(argLen == sizeof(DPC_ObjectDetection_PreStartCommonCfg));
 
         cfg = (DPC_ObjectDetection_PreStartCommonCfg*)arg;
 
+        /* Free all buffers that were allocated from system (MemoryP) heap.
+         * Note we cannot free buffers during allocation time
+         * for new config during the pre-start config processing because the heap is not capable
+         * of defragmentation. This means pre-start common config must precede
+         * all pre-start configs. */
+        for(indx = 0; indx < objDetObj->commonCfg.numSubFrames; indx++)
+        {
+            subFrmObj = &objDetObj->subFrameObj[indx];
+
+            if (subFrmObj->dpuCfg.rangeCfg.hwRes.dcRangeSigMean != NULL)
+            {
+                HeapP_free(&gObjectDetectionHeapObj, subFrmObj->dpuCfg.rangeCfg.hwRes.dcRangeSigMean);
+                subFrmObj->dpuCfg.rangeCfg.hwRes.dcRangeSigMean = NULL;
+            }
+        }
+
         objDetObj->commonCfg = *cfg;
         objDetObj->isCommonCfgReceived = true;
 
-        retVal = DPC_ObjDet_preStartCommonConfig(objDetObj,
-                     cfg,
-                     &objDetObj->L3RamObj);
+        DebugP_logInfo("ObjDet DPC: Pre-start Common Config IOCTL processed\n");
+    }
+    else if (cmd == DPC_OBJDET_IOCTL__DYNAMIC_MEASURE_RANGE_BIAS_AND_RX_CHAN_PHASE)
+    {
+        DPC_ObjectDetection_MeasureRxChannelBiasCfg *cfg;
+
+        DebugP_assert(argLen == sizeof(DPC_ObjectDetection_MeasureRxChannelBiasCfg));
+
+        cfg = (DPC_ObjectDetection_MeasureRxChannelBiasCfg*)arg;
+
+        retVal = DPC_ObjDet_Config_MeasureRxChannelBiasCfg(objDetObj, cfg);
         if (retVal != 0)
         {
             goto exit;
         }
+    }
+    else if (cmd == DPC_OBJDET_IOCTL__DYNAMIC_COMP_RANGE_BIAS_AND_RX_CHAN_PHASE)
+    {
+        DPU_AoAProc_compRxChannelBiasCfg *inpCfg;
+        DPU_AoAProc_compRxChannelBiasCfg outCfg;
+        uint32_t i;
 
-#if defined(SOC_AWR2X44P)
-        DPC_ObjectDetection_ElevEstCommonCfg elevEstCommonCfg;
-        elevEstCommonCfg.numSubFrames = cfg->numSubFrames;
-        (void)memcpy(elevEstCommonCfg.antennaCalibParams, cfg->antennaCalibParams, sizeof(elevEstCommonCfg.antennaCalibParams));
-        (void)memcpy(elevEstCommonCfg.antennaGeometryCfg, cfg->antennaGeometryCfg, sizeof(elevEstCommonCfg.antennaGeometryCfg));
-        elevEstCommonCfg.antennaSpacing = cfg->antennaSpacing;
-        elevEstCommonCfg.zeroInsrtMaskCfg = cfg->zeroInsrtMaskCfg;
-        elevEstCommonCfg.result = (DPC_ObjectDetection_ExecuteResult *)((uint32_t)SOC_virtToPhy((void*)&gObjDetObj.executeResult));
-        
-        /* Copy elevEstCommonCfg to message buffer to send it to MSS */
-        *(DPC_ObjectDetection_ElevEstCommonCfg *) arg = elevEstCommonCfg; 
-#endif
+        DebugP_assert(argLen == sizeof(DPU_AoAProc_compRxChannelBiasCfg));
 
-        DebugP_logInfo("ObjDet DPC: Pre-start Common Config IOCTL processed\n");
+        inpCfg = (DPU_AoAProc_compRxChannelBiasCfg*)arg;
+
+        for(i = 0; i < objDetObj->commonCfg.numSubFrames; i++)
+        {
+            subFrmObj = &objDetObj->subFrameObj[i];
+
+            DPC_ObjDet_GetRxChPhaseComp(&subFrmObj->staticCfg, inpCfg, &outCfg);
+
+            retVal = DPU_AoAProcHWA_control(subFrmObj->dpuAoAObj,
+                     DPU_AoAProcHWA_Cmd_CompRxChannelBiasCfg,
+                     &outCfg,
+                     sizeof(DPU_AoAProc_compRxChannelBiasCfg));
+            if (retVal != 0)
+            {
+                goto exit;
+            }
+        }
+
+        /* save into object */
+        objDetObj->commonCfg.compRxChanCfg = *inpCfg;
     }
     else if (cmd == DPC_OBJDET_IOCTL__DYNAMIC_EXECUTE_RESULT_EXPORTED)
     {
-#ifdef INCLUDE_DPM
         DPC_ObjectDetection_ExecuteResultExportedInfo *inp;
         volatile uint32_t startTime;
 
@@ -3584,8 +3111,9 @@ int32_t DPC_ObjectDetection_ioctl(
         /* input sub-frame index must match current sub-frame index */
         DebugP_assert(inp->subFrameIdx == objDetObj->subFrameIndx);
 
-        /* Increment the subframe index to get the next subrame object */
-        if (objDetObj->commonCfg.numSubFrames > 1)
+        /* Reconfigure all DPUs resources for next sub-frame as all HWA and EDMA
+         * resources overlap across sub-frames */
+        if (objDetObj->commonCfg.numSubFrames > 1U)
         {
             /* Next sub-frame */
             objDetObj->subFrameIndx++;
@@ -3593,33 +3121,45 @@ int32_t DPC_ObjectDetection_ioctl(
             {
                 objDetObj->subFrameIndx = 0;
             }
+
+            (void)DPC_ObjDet_reconfigSubFrame(objDetObj, objDetObj->subFrameIndx);
         }
+
+        subFrmObj = &objDetObj->subFrameObj[objDetObj->subFrameIndx];
+
+#ifdef OVERLAY_RANGE_HWA_PARAMS
+        if(DPU_AoAProcHWA_getNumHwaParamSets(subFrmObj->staticCfg.numTxAntennas,
+                                             subFrmObj->staticCfg.numVirtualAntElev) >
+                                            (16-DPU_RANGEPROCHWA_NUM_HWA_PARAM_SETS))
+        {
+            DPC_ObjDet_GenRangeWindow(&subFrmObj->dpuCfg.rangeCfg);
+            retVal = DPU_RangeProcHWA_config(subFrmObj->dpuRangeObj, &subFrmObj->dpuCfg.rangeCfg);
+            if (retVal != 0)
+            {
+                goto exit;
+            }
+        }
+#endif
+        /* Trigger Range DPU */
+        retVal = DPU_RangeProcHWA_control(subFrmObj->dpuRangeObj,
+                     DPU_RangeProcHWA_Cmd_triggerProc, NULL, 0);
+        if(retVal < 0)
+        {
+            goto exit;
+        }
+
+        DebugP_logInfo("ObjDet DPC: Range Proc Triggered in export IOCTL\n");
+
         objDetObj->stats.subFramePreparationCycles =
             CycleCounterP_getCount32() - startTime;
 
         /* mark end of processing of the frame/sub-frame by the DPC and the app */
         objDetObj->interSubFrameProcToken--;
 
-#ifdef OBJECTDETHWA_PRINT_DPC_TIMING_INFO
-        gTimingInfo.resEndTimes[gTimingInfo.resEndCnt % OBJECTDETHWA_NUM_FRAME_TIMING_TO_STORE] = CycleCounterP_getCount32();
-        gTimingInfo.resEndCnt++;
+#ifdef POWER_MEAS
+    (void)DPC_ObjectDetection_HwaDspGate(handle);
 #endif
-        objDetObj->numTimesResultExported++;
 
-        /* Perform DPM_notifyExecute only if the next frame was received before while
-           the processing of the previous frame was not complete, i.e., the frame start
-           ISR for the next frame was entered before the result exported ioctl was received
-           for the previous frame. Otherwise, perform DPM_notifyExecute in the frame start
-           ISR. */
-        if (objDetObj->numTimesResultExported == objDetObj->stats.subframeStartIntCounter - 1)
-        {
-            DebugP_assert(DPM_notifyExecute(objDetObj->dpmHandle, handle) == 0);
-        }
-        else
-        {
-            // Do Nothing
-        }
-#endif
     }
     else
     {
@@ -3632,16 +3172,235 @@ int32_t DPC_ObjectDetection_ioctl(
 
         switch (cmd)
         {
+            /* Range DPU related */
+            case DPC_OBJDET_IOCTL__DYNAMIC_CALIB_DC_RANGE_SIG_CFG:
+            {
+                DPC_ObjectDetection_CalibDcRangeSigCfg *cfg;
+
+                DebugP_assert(argLen == sizeof(DPC_ObjectDetection_CalibDcRangeSigCfg));
+
+                cfg = (DPC_ObjectDetection_CalibDcRangeSigCfg*)arg;
+
+                retVal = DPU_RangeProcHWA_control(subFrmObj->dpuRangeObj,
+                             DPU_RangeProcHWA_Cmd_dcRangeCfg,
+                             &cfg->cfg,
+                             sizeof(DPU_RangeProc_CalibDcRangeSigCfg));
+                if (retVal != 0)
+                {
+                    goto exit;
+                }
+
+                /* save into object */
+                subFrmObj->dynCfg.calibDcRangeSigCfg = cfg->cfg;
+
+                break;
+            }
+
+            /* CFAR DPU related */
+            case DPC_OBJDET_IOCTL__DYNAMIC_CFAR_RANGE_CFG:
+            {
+                DPC_ObjectDetection_CfarCfg *cfg;
+
+                DebugP_assert(argLen == sizeof(DPC_ObjectDetection_CfarCfg));
+
+                cfg = (DPC_ObjectDetection_CfarCfg*)arg;
+
+                retVal = DPU_CFARProcHWA_control(subFrmObj->dpuCFARObj,
+                             DPU_CFARProcHWA_Cmd_CfarRangeCfg,
+                             &cfg->cfg,
+                             sizeof(DPU_CFARProc_CfarCfg));
+                if (retVal != 0)
+                {
+                    goto exit;
+                }
+
+                /* save into object */
+                subFrmObj->dynCfg.cfarCfgRange = cfg->cfg;
+
+                break;
+            }
+            case DPC_OBJDET_IOCTL__DYNAMIC_CFAR_DOPPLER_CFG:
+            {
+                DPC_ObjectDetection_CfarCfg *cfg;
+
+                DebugP_assert(argLen == sizeof(DPC_ObjectDetection_CfarCfg));
+
+                cfg = (DPC_ObjectDetection_CfarCfg*)arg;
+
+                retVal = DPU_CFARProcHWA_control(subFrmObj->dpuCFARObj,
+                             DPU_CFARProcHWA_Cmd_CfarDopplerCfg,
+                             &cfg->cfg,
+                             sizeof(DPU_CFARProc_CfarCfg));
+                if (retVal != 0)
+                {
+                    goto exit;
+                }
+
+                /* save into object */
+                subFrmObj->dynCfg.cfarCfgDoppler = cfg->cfg;
+
+                break;
+            }
+            case DPC_OBJDET_IOCTL__DYNAMIC_FOV_RANGE:
+            {
+                DPC_ObjectDetection_fovRangeCfg *cfg;
+
+                DebugP_assert(argLen == sizeof(DPC_ObjectDetection_fovRangeCfg));
+
+                cfg = (DPC_ObjectDetection_fovRangeCfg*)arg;
+
+                /* Add range bias to the minimum/maximum */
+                cfg->cfg.min += objDetObj->commonCfg.compRxChanCfg.rangeBias;
+                cfg->cfg.max += objDetObj->commonCfg.compRxChanCfg.rangeBias;
+
+                retVal = DPU_CFARProcHWA_control(subFrmObj->dpuCFARObj,
+                             DPU_CFARProcHWA_Cmd_FovRangeCfg,
+                             &cfg->cfg,
+                             sizeof(DPU_CFARProc_FovCfg));
+                if (retVal != 0)
+                {
+                    goto exit;
+                }
+
+                /* save into object */
+                subFrmObj->dynCfg.fovRange = cfg->cfg;
+
+                break;
+            }
+            case DPC_OBJDET_IOCTL__DYNAMIC_FOV_DOPPLER:
+            {
+                DPC_ObjectDetection_fovDopplerCfg *cfg;
+
+                DebugP_assert(argLen == sizeof(DPC_ObjectDetection_fovDopplerCfg));
+
+                cfg = (DPC_ObjectDetection_fovDopplerCfg*)arg;
+
+                retVal = DPU_CFARProcHWA_control(subFrmObj->dpuCFARObj,
+                             DPU_CFARProcHWA_Cmd_FovDopplerCfg,
+                             &cfg->cfg,
+                             sizeof(DPU_CFARProc_FovCfg));
+                if (retVal != 0)
+                {
+                    goto exit;
+                }
+
+                /* save into object */
+                subFrmObj->dynCfg.fovDoppler = cfg->cfg;
+
+                break;
+            }
+
+            /* AoA DPU related */
+            case DPC_OBJDET_IOCTL__DYNAMIC_MULTI_OBJ_BEAM_FORM_CFG:
+            {
+                DPC_ObjectDetection_MultiObjBeamFormingCfg *cfg;
+
+                DebugP_assert(argLen == sizeof(DPC_ObjectDetection_MultiObjBeamFormingCfg));
+
+                cfg = (DPC_ObjectDetection_MultiObjBeamFormingCfg*)arg;
+
+                retVal = DPU_AoAProcHWA_control(subFrmObj->dpuAoAObj,
+                             DPU_AoAProcHWA_Cmd_MultiObjBeamFormingCfg,
+                             &cfg->cfg,
+                             sizeof(DPU_AoAProc_MultiObjBeamFormingCfg));
+                if (retVal != 0)
+                {
+                    goto exit;
+                }
+
+                /* save into object */
+                subFrmObj->dynCfg.multiObjBeamFormingCfg = cfg->cfg;
+
+                break;
+            }
+            case DPC_OBJDET_IOCTL__DYNAMIC_EXT_MAX_VELOCITY:
+            {
+                DPC_ObjectDetection_extMaxVelCfg *cfg;
+
+                DebugP_assert(argLen == sizeof(DPC_ObjectDetection_extMaxVelCfg));
+
+                cfg = (DPC_ObjectDetection_extMaxVelCfg*)arg;
+
+                retVal = DPU_AoAProcHWA_control(subFrmObj->dpuAoAObj,
+                             DPU_AoAProcHWA_Cmd_ExtMaxVelocityCfg,
+                             &cfg->cfg,
+                             sizeof(DPU_AoAProc_ExtendedMaxVelocityCfg));
+                if (retVal != 0)
+                {
+                    goto exit;
+                }
+
+                /* save into object */
+                subFrmObj->dynCfg.extMaxVelCfg = cfg->cfg;
+
+                break;
+            }
+            case DPC_OBJDET_IOCTL__DYNAMIC_FOV_AOA:
+            {
+                DPC_ObjectDetection_fovAoaCfg *cfg;
+
+                DebugP_assert(argLen == sizeof(DPC_ObjectDetection_fovAoaCfg));
+
+                cfg = (DPC_ObjectDetection_fovAoaCfg*)arg;
+
+                retVal = DPU_AoAProcHWA_control(subFrmObj->dpuAoAObj,
+                             DPU_AoAProcHWA_Cmd_FovAoACfg,
+                             &cfg->cfg,
+                             sizeof(DPU_AoAProc_FovAoaCfg));
+                if (retVal != 0)
+                {
+                    goto exit;
+                }
+
+                /* save into object */
+                subFrmObj->dynCfg.fovAoaCfg = cfg->cfg;
+
+                break;
+            }
+            case DPC_OBJDET_IOCTL__DYNAMIC_RANGE_AZIMUTH_HEAT_MAP:
+            {
+                DPC_ObjectDetection_RangeAzimuthHeatMapCfg *cfg;
+
+                DebugP_assert(argLen == sizeof(DPC_ObjectDetection_RangeAzimuthHeatMapCfg));
+
+                cfg = (DPC_ObjectDetection_RangeAzimuthHeatMapCfg*)arg;
+
+                retVal = DPU_AoAProcHWA_control(subFrmObj->dpuAoAObj,
+                             DPU_AoAProcHWA_Cmd_PrepareRangeAzimuthHeatMap,
+                             &cfg->prepareRangeAzimuthHeatMap,
+                             sizeof(bool));
+                if (retVal != 0)
+                {
+                    goto exit;
+                }
+
+                /* save into object */
+                subFrmObj->dynCfg.prepareRangeAzimuthHeatMap = cfg->prepareRangeAzimuthHeatMap;
+
+                break;
+            }
+
+            /* Static clutter related */
+            case DPC_OBJDET_IOCTL__DYNAMIC_STATICCLUTTER_REMOVAL_CFG:
+            {
+                DPC_ObjectDetection_StaticClutterRemovalCfg *cfg;
+
+                DebugP_assert(argLen == sizeof(DPC_ObjectDetection_StaticClutterRemovalCfg));
+
+                cfg = (DPC_ObjectDetection_StaticClutterRemovalCfg*)arg;
+
+                DPC_ObjDet_Config_StaticClutterRemovalCfg(subFrmObj, &cfg->cfg);
+
+                break;
+            }
+
             /* Related to pre-start configuration */
             case DPC_OBJDET_IOCTL__STATIC_PRE_START_CFG:
             {
                 DPC_ObjectDetection_PreStartCfg *cfg;
                 DPC_ObjectDetection_DPC_IOCTL_preStartCfg_memUsage *memUsage;
-#if defined(SOC_AWR2X44P)
-                DPC_ObjectDetection_ElevEstSubframeCfg elevEstSubframeCfg;
-                float radConversionFactor;
-                radConversionFactor = PI_/180.0f;
-#endif
+                HeapP_MemStats statsStart;
+                HeapP_MemStats statsEnd;
 
                 /* Pre-start common config must be received before pre-start configs
                  * are received. */
@@ -3653,12 +3412,16 @@ int32_t DPC_ObjectDetection_ioctl(
 
                 DebugP_assert(argLen == sizeof(DPC_ObjectDetection_PreStartCfg));
 
+                /* Get system heap size before preStart configuration */
+                HeapP_getHeapStats(&gObjectDetectionHeapObj, &statsStart);
+
                 cfg = (DPC_ObjectDetection_PreStartCfg*)arg;
+
                 memUsage = &cfg->memUsage;
                 memUsage->L3RamTotal = objDetObj->L3RamObj.cfg.size;
                 memUsage->CoreLocalRamTotal = objDetObj->CoreLocalRamObj.cfg.size;
                 retVal = DPC_ObjDet_preStartConfig(subFrmObj,
-                             &objDetObj->commonCfg, &cfg->staticCfg,
+                             &objDetObj->commonCfg, &cfg->staticCfg, &cfg->dynCfg,
                              &objDetObj->edmaHandle[0],
                              &objDetObj->L3RamObj,
                              &objDetObj->CoreLocalRamObj,
@@ -3672,22 +3435,14 @@ int32_t DPC_ObjectDetection_ioctl(
                     goto exit;
                 }
 
-#if defined(SOC_AWR2X44P)
-                /* Populate the configs requirred for AoA estimation */
-                elevEstSubframeCfg.numAzimFFTBins = subFrmObj->dpuCfg.dopplerCfg.staticCfg.numAzimFFTBins;
-                elevEstSubframeCfg.numDopplerBins = subFrmObj->staticCfg.numDopplerBins;
-                elevEstSubframeCfg.rangeStep = subFrmObj->staticCfg.rangeStep;
-                elevEstSubframeCfg.dopplerStep = subFrmObj->staticCfg.dopplerStep;
+                /* Get system heap size after preStart configuration */
+                HeapP_getHeapStats(&gObjectDetectionHeapObj, &statsEnd);
 
-                /* Sin values of FOV */
-                elevEstSubframeCfg.aoaFovSinVal.minAzimuthDeg   = (float)sin((double)radConversionFactor * (double)subFrmObj->staticCfg.aoaFovCfg.minAzimuthDeg);
-                elevEstSubframeCfg.aoaFovSinVal.maxAzimuthDeg   = (float)sin((double)radConversionFactor * (double)subFrmObj->staticCfg.aoaFovCfg.maxAzimuthDeg);
-                elevEstSubframeCfg.aoaFovSinVal.minElevationDeg = (float)sin((double)radConversionFactor * (double)subFrmObj->staticCfg.aoaFovCfg.minElevationDeg);
-                elevEstSubframeCfg.aoaFovSinVal.maxElevationDeg = (float)sin((double)radConversionFactor * (double)subFrmObj->staticCfg.aoaFovCfg.maxElevationDeg);
+                /* Populate system heap usage */
+                memUsage->SystemHeapTotal = OBJECTDETECTION_HEAP_MEM_SIZE;
+                memUsage->SystemHeapUsed = OBJECTDETECTION_HEAP_MEM_SIZE - statsEnd.availableHeapSpaceInBytes;
+                memUsage->SystemHeapDPCUsed = statsStart.availableHeapSpaceInBytes - statsEnd.availableHeapSpaceInBytes;
 
-                /* Copy elevEstSubframeCfg to message buffer to send it to MSS */
-                *(DPC_ObjectDetection_ElevEstSubframeCfg *)arg = elevEstSubframeCfg;
-#endif
                 DebugP_logInfo("ObjDet DPC: Pre-start Config IOCTL processed (subFrameIndx = %d)\n", subFrameNum);
                 break;
             }
@@ -3729,77 +3484,72 @@ exit:
  *  @retval
  *      Error   -   <0
  */
-DPM_DPCHandle DPC_ObjectDetection_init(
-#ifdef INCLUDE_DPM
+static DPM_DPCHandle DPC_ObjectDetection_init
+(
     DPM_Handle          dpmHandle,
     DPM_InitCfg*        ptrInitCfg,
-#else
-    DPC_ObjectDetection_InitParams* dpcInitParams,
-#endif
-
-    int32_t *errCode)
+    int32_t*            errCode
+)
 {
-    uint32_t i;
+    uint8_t i;
     ObjDetObj     *objDetObj = NULL;
-#ifdef INCLUDE_DPM
+    SubFrameObj   *subFrmObj;
     DPC_ObjectDetection_InitParams *dpcInitParams;
-#endif
+    DPU_RangeProcHWA_InitParams rangeInitParams;
+    DPU_AoAProcHWA_InitParams aoaInitParams;
+    DPU_CFARProcHWA_InitParams cfarInitParams;
+    DPU_DopplerProcHWA_InitParams dopplerInitParams;
     HWA_MemInfo         hwaMemInfo;
 
     *errCode = 0;
 
-#ifdef INCLUDE_DPM
     if ((ptrInitCfg == NULL) || (ptrInitCfg->arg == NULL))
-#else
-    if (dpcInitParams == NULL)
-#endif
     {
         *errCode = DPC_OBJECTDETECTION_EINVAL;
         goto exit;
     }
 
-#ifdef INCLUDE_DPM
     if (ptrInitCfg->argSize != sizeof(DPC_ObjectDetection_InitParams))
     {
         *errCode = DPC_OBJECTDETECTION_EINVAL__INIT_CFG_ARGSIZE;
         goto exit;
     }
 
+    /* create heap for RangeProc Hwa object. */
+    HeapP_construct(&gObjectDetectionHeapObj, gObjectDetectionHeapMem, OBJECTDETECTION_HEAP_MEM_SIZE);
+
     dpcInitParams = (DPC_ObjectDetection_InitParams *) ptrInitCfg->arg;
+
+    objDetObj = HeapP_alloc(&gObjectDetectionHeapObj, sizeof(ObjDetObj));
+
+#ifdef DBG_DPC_OBJDET
+    gObjDetObj = objDetObj;
 #endif
 
-    objDetObj = &gObjDetObj;
+    DebugP_logInfo("ObjDet DPC: objDetObj address = %d\n", (uint32_t) objDetObj);
+
+    if(objDetObj == NULL)
+    {
+        *errCode = DPC_OBJECTDETECTION_ENOMEM;
+        goto exit;
+    }
 
     /* Initialize memory */
     (void)memset((void *)objDetObj, 0, sizeof(ObjDetObj));
 
-#ifdef INCLUDE_DPM
     /* Copy over the DPM configuration: */
     (void)memcpy ((void*)&objDetObj->dpmInitCfg, (void*)ptrInitCfg, sizeof(DPM_InitCfg));
 
     objDetObj->dpmHandle = dpmHandle;
-#endif
-
-    objDetObj->hwaHandle = dpcInitParams->hwaHandle;
     objDetObj->L3RamObj.cfg = dpcInitParams->L3ramCfg;
     objDetObj->CoreLocalRamObj.cfg = dpcInitParams->CoreLocalRamCfg;
-    DPC_ObjDet_BiDirMemPoolReset(&objDetObj->L3RamObj);
 
-    for(i = 0; i < (uint32_t)EDMA_NUM_CC; i++)
+    for(i = 0; i < (uint8_t)EDMA_NUM_CC; i++)
     {
         objDetObj->edmaHandle[i] = dpcInitParams->edmaHandle[i];
     }
 
     objDetObj->processCallBackCfg = dpcInitParams->processCallBackCfg;
-
-#ifndef INCLUDE_DPM
-    /* Create Semaphore to trigger DPC execution on frame start */
-    *errCode = SemaphoreP_constructBinary(&objDetObj->dpcExecSemHandle, 0);
-    if (*errCode != 0)
-    {
-        goto exit;
-    }
-#endif
 
     /* Set HWA bank memory address */
     *errCode =  HWA_getHWAMemInfo(dpcInitParams->hwaHandle, &hwaMemInfo);
@@ -3812,15 +3562,46 @@ DPM_DPCHandle DPC_ObjectDetection_init(
 
     for (i = 0; i < hwaMemInfo.numBanks; i++)
     {
-        objDetObj->hwaMemBankAddr[i] = hwaMemInfo.baseAddress +
-            i * hwaMemInfo.bankSize;
+        objDetObj->hwaMemBankAddr[i] = hwaMemInfo.baseAddress + (uint32_t)i * (uint32_t)hwaMemInfo.bankSize;
     }
 
-    /* Initialize M4 RAM Buffer Object */
-    objDetObj->FastRamBufObj.cfg.addr = &gFastRamBuffer[0U];
-    objDetObj->FastRamBufObj.cfg.size = sizeof(gFastRamBuffer);
-    objDetObj->FastRamBufObj.cfg.endSize = sizeof(gFastRamBuffer);
-    DPC_ObjDet_BiDirMemPoolReset(&objDetObj->FastRamBufObj);
+    rangeInitParams.hwaHandle = dpcInitParams->hwaHandle;
+    aoaInitParams.hwaHandle = dpcInitParams->hwaHandle;
+    cfarInitParams.hwaHandle = dpcInitParams->hwaHandle;
+    dopplerInitParams.hwaHandle = dpcInitParams->hwaHandle;
+
+    for(i = 0; i < RL_MAX_SUBFRAMES; i++)
+    {
+        subFrmObj = &objDetObj->subFrameObj[i];
+
+        subFrmObj->dpuRangeObj = DPU_RangeProcHWA_init(&rangeInitParams, i, errCode);
+
+        if (*errCode != 0)
+        {
+            goto exit;
+        }
+
+        subFrmObj->dpuCFARObj = DPU_CFARProcHWA_init(&cfarInitParams, i, errCode);
+
+        if (*errCode != 0)
+        {
+            goto exit;
+        }
+
+        subFrmObj->dpuDopplerObj = DPU_DopplerProcHWA_init(&dopplerInitParams, i, errCode);
+
+        if (*errCode != 0)
+        {
+            goto exit;
+        }
+
+        subFrmObj->dpuAoAObj = DPU_AoAProcHWA_init(&aoaInitParams, i, errCode);
+
+        if (*errCode != 0)
+        {
+            goto exit;
+        }
+    }
 
 exit:
 
@@ -3828,7 +3609,8 @@ exit:
     {
         if(objDetObj != NULL)
         {
-
+            HeapP_free(&gObjectDetectionHeapObj, objDetObj);
+            HeapP_destruct(&gObjectDetectionHeapObj);
             objDetObj = NULL;
         }
     }
@@ -3851,49 +3633,176 @@ exit:
  *  @retval
  *      Error   -   <0
  */
-int32_t DPC_ObjectDetection_deinit (DPM_DPCHandle handle)
+static int32_t DPC_ObjectDetection_deinit (DPM_DPCHandle handle)
 {
     ObjDetObj *objDetObj = (ObjDetObj *) handle;
     SubFrameObj   *subFrmObj;
     int32_t retVal = 0;
+    uint32_t i;
 
     if (handle == NULL)
     {
         retVal = DPC_OBJECTDETECTION_EINVAL;
         goto exit;
     }
-
+    
     ObjectDetection_freeDmaChannels(objDetObj->edmaHandle[0]);
 
-    subFrmObj = &objDetObj->subFrameObj[0];
-    if(subFrmObj == NULL)
+    for(i = 0; i < RL_MAX_SUBFRAMES; i++)
     {
-        retVal = DPC_OBJECTDETECTION_EINVAL;
-        goto exit;
+        subFrmObj = &objDetObj->subFrameObj[i];
+
+        retVal = DPU_RangeProcHWA_deinit(subFrmObj->dpuRangeObj);
+
+        if (retVal != 0)
+        {
+            goto exit;
+        }
+
+        retVal = DPU_DopplerProcHWA_deinit(subFrmObj->dpuDopplerObj);
+
+        if (retVal != 0)
+        {
+            goto exit;
+        }
+
+        retVal = DPU_CFARProcHWA_deinit(subFrmObj->dpuCFARObj);
+
+        if (retVal != 0)
+        {
+            goto exit;
+        }
+        retVal = DPU_AoAProcHWA_deinit(subFrmObj->dpuAoAObj);
+
+        if (retVal != 0)
+        {
+            goto exit;
+        }
     }
 
-    retVal = DPU_RangeProcHWA_deinit(subFrmObj->dpuRangeObj);
-
-    if (retVal != 0)
-    {
-        goto exit;
-    }
-
-    retVal = DPU_DopplerProcHWA_deinit(subFrmObj->dpuDopplerObj);
-
-    if (retVal != 0)
-    {
-        goto exit;
-    }
-
-    retVal = DPU_RangeCFARProcHWA_deinit(subFrmObj->dpuRangeCfarObj);
-
-    if (retVal != 0)
-    {
-        goto exit;
-    }
-
+    HeapP_free(&gObjectDetectionHeapObj, handle);
+    HeapP_destruct(&gObjectDetectionHeapObj);
 exit:
 
     return (retVal);
 }
+
+#ifdef POWER_MEAS
+/**
+ *  @b Description
+ *  @n
+ *      Gate/Power Down HWA and underclock DSP (XTAL)
+ *
+ *  @param[in]  handle  DPM's DPC handle
+ *
+ *  \ingroup DPC_OBJDET__INTERNAL_FUNCTION
+ *
+ *  @retval
+ *      Success -   0
+ *  @retval
+ *      Error   -   <0
+ */
+static inline void DPC_ObjectDetection_HwaDspGate (DPM_DPCHandle handle)
+{
+    ObjDetObj     *objDetObj = (ObjDetObj *) handle;
+    CSL_dss_rcmRegs *ptrDssRcmRegs = (CSL_dss_rcmRegs *)CSL_DSS_RCM_U_BASE;
+
+    /* HWA Clock gate or Power Gate */
+    if (objDetObj->subFrameObj[0].staticCfg.hwaStateAfterFrameProc == DPC_OBJDET_HWA_CG_ENABLE)
+    {
+        /* Gate HWA Peripheral Clock */
+        ptrDssRcmRegs->DSS_HWA_CLK_GATE = 0x7;
+    }
+
+#ifdef SOC_AWR2X44P
+        /* DSP Power Gate/ Underclock */
+        /* Check remaining idle time and Power Gate DSP */
+        uint32_t curTime = ((CycleCounterP_getCount32() - gMmwDssMCB.frameStartTimeStamp)/DSP_CLOCK_MHZ); //In micro seconds
+        float temp = (float)gMmwDssMCB.framePeriod * 1000.0f; // In milliseconds
+        uint32_t remTime = (uint32_t)temp - curTime; // In milliseconds
+        remTime *= 1000U; // In Nanoseconds
+
+        if(objDetObj->subFrameObj[0].staticCfg.dspStateAfterFrameProc == DPC_OBJDET_DSS_UC_ENABLE)
+        {
+            /* Switch DSP Clock to XTAL */
+            ptrDssRcmRegs->DSS_DSP_CLK_SRC_SEL = DPC_OBJDET_DSP_CLK_SRC_XTAL;
+        }
+        else if((remTime > contextSave.minTime) && (objDetObj->subFrameObj[0].staticCfg.dspStateAfterFrameProc == DPC_OBJDET_DSS_PG_ENABLE))
+        {
+            contextSave.altPc = 0x12345678;
+        }
+#endif
+
+#ifdef SOC_AWR294X
+        if(objDetObj->subFrameObj[0].staticCfg.hwaStateAfterFrameProc == 1)
+        {
+
+            /* HWA - Power gating */
+            ptrDssRcmRegs->DSS_HWA_CLK_GATE = 0x7;
+            ptrDssRcmRegs->DSS_HWA_PD_CTRL = 0x77777;
+            ptrDssRcmRegs->HW_SPARE_RW0 = 0x70000;
+            ptrDssRcmRegs->DSS_HWA_PD_CTRL = 0x77707;
+            ptrDssRcmRegs->DSS_HWA_PD_CTRL = 0x77007;
+            ptrDssRcmRegs->DSS_HWA_PD_CTRL = 0x70007;
+            ptrDssRcmRegs->DSS_HWA_PD_CTRL = 0x00007;
+        }
+#endif
+
+}
+
+/**
+ *  @b Description
+ *  @n
+ *      Ungate/Power Up HWA and switch DSP back to it's clock source
+ *
+ *  @param[in]  handle  DPM's DPC handle
+ *
+ *  \ingroup DPC_OBJDET__INTERNAL_FUNCTION
+ *
+ *  @retval
+ *      Success -   0
+ *  @retval
+ *      Error   -   <0
+ */
+static inline void DPC_ObjectDetection_HwaDspUngate (DPM_DPCHandle handle)
+{
+    ObjDetObj     *objDetObj = (ObjDetObj *) handle;
+    CSL_dss_rcmRegs *ptrDssRcmRegs = (CSL_dss_rcmRegs *)CSL_DSS_RCM_U_BASE;
+    
+    #if defined SOC_AWR2X44P
+    /* For DSP Sleep time calculation */
+    gMmwDssMCB.frameStartTimeStamp = CycleCounterP_getCount32();
+    #elif defined  SOC_AWR294X
+        SemaphoreP_post(&gMmwDssMCB.dspLoadSemaphore);
+        gMmwDssMCB.powerMeas.frameStartTimeStamp = ClockP_getTimeUsec();
+    #endif
+
+    if(objDetObj->subFrameObj[0].staticCfg.dspStateAfterFrameProc == DPC_OBJDET_DSS_UC_ENABLE)
+    {
+        /* Switch back DSP CLock source */
+        ptrDssRcmRegs->DSS_DSP_CLK_SRC_SEL = DPC_OBJDET_DSP_CLK_SRC_DSP_PLL_MUX;
+    }
+    if(objDetObj->subFrameObj[0].staticCfg.hwaStateAfterFrameProc == DPC_OBJDET_HWA_CG_ENABLE)
+    {
+        /* Ungate HWA Peripheral Clock */
+        ptrDssRcmRegs->DSS_HWA_CLK_GATE = 0x0;
+    }
+
+}
+#endif
+
+#if defined(SOC_AWR294X) && defined(POWER_MEAS)
+void DPC_ObjectDetection_pmStop(void)
+{
+    ObjDetObj   *objDetObj = gObjDetObj;
+
+    DebugP_assert (objDetObj != NULL);
+
+    /* We can be here only after complete frame processing is done, which means
+     * processing token must be 0 and subFrameIndx also 0  */
+    DebugP_assert((objDetObj->interSubFrameProcToken == 0) && (objDetObj->subFrameIndx == 0));
+
+    DebugP_logInfo("ObjDet DPC: Stop done\n");
+    return;
+}
+#endif

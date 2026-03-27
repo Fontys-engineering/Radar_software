@@ -9,6 +9,7 @@
                     <stringMacro name="MCU_PLUS_SDK_PATH" type="VALUE_PATH_ANY" value="${COM_TI_MCU_PLUS_SDK_AWR294X_INSTALL_DIR}"/>
                     <stringMacro name="C66x_DSPLIB_INSTALL_PATH" type="VALUE_PATH_ANY" value="C:\ti\mmwave_mcuplus_sdk_04_07_02_01\dsplib_c66x_3_4_0_0"/>
                     <stringMacro name="C66x_MATHLIB_INSTALL_PATH" type="VALUE_PATH_ANY" value="C:\ti\mmwave_mcuplus_sdk_04_07_02_01\mathlib_c66x_3_1_2_1"/>
+                    <stringMacro name="DPU_DATA_PATH" type="VALUE_PATH_ANY" value="${MMWAVE_SDK_INSTALL_PATH}/ti/datapath/dpu"/>
                 </macros>
                 <externalSettings/>
                 <extensions>
@@ -18,7 +19,7 @@
                 </extensions>
             </storageModule>
             <storageModule moduleId="cdtBuildSystem" version="4.0.0">
-                <configuration artifactExtension="xe66" artifactName="${ProjName}" buildProperties="" cleanCommand="${CG_CLEAN_CMD}" description="" id="com.ti.ccstudio.buildDefinitions.C6000.Debug.1626576623" name="Debug" parent="com.ti.ccstudio.buildDefinitions.C6000.Debug" postbuildStep="${CG_TOOL_ROOT}/bin/strip6x -p ${CCS_PROJECT_DIR}/${ConfigName}/${ProjName}.xe66 -o=${CCS_PROJECT_DIR}/${ConfigName}/${ProjName}_strip.xe66;                     ${SYSCONFIG_TOOL_ROOT}/nodejs/node.exe  ${COM_TI_MCU_PLUS_SDK_AWR294X_INSTALL_DIR}/tools/boot/out2rprc/elf2rprc.js ${CCS_PROJECT_DIR}/${ConfigName}/${ProjName}_strip.xe66;                     ${CCE_INSTALL_ROOT}/utils/cygwin/mv ${CCS_PROJECT_DIR}/${ConfigName}/${ProjName}_strip.rprc ${CCS_PROJECT_DIR}/${ConfigName}/${ProjName}.rprc;                     ${CCE_INSTALL_ROOT}/utils/cygwin/rm -f ${CCS_PROJECT_DIR}/${ConfigName}/${ProjName}_strip.rprc;                     ${CCE_INSTALL_ROOT}/utils/cygwin/rm -f ${CCS_PROJECT_DIR}/${ConfigName}/${ProjName}_strip.xe66;                     " prebuildStep="${CCE_INSTALL_ROOT}/utils/cygwin/rm -f ${CCS_PROJECT_DIR}/${ConfigName}/${ProjName}.rprc;                     ${SYSCONFIG_TOOL_ROOT}/nodejs/node ${SYSCONFIG_TOOL_ROOT}/dist/cli.js --product ${COM_TI_MCU_PLUS_SDK_AWR294X_INSTALL_DIR}/.metadata/product.json --script ../../out_of_box_2944_mss/mss/mss.syscfg --context r5fss0-0 --output ../../out_of_box_2944_mss/mss/mssgenerated/ --script ../dss/dss.syscfg --context c66ss0 --output ../dss/dssgenerated/;                     ">
+                <configuration artifactExtension="xe66" artifactName="${ProjName}" buildProperties="" cleanCommand="${CG_CLEAN_CMD}" description="" id="com.ti.ccstudio.buildDefinitions.C6000.Debug.1626576623" name="Debug" parent="com.ti.ccstudio.buildDefinitions.C6000.Debug" postbuildStep="${CG_TOOL_ROOT}/bin/strip6x -p ${CCS_PROJECT_DIR}/${ConfigName}/${ProjName}.xe66 -o=${CCS_PROJECT_DIR}/${ConfigName}/${ProjName}_strip.xe66;                     ${SYSCONFIG_TOOL_ROOT}/nodejs/node.exe  ${COM_TI_MCU_PLUS_SDK_AWR294X_INSTALL_DIR}/tools/boot/out2rprc/elf2rprc.js ${CCS_PROJECT_DIR}/${ConfigName}/${ProjName}_strip.xe66;                     ${CCE_INSTALL_ROOT}/utils/cygwin/mv ${CCS_PROJECT_DIR}/${ConfigName}/${ProjName}_strip.rprc ${CCS_PROJECT_DIR}/${ConfigName}/${ProjName}.rprc;                     ${CCE_INSTALL_ROOT}/utils/cygwin/rm -f ${CCS_PROJECT_DIR}/${ConfigName}/${ProjName}_strip.rprc;                     ${CCE_INSTALL_ROOT}/utils/cygwin/rm -f ${CCS_PROJECT_DIR}/${ConfigName}/${ProjName}_strip.xe66;                     " prebuildStep=";${SYSCONFIG_TOOL_ROOT}/nodejs/node ${SYSCONFIG_TOOL_ROOT}/dist/cli.js --product ${COM_TI_MCU_PLUS_SDK_AWR294X_INSTALL_DIR}/.metadata/product.json --script ../../out_of_box_2944_mss/mss/mss.syscfg --context r5fss0-0 --output ../../out_of_box_2944_mss/mss/mssgenerated/ --script ../dss/dss.syscfg --context c66ss0 --output ../dss/dssgenerated/">
                     <folderInfo id="com.ti.ccstudio.buildDefinitions.C6000.Debug.1626576623." name="/" resourcePath="">
                         <toolChain id="com.ti.ccstudio.buildDefinitions.C6000_8.5.exe.DebugToolchain.925894394" name="TI Build Tools" superClass="com.ti.ccstudio.buildDefinitions.C6000_8.5.exe.DebugToolchain" targetTool="com.ti.ccstudio.buildDefinitions.C6000_8.5.exe.linkerDebug.1621708490">
                             <option id="com.ti.ccstudio.buildDefinitions.core.OPT_TAGS.2079540255" superClass="com.ti.ccstudio.buildDefinitions.core.OPT_TAGS" valueType="stringList">
@@ -53,7 +54,7 @@
                                     <listOptionValue value="${MCU_PLUS_SDK_PATH}/source/kernel/freertos/FreeRTOS-Kernel/include"/>
                                     <listOptionValue value="${MCU_PLUS_SDK_PATH}/source/kernel/freertos/portable/TI_CGT/DSP_C66"/>
                                     <listOptionValue value="${MCU_PLUS_SDK_PATH}/source/kernel/freertos/config/awr294x/c66"/>
-                                    <listOptionValue value="${MMWAVE_SDK_INSTALL_PATH}/ti/datapath/dpc/objectdetection/objdethwaDDMA/src/"/>
+                                    <listOptionValue value="${MMWAVE_SDK_INSTALL_PATH}/ti/datapath/dpc/objectdetection/objdethwa/src/"/>
                                     <listOptionValue value="${MMWAVE_SDK_INSTALL_PATH}"/>
                                     <listOptionValue value="${MMWAVE_AWR294X_DFP_INSTALL_PATH}"/>
                                     <listOptionValue value="${PROJECT_ROOT}\dss\dssgenerated"/>
@@ -69,9 +70,10 @@
                                     <listOptionValue value="DebugP_ASSERT_ENABLED"/>
                                     <listOptionValue value="INCLUDE_DPM"/>
                                     <listOptionValue value="DRIVERS_RADAR_HWA_V2"/>
-                                    <listOptionValue value="APP_RESOURCE_FILE='&lt;'ti/demo/awr294x/mmw/mmw_resDDM.h'&gt;'"/>
+                                    <listOptionValue value="APP_RESOURCE_FILE='&lt;'ti/demo/awr294x/mmw/mmw_resTDM.h'&gt;'"/>
                                     <listOptionValue value="SOC_AWR2944"/>
                                     <listOptionValue value="_DEBUG_=1"/>
+                                    <listOptionValue value="MMWDEMO_TDM"/>
                                 </option>
                                 <option id="com.ti.ccstudio.buildDefinitions.C6000_8.5.compilerID.SILICON_VERSION.308154947" superClass="com.ti.ccstudio.buildDefinitions.C6000_8.5.compilerID.SILICON_VERSION" value="6600" valueType="string"/>
                                 <option id="com.ti.ccstudio.buildDefinitions.C6000_8.5.compilerID.ABI.1946372172" superClass="com.ti.ccstudio.buildDefinitions.C6000_8.5.compilerID.ABI" value="com.ti.ccstudio.buildDefinitions.C6000_8.5.compilerID.ABI.eabi" valueType="enumerated"/>
@@ -108,9 +110,9 @@
                                     <listOptionValue value="${MMWAVE_SDK_INSTALL_PATH}/ti/utils/mathutils/lib"/>
                                     <listOptionValue value="${MCU_PLUS_SDK_PATH}/../mathlib_c66x_3_1_2_1/packages/ti/mathlib/lib"/>
                                     <listOptionValue value="${MCU_PLUS_SDK_PATH}/../dsplib_c66x_3_4_0_0/packages/ti/dsplib/lib"/>
-                                    <listOptionValue value="${MMWAVE_SDK_INSTALL_PATH}/ti/datapath/dpu/rangecfarprocDDMA/lib"/>
-                                    <listOptionValue value="${MMWAVE_SDK_INSTALL_PATH}/ti/datapath/dpu/rangeprocDDMA/lib"/>
-                                    <listOptionValue value="${MMWAVE_SDK_INSTALL_PATH}/ti/datapath/dpu/dopplerprocDDMA/lib"/>
+                                    <listOptionValue value="${MMWAVE_SDK_INSTALL_PATH}/ti/datapath/dpu/cfarproc/lib"/>
+                                    <listOptionValue value="${MMWAVE_SDK_INSTALL_PATH}/ti/datapath/dpu/rangeproc"/>
+                                    <listOptionValue value="${MMWAVE_SDK_INSTALL_PATH}/ti/datapath/dpu/dopplerproc/lib"/>
                                     <listOptionValue value="${MMWAVE_SDK_INSTALL_PATH}/ti/datapath/dpedma/lib"/>
                                     <listOptionValue value="${PROJECT_LOC}"/>
                                     <listOptionValue value="${PROJECT_LOC}/dss/dssgenerated"/>
@@ -121,16 +123,18 @@
                                     <listOptionValue value="${COM_TI_MMWAVE_MCUPLUS_SDK_LIBRARIES}"/>
                                     <listOptionValue value="libdpm_awr2944.ae66"/>
                                     <listOptionValue value="libmathutils.ae66"/>
-                                    <listOptionValue value="librangeproc_hwa_ddma_awr2944.ae66"/>
-                                    <listOptionValue value="libdopplerproc_hwa_ddma_awr2944.ae66"/>
-                                    <listOptionValue value="libdpedma_hwa_awr2944.ae66"/>
                                     <listOptionValue value="mathlib.ae66"/>
                                     <listOptionValue value="dsplib.ae66"/>
-                                    <listOptionValue value="librangecfarproc_hwa_ddma_awr2944.ae66"/>
                                     <listOptionValue value="freertos.awr294x.c66.ti-c6000.release.lib"/>
                                     <listOptionValue value="drivers.awr294x.c66.ti-c6000.release.lib"/>
                                     <listOptionValue value="board.awr294x.c66.ti-c6000.release.lib"/>
                                     <listOptionValue value="libc.a"/>
+                                    <listOptionValue value="${DPU_DATA_PATH}/rangeproc/lib/librangeproc_hwa_awr2944.ae66"/>
+                                    <listOptionValue value="${DPU_DATA_PATH}/dopplerproc/lib/libdopplerproc_hwa_awr2944.ae66"/>
+                                    <listOptionValue value="${DPU_DATA_PATH}/cfarproc/lib/libcfarproc_hwa_awr2944.ae66"/>
+                                    <listOptionValue value="${DPU_DATA_PATH}/aoaproc/lib/libaoaproc_hwa_awr2944.ae66"/>
+                                    <listOptionValue value="${MMWAVE_SDK_INSTALL_PATH}/ti/datapath/dpedma/lib/libdpedma_hwa_awr2944.ae66"/>
+                                    <listOptionValue value="${DPU_DATA_PATH}/dopplerprocDDMA/lib/libdopplerproc_hwa_ddma_awr2944.ae66"/>
                                 </option>
                                 <option id="com.ti.ccstudio.buildDefinitions.C6000_8.5.linkerID.DIAG_WARNING.992746182" superClass="com.ti.ccstudio.buildDefinitions.C6000_8.5.linkerID.DIAG_WARNING" valueType="stringList">
                                     <listOptionValue value="225"/>
