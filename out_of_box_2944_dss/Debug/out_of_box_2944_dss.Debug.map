@@ -1,7 +1,7 @@
 ******************************************************************************
                TMS320C6x Linker PC v8.5.0                      
 ******************************************************************************
->> Linked Fri Mar 27 14:27:58 2026
+>> Linked Fri Mar 27 14:29:47 2026
 
 OUTPUT FILE NAME:   <out_of_box_2944_dss.xe66>
 ENTRY POINT SYMBOL: "_c_int00"  address: 0082aa40
@@ -13,7 +13,7 @@ MEMORY CONFIGURATION
 ----------------------  --------  ---------  --------  --------  ----  --------
   DSS_L2                00800000   00060000  000577d8  00008828  RWIX
   HWA_RAM               82000000   00020000  00000000  00020000  RWIX
-  DSS_L3                88000000   00280000  00280000  00000000  RWIX
+  DSS_L3                88000000   00280000  00180000  00100000  RWIX
   RTOS_NORTOS_IPC_SHM_M c5000200   00001d40  00000980  000013c0  RWIX
 
 
@@ -43,9 +43,9 @@ run origin  load origin   length   init length attrs members
 00856fa8    00856fa8    00000848   00000848    r--
   00856fa8    00856fa8    00000240   00000240    r-- .switch
   008571e8    008571e8    00000608   00000608    r-- .cinit
-88000000    88000000    00280000   00000000    rw-
-  88000000    88000000    00278000   00000000    rw- .l3ram
-  88278000    88278000    00008000   00000000    rw- .demoSharedMem
+88000000    88000000    00180000   00000000    rw-
+  88000000    88000000    00178000   00000000    rw- .l3ram
+  88178000    88178000    00008000   00000000    rw- .demoSharedMem
 
 
 SECTION ALLOCATION MAP
@@ -1235,12 +1235,12 @@ section   page    origin      length       input sections
 *          0    c5000200    00000980     NOLOAD SECTION
                   c5000200    00000980     ti_drivers_config.obj (.bss.ipc_vring_mem)
 
-.l3ram     0    88000000    00278000     UNINITIALIZED
-                  88000000    00278000     dss_main.obj (.l3ram)
+.l3ram     0    88000000    00178000     UNINITIALIZED
+                  88000000    00178000     dss_main.obj (.l3ram)
 
 .demoSharedMem 
-*          0    88278000    00008000     UNINITIALIZED
-                  88278000    00008000     dss_main.obj (.demoSharedMem)
+*          0    88178000    00008000     UNINITIALIZED
+                  88178000    00008000     dss_main.obj (.demoSharedMem)
 
 MODULE SUMMARY
 
@@ -1252,10 +1252,10 @@ MODULE SUMMARY
        Total:                              17568    2362      26008  
                                                                      
     .\dss\
-       dss_main.obj                        2848     878       2680396
+       dss_main.obj                        2848     878       1631820
        data_path.obj                       192      40        0      
     +--+-----------------------------------+--------+---------+---------+
-       Total:                              3040     918       2680396
+       Total:                              3040     918       1631820
                                                                      
     .\dss\dssgenerated\
        ti_drivers_config.obj               416      176       3680   
@@ -1442,7 +1442,7 @@ MODULE SUMMARY
        Stack:                              0        0         8192   
        Linker Generated:                   0        1539      0      
     +--+-----------------------------------+--------+---------+---------+
-       Grand Total:                        191872   17843     2768800
+       Grand Total:                        191872   17843     1720224
 
 
 LINKER GENERATED COPY TABLES
@@ -1451,8 +1451,8 @@ __TI_cinit_table @ 008577b0 records: 8, size/record: 8, table size: 64
 	.fardata: load addr=008571e8, load size=00000546 bytes, run addr=008421c0, run size=00000c38 bytes, compression=rle
 	.neardata: load addr=0085772e, load size=00000032 bytes, run addr=00842f38, run size=000000b0 bytes, compression=rle
 	.far: load addr=00857760, load size=0000000d bytes, run addr=0082ed80, run size=00013440 bytes, compression=rle
-	.l3ram: load addr=0085776d, load size=0000000d bytes, run addr=88000000, run size=00278000 bytes, compression=rle
-	.demoSharedMem: load addr=0085777a, load size=0000000b bytes, run addr=88278000, run size=00008000 bytes, compression=rle
+	.l3ram: load addr=0085776d, load size=0000000d bytes, run addr=88000000, run size=00178000 bytes, compression=rle
+	.demoSharedMem: load addr=0085777a, load size=0000000b bytes, run addr=88178000, run size=00008000 bytes, compression=rle
 	.dpc_l2Heap: load addr=00857785, load size=0000000b bytes, run addr=00843000, run size=0000d000 bytes, compression=rle
 	.rodata: load addr=00857790, load size=0000000a bytes, run addr=00842f18, run size=00000008 bytes, compression=rle
 	.bss: load addr=0085779a, load size=00000009 bytes, run addr=00842f20, run size=00000018 bytes, compression=rle
@@ -1912,7 +1912,7 @@ ffffffff  binit
 00842fac  gEsmConfigNum                                  
 0083f4f0  gEsmHandle                                     
 00842df0  gEsmOpenParams                                 
-88278000  gHSRAM                                         
+88178000  gHSRAM                                         
 00842b40  gHwaAttrs                                      
 00842fb0  gHwaConfigNum                                  
 00842cc8  gHwaEDMAChanMapping                            
@@ -2655,7 +2655,7 @@ address   name
 008577f0  __TI_CINIT_Limit                               
 008577f0  __TI_CINIT_Warm                                
 88000000  gMmwL3                                         
-88278000  gHSRAM                                         
+88178000  gHSRAM                                         
 c5000200  gIpcSharedMem                                  
 ffffffff  __TI_pprof_out_hndl                            
 ffffffff  __TI_prof_data_size                            

@@ -18,6 +18,13 @@
 		<nature>org.eclipse.cdt.managedbuilder.core.managedBuildNature</nature>
 		<nature>org.eclipse.cdt.core.ccnature</nature>
 	</natures>
+	<linkedResources>
+		<link>
+			<name>utils/enet_stream.c</name>
+			<type>1</type>
+			<location>C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/demo/utils/enet_stream.c</location>
+		</link>
+	</linkedResources>
 	<variableList>
 		<variable>
 			<name>MCU_PLUS_SDK_PATH</name>
@@ -30,6 +37,10 @@
 		<variable>
 			<name>MMWAVE_SDK_INSTALL_PATH</name>
 			<value>$%7BCOM_TI_MMWAVE_MCUPLUS_SDK_INSTALL_DIR%7D</value>
+		</variable>
+		<variable>
+			<name>NETWORK_PATH</name>
+			<value>$%7BMCU_PLUS_SDK_PATH%7D/source/networking</value>
 		</variable>
 	</variableList>
 </projectDescription>

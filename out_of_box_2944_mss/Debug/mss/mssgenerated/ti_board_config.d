@@ -103,7 +103,52 @@ mss/mssgenerated/ti_board_config.o: \
  C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/dpl/CycleCounterP.h \
  C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/board/flash.h \
  C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/board/flash/flash_config.h \
- C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/board/flash/qspi/flash_nor_qspi.h
+ C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/board/flash/qspi/flash_nor_qspi.h \
+ C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/utils/include/enet_board.h \
+ C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/core/include/enet.h \
+ C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/core/include/enet_cfg.h \
+ C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/soc/awr294x/enet_soc_cfg.h \
+ C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/core/include/core/enet_types.h \
+ C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/drivers/hw_include/csl_types.h \
+ C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/core/include/core/enet_base.h \
+ C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/core/include/core/enet_per.h \
+ C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/core/include/core/enet_ioctl.h \
+ C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/core/include/core/enet_mod_macport.h \
+ C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/core/include/core/enet_mod.h \
+ C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/core/include/core/enet_mod_port.h \
+ C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/core/include/phy/enetphy.h \
+ C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/core/include/core/enet_trace.h \
+ C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/core/include/core/enet_osal.h \
+ C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/core/include/core/enet_utils.h \
+ C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/core/priv/core/enet_trace_priv.h \
+ C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/core/include/core/enet_queue.h \
+ C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/core/include/core/enet_soc.h \
+ C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/soc/awr294x/enet_soc.h \
+ C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/core/include/dma/cpdma/enet_cpdma_types.h \
+ C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/core/include/core/enet_mod_fdb.h \
+ C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/core/include/core/enet_mod_timesync.h \
+ C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/core/include/core/enet_mod_tas.h \
+ C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/core/include/core/enet_mod_phy.h \
+ C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/core/include/core/enet_dma.h \
+ C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/core/include/core/enet_dma_pktutils.h \
+ C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/core/include/dma/cpdma/enet_cpdma.h \
+ C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/core/include/phy/dp83867.h \
+ C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/utils/include/enet_apputils.h \
+ C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/core/include/core/enet_rm.h \
+ C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/core/include/per/cpsw.h \
+ C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/core/include/mod/cpsw_ale.h \
+ C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/core/include/mod/cpsw_cpts.h \
+ C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/core/include/mod/cpsw_hostport.h \
+ C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/core/include/core/enet_mod_hostport.h \
+ C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/core/include/mod/cpsw_macport.h \
+ C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/core/include/mod/mdio.h \
+ C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/core/include/core/enet_mod_mdio.h \
+ C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/core/include/mod/cpsw_stats.h \
+ C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/core/include/core/enet_mod_stats.h \
+ C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/utils/include/enet_ethutils.h \
+ C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/utils/include/enet_ioctlutils.h \
+ C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/utils/include/enet_cpdmautils.h \
+ C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/core/src/phy/enetphy_priv.h
 C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_mss/mss/mssgenerated/ti_board_config.h:
 C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_mss/mss/mssgenerated/ti_drivers_config.h:
 C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/drivers/hw_include/cslr_soc.h:
@@ -206,3 +251,48 @@ C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/ker
 C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/board/flash.h:
 C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/board/flash/flash_config.h:
 C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/board/flash/qspi/flash_nor_qspi.h:
+C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/utils/include/enet_board.h:
+C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/core/include/enet.h:
+C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/core/include/enet_cfg.h:
+C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/soc/awr294x/enet_soc_cfg.h:
+C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/core/include/core/enet_types.h:
+C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/drivers/hw_include/csl_types.h:
+C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/core/include/core/enet_base.h:
+C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/core/include/core/enet_per.h:
+C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/core/include/core/enet_ioctl.h:
+C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/core/include/core/enet_mod_macport.h:
+C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/core/include/core/enet_mod.h:
+C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/core/include/core/enet_mod_port.h:
+C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/core/include/phy/enetphy.h:
+C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/core/include/core/enet_trace.h:
+C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/core/include/core/enet_osal.h:
+C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/core/include/core/enet_utils.h:
+C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/core/priv/core/enet_trace_priv.h:
+C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/core/include/core/enet_queue.h:
+C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/core/include/core/enet_soc.h:
+C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/soc/awr294x/enet_soc.h:
+C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/core/include/dma/cpdma/enet_cpdma_types.h:
+C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/core/include/core/enet_mod_fdb.h:
+C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/core/include/core/enet_mod_timesync.h:
+C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/core/include/core/enet_mod_tas.h:
+C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/core/include/core/enet_mod_phy.h:
+C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/core/include/core/enet_dma.h:
+C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/core/include/core/enet_dma_pktutils.h:
+C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/core/include/dma/cpdma/enet_cpdma.h:
+C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/core/include/phy/dp83867.h:
+C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/utils/include/enet_apputils.h:
+C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/core/include/core/enet_rm.h:
+C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/core/include/per/cpsw.h:
+C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/core/include/mod/cpsw_ale.h:
+C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/core/include/mod/cpsw_cpts.h:
+C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/core/include/mod/cpsw_hostport.h:
+C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/core/include/core/enet_mod_hostport.h:
+C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/core/include/mod/cpsw_macport.h:
+C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/core/include/mod/mdio.h:
+C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/core/include/core/enet_mod_mdio.h:
+C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/core/include/mod/cpsw_stats.h:
+C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/core/include/core/enet_mod_stats.h:
+C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/utils/include/enet_ethutils.h:
+C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/utils/include/enet_ioctlutils.h:
+C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/utils/include/enet_cpdmautils.h:
+C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/core/src/phy/enetphy_priv.h:

@@ -664,6 +664,7 @@
 #include <drivers/uart.h>
 #include <kernel/dpl/CacheP.h>
 #include <kernel/dpl/ClockP.h>
+#include <kernel/dpl/SemaphoreP.h>
 #include <kernel/dpl/CycleCounterP.h>
 #include <kernel/dpl/AddrTranslateP.h>
 #include <kernel/dpl/DebugP.h>

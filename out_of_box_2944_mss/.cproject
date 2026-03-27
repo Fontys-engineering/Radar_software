@@ -6,6 +6,7 @@
                 <macros>
                     <stringMacro name="MMWAVE_SDK_INSTALL_PATH" type="VALUE_PATH_ANY" value="${COM_TI_MMWAVE_MCUPLUS_SDK_INSTALL_DIR}"/>
                     <stringMacro name="MMWAVE_AWR294X_DFP_INSTALL_PATH" type="VALUE_PATH_ANY" value="${COM_TI_MMWAVE_MCUPLUS_SDK_INSTALL_DIR}/../mmwave_dfp_02_04_18_01"/>
+                    <stringMacro name="NETWORK_PATH" type="VALUE_PATH_ANY" value="${MCU_PLUS_SDK_PATH}/source/networking"/>
                     <stringMacro name="MCU_PLUS_SDK_PATH" type="VALUE_PATH_ANY" value="${COM_TI_MCU_PLUS_SDK_AWR294X_INSTALL_DIR}"/>
                 </macros>
                 <externalSettings/>
@@ -51,6 +52,18 @@
                                     <listOptionValue value="${PROJECT_LOC}"/>
                                     <listOptionValue value="${PROJECT_LOC}/mss"/>
                                     <listOptionValue value="${PROJECT_ROOT}\mss\mssgenerated"/>
+                                    <listOptionValue value="${NETWORK_PATH}/enet/core/include/"/>
+                                    <listOptionValue value="${NETWORK_PATH}/enet/soc/awr294x/../.."/>
+                                    <listOptionValue value="${NETWORK_PATH}/enet/soc/awr294x"/>
+                                    <listOptionValue value="${NETWORK_PATH}/enet/core"/>
+                                    <listOptionValue value="${NETWORK_PATH}\lwip\lwip-stack\src\include"/>
+                                    <listOptionValue value="${NETWORK_PATH}\lwip\lwip-config\awr294x"/>
+                                    <listOptionValue value="${NETWORK_PATH}\lwip\lwip-port\freertos\include"/>
+                                    <listOptionValue value="${NETWORK_PATH}\lwip\lwip-port\include"/>
+                                    <listOptionValue value="${NETWORK_PATH}/enet/hw_include"/>
+                                    <listOptionValue value="${NETWORK_PATH}/enet/utils/include"/>
+                                    <listOptionValue value="${NETWORK_PATH}/enet/core/include/core"/>
+                                    <listOptionValue value="${NETWORK_PATH}/enet/core/lwipif/inc"/>
                                 </option>
                                 <option id="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_4.0.compilerID.DEFINE.779001022" superClass="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_4.0.compilerID.DEFINE" valueType="definedSymbols">
                                     <listOptionValue value="${INHERITED_SYMBOLS}"/>
@@ -66,6 +79,7 @@
                                     <listOptionValue value="MMWAVE_SDK_DEVICE=awr2944"/>
                                     <listOptionValue value="SUBSYS_MSS"/>
                                     <listOptionValue value="_DEBUG_=1"/>
+                                    <listOptionValue value="ENET_STREAM"/>
                                 </option>
                                 <option id="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_4.0.compilerID.MCPU.1686780639" superClass="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_4.0.compilerID.MCPU" value="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_4.0.compilerID.MCPU.cortex-r5" valueType="enumerated"/>
                                 <option id="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_4.0.compilerID.MFLOAT_ABI.1678439315" superClass="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_4.0.compilerID.MFLOAT_ABI" value="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_4.0.compilerID.MFLOAT_ABI.hard" valueType="enumerated"/>
@@ -122,6 +136,10 @@
                                     <listOptionValue value="libhsiheader_awr2944.aer5f"/>
                                     <listOptionValue value="board.awr294x.r5f.ti-arm-clang.release.lib"/>
                                     <listOptionValue value="freertos.awr294x.r5f.ti-arm-clang.release.lib"/>
+                                    <listOptionValue value="${NETWORK_PATH}/enet/lib/lwipif-cpsw-freertos.awr294x.r5f.ti-arm-clang.debug.lib"/>
+                                    <listOptionValue value="${NETWORK_PATH}/enet/lib/enet-cpsw.awr294x.r5f.ti-arm-clang.debug.lib"/>
+                                    <listOptionValue value="${NETWORK_PATH}/lwip/lib/lwip-freertos.awr294x.r5f.ti-arm-clang.debug.lib"/>
+                                    <listOptionValue value="${NETWORK_PATH}/lwip/lib/lwip-contrib-freertos.awr294x.r5f.ti-arm-clang.debug.lib"/>
                                 </option>
                                 <option id="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_4.0.linkerID.DIAG_SUPPRESS.83259993" superClass="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_4.0.linkerID.DIAG_SUPPRESS" valueType="stringList">
                                     <listOptionValue value="10063"/>
