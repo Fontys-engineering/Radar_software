@@ -1,0 +1,146 @@
+################################################################################
+# Automatically-generated file. Do not edit!
+################################################################################
+
+SHELL = cmd.exe
+
+# Each subdirectory must supply rules for building sources it contributes
+mss/%.o: ../mss/%.c $(GEN_OPTS) | $(GEN_FILES) $(GEN_MISC_FILES)
+	@echo 'Building file: "$<"'
+	@echo 'Invoking: Arm Compiler'
+	"C:/ti/ccs2041/ccs/tools/compiler/ti-cgt-armllvm_4.0.4.LTS/bin/tiarmclang.exe" -c -mcpu=cortex-r5 -mfloat-abi=hard -mfpu=vfpv3-d16 -mlittle-endian -mthumb -Oz -flto -I"C:/ti/ccs2041/ccs/tools/compiler/ti-cgt-armllvm_4.0.4.LTS/include/c" -I"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04" -I"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source" -I"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/freertos/FreeRTOS-Kernel/include" -I"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/freertos/portable/TI_ARM_CLANG/ARM_CR5F" -I"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/freertos/config/awr294x/r5f" -I"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_dfp_02_04_18_01" -I"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01" -I"C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_mss" -I"C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_mss/mss" -I"C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_mss/mss/mssgenerated" -DDOWNLOAD_FROM_CCS -DDRIVERS_RADAR_HWA_V2 -DDebugP_LOG_ENABLED -DINCLUDE_DPM -DMMWDEMO_DDM -DSOC_AWR294X -DSOC_AWR2944 -D_LITTLE_ENDIAN -DAPP_RESOURCE_FILE='<'ti/demo/awr294x/mmw/mmw_resDDM.h'>' -DMMWAVE_SDK_DEVICE=awr2944 -DSUBSYS_MSS -D_DEBUG_=1 -g -Wall -Wno-gnu-variable-sized-type-not-at-end -Wno-unused-function -Wno-unused-but-set-variable -MMD -MMD -MP -MF"mss/$(basename $(<F)).d_raw" -MT"$(@)"  $(GEN_OPTS__FLAG) -o"$@" "$<"
+	@echo 'Finished building: "$<"'
+	@echo ' '
+
+build-619076038: ../mss/mss.syscfg
+	@echo 'Building file: "$<"'
+	@echo 'Invoking: SysConfig'
+	"C:/ti/sysconfig_1.23.0/sysconfig_cli.bat" -s "C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/.metadata/product.json" -p "LOP" -r "Default" --script "C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_mss/mss/mss.syscfg" --context "r5fss0-0" -o "C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_mss/mss/mssgenerated" --compiler ticlang
+	@echo 'Finished building: "$<"'
+	@echo ' '
+
+C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_mss/mss/mssgenerated/ti_dpl_config.c: build-619076038 ../mss/mss.syscfg
+C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_mss/mss/mssgenerated/ti_dpl_config.h: build-619076038
+C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_mss/mss/mssgenerated/ti_drivers_config.c: build-619076038
+C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_mss/mss/mssgenerated/ti_drivers_config.h: build-619076038
+C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_mss/mss/mssgenerated/ti_drivers_open_close.c: build-619076038
+C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_mss/mss/mssgenerated/ti_drivers_open_close.h: build-619076038
+C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_mss/mss/mssgenerated/ti_pinmux_config.c: build-619076038
+C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_mss/mss/mssgenerated/ti_power_clock_config.c: build-619076038
+C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_mss/mss/mssgenerated/ti_board_config.c: build-619076038
+C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_mss/mss/mssgenerated/ti_board_config.h: build-619076038
+C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_mss/mss/mssgenerated/ti_board_open_close.c: build-619076038
+C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_mss/mss/mssgenerated/ti_board_open_close.h: build-619076038
+C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_mss/mss/mssgenerated/ti_enet_config.c: build-619076038
+C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_mss/mss/mssgenerated/ti_enet_config.h: build-619076038
+C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_mss/mss/mssgenerated/ti_enet_open_close.c: build-619076038
+C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_mss/mss/mssgenerated/ti_enet_open_close.h: build-619076038
+C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_mss/mss/mssgenerated/ti_enet_soc.c: build-619076038
+C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_mss/mss/mssgenerated/ti_enet_lwipif.c: build-619076038
+C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_mss/mss/mssgenerated/ti_enet_lwipif.h: build-619076038
+
+mss/mssgenerated/ti_dpl_config.o: C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_mss/mss/mssgenerated/ti_dpl_config.c $(GEN_OPTS) | $(GEN_FILES) $(GEN_MISC_FILES)
+	@echo 'Building file: "$<"'
+	@echo 'Invoking: Arm Compiler'
+	"C:/ti/ccs2041/ccs/tools/compiler/ti-cgt-armllvm_4.0.4.LTS/bin/tiarmclang.exe" -c -mcpu=cortex-r5 -mfloat-abi=hard -mfpu=vfpv3-d16 -mlittle-endian -mthumb -Oz -flto -I"C:/ti/ccs2041/ccs/tools/compiler/ti-cgt-armllvm_4.0.4.LTS/include/c" -I"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04" -I"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source" -I"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/freertos/FreeRTOS-Kernel/include" -I"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/freertos/portable/TI_ARM_CLANG/ARM_CR5F" -I"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/freertos/config/awr294x/r5f" -I"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_dfp_02_04_18_01" -I"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01" -I"C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_mss" -I"C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_mss/mss" -I"C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_mss/mss/mssgenerated" -DDOWNLOAD_FROM_CCS -DDRIVERS_RADAR_HWA_V2 -DDebugP_LOG_ENABLED -DINCLUDE_DPM -DMMWDEMO_DDM -DSOC_AWR294X -DSOC_AWR2944 -D_LITTLE_ENDIAN -DAPP_RESOURCE_FILE='<'ti/demo/awr294x/mmw/mmw_resDDM.h'>' -DMMWAVE_SDK_DEVICE=awr2944 -DSUBSYS_MSS -D_DEBUG_=1 -g -Wall -Wno-gnu-variable-sized-type-not-at-end -Wno-unused-function -Wno-unused-but-set-variable -MMD -MMD -MP -MF"mss/mssgenerated/$(basename $(<F)).d_raw" -MT"$(@)"  $(GEN_OPTS__FLAG) -o"$@" "$<"
+	@echo 'Finished building: "$<"'
+	@echo ' '
+
+mss/mssgenerated/ti_drivers_config.o: C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_mss/mss/mssgenerated/ti_drivers_config.c $(GEN_OPTS) | $(GEN_FILES) $(GEN_MISC_FILES)
+	@echo 'Building file: "$<"'
+	@echo 'Invoking: Arm Compiler'
+	"C:/ti/ccs2041/ccs/tools/compiler/ti-cgt-armllvm_4.0.4.LTS/bin/tiarmclang.exe" -c -mcpu=cortex-r5 -mfloat-abi=hard -mfpu=vfpv3-d16 -mlittle-endian -mthumb -Oz -flto -I"C:/ti/ccs2041/ccs/tools/compiler/ti-cgt-armllvm_4.0.4.LTS/include/c" -I"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04" -I"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source" -I"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/freertos/FreeRTOS-Kernel/include" -I"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/freertos/portable/TI_ARM_CLANG/ARM_CR5F" -I"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/freertos/config/awr294x/r5f" -I"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_dfp_02_04_18_01" -I"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01" -I"C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_mss" -I"C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_mss/mss" -I"C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_mss/mss/mssgenerated" -DDOWNLOAD_FROM_CCS -DDRIVERS_RADAR_HWA_V2 -DDebugP_LOG_ENABLED -DINCLUDE_DPM -DMMWDEMO_DDM -DSOC_AWR294X -DSOC_AWR2944 -D_LITTLE_ENDIAN -DAPP_RESOURCE_FILE='<'ti/demo/awr294x/mmw/mmw_resDDM.h'>' -DMMWAVE_SDK_DEVICE=awr2944 -DSUBSYS_MSS -D_DEBUG_=1 -g -Wall -Wno-gnu-variable-sized-type-not-at-end -Wno-unused-function -Wno-unused-but-set-variable -MMD -MMD -MP -MF"mss/mssgenerated/$(basename $(<F)).d_raw" -MT"$(@)"  $(GEN_OPTS__FLAG) -o"$@" "$<"
+	@echo 'Finished building: "$<"'
+	@echo ' '
+
+mss/mssgenerated/ti_drivers_open_close.o: C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_mss/mss/mssgenerated/ti_drivers_open_close.c $(GEN_OPTS) | $(GEN_FILES) $(GEN_MISC_FILES)
+	@echo 'Building file: "$<"'
+	@echo 'Invoking: Arm Compiler'
+	"C:/ti/ccs2041/ccs/tools/compiler/ti-cgt-armllvm_4.0.4.LTS/bin/tiarmclang.exe" -c -mcpu=cortex-r5 -mfloat-abi=hard -mfpu=vfpv3-d16 -mlittle-endian -mthumb -Oz -flto -I"C:/ti/ccs2041/ccs/tools/compiler/ti-cgt-armllvm_4.0.4.LTS/include/c" -I"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04" -I"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source" -I"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/freertos/FreeRTOS-Kernel/include" -I"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/freertos/portable/TI_ARM_CLANG/ARM_CR5F" -I"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/freertos/config/awr294x/r5f" -I"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_dfp_02_04_18_01" -I"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01" -I"C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_mss" -I"C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_mss/mss" -I"C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_mss/mss/mssgenerated" -DDOWNLOAD_FROM_CCS -DDRIVERS_RADAR_HWA_V2 -DDebugP_LOG_ENABLED -DINCLUDE_DPM -DMMWDEMO_DDM -DSOC_AWR294X -DSOC_AWR2944 -D_LITTLE_ENDIAN -DAPP_RESOURCE_FILE='<'ti/demo/awr294x/mmw/mmw_resDDM.h'>' -DMMWAVE_SDK_DEVICE=awr2944 -DSUBSYS_MSS -D_DEBUG_=1 -g -Wall -Wno-gnu-variable-sized-type-not-at-end -Wno-unused-function -Wno-unused-but-set-variable -MMD -MMD -MP -MF"mss/mssgenerated/$(basename $(<F)).d_raw" -MT"$(@)"  $(GEN_OPTS__FLAG) -o"$@" "$<"
+	@echo 'Finished building: "$<"'
+	@echo ' '
+
+mss/mssgenerated/ti_pinmux_config.o: C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_mss/mss/mssgenerated/ti_pinmux_config.c $(GEN_OPTS) | $(GEN_FILES) $(GEN_MISC_FILES)
+	@echo 'Building file: "$<"'
+	@echo 'Invoking: Arm Compiler'
+	"C:/ti/ccs2041/ccs/tools/compiler/ti-cgt-armllvm_4.0.4.LTS/bin/tiarmclang.exe" -c -mcpu=cortex-r5 -mfloat-abi=hard -mfpu=vfpv3-d16 -mlittle-endian -mthumb -Oz -flto -I"C:/ti/ccs2041/ccs/tools/compiler/ti-cgt-armllvm_4.0.4.LTS/include/c" -I"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04" -I"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source" -I"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/freertos/FreeRTOS-Kernel/include" -I"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/freertos/portable/TI_ARM_CLANG/ARM_CR5F" -I"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/freertos/config/awr294x/r5f" -I"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_dfp_02_04_18_01" -I"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01" -I"C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_mss" -I"C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_mss/mss" -I"C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_mss/mss/mssgenerated" -DDOWNLOAD_FROM_CCS -DDRIVERS_RADAR_HWA_V2 -DDebugP_LOG_ENABLED -DINCLUDE_DPM -DMMWDEMO_DDM -DSOC_AWR294X -DSOC_AWR2944 -D_LITTLE_ENDIAN -DAPP_RESOURCE_FILE='<'ti/demo/awr294x/mmw/mmw_resDDM.h'>' -DMMWAVE_SDK_DEVICE=awr2944 -DSUBSYS_MSS -D_DEBUG_=1 -g -Wall -Wno-gnu-variable-sized-type-not-at-end -Wno-unused-function -Wno-unused-but-set-variable -MMD -MMD -MP -MF"mss/mssgenerated/$(basename $(<F)).d_raw" -MT"$(@)"  $(GEN_OPTS__FLAG) -o"$@" "$<"
+	@echo 'Finished building: "$<"'
+	@echo ' '
+
+mss/mssgenerated/ti_power_clock_config.o: C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_mss/mss/mssgenerated/ti_power_clock_config.c $(GEN_OPTS) | $(GEN_FILES) $(GEN_MISC_FILES)
+	@echo 'Building file: "$<"'
+	@echo 'Invoking: Arm Compiler'
+	"C:/ti/ccs2041/ccs/tools/compiler/ti-cgt-armllvm_4.0.4.LTS/bin/tiarmclang.exe" -c -mcpu=cortex-r5 -mfloat-abi=hard -mfpu=vfpv3-d16 -mlittle-endian -mthumb -Oz -flto -I"C:/ti/ccs2041/ccs/tools/compiler/ti-cgt-armllvm_4.0.4.LTS/include/c" -I"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04" -I"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source" -I"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/freertos/FreeRTOS-Kernel/include" -I"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/freertos/portable/TI_ARM_CLANG/ARM_CR5F" -I"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/freertos/config/awr294x/r5f" -I"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_dfp_02_04_18_01" -I"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01" -I"C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_mss" -I"C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_mss/mss" -I"C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_mss/mss/mssgenerated" -DDOWNLOAD_FROM_CCS -DDRIVERS_RADAR_HWA_V2 -DDebugP_LOG_ENABLED -DINCLUDE_DPM -DMMWDEMO_DDM -DSOC_AWR294X -DSOC_AWR2944 -D_LITTLE_ENDIAN -DAPP_RESOURCE_FILE='<'ti/demo/awr294x/mmw/mmw_resDDM.h'>' -DMMWAVE_SDK_DEVICE=awr2944 -DSUBSYS_MSS -D_DEBUG_=1 -g -Wall -Wno-gnu-variable-sized-type-not-at-end -Wno-unused-function -Wno-unused-but-set-variable -MMD -MMD -MP -MF"mss/mssgenerated/$(basename $(<F)).d_raw" -MT"$(@)"  $(GEN_OPTS__FLAG) -o"$@" "$<"
+	@echo 'Finished building: "$<"'
+	@echo ' '
+
+mss/mssgenerated/ti_board_config.o: C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_mss/mss/mssgenerated/ti_board_config.c $(GEN_OPTS) | $(GEN_FILES) $(GEN_MISC_FILES)
+	@echo 'Building file: "$<"'
+	@echo 'Invoking: Arm Compiler'
+	"C:/ti/ccs2041/ccs/tools/compiler/ti-cgt-armllvm_4.0.4.LTS/bin/tiarmclang.exe" -c -mcpu=cortex-r5 -mfloat-abi=hard -mfpu=vfpv3-d16 -mlittle-endian -mthumb -Oz -flto -I"C:/ti/ccs2041/ccs/tools/compiler/ti-cgt-armllvm_4.0.4.LTS/include/c" -I"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04" -I"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source" -I"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/freertos/FreeRTOS-Kernel/include" -I"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/freertos/portable/TI_ARM_CLANG/ARM_CR5F" -I"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/freertos/config/awr294x/r5f" -I"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_dfp_02_04_18_01" -I"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01" -I"C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_mss" -I"C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_mss/mss" -I"C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_mss/mss/mssgenerated" -DDOWNLOAD_FROM_CCS -DDRIVERS_RADAR_HWA_V2 -DDebugP_LOG_ENABLED -DINCLUDE_DPM -DMMWDEMO_DDM -DSOC_AWR294X -DSOC_AWR2944 -D_LITTLE_ENDIAN -DAPP_RESOURCE_FILE='<'ti/demo/awr294x/mmw/mmw_resDDM.h'>' -DMMWAVE_SDK_DEVICE=awr2944 -DSUBSYS_MSS -D_DEBUG_=1 -g -Wall -Wno-gnu-variable-sized-type-not-at-end -Wno-unused-function -Wno-unused-but-set-variable -MMD -MMD -MP -MF"mss/mssgenerated/$(basename $(<F)).d_raw" -MT"$(@)"  $(GEN_OPTS__FLAG) -o"$@" "$<"
+	@echo 'Finished building: "$<"'
+	@echo ' '
+
+mss/mssgenerated/ti_board_open_close.o: C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_mss/mss/mssgenerated/ti_board_open_close.c $(GEN_OPTS) | $(GEN_FILES) $(GEN_MISC_FILES)
+	@echo 'Building file: "$<"'
+	@echo 'Invoking: Arm Compiler'
+	"C:/ti/ccs2041/ccs/tools/compiler/ti-cgt-armllvm_4.0.4.LTS/bin/tiarmclang.exe" -c -mcpu=cortex-r5 -mfloat-abi=hard -mfpu=vfpv3-d16 -mlittle-endian -mthumb -Oz -flto -I"C:/ti/ccs2041/ccs/tools/compiler/ti-cgt-armllvm_4.0.4.LTS/include/c" -I"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04" -I"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source" -I"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/freertos/FreeRTOS-Kernel/include" -I"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/freertos/portable/TI_ARM_CLANG/ARM_CR5F" -I"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/freertos/config/awr294x/r5f" -I"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_dfp_02_04_18_01" -I"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01" -I"C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_mss" -I"C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_mss/mss" -I"C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_mss/mss/mssgenerated" -DDOWNLOAD_FROM_CCS -DDRIVERS_RADAR_HWA_V2 -DDebugP_LOG_ENABLED -DINCLUDE_DPM -DMMWDEMO_DDM -DSOC_AWR294X -DSOC_AWR2944 -D_LITTLE_ENDIAN -DAPP_RESOURCE_FILE='<'ti/demo/awr294x/mmw/mmw_resDDM.h'>' -DMMWAVE_SDK_DEVICE=awr2944 -DSUBSYS_MSS -D_DEBUG_=1 -g -Wall -Wno-gnu-variable-sized-type-not-at-end -Wno-unused-function -Wno-unused-but-set-variable -MMD -MMD -MP -MF"mss/mssgenerated/$(basename $(<F)).d_raw" -MT"$(@)"  $(GEN_OPTS__FLAG) -o"$@" "$<"
+	@echo 'Finished building: "$<"'
+	@echo ' '
+
+mss/mssgenerated/ti_enet_config.o: C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_mss/mss/mssgenerated/ti_enet_config.c $(GEN_OPTS) | $(GEN_FILES) $(GEN_MISC_FILES)
+	@echo 'Building file: "$<"'
+	@echo 'Invoking: Arm Compiler'
+	"C:/ti/ccs2041/ccs/tools/compiler/ti-cgt-armllvm_4.0.4.LTS/bin/tiarmclang.exe" -c -mcpu=cortex-r5 -mfloat-abi=hard -mfpu=vfpv3-d16 -mlittle-endian -mthumb -Oz -flto -I"C:/ti/ccs2041/ccs/tools/compiler/ti-cgt-armllvm_4.0.4.LTS/include/c" -I"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04" -I"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source" -I"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/freertos/FreeRTOS-Kernel/include" -I"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/freertos/portable/TI_ARM_CLANG/ARM_CR5F" -I"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/freertos/config/awr294x/r5f" -I"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_dfp_02_04_18_01" -I"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01" -I"C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_mss" -I"C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_mss/mss" -I"C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_mss/mss/mssgenerated" -DDOWNLOAD_FROM_CCS -DDRIVERS_RADAR_HWA_V2 -DDebugP_LOG_ENABLED -DINCLUDE_DPM -DMMWDEMO_DDM -DSOC_AWR294X -DSOC_AWR2944 -D_LITTLE_ENDIAN -DAPP_RESOURCE_FILE='<'ti/demo/awr294x/mmw/mmw_resDDM.h'>' -DMMWAVE_SDK_DEVICE=awr2944 -DSUBSYS_MSS -D_DEBUG_=1 -g -Wall -Wno-gnu-variable-sized-type-not-at-end -Wno-unused-function -Wno-unused-but-set-variable -MMD -MMD -MP -MF"mss/mssgenerated/$(basename $(<F)).d_raw" -MT"$(@)"  $(GEN_OPTS__FLAG) -o"$@" "$<"
+	@echo 'Finished building: "$<"'
+	@echo ' '
+
+mss/mssgenerated/ti_enet_open_close.o: C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_mss/mss/mssgenerated/ti_enet_open_close.c $(GEN_OPTS) | $(GEN_FILES) $(GEN_MISC_FILES)
+	@echo 'Building file: "$<"'
+	@echo 'Invoking: Arm Compiler'
+	"C:/ti/ccs2041/ccs/tools/compiler/ti-cgt-armllvm_4.0.4.LTS/bin/tiarmclang.exe" -c -mcpu=cortex-r5 -mfloat-abi=hard -mfpu=vfpv3-d16 -mlittle-endian -mthumb -Oz -flto -I"C:/ti/ccs2041/ccs/tools/compiler/ti-cgt-armllvm_4.0.4.LTS/include/c" -I"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04" -I"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source" -I"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/freertos/FreeRTOS-Kernel/include" -I"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/freertos/portable/TI_ARM_CLANG/ARM_CR5F" -I"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/freertos/config/awr294x/r5f" -I"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_dfp_02_04_18_01" -I"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01" -I"C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_mss" -I"C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_mss/mss" -I"C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_mss/mss/mssgenerated" -DDOWNLOAD_FROM_CCS -DDRIVERS_RADAR_HWA_V2 -DDebugP_LOG_ENABLED -DINCLUDE_DPM -DMMWDEMO_DDM -DSOC_AWR294X -DSOC_AWR2944 -D_LITTLE_ENDIAN -DAPP_RESOURCE_FILE='<'ti/demo/awr294x/mmw/mmw_resDDM.h'>' -DMMWAVE_SDK_DEVICE=awr2944 -DSUBSYS_MSS -D_DEBUG_=1 -g -Wall -Wno-gnu-variable-sized-type-not-at-end -Wno-unused-function -Wno-unused-but-set-variable -MMD -MMD -MP -MF"mss/mssgenerated/$(basename $(<F)).d_raw" -MT"$(@)"  $(GEN_OPTS__FLAG) -o"$@" "$<"
+	@echo 'Finished building: "$<"'
+	@echo ' '
+
+mss/mssgenerated/ti_enet_soc.o: C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_mss/mss/mssgenerated/ti_enet_soc.c $(GEN_OPTS) | $(GEN_FILES) $(GEN_MISC_FILES)
+	@echo 'Building file: "$<"'
+	@echo 'Invoking: Arm Compiler'
+	"C:/ti/ccs2041/ccs/tools/compiler/ti-cgt-armllvm_4.0.4.LTS/bin/tiarmclang.exe" -c -mcpu=cortex-r5 -mfloat-abi=hard -mfpu=vfpv3-d16 -mlittle-endian -mthumb -Oz -flto -I"C:/ti/ccs2041/ccs/tools/compiler/ti-cgt-armllvm_4.0.4.LTS/include/c" -I"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04" -I"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source" -I"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/freertos/FreeRTOS-Kernel/include" -I"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/freertos/portable/TI_ARM_CLANG/ARM_CR5F" -I"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/freertos/config/awr294x/r5f" -I"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_dfp_02_04_18_01" -I"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01" -I"C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_mss" -I"C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_mss/mss" -I"C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_mss/mss/mssgenerated" -DDOWNLOAD_FROM_CCS -DDRIVERS_RADAR_HWA_V2 -DDebugP_LOG_ENABLED -DINCLUDE_DPM -DMMWDEMO_DDM -DSOC_AWR294X -DSOC_AWR2944 -D_LITTLE_ENDIAN -DAPP_RESOURCE_FILE='<'ti/demo/awr294x/mmw/mmw_resDDM.h'>' -DMMWAVE_SDK_DEVICE=awr2944 -DSUBSYS_MSS -D_DEBUG_=1 -g -Wall -Wno-gnu-variable-sized-type-not-at-end -Wno-unused-function -Wno-unused-but-set-variable -MMD -MMD -MP -MF"mss/mssgenerated/$(basename $(<F)).d_raw" -MT"$(@)"  $(GEN_OPTS__FLAG) -o"$@" "$<"
+	@echo 'Finished building: "$<"'
+	@echo ' '
+
+mss/mssgenerated/ti_enet_lwipif.o: C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_mss/mss/mssgenerated/ti_enet_lwipif.c $(GEN_OPTS) | $(GEN_FILES) $(GEN_MISC_FILES)
+	@echo 'Building file: "$<"'
+	@echo 'Invoking: Arm Compiler'
+	"C:/ti/ccs2041/ccs/tools/compiler/ti-cgt-armllvm_4.0.4.LTS/bin/tiarmclang.exe" -c -mcpu=cortex-r5 -mfloat-abi=hard -mfpu=vfpv3-d16 -mlittle-endian -mthumb -Oz -flto -I"C:/ti/ccs2041/ccs/tools/compiler/ti-cgt-armllvm_4.0.4.LTS/include/c" -I"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04" -I"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source" -I"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/freertos/FreeRTOS-Kernel/include" -I"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/freertos/portable/TI_ARM_CLANG/ARM_CR5F" -I"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/freertos/config/awr294x/r5f" -I"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_dfp_02_04_18_01" -I"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01" -I"C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_mss" -I"C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_mss/mss" -I"C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_mss/mss/mssgenerated" -DDOWNLOAD_FROM_CCS -DDRIVERS_RADAR_HWA_V2 -DDebugP_LOG_ENABLED -DINCLUDE_DPM -DMMWDEMO_DDM -DSOC_AWR294X -DSOC_AWR2944 -D_LITTLE_ENDIAN -DAPP_RESOURCE_FILE='<'ti/demo/awr294x/mmw/mmw_resDDM.h'>' -DMMWAVE_SDK_DEVICE=awr2944 -DSUBSYS_MSS -D_DEBUG_=1 -g -Wall -Wno-gnu-variable-sized-type-not-at-end -Wno-unused-function -Wno-unused-but-set-variable -MMD -MMD -MP -MF"mss/mssgenerated/$(basename $(<F)).d_raw" -MT"$(@)"  $(GEN_OPTS__FLAG) -o"$@" "$<"
+	@echo 'Finished building: "$<"'
+	@echo ' '
+
+build-597457367: ../mss/mss_enet.syscfg
+	@echo 'Building file: "$<"'
+	@echo 'Invoking: SysConfig'
+	"C:/ti/sysconfig_1.23.0/sysconfig_cli.bat" -s "C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/.metadata/product.json" -p "LOP" -r "Default" --script "C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_mss/mss/mss_enet.syscfg" --context "r5fss0-0" -o "C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_mss/mss/mssgenerated" --compiler ticlang
+	@echo 'Finished building: "$<"'
+	@echo ' '
+
+C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_mss/mss/mssgenerated/ti_dpl_config.c: build-597457367 ../mss/mss_enet.syscfg
+C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_mss/mss/mssgenerated/ti_dpl_config.h: build-597457367
+C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_mss/mss/mssgenerated/ti_drivers_config.c: build-597457367
+C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_mss/mss/mssgenerated/ti_drivers_config.h: build-597457367
+C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_mss/mss/mssgenerated/ti_drivers_open_close.c: build-597457367
+C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_mss/mss/mssgenerated/ti_drivers_open_close.h: build-597457367
+C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_mss/mss/mssgenerated/ti_pinmux_config.c: build-597457367
+C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_mss/mss/mssgenerated/ti_power_clock_config.c: build-597457367
+C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_mss/mss/mssgenerated/ti_board_config.c: build-597457367
+C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_mss/mss/mssgenerated/ti_board_config.h: build-597457367
+C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_mss/mss/mssgenerated/ti_board_open_close.c: build-597457367
+C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_mss/mss/mssgenerated/ti_board_open_close.h: build-597457367
+C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_mss/mss/mssgenerated/ti_enet_config.c: build-597457367
+C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_mss/mss/mssgenerated/ti_enet_config.h: build-597457367
+C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_mss/mss/mssgenerated/ti_enet_open_close.c: build-597457367
+C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_mss/mss/mssgenerated/ti_enet_open_close.h: build-597457367
+C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_mss/mss/mssgenerated/ti_enet_soc.c: build-597457367
+C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_mss/mss/mssgenerated/ti_enet_lwipif.c: build-597457367
+C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_mss/mss/mssgenerated/ti_enet_lwipif.h: build-597457367
+
+
