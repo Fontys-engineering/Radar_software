@@ -24,7 +24,10 @@ ORDERED_OBJS += \
 "./mss/mssgenerated/ti_enet_soc.o" \
 "./mss/mssgenerated/ti_enet_lwipif.o" \
 "./mss/mss_main.o" \
+"./utils/enet_apputils.o" \
+"./utils/enet_cpswconfighandler.o" \
 "./utils/enet_stream.o" \
+"./utils/enet_tcpclient.o" \
 "./utils/mmwdemo_adcconfig.o" \
 "./utils/mmwdemo_flash.o" \
 "./utils/mmwdemo_monitor.o" \
@@ -183,9 +186,9 @@ out_of_box_2944_mss.xer5f: $(OBJS) $(CMD_SRCS) $(GEN_CMDS) C:/Users/petri/OneDri
 # Other Targets
 clean:
 	-$(RM) $(GEN_MISC_FILES__QUOTED)$(GEN_FILES__QUOTED)$(EXE_OUTPUTS__QUOTED)
-	-$(RM) "mss\mmw_cli.o" "mss\mmw_lvds_stream.o" "mss\mssgenerated\ti_dpl_config.o" "mss\mssgenerated\ti_drivers_config.o" "mss\mssgenerated\ti_drivers_open_close.o" "mss\mssgenerated\ti_pinmux_config.o" "mss\mssgenerated\ti_power_clock_config.o" "mss\mssgenerated\ti_board_config.o" "mss\mssgenerated\ti_board_open_close.o" "mss\mssgenerated\ti_enet_config.o" "mss\mssgenerated\ti_enet_open_close.o" "mss\mssgenerated\ti_enet_soc.o" "mss\mssgenerated\ti_enet_lwipif.o" "mss\mss_main.o" "utils\enet_stream.o" "utils\mmwdemo_adcconfig.o" "utils\mmwdemo_flash.o" "utils\mmwdemo_monitor.o" "utils\mmwdemo_rfparser.o" 
+	-$(RM) "mss\mmw_cli.o" "mss\mmw_lvds_stream.o" "mss\mssgenerated\ti_dpl_config.o" "mss\mssgenerated\ti_drivers_config.o" "mss\mssgenerated\ti_drivers_open_close.o" "mss\mssgenerated\ti_pinmux_config.o" "mss\mssgenerated\ti_power_clock_config.o" "mss\mssgenerated\ti_board_config.o" "mss\mssgenerated\ti_board_open_close.o" "mss\mssgenerated\ti_enet_config.o" "mss\mssgenerated\ti_enet_open_close.o" "mss\mssgenerated\ti_enet_soc.o" "mss\mssgenerated\ti_enet_lwipif.o" "mss\mss_main.o" "utils\enet_apputils.o" "utils\enet_cpswconfighandler.o" "utils\enet_stream.o" "utils\enet_tcpclient.o" "utils\mmwdemo_adcconfig.o" "utils\mmwdemo_flash.o" "utils\mmwdemo_monitor.o" "utils\mmwdemo_rfparser.o" 
 	-$(RM) "mss\mmw_cli.d" "mss\mmw_lvds_stream.d" "mss\mssgenerated\ti_dpl_config.d" "mss\mssgenerated\ti_drivers_config.d" "mss\mssgenerated\ti_drivers_open_close.d" "mss\mssgenerated\ti_pinmux_config.d" "mss\mssgenerated\ti_power_clock_config.d" "mss\mssgenerated\ti_board_config.d" "mss\mssgenerated\ti_board_open_close.d" "mss\mssgenerated\ti_enet_config.d" "mss\mssgenerated\ti_enet_open_close.d" "mss\mssgenerated\ti_enet_soc.d" "mss\mssgenerated\ti_enet_lwipif.d" "mss\mssgenerated\ti_dpl_config.d" "mss\mssgenerated\ti_drivers_config.d" "mss\mssgenerated\ti_drivers_open_close.d" "mss\mssgenerated\ti_pinmux_config.d" "mss\mssgenerated\ti_power_clock_config.d" "mss\mssgenerated\ti_board_config.d" "mss\mssgenerated\ti_board_open_close.d" "mss\mssgenerated\ti_enet_config.d" "mss\mssgenerated\ti_enet_open_close.d" "mss\mssgenerated\ti_enet_soc.d" "mss\mssgenerated\ti_enet_lwipif.d" "mss\mss_main.d" "mss\mssgenerated\ti_board_config.d" "mss\mssgenerated\ti_board_open_close.d" "mss\mssgenerated\ti_dpl_config.d" 
-	-$(RM) "mss\mssgenerated\ti_drivers_config.d" "mss\mssgenerated\ti_drivers_open_close.d" "mss\mssgenerated\ti_enet_config.d" "mss\mssgenerated\ti_enet_lwipif.d" "mss\mssgenerated\ti_enet_open_close.d" "mss\mssgenerated\ti_enet_soc.d" "mss\mssgenerated\ti_pinmux_config.d" "mss\mssgenerated\ti_power_clock_config.d" "utils\enet_stream.d" "utils\mmwdemo_adcconfig.d" "utils\mmwdemo_flash.d" "utils\mmwdemo_monitor.d" "utils\mmwdemo_rfparser.d" 
+	-$(RM) "mss\mssgenerated\ti_drivers_config.d" "mss\mssgenerated\ti_drivers_open_close.d" "mss\mssgenerated\ti_enet_config.d" "mss\mssgenerated\ti_enet_lwipif.d" "mss\mssgenerated\ti_enet_open_close.d" "mss\mssgenerated\ti_enet_soc.d" "mss\mssgenerated\ti_pinmux_config.d" "mss\mssgenerated\ti_power_clock_config.d" "utils\enet_apputils.d" "utils\enet_cpswconfighandler.d" "utils\enet_stream.d" "utils\enet_tcpclient.d" "utils\mmwdemo_adcconfig.d" "utils\mmwdemo_flash.d" "utils\mmwdemo_monitor.d" "utils\mmwdemo_rfparser.d" 
 	-@echo 'Finished clean'
 	-@echo ' '
 

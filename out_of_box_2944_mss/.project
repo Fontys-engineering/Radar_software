@@ -20,6 +20,16 @@
 	</natures>
 	<linkedResources>
 		<link>
+			<name>utils/enet_apputils.c</name>
+			<type>1</type>
+			<locationURI>COM_TI_MCU_PLUS_SDK_AWR294X_INSTALL_DIR/source/networking/enet/utils/enet_apputils.c</locationURI>
+		</link>
+		<link>
+			<name>utils/enet_cpswconfighandler.c</name>
+			<type>1</type>
+			<locationURI>COM_TI_MMWAVE_MCUPLUS_SDK_INSTALL_DIR/ti/demo/utils/enet_cpswconfighandler.c</locationURI>
+		</link>
+		<link>
 			<name>utils/enet_stream.c</name>
 			<type>1</type>
 			<location>C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/demo/utils/enet_stream.c</location>
