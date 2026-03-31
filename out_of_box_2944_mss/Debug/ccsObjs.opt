@@ -12,6 +12,7 @@
 "./mss/mssgenerated/ti_enet_soc.o"
 "./mss/mssgenerated/ti_enet_lwipif.o"
 "./mss/mss_main.o"
+"./utils/TaskP_freertos.o"
 "./utils/enet_apputils.o"
 "./utils/enet_cpswconfighandler.o"
 "./utils/enet_stream.o"
@@ -37,3 +38,4 @@
 -l"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/lib/enet-cpsw.awr294x.r5f.ti-arm-clang.debug.lib"
 -l"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/lwip/lib/lwip-freertos.awr294x.r5f.ti-arm-clang.debug.lib"
 -l"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/lwip/lib/lwip-contrib-freertos.awr294x.r5f.ti-arm-clang.debug.lib"
+-l"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/freertos/lib/freertos.awr294x.r5f.ti-arm-clang.debug.lib"

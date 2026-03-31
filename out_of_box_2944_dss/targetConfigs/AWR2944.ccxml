@@ -18,6 +18,21 @@
                                 <subpath id="subpath_4">
                                     <property Type="choicelist" Value="0" desc="Type_0" id="Type"/>
                                 </subpath>
+                                <subpath id="subpath_3">
+                                    <cpu XML_version="1.2" id="Cortex_R5_0" HW_revision="1.0" isa="Cortex_R5" description="Cortex_R5 CPU">
+                                        <property id="GEL File" Type="filepathfield" Value="../../../../../../../../.."/>
+                                    </cpu>
+                                </subpath>
+                            </router>
+                        </subpath>
+                        <subpath id="subpath_0">
+                            <router XML_version="1.2" id="IcePick_M_0" HW_revision="1.0" isa="ICEPICK_M" description="ICEPick_M Router">
+                                <subpath id="subpath_1">
+                                    <cpu XML_version="1.2" id="C66xx_DSP" HW_revision="1.0" isa="TMS320C66XX" description="C66xx CGEM+FP CPU">
+                                        <property id="Domain Power Loss Mode" Type="stringfield" Value="-1"/>
+                                        <property id="GEL File" Type="filepathfield" Value="../../../../../../../../.."/>
+                                    </cpu>
+                                </subpath>
                             </router>
                         </subpath>
                     </router>

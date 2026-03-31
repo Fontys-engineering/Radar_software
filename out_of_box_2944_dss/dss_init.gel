@@ -1,0 +1,14 @@
+OnTargetConnect()
+{
+    GEL_TextOut("DSS: Connected\n");
+
+    /* Reset DSS */
+    GEL_TextOut("DSS: Resetting CPU\n");
+    GEL_Reset();
+
+    /* Load DSS program */
+    GEL_TextOut("DSS: Loading program\n");
+    GEL_LoadProgram("C:\\Users\\petri\\OneDrive\\Asiakirjat\\GitHub\\Radar_software\\out_of_box_2944_dss\\Debug\\out_of_box_2944_dss.xe66");
+
+    GEL_TextOut("DSS: Done (not running)\n");
+}

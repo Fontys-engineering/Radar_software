@@ -6,6 +6,7 @@ SHELL = cmd.exe
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
+../utils/TaskP_freertos.c \
 C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/utils/enet_apputils.c \
 C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/demo/utils/enet_cpswconfighandler.c \
 C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/demo/utils/enet_stream.c \
@@ -16,6 +17,7 @@ C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/demo/util
 ../utils/mmwdemo_rfparser.c 
 
 C_DEPS += \
+./utils/TaskP_freertos.d \
 ./utils/enet_apputils.d \
 ./utils/enet_cpswconfighandler.d \
 ./utils/enet_stream.d \
@@ -26,6 +28,7 @@ C_DEPS += \
 ./utils/mmwdemo_rfparser.d 
 
 OBJS += \
+./utils/TaskP_freertos.o \
 ./utils/enet_apputils.o \
 ./utils/enet_cpswconfighandler.o \
 ./utils/enet_stream.o \
@@ -36,6 +39,7 @@ OBJS += \
 ./utils/mmwdemo_rfparser.o 
 
 OBJS__QUOTED += \
+"utils\TaskP_freertos.o" \
 "utils\enet_apputils.o" \
 "utils\enet_cpswconfighandler.o" \
 "utils\enet_stream.o" \
@@ -46,6 +50,7 @@ OBJS__QUOTED += \
 "utils\mmwdemo_rfparser.o" 
 
 C_DEPS__QUOTED += \
+"utils\TaskP_freertos.d" \
 "utils\enet_apputils.d" \
 "utils\enet_cpswconfighandler.d" \
 "utils\enet_stream.d" \
@@ -56,6 +61,7 @@ C_DEPS__QUOTED += \
 "utils\mmwdemo_rfparser.d" 
 
 C_SRCS__QUOTED += \
+"../utils/TaskP_freertos.c" \
 "C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/utils/enet_apputils.c" \
 "C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/demo/utils/enet_cpswconfighandler.c" \
 "C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/demo/utils/enet_stream.c" \

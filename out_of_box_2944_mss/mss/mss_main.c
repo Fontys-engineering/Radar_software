@@ -1709,6 +1709,7 @@ static void MmwDemo_mmWaveCtrlTask(void* args)
         {
             MmwDemo_debugAssert (0);
         }
+        
     }
 }
 
@@ -3242,6 +3243,7 @@ static void mmwDemo_mssDPMTask(void* args)
         {
             test_print ("Error: DPM execution failed [Error code %d]\n", errCode);
         }
+        test_print("DPM Alive\n");    
     }
 }
 
@@ -4090,7 +4092,7 @@ static void MmwDemo_initTask(void* args)
     /*The delay below is needed only if the DCA1000EVM is being used to capture the data traces.
       This is needed because the DCA1000EVM FPGA needs the delay to lock to the
       bit clock before they can start capturing the data correctly. */
-    ClockP_usleep(12 * 1000);
+    //ClockP_usleep(12 * 1000);
 #endif
 
     /* initialize cq configs to invalid profile index to be able to detect
@@ -4113,7 +4115,7 @@ static void MmwDemo_initTask(void* args)
     }
 
     /* Open the UART Instance */
-    gMmwMssMCB.commandUartHandle = gUartHandle[CONFIG_UART0];
+    gMmwMssMCB.commandUartHandle = gUartHandle[CONFIG_UART0]; 
     if (gMmwMssMCB.commandUartHandle == NULL)
     {
         MmwDemo_debugAssert (0);
@@ -4299,6 +4301,7 @@ static void MmwDemo_initTask(void* args)
      * Initialize the CLI Module:
      *****************************************************************************/
     MmwDemo_CLIInit(MMWDEMO_CLI_TASK_PRIORITY);
+    test_print("CLI Alive\n");
 
     /* Never return for this task. */
     SemaphoreP_pend(&gMmwMssMCB.demoInitTaskCompleteSemHandle, SystemP_WAIT_FOREVER);

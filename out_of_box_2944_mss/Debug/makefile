@@ -24,6 +24,7 @@ ORDERED_OBJS += \
 "./mss/mssgenerated/ti_enet_soc.o" \
 "./mss/mssgenerated/ti_enet_lwipif.o" \
 "./mss/mss_main.o" \
+"./utils/TaskP_freertos.o" \
 "./utils/enet_apputils.o" \
 "./utils/enet_cpswconfighandler.o" \
 "./utils/enet_stream.o" \
@@ -50,6 +51,7 @@ $(GEN_CMDS__FLAG) \
 -Wl,-l"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/lib/enet-cpsw.awr294x.r5f.ti-arm-clang.debug.lib" \
 -Wl,-l"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/lwip/lib/lwip-freertos.awr294x.r5f.ti-arm-clang.debug.lib" \
 -Wl,-l"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/lwip/lib/lwip-contrib-freertos.awr294x.r5f.ti-arm-clang.debug.lib" \
+-Wl,-l"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/freertos/lib/freertos.awr294x.r5f.ti-arm-clang.debug.lib" \
 
 -include ../makefile.init
 
@@ -60,11 +62,9 @@ RMDIR := RMDIR /S/Q
 -include sources.mk
 -include subdir_vars.mk
 -include mss/subdir_vars.mk
--include mss/mssgenerated/subdir_vars.mk
 -include utils/subdir_vars.mk
 -include subdir_rules.mk
 -include mss/subdir_rules.mk
--include mss/mssgenerated/subdir_rules.mk
 -include utils/subdir_rules.mk
 -include objects.mk
 
@@ -172,7 +172,7 @@ main-build: $(OBJS) $(CMD_SRCS) $(GEN_CMDS)
 	@$(MAKE) --no-print-directory -Onone "out_of_box_2944_mss.xer5f"
 
 dependents:
-	-cd C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_dss/Debug && $(MAKE) all
+	-cd C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_dss/Debug && $(MAKE) clean all
 
 # Tool invocations
 out_of_box_2944_mss.xer5f: $(OBJS) $(CMD_SRCS) $(GEN_CMDS) C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_dss/Debug/out_of_box_2944_dss.xe66
@@ -186,9 +186,9 @@ out_of_box_2944_mss.xer5f: $(OBJS) $(CMD_SRCS) $(GEN_CMDS) C:/Users/petri/OneDri
 # Other Targets
 clean:
 	-$(RM) $(GEN_MISC_FILES__QUOTED)$(GEN_FILES__QUOTED)$(EXE_OUTPUTS__QUOTED)
-	-$(RM) "mss\mmw_cli.o" "mss\mmw_lvds_stream.o" "mss\mssgenerated\ti_dpl_config.o" "mss\mssgenerated\ti_drivers_config.o" "mss\mssgenerated\ti_drivers_open_close.o" "mss\mssgenerated\ti_pinmux_config.o" "mss\mssgenerated\ti_power_clock_config.o" "mss\mssgenerated\ti_board_config.o" "mss\mssgenerated\ti_board_open_close.o" "mss\mssgenerated\ti_enet_config.o" "mss\mssgenerated\ti_enet_open_close.o" "mss\mssgenerated\ti_enet_soc.o" "mss\mssgenerated\ti_enet_lwipif.o" "mss\mss_main.o" "utils\enet_apputils.o" "utils\enet_cpswconfighandler.o" "utils\enet_stream.o" "utils\enet_tcpclient.o" "utils\mmwdemo_adcconfig.o" "utils\mmwdemo_flash.o" "utils\mmwdemo_monitor.o" "utils\mmwdemo_rfparser.o" 
-	-$(RM) "mss\mmw_cli.d" "mss\mmw_lvds_stream.d" "mss\mssgenerated\ti_dpl_config.d" "mss\mssgenerated\ti_drivers_config.d" "mss\mssgenerated\ti_drivers_open_close.d" "mss\mssgenerated\ti_pinmux_config.d" "mss\mssgenerated\ti_power_clock_config.d" "mss\mssgenerated\ti_board_config.d" "mss\mssgenerated\ti_board_open_close.d" "mss\mssgenerated\ti_enet_config.d" "mss\mssgenerated\ti_enet_open_close.d" "mss\mssgenerated\ti_enet_soc.d" "mss\mssgenerated\ti_enet_lwipif.d" "mss\mssgenerated\ti_dpl_config.d" "mss\mssgenerated\ti_drivers_config.d" "mss\mssgenerated\ti_drivers_open_close.d" "mss\mssgenerated\ti_pinmux_config.d" "mss\mssgenerated\ti_power_clock_config.d" "mss\mssgenerated\ti_board_config.d" "mss\mssgenerated\ti_board_open_close.d" "mss\mssgenerated\ti_enet_config.d" "mss\mssgenerated\ti_enet_open_close.d" "mss\mssgenerated\ti_enet_soc.d" "mss\mssgenerated\ti_enet_lwipif.d" "mss\mss_main.d" "mss\mssgenerated\ti_board_config.d" "mss\mssgenerated\ti_board_open_close.d" "mss\mssgenerated\ti_dpl_config.d" 
-	-$(RM) "mss\mssgenerated\ti_drivers_config.d" "mss\mssgenerated\ti_drivers_open_close.d" "mss\mssgenerated\ti_enet_config.d" "mss\mssgenerated\ti_enet_lwipif.d" "mss\mssgenerated\ti_enet_open_close.d" "mss\mssgenerated\ti_enet_soc.d" "mss\mssgenerated\ti_pinmux_config.d" "mss\mssgenerated\ti_power_clock_config.d" "utils\enet_apputils.d" "utils\enet_cpswconfighandler.d" "utils\enet_stream.d" "utils\enet_tcpclient.d" "utils\mmwdemo_adcconfig.d" "utils\mmwdemo_flash.d" "utils\mmwdemo_monitor.d" "utils\mmwdemo_rfparser.d" 
+	-$(RM) "mss\mmw_cli.o" "mss\mmw_lvds_stream.o" "mss\mssgenerated\ti_dpl_config.o" "mss\mssgenerated\ti_drivers_config.o" "mss\mssgenerated\ti_drivers_open_close.o" "mss\mssgenerated\ti_pinmux_config.o" "mss\mssgenerated\ti_power_clock_config.o" "mss\mssgenerated\ti_board_config.o" "mss\mssgenerated\ti_board_open_close.o" "mss\mssgenerated\ti_enet_config.o" "mss\mssgenerated\ti_enet_open_close.o" "mss\mssgenerated\ti_enet_soc.o" "mss\mssgenerated\ti_enet_lwipif.o" "mss\mss_main.o" "utils\TaskP_freertos.o" "utils\enet_apputils.o" "utils\enet_cpswconfighandler.o" "utils\enet_stream.o" "utils\enet_tcpclient.o" "utils\mmwdemo_adcconfig.o" "utils\mmwdemo_flash.o" "utils\mmwdemo_monitor.o" "utils\mmwdemo_rfparser.o" 
+	-$(RM) "mss\mmw_cli.d" "mss\mmw_lvds_stream.d" "mss\mssgenerated\ti_dpl_config.d" "mss\mssgenerated\ti_drivers_config.d" "mss\mssgenerated\ti_drivers_open_close.d" "mss\mssgenerated\ti_pinmux_config.d" "mss\mssgenerated\ti_power_clock_config.d" "mss\mssgenerated\ti_board_config.d" "mss\mssgenerated\ti_board_open_close.d" "mss\mssgenerated\ti_enet_config.d" "mss\mssgenerated\ti_enet_open_close.d" "mss\mssgenerated\ti_enet_soc.d" "mss\mssgenerated\ti_enet_lwipif.d" "mss\mssgenerated\ti_dpl_config.d" "mss\mssgenerated\ti_drivers_config.d" "mss\mssgenerated\ti_drivers_open_close.d" "mss\mssgenerated\ti_pinmux_config.d" "mss\mssgenerated\ti_power_clock_config.d" "mss\mssgenerated\ti_board_config.d" "mss\mssgenerated\ti_board_open_close.d" "mss\mssgenerated\ti_enet_config.d" "mss\mssgenerated\ti_enet_open_close.d" "mss\mssgenerated\ti_enet_soc.d" "mss\mssgenerated\ti_enet_lwipif.d" "mss\mss_main.d" "utils\TaskP_freertos.d" "utils\enet_apputils.d" "utils\enet_cpswconfighandler.d" "utils\enet_stream.d" 
+	-$(RM) "utils\enet_tcpclient.d" "utils\mmwdemo_adcconfig.d" "utils\mmwdemo_flash.d" "utils\mmwdemo_monitor.d" "utils\mmwdemo_rfparser.d" 
 	-@echo 'Finished clean'
 	-@echo ' '
 

@@ -1,0 +1,14 @@
+OnTargetConnect()
+{
+    GEL_TextOut("MSS: Connected\n");
+
+    /* Reset MSS */
+    GEL_TextOut("MSS: Resetting CPU\n");
+    GEL_Reset();
+
+    /* Load MSS program */
+    GEL_TextOut("MSS: Loading program\n");
+    GEL_LoadProgram("C:\\Users\\petri\\OneDrive\\Asiakirjat\\GitHub\\Radar_software\\out_of_box_2944_mss\\Debug\\out_of_box_2944_mss_strip.xer5f");
+
+    GEL_TextOut("MSS: Done (not running)\n");
+}
