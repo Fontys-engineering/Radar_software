@@ -79,6 +79,7 @@ SECTIONS{
     /* This is rest of initialized data. This can be placed in DDR if DDR is available and needed */
     GROUP {
         .data:   {} palign(8)   /* This is where initialized globals and static go */
+        .stack:  {} palign(8)   /* This is where the main() stack goes */
     } > MSS_L2
 
     /* This is rest of uninitialized data. This can be placed in DDR if DDR is available and needed */
@@ -87,7 +88,7 @@ SECTIONS{
         RUN_START(__BSS_START)
         RUN_END(__BSS_END)
         .sysmem: {} palign(8)   /* This is where the malloc heap goes */
-        .stack:  {} palign(8)   /* This is where the main() stack goes */
+    
     } > DSS_L3
 
     /* This is where the stacks for different R5F modes go */

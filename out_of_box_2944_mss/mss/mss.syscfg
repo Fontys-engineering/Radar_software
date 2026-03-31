@@ -1,8 +1,8 @@
 /**
  * These arguments were used when this file was generated. They will be automatically applied on subsequent loads
  * via the GUI or CLI. Run CLI with '--help' for additional information on how to override these arguments.
- * @cliArgs --device "AWR294X" --part "Default" --package "ETS" --context "r5fss0-0" --product "MCU_PLUS_SDK_AWR2944@10.01.00"
- * @v2CliArgs --device "AWR2944" --package "FCCSP (ALT)" --variant "AWR294x" --context "r5fss0-0" --product "MCU_PLUS_SDK_AWR2944@10.01.00"
+ * @cliArgs --device "AWR294X" --part "Default" --package "ETS" --context "r5fss0-0" --product "MCU_PLUS_SDK_AWR2944@10.02.00"
+ * @v2CliArgs --device "AWR2944" --package "FCCSP (ALT)" --variant "AWR294x" --context "r5fss0-0" --product "MCU_PLUS_SDK_AWR2944@10.02.00"
  * @versions {"tool":"1.23.0+4000"}
  */
 
@@ -64,7 +64,6 @@ uart1.$name           = "CONFIG_UART1";
 uart1.baudRate        = 3125000;
 uart1.intrEnable      = "DISABLE";
 uart1.UART.$assign    = "UARTB";
-uart1.UART.RX.$used   = false;
 uart1.UART.TX.$assign = "PAD_DE";
 
 edma2.$name                        = "CONFIG_EDMA1";
@@ -147,6 +146,7 @@ flash1.peripheralDriver.QSPI["3"].$suggestSolution = "PAD_AO";
 flash1.peripheralDriver.QSPI.$suggestSolution      = "QSPI0";
 flash1.peripheralDriver.QSPI.CLK.$suggestSolution  = "PAD_AP";
 flash1.peripheralDriver.QSPI.CS.$suggestSolution   = "PAD_AQ";
+uart1.UART.RX.$suggestSolution                     = "PAD_BB";
 enet_cpsw1.pinmux[0].CPTS.$suggestSolution         = "CPTS0";
 enet_cpsw1.pinmux[0].MDIO.$suggestSolution         = "MDIO0";
 enet_cpsw1.pinmux[0].MDIO.DATA.$suggestSolution    = "PAD_CM";
