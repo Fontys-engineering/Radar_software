@@ -715,8 +715,8 @@
 #define MMWDEMO_CLI_TASK_PRIORITY                 7
 #define MMWDEMO_UART_EXPORT_TASK_PRIORITY         8
 #define MMWDEMO_DPC_OBJDET_DPM_TASK_PRIORITY      9
-#define MMWDEMO_MMWAVE_CTRL_TASK_PRIORITY         5 //Original : 10
-#define MMWDEMO_MMWAVE_ENET_TASK_PRIORITY         3 //Original : 1
+#define MMWDEMO_MMWAVE_CTRL_TASK_PRIORITY         10 //Original : 10
+#define MMWDEMO_MMWAVE_ENET_TASK_PRIORITY         1 //Original : 1
 
 #else
 #define MMWDEMO_CLI_TASK_PRIORITY                 3
@@ -766,7 +766,7 @@ MmwDemo_enetStreamObjData gEnetStreamObjData;
 #define MMWDEMO_DPC_OBJDET_DPM_TASK_STACK_SIZE (4*1024U)
 #define MMWDEMO_UART_DATA_EXPORT_TASK_STACK_SIZE (4*1024U)
 #ifdef ENET_STREAM
-#define MMWDEMO_MMWAVE_ENET_TASK_STACK_SIZE (4*1024U)
+#define MMWDEMO_MMWAVE_ENET_TASK_STACK_SIZE (8*1024U)
 #endif
 
 /* Application task stack variables */
@@ -2308,7 +2308,7 @@ exit:
 static void MmwDemo_dataPathStart (void)
 {
     int32_t retVal;
-
+    test_print("DataPath Start\n");
     DebugP_logInfo("App: Issuing DPM_start\n");
 #ifdef LVDS_STREAM
     /* Configure HW LVDS stream for the first sub-frame that will start upon
@@ -2329,7 +2329,7 @@ static void MmwDemo_dataPathStart (void)
 
     /* Wait until start completed */
     SemaphoreP_pend(&gMmwMssMCB.DPMstartSemHandle, SystemP_WAIT_FOREVER);
-
+    test_print("Datapath Done\n");
     DebugP_logInfo("App: DPM_start Done (post SemaphoreP_pend on reportFxn reporting start)\n");
 }
 
@@ -2689,6 +2689,7 @@ static void MmwDemo_DPC_ObjectDetection_reportFxn
             DebugP_assert (0);
             break;
         }
+            test_print("DPM REPORT: %d\n", reportType);
     }
     return;
 }
@@ -3683,6 +3684,12 @@ int32_t MmwDemo_startSensor(void)
 {
     int32_t     errCode;
     MMWave_CalibrationCfg   calibrationCfg;
+        /* 🔴 HARD PROTECTION: prevent double start */
+    if (gMmwMssMCB.sensorState == MmwDemo_SensorState_STARTED)
+    {
+        test_print("ERROR: MmwDemo_startSensor called while already STARTED\n");
+        return 0;
+    }
 
     /*****************************************************************************
      * Data path :: start data path first - this will pend for DPC to ack
@@ -3720,7 +3727,6 @@ int32_t MmwDemo_startSensor(void)
         MmwDemo_debugAssert(0);
         return -1;
     }
-
     gMmwMssMCB.sensorStartCount++;
     return 0;
 }
@@ -4206,24 +4212,7 @@ static void MmwDemo_initTask(void* args)
 
     configASSERT(gMmwMssMCB.taskHandles.mmwCtrlTask != NULL);
 
-#ifdef ENET_STREAM
-   /*****************************************************************************
-     * Launch the mmWave enet task
-     *****************************************************************************/
-    /* Create Enet configuration done semaphore */
-    SemaphoreP_constructBinary(&gMmwMssMCB.enetCfg.EnetCfgDoneSemHandle, 0);
 
-    gMmwMssMCB.taskHandles.enetTask = xTaskCreateStatic( enetTask,
-                                      "enet_task",
-                                      MMWDEMO_MMWAVE_ENET_TASK_STACK_SIZE,
-                                      NULL,
-                                      MMWDEMO_MMWAVE_ENET_TASK_PRIORITY,
-                                      gMmwEnetTskStack,
-                                      &gMmwMssMCB.taskHandles.enetTaskObj );
-    test_print("PreConfig");
-    configASSERT(gMmwMssMCB.taskHandles.enetTask != NULL);
-    test_print("Post-ENET\n");
-#endif
 
     /*****************************************************************************
      * Initialization of the DPM Module:
@@ -4313,6 +4302,26 @@ static void MmwDemo_initTask(void* args)
     test_print("Before CLI Init\n");
     MmwDemo_CLIInit(MMWDEMO_CLI_TASK_PRIORITY);
     test_print("After CLI Init\n");
+
+    #ifdef ENET_STREAM
+   /*****************************************************************************
+     * Launch the mmWave enet task
+     *****************************************************************************/
+    /* Create Enet configuration done semaphore */
+    test_print("Pre Enet-Semaphore\n");
+    SemaphoreP_constructBinary(&gMmwMssMCB.enetCfg.EnetCfgDoneSemHandle, 0);
+    test_print("Post-Sema/PreEnet\n");
+    gMmwMssMCB.taskHandles.enetTask = xTaskCreateStatic( enetTask,
+                                      "enet_task",
+                                      MMWDEMO_MMWAVE_ENET_TASK_STACK_SIZE,
+                                      NULL,
+                                      MMWDEMO_MMWAVE_ENET_TASK_PRIORITY,
+                                      gMmwEnetTskStack,
+                                      &gMmwMssMCB.taskHandles.enetTaskObj );
+    test_print("PreConfig\n");
+    configASSERT(gMmwMssMCB.taskHandles.enetTask != NULL);
+    test_print("Post-ENET\n");
+#endif
 
     /* Never return for this task. */
     SemaphoreP_pend(&gMmwMssMCB.demoInitTaskCompleteSemHandle, SystemP_WAIT_FOREVER);

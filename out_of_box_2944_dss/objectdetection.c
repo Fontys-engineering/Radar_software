@@ -403,6 +403,7 @@ static int32_t DPC_ObjectDetection_execute
 (
     DPM_DPCHandle handle,
     DPM_Buffer*       ptrResult
+    
 );
 
 static int32_t DPC_ObjectDetection_ioctl
@@ -994,6 +995,7 @@ exit:
  *  @retval
  *      Error   -   <0
  */
+static uint32_t frameCnt = 0;
 static int32_t DPC_ObjectDetection_execute
 (
     DPM_DPCHandle   handle,
@@ -1144,6 +1146,9 @@ static int32_t DPC_ObjectDetection_execute
         ptrResult->size[i] = 0;
     }
 
+    frameCnt++;
+
+    test_print("DSS FRAME %d\n", frameCnt);
 exit:
 
     return retVal;

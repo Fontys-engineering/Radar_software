@@ -174,7 +174,7 @@ main-build: $(OBJS) $(CMD_SRCS) $(GEN_CMDS)
 	@$(MAKE) --no-print-directory -Onone "out_of_box_2944_mss.xer5f"
 
 dependents:
-	-cd C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_dss/Debug && $(MAKE) clean all
+	-cd C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_dss/Debug && $(MAKE) all
 
 # Tool invocations
 out_of_box_2944_mss.xer5f: $(OBJS) $(CMD_SRCS) $(GEN_CMDS) C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_dss/Debug/out_of_box_2944_dss.xe66
