@@ -120,5 +120,6 @@ GEN_OPTS__QUOTED :=
 SUBDIRS := \
 . \
 dss \
+dss/dssgenerated/excluded \
 dss/dssgenerated \
 

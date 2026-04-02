@@ -287,7 +287,7 @@ static void MmwDemo_DPC_ObjectDetection_reportFxn
              * DPC Results have been acked:
              * - This implies that MSS received the results.
              *****************************************************************/
-
+            test_print("AckRec\n");
             break;
         }
         case DPM_Report_DPC_ASSERT:
@@ -616,6 +616,7 @@ static void MmwDemo_DPC_ObjectDetection_dpmTask(void* args)
 
 
                     /* YES: Results are available send them. */
+                    test_print("DSS: Sending result\n");
                     retVal = DPM_sendResult (gMmwDssMCB.dataPathObj.objDetDpmHandle, true, &resultBuffer);
                     if (retVal < 0)
                     {

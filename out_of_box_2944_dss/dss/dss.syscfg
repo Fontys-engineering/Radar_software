@@ -1,10 +1,17 @@
 /**
  * These arguments were used when this file was generated. They will be automatically applied on subsequent loads
  * via the GUI or CLI. Run CLI with '--help' for additional information on how to override these arguments.
- * @cliArgs --device "AWR294X" --part "Default" --package "ETS" --context "c66ss0" --product "MCU_PLUS_SDK_AWR2944@10.01.00"
- * @v2CliArgs --device "AWR2944" --package "FCCSP (ALT)" --variant "AWR294x" --context "c66ss0" --product "MCU_PLUS_SDK_AWR2944@10.01.00"
+ * @cliArgs --device "AWR294X" --part "Default" --package "ETS" --context "c66ss0" --product "MCU_PLUS_SDK_AWR2944@10.02.00"
+ * @v2CliArgs --device "AWR2944" --package "FCCSP (ALT)" --variant "AWR294x" --context "c66ss0" --product "MCU_PLUS_SDK_AWR2944@10.02.00"
  * @versions {"tool":"1.23.0+4000"}
  */
+scripting.excludeFromBuild("ti_enet_config.c");
+scripting.excludeFromBuild("ti_enet_config.h");
+scripting.excludeFromBuild("ti_enet_open_close.c");
+scripting.excludeFromBuild("ti_enet_open_close.h");
+scripting.excludeFromBuild("ti_enet_soc.c");
+scripting.excludeFromBuild("ti_enet_lwipif.c");
+scripting.excludeFromBuild("ti_enet_lwipif.h");
 
 /**
  * Import the modules used in this configuration.

@@ -120,6 +120,7 @@ GEN_OPTS__QUOTED :=
 SUBDIRS := \
 . \
 mss \
+mss/mssgenerated/excluded \
 mss/mssgenerated \
 utils \
 

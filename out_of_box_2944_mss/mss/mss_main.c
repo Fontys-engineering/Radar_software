@@ -766,7 +766,7 @@ MmwDemo_enetStreamObjData gEnetStreamObjData;
 #define MMWDEMO_DPC_OBJDET_DPM_TASK_STACK_SIZE (4*1024U)
 #define MMWDEMO_UART_DATA_EXPORT_TASK_STACK_SIZE (4*1024U)
 #ifdef ENET_STREAM
-#define MMWDEMO_MMWAVE_ENET_TASK_STACK_SIZE (8*1024U)
+#define MMWDEMO_MMWAVE_ENET_TASK_STACK_SIZE (4*1024U)
 #endif
 
 /* Application task stack variables */

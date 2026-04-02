@@ -31,6 +31,18 @@ C_DEPS += \
 ./dss/dssgenerated/ti_pinmux_config.d \
 ./dss/dssgenerated/ti_power_clock_config.d 
 
+OBJS += \
+./dss/dssgenerated/ti_enet_config.obj \
+./dss/dssgenerated/ti_enet_lwipif.obj \
+./dss/dssgenerated/ti_enet_open_close.obj \
+./dss/dssgenerated/ti_enet_soc.obj 
+
+OBJS__QUOTED += \
+"dss\dssgenerated\ti_enet_config.obj" \
+"dss\dssgenerated\ti_enet_lwipif.obj" \
+"dss\dssgenerated\ti_enet_open_close.obj" \
+"dss\dssgenerated\ti_enet_soc.obj" 
+
 C_DEPS__QUOTED += \
 "dss\dssgenerated\ti_board_config.d" \
 "dss\dssgenerated\ti_board_open_close.d" \

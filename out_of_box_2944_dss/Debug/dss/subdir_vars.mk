@@ -20,10 +20,6 @@ C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_dss/dss
 C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_dss/dss/dssgenerated/ti_power_clock_config.c \
 C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_dss/dss/dssgenerated/ti_board_config.c \
 C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_dss/dss/dssgenerated/ti_board_open_close.c \
-C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_dss/dss/dssgenerated/ti_enet_config.c \
-C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_dss/dss/dssgenerated/ti_enet_open_close.c \
-C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_dss/dss/dssgenerated/ti_enet_soc.c \
-C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_dss/dss/dssgenerated/ti_enet_lwipif.c \
 ../dss/dss_main.c 
 
 GEN_FILES += \
@@ -33,11 +29,7 @@ C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_dss/dss
 C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_dss/dss/dssgenerated/ti_pinmux_config.c \
 C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_dss/dss/dssgenerated/ti_power_clock_config.c \
 C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_dss/dss/dssgenerated/ti_board_config.c \
-C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_dss/dss/dssgenerated/ti_board_open_close.c \
-C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_dss/dss/dssgenerated/ti_enet_config.c \
-C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_dss/dss/dssgenerated/ti_enet_open_close.c \
-C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_dss/dss/dssgenerated/ti_enet_soc.c \
-C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_dss/dss/dssgenerated/ti_enet_lwipif.c 
+C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_dss/dss/dssgenerated/ti_board_open_close.c 
 
 C_DEPS += \
 ./dss/data_path.d \
@@ -48,10 +40,6 @@ C_DEPS += \
 ./dss/dssgenerated/ti_power_clock_config.d \
 ./dss/dssgenerated/ti_board_config.d \
 ./dss/dssgenerated/ti_board_open_close.d \
-./dss/dssgenerated/ti_enet_config.d \
-./dss/dssgenerated/ti_enet_open_close.d \
-./dss/dssgenerated/ti_enet_soc.d \
-./dss/dssgenerated/ti_enet_lwipif.d \
 ./dss/dss_main.d 
 
 OBJS += \
@@ -63,10 +51,6 @@ OBJS += \
 ./dss/dssgenerated/ti_power_clock_config.obj \
 ./dss/dssgenerated/ti_board_config.obj \
 ./dss/dssgenerated/ti_board_open_close.obj \
-./dss/dssgenerated/ti_enet_config.obj \
-./dss/dssgenerated/ti_enet_open_close.obj \
-./dss/dssgenerated/ti_enet_soc.obj \
-./dss/dssgenerated/ti_enet_lwipif.obj \
 ./dss/dss_main.obj 
 
 GEN_MISC_FILES += \
@@ -74,10 +58,7 @@ C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_dss/dss
 C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_dss/dss/dssgenerated/ti_drivers_config.h \
 C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_dss/dss/dssgenerated/ti_drivers_open_close.h \
 C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_dss/dss/dssgenerated/ti_board_config.h \
-C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_dss/dss/dssgenerated/ti_board_open_close.h \
-C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_dss/dss/dssgenerated/ti_enet_config.h \
-C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_dss/dss/dssgenerated/ti_enet_open_close.h \
-C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_dss/dss/dssgenerated/ti_enet_lwipif.h 
+C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_dss/dss/dssgenerated/ti_board_open_close.h 
 
 OBJS__QUOTED += \
 "dss\data_path.obj" \
@@ -88,10 +69,6 @@ OBJS__QUOTED += \
 "dss\dssgenerated\ti_power_clock_config.obj" \
 "dss\dssgenerated\ti_board_config.obj" \
 "dss\dssgenerated\ti_board_open_close.obj" \
-"dss\dssgenerated\ti_enet_config.obj" \
-"dss\dssgenerated\ti_enet_open_close.obj" \
-"dss\dssgenerated\ti_enet_soc.obj" \
-"dss\dssgenerated\ti_enet_lwipif.obj" \
 "dss\dss_main.obj" 
 
 GEN_MISC_FILES__QUOTED += \
@@ -99,10 +76,7 @@ GEN_MISC_FILES__QUOTED += \
 "C:\Users\petri\OneDrive\Asiakirjat\GitHub\Radar_software\out_of_box_2944_dss\dss\dssgenerated\ti_drivers_config.h" \
 "C:\Users\petri\OneDrive\Asiakirjat\GitHub\Radar_software\out_of_box_2944_dss\dss\dssgenerated\ti_drivers_open_close.h" \
 "C:\Users\petri\OneDrive\Asiakirjat\GitHub\Radar_software\out_of_box_2944_dss\dss\dssgenerated\ti_board_config.h" \
-"C:\Users\petri\OneDrive\Asiakirjat\GitHub\Radar_software\out_of_box_2944_dss\dss\dssgenerated\ti_board_open_close.h" \
-"C:\Users\petri\OneDrive\Asiakirjat\GitHub\Radar_software\out_of_box_2944_dss\dss\dssgenerated\ti_enet_config.h" \
-"C:\Users\petri\OneDrive\Asiakirjat\GitHub\Radar_software\out_of_box_2944_dss\dss\dssgenerated\ti_enet_open_close.h" \
-"C:\Users\petri\OneDrive\Asiakirjat\GitHub\Radar_software\out_of_box_2944_dss\dss\dssgenerated\ti_enet_lwipif.h" 
+"C:\Users\petri\OneDrive\Asiakirjat\GitHub\Radar_software\out_of_box_2944_dss\dss\dssgenerated\ti_board_open_close.h" 
 
 C_DEPS__QUOTED += \
 "dss\data_path.d" \
@@ -113,10 +87,6 @@ C_DEPS__QUOTED += \
 "dss\dssgenerated\ti_power_clock_config.d" \
 "dss\dssgenerated\ti_board_config.d" \
 "dss\dssgenerated\ti_board_open_close.d" \
-"dss\dssgenerated\ti_enet_config.d" \
-"dss\dssgenerated\ti_enet_open_close.d" \
-"dss\dssgenerated\ti_enet_soc.d" \
-"dss\dssgenerated\ti_enet_lwipif.d" \
 "dss\dss_main.d" 
 
 GEN_FILES__QUOTED += \
@@ -126,11 +96,7 @@ GEN_FILES__QUOTED += \
 "C:\Users\petri\OneDrive\Asiakirjat\GitHub\Radar_software\out_of_box_2944_dss\dss\dssgenerated\ti_pinmux_config.c" \
 "C:\Users\petri\OneDrive\Asiakirjat\GitHub\Radar_software\out_of_box_2944_dss\dss\dssgenerated\ti_power_clock_config.c" \
 "C:\Users\petri\OneDrive\Asiakirjat\GitHub\Radar_software\out_of_box_2944_dss\dss\dssgenerated\ti_board_config.c" \
-"C:\Users\petri\OneDrive\Asiakirjat\GitHub\Radar_software\out_of_box_2944_dss\dss\dssgenerated\ti_board_open_close.c" \
-"C:\Users\petri\OneDrive\Asiakirjat\GitHub\Radar_software\out_of_box_2944_dss\dss\dssgenerated\ti_enet_config.c" \
-"C:\Users\petri\OneDrive\Asiakirjat\GitHub\Radar_software\out_of_box_2944_dss\dss\dssgenerated\ti_enet_open_close.c" \
-"C:\Users\petri\OneDrive\Asiakirjat\GitHub\Radar_software\out_of_box_2944_dss\dss\dssgenerated\ti_enet_soc.c" \
-"C:\Users\petri\OneDrive\Asiakirjat\GitHub\Radar_software\out_of_box_2944_dss\dss\dssgenerated\ti_enet_lwipif.c" 
+"C:\Users\petri\OneDrive\Asiakirjat\GitHub\Radar_software\out_of_box_2944_dss\dss\dssgenerated\ti_board_open_close.c" 
 
 C_SRCS__QUOTED += \
 "../dss/data_path.c" \
@@ -141,10 +107,6 @@ C_SRCS__QUOTED += \
 "C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_dss/dss/dssgenerated/ti_power_clock_config.c" \
 "C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_dss/dss/dssgenerated/ti_board_config.c" \
 "C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_dss/dss/dssgenerated/ti_board_open_close.c" \
-"C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_dss/dss/dssgenerated/ti_enet_config.c" \
-"C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_dss/dss/dssgenerated/ti_enet_open_close.c" \
-"C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_dss/dss/dssgenerated/ti_enet_soc.c" \
-"C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_dss/dss/dssgenerated/ti_enet_lwipif.c" \
 "../dss/dss_main.c" 
 
 SYSCFG_SRCS__QUOTED += \
