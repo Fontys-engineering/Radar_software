@@ -664,7 +664,6 @@
 #include <drivers/uart.h>
 #include <kernel/dpl/CacheP.h>
 #include <kernel/dpl/ClockP.h>
-#include <kernel/dpl/SemaphoreP.h>
 #include <kernel/dpl/CycleCounterP.h>
 #include <kernel/dpl/AddrTranslateP.h>
 #include <kernel/dpl/DebugP.h>
@@ -715,9 +714,8 @@
 #define MMWDEMO_CLI_TASK_PRIORITY                 7
 #define MMWDEMO_UART_EXPORT_TASK_PRIORITY         8
 #define MMWDEMO_DPC_OBJDET_DPM_TASK_PRIORITY      9
-#define MMWDEMO_MMWAVE_CTRL_TASK_PRIORITY         10 //Original : 10
-#define MMWDEMO_MMWAVE_ENET_TASK_PRIORITY         1 //Original : 1
-
+#define MMWDEMO_MMWAVE_CTRL_TASK_PRIORITY         10
+#define MMWDEMO_MMWAVE_ENET_TASK_PRIORITY         1
 #else
 #define MMWDEMO_CLI_TASK_PRIORITY                 3
 #define MMWDEMO_UART_EXPORT_TASK_PRIORITY         4
@@ -1705,16 +1703,11 @@ static void MmwDemo_mmWaveCtrlTask(void* args)
 
     while (1)
     {
-        test_print("Pre Ex\n");
         /* Execute the mmWave control module: */
         if (MMWave_execute (gMmwMssMCB.ctrlHandle, &errCode) < 0)
         {
             MmwDemo_debugAssert (0);
         }
-        test_print("Post Ex\n");
-        vTaskDelay(1);
-        
-        
     }
 }
 
@@ -2308,7 +2301,7 @@ exit:
 static void MmwDemo_dataPathStart (void)
 {
     int32_t retVal;
-    test_print("DataPath Start\n");
+
     DebugP_logInfo("App: Issuing DPM_start\n");
 #ifdef LVDS_STREAM
     /* Configure HW LVDS stream for the first sub-frame that will start upon
@@ -2329,7 +2322,7 @@ static void MmwDemo_dataPathStart (void)
 
     /* Wait until start completed */
     SemaphoreP_pend(&gMmwMssMCB.DPMstartSemHandle, SystemP_WAIT_FOREVER);
-    test_print("Datapath Done\n");
+
     DebugP_logInfo("App: DPM_start Done (post SemaphoreP_pend on reportFxn reporting start)\n");
 }
 
@@ -2689,7 +2682,6 @@ static void MmwDemo_DPC_ObjectDetection_reportFxn
             DebugP_assert (0);
             break;
         }
-            test_print("DPM REPORT: %d\n", reportType);
     }
     return;
 }
@@ -3249,8 +3241,6 @@ static void mmwDemo_mssDPMTask(void* args)
         {
             test_print ("Error: DPM execution failed [Error code %d]\n", errCode);
         }
-        vTaskDelay(1);
-        test_print("DPM Alive\n");    
     }
 }
 
@@ -3684,12 +3674,6 @@ int32_t MmwDemo_startSensor(void)
 {
     int32_t     errCode;
     MMWave_CalibrationCfg   calibrationCfg;
-        /* 🔴 HARD PROTECTION: prevent double start */
-    if (gMmwMssMCB.sensorState == MmwDemo_SensorState_STARTED)
-    {
-        test_print("ERROR: MmwDemo_startSensor called while already STARTED\n");
-        return 0;
-    }
 
     /*****************************************************************************
      * Data path :: start data path first - this will pend for DPC to ack
@@ -3727,6 +3711,7 @@ int32_t MmwDemo_startSensor(void)
         MmwDemo_debugAssert(0);
         return -1;
     }
+
     gMmwMssMCB.sensorStartCount++;
     return 0;
 }
@@ -4086,7 +4071,7 @@ static void MmwDemo_initTask(void* args)
 
     /* Initialize Last Frame data Set flag for first frame. */
     gMmwMssMCB.stats.isLastFrameDataProcessed = true;
-    test_print("Pre-LVDS\n");
+
 #ifdef LVDS_STREAM
     gMmwMssMCB.edmaHandle = gEdmaHandle[CONFIG_EDMA0];
 
@@ -4104,10 +4089,9 @@ static void MmwDemo_initTask(void* args)
     /*The delay below is needed only if the DCA1000EVM is being used to capture the data traces.
       This is needed because the DCA1000EVM FPGA needs the delay to lock to the
       bit clock before they can start capturing the data correctly. */
-      
-    //ClockP_usleep(12 * 1000);
+    ClockP_usleep(12 * 1000);
 #endif
-    test_print("Post LVDS / Pre-Profile\n");
+
     /* initialize cq configs to invalid profile index to be able to detect
      * unconfigured state of these when monitors for them are enabled.
      */
@@ -4116,7 +4100,7 @@ static void MmwDemo_initTask(void* args)
         gMmwMssMCB.cqSatMonCfg[i].profileIndx    = (RL_MAX_PROFILES_CNT + 1);
         gMmwMssMCB.cqSigImgMonCfg[i].profileIndx = (RL_MAX_PROFILES_CNT + 1);
     }
-    test_print("PostProfile/PrePlat\n");
+
     /* Platform specific configuration */
     MmwDemo_platformInit(&gMmwMssMCB.cfg.platformCfg);
 
@@ -4128,13 +4112,13 @@ static void MmwDemo_initTask(void* args)
     }
 
     /* Open the UART Instance */
-    gMmwMssMCB.commandUartHandle = gUartHandle[CONFIG_UART0]; 
+    gMmwMssMCB.commandUartHandle = gUartHandle[CONFIG_UART0];
     if (gMmwMssMCB.commandUartHandle == NULL)
     {
         MmwDemo_debugAssert (0);
         return;
     }
-    test_print("Post Command/Pre UARTLOG\n");
+
     /* Open the Logging UART Instance: */
     gMmwMssMCB.loggingUartHandle = gUartHandle[CONFIG_UART1];
     if (gMmwMssMCB.loggingUartHandle == NULL)
@@ -4212,7 +4196,23 @@ static void MmwDemo_initTask(void* args)
 
     configASSERT(gMmwMssMCB.taskHandles.mmwCtrlTask != NULL);
 
+#ifdef ENET_STREAM
+   /*****************************************************************************
+     * Launch the mmWave enet task
+     *****************************************************************************/
+    /* Create Enet configuration done semaphore */
+    SemaphoreP_constructBinary(&gMmwMssMCB.enetCfg.EnetCfgDoneSemHandle, 0);
 
+    gMmwMssMCB.taskHandles.enetTask = xTaskCreateStatic( enetTask,
+                                      "enet_task",
+                                      MMWDEMO_MMWAVE_ENET_TASK_STACK_SIZE,
+                                      NULL,
+                                      MMWDEMO_MMWAVE_ENET_TASK_PRIORITY,
+                                      gMmwEnetTskStack,
+                                      &gMmwMssMCB.taskHandles.enetTaskObj );
+
+    configASSERT(gMmwMssMCB.taskHandles.enetTask != NULL);
+#endif
 
     /*****************************************************************************
      * Initialization of the DPM Module:
@@ -4259,7 +4259,7 @@ static void MmwDemo_initTask(void* args)
         /* Sleep and poll again: */
         ClockP_usleep(1 * 1000U);
     }
-    test_print("Before DPM/After Sync\n");
+
     /* Launch the DPM Task */
     gMmwMssMCB.taskHandles.mmwObjDetDpmTask = xTaskCreateStatic( mmwDemo_mssDPMTask,
                                            "mmwdemo_dpm_task",
@@ -4270,14 +4270,14 @@ static void MmwDemo_initTask(void* args)
                                            &gMmwMssMCB.taskHandles.mmwObjDetDpmTaskObj );
 
     configASSERT(gMmwMssMCB.taskHandles.mmwObjDetDpmTask != NULL);
-    test_print("After DPM/Before Calib\n");
+
     /* Calibration save/restore initialization */
     if(MmwDemo_calibInit()<0)
     {
         test_print("Error: Calibration data initialization failed \n");
         MmwDemo_debugAssert (0);
     }
-    test_print("After Calib Data/Before UART Exp\n");
+
     /* Launch the UART Data Export Task */
     gMmwMssMCB.taskHandles.uartDataExportTask = xTaskCreateStatic( mmwDemo_mssUartDataExportTask,
                                            "mmwdemo_uart_task",
@@ -4288,40 +4288,16 @@ static void MmwDemo_initTask(void* args)
                                            &gMmwMssMCB.taskHandles.uartDataExportTaskObj );
 
     configASSERT(gMmwMssMCB.taskHandles.uartDataExportTask != NULL);
-    test_print("After UART Export\n");
+
     /*****************************************************************************
      * Initialize the Profiler
      *****************************************************************************/
-    test_print("Before Profiler\n");
     CycleCounterP_reset();
-    test_print("After Profiler\n");
 
     /*****************************************************************************
      * Initialize the CLI Module:
      *****************************************************************************/
-    test_print("Before CLI Init\n");
     MmwDemo_CLIInit(MMWDEMO_CLI_TASK_PRIORITY);
-    test_print("After CLI Init\n");
-
-    #ifdef ENET_STREAM
-   /*****************************************************************************
-     * Launch the mmWave enet task
-     *****************************************************************************/
-    /* Create Enet configuration done semaphore */
-    test_print("Pre Enet-Semaphore\n");
-    SemaphoreP_constructBinary(&gMmwMssMCB.enetCfg.EnetCfgDoneSemHandle, 0);
-    test_print("Post-Sema/PreEnet\n");
-    gMmwMssMCB.taskHandles.enetTask = xTaskCreateStatic( enetTask,
-                                      "enet_task",
-                                      MMWDEMO_MMWAVE_ENET_TASK_STACK_SIZE,
-                                      NULL,
-                                      MMWDEMO_MMWAVE_ENET_TASK_PRIORITY,
-                                      gMmwEnetTskStack,
-                                      &gMmwMssMCB.taskHandles.enetTaskObj );
-    test_print("PreConfig\n");
-    configASSERT(gMmwMssMCB.taskHandles.enetTask != NULL);
-    test_print("Post-ENET\n");
-#endif
 
     /* Never return for this task. */
     SemaphoreP_pend(&gMmwMssMCB.demoInitTaskCompleteSemHandle, SystemP_WAIT_FOREVER);
@@ -4524,7 +4500,7 @@ int32_t main (void)
 
     /* Start the scheduler to start the tasks executing. */
     vTaskStartScheduler();
-    test_print("Something's Wrong\n");
+
     /* The following line should never be reached because vTaskStartScheduler()
     will only return if there was not enough FreeRTOS heap memory available to
     create the Idle and (if configured) Timer tasks.  Heap management, and

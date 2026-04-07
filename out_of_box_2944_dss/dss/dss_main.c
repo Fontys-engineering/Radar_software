@@ -287,7 +287,7 @@ static void MmwDemo_DPC_ObjectDetection_reportFxn
              * DPC Results have been acked:
              * - This implies that MSS received the results.
              *****************************************************************/
-            test_print("AckRec\n");
+
             break;
         }
         case DPM_Report_DPC_ASSERT:
@@ -616,7 +616,6 @@ static void MmwDemo_DPC_ObjectDetection_dpmTask(void* args)
 
 
                     /* YES: Results are available send them. */
-                    test_print("DSS: Sending result\n");
                     retVal = DPM_sendResult (gMmwDssMCB.dataPathObj.objDetDpmHandle, true, &resultBuffer);
                     if (retVal < 0)
                     {
@@ -703,7 +702,7 @@ static void MmwDemo_dssInitTask(void* args)
     DPM_InitCfg         dpmInitCfg;
     DPC_ObjectDetection_InitParams      objDetInitParams;
     uint32_t            edmaCCIdx;
-    test_print("DSS Init Task STARTED\n");
+
     CycleCounterP_reset();
     /*****************************************************************************
      * Driver Open/Configuraiton:
@@ -757,7 +756,6 @@ static void MmwDemo_dssInitTask(void* args)
     dpmInitCfg.argSize          = sizeof(DPC_ObjectDetection_InitParams);
 
     /* Initialize the DPM Module: */
-    test_print("Before DPM_init\n");
     gMmwDssMCB.dataPathObj.objDetDpmHandle = DPM_init (&dpmInitCfg, &errCode);
     if (gMmwDssMCB.dataPathObj.objDetDpmHandle == NULL)
     {
@@ -765,16 +763,15 @@ static void MmwDemo_dssInitTask(void* args)
         MmwDemo_debugAssert (0);
         return;
     }
-    test_print("After DPM_init\n");
+
     /* Synchronization: This will synchronize the execution of the control module
      * between the domains. This is a prerequiste and always needs to be invoked. */
     while (1)
     {
         int32_t syncStatus;
-        int loop= 0;
+
         /* Get the synchronization status: */
         syncStatus = DPM_synch (gMmwDssMCB.dataPathObj.objDetDpmHandle, &errCode);
-        test_print("DSS DPM sync loop %d status=%d\n", loop++, syncStatus);
         if (syncStatus < 0)
         {
             /* Error: Unable to synchronize the framework */

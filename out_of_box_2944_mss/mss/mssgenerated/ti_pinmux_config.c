@@ -170,12 +170,6 @@ static Pinmux_PerCfg_t gPinMuxMainDomainCfg[] = {
     },
 
             /* UARTB pin config */
-    /* UARTB_RX -> PAD_BB (R17) */
-    {
-        PIN_PAD_BB,
-        ( PIN_MODE(6) | PIN_PULL_DISABLE | PIN_SLEW_RATE_LOW )
-    },
-    /* UARTB pin config */
     /* UARTB_TX -> PAD_DE (A14) */
     {
         PIN_PAD_DE,

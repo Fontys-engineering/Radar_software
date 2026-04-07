@@ -19,15 +19,15 @@ ORDERED_OBJS += \
 "./dss/dssgenerated/ti_power_clock_config.obj" \
 "./dss/dssgenerated/ti_board_config.obj" \
 "./dss/dssgenerated/ti_board_open_close.obj" \
+"./dss/dssgenerated/ti_enet_config.obj" \
+"./dss/dssgenerated/ti_enet_open_close.obj" \
+"./dss/dssgenerated/ti_enet_soc.obj" \
+"./dss/dssgenerated/ti_enet_lwipif.obj" \
 "./dss/dss_main.obj" \
 "./dss/dssgenerated/excluded/ti_enet_config.obj" \
 "./dss/dssgenerated/excluded/ti_enet_lwipif.obj" \
 "./dss/dssgenerated/excluded/ti_enet_open_close.obj" \
 "./dss/dssgenerated/excluded/ti_enet_soc.obj" \
-"./dss/dssgenerated/ti_enet_config.obj" \
-"./dss/dssgenerated/ti_enet_lwipif.obj" \
-"./dss/dssgenerated/ti_enet_open_close.obj" \
-"./dss/dssgenerated/ti_enet_soc.obj" \
 "../c66x_linker.cmd" \
 "../dss/mmw_dss_linker.cmd" \
 $(GEN_CMDS__FLAG) \
@@ -178,8 +178,9 @@ out_of_box_2944_dss.xe66: $(OBJS) $(CMD_SRCS) $(GEN_CMDS)
 # Other Targets
 clean:
 	-$(RM) $(GEN_MISC_FILES__QUOTED)$(GEN_FILES__QUOTED)$(EXE_OUTPUTS__QUOTED)
-	-$(RM) "objectdetection.obj" "dss\data_path.obj" "dss\dssgenerated\ti_dpl_config.obj" "dss\dssgenerated\ti_drivers_config.obj" "dss\dssgenerated\ti_drivers_open_close.obj" "dss\dssgenerated\ti_pinmux_config.obj" "dss\dssgenerated\ti_power_clock_config.obj" "dss\dssgenerated\ti_board_config.obj" "dss\dssgenerated\ti_board_open_close.obj" "dss\dss_main.obj" "dss\dssgenerated\excluded\ti_enet_config.obj" "dss\dssgenerated\excluded\ti_enet_lwipif.obj" "dss\dssgenerated\excluded\ti_enet_open_close.obj" "dss\dssgenerated\excluded\ti_enet_soc.obj" "dss\dssgenerated\ti_enet_config.obj" "dss\dssgenerated\ti_enet_lwipif.obj" "dss\dssgenerated\ti_enet_open_close.obj" "dss\dssgenerated\ti_enet_soc.obj" 
-	-$(RM) "objectdetection.d" "dss\data_path.d" "dss\dssgenerated\ti_dpl_config.d" "dss\dssgenerated\ti_drivers_config.d" "dss\dssgenerated\ti_drivers_open_close.d" "dss\dssgenerated\ti_pinmux_config.d" "dss\dssgenerated\ti_power_clock_config.d" "dss\dssgenerated\ti_board_config.d" "dss\dssgenerated\ti_board_open_close.d" "dss\dss_main.d" "dss\dssgenerated\excluded\ti_enet_config.d" "dss\dssgenerated\excluded\ti_enet_lwipif.d" "dss\dssgenerated\excluded\ti_enet_open_close.d" "dss\dssgenerated\excluded\ti_enet_soc.d" "dss\dssgenerated\ti_board_config.d" "dss\dssgenerated\ti_board_open_close.d" "dss\dssgenerated\ti_dpl_config.d" "dss\dssgenerated\ti_drivers_config.d" "dss\dssgenerated\ti_drivers_open_close.d" "dss\dssgenerated\ti_enet_config.d" "dss\dssgenerated\ti_enet_lwipif.d" "dss\dssgenerated\ti_enet_open_close.d" "dss\dssgenerated\ti_enet_soc.d" "dss\dssgenerated\ti_pinmux_config.d" "dss\dssgenerated\ti_power_clock_config.d" 
+	-$(RM) "objectdetection.obj" "dss\data_path.obj" "dss\dssgenerated\ti_dpl_config.obj" "dss\dssgenerated\ti_drivers_config.obj" "dss\dssgenerated\ti_drivers_open_close.obj" "dss\dssgenerated\ti_pinmux_config.obj" "dss\dssgenerated\ti_power_clock_config.obj" "dss\dssgenerated\ti_board_config.obj" "dss\dssgenerated\ti_board_open_close.obj" "dss\dssgenerated\ti_enet_config.obj" "dss\dssgenerated\ti_enet_open_close.obj" "dss\dssgenerated\ti_enet_soc.obj" "dss\dssgenerated\ti_enet_lwipif.obj" "dss\dss_main.obj" "dss\dssgenerated\excluded\ti_enet_config.obj" "dss\dssgenerated\excluded\ti_enet_lwipif.obj" "dss\dssgenerated\excluded\ti_enet_open_close.obj" "dss\dssgenerated\excluded\ti_enet_soc.obj" 
+	-$(RM) "objectdetection.d" "dss\data_path.d" "dss\dssgenerated\ti_dpl_config.d" "dss\dssgenerated\ti_drivers_config.d" "dss\dssgenerated\ti_drivers_open_close.d" "dss\dssgenerated\ti_pinmux_config.d" "dss\dssgenerated\ti_power_clock_config.d" "dss\dssgenerated\ti_board_config.d" "dss\dssgenerated\ti_board_open_close.d" "dss\dssgenerated\ti_enet_config.d" "dss\dssgenerated\ti_enet_open_close.d" "dss\dssgenerated\ti_enet_soc.d" "dss\dssgenerated\ti_enet_lwipif.d" "dss\dss_main.d" "dss\dssgenerated\excluded\ti_enet_config.d" "dss\dssgenerated\excluded\ti_enet_lwipif.d" "dss\dssgenerated\excluded\ti_enet_open_close.d" "dss\dssgenerated\excluded\ti_enet_soc.d" "dss\dssgenerated\ti_board_config.d" "dss\dssgenerated\ti_board_open_close.d" "dss\dssgenerated\ti_dpl_config.d" "dss\dssgenerated\ti_drivers_config.d" "dss\dssgenerated\ti_drivers_open_close.d" "dss\dssgenerated\ti_enet_config.d" "dss\dssgenerated\ti_enet_lwipif.d" "dss\dssgenerated\ti_enet_open_close.d" "dss\dssgenerated\ti_enet_soc.d" "dss\dssgenerated\ti_pinmux_config.d" 
+	-$(RM) "dss\dssgenerated\ti_power_clock_config.d" 
 	-@echo 'Finished clean'
 	-@echo ' '
 

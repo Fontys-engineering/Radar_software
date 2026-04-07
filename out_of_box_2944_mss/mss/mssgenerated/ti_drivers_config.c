@@ -91,14 +91,14 @@ static EDMA_Attrs gEdmaAttrs[CONFIG_EDMA_NUM_INSTANCES] =
         .errIntrNumber      = CSL_MSS_INTR_DSS_TPCC_B_ERRAGG,
         .errIntrNumberDirMap      = 0,
         .intrAggEnableAddr  = CSL_DSS_CTRL_U_BASE + CSL_DSS_CTRL_DSS_TPCC_B_INTAGG_MASK,
-        .intrAggEnableMask  = 0x1FF & (~(2U << 2)),
+        .intrAggEnableMask  = 0x1FF & (~(2U << 0)),
         .intrAggStatusAddr  = CSL_DSS_CTRL_U_BASE + CSL_DSS_CTRL_DSS_TPCC_B_INTAGG_STATUS,
-        .intrAggClearMask   = (2U << 2),
+        .intrAggClearMask   = (2U << 0),
         .errIntrAggEnableAddr  = CSL_DSS_CTRL_U_BASE + CSL_DSS_CTRL_DSS_TPCC_B_ERRAGG_MASK,
         .errIntrAggStatusAddr  = CSL_DSS_CTRL_U_BASE + CSL_DSS_CTRL_DSS_TPCC_B_ERRAGG_STATUS,
         .initPrms           =
         {
-            .regionId     = 2,
+            .regionId     = 0,
             .queNum       = 0,
             .initParamSet = FALSE,
             .ownResource    =
