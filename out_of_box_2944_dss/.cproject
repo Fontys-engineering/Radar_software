@@ -74,6 +74,7 @@
                                     <listOptionValue value="SOC_AWR2944"/>
                                     <listOptionValue value="_DEBUG_=1"/>
                                     <listOptionValue value="MMWDEMO_TDM"/>
+                                    <listOptionValue value="ENET_STREAM"/>
                                 </option>
                                 <option id="com.ti.ccstudio.buildDefinitions.C6000_8.5.compilerID.SILICON_VERSION.308154947" superClass="com.ti.ccstudio.buildDefinitions.C6000_8.5.compilerID.SILICON_VERSION" value="6600" valueType="string"/>
                                 <option id="com.ti.ccstudio.buildDefinitions.C6000_8.5.compilerID.ABI.1946372172" superClass="com.ti.ccstudio.buildDefinitions.C6000_8.5.compilerID.ABI" value="com.ti.ccstudio.buildDefinitions.C6000_8.5.compilerID.ABI.eabi" valueType="enumerated"/>

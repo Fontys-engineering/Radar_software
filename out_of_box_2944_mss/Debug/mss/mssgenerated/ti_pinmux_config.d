@@ -1,8 +1,8 @@
 # FIXED
 
 mss/mssgenerated/ti_pinmux_config.o: \
- C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_mss/mss/mssgenerated/ti_pinmux_config.c \
- C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_mss/mss/mssgenerated/ti_drivers_config.h \
+ C:/Git/Radar_software/out_of_box_2944_mss/mss/mssgenerated/ti_pinmux_config.c \
+ C:/Git/Radar_software/out_of_box_2944_mss/mss/mssgenerated/ti_drivers_config.h \
  C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/drivers/hw_include/cslr_soc.h \
  C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/drivers/hw_include/awr294x/cslr_soc.h \
  C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/drivers/hw_include/awr294x/cslr_soc_defines.h \
@@ -52,7 +52,7 @@ mss/mssgenerated/ti_pinmux_config.o: \
  C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/drivers/hw_include/awr294x/cslr_bss_prog_filt.h \
  C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/drivers/hw_include/awr294x/cslr_bss_rampgen.h \
  C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/drivers/hw_include/awr294x/cslr_bss_vim_parity.h \
- C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_mss/mss/mssgenerated/ti_dpl_config.h \
+ C:/Git/Radar_software/out_of_box_2944_mss/mss/mssgenerated/ti_dpl_config.h \
  C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/dpl/HwiP.h \
  C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/dpl/HwiP_arm.h \
  C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/dpl/SystemP.h \
@@ -102,7 +102,7 @@ mss/mssgenerated/ti_pinmux_config.o: \
  C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/dpl/CycleCounterP.h \
  C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/drivers/pinmux.h \
  C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/drivers/pinmux/awr294x/pinmux.h
-C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_mss/mss/mssgenerated/ti_drivers_config.h:
+C:/Git/Radar_software/out_of_box_2944_mss/mss/mssgenerated/ti_drivers_config.h:
 C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/drivers/hw_include/cslr_soc.h:
 C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/drivers/hw_include/awr294x/cslr_soc.h:
 C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/drivers/hw_include/awr294x/cslr_soc_defines.h:
@@ -152,7 +152,7 @@ C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/dri
 C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/drivers/hw_include/awr294x/cslr_bss_prog_filt.h:
 C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/drivers/hw_include/awr294x/cslr_bss_rampgen.h:
 C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/drivers/hw_include/awr294x/cslr_bss_vim_parity.h:
-C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_mss/mss/mssgenerated/ti_dpl_config.h:
+C:/Git/Radar_software/out_of_box_2944_mss/mss/mssgenerated/ti_dpl_config.h:
 C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/dpl/HwiP.h:
 C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/dpl/HwiP_arm.h:
 C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/dpl/SystemP.h:

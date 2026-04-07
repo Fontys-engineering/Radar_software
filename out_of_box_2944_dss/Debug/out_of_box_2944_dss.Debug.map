@@ -1,7 +1,7 @@
 ******************************************************************************
                TMS320C6x Linker PC v8.5.0                      
 ******************************************************************************
->> Linked Tue Apr  7 11:21:38 2026
+>> Linked Tue Apr  7 16:11:50 2026
 
 OUTPUT FILE NAME:   <out_of_box_2944_dss.xe66>
 ENTRY POINT SYMBOL: "_c_int00"  address: 0082aa40
@@ -11,9 +11,9 @@ MEMORY CONFIGURATION
 
          name            origin    length      used     unused   attr    fill
 ----------------------  --------  ---------  --------  --------  ----  --------
-  DSS_L2                00800000   00060000  000577d8  00008828  RWIX
+  DSS_L2                00800000   00060000  000577b8  00008848  RWIX
   HWA_RAM               82000000   00020000  00000000  00020000  RWIX
-  DSS_L3                88000000   00280000  00280000  00000000  RWIX
+  DSS_L3                88000000   00280000  00180000  00100000  RWIX
   RTOS_NORTOS_IPC_SHM_M c5000200   00001d40  00000980  000013c0  RWIX
 
 
@@ -35,17 +35,17 @@ run origin  load origin   length   init length attrs members
   00842f38    00842f38    000000b0   00000000    rw- .neardata
 00843000    00843000    0000d000   00000000    rw-
   00843000    00843000    0000d000   00000000    rw- .dpc_l2Heap
-00850000    00850000    00003fa8   00003fa8    r--
-  00850000    00850000    00003fa8   00003fa8    r-- .const
-00853fa8    00853fa8    00003000   00000000    rw-
-  00853fa8    00853fa8    00002000   00000000    rw- .stack
-  00855fa8    00855fa8    00001000   00000000    rw- .sysmem
-00856fa8    00856fa8    00000848   00000848    r--
-  00856fa8    00856fa8    00000240   00000240    r-- .switch
-  008571e8    008571e8    00000608   00000608    r-- .cinit
-88000000    88000000    00280000   00000000    rw-
-  88000000    88000000    00278000   00000000    rw- .l3ram
-  88278000    88278000    00008000   00000000    rw- .demoSharedMem
+00850000    00850000    00003f88   00003f88    r--
+  00850000    00850000    00003f88   00003f88    r-- .const
+00853f88    00853f88    00003000   00000000    rw-
+  00853f88    00853f88    00002000   00000000    rw- .stack
+  00855f88    00855f88    00001000   00000000    rw- .sysmem
+00856f88    00856f88    00000848   00000848    r--
+  00856f88    00856f88    00000240   00000240    r-- .switch
+  008571c8    008571c8    00000608   00000608    r-- .cinit
+88000000    88000000    00180000   00000000    rw-
+  88000000    88000000    00178000   00000000    rw- .l3ram
+  88178000    88178000    00008000   00000000    rw- .demoSharedMem
 
 
 SECTION ALLOCATION MAP
@@ -850,7 +850,7 @@ section   page    origin      length       input sections
                   00843000    0000c400     dss_main.obj (.dpc_l2Heap)
                   0084f400    00000c00     --HOLE--
 
-.const     0    00850000    00003fa8     
+.const     0    00850000    00003f88     
                   00850000    00000790     objectdetection.obj (.const:.string)
                   00850790    00000568     freertos.awr294x.c66.ti-c6000.release.lib : tasks.obj (.const:.string)
                   00850cf8    0000053c                                               : queue.obj (.const:.string)
@@ -870,377 +870,377 @@ section   page    origin      length       input sections
                   008525d4    000000f8     drivers.awr294x.c66.ti-c6000.release.lib : esm_v0.obj (.const:.string)
                   008526cc    000000c0     freertos.awr294x.c66.ti-c6000.release.lib : TimerP_rti.obj (.const:.string)
                   0085278c    000000a8                                               : port.obj (.const:.string)
-                  00852834    000000a4     ti_drivers_config.obj (.const:.string)
-                  008528d8    00000094     drivers.awr294x.c66.ti-c6000.release.lib : edma.obj (.const:.string)
-                  0085296c    00000088                                              : hwa.obj (.const:.string)
-                  008529f4    00000088     freertos.awr294x.c66.ti-c6000.release.lib : SemaphoreP_freertos.obj (.const:.string)
-                  00852a7c    00000088     libdpm_awr2944.ae66 : dpm_msg.oe66 (.const:.string)
-                  00852b04    00000004     --HOLE-- [fill = 0]
-                  00852b08    00000080     objectdetection.obj (.const:$P$T7$8)
-                  00852b88    00000080     libcfarproc_hwa_awr2944.ae66 : cfarprochwa.oe66 (.const:.string)
-                  00852c08    00000078     libdpedma_hwa_awr2944.ae66 : dpedma.oe66 (.const:.string)
-                  00852c80    00000074     libdpm_awr2944.ae66 : dpm_core.oe66 (.const:.string)
-                  00852cf4    00000068     libdopplerproc_hwa_awr2944.ae66 : dopplerprochwa.oe66 (.const:.string)
-                  00852d5c    00000064     libaoaproc_hwa_awr2944.ae66 : aoaprochwa.oe66 (.const:.string)
-                  00852dc0    00000058     librangeproc_hwa_awr2944.ae66 : rangeprochwa.oe66 (.const:.string)
-                  00852e18    00000050     freertos.awr294x.c66.ti-c6000.release.lib : printf.obj (.const:pow10$1$0)
-                  00852e68    00000048                                               : HeapP_freertos.obj (.const:.string)
-                  00852eb0    00000040     drivers.awr294x.c66.ti-c6000.release.lib : hwa.obj (.const:$P$T5$6$0)
-                  00852ef0    0000003c                                              : ipc_notify_v1_cfg.obj (.const:.string)
-                  00852f2c    0000003c                                              : ipc_rpmsg_vring.obj (.const:.string)
-                  00852f68    00000034                                              : soc_rcm.obj (.const:gSocRcmPeripheralClkSrcInfoMap$0)
-                  00852f9c    00000030                                              : mailbox.obj (.const:.string)
-                  00852fcc    00000030     freertos.awr294x.c66.ti-c6000.release.lib : DebugP_log.obj (.const:.string)
-                  00852ffc    00000004     --HOLE-- [fill = 0]
-                  00853000    0000002c     drivers.awr294x.c66.ti-c6000.release.lib : soc_rcm.obj (.const:gSocRcmHsDivMuxClkSrcInfoMap$0)
-                  0085302c    00000004     --HOLE-- [fill = 0]
-                  00853030    00000028                                              : soc_rcm.obj (.const:gSocRcmFixedClocksTbl$0)
-                  00853058    00000027     librangeproc_hwa_awr2944.ae66 : rangeprochwa.oe66 (.const:.string:$P$T1$2)
-                  0085307f    00000001     --HOLE-- [fill = 0]
-                  00853080    00000026     dss_main.obj (.const:.string:$P$T0$1)
-                  008530a6    00000002     --HOLE-- [fill = 0]
-                  008530a8    00000026     libaoaproc_hwa_awr2944.ae66 : aoaprochwa.oe66 (.const:.string:$P$T2$3)
-                  008530ce    00000002     --HOLE-- [fill = 0]
-                  008530d0    00000025     librangeproc_hwa_awr2944.ae66 : rangeprochwa.oe66 (.const:.string:$P$T0$1)
-                  008530f5    00000003     --HOLE-- [fill = 0]
-                  008530f8    00000024     libaoaproc_hwa_awr2944.ae66 : aoaprochwa.oe66 (.const:.string:$P$T1$2)
-                  0085311c    00000004     --HOLE-- [fill = 0]
-                  00853120    00000024     dss_main.obj (.const:.string:$P$T1$3)
-                  00853144    00000004     --HOLE-- [fill = 0]
-                  00853148    00000024     drivers.awr294x.c66.ti-c6000.release.lib : edma.obj (.const:.string:$P$T18$19$0)
-                  0085316c    00000004     --HOLE-- [fill = 0]
-                  00853170    00000024     freertos.awr294x.c66.ti-c6000.release.lib : tasks.obj (.const:.string:$P$T28$29$0)
-                  00853194    00000004     --HOLE-- [fill = 0]
-                  00853198    00000024                                               : queue.obj (.const:.string:$P$T5$6$0)
-                  008531bc    00000024     rts6600_elf.lib : _printfi.c.obj (.const:.string)
-                  008531e0    00000024     libdpm_awr2944.ae66 : dpm_msg.oe66 (.const:gDPMMessageFxnTable)
-                  00853204    00000004     --HOLE-- [fill = 0]
-                  00853208    00000020     freertos.awr294x.c66.ti-c6000.release.lib : tasks.obj (.const:.string:$P$T19$20$0)
-                  00853228    00000020     objectdetection.obj (.const:.string:$P$T3$4)
-                  00853248    0000001f     objectdetection.obj (.const:.string:$P$T0$1)
+                  00852834    00000094     drivers.awr294x.c66.ti-c6000.release.lib : edma.obj (.const:.string)
+                  008528c8    00000088                                              : hwa.obj (.const:.string)
+                  00852950    00000088     freertos.awr294x.c66.ti-c6000.release.lib : SemaphoreP_freertos.obj (.const:.string)
+                  008529d8    00000088     libdpm_awr2944.ae66 : dpm_msg.oe66 (.const:.string)
+                  00852a60    00000084     ti_drivers_config.obj (.const:.string)
+                  00852ae4    00000004     --HOLE-- [fill = 0]
+                  00852ae8    00000080     objectdetection.obj (.const:$P$T7$8)
+                  00852b68    00000080     libcfarproc_hwa_awr2944.ae66 : cfarprochwa.oe66 (.const:.string)
+                  00852be8    00000078     libdpedma_hwa_awr2944.ae66 : dpedma.oe66 (.const:.string)
+                  00852c60    00000074     libdpm_awr2944.ae66 : dpm_core.oe66 (.const:.string)
+                  00852cd4    00000068     libdopplerproc_hwa_awr2944.ae66 : dopplerprochwa.oe66 (.const:.string)
+                  00852d3c    00000064     libaoaproc_hwa_awr2944.ae66 : aoaprochwa.oe66 (.const:.string)
+                  00852da0    00000058     librangeproc_hwa_awr2944.ae66 : rangeprochwa.oe66 (.const:.string)
+                  00852df8    00000050     freertos.awr294x.c66.ti-c6000.release.lib : printf.obj (.const:pow10$1$0)
+                  00852e48    00000048                                               : HeapP_freertos.obj (.const:.string)
+                  00852e90    00000040     drivers.awr294x.c66.ti-c6000.release.lib : hwa.obj (.const:$P$T5$6$0)
+                  00852ed0    0000003c                                              : ipc_notify_v1_cfg.obj (.const:.string)
+                  00852f0c    0000003c                                              : ipc_rpmsg_vring.obj (.const:.string)
+                  00852f48    00000034                                              : soc_rcm.obj (.const:gSocRcmPeripheralClkSrcInfoMap$0)
+                  00852f7c    00000030                                              : mailbox.obj (.const:.string)
+                  00852fac    00000030     freertos.awr294x.c66.ti-c6000.release.lib : DebugP_log.obj (.const:.string)
+                  00852fdc    00000004     --HOLE-- [fill = 0]
+                  00852fe0    0000002c     drivers.awr294x.c66.ti-c6000.release.lib : soc_rcm.obj (.const:gSocRcmHsDivMuxClkSrcInfoMap$0)
+                  0085300c    00000004     --HOLE-- [fill = 0]
+                  00853010    00000028                                              : soc_rcm.obj (.const:gSocRcmFixedClocksTbl$0)
+                  00853038    00000027     librangeproc_hwa_awr2944.ae66 : rangeprochwa.oe66 (.const:.string:$P$T1$2)
+                  0085305f    00000001     --HOLE-- [fill = 0]
+                  00853060    00000026     dss_main.obj (.const:.string:$P$T0$1)
+                  00853086    00000002     --HOLE-- [fill = 0]
+                  00853088    00000026     libaoaproc_hwa_awr2944.ae66 : aoaprochwa.oe66 (.const:.string:$P$T2$3)
+                  008530ae    00000002     --HOLE-- [fill = 0]
+                  008530b0    00000025     librangeproc_hwa_awr2944.ae66 : rangeprochwa.oe66 (.const:.string:$P$T0$1)
+                  008530d5    00000003     --HOLE-- [fill = 0]
+                  008530d8    00000024     libaoaproc_hwa_awr2944.ae66 : aoaprochwa.oe66 (.const:.string:$P$T1$2)
+                  008530fc    00000004     --HOLE-- [fill = 0]
+                  00853100    00000024     dss_main.obj (.const:.string:$P$T1$3)
+                  00853124    00000004     --HOLE-- [fill = 0]
+                  00853128    00000024     drivers.awr294x.c66.ti-c6000.release.lib : edma.obj (.const:.string:$P$T18$19$0)
+                  0085314c    00000004     --HOLE-- [fill = 0]
+                  00853150    00000024     freertos.awr294x.c66.ti-c6000.release.lib : tasks.obj (.const:.string:$P$T28$29$0)
+                  00853174    00000004     --HOLE-- [fill = 0]
+                  00853178    00000024                                               : queue.obj (.const:.string:$P$T5$6$0)
+                  0085319c    00000024     rts6600_elf.lib : _printfi.c.obj (.const:.string)
+                  008531c0    00000024     libdpm_awr2944.ae66 : dpm_msg.oe66 (.const:gDPMMessageFxnTable)
+                  008531e4    00000004     --HOLE-- [fill = 0]
+                  008531e8    00000020     freertos.awr294x.c66.ti-c6000.release.lib : tasks.obj (.const:.string:$P$T19$20$0)
+                  00853208    00000020     objectdetection.obj (.const:.string:$P$T3$4)
+                  00853228    0000001f     objectdetection.obj (.const:.string:$P$T0$1)
+                  00853247    00000001     --HOLE-- [fill = 0]
+                  00853248    0000001f     drivers.awr294x.c66.ti-c6000.release.lib : soc_rcm.obj (.const:.string:$P$T1$2$0)
                   00853267    00000001     --HOLE-- [fill = 0]
-                  00853268    0000001f     drivers.awr294x.c66.ti-c6000.release.lib : soc_rcm.obj (.const:.string:$P$T1$2$0)
+                  00853268    0000001f     libdpedma_hwa_awr2944.ae66 : dpedma.oe66 (.const:.string:$P$T3$4)
                   00853287    00000001     --HOLE-- [fill = 0]
-                  00853288    0000001f     libdpedma_hwa_awr2944.ae66 : dpedma.oe66 (.const:.string:$P$T3$4)
-                  008532a7    00000001     --HOLE-- [fill = 0]
-                  008532a8    0000001e     freertos.awr294x.c66.ti-c6000.release.lib : port.obj (.const:.string:$P$T0$1$0)
-                  008532c6    00000002     --HOLE-- [fill = 0]
-                  008532c8    0000001d                                               : SemaphoreP_freertos.obj (.const:.string:$P$T1$2$0)
-                  008532e5    00000003     --HOLE-- [fill = 0]
-                  008532e8    0000001c     drivers.awr294x.c66.ti-c6000.release.lib : ipc_notify_v1_cfg.obj (.const:.string:$P$T1$2$0)
+                  00853288    0000001e     freertos.awr294x.c66.ti-c6000.release.lib : port.obj (.const:.string:$P$T0$1$0)
+                  008532a6    00000002     --HOLE-- [fill = 0]
+                  008532a8    0000001d                                               : SemaphoreP_freertos.obj (.const:.string:$P$T1$2$0)
+                  008532c5    00000003     --HOLE-- [fill = 0]
+                  008532c8    0000001c     drivers.awr294x.c66.ti-c6000.release.lib : ipc_notify_v1_cfg.obj (.const:.string:$P$T1$2$0)
+                  008532e4    00000004     --HOLE-- [fill = 0]
+                  008532e8    0000001c     objectdetection.obj (.const:.string:$P$T1$2)
                   00853304    00000004     --HOLE-- [fill = 0]
-                  00853308    0000001c     objectdetection.obj (.const:.string:$P$T1$2)
-                  00853324    00000004     --HOLE-- [fill = 0]
-                  00853328    0000001b     freertos.awr294x.c66.ti-c6000.release.lib : SemaphoreP_freertos.obj (.const:.string:$P$T0$1$0)
+                  00853308    0000001b     freertos.awr294x.c66.ti-c6000.release.lib : SemaphoreP_freertos.obj (.const:.string:$P$T0$1$0)
+                  00853323    00000005     --HOLE-- [fill = 0]
+                  00853328    0000001b                                               : timers.obj (.const:.string:$P$T11$13$0)
                   00853343    00000005     --HOLE-- [fill = 0]
-                  00853348    0000001b                                               : timers.obj (.const:.string:$P$T11$13$0)
+                  00853348    0000001b     drivers.awr294x.c66.ti-c6000.release.lib : edma.obj (.const:.string:$P$T12$13$0)
                   00853363    00000005     --HOLE-- [fill = 0]
-                  00853368    0000001b     drivers.awr294x.c66.ti-c6000.release.lib : edma.obj (.const:.string:$P$T12$13$0)
+                  00853368    0000001b     libdopplerproc_hwa_awr2944.ae66 : dopplerprochwa.oe66 (.const:.string:$P$T2$3)
                   00853383    00000005     --HOLE-- [fill = 0]
-                  00853388    0000001b     libdopplerproc_hwa_awr2944.ae66 : dopplerprochwa.oe66 (.const:.string:$P$T2$3)
+                  00853388    0000001b     drivers.awr294x.c66.ti-c6000.release.lib : soc_rcm.obj (.const:.string:$P$T21$22$0)
                   008533a3    00000005     --HOLE-- [fill = 0]
-                  008533a8    0000001b     drivers.awr294x.c66.ti-c6000.release.lib : soc_rcm.obj (.const:.string:$P$T21$22$0)
+                  008533a8    0000001b     libdpedma_hwa_awr2944.ae66 : dpedma.oe66 (.const:.string:$P$T5$6)
                   008533c3    00000005     --HOLE-- [fill = 0]
-                  008533c8    0000001b     libdpedma_hwa_awr2944.ae66 : dpedma.oe66 (.const:.string:$P$T5$6)
-                  008533e3    00000005     --HOLE-- [fill = 0]
-                  008533e8    0000001a     freertos.awr294x.c66.ti-c6000.release.lib : queue.obj (.const:.string:$P$T1$2$0)
+                  008533c8    0000001a     freertos.awr294x.c66.ti-c6000.release.lib : queue.obj (.const:.string:$P$T1$2$0)
+                  008533e2    00000006     --HOLE-- [fill = 0]
+                  008533e8    0000001a     drivers.awr294x.c66.ti-c6000.release.lib : soc_rcm.obj (.const:.string:$P$T12$13$0)
                   00853402    00000006     --HOLE-- [fill = 0]
-                  00853408    0000001a     drivers.awr294x.c66.ti-c6000.release.lib : soc_rcm.obj (.const:.string:$P$T12$13$0)
+                  00853408    0000001a     freertos.awr294x.c66.ti-c6000.release.lib : SemaphoreP_freertos.obj (.const:.string:$P$T2$3$0)
                   00853422    00000006     --HOLE-- [fill = 0]
-                  00853428    0000001a     freertos.awr294x.c66.ti-c6000.release.lib : SemaphoreP_freertos.obj (.const:.string:$P$T2$3$0)
+                  00853428    0000001a     objectdetection.obj (.const:.string:$P$T2$3)
                   00853442    00000006     --HOLE-- [fill = 0]
-                  00853448    0000001a     objectdetection.obj (.const:.string:$P$T2$3)
+                  00853448    0000001a     objectdetection.obj (.const:.string:$P$T5$6)
                   00853462    00000006     --HOLE-- [fill = 0]
-                  00853468    0000001a     objectdetection.obj (.const:.string:$P$T5$6)
+                  00853468    0000001a     objectdetection.obj (.const:.string:$P$T8$9)
                   00853482    00000006     --HOLE-- [fill = 0]
-                  00853488    0000001a     objectdetection.obj (.const:.string:$P$T8$9)
+                  00853488    0000001a     drivers.awr294x.c66.ti-c6000.release.lib : soc_rcm.obj (.const:gSocRcmCpswClkSrcValMap$0)
                   008534a2    00000006     --HOLE-- [fill = 0]
-                  008534a8    0000001a     drivers.awr294x.c66.ti-c6000.release.lib : soc_rcm.obj (.const:gSocRcmCpswClkSrcValMap$0)
+                  008534a8    0000001a                                              : soc_rcm.obj (.const:gSocRcmCptsClkSrcValMap$0)
                   008534c2    00000006     --HOLE-- [fill = 0]
-                  008534c8    0000001a                                              : soc_rcm.obj (.const:gSocRcmCptsClkSrcValMap$0)
+                  008534c8    0000001a                                              : soc_rcm.obj (.const:gSocRcmCsiRxClkSrcValMap$0)
                   008534e2    00000006     --HOLE-- [fill = 0]
-                  008534e8    0000001a                                              : soc_rcm.obj (.const:gSocRcmCsiRxClkSrcValMap$0)
+                  008534e8    0000001a                                              : soc_rcm.obj (.const:gSocRcmDssHwaClkSrcValMap$0)
                   00853502    00000006     --HOLE-- [fill = 0]
-                  00853508    0000001a                                              : soc_rcm.obj (.const:gSocRcmDssHwaClkSrcValMap$0)
+                  00853508    0000001a                                              : soc_rcm.obj (.const:gSocRcmDssRtiClkSrcValMap$0)
                   00853522    00000006     --HOLE-- [fill = 0]
-                  00853528    0000001a                                              : soc_rcm.obj (.const:gSocRcmDssRtiClkSrcValMap$0)
+                  00853528    0000001a                                              : soc_rcm.obj (.const:gSocRcmDssSciClkSrcValMap$0)
                   00853542    00000006     --HOLE-- [fill = 0]
-                  00853548    0000001a                                              : soc_rcm.obj (.const:gSocRcmDssSciClkSrcValMap$0)
+                  00853548    0000001a                                              : soc_rcm.obj (.const:gSocRcmI2CClkSrcValMap$0)
                   00853562    00000006     --HOLE-- [fill = 0]
-                  00853568    0000001a                                              : soc_rcm.obj (.const:gSocRcmI2CClkSrcValMap$0)
+                  00853568    0000001a                                              : soc_rcm.obj (.const:gSocRcmMcanClkSrcValMap$0)
                   00853582    00000006     --HOLE-- [fill = 0]
-                  00853588    0000001a                                              : soc_rcm.obj (.const:gSocRcmMcanClkSrcValMap$0)
+                  00853588    0000001a                                              : soc_rcm.obj (.const:gSocRcmQspiClkSrcValMap$0)
                   008535a2    00000006     --HOLE-- [fill = 0]
-                  008535a8    0000001a                                              : soc_rcm.obj (.const:gSocRcmQspiClkSrcValMap$0)
+                  008535a8    0000001a                                              : soc_rcm.obj (.const:gSocRcmRtiClkSrcValMap$0)
                   008535c2    00000006     --HOLE-- [fill = 0]
-                  008535c8    0000001a                                              : soc_rcm.obj (.const:gSocRcmRtiClkSrcValMap$0)
+                  008535c8    0000001a                                              : soc_rcm.obj (.const:gSocRcmSciClkSrcValMap$0)
                   008535e2    00000006     --HOLE-- [fill = 0]
-                  008535e8    0000001a                                              : soc_rcm.obj (.const:gSocRcmSciClkSrcValMap$0)
+                  008535e8    0000001a                                              : soc_rcm.obj (.const:gSocRcmSpiClkSrcValMap$0)
                   00853602    00000006     --HOLE-- [fill = 0]
-                  00853608    0000001a                                              : soc_rcm.obj (.const:gSocRcmSpiClkSrcValMap$0)
-                  00853622    00000006     --HOLE-- [fill = 0]
-                  00853628    00000019     libdpedma_hwa_awr2944.ae66 : dpedma.oe66 (.const:.string:$P$T0$1)
+                  00853608    00000019     libdpedma_hwa_awr2944.ae66 : dpedma.oe66 (.const:.string:$P$T0$1)
+                  00853621    00000007     --HOLE-- [fill = 0]
+                  00853628    00000019     drivers.awr294x.c66.ti-c6000.release.lib : ipc_notify_v1.obj (.const:.string:$P$T1$2$0)
                   00853641    00000007     --HOLE-- [fill = 0]
-                  00853648    00000019     drivers.awr294x.c66.ti-c6000.release.lib : ipc_notify_v1.obj (.const:.string:$P$T1$2$0)
+                  00853648    00000019     freertos.awr294x.c66.ti-c6000.release.lib : tasks.obj (.const:.string:$P$T20$21$0)
                   00853661    00000007     --HOLE-- [fill = 0]
-                  00853668    00000019     freertos.awr294x.c66.ti-c6000.release.lib : tasks.obj (.const:.string:$P$T20$21$0)
+                  00853668    00000019                                               : queue.obj (.const:.string:$P$T3$4$0)
                   00853681    00000007     --HOLE-- [fill = 0]
-                  00853688    00000019                                               : queue.obj (.const:.string:$P$T3$4$0)
+                  00853688    00000019                                               : queue.obj (.const:.string:$P$T4$5$0)
                   008536a1    00000007     --HOLE-- [fill = 0]
-                  008536a8    00000019                                               : queue.obj (.const:.string:$P$T4$5$0)
+                  008536a8    00000019     objectdetection.obj (.const:.string:$P$T4$5)
                   008536c1    00000007     --HOLE-- [fill = 0]
-                  008536c8    00000019     objectdetection.obj (.const:.string:$P$T4$5)
+                  008536c8    00000019     freertos.awr294x.c66.ti-c6000.release.lib : queue.obj (.const:.string:$P$T8$9$0)
                   008536e1    00000007     --HOLE-- [fill = 0]
-                  008536e8    00000019     freertos.awr294x.c66.ti-c6000.release.lib : queue.obj (.const:.string:$P$T8$9$0)
+                  008536e8    00000019     objectdetection.obj (.const:.string:$P$T9$10)
                   00853701    00000007     --HOLE-- [fill = 0]
-                  00853708    00000019     objectdetection.obj (.const:.string:$P$T9$10)
-                  00853721    00000007     --HOLE-- [fill = 0]
-                  00853728    00000018     drivers.awr294x.c66.ti-c6000.release.lib : ipc_notify_v1_cfg.obj (.const:.string:$P$T0$1$0)
-                  00853740    00000018     libdopplerproc_hwa_awr2944.ae66 : dopplerprochwa.oe66 (.const:.string:$P$T1$2)
-                  00853758    00000018     drivers.awr294x.c66.ti-c6000.release.lib : ipc_rpmsg.obj (.const:.string:$P$T2$3$0)
-                  00853770    00000018     freertos.awr294x.c66.ti-c6000.release.lib : tasks.obj (.const:.string:$P$T27$28$0)
-                  00853788    00000018     drivers.awr294x.c66.ti-c6000.release.lib : soc_rcm.obj (.const:.string:$P$T7$8$0)
-                  008537a0    00000018     data_path.obj (.const:.string)
-                  008537b8    00000017     libaoaproc_hwa_awr2944.ae66 : aoaprochwa.oe66 (.const:.string:$P$T0$1)
-                  008537cf    00000001     --HOLE-- [fill = 0]
-                  008537d0    00000017     freertos.awr294x.c66.ti-c6000.release.lib : timers.obj (.const:.string:$P$T10$11$0)
-                  008537e7    00000001     --HOLE-- [fill = 0]
-                  008537e8    00000017                                               : tasks.obj (.const:.string:$P$T12$13$0)
-                  008537ff    00000001     --HOLE-- [fill = 0]
-                  00853800    00000017     drivers.awr294x.c66.ti-c6000.release.lib : soc_rcm.obj (.const:.string:$P$T18$19$0)
-                  00853817    00000001     --HOLE-- [fill = 0]
-                  00853818    00000017     libdpm_awr2944.ae66 : dpm_msg.oe66 (.const:.string:$P$T2$3)
-                  0085382f    00000001     --HOLE-- [fill = 0]
-                  00853830    00000017     dss_main.obj (.const:.string:$P$T2$4)
-                  00853847    00000001     --HOLE-- [fill = 0]
-                  00853848    00000017     drivers.awr294x.c66.ti-c6000.release.lib : hwa.obj (.const:.string:$P$T3$4$0)
-                  0085385f    00000001     --HOLE-- [fill = 0]
-                  00853860    00000017     libaoaproc_hwa_awr2944.ae66 : aoaprochwa.oe66 (.const:.string:$P$T4$5)
-                  00853877    00000001     --HOLE-- [fill = 0]
-                  00853878    00000017     drivers.awr294x.c66.ti-c6000.release.lib : soc_rcm.obj (.const:.string:$P$T5$6$0)
-                  0085388f    00000001     --HOLE-- [fill = 0]
-                  00853890    00000017     libdpedma_hwa_awr2944.ae66 : dpedma.oe66 (.const:.string:$P$T6$7)
-                  008538a7    00000001     --HOLE-- [fill = 0]
-                  008538a8    00000017     objectdetection.obj (.const:.string:$P$T6$7)
-                  008538bf    00000001     --HOLE-- [fill = 0]
-                  008538c0    00000016     drivers.awr294x.c66.ti-c6000.release.lib : hwa.obj (.const:.string:$P$T0$1$0)
-                  008538d6    00000002     --HOLE-- [fill = 0]
-                  008538d8    00000016     freertos.awr294x.c66.ti-c6000.release.lib : timers.obj (.const:.string:$P$T0$1$0)
-                  008538ee    00000002     --HOLE-- [fill = 0]
-                  008538f0    00000016     drivers.awr294x.c66.ti-c6000.release.lib : hwa.obj (.const:.string:$P$T1$2$0)
-                  00853906    00000002     --HOLE-- [fill = 0]
-                  00853908    00000016                                              : soc_rcm.obj (.const:.string:$P$T16$17$0)
-                  0085391e    00000002     --HOLE-- [fill = 0]
-                  00853920    00000016     freertos.awr294x.c66.ti-c6000.release.lib : tasks.obj (.const:.string:$P$T17$18$0)
-                  00853936    00000002     --HOLE-- [fill = 0]
-                  00853938    00000016     librangeproc_hwa_awr2944.ae66 : rangeprochwa.oe66 (.const:.string:$P$T2$3)
-                  0085394e    00000002     --HOLE-- [fill = 0]
-                  00853950    00000016     drivers.awr294x.c66.ti-c6000.release.lib : soc_rcm.obj (.const:.string:$P$T20$21$0)
-                  00853966    00000002     --HOLE-- [fill = 0]
-                  00853968    00000016                                              : esm_v0.obj (.const:.string:$P$T3$4$0)
-                  0085397e    00000002     --HOLE-- [fill = 0]
-                  00853980    00000016                                              : soc_rcm.obj (.const:gSocRcmPllCoreOut2HSDivClkSrcValMap$0)
-                  00853996    00000002     --HOLE-- [fill = 0]
-                  00853998    00000016                                              : soc_rcm.obj (.const:gSocRcmPllDspOut1HSDivClkSrcValMap$0)
-                  008539ae    00000002     --HOLE-- [fill = 0]
-                  008539b0    00000016                                              : soc_rcm.obj (.const:gSocRcmPllDspOut2HSDivClkSrcValMap$0)
-                  008539c6    00000002     --HOLE-- [fill = 0]
-                  008539c8    00000016                                              : soc_rcm.obj (.const:gSocRcmPllPerOut1HSDivClkSrcValMap$0)
-                  008539de    00000002     --HOLE-- [fill = 0]
-                  008539e0    00000015                                              : ipc_rpmsg_vring.obj (.const:.string:$P$T0$1$0)
-                  008539f5    00000003     --HOLE-- [fill = 0]
-                  008539f8    00000015     freertos.awr294x.c66.ti-c6000.release.lib : tasks.obj (.const:.string:$P$T1$2$0)
-                  00853a0d    00000003     --HOLE-- [fill = 0]
-                  00853a10    00000015     libcfarproc_hwa_awr2944.ae66 : cfarprochwa.oe66 (.const:.string:$P$T1$2)
-                  00853a25    00000003     --HOLE-- [fill = 0]
-                  00853a28    00000015     libdpm_awr2944.ae66 : dpm_msg.oe66 (.const:.string:$P$T1$2)
-                  00853a3d    00000003     --HOLE-- [fill = 0]
-                  00853a40    00000015     freertos.awr294x.c66.ti-c6000.release.lib : queue.obj (.const:.string:$P$T13$14$0)
-                  00853a55    00000003     --HOLE-- [fill = 0]
-                  00853a58    00000015     drivers.awr294x.c66.ti-c6000.release.lib : esm_v0.obj (.const:.string:$P$T2$3$0)
-                  00853a6d    00000003     --HOLE-- [fill = 0]
-                  00853a70    00000015     freertos.awr294x.c66.ti-c6000.release.lib : tasks.obj (.const:.string:$P$T23$24$0)
-                  00853a85    00000003     --HOLE-- [fill = 0]
-                  00853a88    00000015                                               : timers.obj (.const:.string:$P$T3$4$0)
-                  00853a9d    00000003     --HOLE-- [fill = 0]
-                  00853aa0    00000015     drivers.awr294x.c66.ti-c6000.release.lib : hwa.obj (.const:.string:$P$T4$5$0)
-                  00853ab5    00000003     --HOLE-- [fill = 0]
-                  00853ab8    00000015                                              : edma.obj (.const:.string:$P$T8$9$0)
-                  00853acd    00000003     --HOLE-- [fill = 0]
-                  00853ad0    00000014     libcfarproc_hwa_awr2944.ae66 : cfarprochwa.oe66 (.const:.string:$P$T0$1)
-                  00853ae4    00000004     --HOLE-- [fill = 0]
-                  00853ae8    00000014     libdpedma_hwa_awr2944.ae66 : dpedma.oe66 (.const:.string:$P$T1$2)
-                  00853afc    00000004     --HOLE-- [fill = 0]
-                  00853b00    00000014     freertos.awr294x.c66.ti-c6000.release.lib : queue.obj (.const:.string:$P$T11$12$0)
-                  00853b14    00000004     --HOLE-- [fill = 0]
-                  00853b18    00000014                                               : timers.obj (.const:.string:$P$T12$14$0)
-                  00853b2c    00000004     --HOLE-- [fill = 0]
-                  00853b30    00000014     drivers.awr294x.c66.ti-c6000.release.lib : edma.obj (.const:.string:$P$T13$14$0)
-                  00853b44    00000004     --HOLE-- [fill = 0]
-                  00853b48    00000014                                              : edma.obj (.const:.string:$P$T14$15$0)
-                  00853b5c    00000004     --HOLE-- [fill = 0]
-                  00853b60    00000014                                              : hwa.obj (.const:.string:$P$T2$3$0)
-                  00853b74    00000004     --HOLE-- [fill = 0]
-                  00853b78    00000014                                              : ipc_rpmsg.obj (.const:.string:$P$T3$4$0)
-                  00853b8c    00000004     --HOLE-- [fill = 0]
-                  00853b90    00000014     libaoaproc_hwa_awr2944.ae66 : aoaprochwa.oe66 (.const:.string:$P$T3$4)
-                  00853ba4    00000004     --HOLE-- [fill = 0]
-                  00853ba8    00000014     dss_main.obj (.const:.string:$P$T3$5)
-                  00853bbc    00000004     --HOLE-- [fill = 0]
-                  00853bc0    00000014     freertos.awr294x.c66.ti-c6000.release.lib : tasks.obj (.const:.string:$P$T9$10$0)
-                  00853bd4    00000014                                               : printf.obj (.const:.string)
-                  00853be8    00000013                                               : queue.obj (.const:.string:$P$T0$1$0)
-                  00853bfb    00000005     --HOLE-- [fill = 0]
-                  00853c00    00000013     libdpm_awr2944.ae66 : dpm_msg.oe66 (.const:.string:$P$T0$1)
-                  00853c13    00000005     --HOLE-- [fill = 0]
-                  00853c18    00000013     freertos.awr294x.c66.ti-c6000.release.lib : port.obj (.const:.string:$P$T1$2$0)
-                  00853c2b    00000005     --HOLE-- [fill = 0]
-                  00853c30    00000013                                               : tasks.obj (.const:.string:$P$T15$16$0)
-                  00853c43    00000005     --HOLE-- [fill = 0]
-                  00853c48    00000013                                               : tasks.obj (.const:.string:$P$T16$17$0)
-                  00853c5b    00000005     --HOLE-- [fill = 0]
-                  00853c60    00000013     drivers.awr294x.c66.ti-c6000.release.lib : soc_rcm.obj (.const:.string:$P$T17$18$0)
-                  00853c73    00000005     --HOLE-- [fill = 0]
-                  00853c78    00000012                                              : ipc_notify_v1.obj (.const:.string:$P$T0$1$0)
-                  00853c8a    00000006     --HOLE-- [fill = 0]
-                  00853c90    00000012     freertos.awr294x.c66.ti-c6000.release.lib : tasks.obj (.const:.string:$P$T0$1$0)
-                  00853ca2    00000006     --HOLE-- [fill = 0]
-                  00853ca8    00000012     drivers.awr294x.c66.ti-c6000.release.lib : soc_rcm.obj (.const:.string:$P$T15$16$0)
-                  00853cba    00000006     --HOLE-- [fill = 0]
-                  00853cc0    00000012                                              : soc_rcm.obj (.const:.string:$P$T19$20$0)
-                  00853cd2    00000006     --HOLE-- [fill = 0]
-                  00853cd8    00000012                                              : edma.obj (.const:.string:$P$T3$4$0)
-                  00853cea    00000006     --HOLE-- [fill = 0]
-                  00853cf0    00000012     freertos.awr294x.c66.ti-c6000.release.lib : queue.obj (.const:.string:$P$T7$8$0)
-                  00853d02    00000006     --HOLE-- [fill = 0]
-                  00853d08    00000012                                               : queue.obj (.const:.string:$P$T9$10$0)
-                  00853d1a    00000006     --HOLE-- [fill = 0]
-                  00853d20    00000011     ti_drivers_open_close.obj (.const:.string:$P$T0$1)
-                  00853d31    00000007     --HOLE-- [fill = 0]
-                  00853d38    00000011     drivers.awr294x.c66.ti-c6000.release.lib : edma.obj (.const:.string:$P$T19$20$0)
-                  00853d49    00000007     --HOLE-- [fill = 0]
-                  00853d50    00000011     ti_drivers_open_close.obj (.const:.string:$P$T2$3)
-                  00853d61    00000007     --HOLE-- [fill = 0]
-                  00853d68    00000011     drivers.awr294x.c66.ti-c6000.release.lib : edma.obj (.const:.string:$P$T7$8$0)
-                  00853d79    00000007     --HOLE-- [fill = 0]
-                  00853d80    00000010     freertos.awr294x.c66.ti-c6000.release.lib : HeapP_freertos.obj (.const:.string:$P$T0$1$0)
-                  00853d90    00000010     data_path.obj (.const:.string:$P$T0$1)
-                  00853da0    00000010     ti_drivers_open_close.obj (.const:.string:$P$T1$2)
-                  00853db0    00000010     drivers.awr294x.c66.ti-c6000.release.lib : edma.obj (.const:.string:$P$T11$12$0)
-                  00853dc0    00000010                                              : soc_rcm.obj (.const:gSocRcmXTALInfo$0)
-                  00853dd0    0000000f                                              : ipc_rpmsg.obj (.const:.string:$P$T0$1$0)
+                  00853708    00000018     drivers.awr294x.c66.ti-c6000.release.lib : ipc_notify_v1_cfg.obj (.const:.string:$P$T0$1$0)
+                  00853720    00000018     libdopplerproc_hwa_awr2944.ae66 : dopplerprochwa.oe66 (.const:.string:$P$T1$2)
+                  00853738    00000018     drivers.awr294x.c66.ti-c6000.release.lib : ipc_rpmsg.obj (.const:.string:$P$T2$3$0)
+                  00853750    00000018     freertos.awr294x.c66.ti-c6000.release.lib : tasks.obj (.const:.string:$P$T27$28$0)
+                  00853768    00000018     drivers.awr294x.c66.ti-c6000.release.lib : soc_rcm.obj (.const:.string:$P$T7$8$0)
+                  00853780    00000018     data_path.obj (.const:.string)
+                  00853798    00000017     libaoaproc_hwa_awr2944.ae66 : aoaprochwa.oe66 (.const:.string:$P$T0$1)
+                  008537af    00000001     --HOLE-- [fill = 0]
+                  008537b0    00000017     freertos.awr294x.c66.ti-c6000.release.lib : timers.obj (.const:.string:$P$T10$11$0)
+                  008537c7    00000001     --HOLE-- [fill = 0]
+                  008537c8    00000017                                               : tasks.obj (.const:.string:$P$T12$13$0)
+                  008537df    00000001     --HOLE-- [fill = 0]
+                  008537e0    00000017     drivers.awr294x.c66.ti-c6000.release.lib : soc_rcm.obj (.const:.string:$P$T18$19$0)
+                  008537f7    00000001     --HOLE-- [fill = 0]
+                  008537f8    00000017     libdpm_awr2944.ae66 : dpm_msg.oe66 (.const:.string:$P$T2$3)
+                  0085380f    00000001     --HOLE-- [fill = 0]
+                  00853810    00000017     dss_main.obj (.const:.string:$P$T2$4)
+                  00853827    00000001     --HOLE-- [fill = 0]
+                  00853828    00000017     drivers.awr294x.c66.ti-c6000.release.lib : hwa.obj (.const:.string:$P$T3$4$0)
+                  0085383f    00000001     --HOLE-- [fill = 0]
+                  00853840    00000017     libaoaproc_hwa_awr2944.ae66 : aoaprochwa.oe66 (.const:.string:$P$T4$5)
+                  00853857    00000001     --HOLE-- [fill = 0]
+                  00853858    00000017     drivers.awr294x.c66.ti-c6000.release.lib : soc_rcm.obj (.const:.string:$P$T5$6$0)
+                  0085386f    00000001     --HOLE-- [fill = 0]
+                  00853870    00000017     libdpedma_hwa_awr2944.ae66 : dpedma.oe66 (.const:.string:$P$T6$7)
+                  00853887    00000001     --HOLE-- [fill = 0]
+                  00853888    00000017     objectdetection.obj (.const:.string:$P$T6$7)
+                  0085389f    00000001     --HOLE-- [fill = 0]
+                  008538a0    00000016     drivers.awr294x.c66.ti-c6000.release.lib : hwa.obj (.const:.string:$P$T0$1$0)
+                  008538b6    00000002     --HOLE-- [fill = 0]
+                  008538b8    00000016     freertos.awr294x.c66.ti-c6000.release.lib : timers.obj (.const:.string:$P$T0$1$0)
+                  008538ce    00000002     --HOLE-- [fill = 0]
+                  008538d0    00000016     drivers.awr294x.c66.ti-c6000.release.lib : hwa.obj (.const:.string:$P$T1$2$0)
+                  008538e6    00000002     --HOLE-- [fill = 0]
+                  008538e8    00000016                                              : soc_rcm.obj (.const:.string:$P$T16$17$0)
+                  008538fe    00000002     --HOLE-- [fill = 0]
+                  00853900    00000016     freertos.awr294x.c66.ti-c6000.release.lib : tasks.obj (.const:.string:$P$T17$18$0)
+                  00853916    00000002     --HOLE-- [fill = 0]
+                  00853918    00000016     librangeproc_hwa_awr2944.ae66 : rangeprochwa.oe66 (.const:.string:$P$T2$3)
+                  0085392e    00000002     --HOLE-- [fill = 0]
+                  00853930    00000016     drivers.awr294x.c66.ti-c6000.release.lib : soc_rcm.obj (.const:.string:$P$T20$21$0)
+                  00853946    00000002     --HOLE-- [fill = 0]
+                  00853948    00000016                                              : esm_v0.obj (.const:.string:$P$T3$4$0)
+                  0085395e    00000002     --HOLE-- [fill = 0]
+                  00853960    00000016                                              : soc_rcm.obj (.const:gSocRcmPllCoreOut2HSDivClkSrcValMap$0)
+                  00853976    00000002     --HOLE-- [fill = 0]
+                  00853978    00000016                                              : soc_rcm.obj (.const:gSocRcmPllDspOut1HSDivClkSrcValMap$0)
+                  0085398e    00000002     --HOLE-- [fill = 0]
+                  00853990    00000016                                              : soc_rcm.obj (.const:gSocRcmPllDspOut2HSDivClkSrcValMap$0)
+                  008539a6    00000002     --HOLE-- [fill = 0]
+                  008539a8    00000016                                              : soc_rcm.obj (.const:gSocRcmPllPerOut1HSDivClkSrcValMap$0)
+                  008539be    00000002     --HOLE-- [fill = 0]
+                  008539c0    00000015                                              : ipc_rpmsg_vring.obj (.const:.string:$P$T0$1$0)
+                  008539d5    00000003     --HOLE-- [fill = 0]
+                  008539d8    00000015     freertos.awr294x.c66.ti-c6000.release.lib : tasks.obj (.const:.string:$P$T1$2$0)
+                  008539ed    00000003     --HOLE-- [fill = 0]
+                  008539f0    00000015     libcfarproc_hwa_awr2944.ae66 : cfarprochwa.oe66 (.const:.string:$P$T1$2)
+                  00853a05    00000003     --HOLE-- [fill = 0]
+                  00853a08    00000015     libdpm_awr2944.ae66 : dpm_msg.oe66 (.const:.string:$P$T1$2)
+                  00853a1d    00000003     --HOLE-- [fill = 0]
+                  00853a20    00000015     freertos.awr294x.c66.ti-c6000.release.lib : queue.obj (.const:.string:$P$T13$14$0)
+                  00853a35    00000003     --HOLE-- [fill = 0]
+                  00853a38    00000015     drivers.awr294x.c66.ti-c6000.release.lib : esm_v0.obj (.const:.string:$P$T2$3$0)
+                  00853a4d    00000003     --HOLE-- [fill = 0]
+                  00853a50    00000015     freertos.awr294x.c66.ti-c6000.release.lib : tasks.obj (.const:.string:$P$T23$24$0)
+                  00853a65    00000003     --HOLE-- [fill = 0]
+                  00853a68    00000015                                               : timers.obj (.const:.string:$P$T3$4$0)
+                  00853a7d    00000003     --HOLE-- [fill = 0]
+                  00853a80    00000015     drivers.awr294x.c66.ti-c6000.release.lib : hwa.obj (.const:.string:$P$T4$5$0)
+                  00853a95    00000003     --HOLE-- [fill = 0]
+                  00853a98    00000015                                              : edma.obj (.const:.string:$P$T8$9$0)
+                  00853aad    00000003     --HOLE-- [fill = 0]
+                  00853ab0    00000014     libcfarproc_hwa_awr2944.ae66 : cfarprochwa.oe66 (.const:.string:$P$T0$1)
+                  00853ac4    00000004     --HOLE-- [fill = 0]
+                  00853ac8    00000014     libdpedma_hwa_awr2944.ae66 : dpedma.oe66 (.const:.string:$P$T1$2)
+                  00853adc    00000004     --HOLE-- [fill = 0]
+                  00853ae0    00000014     freertos.awr294x.c66.ti-c6000.release.lib : queue.obj (.const:.string:$P$T11$12$0)
+                  00853af4    00000004     --HOLE-- [fill = 0]
+                  00853af8    00000014                                               : timers.obj (.const:.string:$P$T12$14$0)
+                  00853b0c    00000004     --HOLE-- [fill = 0]
+                  00853b10    00000014     drivers.awr294x.c66.ti-c6000.release.lib : edma.obj (.const:.string:$P$T13$14$0)
+                  00853b24    00000004     --HOLE-- [fill = 0]
+                  00853b28    00000014                                              : edma.obj (.const:.string:$P$T14$15$0)
+                  00853b3c    00000004     --HOLE-- [fill = 0]
+                  00853b40    00000014                                              : hwa.obj (.const:.string:$P$T2$3$0)
+                  00853b54    00000004     --HOLE-- [fill = 0]
+                  00853b58    00000014                                              : ipc_rpmsg.obj (.const:.string:$P$T3$4$0)
+                  00853b6c    00000004     --HOLE-- [fill = 0]
+                  00853b70    00000014     libaoaproc_hwa_awr2944.ae66 : aoaprochwa.oe66 (.const:.string:$P$T3$4)
+                  00853b84    00000004     --HOLE-- [fill = 0]
+                  00853b88    00000014     dss_main.obj (.const:.string:$P$T3$5)
+                  00853b9c    00000004     --HOLE-- [fill = 0]
+                  00853ba0    00000014     freertos.awr294x.c66.ti-c6000.release.lib : tasks.obj (.const:.string:$P$T9$10$0)
+                  00853bb4    00000014                                               : printf.obj (.const:.string)
+                  00853bc8    00000013                                               : queue.obj (.const:.string:$P$T0$1$0)
+                  00853bdb    00000005     --HOLE-- [fill = 0]
+                  00853be0    00000013     libdpm_awr2944.ae66 : dpm_msg.oe66 (.const:.string:$P$T0$1)
+                  00853bf3    00000005     --HOLE-- [fill = 0]
+                  00853bf8    00000013     freertos.awr294x.c66.ti-c6000.release.lib : port.obj (.const:.string:$P$T1$2$0)
+                  00853c0b    00000005     --HOLE-- [fill = 0]
+                  00853c10    00000013                                               : tasks.obj (.const:.string:$P$T15$16$0)
+                  00853c23    00000005     --HOLE-- [fill = 0]
+                  00853c28    00000013                                               : tasks.obj (.const:.string:$P$T16$17$0)
+                  00853c3b    00000005     --HOLE-- [fill = 0]
+                  00853c40    00000013     drivers.awr294x.c66.ti-c6000.release.lib : soc_rcm.obj (.const:.string:$P$T17$18$0)
+                  00853c53    00000005     --HOLE-- [fill = 0]
+                  00853c58    00000012                                              : ipc_notify_v1.obj (.const:.string:$P$T0$1$0)
+                  00853c6a    00000006     --HOLE-- [fill = 0]
+                  00853c70    00000012     freertos.awr294x.c66.ti-c6000.release.lib : tasks.obj (.const:.string:$P$T0$1$0)
+                  00853c82    00000006     --HOLE-- [fill = 0]
+                  00853c88    00000012     drivers.awr294x.c66.ti-c6000.release.lib : soc_rcm.obj (.const:.string:$P$T15$16$0)
+                  00853c9a    00000006     --HOLE-- [fill = 0]
+                  00853ca0    00000012                                              : soc_rcm.obj (.const:.string:$P$T19$20$0)
+                  00853cb2    00000006     --HOLE-- [fill = 0]
+                  00853cb8    00000012                                              : edma.obj (.const:.string:$P$T3$4$0)
+                  00853cca    00000006     --HOLE-- [fill = 0]
+                  00853cd0    00000012     freertos.awr294x.c66.ti-c6000.release.lib : queue.obj (.const:.string:$P$T7$8$0)
+                  00853ce2    00000006     --HOLE-- [fill = 0]
+                  00853ce8    00000012                                               : queue.obj (.const:.string:$P$T9$10$0)
+                  00853cfa    00000006     --HOLE-- [fill = 0]
+                  00853d00    00000011     ti_drivers_open_close.obj (.const:.string:$P$T0$1)
+                  00853d11    00000007     --HOLE-- [fill = 0]
+                  00853d18    00000011     drivers.awr294x.c66.ti-c6000.release.lib : edma.obj (.const:.string:$P$T19$20$0)
+                  00853d29    00000007     --HOLE-- [fill = 0]
+                  00853d30    00000011     ti_drivers_open_close.obj (.const:.string:$P$T2$3)
+                  00853d41    00000007     --HOLE-- [fill = 0]
+                  00853d48    00000011     drivers.awr294x.c66.ti-c6000.release.lib : edma.obj (.const:.string:$P$T7$8$0)
+                  00853d59    00000007     --HOLE-- [fill = 0]
+                  00853d60    00000010     freertos.awr294x.c66.ti-c6000.release.lib : HeapP_freertos.obj (.const:.string:$P$T0$1$0)
+                  00853d70    00000010     data_path.obj (.const:.string:$P$T0$1)
+                  00853d80    00000010     ti_drivers_open_close.obj (.const:.string:$P$T1$2)
+                  00853d90    00000010     drivers.awr294x.c66.ti-c6000.release.lib : edma.obj (.const:.string:$P$T11$12$0)
+                  00853da0    00000010                                              : soc_rcm.obj (.const:gSocRcmXTALInfo$0)
+                  00853db0    0000000f                                              : ipc_rpmsg.obj (.const:.string:$P$T0$1$0)
+                  00853dbf    00000001     --HOLE-- [fill = 0]
+                  00853dc0    0000000f     libdpm_awr2944.ae66 : dpm_core.oe66 (.const:.string:$P$T1$2)
+                  00853dcf    00000001     --HOLE-- [fill = 0]
+                  00853dd0    0000000f     freertos.awr294x.c66.ti-c6000.release.lib : tasks.obj (.const:.string:$P$T10$11$0)
                   00853ddf    00000001     --HOLE-- [fill = 0]
-                  00853de0    0000000f     libdpm_awr2944.ae66 : dpm_core.oe66 (.const:.string:$P$T1$2)
+                  00853de0    0000000f     drivers.awr294x.c66.ti-c6000.release.lib : edma.obj (.const:.string:$P$T17$18$0)
                   00853def    00000001     --HOLE-- [fill = 0]
-                  00853df0    0000000f     freertos.awr294x.c66.ti-c6000.release.lib : tasks.obj (.const:.string:$P$T10$11$0)
+                  00853df0    0000000f                                              : ipc_notify_v1.obj (.const:.string:$P$T2$3$0)
                   00853dff    00000001     --HOLE-- [fill = 0]
-                  00853e00    0000000f     drivers.awr294x.c66.ti-c6000.release.lib : edma.obj (.const:.string:$P$T17$18$0)
-                  00853e0f    00000001     --HOLE-- [fill = 0]
-                  00853e10    0000000f                                              : ipc_notify_v1.obj (.const:.string:$P$T2$3$0)
-                  00853e1f    00000001     --HOLE-- [fill = 0]
-                  00853e20    0000000e     libdpm_awr2944.ae66 : dpm_core.oe66 (.const:.string:$P$T0$1)
+                  00853e00    0000000e     libdpm_awr2944.ae66 : dpm_core.oe66 (.const:.string:$P$T0$1)
+                  00853e0e    00000002     --HOLE-- [fill = 0]
+                  00853e10    0000000e     drivers.awr294x.c66.ti-c6000.release.lib : edma.obj (.const:.string:$P$T10$11$0)
+                  00853e1e    00000002     --HOLE-- [fill = 0]
+                  00853e20    0000000e     freertos.awr294x.c66.ti-c6000.release.lib : queue.obj (.const:.string:$P$T10$11$0)
                   00853e2e    00000002     --HOLE-- [fill = 0]
-                  00853e30    0000000e     drivers.awr294x.c66.ti-c6000.release.lib : edma.obj (.const:.string:$P$T10$11$0)
+                  00853e30    0000000e                                               : tasks.obj (.const:.string:$P$T4$5$0)
                   00853e3e    00000002     --HOLE-- [fill = 0]
-                  00853e40    0000000e     freertos.awr294x.c66.ti-c6000.release.lib : queue.obj (.const:.string:$P$T10$11$0)
-                  00853e4e    00000002     --HOLE-- [fill = 0]
-                  00853e50    0000000e                                               : tasks.obj (.const:.string:$P$T4$5$0)
-                  00853e5e    00000002     --HOLE-- [fill = 0]
-                  00853e60    0000000d     drivers.awr294x.c66.ti-c6000.release.lib : mailbox.obj (.const:.string:$P$T0$1$0)
+                  00853e40    0000000d     drivers.awr294x.c66.ti-c6000.release.lib : mailbox.obj (.const:.string:$P$T0$1$0)
+                  00853e4d    00000003     --HOLE-- [fill = 0]
+                  00853e50    0000000d     freertos.awr294x.c66.ti-c6000.release.lib : HeapP_internal.obj (.const:.string:$P$T0$1$0)
+                  00853e5d    00000003     --HOLE-- [fill = 0]
+                  00853e60    0000000d                                               : TimerP_rti.obj (.const:.string:$P$T0$1$0)
                   00853e6d    00000003     --HOLE-- [fill = 0]
-                  00853e70    0000000d     freertos.awr294x.c66.ti-c6000.release.lib : HeapP_internal.obj (.const:.string:$P$T0$1$0)
+                  00853e70    0000000d     drivers.awr294x.c66.ti-c6000.release.lib : edma.obj (.const:.string:$P$T16$17$0)
                   00853e7d    00000003     --HOLE-- [fill = 0]
-                  00853e80    0000000d                                               : TimerP_rti.obj (.const:.string:$P$T0$1$0)
+                  00853e80    0000000d     freertos.awr294x.c66.ti-c6000.release.lib : queue.obj (.const:.string:$P$T18$19$0)
                   00853e8d    00000003     --HOLE-- [fill = 0]
-                  00853e90    0000000d     drivers.awr294x.c66.ti-c6000.release.lib : edma.obj (.const:.string:$P$T16$17$0)
+                  00853e90    0000000d                                               : tasks.obj (.const:.string:$P$T26$27$0)
                   00853e9d    00000003     --HOLE-- [fill = 0]
-                  00853ea0    0000000d     freertos.awr294x.c66.ti-c6000.release.lib : queue.obj (.const:.string:$P$T18$19$0)
-                  00853ead    00000003     --HOLE-- [fill = 0]
-                  00853eb0    0000000d                                               : tasks.obj (.const:.string:$P$T26$27$0)
-                  00853ebd    00000003     --HOLE-- [fill = 0]
-                  00853ec0    0000000c                                               : ClockP_freertos_c66.obj (.const:.string:$P$T0$1$0)
+                  00853ea0    0000000c                                               : ClockP_freertos_c66.obj (.const:.string:$P$T0$1$0)
+                  00853eac    00000004     --HOLE-- [fill = 0]
+                  00853eb0    0000000c     ti_drivers_config.obj (.const:.string:$P$T0$1)
+                  00853ebc    00000004     --HOLE-- [fill = 0]
+                  00853ec0    0000000c     freertos.awr294x.c66.ti-c6000.release.lib : tasks.obj (.const:.string:$P$T24$25$0)
                   00853ecc    00000004     --HOLE-- [fill = 0]
-                  00853ed0    0000000c     ti_drivers_config.obj (.const:.string:$P$T0$1)
+                  00853ed0    0000000c     libdpm_awr2944.ae66 : dpm_msg.oe66 (.const:.string:$P$T3$4)
                   00853edc    00000004     --HOLE-- [fill = 0]
-                  00853ee0    0000000c     freertos.awr294x.c66.ti-c6000.release.lib : tasks.obj (.const:.string:$P$T24$25$0)
-                  00853eec    00000004     --HOLE-- [fill = 0]
-                  00853ef0    0000000c     libdpm_awr2944.ae66 : dpm_msg.oe66 (.const:.string:$P$T3$4)
-                  00853efc    00000004     --HOLE-- [fill = 0]
-                  00853f00    0000000b     drivers.awr294x.c66.ti-c6000.release.lib : edma.obj (.const:.string:$P$T2$3$0)
-                  00853f0b    00000005     --HOLE-- [fill = 0]
-                  00853f10    0000000b     freertos.awr294x.c66.ti-c6000.release.lib : tasks.obj (.const:.string:$P$T3$4$0)
-                  00853f1b    00000005     --HOLE-- [fill = 0]
-                  00853f20    0000000a     drivers.awr294x.c66.ti-c6000.release.lib : edma.obj (.const:.string:$P$T0$1$0)
+                  00853ee0    0000000b     drivers.awr294x.c66.ti-c6000.release.lib : edma.obj (.const:.string:$P$T2$3$0)
+                  00853eeb    00000005     --HOLE-- [fill = 0]
+                  00853ef0    0000000b     freertos.awr294x.c66.ti-c6000.release.lib : tasks.obj (.const:.string:$P$T3$4$0)
+                  00853efb    00000005     --HOLE-- [fill = 0]
+                  00853f00    0000000a     drivers.awr294x.c66.ti-c6000.release.lib : edma.obj (.const:.string:$P$T0$1$0)
+                  00853f0a    00000006     --HOLE-- [fill = 0]
+                  00853f10    0000000a                                              : edma.obj (.const:.string:$P$T1$2$0)
+                  00853f1a    00000006     --HOLE-- [fill = 0]
+                  00853f20    0000000a                                              : esm_v0.obj (.const:.string:$P$T1$2$0)
                   00853f2a    00000006     --HOLE-- [fill = 0]
-                  00853f30    0000000a                                              : edma.obj (.const:.string:$P$T1$2$0)
+                  00853f30    0000000a     freertos.awr294x.c66.ti-c6000.release.lib : HeapP_internal.obj (.const:.string:$P$T1$2$0)
                   00853f3a    00000006     --HOLE-- [fill = 0]
-                  00853f40    0000000a                                              : esm_v0.obj (.const:.string:$P$T1$2$0)
+                  00853f40    0000000a     libdpm_awr2944.ae66 : dpm_core.oe66 (.const:.string:$P$T3$4)
                   00853f4a    00000006     --HOLE-- [fill = 0]
-                  00853f50    0000000a     freertos.awr294x.c66.ti-c6000.release.lib : HeapP_internal.obj (.const:.string:$P$T1$2$0)
-                  00853f5a    00000006     --HOLE-- [fill = 0]
-                  00853f60    0000000a     libdpm_awr2944.ae66 : dpm_core.oe66 (.const:.string:$P$T3$4)
-                  00853f6a    00000006     --HOLE-- [fill = 0]
-                  00853f70    00000009     drivers.awr294x.c66.ti-c6000.release.lib : esm_v0.obj (.const:.string:$P$T0$1$0)
-                  00853f79    00000007     --HOLE-- [fill = 0]
-                  00853f80    00000009     libdpm_awr2944.ae66 : dpm_core.oe66 (.const:.string:$P$T4$6)
-                  00853f89    00000007     --HOLE-- [fill = 0]
-                  00853f90    00000008     drivers.awr294x.c66.ti-c6000.release.lib : soc_rcm.obj (.const:gSocRcmXTALFreqTbl$0)
-                  00853f98    00000005     dss_main.obj (.const:.string:$P$T4$6)
-                  00853f9d    00000003     --HOLE-- [fill = 0]
-                  00853fa0    00000002     libdopplerproc_hwa_awr2944.ae66 : dopplerprochwa.oe66 (.const:.string:$P$T0$1)
-                  00853fa2    00000006     --HOLE-- [fill = 0]
+                  00853f50    00000009     drivers.awr294x.c66.ti-c6000.release.lib : esm_v0.obj (.const:.string:$P$T0$1$0)
+                  00853f59    00000007     --HOLE-- [fill = 0]
+                  00853f60    00000009     libdpm_awr2944.ae66 : dpm_core.oe66 (.const:.string:$P$T4$6)
+                  00853f69    00000007     --HOLE-- [fill = 0]
+                  00853f70    00000008     drivers.awr294x.c66.ti-c6000.release.lib : soc_rcm.obj (.const:gSocRcmXTALFreqTbl$0)
+                  00853f78    00000005     dss_main.obj (.const:.string:$P$T4$6)
+                  00853f7d    00000003     --HOLE-- [fill = 0]
+                  00853f80    00000002     libdopplerproc_hwa_awr2944.ae66 : dopplerprochwa.oe66 (.const:.string:$P$T0$1)
+                  00853f82    00000006     --HOLE-- [fill = 0]
 
-.sysmem    0    00855fa8    00001000     UNINITIALIZED
-                  00855fa8    00000010     rts6600_elf.lib : memory.c.obj (.sysmem)
-                  00855fb8    00000ff0     --HOLE--
+.sysmem    0    00855f88    00001000     UNINITIALIZED
+                  00855f88    00000010     rts6600_elf.lib : memory.c.obj (.sysmem)
+                  00855f98    00000ff0     --HOLE--
 
-.cinit     0    008571e8    00000608     
-                  008571e8    00000546     (.cinit..fardata.load) [load image, compression = rle]
-                  0085772e    00000032     (.cinit..neardata.load) [load image, compression = rle]
-                  00857760    0000000d     (.cinit..far.load) [load image, compression = rle]
-                  0085776d    0000000d     (.cinit..l3ram.load) [load image, compression = rle]
-                  0085777a    0000000b     (.cinit..demoSharedMem.load) [load image, compression = rle]
-                  00857785    0000000b     (.cinit..dpc_l2Heap.load) [load image, compression = rle]
-                  00857790    0000000a     (.cinit..rodata.load) [load image, compression = rle]
-                  0085779a    00000009     (.cinit..bss.load) [load image, compression = rle]
-                  008577a3    00000001     --HOLE-- [fill = 0]
-                  008577a4    00000008     (__TI_handler_table)
-                  008577ac    00000004     --HOLE-- [fill = 0]
-                  008577b0    00000040     (__TI_cinit_table)
+.cinit     0    008571c8    00000608     
+                  008571c8    00000546     (.cinit..fardata.load) [load image, compression = rle]
+                  0085770e    00000032     (.cinit..neardata.load) [load image, compression = rle]
+                  00857740    0000000d     (.cinit..far.load) [load image, compression = rle]
+                  0085774d    0000000d     (.cinit..l3ram.load) [load image, compression = rle]
+                  0085775a    0000000b     (.cinit..demoSharedMem.load) [load image, compression = rle]
+                  00857765    0000000b     (.cinit..dpc_l2Heap.load) [load image, compression = rle]
+                  00857770    0000000a     (.cinit..rodata.load) [load image, compression = rle]
+                  0085777a    00000009     (.cinit..bss.load) [load image, compression = rle]
+                  00857783    00000001     --HOLE-- [fill = 0]
+                  00857784    00000008     (__TI_handler_table)
+                  0085778c    00000004     --HOLE-- [fill = 0]
+                  00857790    00000040     (__TI_cinit_table)
 
-.stack     0    00853fa8    00002000     UNINITIALIZED
-                  00853fa8    00000008     rts6600_elf.lib : boot.c.obj (.stack)
-                  00853fb0    00001ff8     --HOLE--
+.stack     0    00853f88    00002000     UNINITIALIZED
+                  00853f88    00000008     rts6600_elf.lib : boot.c.obj (.stack)
+                  00853f90    00001ff8     --HOLE--
 
-.switch    0    00856fa8    00000240     
-                  00856fa8    00000084     freertos.awr294x.c66.ti-c6000.release.lib : printf.obj (.switch:_vsnprintf$0)
-                  0085702c    00000050     drivers.awr294x.c66.ti-c6000.release.lib : soc_rcm.obj (.switch:SOC_rcmGetClkSrcAndDivReg$0)
-                  0085707c    00000038     objectdetection.obj (.switch:DPC_ObjectDetection_ioctl)
-                  008570b4    00000038     rts6600_elf.lib : _printfi.c.obj (.switch:__TI_printfi)
-                  008570ec    0000001c     drivers.awr294x.c66.ti-c6000.release.lib : hwa.obj (.switch:HWA_configParamSet)
-                  00857108    00000018     libdpm_awr2944.ae66 : dpm_msg.oe66 (.switch:DPM_msgResponseHandler)
-                  00857120    00000014     libaoaproc_hwa_awr2944.ae66 : aoaprochwa.oe66 (.switch:DPU_AoAProcHWA_control)
-                  00857134    00000014     drivers.awr294x.c66.ti-c6000.release.lib : soc_rcm.obj (.switch:SOC_rcmGetApllHSDivOutFreq$0)
-                  00857148    00000014                                              : soc_rcm.obj (.switch:SOC_rcmGetCoreHSDivOut$0)
-                  0085715c    00000014                                              : soc_rcm.obj (.switch:SOC_rcmGetDSSHSDivOut$0)
-                  00857170    00000014                                              : soc_rcm.obj (.switch:SOC_rcmGetFreqLeafNode$0)
-                  00857184    00000014                                              : soc_rcm.obj (.switch:SOC_rcmGetPerHSDivOut$0)
-                  00857198    00000010                                              : edma.obj (.switch:Alloc_resource$0)
-                  008571a8    00000010     libdpm_awr2944.ae66 : dpm_core.oe66 (.switch:DPM_ioctl)
-                  008571b8    00000010     libcfarproc_hwa_awr2944.ae66 : cfarprochwa.oe66 (.switch:DPU_CFARProcHWA_control)
-                  008571c8    00000010     dss_main.obj (.switch:MmwDemo_DPC_ObjectDetection_reportFxn)
-                  008571d8    00000010     drivers.awr294x.c66.ti-c6000.release.lib : soc_rcm.obj (.switch:SOC_rcmGetHSDIVClkOutMuxClkSrc$0)
+.switch    0    00856f88    00000240     
+                  00856f88    00000084     freertos.awr294x.c66.ti-c6000.release.lib : printf.obj (.switch:_vsnprintf$0)
+                  0085700c    00000050     drivers.awr294x.c66.ti-c6000.release.lib : soc_rcm.obj (.switch:SOC_rcmGetClkSrcAndDivReg$0)
+                  0085705c    00000038     objectdetection.obj (.switch:DPC_ObjectDetection_ioctl)
+                  00857094    00000038     rts6600_elf.lib : _printfi.c.obj (.switch:__TI_printfi)
+                  008570cc    0000001c     drivers.awr294x.c66.ti-c6000.release.lib : hwa.obj (.switch:HWA_configParamSet)
+                  008570e8    00000018     libdpm_awr2944.ae66 : dpm_msg.oe66 (.switch:DPM_msgResponseHandler)
+                  00857100    00000014     libaoaproc_hwa_awr2944.ae66 : aoaprochwa.oe66 (.switch:DPU_AoAProcHWA_control)
+                  00857114    00000014     drivers.awr294x.c66.ti-c6000.release.lib : soc_rcm.obj (.switch:SOC_rcmGetApllHSDivOutFreq$0)
+                  00857128    00000014                                              : soc_rcm.obj (.switch:SOC_rcmGetCoreHSDivOut$0)
+                  0085713c    00000014                                              : soc_rcm.obj (.switch:SOC_rcmGetDSSHSDivOut$0)
+                  00857150    00000014                                              : soc_rcm.obj (.switch:SOC_rcmGetFreqLeafNode$0)
+                  00857164    00000014                                              : soc_rcm.obj (.switch:SOC_rcmGetPerHSDivOut$0)
+                  00857178    00000010                                              : edma.obj (.switch:Alloc_resource$0)
+                  00857188    00000010     libdpm_awr2944.ae66 : dpm_core.oe66 (.switch:DPM_ioctl)
+                  00857198    00000010     libcfarproc_hwa_awr2944.ae66 : cfarprochwa.oe66 (.switch:DPU_CFARProcHWA_control)
+                  008571a8    00000010     dss_main.obj (.switch:MmwDemo_DPC_ObjectDetection_reportFxn)
+                  008571b8    00000010     drivers.awr294x.c66.ti-c6000.release.lib : soc_rcm.obj (.switch:SOC_rcmGetHSDIVClkOutMuxClkSrc$0)
 
 .bss.ipc_vring_mem 
 *          0    c5000200    00000980     NOLOAD SECTION
                   c5000200    00000980     ti_drivers_config.obj (.bss.ipc_vring_mem)
 
-.l3ram     0    88000000    00278000     UNINITIALIZED
-                  88000000    00278000     dss_main.obj (.l3ram)
+.l3ram     0    88000000    00178000     UNINITIALIZED
+                  88000000    00178000     dss_main.obj (.l3ram)
 
 .demoSharedMem 
-*          0    88278000    00008000     UNINITIALIZED
-                  88278000    00008000     dss_main.obj (.demoSharedMem)
+*          0    88178000    00008000     UNINITIALIZED
+                  88178000    00008000     dss_main.obj (.demoSharedMem)
 
 MODULE SUMMARY
 
@@ -1252,13 +1252,13 @@ MODULE SUMMARY
        Total:                              17568    2362      26008  
                                                                      
     .\dss\
-       dss_main.obj                        2848     878       2680396
+       dss_main.obj                        2848     878       1631820
        data_path.obj                       192      40        0      
     +--+-----------------------------------+--------+---------+---------+
-       Total:                              3040     918       2680396
+       Total:                              3040     918       1631820
                                                                      
     .\dss\dssgenerated\
-       ti_drivers_config.obj               416      176       3680   
+       ti_drivers_config.obj               416      144       3680   
        ti_drivers_open_close.obj           672      338       42     
        ti_power_clock_config.obj           256      0         20     
        ti_pinmux_config.obj                64       0         184    
@@ -1266,7 +1266,7 @@ MODULE SUMMARY
        ti_board_config.obj                 32       0         0      
        ti_board_open_close.obj             32       0         0      
     +--+-----------------------------------+--------+---------+---------+
-       Total:                              1600     514       3990   
+       Total:                              1600     482       3990   
                                                                      
     C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mathlib_c66x_3_1_2_1/packages/ti/mathlib/lib/mathlib.ae66
        sqrtsp.oe66                         160      0         0      
@@ -1442,25 +1442,25 @@ MODULE SUMMARY
        Stack:                              0        0         8192   
        Linker Generated:                   0        1539      0      
     +--+-----------------------------------+--------+---------+---------+
-       Grand Total:                        191872   17843     2768800
+       Grand Total:                        191872   17811     1720224
 
 
 LINKER GENERATED COPY TABLES
 
-__TI_cinit_table @ 008577b0 records: 8, size/record: 8, table size: 64
-	.fardata: load addr=008571e8, load size=00000546 bytes, run addr=008421c0, run size=00000c38 bytes, compression=rle
-	.neardata: load addr=0085772e, load size=00000032 bytes, run addr=00842f38, run size=000000b0 bytes, compression=rle
-	.far: load addr=00857760, load size=0000000d bytes, run addr=0082ed80, run size=00013440 bytes, compression=rle
-	.l3ram: load addr=0085776d, load size=0000000d bytes, run addr=88000000, run size=00278000 bytes, compression=rle
-	.demoSharedMem: load addr=0085777a, load size=0000000b bytes, run addr=88278000, run size=00008000 bytes, compression=rle
-	.dpc_l2Heap: load addr=00857785, load size=0000000b bytes, run addr=00843000, run size=0000d000 bytes, compression=rle
-	.rodata: load addr=00857790, load size=0000000a bytes, run addr=00842f18, run size=00000008 bytes, compression=rle
-	.bss: load addr=0085779a, load size=00000009 bytes, run addr=00842f20, run size=00000018 bytes, compression=rle
+__TI_cinit_table @ 00857790 records: 8, size/record: 8, table size: 64
+	.fardata: load addr=008571c8, load size=00000546 bytes, run addr=008421c0, run size=00000c38 bytes, compression=rle
+	.neardata: load addr=0085770e, load size=00000032 bytes, run addr=00842f38, run size=000000b0 bytes, compression=rle
+	.far: load addr=00857740, load size=0000000d bytes, run addr=0082ed80, run size=00013440 bytes, compression=rle
+	.l3ram: load addr=0085774d, load size=0000000d bytes, run addr=88000000, run size=00178000 bytes, compression=rle
+	.demoSharedMem: load addr=0085775a, load size=0000000b bytes, run addr=88178000, run size=00008000 bytes, compression=rle
+	.dpc_l2Heap: load addr=00857765, load size=0000000b bytes, run addr=00843000, run size=0000d000 bytes, compression=rle
+	.rodata: load addr=00857770, load size=0000000a bytes, run addr=00842f18, run size=00000008 bytes, compression=rle
+	.bss: load addr=0085777a, load size=00000009 bytes, run addr=00842f20, run size=00000018 bytes, compression=rle
 
 
 LINKER GENERATED HANDLER TABLE
 
-__TI_handler_table @ 008577a4 records: 2, size/record: 4, table size: 8
+__TI_handler_table @ 00857784 records: 2, size/record: 4, table size: 8
 	index: 0, handler: __TI_decompress_rle24
 	index: 1, handler: __TI_decompress_none
 
@@ -1784,12 +1784,12 @@ address   name
 0082d660  _DebugP_assertNoLog                            
 00828d80  _DebugP_logZone                                
 00842df8  __CIOBUF_                                      
-008577b0  __TI_CINIT_Base                                
-008577f0  __TI_CINIT_Limit                               
-008577f0  __TI_CINIT_Warm                                
-008577a4  __TI_Handler_Table_Base                        
-008577ac  __TI_Handler_Table_Limit                       
-00855fa8  __TI_STACK_END                                 
+00857790  __TI_CINIT_Base                                
+008577d0  __TI_CINIT_Limit                               
+008577d0  __TI_CINIT_Warm                                
+00857784  __TI_Handler_Table_Base                        
+0085778c  __TI_Handler_Table_Limit                       
+00855f88  __TI_STACK_END                                 
 00002000  __TI_STACK_SIZE                                
 00842f18  __TI_STATIC_BASE                               
 00001000  __TI_SYSMEM_SIZE                               
@@ -1856,10 +1856,10 @@ ffffffff  __c_args__
 008427dc  _lock                                          
 0082e940  _nop                                           
 0082e9e0  _signbit                                       
-00853fa8  _stack                                         
+00853f88  _stack                                         
 008427e0  _stream                                        
 0082c2a0  _subcull                                       
-00855fa8  _sys_memory                                    
+00855f88  _sys_memory                                    
 0082ea00  _system_post_cinit                             
 0082ea20  _system_pre_init                               
 00842904  _unlock                                        
@@ -1900,7 +1900,7 @@ ffffffff  binit
 00842c80  gDPC_ObjectDetectionCfg                        
 00842fdc  gDPM                                           
 00842db8  gDPMHwAttrib                                   
-008531e0  gDPMMessageFxnTable                            
+008531c0  gDPMMessageFxnTable                            
 00842d68  gDPMRemoteTable                                
 00842fd8  gDebugLogZone                                  
 00842dc0  gDirectMap                                     
@@ -1912,7 +1912,7 @@ ffffffff  binit
 00842fac  gEsmConfigNum                                  
 0083f4f0  gEsmHandle                                     
 00842df0  gEsmOpenParams                                 
-88278000  gHSRAM                                         
+88178000  gHSRAM                                         
 00842b40  gHwaAttrs                                      
 00842fb0  gHwaConfigNum                                  
 00842cc8  gHwaEDMAChanMapping                            
@@ -2645,17 +2645,17 @@ address   name
 00842fe0  gCacheMarRegionNum                             
 00843000  gDPC_ObjDetL2Heap                              
 008524d0  _ctypes_                                       
-008531e0  gDPMMessageFxnTable                            
-00853fa8  _stack                                         
-00855fa8  __TI_STACK_END                                 
-00855fa8  _sys_memory                                    
-008577a4  __TI_Handler_Table_Base                        
-008577ac  __TI_Handler_Table_Limit                       
-008577b0  __TI_CINIT_Base                                
-008577f0  __TI_CINIT_Limit                               
-008577f0  __TI_CINIT_Warm                                
+008531c0  gDPMMessageFxnTable                            
+00853f88  _stack                                         
+00855f88  __TI_STACK_END                                 
+00855f88  _sys_memory                                    
+00857784  __TI_Handler_Table_Base                        
+0085778c  __TI_Handler_Table_Limit                       
+00857790  __TI_CINIT_Base                                
+008577d0  __TI_CINIT_Limit                               
+008577d0  __TI_CINIT_Warm                                
 88000000  gMmwL3                                         
-88278000  gHSRAM                                         
+88178000  gHSRAM                                         
 c5000200  gIpcSharedMem                                  
 ffffffff  __TI_pprof_out_hndl                            
 ffffffff  __TI_prof_data_size                            

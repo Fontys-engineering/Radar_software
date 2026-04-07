@@ -1,6 +1,6 @@
 # FIXED
 
-dss/dssgenerated/ti_power_clock_config.obj: C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_dss/dss/dssgenerated/ti_power_clock_config.c
+dss/dssgenerated/ti_power_clock_config.obj: C:/Git/Radar_software/out_of_box_2944_dss/dss/dssgenerated/ti_power_clock_config.c
 dss/dssgenerated/ti_power_clock_config.obj: C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/dpl/DebugP.h
 dss/dssgenerated/ti_power_clock_config.obj: C:/ti/ccs2041/ccs/tools/compiler/ti-cgt-c6000_8.5.0.LTS/include/stdint.h
 dss/dssgenerated/ti_power_clock_config.obj: C:/ti/ccs2041/ccs/tools/compiler/ti-cgt-c6000_8.5.0.LTS/include/_ti_config.h
@@ -18,7 +18,7 @@ dss/dssgenerated/ti_power_clock_config.obj: C:/ti/mmwave_mcuplus_sdk_04_07_02_01
 dss/dssgenerated/ti_power_clock_config.obj: C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/dpl/SystemP.h
 dss/dssgenerated/ti_power_clock_config.obj: C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/drivers/soc/awr294x/soc_rcm.h
 
-C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_dss/dss/dssgenerated/ti_power_clock_config.c:
+C:/Git/Radar_software/out_of_box_2944_dss/dss/dssgenerated/ti_power_clock_config.c:
 
 C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/dpl/DebugP.h:
 

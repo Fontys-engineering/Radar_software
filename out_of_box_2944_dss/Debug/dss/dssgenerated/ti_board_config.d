@@ -1,8 +1,8 @@
 # FIXED
 
-dss/dssgenerated/ti_board_config.obj: C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_dss/dss/dssgenerated/ti_board_config.c
-dss/dssgenerated/ti_board_config.obj: C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_dss/dss/dssgenerated/ti_board_config.h
-dss/dssgenerated/ti_board_config.obj: C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_dss/dss/dssgenerated/ti_drivers_config.h
+dss/dssgenerated/ti_board_config.obj: C:/Git/Radar_software/out_of_box_2944_dss/dss/dssgenerated/ti_board_config.c
+dss/dssgenerated/ti_board_config.obj: C:/Git/Radar_software/out_of_box_2944_dss/dss/dssgenerated/ti_board_config.h
+dss/dssgenerated/ti_board_config.obj: C:/Git/Radar_software/out_of_box_2944_dss/dss/dssgenerated/ti_drivers_config.h
 dss/dssgenerated/ti_board_config.obj: C:/ti/ccs2041/ccs/tools/compiler/ti-cgt-c6000_8.5.0.LTS/include/stdint.h
 dss/dssgenerated/ti_board_config.obj: C:/ti/ccs2041/ccs/tools/compiler/ti-cgt-c6000_8.5.0.LTS/include/_ti_config.h
 dss/dssgenerated/ti_board_config.obj: C:/ti/ccs2041/ccs/tools/compiler/ti-cgt-c6000_8.5.0.LTS/include/linkage.h
@@ -99,7 +99,7 @@ dss/dssgenerated/ti_board_config.obj: C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_p
 dss/dssgenerated/ti_board_config.obj: C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/drivers/hw_include/tistdtypes.h
 dss/dssgenerated/ti_board_config.obj: C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/drivers/hw_include/awr294x/cslr_bss_vim_parity.h
 dss/dssgenerated/ti_board_config.obj: C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/drivers/hw_include/tistdtypes.h
-dss/dssgenerated/ti_board_config.obj: C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_dss/dss/dssgenerated/ti_dpl_config.h
+dss/dssgenerated/ti_board_config.obj: C:/Git/Radar_software/out_of_box_2944_dss/dss/dssgenerated/ti_dpl_config.h
 dss/dssgenerated/ti_board_config.obj: C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/dpl/HwiP.h
 dss/dssgenerated/ti_board_config.obj: C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/dpl/HwiP_c6x.h
 dss/dssgenerated/ti_board_config.obj: C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/dpl/SystemP.h
@@ -143,11 +143,11 @@ dss/dssgenerated/ti_board_config.obj: C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_p
 dss/dssgenerated/ti_board_config.obj: C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/drivers/ipc_rpmsg/include/ipc_rpmsg_linux_resource_table.h
 dss/dssgenerated/ti_board_config.obj: C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/dpl/CycleCounterP.h
 
-C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_dss/dss/dssgenerated/ti_board_config.c:
+C:/Git/Radar_software/out_of_box_2944_dss/dss/dssgenerated/ti_board_config.c:
 
-C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_dss/dss/dssgenerated/ti_board_config.h:
+C:/Git/Radar_software/out_of_box_2944_dss/dss/dssgenerated/ti_board_config.h:
 
-C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_dss/dss/dssgenerated/ti_drivers_config.h:
+C:/Git/Radar_software/out_of_box_2944_dss/dss/dssgenerated/ti_drivers_config.h:
 
 C:/ti/ccs2041/ccs/tools/compiler/ti-cgt-c6000_8.5.0.LTS/include/stdint.h:
 
@@ -341,7 +341,7 @@ C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/dri
 
 C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/drivers/hw_include/tistdtypes.h:
 
-C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_dss/dss/dssgenerated/ti_dpl_config.h:
+C:/Git/Radar_software/out_of_box_2944_dss/dss/dssgenerated/ti_dpl_config.h:
 
 C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/dpl/HwiP.h:
 

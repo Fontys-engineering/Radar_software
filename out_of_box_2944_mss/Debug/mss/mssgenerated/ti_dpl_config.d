@@ -1,20 +1,20 @@
 # FIXED
 
 mss/mssgenerated/ti_dpl_config.o: \
- C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_mss/mss/mssgenerated/ti_dpl_config.c \
+ C:/Git/Radar_software/out_of_box_2944_mss/mss/mssgenerated/ti_dpl_config.c \
  C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/drivers/soc.h \
  C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/drivers/soc/awr294x/soc.h \
  C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/dpl/SystemP.h \
  C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/dpl/DebugP.h \
  C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/drivers/soc/awr294x/soc_rcm.h \
  C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/dpl/AddrTranslateP.h \
- C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_mss/mss/mssgenerated/ti_dpl_config.h \
+ C:/Git/Radar_software/out_of_box_2944_mss/mss/mssgenerated/ti_dpl_config.h \
  C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/dpl/HwiP.h \
  C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/dpl/HwiP_arm.h \
  C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/dpl/ClockP.h \
  C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/dpl/CacheP.h \
  C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/dpl/MpuP_armv7.h \
- C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_mss/mss/mssgenerated/ti_drivers_config.h \
+ C:/Git/Radar_software/out_of_box_2944_mss/mss/mssgenerated/ti_drivers_config.h \
  C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/drivers/hw_include/cslr_soc.h \
  C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/drivers/hw_include/awr294x/cslr_soc.h \
  C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/drivers/hw_include/awr294x/cslr_soc_defines.h \
@@ -107,13 +107,13 @@ C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/ker
 C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/dpl/DebugP.h:
 C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/drivers/soc/awr294x/soc_rcm.h:
 C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/dpl/AddrTranslateP.h:
-C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_mss/mss/mssgenerated/ti_dpl_config.h:
+C:/Git/Radar_software/out_of_box_2944_mss/mss/mssgenerated/ti_dpl_config.h:
 C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/dpl/HwiP.h:
 C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/dpl/HwiP_arm.h:
 C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/dpl/ClockP.h:
 C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/dpl/CacheP.h:
 C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/dpl/MpuP_armv7.h:
-C:/Users/petri/OneDrive/Asiakirjat/GitHub/Radar_software/out_of_box_2944_mss/mss/mssgenerated/ti_drivers_config.h:
+C:/Git/Radar_software/out_of_box_2944_mss/mss/mssgenerated/ti_drivers_config.h:
 C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/drivers/hw_include/cslr_soc.h:
 C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/drivers/hw_include/awr294x/cslr_soc.h:
 C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/drivers/hw_include/awr294x/cslr_soc_defines.h:
