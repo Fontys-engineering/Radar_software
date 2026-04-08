@@ -43,6 +43,8 @@ int32_t Board_driversOpen(void)
     {
         status = Board_flashOpen();
     }
+	SOC_rcmConfigEthMacIf();
+	
     return status;
 }
 
