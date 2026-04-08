@@ -245,7 +245,12 @@ utils/enet_stream.o: \
  C:/Git/Radar_software/out_of_box_2944_mss/mss/mssgenerated/ti_board_open_close.h \
  C:/Git/Radar_software/out_of_box_2944_mss/mss/mssgenerated/ti_enet_config.h \
  C:/Git/Radar_software/out_of_box_2944_mss/mss/mssgenerated/ti_enet_open_close.h \
+ C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/dpl/EventP.h \
  C:/Git/Radar_software/out_of_box_2944_mss/mss/mssgenerated/ti_enet_lwipif.h \
+ C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/core/lwipif/inc/lwip2enet.h \
+ C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/core/lwipif/inc/lwipif2enet_AppIf.h \
+ C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/core/lwipif/inc/lwip2lwipif.h \
+ C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/core/lwipif/inc/pbufQ.h \
  C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/demo/utils/enet_cpswconfighandler.h \
  C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/demo/utils/enet_tcpclient.h
 C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/freertos/FreeRTOS-Kernel/include/FreeRTOS.h:
@@ -491,6 +496,11 @@ C:/Git/Radar_software/out_of_box_2944_mss/mss/mssgenerated/ti_drivers_open_close
 C:/Git/Radar_software/out_of_box_2944_mss/mss/mssgenerated/ti_board_open_close.h:
 C:/Git/Radar_software/out_of_box_2944_mss/mss/mssgenerated/ti_enet_config.h:
 C:/Git/Radar_software/out_of_box_2944_mss/mss/mssgenerated/ti_enet_open_close.h:
+C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/dpl/EventP.h:
 C:/Git/Radar_software/out_of_box_2944_mss/mss/mssgenerated/ti_enet_lwipif.h:
+C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/core/lwipif/inc/lwip2enet.h:
+C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/core/lwipif/inc/lwipif2enet_AppIf.h:
+C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/core/lwipif/inc/lwip2lwipif.h:
+C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/core/lwipif/inc/pbufQ.h:
 C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/demo/utils/enet_cpswconfighandler.h:
 C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/demo/utils/enet_tcpclient.h:

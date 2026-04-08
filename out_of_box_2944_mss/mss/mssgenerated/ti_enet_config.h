@@ -35,3 +35,53 @@
  *
  *  \brief Enet config header file.
  */
+
+/* ========================================================================== */
+/*                         Macros & Typedefs                                  */
+/* ========================================================================== */
+
+/* ENET Pheriphel instance indexes. Name of ENET PHERIPHERAL can be changed in example syscfg */
+/* Application should use the defines below when opening a ENET Driver */
+#define CONFIG_ENET_CPSW0       (0U)
+#define ENET_SYSCFG_MAX_ENET_INSTANCES           (1U)
+
+#define ENET_SYSCFG_TOTAL_NUM_TX_PKT      (16U)
+#define ENET_SYSCFG_TOTAL_NUM_RX_PKT      (32U)
+#define ENET_SYSCFG_PKT_POOL_ENABLE       (1U)
+#define ENET_SYSCFG_PKT_INFO_ONLY_ENABLE  (1U)
+#define ENET_SYSCFG_MAX_MAC_PORTS         (1U)
+#define ENET_SYSCFG_ENABLE_EXTPHY         (0U)
+#define ENET_SYSCFG_ENABLE_MDIO_MANUALMODE   (0U)
+#define ENET_SYSCFG_RX_FLOWS_NUM          (1U)
+#define ENET_SYSCFG_TX_CHANNELS_NUM       (1U)
+#define ENET_SYSCFG_RING_MON_NUM          (3U) /*Not appicable for LCDMA devices*/
+/* TX DMA Channel indexes. Name of TX DMA channel can be changed in example syscfg */
+/* Application should use the define below when opening a Tx DMA channel */
+#define ENET_DMA_TX_CH0          (0U)
+
+/* RX DMA Channel indexes. Name of RX DMA channel can be changed in example syscfg */
+/* Application should use the define below when opening a Rx DMA channel */
+#define ENET_DMA_RX_CH0          (0U)
+
+/* TX DMA max num packets allocated to the DMA channel */
+/* Application should use the define below when opening a Tx DMA channel */
+#define ENET_DMA_TX_CH0_NUM_PKTS          (16U)
+
+/* RX DMA DMA max num packets allocated to the DMA channel  */
+/* Application should use the define below when opening a Rx DMA channel */
+#define ENET_DMA_RX_CH0_NUM_PKTS          (32U)
+
+
+/* NETIF indexes. Name of NETIF can be changed in example syscfg */
+/* Application should use the define below when opening a NETIF */
+#define NETIF_INST_ID0          (0U)
+#define ENET_SYSCFG_NETIF_COUNT                    (1U)
+#define ENET_SYSCFG_DEFAULT_NETIF_IDX              (NETIF_INST_ID0)
+/*
+ * Packet sizes for different pools. LARGE_POOL is largest packet size pool with MEDIUM_POOL
+ * second largest and SMALL_POOL smallest
+ */
+#define ENET_MEM_LARGE_POOL_PKT_SIZE        ENET_UTILS_ALIGN(1536U, ENET_UTILS_CACHELINE_SIZE)
+#define ENET_MEM_MEDIUM_POOL_PKT_SIZE       ENET_UTILS_ALIGN(512U, ENET_UTILS_CACHELINE_SIZE)
+#define ENET_MEM_SMALL_POOL_PKT_SIZE        ENET_UTILS_ALIGN(128U, ENET_UTILS_CACHELINE_SIZE)
+

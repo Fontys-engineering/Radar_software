@@ -169,7 +169,8 @@ utils/enet_cpswconfighandler.o: \
  C:/Git/Radar_software/out_of_box_2944_mss/mss/mssgenerated/ti_board_open_close.h \
  C:/Git/Radar_software/out_of_box_2944_mss/mss/mssgenerated/ti_drivers_open_close.h \
  C:/Git/Radar_software/out_of_box_2944_mss/mss/mssgenerated/ti_enet_config.h \
- C:/Git/Radar_software/out_of_box_2944_mss/mss/mssgenerated/ti_enet_open_close.h
+ C:/Git/Radar_software/out_of_box_2944_mss/mss/mssgenerated/ti_enet_open_close.h \
+ C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/dpl/EventP.h
 C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/freertos/FreeRTOS-Kernel/include/FreeRTOS.h:
 C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/freertos/config/awr294x/r5f/FreeRTOSConfig.h:
 C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/dpl/DebugP.h:
@@ -338,3 +339,4 @@ C:/Git/Radar_software/out_of_box_2944_mss/mss/mssgenerated/ti_board_open_close.h
 C:/Git/Radar_software/out_of_box_2944_mss/mss/mssgenerated/ti_drivers_open_close.h:
 C:/Git/Radar_software/out_of_box_2944_mss/mss/mssgenerated/ti_enet_config.h:
 C:/Git/Radar_software/out_of_box_2944_mss/mss/mssgenerated/ti_enet_open_close.h:
+C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/dpl/EventP.h:
