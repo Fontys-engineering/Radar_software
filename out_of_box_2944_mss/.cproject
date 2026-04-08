@@ -64,6 +64,9 @@
                                     <listOptionValue value="${NETWORK_PATH}/enet/utils/include"/>
                                     <listOptionValue value="${NETWORK_PATH}/enet/core/include/core"/>
                                     <listOptionValue value="${NETWORK_PATH}/enet/core/lwipif/inc"/>
+                                    <listOptionValue value="${NETWORK_PATH}/lwip/lwip-stack/src/include/lwip"/>
+                                    <listOptionValue value="${NETWORK_PATH}/lwip/lwip-port/freertos/include"/>
+                                    <listOptionValue value="${NETWORK_PATH}/lwip/lwip-config/awr294x"/>
                                 </option>
                                 <option id="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_4.0.compilerID.DEFINE.779001022" superClass="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_4.0.compilerID.DEFINE" valueType="definedSymbols">
                                     <listOptionValue value="${INHERITED_SYMBOLS}"/>

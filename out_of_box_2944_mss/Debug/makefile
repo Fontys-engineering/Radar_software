@@ -29,15 +29,36 @@ ORDERED_OBJS += \
 "./mss/mssgenerated/excluded/ti_enet_open_close.o" \
 "./mss/mssgenerated/excluded/ti_enet_soc.o" \
 "./utils/TaskP_freertos.o" \
+"./utils/altcp.o" \
+"./utils/altcp_alloc.o" \
+"./utils/altcp_tcp.o" \
+"./utils/def.o" \
+"./utils/dns.o" \
 "./utils/enet_apputils.o" \
 "./utils/enet_cpswconfighandler.o" \
 "./utils/enet_stream.o" \
 "./utils/enet_tcpclient.o" \
+"./utils/inet_chksum.o" \
+"./utils/init.o" \
+"./utils/ip.o" \
+"./utils/mem.o" \
+"./utils/memp.o" \
 "./utils/mmwdemo_adcconfig.o" \
 "./utils/mmwdemo_flash.o" \
 "./utils/mmwdemo_monitor.o" \
 "./utils/mmwdemo_rfparser.o" \
+"./utils/netif.o" \
+"./utils/pbuf.o" \
+"./utils/raw.o" \
+"./utils/stats.o" \
+"./utils/sys.o" \
+"./utils/sys_arch.o" \
 "./utils/tasks.o" \
+"./utils/tcp.o" \
+"./utils/tcp_in.o" \
+"./utils/tcp_out.o" \
+"./utils/timeouts.o" \
+"./utils/udp.o" \
 "../r5f_linker.cmd" \
 "../mss/mmw_mss_linker.cmd" \
 $(GEN_CMDS__FLAG) \
@@ -67,10 +88,12 @@ RMDIR := RMDIR /S/Q
 -include subdir_vars.mk
 -include mss/subdir_vars.mk
 -include mss/mssgenerated/excluded/subdir_vars.mk
+-include mss/mssgenerated/subdir_vars.mk
 -include utils/subdir_vars.mk
 -include subdir_rules.mk
 -include mss/subdir_rules.mk
 -include mss/mssgenerated/excluded/subdir_rules.mk
+-include mss/mssgenerated/subdir_rules.mk
 -include utils/subdir_rules.mk
 -include objects.mk
 
@@ -178,7 +201,7 @@ main-build: $(OBJS) $(CMD_SRCS) $(GEN_CMDS)
 	@$(MAKE) --no-print-directory -Onone "out_of_box_2944_mss.xer5f"
 
 dependents:
-	-cd C:/Git/Radar_software/out_of_box_2944_dss/Debug && $(MAKE) clean all
+	-cd C:/Git/Radar_software/out_of_box_2944_dss/Debug && $(MAKE) all
 
 # Tool invocations
 out_of_box_2944_mss.xer5f: $(OBJS) $(CMD_SRCS) $(GEN_CMDS) C:/Git/Radar_software/out_of_box_2944_dss/Debug/out_of_box_2944_dss.xe66
@@ -192,9 +215,11 @@ out_of_box_2944_mss.xer5f: $(OBJS) $(CMD_SRCS) $(GEN_CMDS) C:/Git/Radar_software
 # Other Targets
 clean:
 	-$(RM) $(GEN_MISC_FILES__QUOTED)$(GEN_FILES__QUOTED)$(EXE_OUTPUTS__QUOTED)
-	-$(RM) "mss\mmw_cli.o" "mss\mmw_lvds_stream.o" "mss\mssgenerated\ti_dpl_config.o" "mss\mssgenerated\ti_drivers_config.o" "mss\mssgenerated\ti_drivers_open_close.o" "mss\mssgenerated\ti_pinmux_config.o" "mss\mssgenerated\ti_power_clock_config.o" "mss\mssgenerated\ti_board_config.o" "mss\mssgenerated\ti_board_open_close.o" "mss\mssgenerated\ti_enet_config.o" "mss\mssgenerated\ti_enet_open_close.o" "mss\mssgenerated\ti_enet_soc.o" "mss\mssgenerated\ti_enet_lwipif.o" "mss\mss_main.o" "mss\mssgenerated\excluded\ti_enet_config.o" "mss\mssgenerated\excluded\ti_enet_lwipif.o" "mss\mssgenerated\excluded\ti_enet_open_close.o" "mss\mssgenerated\excluded\ti_enet_soc.o" "utils\TaskP_freertos.o" "utils\enet_apputils.o" "utils\enet_cpswconfighandler.o" "utils\enet_stream.o" "utils\enet_tcpclient.o" "utils\mmwdemo_adcconfig.o" "utils\mmwdemo_flash.o" "utils\mmwdemo_monitor.o" "utils\mmwdemo_rfparser.o" "utils\tasks.o" 
+	-$(RM) "mss\mmw_cli.o" "mss\mmw_lvds_stream.o" "mss\mssgenerated\ti_dpl_config.o" "mss\mssgenerated\ti_drivers_config.o" "mss\mssgenerated\ti_drivers_open_close.o" "mss\mssgenerated\ti_pinmux_config.o" "mss\mssgenerated\ti_power_clock_config.o" "mss\mssgenerated\ti_board_config.o" "mss\mssgenerated\ti_board_open_close.o" "mss\mssgenerated\ti_enet_config.o" "mss\mssgenerated\ti_enet_open_close.o" "mss\mssgenerated\ti_enet_soc.o" "mss\mssgenerated\ti_enet_lwipif.o" "mss\mss_main.o" "mss\mssgenerated\excluded\ti_enet_config.o" "mss\mssgenerated\excluded\ti_enet_lwipif.o" "mss\mssgenerated\excluded\ti_enet_open_close.o" "mss\mssgenerated\excluded\ti_enet_soc.o" "utils\TaskP_freertos.o" "utils\altcp.o" "utils\altcp_alloc.o" "utils\altcp_tcp.o" "utils\def.o" "utils\dns.o" "utils\enet_apputils.o" "utils\enet_cpswconfighandler.o" "utils\enet_stream.o" "utils\enet_tcpclient.o" "utils\inet_chksum.o" "utils\init.o" "utils\ip.o" "utils\mem.o" "utils\memp.o" "utils\mmwdemo_adcconfig.o" "utils\mmwdemo_flash.o" 
+	-$(RM) "utils\mmwdemo_monitor.o" "utils\mmwdemo_rfparser.o" "utils\netif.o" "utils\pbuf.o" "utils\raw.o" "utils\stats.o" "utils\sys.o" "utils\sys_arch.o" "utils\tasks.o" "utils\tcp.o" "utils\tcp_in.o" "utils\tcp_out.o" "utils\timeouts.o" "utils\udp.o" 
 	-$(RM) "mss\mmw_cli.d" "mss\mmw_lvds_stream.d" "mss\mssgenerated\ti_dpl_config.d" "mss\mssgenerated\ti_drivers_config.d" "mss\mssgenerated\ti_drivers_open_close.d" "mss\mssgenerated\ti_pinmux_config.d" "mss\mssgenerated\ti_power_clock_config.d" "mss\mssgenerated\ti_board_config.d" "mss\mssgenerated\ti_board_open_close.d" "mss\mssgenerated\ti_enet_config.d" "mss\mssgenerated\ti_enet_open_close.d" "mss\mssgenerated\ti_enet_soc.d" "mss\mssgenerated\ti_enet_lwipif.d" "mss\mssgenerated\ti_dpl_config.d" "mss\mssgenerated\ti_drivers_config.d" "mss\mssgenerated\ti_drivers_open_close.d" "mss\mssgenerated\ti_pinmux_config.d" "mss\mssgenerated\ti_power_clock_config.d" "mss\mssgenerated\ti_board_config.d" "mss\mssgenerated\ti_board_open_close.d" "mss\mssgenerated\ti_enet_config.d" "mss\mssgenerated\ti_enet_open_close.d" "mss\mssgenerated\ti_enet_soc.d" "mss\mssgenerated\ti_enet_lwipif.d" "mss\mss_main.d" "mss\mssgenerated\excluded\ti_enet_config.d" "mss\mssgenerated\excluded\ti_enet_lwipif.d" "mss\mssgenerated\excluded\ti_enet_open_close.d" 
-	-$(RM) "mss\mssgenerated\excluded\ti_enet_soc.d" "utils\TaskP_freertos.d" "utils\enet_apputils.d" "utils\enet_cpswconfighandler.d" "utils\enet_stream.d" "utils\enet_tcpclient.d" "utils\mmwdemo_adcconfig.d" "utils\mmwdemo_flash.d" "utils\mmwdemo_monitor.d" "utils\mmwdemo_rfparser.d" "utils\tasks.d" 
+	-$(RM) "mss\mssgenerated\excluded\ti_enet_soc.d" "mss\mssgenerated\ti_board_config.d" "mss\mssgenerated\ti_board_open_close.d" "mss\mssgenerated\ti_dpl_config.d" "mss\mssgenerated\ti_drivers_config.d" "mss\mssgenerated\ti_drivers_open_close.d" "mss\mssgenerated\ti_enet_config.d" "mss\mssgenerated\ti_enet_lwipif.d" "mss\mssgenerated\ti_enet_open_close.d" "mss\mssgenerated\ti_enet_soc.d" "mss\mssgenerated\ti_pinmux_config.d" "mss\mssgenerated\ti_power_clock_config.d" "utils\TaskP_freertos.d" "utils\altcp.d" "utils\altcp_alloc.d" "utils\altcp_tcp.d" "utils\def.d" "utils\dns.d" "utils\enet_apputils.d" "utils\enet_cpswconfighandler.d" "utils\enet_stream.d" "utils\enet_tcpclient.d" "utils\inet_chksum.d" "utils\init.d" "utils\ip.d" "utils\mem.d" "utils\memp.d" "utils\mmwdemo_adcconfig.d" "utils\mmwdemo_flash.d" "utils\mmwdemo_monitor.d" "utils\mmwdemo_rfparser.d" "utils\netif.d" "utils\pbuf.d" "utils\raw.d" "utils\stats.d" "utils\sys.d" "utils\sys_arch.d" "utils\tasks.d" "utils\tcp.d" "utils\tcp_in.d" 
+	-$(RM) "utils\tcp_out.d" "utils\timeouts.d" "utils\udp.d" 
 	-@echo 'Finished clean'
 	-@echo ' '
 
