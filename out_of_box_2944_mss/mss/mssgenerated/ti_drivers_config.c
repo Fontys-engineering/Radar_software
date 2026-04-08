@@ -91,14 +91,14 @@ static EDMA_Attrs gEdmaAttrs[CONFIG_EDMA_NUM_INSTANCES] =
         .errIntrNumber      = CSL_MSS_INTR_DSS_TPCC_B_ERRAGG,
         .errIntrNumberDirMap      = 0,
         .intrAggEnableAddr  = CSL_DSS_CTRL_U_BASE + CSL_DSS_CTRL_DSS_TPCC_B_INTAGG_MASK,
-        .intrAggEnableMask  = 0x1FF & (~(2U << 2)),
+        .intrAggEnableMask  = 0x1FF & (~(2U << 0)),
         .intrAggStatusAddr  = CSL_DSS_CTRL_U_BASE + CSL_DSS_CTRL_DSS_TPCC_B_INTAGG_STATUS,
-        .intrAggClearMask   = (2U << 2),
+        .intrAggClearMask   = (2U << 0),
         .errIntrAggEnableAddr  = CSL_DSS_CTRL_U_BASE + CSL_DSS_CTRL_DSS_TPCC_B_ERRAGG_MASK,
         .errIntrAggStatusAddr  = CSL_DSS_CTRL_U_BASE + CSL_DSS_CTRL_DSS_TPCC_B_ERRAGG_STATUS,
         .initPrms           =
         {
-            .regionId     = 2,
+            .regionId     = 0,
             .queNum       = 0,
             .initParamSet = FALSE,
             .ownResource    =
@@ -328,7 +328,7 @@ uint32_t gEsmConfigNum = CONFIG_ESM_NUM_INSTANCES;
 #define IPC_RPMESSAGE_VRING_SIZE          RPMESSAGE_VRING_SIZE(IPC_RPMESSAGE_NUM_VRING_BUF, IPC_RPMESSAGE_MAX_VRING_BUF_SIZE)
 
 /* Total Shared memory size used for IPC */
-#define IPC_SHARED_MEM_SIZE               (2432U)
+#define IPC_SHARED_MEM_SIZE               (0U)
 
 /* Shared Memory Used for IPC.
 *
@@ -495,9 +495,8 @@ void System_init(void)
         RPMessage_Params_init(&rpmsgParams);
 
         /* TX VRINGs */
-        rpmsgParams.vringTxBaseAddr[CSL_CORE_ID_C66SS0] = (uintptr_t)(&gIpcSharedMem[0]);
+        rpmsgParams.vringTxBaseAddr[CSL_CORE_ID_C66SS0] = (uintptr_t)(&gIpcSharedMem[]);
         /* RX VRINGs */
-        rpmsgParams.vringRxBaseAddr[CSL_CORE_ID_C66SS0] = (uintptr_t)(&gIpcSharedMem[1216]);
         /* Other VRING properties */
         rpmsgParams.vringSize = IPC_RPMESSAGE_VRING_SIZE;
         rpmsgParams.vringNumBuf = IPC_RPMESSAGE_NUM_VRING_BUF;

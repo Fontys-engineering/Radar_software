@@ -89,7 +89,13 @@ SECTIONS{
         RUN_END(__BSS_END)
         .sysmem: {} palign(8)   /* This is where the malloc heap goes */
     
-    } > DSS_L3
+    } > MSS_L2
+
+
+
+
+
+
 
     /* This is where the stacks for different R5F modes go */
     GROUP {

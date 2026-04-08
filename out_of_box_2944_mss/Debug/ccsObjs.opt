@@ -25,6 +25,7 @@
 "./utils/mmwdemo_flash.o"
 "./utils/mmwdemo_monitor.o"
 "./utils/mmwdemo_rfparser.o"
+"./utils/tasks.o"
 "../r5f_linker.cmd"
 "../mss/mmw_mss_linker.cmd"
 -ldrivers.awr294x.r5f.ti-arm-clang.release.lib

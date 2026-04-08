@@ -20,6 +20,11 @@
 	</natures>
 	<linkedResources>
 		<link>
+			<name>include/lwipopts.h</name>
+			<type>1</type>
+			<location>C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/lwip/lwip-config/awr294x/lwipopts.h</location>
+		</link>
+		<link>
 			<name>utils/enet_apputils.c</name>
 			<type>1</type>
 			<locationURI>COM_TI_MCU_PLUS_SDK_AWR294X_INSTALL_DIR/source/networking/enet/utils/enet_apputils.c</locationURI>
@@ -33,6 +38,11 @@
 			<name>utils/enet_stream.c</name>
 			<type>1</type>
 			<location>C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/demo/utils/enet_stream.c</location>
+		</link>
+		<link>
+			<name>utils/tasks.c</name>
+			<type>1</type>
+			<location>C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/freertos/FreeRTOS-Kernel/tasks.c</location>
 		</link>
 	</linkedResources>
 	<variableList>

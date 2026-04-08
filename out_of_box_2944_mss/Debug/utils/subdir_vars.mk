@@ -14,7 +14,8 @@ C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/demo/util
 ../utils/mmwdemo_adcconfig.c \
 ../utils/mmwdemo_flash.c \
 ../utils/mmwdemo_monitor.c \
-../utils/mmwdemo_rfparser.c 
+../utils/mmwdemo_rfparser.c \
+C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/freertos/FreeRTOS-Kernel/tasks.c 
 
 C_DEPS += \
 ./utils/TaskP_freertos.d \
@@ -25,7 +26,8 @@ C_DEPS += \
 ./utils/mmwdemo_adcconfig.d \
 ./utils/mmwdemo_flash.d \
 ./utils/mmwdemo_monitor.d \
-./utils/mmwdemo_rfparser.d 
+./utils/mmwdemo_rfparser.d \
+./utils/tasks.d 
 
 OBJS += \
 ./utils/TaskP_freertos.o \
@@ -36,7 +38,8 @@ OBJS += \
 ./utils/mmwdemo_adcconfig.o \
 ./utils/mmwdemo_flash.o \
 ./utils/mmwdemo_monitor.o \
-./utils/mmwdemo_rfparser.o 
+./utils/mmwdemo_rfparser.o \
+./utils/tasks.o 
 
 OBJS__QUOTED += \
 "utils\TaskP_freertos.o" \
@@ -47,7 +50,8 @@ OBJS__QUOTED += \
 "utils\mmwdemo_adcconfig.o" \
 "utils\mmwdemo_flash.o" \
 "utils\mmwdemo_monitor.o" \
-"utils\mmwdemo_rfparser.o" 
+"utils\mmwdemo_rfparser.o" \
+"utils\tasks.o" 
 
 C_DEPS__QUOTED += \
 "utils\TaskP_freertos.d" \
@@ -58,7 +62,8 @@ C_DEPS__QUOTED += \
 "utils\mmwdemo_adcconfig.d" \
 "utils\mmwdemo_flash.d" \
 "utils\mmwdemo_monitor.d" \
-"utils\mmwdemo_rfparser.d" 
+"utils\mmwdemo_rfparser.d" \
+"utils\tasks.d" 
 
 C_SRCS__QUOTED += \
 "../utils/TaskP_freertos.c" \
@@ -69,6 +74,7 @@ C_SRCS__QUOTED += \
 "../utils/mmwdemo_adcconfig.c" \
 "../utils/mmwdemo_flash.c" \
 "../utils/mmwdemo_monitor.c" \
-"../utils/mmwdemo_rfparser.c" 
+"../utils/mmwdemo_rfparser.c" \
+"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/freertos/FreeRTOS-Kernel/tasks.c" 
 
 
