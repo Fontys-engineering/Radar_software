@@ -54,7 +54,6 @@ $(GEN_CMDS__FLAG) \
 -Wl,-lfreertos.awr294x.r5f.ti-arm-clang.release.lib \
 -Wl,-l"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/lib/lwipif-cpsw-freertos.awr294x.r5f.ti-arm-clang.debug.lib" \
 -Wl,-l"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/lib/enet-cpsw.awr294x.r5f.ti-arm-clang.debug.lib" \
--Wl,-l"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/lwip/lib/lwip-freertos.awr294x.r5f.ti-arm-clang.debug.lib" \
 -Wl,-l"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/lwip/lib/lwip-contrib-freertos.awr294x.r5f.ti-arm-clang.debug.lib" \
 -Wl,-l"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/freertos/lib/freertos.awr294x.r5f.ti-arm-clang.debug.lib" \
 
@@ -179,7 +178,7 @@ main-build: $(OBJS) $(CMD_SRCS) $(GEN_CMDS)
 	@$(MAKE) --no-print-directory -Onone "out_of_box_2944_mss.xer5f"
 
 dependents:
-	-cd C:/Git/Radar_software/out_of_box_2944_dss/Debug && $(MAKE) all
+	-cd C:/Git/Radar_software/out_of_box_2944_dss/Debug && $(MAKE) clean all
 
 # Tool invocations
 out_of_box_2944_mss.xer5f: $(OBJS) $(CMD_SRCS) $(GEN_CMDS) C:/Git/Radar_software/out_of_box_2944_dss/Debug/out_of_box_2944_dss.xe66

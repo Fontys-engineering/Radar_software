@@ -138,7 +138,6 @@
                                     <listOptionValue value="freertos.awr294x.r5f.ti-arm-clang.release.lib"/>
                                     <listOptionValue value="${NETWORK_PATH}/enet/lib/lwipif-cpsw-freertos.awr294x.r5f.ti-arm-clang.debug.lib"/>
                                     <listOptionValue value="${NETWORK_PATH}/enet/lib/enet-cpsw.awr294x.r5f.ti-arm-clang.debug.lib"/>
-                                    <listOptionValue value="${NETWORK_PATH}/lwip/lib/lwip-freertos.awr294x.r5f.ti-arm-clang.debug.lib"/>
                                     <listOptionValue value="${NETWORK_PATH}/lwip/lib/lwip-contrib-freertos.awr294x.r5f.ti-arm-clang.debug.lib"/>
                                     <listOptionValue value="${MCU_PLUS_SDK_PATH}/source/kernel/freertos/lib/freertos.awr294x.r5f.ti-arm-clang.debug.lib"/>
                                 </option>
