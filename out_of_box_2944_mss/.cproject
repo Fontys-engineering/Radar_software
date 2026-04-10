@@ -141,8 +141,7 @@
                                     <listOptionValue value="freertos.awr294x.r5f.ti-arm-clang.release.lib"/>
                                     <listOptionValue value="${NETWORK_PATH}/enet/lib/lwipif-cpsw-freertos.awr294x.r5f.ti-arm-clang.debug.lib"/>
                                     <listOptionValue value="${NETWORK_PATH}/enet/lib/enet-cpsw.awr294x.r5f.ti-arm-clang.debug.lib"/>
-                                    <listOptionValue value="${NETWORK_PATH}/lwip/lib/lwip-contrib-freertos.awr294x.r5f.ti-arm-clang.debug.lib"/>
-                                    <listOptionValue value="${MCU_PLUS_SDK_PATH}/source/kernel/freertos/lib/freertos.awr294x.r5f.ti-arm-clang.debug.lib"/>
+                                    <listOptionValue value="${NETWORK_PATH}/lwip/lib/lwip-freertos.awr294x.r5f.ti-arm-clang.debug.lib"/>
                                 </option>
                                 <option id="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_4.0.linkerID.DIAG_SUPPRESS.83259993" superClass="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_4.0.linkerID.DIAG_SUPPRESS" valueType="stringList">
                                     <listOptionValue value="10063"/>
@@ -167,7 +166,7 @@
                         </toolChain>
                     </folderInfo>
                     <sourceEntries>
-                        <entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+                        <entry excluding="r5f_linker.cmd" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
                     </sourceEntries>
                 </configuration>
             </storageModule>
