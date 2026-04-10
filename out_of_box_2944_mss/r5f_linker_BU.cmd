@@ -16,7 +16,7 @@
 --retain="*(.undStack)"
 --retain="*(.svcStack)"
 -stack  0x2000                              /* SOFTWARE STACK SIZE           */
--heap   0x1000                              /* HEAP AREA SIZE                */
+-heap   0x4000                              /* HEAP AREA SIZE                */
 
 -e_vectors  /* This is the entry of the application, _vector MUST be plabed starting address 0x0 */
 
