@@ -42,6 +42,14 @@
 	</linkedResources>
 	<variableList>
 		<variable>
+			<name>BuildArtifactFilePath</name>
+			<value>file:/C:/Git/Radar_software/$%7BProjName%7D/Debug/$%7BProjName%7D.xer5f</value>
+		</variable>
+		<variable>
+			<name>BuildDirectory</name>
+			<value>file:/C:/Git/Radar_software/$%7BProjName%7D/Debug</value>
+		</variable>
+		<variable>
 			<name>MCU_PLUS_SDK_PATH</name>
 			<value>$%7BCOM_TI_MCU_PLUS_SDK_AWR294X_INSTALL_DIR%7D</value>
 		</variable>
@@ -56,6 +64,22 @@
 		<variable>
 			<name>NETWORK_PATH</name>
 			<value>$%7BMCU_PLUS_SDK_PATH%7D/source/networking</value>
+		</variable>
+		<variable>
+			<name>PROJECT_BUILD_DIR</name>
+			<value>file:/C:/Git/Radar_software/$%7BProjName%7D/Debug</value>
+		</variable>
+		<variable>
+			<name>PROJECT_ROOT</name>
+			<value>file:/C:/Git/Radar_software/$%7BProjName%7D</value>
+		</variable>
+		<variable>
+			<name>REF_PROJECT_1_LOC</name>
+			<value>file:/C:/Git/Radar_software/Radar_Program_dss</value>
+		</variable>
+		<variable>
+			<name>SYSCONFIG_TOOL_OUTPUT_DIR</name>
+			<value>file:/C:/Git/Radar_software/$%7BProjName%7D/mss/mssgenerated</value>
 		</variable>
 	</variableList>
 </projectDescription>

@@ -28,7 +28,7 @@ dss/dss_main.obj: C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_0
 dss/dss_main.obj: C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/dpl/SystemP.h
 dss/dss_main.obj: C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/dpl/DebugP.h
 dss/dss_main.obj: C:/ti/ccs2041/ccs/tools/compiler/ti-cgt-c6000_8.5.0.LTS/include/stdbool.h
-dss/dss_main.obj: C:/Git/Radar_software/out_of_box_2944_dss/dss/dssgenerated/ti_drivers_config.h
+dss/dss_main.obj: C:/Git/Radar_software/Radar_Program_dss/dss/dssgenerated/ti_drivers_config.h
 dss/dss_main.obj: C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/drivers/hw_include/cslr_soc.h
 dss/dss_main.obj: C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/drivers/hw_include/awr294x/cslr_soc.h
 dss/dss_main.obj: C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/drivers/hw_include/awr294x/cslr_soc_defines.h
@@ -115,7 +115,7 @@ dss/dss_main.obj: C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_0
 dss/dss_main.obj: C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/drivers/hw_include/tistdtypes.h
 dss/dss_main.obj: C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/drivers/hw_include/awr294x/cslr_bss_vim_parity.h
 dss/dss_main.obj: C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/drivers/hw_include/tistdtypes.h
-dss/dss_main.obj: C:/Git/Radar_software/out_of_box_2944_dss/dss/dssgenerated/ti_dpl_config.h
+dss/dss_main.obj: C:/Git/Radar_software/Radar_Program_dss/dss/dssgenerated/ti_dpl_config.h
 dss/dss_main.obj: C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/dpl/HwiP.h
 dss/dss_main.obj: C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/dpl/HwiP_c6x.h
 dss/dss_main.obj: C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/dpl/ClockP.h
@@ -153,9 +153,9 @@ dss/dss_main.obj: C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_0
 dss/dss_main.obj: C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/drivers/mailbox/v0/mailbox.h
 dss/dss_main.obj: C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/drivers/ipc_rpmsg.h
 dss/dss_main.obj: C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/drivers/ipc_rpmsg/include/ipc_rpmsg_linux_resource_table.h
-dss/dss_main.obj: C:/Git/Radar_software/out_of_box_2944_dss/dss/dssgenerated/ti_board_config.h
-dss/dss_main.obj: C:/Git/Radar_software/out_of_box_2944_dss/dss/dssgenerated/ti_drivers_open_close.h
-dss/dss_main.obj: C:/Git/Radar_software/out_of_box_2944_dss/dss/dssgenerated/ti_board_open_close.h
+dss/dss_main.obj: C:/Git/Radar_software/Radar_Program_dss/dss/dssgenerated/ti_board_config.h
+dss/dss_main.obj: C:/Git/Radar_software/Radar_Program_dss/dss/dssgenerated/ti_drivers_open_close.h
+dss/dss_main.obj: C:/Git/Radar_software/Radar_Program_dss/dss/dssgenerated/ti_board_open_close.h
 dss/dss_main.obj: C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/dpl/AddrTranslateP.h
 dss/dss_main.obj: C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/freertos/FreeRTOS-Kernel/include/FreeRTOS.h
 dss/dss_main.obj: C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/freertos/config/awr294x/c66/FreeRTOSConfig.h
@@ -282,7 +282,7 @@ C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/ker
 
 C:/ti/ccs2041/ccs/tools/compiler/ti-cgt-c6000_8.5.0.LTS/include/stdbool.h:
 
-C:/Git/Radar_software/out_of_box_2944_dss/dss/dssgenerated/ti_drivers_config.h:
+C:/Git/Radar_software/Radar_Program_dss/dss/dssgenerated/ti_drivers_config.h:
 
 C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/drivers/hw_include/cslr_soc.h:
 
@@ -456,7 +456,7 @@ C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/dri
 
 C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/drivers/hw_include/tistdtypes.h:
 
-C:/Git/Radar_software/out_of_box_2944_dss/dss/dssgenerated/ti_dpl_config.h:
+C:/Git/Radar_software/Radar_Program_dss/dss/dssgenerated/ti_dpl_config.h:
 
 C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/dpl/HwiP.h:
 
@@ -532,11 +532,11 @@ C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/dri
 
 C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/drivers/ipc_rpmsg/include/ipc_rpmsg_linux_resource_table.h:
 
-C:/Git/Radar_software/out_of_box_2944_dss/dss/dssgenerated/ti_board_config.h:
+C:/Git/Radar_software/Radar_Program_dss/dss/dssgenerated/ti_board_config.h:
 
-C:/Git/Radar_software/out_of_box_2944_dss/dss/dssgenerated/ti_drivers_open_close.h:
+C:/Git/Radar_software/Radar_Program_dss/dss/dssgenerated/ti_drivers_open_close.h:
 
-C:/Git/Radar_software/out_of_box_2944_dss/dss/dssgenerated/ti_board_open_close.h:
+C:/Git/Radar_software/Radar_Program_dss/dss/dssgenerated/ti_board_open_close.h:
 
 C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/dpl/AddrTranslateP.h:
 
