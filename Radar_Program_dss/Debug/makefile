@@ -185,7 +185,7 @@ clean:
 	-@echo ' '
 
 pre-build:
-	-C:/ti/sysconfig_1.23.0/nodejs/node C:/ti/sysconfig_1.23.0/dist/cli.js --product C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/.metadata/product.json --script ../../out_of_box_2944_mss/mss/mss.syscfg --context r5fss0-0 --output ../../out_of_box_2944_mss/mss/mssgenerated/ --script ../dss/dss.syscfg --context c66ss0 --output ../dss/dssgenerated/
+	-C:/ti/sysconfig_1.23.0/nodejs/node C:/ti/sysconfig_1.23.0/dist/cli.js --product C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/.metadata/product.json --script ../../Radar_Program_mss/mss/mss.syscfg --context r5fss0-0 --output ../../Radar_Program_mss/mss/mssgenerated/ --script ../dss/dss.syscfg --context c66ss0 --output ../dss/dssgenerated/
 	-@echo ' '
 
 post-build:
