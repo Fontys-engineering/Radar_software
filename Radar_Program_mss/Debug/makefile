@@ -178,7 +178,7 @@ main-build: $(OBJS) $(CMD_SRCS) $(GEN_CMDS)
 	@$(MAKE) --no-print-directory -Onone "Radar_Program_mss.xer5f"
 
 dependents:
-	-cd C:/Git/Radar_software/Radar_Program_dss/Debug && $(MAKE) clean all
+	-cd C:/Git/Radar_software/Radar_Program_dss/Debug && $(MAKE) all
 
 # Tool invocations
 Radar_Program_mss.xer5f: $(OBJS) $(CMD_SRCS) $(GEN_CMDS) C:/Git/Radar_software/Radar_Program_dss/Debug/Radar_Program_dss.xe66
@@ -204,12 +204,12 @@ pre-build:
 	-@echo ' '
 
 post-build:
-	-C:/ti/ccs2041/ccs//utils/cygwin/rm -f C:\Git\Radar_software${ProjName}/Debug/Radar_Program_mss_strip.xer5f
-	-C:/ti/ccs2041/ccs/tools/compiler/ti-cgt-armllvm_4.0.4.LTS/bin/tiarmstrip -p C:\Git\Radar_software${ProjName}/Debug/Radar_Program_mss.xer5f -o=C:\Git\Radar_software${ProjName}/Debug/Radar_Program_mss_strip.xer5f
-	-C:/ti/ccs2041/ccs//utils/cygwin/rm -f C:\Git\Radar_software${ProjName}/Debug/Radar_Program_mss_strip.rprc
-	-C:/ti/sysconfig_1.23.0/nodejs/node.exe  C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/tools/boot/out2rprc/elf2rprc.js C:\Git\Radar_software${ProjName}/Debug/Radar_Program_mss_strip.xer5f
-	-C:/ti/ccs2041/ccs//utils/cygwin/mv C:\Git\Radar_software${ProjName}/Debug/Radar_Program_mss_strip.rprc C:\Git\Radar_software${ProjName}/Debug/Radar_Program_mss.rprc
-	-C:/ti/sysconfig_1.23.0/nodejs/node.exe C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/tools/boot/multicoreImageGen/multicoreImageGen.js --devID 55 --out C:\Git\Radar_software${ProjName}/Radar_Program_Debug.appimage C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/../mmwave_dfp_02_04_18_01/firmware/radarss/xwr29xx_radarss_metarprc.bin@3  C:\Git\Radar_software${ProjName}/../Radar_Program_dss/Debug/Radar_Program_dss.rprc@2 C:\Git\Radar_software${ProjName}/Debug/Radar_Program_mss.rprc@0
+	-C:/ti/ccs2041/ccs//utils/cygwin/rm -f C:/Git/Radar_software/Radar_Program_mss/Debug/Radar_Program_mss_strip.xer5f
+	-C:/ti/ccs2041/ccs/tools/compiler/ti-cgt-armllvm_4.0.4.LTS/bin/tiarmstrip -p C:/Git/Radar_software/Radar_Program_mss/Debug/Radar_Program_mss.xer5f -o=C:/Git/Radar_software/Radar_Program_mss/Debug/Radar_Program_mss_strip.xer5f
+	-C:/ti/ccs2041/ccs//utils/cygwin/rm -f C:\Git\Radar_software\Radar_Program_mss/Debug/Radar_Program_mss_strip.rprc
+	-C:/ti/sysconfig_1.23.0/nodejs/node.exe  C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/tools/boot/out2rprc/elf2rprc.js C:/Git/Radar_software/Radar_Program_mss/Debug/Radar_Program_mss_strip.xer5f
+	-C:/ti/ccs2041/ccs//utils/cygwin/mv C:/Git/Radar_software/Radar_Program_mss/Debug/Radar_Program_mss_strip.rprc C:/Git/Radar_software/Radar_Program_mss/Debug/Radar_Program_mss.rprc
+	-C:/ti/sysconfig_1.23.0/nodejs/node.exe C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/tools/boot/multicoreImageGen/multicoreImageGen.js --devID 55 --out C:/Git/Radar_software/Radar_Program_mss/Debug/Radar_Program_Debug.appimage C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/../mmwave_dfp_02_04_18_01/firmware/radarss/xwr29xx_radarss_metarprc.bin@3 C:/Git/Radar_software/Radar_Program_dss/Debug/Radar_Program_dss.rprc@2 C:/Git/Radar_software/Radar_Program_mss/Debug/Radar_Program_mss.rprc@0
 	-@echo ' '
 
 .PHONY: all clean dependents
