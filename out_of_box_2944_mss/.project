@@ -3,7 +3,7 @@
 	<name>out_of_box_2944_mss</name>
 	<comment></comment>
 	<projects>
-		<project>out_of_box_2944_dss</project>
+		<project>Radar_Program_dss</project>
 	</projects>
 	<buildSpec>
 		<buildCommand>

@@ -171,7 +171,7 @@
                 </configuration>
             </storageModule>
             <storageModule moduleId="org.eclipse.cdt.core.externalSettings">
-                <externalSettings containerId="out_of_box_2944_dss;com.ti.ccstudio.buildDefinitions.C6000.Debug.1626576623" factoryId="org.eclipse.cdt.core.cfg.export.settings.sipplier"/>
+                <externalSettings containerId="Radar_Program_dss;" factoryId="org.eclipse.cdt.core.cfg.export.settings.sipplier"/>
             </storageModule>
         </cconfiguration>
         <cconfiguration id="com.ti.ccstudio.buildDefinitions.TMS470.Release.1587779451">
