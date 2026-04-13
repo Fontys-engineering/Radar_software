@@ -10,7 +10,7 @@
 	<ignoreDefaultDeviceSettings value="true"/>
 	<ignoreDefaultCCSSettings value="true"/>
 	<activeTargetConfiguration value="targetConfigs/AWR2944.ccxml"/>
-	<templateProperties value="id=out_of_box_2944_mss.projectspec.out_of_box_2944_mss"/>
+	<templateProperties value="id=out_of_box_2944_mss.projectspec.Radar_Program_mss"/>
 	<isTargetConfigurationManual value="false"/>
 	<origin value="C:\ti\radar_toolbox_4_00_00_05\source\ti\examples\Out_Of_Box_Demo\src\awr294x\out_of_box_2944_mss.projectspec"/>
 	<filesToOpen value=""/>

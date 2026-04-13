@@ -328,7 +328,7 @@ uint32_t gEsmConfigNum = CONFIG_ESM_NUM_INSTANCES;
 #define IPC_RPMESSAGE_VRING_SIZE          RPMESSAGE_VRING_SIZE(IPC_RPMESSAGE_NUM_VRING_BUF, IPC_RPMESSAGE_MAX_VRING_BUF_SIZE)
 
 /* Total Shared memory size used for IPC */
-#define IPC_SHARED_MEM_SIZE               (0U)
+#define IPC_SHARED_MEM_SIZE               (2432U)
 
 /* Shared Memory Used for IPC.
 *
@@ -495,8 +495,9 @@ void System_init(void)
         RPMessage_Params_init(&rpmsgParams);
 
         /* TX VRINGs */
-        rpmsgParams.vringTxBaseAddr[CSL_CORE_ID_C66SS0] = (uintptr_t)(&gIpcSharedMem[]);
+        rpmsgParams.vringTxBaseAddr[CSL_CORE_ID_C66SS0] = (uintptr_t)(&gIpcSharedMem[0]);
         /* RX VRINGs */
+        rpmsgParams.vringRxBaseAddr[CSL_CORE_ID_C66SS0] = (uintptr_t)(&gIpcSharedMem[1216]);
         /* Other VRING properties */
         rpmsgParams.vringSize = IPC_RPMESSAGE_VRING_SIZE;
         rpmsgParams.vringNumBuf = IPC_RPMESSAGE_NUM_VRING_BUF;
