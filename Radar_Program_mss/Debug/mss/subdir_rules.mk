@@ -12,32 +12,32 @@ mss/%.o: ../mss/%.c $(GEN_OPTS) | $(GEN_FILES) $(GEN_MISC_FILES)
 	@echo 'Finished building: "$<"'
 	@echo ' '
 
-build-619076038: ../mss/mss.syscfg
+build-78371319: ../mss/mss.syscfg
 	@echo 'Building file: "$<"'
 	@echo 'Invoking: SysConfig'
 	"C:/ti/sysconfig_1.23.0/sysconfig_cli.bat" -s "C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/.metadata/product.json" -p "LOP" -r "Default" --script "C:/Git/Radar_software/Radar_Program_mss/mss/mss.syscfg" --context "r5fss0-0" -o "C:/Git/Radar_software/Radar_Program_mss/mss/mssgenerated" --compiler ticlang
 	@echo 'Finished building: "$<"'
 	@echo ' '
 
-C:/Git/Radar_software/Radar_Program_mss/mss/mssgenerated/ti_dpl_config.c: build-619076038 ../mss/mss.syscfg
-C:/Git/Radar_software/Radar_Program_mss/mss/mssgenerated/ti_dpl_config.h: build-619076038
-C:/Git/Radar_software/Radar_Program_mss/mss/mssgenerated/ti_drivers_config.c: build-619076038
-C:/Git/Radar_software/Radar_Program_mss/mss/mssgenerated/ti_drivers_config.h: build-619076038
-C:/Git/Radar_software/Radar_Program_mss/mss/mssgenerated/ti_drivers_open_close.c: build-619076038
-C:/Git/Radar_software/Radar_Program_mss/mss/mssgenerated/ti_drivers_open_close.h: build-619076038
-C:/Git/Radar_software/Radar_Program_mss/mss/mssgenerated/ti_pinmux_config.c: build-619076038
-C:/Git/Radar_software/Radar_Program_mss/mss/mssgenerated/ti_power_clock_config.c: build-619076038
-C:/Git/Radar_software/Radar_Program_mss/mss/mssgenerated/ti_board_config.c: build-619076038
-C:/Git/Radar_software/Radar_Program_mss/mss/mssgenerated/ti_board_config.h: build-619076038
-C:/Git/Radar_software/Radar_Program_mss/mss/mssgenerated/ti_board_open_close.c: build-619076038
-C:/Git/Radar_software/Radar_Program_mss/mss/mssgenerated/ti_board_open_close.h: build-619076038
-C:/Git/Radar_software/Radar_Program_mss/mss/mssgenerated/ti_enet_config.c: build-619076038
-C:/Git/Radar_software/Radar_Program_mss/mss/mssgenerated/ti_enet_config.h: build-619076038
-C:/Git/Radar_software/Radar_Program_mss/mss/mssgenerated/ti_enet_open_close.c: build-619076038
-C:/Git/Radar_software/Radar_Program_mss/mss/mssgenerated/ti_enet_open_close.h: build-619076038
-C:/Git/Radar_software/Radar_Program_mss/mss/mssgenerated/ti_enet_soc.c: build-619076038
-C:/Git/Radar_software/Radar_Program_mss/mss/mssgenerated/ti_enet_lwipif.c: build-619076038
-C:/Git/Radar_software/Radar_Program_mss/mss/mssgenerated/ti_enet_lwipif.h: build-619076038
+C:/Git/Radar_software/Radar_Program_mss/mss/mssgenerated/ti_dpl_config.c: build-78371319 ../mss/mss.syscfg
+C:/Git/Radar_software/Radar_Program_mss/mss/mssgenerated/ti_dpl_config.h: build-78371319
+C:/Git/Radar_software/Radar_Program_mss/mss/mssgenerated/ti_drivers_config.c: build-78371319
+C:/Git/Radar_software/Radar_Program_mss/mss/mssgenerated/ti_drivers_config.h: build-78371319
+C:/Git/Radar_software/Radar_Program_mss/mss/mssgenerated/ti_drivers_open_close.c: build-78371319
+C:/Git/Radar_software/Radar_Program_mss/mss/mssgenerated/ti_drivers_open_close.h: build-78371319
+C:/Git/Radar_software/Radar_Program_mss/mss/mssgenerated/ti_pinmux_config.c: build-78371319
+C:/Git/Radar_software/Radar_Program_mss/mss/mssgenerated/ti_power_clock_config.c: build-78371319
+C:/Git/Radar_software/Radar_Program_mss/mss/mssgenerated/ti_board_config.c: build-78371319
+C:/Git/Radar_software/Radar_Program_mss/mss/mssgenerated/ti_board_config.h: build-78371319
+C:/Git/Radar_software/Radar_Program_mss/mss/mssgenerated/ti_board_open_close.c: build-78371319
+C:/Git/Radar_software/Radar_Program_mss/mss/mssgenerated/ti_board_open_close.h: build-78371319
+C:/Git/Radar_software/Radar_Program_mss/mss/mssgenerated/ti_enet_config.c: build-78371319
+C:/Git/Radar_software/Radar_Program_mss/mss/mssgenerated/ti_enet_config.h: build-78371319
+C:/Git/Radar_software/Radar_Program_mss/mss/mssgenerated/ti_enet_open_close.c: build-78371319
+C:/Git/Radar_software/Radar_Program_mss/mss/mssgenerated/ti_enet_open_close.h: build-78371319
+C:/Git/Radar_software/Radar_Program_mss/mss/mssgenerated/ti_enet_soc.c: build-78371319
+C:/Git/Radar_software/Radar_Program_mss/mss/mssgenerated/ti_enet_lwipif.c: build-78371319
+C:/Git/Radar_software/Radar_Program_mss/mss/mssgenerated/ti_enet_lwipif.h: build-78371319
 
 mss/mssgenerated/ti_dpl_config.o: C:/Git/Radar_software/Radar_Program_mss/mss/mssgenerated/ti_dpl_config.c $(GEN_OPTS) | $(GEN_FILES) $(GEN_MISC_FILES)
 	@echo 'Building file: "$<"'
@@ -116,31 +116,31 @@ mss/mssgenerated/ti_enet_lwipif.o: C:/Git/Radar_software/Radar_Program_mss/mss/m
 	@echo 'Finished building: "$<"'
 	@echo ' '
 
-build-597457367: ../mss/mss_enet.syscfg
+build-1138162086: ../mss/mss_enet.syscfg
 	@echo 'Building file: "$<"'
 	@echo 'Invoking: SysConfig'
 	"C:/ti/sysconfig_1.23.0/sysconfig_cli.bat" -s "C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/.metadata/product.json" -p "LOP" -r "Default" --script "C:/Git/Radar_software/Radar_Program_mss/mss/mss_enet.syscfg" --context "r5fss0-0" -o "C:/Git/Radar_software/Radar_Program_mss/mss/mssgenerated" --compiler ticlang
 	@echo 'Finished building: "$<"'
 	@echo ' '
 
-C:/Git/Radar_software/Radar_Program_mss/mss/mssgenerated/ti_dpl_config.c: build-597457367 ../mss/mss_enet.syscfg
-C:/Git/Radar_software/Radar_Program_mss/mss/mssgenerated/ti_dpl_config.h: build-597457367
-C:/Git/Radar_software/Radar_Program_mss/mss/mssgenerated/ti_drivers_config.c: build-597457367
-C:/Git/Radar_software/Radar_Program_mss/mss/mssgenerated/ti_drivers_config.h: build-597457367
-C:/Git/Radar_software/Radar_Program_mss/mss/mssgenerated/ti_drivers_open_close.c: build-597457367
-C:/Git/Radar_software/Radar_Program_mss/mss/mssgenerated/ti_drivers_open_close.h: build-597457367
-C:/Git/Radar_software/Radar_Program_mss/mss/mssgenerated/ti_pinmux_config.c: build-597457367
-C:/Git/Radar_software/Radar_Program_mss/mss/mssgenerated/ti_power_clock_config.c: build-597457367
-C:/Git/Radar_software/Radar_Program_mss/mss/mssgenerated/ti_board_config.c: build-597457367
-C:/Git/Radar_software/Radar_Program_mss/mss/mssgenerated/ti_board_config.h: build-597457367
-C:/Git/Radar_software/Radar_Program_mss/mss/mssgenerated/ti_board_open_close.c: build-597457367
-C:/Git/Radar_software/Radar_Program_mss/mss/mssgenerated/ti_board_open_close.h: build-597457367
-C:/Git/Radar_software/Radar_Program_mss/mss/mssgenerated/ti_enet_config.c: build-597457367
-C:/Git/Radar_software/Radar_Program_mss/mss/mssgenerated/ti_enet_config.h: build-597457367
-C:/Git/Radar_software/Radar_Program_mss/mss/mssgenerated/ti_enet_open_close.c: build-597457367
-C:/Git/Radar_software/Radar_Program_mss/mss/mssgenerated/ti_enet_open_close.h: build-597457367
-C:/Git/Radar_software/Radar_Program_mss/mss/mssgenerated/ti_enet_soc.c: build-597457367
-C:/Git/Radar_software/Radar_Program_mss/mss/mssgenerated/ti_enet_lwipif.c: build-597457367
-C:/Git/Radar_software/Radar_Program_mss/mss/mssgenerated/ti_enet_lwipif.h: build-597457367
+C:/Git/Radar_software/Radar_Program_mss/mss/mssgenerated/ti_dpl_config.c: build-1138162086 ../mss/mss_enet.syscfg
+C:/Git/Radar_software/Radar_Program_mss/mss/mssgenerated/ti_dpl_config.h: build-1138162086
+C:/Git/Radar_software/Radar_Program_mss/mss/mssgenerated/ti_drivers_config.c: build-1138162086
+C:/Git/Radar_software/Radar_Program_mss/mss/mssgenerated/ti_drivers_config.h: build-1138162086
+C:/Git/Radar_software/Radar_Program_mss/mss/mssgenerated/ti_drivers_open_close.c: build-1138162086
+C:/Git/Radar_software/Radar_Program_mss/mss/mssgenerated/ti_drivers_open_close.h: build-1138162086
+C:/Git/Radar_software/Radar_Program_mss/mss/mssgenerated/ti_pinmux_config.c: build-1138162086
+C:/Git/Radar_software/Radar_Program_mss/mss/mssgenerated/ti_power_clock_config.c: build-1138162086
+C:/Git/Radar_software/Radar_Program_mss/mss/mssgenerated/ti_board_config.c: build-1138162086
+C:/Git/Radar_software/Radar_Program_mss/mss/mssgenerated/ti_board_config.h: build-1138162086
+C:/Git/Radar_software/Radar_Program_mss/mss/mssgenerated/ti_board_open_close.c: build-1138162086
+C:/Git/Radar_software/Radar_Program_mss/mss/mssgenerated/ti_board_open_close.h: build-1138162086
+C:/Git/Radar_software/Radar_Program_mss/mss/mssgenerated/ti_enet_config.c: build-1138162086
+C:/Git/Radar_software/Radar_Program_mss/mss/mssgenerated/ti_enet_config.h: build-1138162086
+C:/Git/Radar_software/Radar_Program_mss/mss/mssgenerated/ti_enet_open_close.c: build-1138162086
+C:/Git/Radar_software/Radar_Program_mss/mss/mssgenerated/ti_enet_open_close.h: build-1138162086
+C:/Git/Radar_software/Radar_Program_mss/mss/mssgenerated/ti_enet_soc.c: build-1138162086
+C:/Git/Radar_software/Radar_Program_mss/mss/mssgenerated/ti_enet_lwipif.c: build-1138162086
+C:/Git/Radar_software/Radar_Program_mss/mss/mssgenerated/ti_enet_lwipif.h: build-1138162086
 
 
