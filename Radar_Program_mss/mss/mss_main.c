@@ -3007,6 +3007,7 @@
                                        &gMmwMssMCB.taskHandles.mmwCtrlTaskObj );
   
      configASSERT(gMmwMssMCB.taskHandles.mmwCtrlTask != NULL);
+     DebugP_log("CtrTask Done\n");
   
  #ifdef ENET_STREAM
     /*****************************************************************************
@@ -3024,6 +3025,7 @@
                                        &gMmwMssMCB.taskHandles.enetTaskObj );
   
      configASSERT(gMmwMssMCB.taskHandles.enetTask != NULL);
+     DebugP_log("EnetTask Done\n");
  #endif
   
      /*****************************************************************************
@@ -3082,7 +3084,7 @@
                                             &gMmwMssMCB.taskHandles.mmwObjDetDpmTaskObj );
   
      configASSERT(gMmwMssMCB.taskHandles.mmwObjDetDpmTask != NULL);
-  
+    DebugP_log("DPMTask Done\n");
      /* Calibration save/restore initialization */
      if(MmwDemo_calibInit()<0)
      {
@@ -3100,7 +3102,7 @@
                                             &gMmwMssMCB.taskHandles.uartDataExportTaskObj );
   
      configASSERT(gMmwMssMCB.taskHandles.uartDataExportTask != NULL);
-  
+    DebugP_log("UARTTask Done\n");
      /*****************************************************************************
       * Initialize the Profiler
       *****************************************************************************/
@@ -3109,7 +3111,9 @@
      /*****************************************************************************
       * Initialize the CLI Module:
       *****************************************************************************/
+     DebugP_log("Before CLI Init\n");
      MmwDemo_CLIInit(MMWDEMO_CLI_TASK_PRIORITY);
+     DebugP_log("After CLI Init\n");
   
      /* Never return for this task. */
      SemaphoreP_pend(&gMmwMssMCB.demoInitTaskCompleteSemHandle, SystemP_WAIT_FOREVER);

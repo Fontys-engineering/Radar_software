@@ -17,6 +17,22 @@
                             <router HW_revision="1.0" XML_version="1.2" description="CS_DAP Router" id="CS_DAP_0" isa="CS_DAP">
                                 <subpath id="subpath_4">
                                     <property Type="choicelist" Value="0" desc="Type_0" id="Type"/>
+                                    <cpu XML_version="1.2" id="Cortex_R5_1" HW_revision="1.0" isa="Cortex_R5" description="Cortex_R5 CPU">
+                                        <property id="bypass" Type="choicelist" Value="1"/>
+                                        <property id="Slave Processor" Type="choicelist" Value="1"/>
+                                    </cpu>
+                                </subpath>
+                                <subpath id="subpath_5">
+                                    <property id="Type" Type="choicelist" Value="0"/>
+                                </subpath>
+                            </router>
+                        </subpath>
+                        <subpath id="subpath_0">
+                            <router XML_version="1.2" id="IcePick_M_0" HW_revision="1.0" isa="ICEPICK_M" description="ICEPick_M Router">
+                                <subpath id="subpath_1">
+                                    <cpu XML_version="1.2" id="C66xx_DSP" HW_revision="1.0" isa="TMS320C66XX" description="C66xx CGEM+FP CPU">
+                                        <property id="Domain Power Loss Mode" Type="stringfield" Value="-1"/>
+                                    </cpu>
                                 </subpath>
                             </router>
                         </subpath>
