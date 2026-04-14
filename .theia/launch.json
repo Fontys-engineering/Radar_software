@@ -6,14 +6,14 @@
             "name": "Auto Launch",
             "type": "ccs-debug",
             "request": "launch",
-            "targetConfig": "C:\\Users\\petri\\OneDrive\\Asiakirjat\\GitHub\\Radar_software\\out_of_box_2944_dss\\targetConfigs\\AWR2944.ccxml",
+            "targetConfig": "C:\\Users\\petri\\OneDrive\\Asiakirjat\\GitHub\\Radar_software\\Radar_Program_dss\\targetConfigs\\AWR2944.ccxml",
             "connections": [
                 {
                     "name": "Texas Instruments XDS110 USB Debug Probe",
                     "cores": [
                         {
                             "name": "C66xx_DSP",
-                            "program": "C:\\Users\\petri\\OneDrive\\Asiakirjat\\GitHub\\Radar_software\\out_of_box_2944_dss\\Debug\\out_of_box_2944_dss.xe66",
+                            "program": "C:\\Users\\petri\\OneDrive\\Asiakirjat\\GitHub\\Radar_software\\Radar_Program_dss\\Debug\\Radar_Program_dss.xe66",
                             "autoRun": false,
                             "debuggerSettings": {
                                 "data": "<?xml version=\"1.0\" encoding=\"UTF-8\"?><PropertyValues><Property id=\"AutoRunToLabelOnRestart\" value=\"false\"/><Property id=\"AutoRunToLabelOnConnect\" value=\"false\"/><Property id=\"ResetOnConnect\" value=\"true\"/></PropertyValues>"
@@ -21,7 +21,7 @@
                         },
                         {
                             "name": "Cortex_R5_0",
-                            "program": "C:\\Users\\petri\\OneDrive\\Asiakirjat\\GitHub\\Radar_software\\out_of_box_2944_mss\\Debug\\out_of_box_2944_mss.xer5f",
+                            "program": "C:\\Users\\petri\\OneDrive\\Asiakirjat\\GitHub\\Radar_software\\Radar_Program_mss\\Debug\\Radar_Program_mss.xer5f",
                             "autoRun": false,
                             "debuggerSettings": {
                                 "data": "<?xml version=\"1.0\" encoding=\"UTF-8\"?><PropertyValues><Property id=\"AutoRunToLabelOnRestart\" value=\"false\"/><Property id=\"AutoRunToLabelOnConnect\" value=\"false\"/><Property id=\"ResetOnConnect\" value=\"true\"/><Property id=\"HaltOnConnect\" value=\"true\"/></PropertyValues>"
@@ -82,7 +82,7 @@
             "name": "AWR2944.ccxml",
             "type": "ccs-debug",
             "request": "launch",
-            "targetConfig": "${workspaceFolder}\\out_of_box_2944_dss\\targetConfigs\\AWR2944.ccxml"
+            "targetConfig": "${workspaceFolder}\\Radar_Program_dss\\targetConfigs\\AWR2944.ccxml"
         },
      ]
   }
