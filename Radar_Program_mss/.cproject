@@ -84,7 +84,6 @@
                                     <listOptionValue value="${INHERITED_SYMBOLS}"/>
                                     <listOptionValue value="DOWNLOAD_FROM_CCS"/>
                                     <listOptionValue value="DRIVERS_RADAR_HWA_V2"/>
-                                    <listOptionValue value="DebugP_LOG_ENABLED"/>
                                     <listOptionValue value="INCLUDE_DPM"/>
                                     <listOptionValue value="MMWDEMO_TDM"/>
                                     <listOptionValue value="SOC_AWR294X"/>
@@ -93,6 +92,7 @@
                                     <listOptionValue value="APP_RESOURCE_FILE='&lt;'ti/demo/awr294x/mmw/mmw_resTDM.h'&gt;'"/>
                                     <listOptionValue value="MMWAVE_SDK_DEVICE=awr2944"/>
                                     <listOptionValue value="SUBSYS_MSS"/>
+                                    <listOptionValue value="DebugP_LOG_ENABLED"/>
                                     <listOptionValue value="_DEBUG_=1"/>
                                     <listOptionValue value="ENET_STREAM"/>
                                 </option>

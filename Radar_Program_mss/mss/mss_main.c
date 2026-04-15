@@ -3009,7 +3009,24 @@
      configASSERT(gMmwMssMCB.taskHandles.mmwCtrlTask != NULL);
      DebugP_log("CtrTask Done\n");
   
-
+ #ifdef ENET_STREAM
+    /*****************************************************************************
+      * Launch the mmWave enet task
+      *****************************************************************************/
+     /* Create Enet configuration done semaphore */
+     SemaphoreP_constructBinary(&gMmwMssMCB.enetCfg.EnetCfgDoneSemHandle, 0);
+  
+     gMmwMssMCB.taskHandles.enetTask = xTaskCreateStatic( enetTask,
+                                       "enet_task",
+                                       MMWDEMO_MMWAVE_ENET_TASK_STACK_SIZE,
+                                       NULL,
+                                       MMWDEMO_MMWAVE_ENET_TASK_PRIORITY,
+                                       gMmwEnetTskStack,
+                                       &gMmwMssMCB.taskHandles.enetTaskObj );
+  
+     configASSERT(gMmwMssMCB.taskHandles.enetTask != NULL);
+     DebugP_log("EnetTask Done\n");
+ #endif
   
      /*****************************************************************************
       * Initialization of the DPM Module:
@@ -3107,25 +3124,6 @@
      /* The following line should never be reached. */
      DebugP_assertNoLog(0);
  }
-
-  #ifdef ENET_STREAM
-    /*****************************************************************************
-      * Launch the mmWave enet task
-      *****************************************************************************/
-     /* Create Enet configuration done semaphore */
-     SemaphoreP_constructBinary(&gMmwMssMCB.enetCfg.EnetCfgDoneSemHandle, 0);
-  
-     gMmwMssMCB.taskHandles.enetTask = xTaskCreateStatic( enetTask,
-                                       "enet_task",
-                                       MMWDEMO_MMWAVE_ENET_TASK_STACK_SIZE,
-                                       NULL,
-                                       MMWDEMO_MMWAVE_ENET_TASK_PRIORITY,
-                                       gMmwEnetTskStack,
-                                       &gMmwMssMCB.taskHandles.enetTaskObj );
-  
-     configASSERT(gMmwMssMCB.taskHandles.enetTask != NULL);
-     DebugP_log("EnetTask Done\n");
- #endif
   
  static bool MmwDemo_BoardInit(void)
  {
