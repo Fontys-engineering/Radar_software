@@ -96,7 +96,7 @@
   *************************** Global Definitions ***************************
   **************************************************************************/
  /* FreeRTOS Task declarations. */
- #define MMWDEMO_INIT_TASK_PRI         (1U)
+ #define MMWDEMO_INIT_TASK_PRI         (1U) // 1U > 11U
   
  #define MMWDEMO_INIT_TASK_STACK_SIZE  (2*1024U)
  #define MMWDEMO_MMWAVE_CTRL_TASK_STACK_SIZE (2*1024U)
@@ -3009,24 +3009,7 @@
      configASSERT(gMmwMssMCB.taskHandles.mmwCtrlTask != NULL);
      DebugP_log("CtrTask Done\n");
   
- #ifdef ENET_STREAM
-    /*****************************************************************************
-      * Launch the mmWave enet task
-      *****************************************************************************/
-     /* Create Enet configuration done semaphore */
-     SemaphoreP_constructBinary(&gMmwMssMCB.enetCfg.EnetCfgDoneSemHandle, 0);
-  
-     gMmwMssMCB.taskHandles.enetTask = xTaskCreateStatic( enetTask,
-                                       "enet_task",
-                                       MMWDEMO_MMWAVE_ENET_TASK_STACK_SIZE,
-                                       NULL,
-                                       MMWDEMO_MMWAVE_ENET_TASK_PRIORITY,
-                                       gMmwEnetTskStack,
-                                       &gMmwMssMCB.taskHandles.enetTaskObj );
-  
-     configASSERT(gMmwMssMCB.taskHandles.enetTask != NULL);
-     DebugP_log("EnetTask Done\n");
- #endif
+
   
      /*****************************************************************************
       * Initialization of the DPM Module:
@@ -3114,6 +3097,9 @@
      DebugP_log("Before CLI Init\n");
      MmwDemo_CLIInit(MMWDEMO_CLI_TASK_PRIORITY);
      DebugP_log("After CLI Init\n");
+    DebugP_log("UART0 handle=%p (CLI), UART1 handle=%p (DATA)\n",
+        gUartHandle[CONFIG_UART0],
+        gUartHandle[CONFIG_UART1]);
   
      /* Never return for this task. */
      SemaphoreP_pend(&gMmwMssMCB.demoInitTaskCompleteSemHandle, SystemP_WAIT_FOREVER);
@@ -3121,6 +3107,25 @@
      /* The following line should never be reached. */
      DebugP_assertNoLog(0);
  }
+
+  #ifdef ENET_STREAM
+    /*****************************************************************************
+      * Launch the mmWave enet task
+      *****************************************************************************/
+     /* Create Enet configuration done semaphore */
+     SemaphoreP_constructBinary(&gMmwMssMCB.enetCfg.EnetCfgDoneSemHandle, 0);
+  
+     gMmwMssMCB.taskHandles.enetTask = xTaskCreateStatic( enetTask,
+                                       "enet_task",
+                                       MMWDEMO_MMWAVE_ENET_TASK_STACK_SIZE,
+                                       NULL,
+                                       MMWDEMO_MMWAVE_ENET_TASK_PRIORITY,
+                                       gMmwEnetTskStack,
+                                       &gMmwMssMCB.taskHandles.enetTaskObj );
+  
+     configASSERT(gMmwMssMCB.taskHandles.enetTask != NULL);
+     DebugP_log("EnetTask Done\n");
+ #endif
   
  static bool MmwDemo_BoardInit(void)
  {
