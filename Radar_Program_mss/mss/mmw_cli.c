@@ -1750,49 +1750,86 @@ static int32_t MmwDemo_CLIConfigDataPort (int32_t argc, char* argv[])
     uint8_t ackData[16];
     UART_Transaction trans;
 
-    UART_Transaction_init(&trans);
+    DebugP_log("CLIConfigDataPort: ENTER (argc=%d)\n", argc);
 
+    UART_Transaction_init(&trans);
     trans.buf   = &ackData[0U];
     trans.count = sizeof(ackData);
 
     if (gMmwMssMCB.sensorState == MmwDemo_SensorState_STARTED)
     {
+        DebugP_log("CLIConfigDataPort: Sensor already started -> command ignored\n");
         CLI_write ("Ignored: This command is not allowed after sensor has started\n");
         return 0;
     }
 
-    /* Populate configuration: */
+    /* Sanity check */
+    if (argc < 3)
+    {
+        DebugP_log("CLIConfigDataPort: Invalid argc (%d), expected >=3\n", argc);
+        return -1;
+    }
+
+    /* Populate configuration */
     baudrate = (uint32_t) atoi(argv[1]);
-    ackPing = (bool) atoi(argv[2]);
+    ackPing  = (bool) atoi(argv[2]);
+
+    DebugP_log("CLIConfigDataPort: Requested baudrate=%u, ackPing=%d\n", baudrate, ackPing);
 
     /* check if requested value is less than max supported value */
     if (baudrate > MMWDEMO_DATAUART_MAX_BAUDRATE_SUPPORTED)
     {
-        CLI_write ("Ignored: Invalid baud rate (%d) specified\n",baudrate);
+        DebugP_log("CLIConfigDataPort: Invalid baudrate=%u (max=%u)\n",
+                        baudrate, MMWDEMO_DATAUART_MAX_BAUDRATE_SUPPORTED);
+        CLI_write ("Ignored: Invalid baud rate (%d) specified\n", baudrate);
         return 0;
     }
+
+    /* Close existing UART1 */
+    DebugP_log("CLIConfigDataPort: Closing UART1 (old handle=%p)\n", gUartHandle[CONFIG_UART1]);
 
     UART_close(gUartHandle[CONFIG_UART1]);
     gUartHandle[CONFIG_UART1] = NULL;
 
-    gUartParams[CONFIG_UART1].baudRate = (uint32_t) atoi(argv[1]);
+    /* Apply new baudrate */
+    gUartParams[CONFIG_UART1].baudRate = baudrate;
+
+    DebugP_log("CLIConfigDataPort: Opening UART1 with baudrate=%u\n", baudrate);
 
     gUartHandle[CONFIG_UART1] = UART_open(CONFIG_UART1, &gUartParams[CONFIG_UART1]);
-    if(NULL == gUartHandle[CONFIG_UART1])
+
+    if (gUartHandle[CONFIG_UART1] == NULL)
     {
-        DebugP_logError("UART open failed for instance %d !!!\r\n", CONFIG_UART1);
-        return 0;
+        DebugP_log("CLIConfigDataPort: UART_open FAILED for CONFIG_UART1\n");
+        return -1;
     }
 
+    DebugP_log("CLIConfigDataPort: UART1 opened successfully (handle=%p)\n",
+                   gUartHandle[CONFIG_UART1]);
+
+    /* Update logging handle */
     gMmwMssMCB.loggingUartHandle = gUartHandle[CONFIG_UART1];
 
-    /* regardless of baud rate update, ack back to the host over this UART
-       port if handle is valid and user has requested the ack back */
+    DebugP_log("CLIConfigDataPort: loggingUartHandle updated -> %p\n",
+                   gMmwMssMCB.loggingUartHandle);
+
+    /* Send ACK if requested */
     if ((gMmwMssMCB.loggingUartHandle != NULL) && (ackPing == true))
     {
-        memset(ackData,0xFF,sizeof(ackData));
+        DebugP_log("CLIConfigDataPort: Sending ACK over UART1\n");
+
+        memset(ackData, 0xFF, sizeof(ackData));
         UART_write(gMmwMssMCB.loggingUartHandle, &trans);
+
+        DebugP_log("CLIConfigDataPort: ACK sent\n");
     }
+    else
+    {
+        DebugP_log("CLIConfigDataPort: ACK skipped (handle=%p, ackPing=%d)\n",
+                       gMmwMssMCB.loggingUartHandle, ackPing);
+    }
+
+    DebugP_log("CLIConfigDataPort: EXIT SUCCESS\n");
 
     return 0;
 }

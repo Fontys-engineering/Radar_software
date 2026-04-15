@@ -52,6 +52,9 @@ SECTIONS{
     /* Vector table */
     .vectors:{} palign(8) > RESET_VECTORS
 
+
+
+
     /* Boot / critical code */
     GROUP {
         .text.hwi: palign(8)
@@ -65,26 +68,36 @@ SECTIONS{
     GROUP {
         .text:   {} palign(8)
         .rodata: {} palign(8)
-    } > DSS_L3
+    } > MSS_L2
 
     /* Initialized data */
     GROUP {
         .data:   {} palign(8)
+    } > MSS_L2
+
+    GROUP {
         .stack:  {} palign(8)
-    } > DSS_L3
+        .sysmem: {} palign(8)
+
+    } >SBL_RESERVED_L2_RAM
 
     /* lwIP pools */
     .lwip.pools (NOLOAD) :
     {
         *(.bss.memp*)
+        "C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/lib/lwipif-cpsw-freertos.awr294x.r5f.ti-arm-clang.debug.lib"(.bss*)
+
+        "C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/lwip/lib/lwip-freertos.awr294x.r5f.ti-arm-clang.debug.lib"(.bss*)
     } > DSS_L3
+
+
+    
 
     /* Uninitialized data */
     GROUP {
         .bss:    {} palign(8)
         RUN_START(__BSS_START)
         RUN_END(__BSS_END)
-        .sysmem: {} palign(8)
     } > MSS_L2
 
     /* Mode stacks */
