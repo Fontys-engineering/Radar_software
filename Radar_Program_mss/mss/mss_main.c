@@ -868,7 +868,8 @@
          if (MMWave_execute (gMmwMssMCB.ctrlHandle, &errCode) < 0)
          {
              MmwDemo_debugAssert (0);
-         }
+            
+         } DebugP_log("mmWave_execute loop running\n");
      }
  }
   
