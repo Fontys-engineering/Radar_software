@@ -9,7 +9,7 @@
                     <stringMacro name="ProjDirPath" type="VALUE_TEXT" value="C:/Git/Radar_software/${ProjName}"/>
                     <stringMacro name="BuildArtifactFilePath" type="VALUE_PATH_FILE" value="C:/Git/Radar_software/${ProjName}/Debug/${ProjName}.xer5f"/>
                     <stringMacro name="SYSCONFIG_TOOL_OUTPUT_DIR" type="VALUE_PATH_DIR" value="C:/Git/Radar_software/${ProjName}/mss/mssgenerated"/>
-                    <stringMacro name="MMWAVE_AWR294X_DFP_INSTALL_PATH" type="VALUE_PATH_ANY" value="${COM_TI_MMWAVE_MCUPLUS_SDK_INSTALL_DIR}/../mmwave_dfp_02_04_18_01"/>
+                    <stringMacro name="MMWAVE_AWR294X_DFP_INSTALL_PATH" type="VALUE_PATH_ANY" value="C:\ti\mmwave_mcuplus_sdk_04_07_02_01\mmwave_dfp_02_04_18_01"/>
                     <stringMacro name="PROJECT_ROOT" type="VALUE_PATH_DIR" value="C:/Git/Radar_software/${ProjName}"/>
                     <stringMacro name="MCU_PLUS_SDK_PATH" type="VALUE_PATH_ANY" value="${COM_TI_MCU_PLUS_SDK_AWR294X_INSTALL_DIR}"/>
                     <stringMacro name="CWD" type="VALUE_TEXT" value="C:\Git\Radar_software\${ProjName}\Debug"/>
@@ -79,6 +79,10 @@
                                     <listOptionValue value="${NETWORK_PATH}/lwip/lwip-stack/src/include/lwip"/>
                                     <listOptionValue value="${NETWORK_PATH}/lwip/lwip-port/freertos/include"/>
                                     <listOptionValue value="${NETWORK_PATH}/lwip/lwip-config/awr294x"/>
+                                    <listOptionValue value="${MMWAVE_AWR294X_DFP_INSTALL_PATH}"/>
+                                    <listOptionValue value="${MMWAVE_AWR294X_DFP_INSTALL_PATH}/ti/control/mmwavelink"/>
+                                    <listOptionValue value="C:\ti\mmwave_mcuplus_sdk_04_07_02_01\mmwave_mcuplus_sdk_04_07_02_01"/>
+                                    <listOptionValue value="C:\ti\mmwave_mcuplus_sdk_04_07_02_01\mathlib_c66x_3_1_2_1\packages"/>
                                 </option>
                                 <option id="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_4.0.compilerID.DEFINE.779001022" superClass="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_4.0.compilerID.DEFINE" valueType="definedSymbols">
                                     <listOptionValue value="${INHERITED_SYMBOLS}"/>
@@ -138,6 +142,7 @@
                                     <listOptionValue value="${PROJECT_ROOT}\mss\mssgenerated"/>
                                     <listOptionValue value="${PROJECT_LOC}"/>
                                     <listOptionValue value="C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/lib/"/>
+                                    <listOptionValue value="C:\ti\mmwave_mcuplus_sdk_04_07_02_01\mmwave_dfp_02_04_18_01\ti\control\mmwavelink\"/>
                                 </option>
                                 <option id="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_4.0.linkerID.LIBRARY.33406377" superClass="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_4.0.linkerID.LIBRARY" valueType="libs">
                                     <listOptionValue value="${INHERITED_LIBRARIES}"/>
@@ -154,13 +159,14 @@
                                     <listOptionValue value="${NETWORK_PATH}/enet/lib/lwipif-cpsw-freertos.awr294x.r5f.ti-arm-clang.debug.lib"/>
                                     <listOptionValue value="${NETWORK_PATH}/enet/lib/enet-cpsw.awr294x.r5f.ti-arm-clang.debug.lib"/>
                                     <listOptionValue value="${NETWORK_PATH}/lwip/lib/lwip-freertos.awr294x.r5f.ti-arm-clang.debug.lib"/>
+                                    <listOptionValue value="${MMWAVE_AWR294X_DFP_INSTALL_PATH}/ti/control/mmwavelink/lib/mmwavelink_r5f.lib"/>
                                 </option>
                                 <option id="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_4.0.linkerID.DIAG_SUPPRESS.83259993" superClass="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_4.0.linkerID.DIAG_SUPPRESS" valueType="stringList">
                                     <listOptionValue value="10063"/>
                                 </option>
                                 <option id="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_4.0.linkerID.INITIALIZATION_MODEL.1429324879" superClass="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_4.0.linkerID.INITIALIZATION_MODEL" value="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_4.0.linkerID.INITIALIZATION_MODEL.RAM_MODEL" valueType="enumerated"/>
-                                <option id="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_4.0.linkerID.USE_MEMSET.2029939757" superClass="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_4.0.linkerID.USE_MEMSET" value="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_4.0.linkerID.USE_MEMSET.small" valueType="enumerated"/>
-                                <option id="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_4.0.linkerID.USE_MEMCPY.688586224" superClass="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_4.0.linkerID.USE_MEMCPY" value="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_4.0.linkerID.USE_MEMCPY.small" valueType="enumerated"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_4.0.linkerID.USE_MEMSET.2029939757" superClass="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_4.0.linkerID.USE_MEMSET" value="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_4.0.linkerID.USE_MEMSET.fast" valueType="enumerated"/>
+                                <option id="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_4.0.linkerID.USE_MEMCPY.688586224" superClass="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_4.0.linkerID.USE_MEMCPY" value="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_4.0.linkerID.USE_MEMCPY.fast" valueType="enumerated"/>
                                 <option id="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_4.0.linkerID.ZERO_INIT.376865330" superClass="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_4.0.linkerID.ZERO_INIT" value="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_4.0.linkerID.ZERO_INIT.on" valueType="enumerated"/>
                             </tool>
                             <tool id="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_4.0.hex.313880523" name="Arm Hex Utility" superClass="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_4.0.hex"/>

@@ -291,16 +291,28 @@ static int32_t MmwDemo_CLISensorStart (int32_t argc, char* argv[])
      ***********************************************************************************/
 
     /*  Fill demo's MCB mmWave openCfg structure from the CLI configs*/
+    //DebugP_log("CLI: Preparing to OPEN sensor, state=%d\n", gMmwMssMCB.sensorState);
+
     if (gMmwMssMCB.sensorState == MmwDemo_SensorState_INIT)
     {
-        /* Get the open configuration: */
+        //DebugP_log("CLI: Getting openCfg\n");
+
         CLI_getMMWaveExtensionOpenConfig (&gMmwMssMCB.cfg.openCfg);
-        /* call sensor open */
+
+        //DebugP_log("CLI: Calling MmwDemo_openSensor()\n");
+
         retVal = MmwDemo_openSensor(true);
+
+        //DebugP_log("CLI: MmwDemo_openSensor returned %d\n", retVal);
+
         if(retVal != 0)
         {
+            DebugP_logError("CLI: openSensor FAILED\n");
             return -1;
         }
+
+        //DebugP_log("CLI: Sensor state -> OPENED\n");
+
         gMmwMssMCB.sensorState = MmwDemo_SensorState_OPENED;
     }
     else
@@ -1743,59 +1755,88 @@ static int32_t MmwDemo_CLILvdsStreamCfg (int32_t argc, char* argv[])
  *  @retval
  *      Error   -   <0
  */
-static int32_t MmwDemo_CLIConfigDataPort(int32_t argc, char* argv[])
+static int32_t MmwDemo_CLIConfigDataPort (int32_t argc, char* argv[])
 {
     uint32_t baudrate;
     bool ackPing;
     uint8_t ackData[16];
     UART_Transaction trans;
 
-    UART_Transaction_init(&trans);
+    //DebugP_log("CLI: Entered MmwDemo_CLIConfigDataPort\n");
 
+    UART_Transaction_init(&trans);
     trans.buf   = &ackData[0U];
     trans.count = sizeof(ackData);
 
     if (gMmwMssMCB.sensorState == MmwDemo_SensorState_STARTED)
     {
         CLI_write("Ignored: This command is not allowed after sensor has started\n");
+        //DebugP_log("CLI: Sensor already started, ignoring command\n");
         return 0;
     }
 
-    /* Populate configuration */
+    /* Parse arguments */
     baudrate = (uint32_t)atoi(argv[1]);
     ackPing  = (bool)atoi(argv[2]);
 
-    /* Check if requested value is less than max supported value */
+    //DebugP_log("CLI: Requested baudrate = %u, ackPing = %d\n", baudrate, ackPing);
+
+    /* Validate baudrate */
     if (baudrate > MMWDEMO_DATAUART_MAX_BAUDRATE_SUPPORTED)
     {
-        CLI_write("Ignored: Invalid baud rate (%d) specified\n", baudrate);
+        //CLI_write("Ignored: Invalid baud rate (%d) specified\n", baudrate);
+        DebugP_logError("CLI: Invalid baudrate %u\n", baudrate);
         return 0;
     }
 
-    /* Close existing UART1 */
+    /* Close existing UART */
+    //DebugP_log("CLI: Closing existing UART1 handle = %p\n", gUartHandle[CONFIG_UART1]);
     UART_close(gUartHandle[CONFIG_UART1]);
     gUartHandle[CONFIG_UART1] = NULL;
 
-    /* Set new baud rate */
+    /* Update params */
     gUartParams[CONFIG_UART1].baudRate = baudrate;
 
-    /* Open UART1 */
+    //DebugP_log("CLI: Reopening UART1 with baudrate %u\n", baudrate);
+
+    /* Reopen UART */
     gUartHandle[CONFIG_UART1] = UART_open(CONFIG_UART1, &gUartParams[CONFIG_UART1]);
     if (gUartHandle[CONFIG_UART1] == NULL)
     {
-        DebugP_logError("UART open failed for instance %d !!!\r\n", CONFIG_UART1);
+        //DebugP_logError("CLI: UART_open FAILED for instance %d\n", CONFIG_UART1);
         return 0;
     }
 
-    /* Update logging UART handle */
+    //DebugP_log("CLI: UART1 reopened successfully, handle = %p\n", gUartHandle[CONFIG_UART1]);
+
+    /* Update logging handle */
     gMmwMssMCB.loggingUartHandle = gUartHandle[CONFIG_UART1];
 
     /* Send ACK if requested */
     if ((gMmwMssMCB.loggingUartHandle != NULL) && (ackPing == true))
     {
+        //DebugP_log("CLI: Sending ACK over UART1...\n");
+
         memset(ackData, 0xFF, sizeof(ackData));
-        UART_write(gMmwMssMCB.loggingUartHandle, &trans);
+
+        int32_t status = UART_write(gMmwMssMCB.loggingUartHandle, &trans);
+
+        if (status != SystemP_SUCCESS)
+        {
+            //DebugP_logError("CLI: UART_write FAILED (status = %d)\n", status);
+        }
+        else
+        {
+            //DebugP_log("CLI: ACK sent successfully (%u bytes)\n", trans.count);
+        }
     }
+    else
+    {
+        //DebugP_log("CLI: ACK not sent (handle=%p, ackPing=%d)\n",
+        // gMmwMssMCB.loggingUartHandle, ackPing);
+    }
+
+    //DebugP_log("CLI: Exit MmwDemo_CLIConfigDataPort\n");
 
     return 0;
 }
@@ -2321,6 +2362,6 @@ void MmwDemo_CLIInit (uint8_t taskPriority)
         test_print ("Error: Unable to open the CLI\n");
         return;
     }
-    test_print ("Debug: CLI is operational\n");
+    //test_print ("Debug: CLI is operational\n");
     return;
 }

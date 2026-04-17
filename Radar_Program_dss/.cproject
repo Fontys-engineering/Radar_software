@@ -59,6 +59,8 @@
                                     <listOptionValue value="${MMWAVE_AWR294X_DFP_INSTALL_PATH}"/>
                                     <listOptionValue value="${PROJECT_ROOT}\dss\dssgenerated"/>
                                     <listOptionValue value="${PROJECT_LOC}"/>
+                                    <listOptionValue value="C:\ti\mmwave_mcuplus_sdk_04_07_02_01\mathlib_c66x_3_1_2_1\packages"/>
+                                    <listOptionValue value="C:\ti\mmwave_mcuplus_sdk_04_07_02_01\mmwave_dfp_02_04_18_01"/>
                                 </option>
                                 <option id="com.ti.ccstudio.buildDefinitions.C6000_8.5.compilerID.DEFINE.747000050" superClass="com.ti.ccstudio.buildDefinitions.C6000_8.5.compilerID.DEFINE" valueType="definedSymbols">
                                     <listOptionValue value="${SYSCONFIG_TOOL_SYMBOLS}"/>
@@ -117,6 +119,9 @@
                                     <listOptionValue value="${MMWAVE_SDK_INSTALL_PATH}/ti/datapath/dpedma/lib"/>
                                     <listOptionValue value="${PROJECT_LOC}"/>
                                     <listOptionValue value="${PROJECT_LOC}/dss/dssgenerated"/>
+                                    <listOptionValue value="C:\ti\mmwave_mcuplus_sdk_04_07_02_01\mmwave_dfp_02_04_18_01\ti\control\mmwavelink\lib"/>
+                                    <listOptionValue value="C:\ti\mmwave_mcuplus_sdk_04_07_02_01\mathlib_c66x_3_1_2_1\packages\ti\mathlib\lib"/>
+                                    <listOptionValue value="C:\ti\mmwave_mcuplus_sdk_04_07_02_01\dsplib_c66x_3_4_0_0\packages\ti\dsplib\lib"/>
                                 </option>
                                 <option id="com.ti.ccstudio.buildDefinitions.C6000_8.5.linkerID.LIBRARY.1159335123" superClass="com.ti.ccstudio.buildDefinitions.C6000_8.5.linkerID.LIBRARY" valueType="libs">
                                     <listOptionValue value="${SYSCONFIG_TOOL_LIBRARIES}"/>

@@ -1,7 +1,7 @@
 ******************************************************************************
                TMS320C6x Linker PC v8.5.0                      
 ******************************************************************************
->> Linked Tue Apr 14 16:43:36 2026
+>> Linked Fri Apr 17 16:51:48 2026
 
 OUTPUT FILE NAME:   <Radar_Program_dss.xe66>
 ENTRY POINT SYMBOL: "_c_int00"  address: 0082aa40
@@ -1267,12 +1267,7 @@ MODULE SUMMARY
     +--+-----------------------------------+--------+---------+---------+
        Total:                              1600     478       3990   
                                                                      
-    C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mathlib_c66x_3_1_2_1/packages/ti/mathlib/lib/mathlib.ae66
-       sqrtsp.oe66                         160      0         0      
-    +--+-----------------------------------+--------+---------+---------+
-       Total:                              160      0         0      
-                                                                     
-    C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/drivers/lib/drivers.awr294x.c66.ti-c6000.release.lib
+    C:/ti/backups/mcu_plus_sdk_awr294x_10_02_00_04/source/drivers/lib/drivers.awr294x.c66.ti-c6000.release.lib
        hwa.obj                             21184    336       553    
        edma.obj                            10112    429       0      
        soc_rcm.obj                         4096     2657      0      
@@ -1288,7 +1283,7 @@ MODULE SUMMARY
     +--+-----------------------------------+--------+---------+---------+
        Total:                              51104    5279      3641   
                                                                      
-    C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/freertos/lib/freertos.awr294x.c66.ti-c6000.release.lib
+    C:/ti/backups/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/freertos/lib/freertos.awr294x.c66.ti-c6000.release.lib
        port_hwi.obj                        320      0         16412  
        tasks.obj                           6528     1733      812    
        queue.obj                           5472     1600      256    
@@ -1320,7 +1315,7 @@ MODULE SUMMARY
     +--+-----------------------------------+--------+---------+---------+
        Total:                              36864    5397      24928  
                                                                      
-    C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/control/dpm/lib/libdpm_awr2944.ae66
+    C:/ti/backups/mmwave_mcuplus_sdk_04_07_02_01/ti/control/dpm/lib/libdpm_awr2944.ae66
        dpm_core.oe66                       2176     180       8321   
        dpm_msg.oe66                        2752     271       0      
        dpm_pipe.oe66                       704      0         0      
@@ -1330,36 +1325,41 @@ MODULE SUMMARY
     +--+-----------------------------------+--------+---------+---------+
        Total:                              6912     451       8353   
                                                                      
-    C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/datapath/dpedma/lib/libdpedma_hwa_awr2944.ae66
+    C:/ti/backups/mmwave_mcuplus_sdk_04_07_02_01/ti/datapath/dpedma/lib/libdpedma_hwa_awr2944.ae66
        dpedma.oe66                         2656     246       0      
        dpedmahwa.oe66                      896      0         0      
     +--+-----------------------------------+--------+---------+---------+
        Total:                              3552     246       0      
                                                                      
-    C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/datapath/dpu/aoaproc/lib/libaoaproc_hwa_awr2944.ae66
+    C:/ti/backups/mmwave_mcuplus_sdk_04_07_02_01/ti/datapath/dpu/aoaproc/lib/libaoaproc_hwa_awr2944.ae66
        aoaprochwa.oe66                     16768    260       2880   
     +--+-----------------------------------+--------+---------+---------+
        Total:                              16768    260       2880   
                                                                      
-    C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/datapath/dpu/cfarproc/lib/libcfarproc_hwa_awr2944.ae66
+    C:/ti/backups/mmwave_mcuplus_sdk_04_07_02_01/ti/datapath/dpu/cfarproc/lib/libcfarproc_hwa_awr2944.ae66
        cfarprochwa.oe66                    4224     185       1248   
     +--+-----------------------------------+--------+---------+---------+
        Total:                              4224     185       1248   
                                                                      
-    C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/datapath/dpu/dopplerproc/lib/libdopplerproc_hwa_awr2944.ae66
+    C:/ti/backups/mmwave_mcuplus_sdk_04_07_02_01/ti/datapath/dpu/dopplerproc/lib/libdopplerproc_hwa_awr2944.ae66
        dopplerprochwa.oe66                 5056     157       1664   
     +--+-----------------------------------+--------+---------+---------+
        Total:                              5056     157       1664   
                                                                      
-    C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/datapath/dpu/rangeproc/lib/librangeproc_hwa_awr2944.ae66
+    C:/ti/backups/mmwave_mcuplus_sdk_04_07_02_01/ti/datapath/dpu/rangeproc/lib/librangeproc_hwa_awr2944.ae66
        rangeprochwa.oe66                   11072    186       1768   
     +--+-----------------------------------+--------+---------+---------+
        Total:                              11072    186       1768   
                                                                      
-    C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/utils/mathutils/lib/libmathutils.ae66
+    C:/ti/backups/mmwave_mcuplus_sdk_04_07_02_01/ti/utils/mathutils/lib/libmathutils.ae66
        mathutils.oe66                      896      0         0      
     +--+-----------------------------------+--------+---------+---------+
        Total:                              896      0         0      
+                                                                     
+    C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mathlib_c66x_3_1_2_1/packages/ti/mathlib/lib/mathlib.ae66
+       sqrtsp.oe66                         160      0         0      
+    +--+-----------------------------------+--------+---------+---------+
+       Total:                              160      0         0      
                                                                      
     C:\ti\ccs2041\ccs\tools\compiler\ti-cgt-c6000_8.5.0.LTS\lib\rts6600_elf.lib
        _printfi.c.obj                      13696    92        0      

@@ -98,12 +98,12 @@
  /* FreeRTOS Task declarations. */
  #define MMWDEMO_INIT_TASK_PRI         (1U) // 1U > 11U
   
- #define MMWDEMO_INIT_TASK_STACK_SIZE  (2*1024U)
- #define MMWDEMO_MMWAVE_CTRL_TASK_STACK_SIZE (2*1024U)
- #define MMWDEMO_DPC_OBJDET_DPM_TASK_STACK_SIZE (2*1024U)
- #define MMWDEMO_UART_DATA_EXPORT_TASK_STACK_SIZE (2*1024U)
+ #define MMWDEMO_INIT_TASK_STACK_SIZE  (4*1024U)
+ #define MMWDEMO_MMWAVE_CTRL_TASK_STACK_SIZE (4*1024U)
+ #define MMWDEMO_DPC_OBJDET_DPM_TASK_STACK_SIZE (4*1024U)
+ #define MMWDEMO_UART_DATA_EXPORT_TASK_STACK_SIZE (4*1024U)
  #ifdef ENET_STREAM
- #define MMWDEMO_MMWAVE_ENET_TASK_STACK_SIZE (2*1024U)
+ #define MMWDEMO_MMWAVE_ENET_TASK_STACK_SIZE (4*1024U)
  #endif
   
  /* Application task stack variables */
@@ -858,20 +858,25 @@
      return errCode;
  }
   
- static void MmwDemo_mmWaveCtrlTask(void* args)
- {
-     int32_t errCode;
-  
-     while (1)
-     {
-         /* Execute the mmWave control module: */
-         if (MMWave_execute (gMmwMssMCB.ctrlHandle, &errCode) < 0)
-         {
-             MmwDemo_debugAssert (0);
-            
-         } DebugP_log("mmWave_execute loop running\n");
-     }
- }
+static void MmwDemo_mmWaveCtrlTask(void* args)
+{
+    int32_t errCode;
+    vTaskDelay(100);
+
+    while (1)
+    {
+        DebugP_log("Execute loop\n");
+
+        if (MMWave_execute(gMmwMssMCB.ctrlHandle, &errCode) < 0)
+        {
+            DebugP_logError("MMWave_execute ERROR: %d\n", errCode);
+            MmwDemo_debugAssert(0);
+        }
+
+        /* CRITICAL: allow other tasks to run */
+        vTaskDelay(1);
+    }
+}
   
  /**************************************************************************
   ******************** Millimeter Wave Demo data path Functions *******************
@@ -1435,7 +1440,7 @@
  static int32_t MmwDemo_eventCallbackFxn(uint8_t devIndex, uint16_t msgId, uint16_t sbId, uint16_t sbLen, uint8_t *payload)
  {
      uint16_t asyncSB = RL_GET_SBID_FROM_UNIQ_SBID(sbId);
-  
+    DebugP_log("MMWAVE EVENT RECEIVED\n");
      /* Process the received message: */
      switch (msgId)
      {
@@ -2232,6 +2237,7 @@
          if ((gMmwMssMCB.ptrResult.size[0]) == sizeof(DPC_ObjectDetection_ExecuteResult)){
              MmwDemo_handleObjectDetResult();
          }
+         vTaskDelay(1);
      }
  }
   
@@ -2252,138 +2258,146 @@
   ******************** Millimeter Wave Demo sensor management Functions **********
   **************************************************************************/
   
- int32_t MmwDemo_openSensor(bool isFirstTimeOpen)
- {
-     int32_t             errCode;
-     MMWave_ErrorLevel   errorLevel;
-     int16_t             mmWaveErrorCode;
-     int16_t             subsysErrorCode;
-     int32_t             retVal;
-     MMWave_CalibrationData     calibrationDataCfg;
-     MMWave_CalibrationData     *ptrCalibrationDataCfg;
-  
-     /*  Open mmWave module, this is only done once */
-     if (isFirstTimeOpen == true)
-     {
-  
-         /**********************************************************
-          **********************************************************/
-  
-         /* Open mmWave module, this is only done once */
-         /* Setup the calibration frequency:*/
-         gMmwMssMCB.cfg.openCfg.freqLimitLow  = 760U;
-         gMmwMssMCB.cfg.openCfg.freqLimitHigh = 810U;
-  
-         /* start/stop async events */
-         gMmwMssMCB.cfg.openCfg.disableFrameStartAsyncEvent = false;
-         gMmwMssMCB.cfg.openCfg.disableFrameStopAsyncEvent  = false;
-  
-         /* No custom calibration: */
-         gMmwMssMCB.cfg.openCfg.useCustomCalibration        = false;
-         gMmwMssMCB.cfg.openCfg.customCalibrationEnableMask = 0x0;
-  
-         /* calibration monitoring base time unit
-          * setting it to one frame duration as the demo doesnt support any
-          * monitoring related functionality
-          */
-         gMmwMssMCB.cfg.openCfg.calibMonTimeUnit            = 1;
-  
-         if( (gMmwMssMCB.calibCfg.saveEnable != 0) &&
-                 (gMmwMssMCB.calibCfg.restoreEnable != 0) )
-         {
-             /* Error: only one can be enabled at at time */
-             test_print ("Error: MmwDemo failed with both save and restore enabled.\n");
-             return -1;
-         }
-  
-         if(gMmwMssMCB.calibCfg.restoreEnable != 0)
-         {
-             if(MmwDemo_calibRestore(&gCalibDataStorage) < 0)
-             {
-                 test_print ("Error: MmwDemo failed restoring calibration data from flash.\n");
-                 return -1;
-             }
-  
-             /*  Boot calibration during restore: Disable calibration for:
-                  - Rx gain,
-                  - Rx IQMM,
-                  - Tx phase shifer,
-                  - Tx Power
-  
-                  The above calibration data will be restored from flash. Since they are calibrated in a control
-                  way to avoid interfaerence and spec violations.
-                  In this demo, other bit fields(except the above) are enabled as indicated in customCalibrationEnableMask to perform boot time
-                  calibration. The boot time calibration will overwrite the restored calibration data from flash.
-                  However other bit fields can be disabled and calibration data can be restored from flash as well.
-  
-                  Note: In this demo, calibration masks are enabled for all bit fields when "saving" the data.
-             */
-             gMmwMssMCB.cfg.openCfg.useCustomCalibration        = true;
-             gMmwMssMCB.cfg.openCfg.customCalibrationEnableMask = 0x1F0U;
-  
-             calibrationDataCfg.ptrCalibData = &gCalibDataStorage.calibData;
-             calibrationDataCfg.ptrPhaseShiftCalibData = &gCalibDataStorage.phaseShiftCalibData;
-             ptrCalibrationDataCfg = &calibrationDataCfg;
-         }
-         else
-         {
-             ptrCalibrationDataCfg = NULL;
-         }
-  
-  
-         /* Open the mmWave module: */
-         if (MMWave_open (gMmwMssMCB.ctrlHandle, &gMmwMssMCB.cfg.openCfg, ptrCalibrationDataCfg, &errCode) < 0)
-         {
-             /* Error: decode and Report the error */
-             MMWave_decodeError (errCode, &errorLevel, &mmWaveErrorCode, &subsysErrorCode);
-             test_print ("Error: mmWave Open failed [Error code: %d Subsystem: %d]\n",
-                             mmWaveErrorCode, subsysErrorCode);
-             return -1;
-         }
-  
-         /* Save calibration data in flash */
-         if(gMmwMssMCB.calibCfg.saveEnable != 0)
-         {
-             retVal = rlRfCalibDataStore(RL_DEVICE_MAP_INTERNAL_BSS, &gCalibDataStorage.calibData);
-             if(retVal != RL_RET_CODE_OK)
-             {
-                 /* Error: Calibration data restore failed */
-                  test_print("MSS demo failed rlRfCalibDataStore with Error[%d]\n", retVal);
-                 return -1;
-             }
-  
-             /* update txIndex in all chunks to get data from all Tx.
-             This should be done regardless of num TX channels enabled in MMWave_OpenCfg_t::chCfg or number of Tx
-             application is interested in. Data for all existing Tx channels should be retrieved
-             from RadarSS and in the order as shown below.
-             RadarSS will return non-zero phase shift values for all the channels enabled via
-             MMWave_OpenCfg_t::chCfg and zero phase shift values for channels disabled in MMWave_OpenCfg_t::chCfg */
-             gCalibDataStorage.phaseShiftCalibData.PhShiftcalibChunk[0].txIndex = 0;
-             gCalibDataStorage.phaseShiftCalibData.PhShiftcalibChunk[1].txIndex = 1;
-             gCalibDataStorage.phaseShiftCalibData.PhShiftcalibChunk[2].txIndex = 2;
-  
-             /* Basic validation passed: Restore the phase shift calibration data */
-             retVal = rlRfPhShiftCalibDataStore(RL_DEVICE_MAP_INTERNAL_BSS, &(gCalibDataStorage.phaseShiftCalibData));
-             if (retVal != RL_RET_CODE_OK)
-             {
-                 /* Error: Phase shift Calibration data restore failed */
-                 test_print("MSS demo failed rlRfPhShiftCalibDataStore with Error[%d]\n", retVal);
-                 return retVal;
-             }
-  
-             /* Save data in flash */
-             retVal = MmwDemo_calibSave(&gMmwMssMCB.calibCfg.calibDataHdr, &gCalibDataStorage);
-             if(retVal < 0)
-             {
-                 return retVal;
-             }
-         }
-  
-         /* Open the datapath modules that runs on MSS */
-         MmwDemo_dataPathOpen();
-     }
-     return 0;
- }
+int32_t MmwDemo_openSensor(bool isFirstTimeOpen)
+{
+    int32_t             errCode = 0;
+    MMWave_ErrorLevel   errorLevel;
+    int16_t             mmWaveErrorCode;
+    int16_t             subsysErrorCode;
+    int32_t             retVal;
+    MMWave_CalibrationData calibrationDataCfg;
+    MMWave_CalibrationData *ptrCalibrationDataCfg;
+
+    //DebugP_log("MMW: >>> Enter MmwDemo_openSensor (firstTime=%d)\n", isFirstTimeOpen);
+
+    if (isFirstTimeOpen == true)
+    {
+        //DebugP_log("MMW: First-time open: configuring openCfg\n");
+
+        /* Frequency limits */
+        gMmwMssMCB.cfg.openCfg.freqLimitLow  = 760U;
+        gMmwMssMCB.cfg.openCfg.freqLimitHigh = 810U;
+
+        // DebugP_log("MMW: freqLow=%u freqHigh=%u\n",
+        //     gMmwMssMCB.cfg.openCfg.freqLimitLow,
+        //     gMmwMssMCB.cfg.openCfg.freqLimitHigh);
+
+        /* Async events */
+        gMmwMssMCB.cfg.openCfg.disableFrameStartAsyncEvent = false;
+        gMmwMssMCB.cfg.openCfg.disableFrameStopAsyncEvent  = false;
+
+        /* Calibration defaults */
+        gMmwMssMCB.cfg.openCfg.useCustomCalibration        = false;
+        gMmwMssMCB.cfg.openCfg.customCalibrationEnableMask = 0x0;
+        gMmwMssMCB.cfg.openCfg.calibMonTimeUnit            = 1;
+
+        // DebugP_log("MMW: Calibration flags: save=%d restore=%d\n",
+        //     gMmwMssMCB.calibCfg.saveEnable,
+        //     gMmwMssMCB.calibCfg.restoreEnable);
+
+        /* Sanity check */
+        if ((gMmwMssMCB.calibCfg.saveEnable != 0) &&
+            (gMmwMssMCB.calibCfg.restoreEnable != 0))
+        {
+            DebugP_logError("MMW: ERROR - both save and restore enabled\n");
+            return -1;
+        }
+
+        /* Calibration restore */
+        if (gMmwMssMCB.calibCfg.restoreEnable != 0)
+        {
+            DebugP_log("MMW: Restoring calibration from flash...\n");
+
+            if (MmwDemo_calibRestore(&gCalibDataStorage) < 0)
+            {
+                DebugP_logError("MMW: Calibration restore FAILED\n");
+                return -1;
+            }
+
+            gMmwMssMCB.cfg.openCfg.useCustomCalibration        = true;
+            gMmwMssMCB.cfg.openCfg.customCalibrationEnableMask = 0x1F0U;
+
+            calibrationDataCfg.ptrCalibData = &gCalibDataStorage.calibData;
+            calibrationDataCfg.ptrPhaseShiftCalibData = &gCalibDataStorage.phaseShiftCalibData;
+            ptrCalibrationDataCfg = &calibrationDataCfg;
+
+            //DebugP_log("MMW: Calibration restore SUCCESS\n");
+        }
+        else
+        {
+            ptrCalibrationDataCfg = NULL;
+        }
+
+        /* ===== CRITICAL CALL ===== */
+        //DebugP_log("MMW: >>> Calling MMWave_open()\n");
+
+        int32_t openRet = MMWave_open(
+            gMmwMssMCB.ctrlHandle,
+            &gMmwMssMCB.cfg.openCfg,
+            ptrCalibrationDataCfg,
+            &errCode
+        );
+
+        DebugP_log("MMW: <<< MMWave_open returned %d (errCode=%d)\n", openRet, errCode);
+
+        if (openRet < 0)
+        {
+            MMWave_decodeError(errCode, &errorLevel, &mmWaveErrorCode, &subsysErrorCode);
+
+            DebugP_logError("MMW: Open FAILED → mmWaveErrorCode=%d, subsys=%d\n",
+                mmWaveErrorCode, subsysErrorCode);
+
+            return -1;
+        }
+
+        DebugP_log("MMW: MMWave_open SUCCESS\n");
+
+        /* Calibration save */
+        if (gMmwMssMCB.calibCfg.saveEnable != 0)
+        {
+            DebugP_log("MMW: Saving calibration data...\n");
+
+            retVal = rlRfCalibDataStore(RL_DEVICE_MAP_INTERNAL_BSS, &gCalibDataStorage.calibData);
+            if (retVal != RL_RET_CODE_OK)
+            {
+                DebugP_logError("MMW: rlRfCalibDataStore FAILED (%d)\n", retVal);
+                return -1;
+            }
+
+            gCalibDataStorage.phaseShiftCalibData.PhShiftcalibChunk[0].txIndex = 0;
+            gCalibDataStorage.phaseShiftCalibData.PhShiftcalibChunk[1].txIndex = 1;
+            gCalibDataStorage.phaseShiftCalibData.PhShiftcalibChunk[2].txIndex = 2;
+
+            retVal = rlRfPhShiftCalibDataStore(
+                RL_DEVICE_MAP_INTERNAL_BSS,
+                &(gCalibDataStorage.phaseShiftCalibData)
+            );
+
+            if (retVal != RL_RET_CODE_OK)
+            {
+                DebugP_logError("MMW: rlRfPhShiftCalibDataStore FAILED (%d)\n", retVal);
+                return -1;
+            }
+
+            if (MmwDemo_calibSave(&gMmwMssMCB.calibCfg.calibDataHdr, &gCalibDataStorage) < 0)
+            {
+                DebugP_logError("MMW: Calibration save to flash FAILED\n");
+                return -1;
+            }
+
+            DebugP_log("MMW: Calibration save SUCCESS\n");
+        }
+
+        /* Data path open */
+        DebugP_log("MMW: Calling MmwDemo_dataPathOpen()\n");
+        MmwDemo_dataPathOpen();
+
+        DebugP_log("MMW: Data path open DONE\n");
+    }
+
+    DebugP_log("MMW: <<< Exit MmwDemo_openSensor\n");
+    return 0;
+}
   
  #ifdef MMWDEMO_DDM
   
@@ -2554,6 +2568,9 @@
  #endif
   
      /* Configure the mmWave module: */
+     DebugP_log("CONFIG: Enter MmwDemo_configSensor\n");
+
+     DebugP_log("CONFIG: Before MMWave_config\n");
      if (MMWave_config (gMmwMssMCB.ctrlHandle, &gMmwMssMCB.cfg.ctrlCfg, &errCode) < 0)
      {
          MMWave_ErrorLevel   errorLevel;
@@ -2568,6 +2585,7 @@
      }
      else
      {
+         DebugP_log("CONFIG: After MMWave_config, errCode=%d\n", errCode);
          errCode = MmwDemo_dataPathConfig();
      }
   
@@ -2965,7 +2983,7 @@
      initCfg.domain                  = MMWave_Domain_MSS;
      initCfg.eventFxn                = MmwDemo_eventCallbackFxn;
      initCfg.linkCRCCfg.crcBaseAddr  = (uint32_t) AddrTranslateP_getLocalAddr(CONFIG_CRC0_BASE_ADDR);
-     initCfg.linkCRCCfg.useCRCDriver = 1U;
+     initCfg.linkCRCCfg.useCRCDriver = 1U; 
      initCfg.linkCRCCfg.crcChannel   = CRC_CHANNEL_1;
      initCfg.cfgMode                 = MMWave_ConfigurationMode_FULL;
   
@@ -2994,40 +3012,9 @@
      }
      test_print ("Debug: mmWave Control Synchronization was successful\n");
   
-     /*****************************************************************************
-      * Launch the mmWave control execution task
-      * - This should have a higher priroity than any other task which uses the
-      *   mmWave control API
-      *****************************************************************************/
-     gMmwMssMCB.taskHandles.mmwCtrlTask = xTaskCreateStatic( MmwDemo_mmWaveCtrlTask,
-                                       "mmwdemo_ctrl_task",
-                                       MMWDEMO_MMWAVE_CTRL_TASK_STACK_SIZE,
-                                       NULL,
-                                       MMWDEMO_MMWAVE_CTRL_TASK_PRIORITY,
-                                       gMmwCtrlTskStack,
-                                       &gMmwMssMCB.taskHandles.mmwCtrlTaskObj );
+
   
-     configASSERT(gMmwMssMCB.taskHandles.mmwCtrlTask != NULL);
-     DebugP_log("CtrTask Done\n");
-  
- #ifdef ENET_STREAM
-    /*****************************************************************************
-      * Launch the mmWave enet task
-      *****************************************************************************/
-     /* Create Enet configuration done semaphore */
-     SemaphoreP_constructBinary(&gMmwMssMCB.enetCfg.EnetCfgDoneSemHandle, 0);
-  
-     gMmwMssMCB.taskHandles.enetTask = xTaskCreateStatic( enetTask,
-                                       "enet_task",
-                                       MMWDEMO_MMWAVE_ENET_TASK_STACK_SIZE,
-                                       NULL,
-                                       MMWDEMO_MMWAVE_ENET_TASK_PRIORITY,
-                                       gMmwEnetTskStack,
-                                       &gMmwMssMCB.taskHandles.enetTaskObj );
-  
-     configASSERT(gMmwMssMCB.taskHandles.enetTask != NULL);
-     DebugP_log("EnetTask Done\n");
- #endif
+ 
   
      /*****************************************************************************
       * Initialization of the DPM Module:
@@ -3118,7 +3105,27 @@
     DebugP_log("UART0 handle=%p (CLI), UART1 handle=%p (DATA)\n",
         gUartHandle[CONFIG_UART0],
         gUartHandle[CONFIG_UART1]);
+    
+#ifdef ENET_STREAM
+    /*****************************************************************************
+      * Launch the mmWave enet task
+      *****************************************************************************/
+     /* Create Enet configuration done semaphore */
+     SemaphoreP_constructBinary(&gMmwMssMCB.enetCfg.EnetCfgDoneSemHandle, 0);
   
+     gMmwMssMCB.taskHandles.enetTask = xTaskCreateStatic( enetTask,
+                                       "enet_task",
+                                       MMWDEMO_MMWAVE_ENET_TASK_STACK_SIZE,
+                                       NULL,
+                                       MMWDEMO_MMWAVE_ENET_TASK_PRIORITY,
+                                       gMmwEnetTskStack,
+                                       &gMmwMssMCB.taskHandles.enetTaskObj );
+  
+     configASSERT(gMmwMssMCB.taskHandles.enetTask != NULL);
+     DebugP_log("EnetTask Done\n");
+ #endif
+
+
      /* Never return for this task. */
      SemaphoreP_pend(&gMmwMssMCB.demoInitTaskCompleteSemHandle, SystemP_WAIT_FOREVER);
   

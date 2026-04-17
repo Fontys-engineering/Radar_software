@@ -25,6 +25,11 @@
 			<location>C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/lwip/lwip-config/awr294x/lwipopts.h</location>
 		</link>
 		<link>
+			<name>utils/cli_mmwave.c</name>
+			<type>1</type>
+			<location>C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/utils/cli/src/cli_mmwave.c</location>
+		</link>
+		<link>
 			<name>utils/enet_apputils.c</name>
 			<type>1</type>
 			<locationURI>COM_TI_MCU_PLUS_SDK_AWR294X_INSTALL_DIR/source/networking/enet/utils/enet_apputils.c</locationURI>
@@ -38,6 +43,51 @@
 			<name>utils/enet_stream.c</name>
 			<type>1</type>
 			<location>C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/demo/utils/enet_stream.c</location>
+		</link>
+		<link>
+			<name>utils/mmwave.c</name>
+			<type>1</type>
+			<location>C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/control/mmwave/src/mmwave.c</location>
+		</link>
+		<link>
+			<name>utils/mmwave_fullcfg.c</name>
+			<type>1</type>
+			<location>C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/control/mmwave/src/mmwave_fullcfg.c</location>
+		</link>
+		<link>
+			<name>utils/mmwave_link_common.c</name>
+			<type>1</type>
+			<location>C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/control/mmwave/src/mmwave_link_common.c</location>
+		</link>
+		<link>
+			<name>utils/mmwave_link_mailbox.c</name>
+			<type>1</type>
+			<location>C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/control/mmwave/src/mmwave_link_mailbox.c</location>
+		</link>
+		<link>
+			<name>utils/rl_controller.c</name>
+			<type>1</type>
+			<location>C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_dfp_02_04_18_01/ti/control/mmwavelink/src/rl_controller.c</location>
+		</link>
+		<link>
+			<name>utils/rl_device.c</name>
+			<type>1</type>
+			<location>C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_dfp_02_04_18_01/ti/control/mmwavelink/src/rl_device.c</location>
+		</link>
+		<link>
+			<name>utils/rl_driver.c</name>
+			<type>1</type>
+			<location>C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_dfp_02_04_18_01/ti/control/mmwavelink/src/rl_driver.c</location>
+		</link>
+		<link>
+			<name>utils/rl_monitoring.c</name>
+			<type>1</type>
+			<location>C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_dfp_02_04_18_01/ti/control/mmwavelink/src/rl_monitoring.c</location>
+		</link>
+		<link>
+			<name>utils/rl_sensor.c</name>
+			<type>1</type>
+			<location>C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_dfp_02_04_18_01/ti/control/mmwavelink/src/rl_sensor.c</location>
 		</link>
 		<link>
 			<name>utils/tasks.c</name>
@@ -60,7 +110,7 @@
 		</variable>
 		<variable>
 			<name>MMWAVE_AWR294X_DFP_INSTALL_PATH</name>
-			<value>$%7BPARENT-1-COM_TI_MMWAVE_MCUPLUS_SDK_INSTALL_DIR%7D/mmwave_dfp_02_04_18_01</value>
+			<value>file:/C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_dfp_02_04_18_01</value>
 		</variable>
 		<variable>
 			<name>MMWAVE_SDK_INSTALL_PATH</name>

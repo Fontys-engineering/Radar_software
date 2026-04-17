@@ -37,6 +37,7 @@ const mpu_armv76 = mpu_armv7.addInstance();
 const enet_cpsw  = scripting.addModule("/networking/enet_cpsw/enet_cpsw", {}, false);
 const enet_cpsw1 = enet_cpsw.addInstance();
 
+
 /**
  * Write custom configuration values to the imported modules.
  */
@@ -55,10 +56,10 @@ esm1.esmNotifier[0].errorNumber             = 18;
 esm1.esmNotifier[0].enableInfluenceOnErrPin = false;
 esm1.esmNotifier[0].notify                  = "MmwDemo_mssSECCallBack";
 
-ipc.r5fss0_1     = "NONE";
 ipc.vringNumBuf  = 1;
 ipc.vringMsgSize = 1152;
 ipc.intrPriority = 12;
+ipc.r5fss0_1     = "NONE";
 
 uart1.$name           = "CONFIG_UART1";
 uart1.baudRate        = 3125000;

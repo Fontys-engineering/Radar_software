@@ -10,7 +10,7 @@
 --retain="*(.abortStack)"
 --retain="*(.undStack)"
 --retain="*(.svcStack)"
--stack  0x2000                              /* SOFTWARE STACK SIZE           */
+-stack  0x4000                              /* SOFTWARE STACK SIZE           */
 -heap   0x4000                              /* HEAP AREA SIZE                */
 
 -e_vectors  /* Entry point */
