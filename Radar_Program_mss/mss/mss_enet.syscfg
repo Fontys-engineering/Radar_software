@@ -99,9 +99,6 @@ edma1.edmaRmReservedDmaCh[0].$name      = "CONFIG_EDMA_RM4";
 edma1.edmaRmReservedDmaCh[0].startIndex = 0;
 edma1.edmaRmReservedDmaCh[0].endIndex   = 0;
 
-debug_log.enableSharedMemLogReader = true;
-debug_log.enableSharedMemLog       = true;
-
 mpu_armv71.$name        = "CONFIG_MPU_REGION0";
 mpu_armv71.attributes   = "Device";
 mpu_armv71.allowExecute = false;
