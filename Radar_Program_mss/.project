@@ -47,7 +47,7 @@
 		<link>
 			<name>utils/mailbox.c</name>
 			<type>1</type>
-			<location>C:/ti/backups/mcu_plus_sdk_awr294x_10_02_00_04/source/drivers/mailbox/v0/mailbox.c</location>
+			<locationURI>MCU_PLUS_SDK_PATH/source/drivers/mailbox/v0/mailbox.c</locationURI>
 		</link>
 		<link>
 			<name>utils/mmwave.c</name>
@@ -97,7 +97,7 @@
 		<link>
 			<name>utils/tasks.c</name>
 			<type>1</type>
-			<locationURI>COM_TI_MCU_PLUS_SDK_AWR294X_INSTALL_DIR/source/kernel/freertos/FreeRTOS-Kernel/tasks.c</locationURI>
+			<locationURI>MCU_PLUS_SDK_PATH/source/kernel/freertos/FreeRTOS-Kernel/tasks.c</locationURI>
 		</link>
 	</linkedResources>
 	<variableList>
@@ -111,7 +111,7 @@
 		</variable>
 		<variable>
 			<name>MCU_PLUS_SDK_PATH</name>
-			<value>$%7BCOM_TI_MCU_PLUS_SDK_AWR294X_INSTALL_DIR%7D</value>
+			<value>file:/C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04</value>
 		</variable>
 		<variable>
 			<name>MMWAVE_AWR294X_DFP_INSTALL_PATH</name>
@@ -119,7 +119,7 @@
 		</variable>
 		<variable>
 			<name>MMWAVE_SDK_INSTALL_PATH</name>
-			<value>$%7BCOM_TI_MMWAVE_MCUPLUS_SDK_INSTALL_DIR%7D</value>
+			<value>file:/C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01</value>
 		</variable>
 		<variable>
 			<name>NETWORK_PATH</name>

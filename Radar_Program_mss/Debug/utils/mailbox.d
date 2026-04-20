@@ -1,8 +1,8 @@
 # FIXED
 
 utils/mailbox.o: \
- C:/ti/backups/mcu_plus_sdk_awr294x_10_02_00_04/source/drivers/mailbox/v0/mailbox.c \
- C:/ti/backups/mcu_plus_sdk_awr294x_10_02_00_04/source/drivers/mailbox/v0/mailbox_priv.h \
+ C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/drivers/mailbox/v0/mailbox.c \
+ C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/drivers/mailbox/v0/mailbox_priv.h \
  C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/dpl/SemaphoreP.h \
  C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/dpl/SystemP.h \
  C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/dpl/DebugP.h \
@@ -63,7 +63,7 @@ utils/mailbox.o: \
  C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/drivers/mailbox/v0/mailbox.h \
  C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/dpl/HwiP.h \
  C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/dpl/HwiP_arm.h
-C:/ti/backups/mcu_plus_sdk_awr294x_10_02_00_04/source/drivers/mailbox/v0/mailbox_priv.h:
+C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/drivers/mailbox/v0/mailbox_priv.h:
 C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/dpl/SemaphoreP.h:
 C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/dpl/SystemP.h:
 C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/dpl/DebugP.h:

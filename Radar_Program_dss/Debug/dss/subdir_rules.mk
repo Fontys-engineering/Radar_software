@@ -13,7 +13,7 @@ dss/%.obj: ../dss/%.c $(GEN_OPTS) | $(GEN_FILES) $(GEN_MISC_FILES)
 
 build-1834832370: ../dss/dss.syscfg
 	@echo 'SysConfig - building file: "$<"'
-	"C:/ti/sysconfig_1.23.0/sysconfig_cli.bat" -s "C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/.metadata/product.json" -p "LOP" -r "Default" --script "C:/Git/Radar_software/Radar_Program_dss/dss/dss.syscfg" --context "c66ss0" -o "C:/Git/Radar_software/Radar_Program_dss/dss/dssgenerated" --compiler ccs
+	"C:/ti/sysconfig_1.23.0/sysconfig_cli.bat" -s "C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/.metadata/product.json" -s "C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/.metadata/product.json" -p "LOP" -r "Default" --script "C:/Git/Radar_software/Radar_Program_dss/dss/dss.syscfg" --context "c66ss0" -o "C:/Git/Radar_software/Radar_Program_dss/dss/dssgenerated" --compiler ccs
 	@echo 'Finished building: "$<"'
 	@echo ' '
 

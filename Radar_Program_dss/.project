@@ -32,15 +32,15 @@
 		</variable>
 		<variable>
 			<name>MCU_PLUS_SDK_PATH</name>
-			<value>$%7BCOM_TI_MCU_PLUS_SDK_AWR294X_INSTALL_DIR%7D</value>
+			<value>file:/C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04</value>
 		</variable>
 		<variable>
 			<name>MMWAVE_AWR294X_DFP_INSTALL_PATH</name>
-			<value>$%7BPARENT-1-COM_TI_MMWAVE_MCUPLUS_SDK_INSTALL_DIR%7D/mmwave_dfp_02_04_18_01</value>
+			<value>file:/C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_dfp_02_04_18_01</value>
 		</variable>
 		<variable>
 			<name>MMWAVE_SDK_INSTALL_PATH</name>
-			<value>$%7BCOM_TI_MMWAVE_MCUPLUS_SDK_INSTALL_DIR%7D</value>
+			<value>file:/C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01</value>
 		</variable>
 	</variableList>
 </projectDescription>

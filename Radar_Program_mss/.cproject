@@ -12,7 +12,7 @@
                     <stringMacro name="MMWAVE_AWR294X_DFP_INSTALL_PATH" type="VALUE_PATH_ANY" value="C:\ti\mmwave_mcuplus_sdk_04_07_02_01\mmwave_dfp_02_04_18_01"/>
                     <stringMacro name="PROJECT_ROOT" type="VALUE_PATH_DIR" value="C:/Git/Radar_software/${ProjName}"/>
                     <stringListMacro name="COM_TI_MCU_PLUS_SDK_AWR294X_LIBRARY_PATH" type="VALUE_PATH_DIR_LIST"/>
-                    <stringMacro name="MCU_PLUS_SDK_PATH" type="VALUE_PATH_ANY" value="${COM_TI_MCU_PLUS_SDK_AWR294X_INSTALL_DIR}"/>
+                    <stringMacro name="MCU_PLUS_SDK_PATH" type="VALUE_PATH_ANY" value="C:\ti\mmwave_mcuplus_sdk_04_07_02_01\mcu_plus_sdk_awr294x_10_02_00_04"/>
                     <stringMacro name="COM_TI_MCU_PLUS_SDK_AWR294X_INSTALL_DIR" type="VALUE_PATH_DIR" value="C:\ti\mmwave_mcuplus_sdk_04_07_02_01\mcu_plus_sdk_awr294x_10_02_00_04"/>
                     <stringListMacro name="INHERITED_SYSCONFIG_MANIFESTS" type="VALUE_PATH_FILE_LIST">
                         <value name="C:\ti\mmwave_mcuplus_sdk_04_07_02_01\mcu_plus_sdk_awr294x_10_02_00_04\.metadata\product.json"/>
@@ -24,7 +24,7 @@
                     <stringMacro name="COM_TI_MMWAVE_MCUPLUS_SDK_INSTALL_DIR" type="VALUE_PATH_ANY" value="C:\ti\mmwave_mcuplus_sdk_04_07_02_01\mmwave_mcuplus_sdk_04_07_02_01"/>
                     <stringListMacro name="COM_TI_MCU_PLUS_SDK_AWR294X_INCLUDE_PATH" type="VALUE_PATH_DIR_LIST"/>
                     <stringMacro name="COM_TI_MCU_PLUS_SDK_AWR294X_SYSCONFIG_MANIFEST" type="VALUE_PATH_FILE" value="C:\ti\mmwave_mcuplus_sdk_04_07_02_01\mcu_plus_sdk_awr294x_10_02_00_04\.metadata\product.json"/>
-                    <stringMacro name="MMWAVE_SDK_INSTALL_PATH" type="VALUE_PATH_ANY" value="${COM_TI_MMWAVE_MCUPLUS_SDK_INSTALL_DIR}"/>
+                    <stringMacro name="MMWAVE_SDK_INSTALL_PATH" type="VALUE_PATH_ANY" value="C:\ti\mmwave_mcuplus_sdk_04_07_02_01\mmwave_mcuplus_sdk_04_07_02_01"/>
                     <stringMacro name="PROJECT_LOC" type="VALUE_PATH_ANY" value="C:/Git/Radar_software/${ProjName}"/>
                     <stringMacro name="CCS_PROJECT_DIR" type="VALUE_TEXT" value="C:\Git\Radar_software\Radar_Program_mss"/>
                     <stringMacro name="PWD" type="VALUE_TEXT" value="C:\Git\Radar_software\${ProjName}\Debug"/>

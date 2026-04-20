@@ -12,7 +12,7 @@ C:/ti/backups/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/utils/enet
 C:/ti/backups/mmwave_mcuplus_sdk_04_07_02_01/ti/demo/utils/enet_cpswconfighandler.c \
 C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/demo/utils/enet_stream.c \
 ../utils/enet_tcpclient.c \
-C:/ti/backups/mcu_plus_sdk_awr294x_10_02_00_04/source/drivers/mailbox/v0/mailbox.c \
+C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/drivers/mailbox/v0/mailbox.c \
 C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/control/mmwave/src/mmwave.c \
 C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/control/mmwave/src/mmwave_fullcfg.c \
 C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/control/mmwave/src/mmwave_link_common.c \
@@ -26,7 +26,7 @@ C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_dfp_02_04_18_01/ti/control/mmwavelin
 C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_dfp_02_04_18_01/ti/control/mmwavelink/src/rl_driver.c \
 C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_dfp_02_04_18_01/ti/control/mmwavelink/src/rl_monitoring.c \
 C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_dfp_02_04_18_01/ti/control/mmwavelink/src/rl_sensor.c \
-C:/ti/backups/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/freertos/FreeRTOS-Kernel/tasks.c 
+C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/freertos/FreeRTOS-Kernel/tasks.c 
 
 C_DEPS += \
 ./utils/TaskP_freertos.d \
@@ -127,7 +127,7 @@ C_SRCS__QUOTED += \
 "C:/ti/backups/mmwave_mcuplus_sdk_04_07_02_01/ti/demo/utils/enet_cpswconfighandler.c" \
 "C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/demo/utils/enet_stream.c" \
 "../utils/enet_tcpclient.c" \
-"C:/ti/backups/mcu_plus_sdk_awr294x_10_02_00_04/source/drivers/mailbox/v0/mailbox.c" \
+"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/drivers/mailbox/v0/mailbox.c" \
 "C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/control/mmwave/src/mmwave.c" \
 "C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/control/mmwave/src/mmwave_fullcfg.c" \
 "C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/control/mmwave/src/mmwave_link_common.c" \
@@ -141,6 +141,6 @@ C_SRCS__QUOTED += \
 "C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_dfp_02_04_18_01/ti/control/mmwavelink/src/rl_driver.c" \
 "C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_dfp_02_04_18_01/ti/control/mmwavelink/src/rl_monitoring.c" \
 "C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_dfp_02_04_18_01/ti/control/mmwavelink/src/rl_sensor.c" \
-"C:/ti/backups/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/freertos/FreeRTOS-Kernel/tasks.c" 
+"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/freertos/FreeRTOS-Kernel/tasks.c" 
 
 
