@@ -139,10 +139,6 @@ void System_deinit(void);
 #define CONFIG_UART_NUM_INSTANCES (2U)
 #define CONFIG_UART_NUM_DMA_INSTANCES (0U)
 
-/* ENET MACROS */
-
-
-
 #include <drivers/soc.h>
 #include <kernel/dpl/CycleCounterP.h>
 

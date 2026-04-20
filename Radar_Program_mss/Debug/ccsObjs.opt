@@ -22,6 +22,7 @@
 "./utils/enet_cpswconfighandler.o"
 "./utils/enet_stream.o"
 "./utils/enet_tcpclient.o"
+"./utils/ipc_notify_v1.o"
 "./utils/mailbox.o"
 "./utils/mmwave.o"
 "./utils/mmwave_fullcfg.o"

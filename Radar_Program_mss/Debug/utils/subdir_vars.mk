@@ -12,6 +12,7 @@ C:/ti/backups/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/utils/enet
 C:/ti/backups/mmwave_mcuplus_sdk_04_07_02_01/ti/demo/utils/enet_cpswconfighandler.c \
 C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/demo/utils/enet_stream.c \
 ../utils/enet_tcpclient.c \
+C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/drivers/ipc_notify/v1/ipc_notify_v1.c \
 C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/drivers/mailbox/v0/mailbox.c \
 C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/control/mmwave/src/mmwave.c \
 C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/control/mmwave/src/mmwave_fullcfg.c \
@@ -35,6 +36,7 @@ C_DEPS += \
 ./utils/enet_cpswconfighandler.d \
 ./utils/enet_stream.d \
 ./utils/enet_tcpclient.d \
+./utils/ipc_notify_v1.d \
 ./utils/mailbox.d \
 ./utils/mmwave.d \
 ./utils/mmwave_fullcfg.d \
@@ -58,6 +60,7 @@ OBJS += \
 ./utils/enet_cpswconfighandler.o \
 ./utils/enet_stream.o \
 ./utils/enet_tcpclient.o \
+./utils/ipc_notify_v1.o \
 ./utils/mailbox.o \
 ./utils/mmwave.o \
 ./utils/mmwave_fullcfg.o \
@@ -81,6 +84,7 @@ OBJS__QUOTED += \
 "utils\enet_cpswconfighandler.o" \
 "utils\enet_stream.o" \
 "utils\enet_tcpclient.o" \
+"utils\ipc_notify_v1.o" \
 "utils\mailbox.o" \
 "utils\mmwave.o" \
 "utils\mmwave_fullcfg.o" \
@@ -104,6 +108,7 @@ C_DEPS__QUOTED += \
 "utils\enet_cpswconfighandler.d" \
 "utils\enet_stream.d" \
 "utils\enet_tcpclient.d" \
+"utils\ipc_notify_v1.d" \
 "utils\mailbox.d" \
 "utils\mmwave.d" \
 "utils\mmwave_fullcfg.d" \
@@ -127,6 +132,7 @@ C_SRCS__QUOTED += \
 "C:/ti/backups/mmwave_mcuplus_sdk_04_07_02_01/ti/demo/utils/enet_cpswconfighandler.c" \
 "C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/demo/utils/enet_stream.c" \
 "../utils/enet_tcpclient.c" \
+"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/drivers/ipc_notify/v1/ipc_notify_v1.c" \
 "C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/drivers/mailbox/v0/mailbox.c" \
 "C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/control/mmwave/src/mmwave.c" \
 "C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/control/mmwave/src/mmwave_fullcfg.c" \
