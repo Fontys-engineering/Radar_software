@@ -13,7 +13,7 @@ mss/%.o: ../mss/%.c $(GEN_OPTS) | $(GEN_FILES) $(GEN_MISC_FILES)
 
 build-78371319: ../mss/mss.syscfg
 	@echo 'SysConfig - building file: "$<"'
-	"C:/ti/sysconfig_1.23.0/sysconfig_cli.bat" -s "C:/ti/backups/mcu_plus_sdk_awr294x_10_02_00_04/.metadata/product.json" -p "LOP" -r "Default" --script "C:/Git/Radar_software/Radar_Program_mss/mss/mss.syscfg" --context "r5fss0-0" -o "C:/Git/Radar_software/Radar_Program_mss/mss/mssgenerated" --compiler ticlang
+	"C:/ti/sysconfig_1.23.0/sysconfig_cli.bat" -s "C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/.metadata/product.json" -p "LOP" -r "Default" --script "C:/Git/Radar_software/Radar_Program_mss/mss/mss.syscfg" --context "r5fss0-0" -o "C:/Git/Radar_software/Radar_Program_mss/mss/mssgenerated" --compiler ticlang
 	@echo 'Finished building: "$<"'
 	@echo ' '
 
@@ -105,7 +105,7 @@ mss/mssgenerated/ti_enet_lwipif.o: C:/Git/Radar_software/Radar_Program_mss/mss/m
 
 build-1138162086: ../mss/mss_enet.syscfg
 	@echo 'SysConfig - building file: "$<"'
-	"C:/ti/sysconfig_1.23.0/sysconfig_cli.bat" -s "C:/ti/backups/mcu_plus_sdk_awr294x_10_02_00_04/.metadata/product.json" -p "LOP" -r "Default" --script "C:/Git/Radar_software/Radar_Program_mss/mss/mss_enet.syscfg" --context "r5fss0-0" -o "C:/Git/Radar_software/Radar_Program_mss/mss/mssgenerated" --compiler ticlang
+	"C:/ti/sysconfig_1.23.0/sysconfig_cli.bat" -s "C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/.metadata/product.json" -p "LOP" -r "Default" --script "C:/Git/Radar_software/Radar_Program_mss/mss/mss_enet.syscfg" --context "r5fss0-0" -o "C:/Git/Radar_software/Radar_Program_mss/mss/mssgenerated" --compiler ticlang
 	@echo 'Finished building: "$<"'
 	@echo ' '
 

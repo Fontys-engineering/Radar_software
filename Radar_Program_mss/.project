@@ -45,6 +45,11 @@
 			<location>C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/demo/utils/enet_stream.c</location>
 		</link>
 		<link>
+			<name>utils/mailbox.c</name>
+			<type>1</type>
+			<location>C:/ti/backups/mcu_plus_sdk_awr294x_10_02_00_04/source/drivers/mailbox/v0/mailbox.c</location>
+		</link>
+		<link>
 			<name>utils/mmwave.c</name>
 			<type>1</type>
 			<location>C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/control/mmwave/src/mmwave.c</location>
