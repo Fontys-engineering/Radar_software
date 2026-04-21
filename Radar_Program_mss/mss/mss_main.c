@@ -2426,6 +2426,7 @@ static int32_t MmwDemo_eventCallbackFxn(uint8_t devIndex, uint16_t msgId, uint16
                 }
                 case RL_RF_AE_FRAME_TRIGGER_RDY_SB:
                 {
+                    //DebugP_log("Frame Trigger\n");
                     gMmwMssMCB.stats.frameTriggerReady++;
                     break;
                 }
@@ -3259,6 +3260,7 @@ void mmwDemo_mssUartDataExportTask(void* args)
 
     while (1)
     {
+        //DebugP_log("UART TX\n");
         /* Export the Data: */
         SemaphoreP_pend(&gMmwMssMCB.UartExportSemHandle, SystemP_WAIT_FOREVER);
         if ((gMmwMssMCB.ptrResult.size[0]) == sizeof(DPC_ObjectDetection_ExecuteResult)){
