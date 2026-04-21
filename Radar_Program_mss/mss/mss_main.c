@@ -861,8 +861,6 @@
 static void MmwDemo_mmWaveCtrlTask(void* args)
 {
     int32_t errCode;
-    vTaskDelay(100);
-
     while (1)
     {
         DebugP_log("Execute loop\n");
@@ -2987,6 +2985,27 @@ int32_t MmwDemo_openSensor(bool isFirstTimeOpen)
      initCfg.linkCRCCfg.crcChannel   = CRC_CHANNEL_1;
      initCfg.cfgMode                 = MMWave_ConfigurationMode_FULL;
   
+
+
+    #ifdef ENET_STREAM
+    /*****************************************************************************
+      * Launch the mmWave enet task
+      *****************************************************************************/
+     /* Create Enet configuration done semaphore */
+     SemaphoreP_constructBinary(&gMmwMssMCB.enetCfg.EnetCfgDoneSemHandle, 0);
+  
+     gMmwMssMCB.taskHandles.enetTask = xTaskCreateStatic( enetTask,
+                                       "enet_task",
+                                       MMWDEMO_MMWAVE_ENET_TASK_STACK_SIZE,
+                                       NULL,
+                                       MMWDEMO_MMWAVE_ENET_TASK_PRIORITY,
+                                       gMmwEnetTskStack,
+                                       &gMmwMssMCB.taskHandles.enetTaskObj );
+  
+     configASSERT(gMmwMssMCB.taskHandles.enetTask != NULL);
+     DebugP_log("EnetTask Done\n");
+ #endif
+
      /* Initialize and setup the mmWave Control module */
      gMmwMssMCB.ctrlHandle = MMWave_init (&initCfg, &errCode);
      if (gMmwMssMCB.ctrlHandle == NULL)
@@ -3013,7 +3032,15 @@ int32_t MmwDemo_openSensor(bool isFirstTimeOpen)
      test_print ("Debug: mmWave Control Synchronization was successful\n");
   
 
-  
+        gMmwMssMCB.taskHandles.mmwCtrlTask = xTaskCreateStatic( MmwDemo_mmWaveCtrlTask,
+                                      "mmwdemo_ctrl_task",
+                                      MMWDEMO_MMWAVE_CTRL_TASK_STACK_SIZE,
+                                      NULL,
+                                      MMWDEMO_MMWAVE_CTRL_TASK_PRIORITY,
+                                      gMmwCtrlTskStack,
+                                      &gMmwMssMCB.taskHandles.mmwCtrlTaskObj );
+
+    configASSERT(gMmwMssMCB.taskHandles.mmwCtrlTask != NULL);
  
   
      /*****************************************************************************
@@ -3106,24 +3133,7 @@ int32_t MmwDemo_openSensor(bool isFirstTimeOpen)
         gUartHandle[CONFIG_UART0],
         gUartHandle[CONFIG_UART1]);
     
-#ifdef ENET_STREAM
-    /*****************************************************************************
-      * Launch the mmWave enet task
-      *****************************************************************************/
-     /* Create Enet configuration done semaphore */
-     SemaphoreP_constructBinary(&gMmwMssMCB.enetCfg.EnetCfgDoneSemHandle, 0);
-  
-     gMmwMssMCB.taskHandles.enetTask = xTaskCreateStatic( enetTask,
-                                       "enet_task",
-                                       MMWDEMO_MMWAVE_ENET_TASK_STACK_SIZE,
-                                       NULL,
-                                       MMWDEMO_MMWAVE_ENET_TASK_PRIORITY,
-                                       gMmwEnetTskStack,
-                                       &gMmwMssMCB.taskHandles.enetTaskObj );
-  
-     configASSERT(gMmwMssMCB.taskHandles.enetTask != NULL);
-     DebugP_log("EnetTask Done\n");
- #endif
+
 
 
      /* Never return for this task. */
