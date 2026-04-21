@@ -55,10 +55,12 @@ esm1.esmNotifier[0].errorNumber             = 18;
 esm1.esmNotifier[0].enableInfluenceOnErrPin = false;
 esm1.esmNotifier[0].notify                  = "MmwDemo_mssSECCallBack";
 
-ipc.vringNumBuf  = 1;
-ipc.vringMsgSize = 1152;
-ipc.intrPriority = 12;
-ipc.r5fss0_1     = "NONE";
+ipc.vringNumBuf                = 1;
+ipc.vringMsgSize               = 1152;
+ipc.intrPriority               = 12;
+ipc.r5fss0_1                   = "notify";
+ipc.rx_mailbox_offset_c66ss0   = 1280;
+ipc.rx_mailbox_offset_r5fss0_1 = 2304;
 
 uart1.$name           = "CONFIG_UART1";
 uart1.baudRate        = 3125000;

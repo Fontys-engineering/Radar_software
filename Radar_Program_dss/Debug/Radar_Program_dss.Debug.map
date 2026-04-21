@@ -1,7 +1,7 @@
 ******************************************************************************
                TMS320C6x Linker PC v8.5.0                      
 ******************************************************************************
->> Linked Mon Apr 20 14:47:06 2026
+>> Linked Tue Apr 21 13:25:32 2026
 
 OUTPUT FILE NAME:   <Radar_Program_dss.xe66>
 ENTRY POINT SYMBOL: "_c_int00"  address: 00830e80
@@ -11,7 +11,7 @@ MEMORY CONFIGURATION
 
          name            origin    length      used     unused   attr    fill
 ----------------------  --------  ---------  --------  --------  ----  --------
-  DSS_L2                00800000   00060000  0005dff8  00002008  RWIX
+  DSS_L2                00800000   00060000  0005e018  00001fe8  RWIX
   HWA_RAM               82000000   00020000  00000000  00020000  RWIX
   DSS_L3                88000000   00280000  00180000  00100000  RWIX
   RTOS_NORTOS_IPC_SHM_M c5000200   00001d40  00000980  000013c0  RWIX
@@ -21,9 +21,9 @@ SEGMENT ALLOCATION MAP
 
 run origin  load origin   length   init length attrs members
 ----------  ----------- ---------- ----------- ----- -------
-00800000    00800000    000355a0   000355a0    r-x
+00800000    00800000    000355c0   000355c0    r-x
   00800000    00800000    00000200   00000200    r-x .text:vectors
-  00800200    00800200    000353a0   000353a0    r-x .text
+  00800200    00800200    000353c0   000353c0    r-x .text
 008355c0    008355c0    00013440   00000000    rw-
   008355c0    008355c0    00013440   00000000    rw- .far
 00848a00    00848a00    00000268   00000268    r--
@@ -59,7 +59,7 @@ section   page    origin      length       input sections
 *          0    00800000    00000200     
                   00800000    00000200     freertos.awr294x.c66.ti-c6000.debug.lib : port_hwi_vectors_freertos_asm.obj (.text:vectors)
 
-.text      0    00800200    000353a0     
+.text      0    00800200    000353c0     
                   00800200    00002000     rts6600_elf.lib : _printfi.c.obj (.text:__TI_printfi:__TI_printfi)
                   00802200    00001360     drivers.awr294x.c66.ti-c6000.debug.lib : hwa.obj (.text:HWA_configCommon)
                   00803560    00001300                                            : hwa.obj (.text:HWA_configParamSet)
@@ -608,155 +608,155 @@ section   page    origin      length       input sections
                   00833c40    00000040                                             : HwiP_c66_handlers_freertos.obj (.text:HwiP_intcReservedDispatcher)
                   00833c80    00000040                                             : port_hwi.obj (.text:Hwi_Module_startup)
                   00833cc0    00000040                                             : port_hwi.obj (.text:Hwi_getIsrStackAddress)
-                  00833d00    00000040     drivers.awr294x.c66.ti-c6000.debug.lib : ipc_notify_v1.obj (.text:IpcNotify_isCoreEnabled)
-                  00833d40    00000040                                            : ipc_notify_v1.obj (.text:IpcNotify_mailboxClearAllInt)
-                  00833d80    00000040                                            : ipc_notify_v1.obj (.text:IpcNotify_mailboxClearPendingIntr)
-                  00833dc0    00000040                                            : ipc_notify_v1_cfg.obj (.text:IpcNotify_wait)
-                  00833e00    00000040                                            : mailbox.obj (.text:Mailbox_isCoreEnabled)
-                  00833e40    00000040     dss_main.obj (.text:MmwDemo_dssSECCallBack)
-                  00833e80    00000040     ti_pinmux_config.obj (.text:Pinmux_init)
-                  00833ec0    00000040     drivers.awr294x.c66.ti-c6000.debug.lib : ipc_rpmsg.obj (.text:RPMessage_CreateParams_init)
-                  00833f00    00000040                                            : soc_rcm.obj (.text:SOC_rcmGetFixedRootClkFout)
-                  00833f40    00000040                                            : soc_rcm.obj (.text:SOC_rcmGetHSDivClkSrc)
-                  00833f80    00000040                                            : soc_rcm.obj (.text:SOC_rcmGetHwaIPVer)
-                  00833fc0    00000040                                            : soc_rcm.obj (.text:SOC_rcmGetPeripheralClockFrequency)
-                  00834000    00000040     freertos.awr294x.c66.ti-c6000.debug.lib : SemaphoreP_freertos.obj (.text:SemaphoreP_destruct)
-                  00834040    00000040                                             : TaskP_freertos.obj (.text:TaskP_calcCounterDiff)
-                  00834080    00000040                                             : port.obj (.text:Task_Func)
-                  008340c0    00000040                                             : TimerP_rti.obj (.text:TimerP_clearOverflowInt)
-                  00834100    00000040                                             : TimerP_rti.obj (.text:TimerP_getReloadCount)
-                  00834140    00000040                                             : TimerP_rti.obj (.text:TimerP_start)
-                  00834180    00000040                                             : TimerP_rti.obj (.text:TimerP_stop)
-                  008341c0    00000040                                             : DebugP_log.obj (.text:_DebugP_assertNoLog)
-                  00834200    00000040                                             : port_tasksupport.obj (.text:_TaskSupport_buildTaskStack)
-                  00834240    00000040     rts6600_elf.lib : isinf.c.obj (.text:__c6xabi_isinf)
-                  00834280    00000040                     : strasg.asm.obj (.text:__strasgi_64plus)
-                  008342c0    00000040                     : args_main.c.obj (.text:_args_main)
-                  00834300    00000040     freertos.awr294x.c66.ti-c6000.debug.lib : printf.obj (.text:_out_char)
-                  00834340    00000040     libmathutils.ae66 : mathutils.oe66 (.text:mathUtils_ceilLog2)
-                  00834380    00000040                       : mathutils.oe66 (.text:mathUtils_floorLog2)
-                  008343c0    00000040     rts6600_elf.lib : memccpy.c.obj (.text:memccpy)
-                  00834400    00000040     freertos.awr294x.c66.ti-c6000.debug.lib : queue.obj (.text:prvGetDisinheritPriorityAfterTimeout)
-                  00834440    00000040                                             : queue.obj (.text:prvInitialiseMutex)
-                  00834480    00000040                                             : queue.obj (.text:prvIsQueueEmpty)
-                  008344c0    00000040                                             : tasks.obj (.text:prvResetNextTaskUnblockTime)
-                  00834500    00000040                                             : timers.obj (.text:prvTimerTask)
-                  00834540    00000040                                             : tasks.obj (.text:pvTaskIncrementMutexHeldCount)
-                  00834580    00000040     librangeproc_hwa_awr2944.ae66 : rangeprochwa.oe66 (.text:rangeProcHWADoneIsrCallback)
-                  008345c0    00000040     freertos.awr294x.c66.ti-c6000.debug.lib : HeapP_internal.obj (.text:vHeapCreateStatic)
-                  00834600    00000040                                             : list.obj (.text:vListInitialise)
-                  00834640    00000040                                             : heap_3.obj (.text:vPortFree)
-                  00834680    00000040                                             : port.obj (.text:vPortTimerTickHandler)
-                  008346c0    00000040                                             : port.obj (.text:vPortYeildFromISR)
-                  00834700    00000040                                             : port.obj (.text:vPortYieldAsyncFromISR)
-                  00834740    00000040                                             : tasks.obj (.text:vTaskInternalSetTimeOutState)
-                  00834780    00000040                                             : printf.obj (.text:vprintf_)
-                  008347c0    00000040     rts6600_elf.lib : wcslen.c.obj (.text:wcslen)
-                  00834800    00000040     freertos.awr294x.c66.ti-c6000.debug.lib : port.obj (.text:xPortInIsrContext)
-                  00834840    00000040                                             : port.obj (.text:xPortStartScheduler)
-                  00834880    00000040                                             : queue.obj (.text:xQueueCreateMutexStatic)
-                  008348c0    00000040                                             : tasks.obj (.text:xTaskGetSchedulerState)
-                  00834900    00000020     libaoaproc_hwa_awr2944.ae66 : aoaprochwa.oe66 (.text:AOAProcHWADoneIsrCallback)
-                  00834920    00000020     ti_board_open_close.obj (.text:Board_driversOpen)
-                  00834940    00000020     ti_board_config.obj (.text:Board_init)
-                  00834960    00000020     libcfarproc_hwa_awr2944.ae66 : cfarprochwa.oe66 (.text:CFARHWADoneIsrCallback)
-                  00834980    00000020     drivers.awr294x.c66.ti-c6000.debug.lib : soc_rcm.obj (.text:CSL_DSSRCM_getBaseAddress)
-                  008349a0    00000020                                            : soc_rcm.obj (.text:CSL_RCM_getBaseAddress)
-                  008349c0    00000020                                            : soc_rcm.obj (.text:CSL_REG32_RD_RAW)
-                  008349e0    00000020                                            : pinmux.obj (.text:CSL_REG32_WR_RAW)
-                  00834a00    00000020                                            : soc.obj (.text:CSL_REG32_WR_RAW)
-                  00834a20    00000020                                            : soc_rcm.obj (.text:CSL_TopCtrl_getBaseAddress)
-                  00834a40    00000020                                            : soc_rcm.obj (.text:CSL_TopCtrl_readXtalFreqScale)
-                  00834a60    00000020                                            : soc_rcm.obj (.text:CSL_TopRCM_getBaseAddress)
-                  00834a80    00000020     freertos.awr294x.c66.ti-c6000.debug.lib : CacheP_c66.obj (.text:CacheP_wait)
-                  00834aa0    00000020                                             : ClockP_freertos.obj (.text:ClockP_getTicks)
-                  00834ac0    00000020                                             : ClockP_freertos_c66.obj (.text:ClockP_getTimerCount)
-                  00834ae0    00000020                                             : ClockP_freertos.obj (.text:ClockP_sleepTicks)
-                  00834b00    00000020                                             : ClockP_freertos_c66.obj (.text:ClockP_timerClearOverflowInt)
-                  00834b20    00000020                                             : CycleCounterP_c66.obj (.text:CycleCounterP_getCount32)
-                  00834b40    00000020                                             : CycleCounterP_c66.obj (.text:CycleCounterP_reset)
-                  00834b60    00000020     objectdetection.obj (.text:DPC_ObjDet_MemPoolReset)
-                  00834b80    00000020     libdpm_awr2944.ae66 : dpm_mailbox.oe66 (.text:DPM_isMSSOperational)
-                  00834ba0    00000020                         : dpm_mailbox.oe66 (.text:DPM_mboxDeinit)
-                  00834bc0    00000020                         : dpm_mailbox.oe66 (.text:DPM_mboxSynch)
-                  00834be0    00000020     libaoaproc_hwa_awr2944.ae66 : aoaprochwa.oe66 (.text:DPU_AoAProcHWA_deinit)
-                  00834c00    00000020     libcfarproc_hwa_awr2944.ae66 : cfarprochwa.oe66 (.text:DPU_CFARProcHWA_deinit)
-                  00834c20    00000020     libdopplerproc_hwa_awr2944.ae66 : dopplerprochwa.oe66 (.text:DPU_DopplerProcHWA_deinit)
-                  00834c40    00000020                                     : dopplerprochwa.oe66 (.text:DPU_DopplerProcHWA_edmaDoneIsrCallback)
-                  00834c60    00000020                                     : dopplerprochwa.oe66 (.text:DPU_DopplerProcHWA_hwaDoneIsrCallback)
-                  00834c80    00000020     ti_drivers_open_close.obj (.text:Drivers_open)
-                  00834ca0    00000020     drivers.awr294x.c66.ti-c6000.debug.lib : esm_v0.obj (.text:ESM_init)
-                  00834cc0    00000020                                            : hwa.obj (.text:HWA_init)
-                  00834ce0    00000020                                            : edma.obj (.text:HW_RD_REG32_RAW)
-                  00834d00    00000020                                            : esm_v0.obj (.text:HW_RD_REG32_RAW)
-                  00834d20    00000020                                            : edma.obj (.text:HW_WR_REG32_RAW)
-                  00834d40    00000020                                            : esm_v0.obj (.text:HW_WR_REG32_RAW)
-                  00834d60    00000020     freertos.awr294x.c66.ti-c6000.debug.lib : HeapP_freertos.obj (.text:HeapP_destruct)
-                  00834d80    00000020                                             : HwiP_c66.obj (.text:HwiP_disable)
-                  00834da0    00000020                                             : HwiP_c66.obj (.text:HwiP_enable)
-                  00834dc0    00000020                                             : HwiP_c66_handlers_freertos.obj (.text:HwiP_intcEcm0Dispatcher)
-                  00834de0    00000020                                             : HwiP_c66_handlers_freertos.obj (.text:HwiP_intcEcm1Dispatcher)
-                  00834e00    00000020                                             : HwiP_c66_handlers_freertos.obj (.text:HwiP_intcEcm2Dispatcher)
-                  00834e20    00000020                                             : HwiP_c66_handlers_freertos.obj (.text:HwiP_intcEcm3Dispatcher)
-                  00834e40    00000020                                             : HwiP_c66_handlers_freertos.obj (.text:HwiP_intcdm10Dispatcher)
-                  00834e60    00000020                                             : HwiP_c66_handlers_freertos.obj (.text:HwiP_intcdm11Dispatcher)
-                  00834e80    00000020                                             : HwiP_c66_handlers_freertos.obj (.text:HwiP_intcdm4Dispatcher)
-                  00834ea0    00000020                                             : HwiP_c66_handlers_freertos.obj (.text:HwiP_intcdm5Dispatcher)
-                  00834ec0    00000020                                             : HwiP_c66_handlers_freertos.obj (.text:HwiP_intcdm6Dispatcher)
-                  00834ee0    00000020                                             : HwiP_c66_handlers_freertos.obj (.text:HwiP_intcdm7Dispatcher)
-                  00834f00    00000020                                             : HwiP_c66_handlers_freertos.obj (.text:HwiP_intcdm8Dispatcher)
-                  00834f20    00000020                                             : HwiP_c66_handlers_freertos.obj (.text:HwiP_intcdm9Dispatcher)
-                  00834f40    00000020                                             : HwiP_c66.obj (.text:HwiP_restore)
-                  00834f60    00000020                                             : port_hwi.obj (.text:Hwi_dispatchCore__I)
-                  00834f80    00000020                                             : port_hwi.obj (.text:Hwi_switchFromBootStack)
-                  00834fa0    00000020     ti_drivers_config.obj (.text:IpcNotify_allocSwQueue)
-                  00834fc0    00000020     ti_drivers_config.obj (.text:IpcNotify_getConfig)
-                  00834fe0    00000020     drivers.awr294x.c66.ti-c6000.debug.lib : ipc_notify_v1.obj (.text:IpcNotify_getSelfCoreId)
-                  00835000    00000020                                            : ipc_notify_v1.obj (.text:IpcNotify_isCustomIpcConfigEnabled)
-                  00835020    00000020                                            : ipc_notify_v1.obj (.text:IpcNotify_mailboxGetPendingIntr)
-                  00835040    00000020                                            : ipc_notify_v1.obj (.text:IpcNotify_registerNonNotifyCallback)
-                  00835060    00000020                                            : mailbox.obj (.text:Mailbox_Params_init)
-                  00835080    00000020     ti_power_clock_config.obj (.text:PowerClock_init)
-                  008350a0    00000020     drivers.awr294x.c66.ti-c6000.debug.lib : ipc_rpmsg_vring.obj (.text:RPMessage_align)
-                  008350c0    00000020                                            : ipc_rpmsg.obj (.text:RPMessage_queueReset)
-                  008350e0    00000020                                            : soc.obj (.text:SOC_moduleClockEnable)
-                  00835100    00000020                                            : soc.obj (.text:SOC_moduleSetClockFrequency)
-                  00835120    00000020     freertos.awr294x.c66.ti-c6000.debug.lib : port.obj (.text:Task_enter)
-                  00835140    00000020                                             : port.obj (.text:Task_exit)
-                  00835160    00000020                                             : port_tasksupport.obj (.text:_TaskSupport_glue)
-                  00835180    00000020     rts6600_elf.lib : errno.c.obj (.text:__c6xabi_errno_addr)
-                  008351a0    00000020                     : trunc.c.obj (.text:__c6xabi_trunc)
-                  008351c0    00000020                     : push.asm.obj (.text:__pop_rts)
-                  008351e0    00000020                     : push.asm.obj (.text:__push_rts)
-                  00835200    00000020                     : _lock.c.obj (.text:_nop)
-                  00835220    00000020     freertos.awr294x.c66.ti-c6000.debug.lib : printf.obj (.text:_out_null)
-                  00835240    00000020     rts6600_elf.lib : printf.c.obj (.text:_outc)
-                  00835260    00000020                     : printf.c.obj (.text:_outs)
-                  00835280    00000020                     : signbit.c.obj (.text:_signbit)
-                  008352a0    00000020                     : startup.c.obj (.text:_system_post_cinit)
-                  008352c0    00000020                     : pre_init.c.obj (.text:_system_pre_init)
-                  008352e0    00000020                     : exit.c.obj (.text:abort)
-                  00835300    00000020     objectdetection.obj (.text:compare)
-                  00835320    00000020     rts6600_elf.lib : copy_decompress_none.c.obj (.text:decompress:none:__TI_decompress_none)
-                  00835340    00000020                     : copy_decompress_rle.c.obj (.text:decompress:rle24:__TI_decompress_rle24)
-                  00835360    00000020     freertos.awr294x.c66.ti-c6000.debug.lib : port_hwi_vectors_freertos_asm.obj (.text)
-                  00835380    00000020     rts6600_elf.lib : memory.c.obj (.text:malloc)
-                  008353a0    00000020     mathlib.ae66 : sqrtsp.oe66 (.text:optasm)
-                  008353c0    00000020     freertos.awr294x.c66.ti-c6000.debug.lib : port.obj (.text:prvTaskExitError)
-                  008353e0    00000020     ti_dpl_config.obj (.text:putchar_)
-                  00835400    00000020     freertos.awr294x.c66.ti-c6000.debug.lib : port.obj (.text:uiPortGetRunTimeCounterValue)
-                  00835420    00000020                                             : HeapP_internal.obj (.text:vHeapDelete)
-                  00835440    00000020                                             : list.obj (.text:vListInitialiseItem)
-                  00835460    00000020                                             : port.obj (.text:vPortConfigTimerForRunTimeStats)
-                  00835480    00000020                                             : port.obj (.text:vPortEnterCritical)
-                  008354a0    00000020                                             : port.obj (.text:vPortExitCritical)
-                  008354c0    00000020                                             : port.obj (.text:vPortRestoreTaskContext)
-                  008354e0    00000020                                             : port.obj (.text:vPortSuppressTicksAndSleep)
-                  00835500    00000020                                             : port.obj (.text:vPortValidateInterruptPriority)
-                  00835520    00000020                                             : tasks.obj (.text:vTaskMissedYield)
-                  00835540    00000020                                             : tasks.obj (.text:vTaskSuspendAll)
-                  00835560    00000020                                             : tasks.obj (.text:xTaskGetCurrentTaskHandle)
-                  00835580    00000020                                             : tasks.obj (.text:xTaskGetTickCount)
+                  00833d00    00000040     ti_drivers_config.obj (.text:IpcNotify_allocSwQueue)
+                  00833d40    00000040     drivers.awr294x.c66.ti-c6000.debug.lib : ipc_notify_v1.obj (.text:IpcNotify_isCoreEnabled)
+                  00833d80    00000040                                            : ipc_notify_v1.obj (.text:IpcNotify_mailboxClearAllInt)
+                  00833dc0    00000040                                            : ipc_notify_v1.obj (.text:IpcNotify_mailboxClearPendingIntr)
+                  00833e00    00000040                                            : ipc_notify_v1_cfg.obj (.text:IpcNotify_wait)
+                  00833e40    00000040                                            : mailbox.obj (.text:Mailbox_isCoreEnabled)
+                  00833e80    00000040     dss_main.obj (.text:MmwDemo_dssSECCallBack)
+                  00833ec0    00000040     ti_pinmux_config.obj (.text:Pinmux_init)
+                  00833f00    00000040     drivers.awr294x.c66.ti-c6000.debug.lib : ipc_rpmsg.obj (.text:RPMessage_CreateParams_init)
+                  00833f40    00000040                                            : soc_rcm.obj (.text:SOC_rcmGetFixedRootClkFout)
+                  00833f80    00000040                                            : soc_rcm.obj (.text:SOC_rcmGetHSDivClkSrc)
+                  00833fc0    00000040                                            : soc_rcm.obj (.text:SOC_rcmGetHwaIPVer)
+                  00834000    00000040                                            : soc_rcm.obj (.text:SOC_rcmGetPeripheralClockFrequency)
+                  00834040    00000040     freertos.awr294x.c66.ti-c6000.debug.lib : SemaphoreP_freertos.obj (.text:SemaphoreP_destruct)
+                  00834080    00000040                                             : TaskP_freertos.obj (.text:TaskP_calcCounterDiff)
+                  008340c0    00000040                                             : port.obj (.text:Task_Func)
+                  00834100    00000040                                             : TimerP_rti.obj (.text:TimerP_clearOverflowInt)
+                  00834140    00000040                                             : TimerP_rti.obj (.text:TimerP_getReloadCount)
+                  00834180    00000040                                             : TimerP_rti.obj (.text:TimerP_start)
+                  008341c0    00000040                                             : TimerP_rti.obj (.text:TimerP_stop)
+                  00834200    00000040                                             : DebugP_log.obj (.text:_DebugP_assertNoLog)
+                  00834240    00000040                                             : port_tasksupport.obj (.text:_TaskSupport_buildTaskStack)
+                  00834280    00000040     rts6600_elf.lib : isinf.c.obj (.text:__c6xabi_isinf)
+                  008342c0    00000040                     : strasg.asm.obj (.text:__strasgi_64plus)
+                  00834300    00000040                     : args_main.c.obj (.text:_args_main)
+                  00834340    00000040     freertos.awr294x.c66.ti-c6000.debug.lib : printf.obj (.text:_out_char)
+                  00834380    00000040     libmathutils.ae66 : mathutils.oe66 (.text:mathUtils_ceilLog2)
+                  008343c0    00000040                       : mathutils.oe66 (.text:mathUtils_floorLog2)
+                  00834400    00000040     rts6600_elf.lib : memccpy.c.obj (.text:memccpy)
+                  00834440    00000040     freertos.awr294x.c66.ti-c6000.debug.lib : queue.obj (.text:prvGetDisinheritPriorityAfterTimeout)
+                  00834480    00000040                                             : queue.obj (.text:prvInitialiseMutex)
+                  008344c0    00000040                                             : queue.obj (.text:prvIsQueueEmpty)
+                  00834500    00000040                                             : tasks.obj (.text:prvResetNextTaskUnblockTime)
+                  00834540    00000040                                             : timers.obj (.text:prvTimerTask)
+                  00834580    00000040                                             : tasks.obj (.text:pvTaskIncrementMutexHeldCount)
+                  008345c0    00000040     librangeproc_hwa_awr2944.ae66 : rangeprochwa.oe66 (.text:rangeProcHWADoneIsrCallback)
+                  00834600    00000040     freertos.awr294x.c66.ti-c6000.debug.lib : HeapP_internal.obj (.text:vHeapCreateStatic)
+                  00834640    00000040                                             : list.obj (.text:vListInitialise)
+                  00834680    00000040                                             : heap_3.obj (.text:vPortFree)
+                  008346c0    00000040                                             : port.obj (.text:vPortTimerTickHandler)
+                  00834700    00000040                                             : port.obj (.text:vPortYeildFromISR)
+                  00834740    00000040                                             : port.obj (.text:vPortYieldAsyncFromISR)
+                  00834780    00000040                                             : tasks.obj (.text:vTaskInternalSetTimeOutState)
+                  008347c0    00000040                                             : printf.obj (.text:vprintf_)
+                  00834800    00000040     rts6600_elf.lib : wcslen.c.obj (.text:wcslen)
+                  00834840    00000040     freertos.awr294x.c66.ti-c6000.debug.lib : port.obj (.text:xPortInIsrContext)
+                  00834880    00000040                                             : port.obj (.text:xPortStartScheduler)
+                  008348c0    00000040                                             : queue.obj (.text:xQueueCreateMutexStatic)
+                  00834900    00000040                                             : tasks.obj (.text:xTaskGetSchedulerState)
+                  00834940    00000020     libaoaproc_hwa_awr2944.ae66 : aoaprochwa.oe66 (.text:AOAProcHWADoneIsrCallback)
+                  00834960    00000020     ti_board_open_close.obj (.text:Board_driversOpen)
+                  00834980    00000020     ti_board_config.obj (.text:Board_init)
+                  008349a0    00000020     libcfarproc_hwa_awr2944.ae66 : cfarprochwa.oe66 (.text:CFARHWADoneIsrCallback)
+                  008349c0    00000020     drivers.awr294x.c66.ti-c6000.debug.lib : soc_rcm.obj (.text:CSL_DSSRCM_getBaseAddress)
+                  008349e0    00000020                                            : soc_rcm.obj (.text:CSL_RCM_getBaseAddress)
+                  00834a00    00000020                                            : soc_rcm.obj (.text:CSL_REG32_RD_RAW)
+                  00834a20    00000020                                            : pinmux.obj (.text:CSL_REG32_WR_RAW)
+                  00834a40    00000020                                            : soc.obj (.text:CSL_REG32_WR_RAW)
+                  00834a60    00000020                                            : soc_rcm.obj (.text:CSL_TopCtrl_getBaseAddress)
+                  00834a80    00000020                                            : soc_rcm.obj (.text:CSL_TopCtrl_readXtalFreqScale)
+                  00834aa0    00000020                                            : soc_rcm.obj (.text:CSL_TopRCM_getBaseAddress)
+                  00834ac0    00000020     freertos.awr294x.c66.ti-c6000.debug.lib : CacheP_c66.obj (.text:CacheP_wait)
+                  00834ae0    00000020                                             : ClockP_freertos.obj (.text:ClockP_getTicks)
+                  00834b00    00000020                                             : ClockP_freertos_c66.obj (.text:ClockP_getTimerCount)
+                  00834b20    00000020                                             : ClockP_freertos.obj (.text:ClockP_sleepTicks)
+                  00834b40    00000020                                             : ClockP_freertos_c66.obj (.text:ClockP_timerClearOverflowInt)
+                  00834b60    00000020                                             : CycleCounterP_c66.obj (.text:CycleCounterP_getCount32)
+                  00834b80    00000020                                             : CycleCounterP_c66.obj (.text:CycleCounterP_reset)
+                  00834ba0    00000020     objectdetection.obj (.text:DPC_ObjDet_MemPoolReset)
+                  00834bc0    00000020     libdpm_awr2944.ae66 : dpm_mailbox.oe66 (.text:DPM_isMSSOperational)
+                  00834be0    00000020                         : dpm_mailbox.oe66 (.text:DPM_mboxDeinit)
+                  00834c00    00000020                         : dpm_mailbox.oe66 (.text:DPM_mboxSynch)
+                  00834c20    00000020     libaoaproc_hwa_awr2944.ae66 : aoaprochwa.oe66 (.text:DPU_AoAProcHWA_deinit)
+                  00834c40    00000020     libcfarproc_hwa_awr2944.ae66 : cfarprochwa.oe66 (.text:DPU_CFARProcHWA_deinit)
+                  00834c60    00000020     libdopplerproc_hwa_awr2944.ae66 : dopplerprochwa.oe66 (.text:DPU_DopplerProcHWA_deinit)
+                  00834c80    00000020                                     : dopplerprochwa.oe66 (.text:DPU_DopplerProcHWA_edmaDoneIsrCallback)
+                  00834ca0    00000020                                     : dopplerprochwa.oe66 (.text:DPU_DopplerProcHWA_hwaDoneIsrCallback)
+                  00834cc0    00000020     ti_drivers_open_close.obj (.text:Drivers_open)
+                  00834ce0    00000020     drivers.awr294x.c66.ti-c6000.debug.lib : esm_v0.obj (.text:ESM_init)
+                  00834d00    00000020                                            : hwa.obj (.text:HWA_init)
+                  00834d20    00000020                                            : edma.obj (.text:HW_RD_REG32_RAW)
+                  00834d40    00000020                                            : esm_v0.obj (.text:HW_RD_REG32_RAW)
+                  00834d60    00000020                                            : edma.obj (.text:HW_WR_REG32_RAW)
+                  00834d80    00000020                                            : esm_v0.obj (.text:HW_WR_REG32_RAW)
+                  00834da0    00000020     freertos.awr294x.c66.ti-c6000.debug.lib : HeapP_freertos.obj (.text:HeapP_destruct)
+                  00834dc0    00000020                                             : HwiP_c66.obj (.text:HwiP_disable)
+                  00834de0    00000020                                             : HwiP_c66.obj (.text:HwiP_enable)
+                  00834e00    00000020                                             : HwiP_c66_handlers_freertos.obj (.text:HwiP_intcEcm0Dispatcher)
+                  00834e20    00000020                                             : HwiP_c66_handlers_freertos.obj (.text:HwiP_intcEcm1Dispatcher)
+                  00834e40    00000020                                             : HwiP_c66_handlers_freertos.obj (.text:HwiP_intcEcm2Dispatcher)
+                  00834e60    00000020                                             : HwiP_c66_handlers_freertos.obj (.text:HwiP_intcEcm3Dispatcher)
+                  00834e80    00000020                                             : HwiP_c66_handlers_freertos.obj (.text:HwiP_intcdm10Dispatcher)
+                  00834ea0    00000020                                             : HwiP_c66_handlers_freertos.obj (.text:HwiP_intcdm11Dispatcher)
+                  00834ec0    00000020                                             : HwiP_c66_handlers_freertos.obj (.text:HwiP_intcdm4Dispatcher)
+                  00834ee0    00000020                                             : HwiP_c66_handlers_freertos.obj (.text:HwiP_intcdm5Dispatcher)
+                  00834f00    00000020                                             : HwiP_c66_handlers_freertos.obj (.text:HwiP_intcdm6Dispatcher)
+                  00834f20    00000020                                             : HwiP_c66_handlers_freertos.obj (.text:HwiP_intcdm7Dispatcher)
+                  00834f40    00000020                                             : HwiP_c66_handlers_freertos.obj (.text:HwiP_intcdm8Dispatcher)
+                  00834f60    00000020                                             : HwiP_c66_handlers_freertos.obj (.text:HwiP_intcdm9Dispatcher)
+                  00834f80    00000020                                             : HwiP_c66.obj (.text:HwiP_restore)
+                  00834fa0    00000020                                             : port_hwi.obj (.text:Hwi_dispatchCore__I)
+                  00834fc0    00000020                                             : port_hwi.obj (.text:Hwi_switchFromBootStack)
+                  00834fe0    00000020     ti_drivers_config.obj (.text:IpcNotify_getConfig)
+                  00835000    00000020     drivers.awr294x.c66.ti-c6000.debug.lib : ipc_notify_v1.obj (.text:IpcNotify_getSelfCoreId)
+                  00835020    00000020                                            : ipc_notify_v1.obj (.text:IpcNotify_isCustomIpcConfigEnabled)
+                  00835040    00000020                                            : ipc_notify_v1.obj (.text:IpcNotify_mailboxGetPendingIntr)
+                  00835060    00000020                                            : ipc_notify_v1.obj (.text:IpcNotify_registerNonNotifyCallback)
+                  00835080    00000020                                            : mailbox.obj (.text:Mailbox_Params_init)
+                  008350a0    00000020     ti_power_clock_config.obj (.text:PowerClock_init)
+                  008350c0    00000020     drivers.awr294x.c66.ti-c6000.debug.lib : ipc_rpmsg_vring.obj (.text:RPMessage_align)
+                  008350e0    00000020                                            : ipc_rpmsg.obj (.text:RPMessage_queueReset)
+                  00835100    00000020                                            : soc.obj (.text:SOC_moduleClockEnable)
+                  00835120    00000020                                            : soc.obj (.text:SOC_moduleSetClockFrequency)
+                  00835140    00000020     freertos.awr294x.c66.ti-c6000.debug.lib : port.obj (.text:Task_enter)
+                  00835160    00000020                                             : port.obj (.text:Task_exit)
+                  00835180    00000020                                             : port_tasksupport.obj (.text:_TaskSupport_glue)
+                  008351a0    00000020     rts6600_elf.lib : errno.c.obj (.text:__c6xabi_errno_addr)
+                  008351c0    00000020                     : trunc.c.obj (.text:__c6xabi_trunc)
+                  008351e0    00000020                     : push.asm.obj (.text:__pop_rts)
+                  00835200    00000020                     : push.asm.obj (.text:__push_rts)
+                  00835220    00000020                     : _lock.c.obj (.text:_nop)
+                  00835240    00000020     freertos.awr294x.c66.ti-c6000.debug.lib : printf.obj (.text:_out_null)
+                  00835260    00000020     rts6600_elf.lib : printf.c.obj (.text:_outc)
+                  00835280    00000020                     : printf.c.obj (.text:_outs)
+                  008352a0    00000020                     : signbit.c.obj (.text:_signbit)
+                  008352c0    00000020                     : startup.c.obj (.text:_system_post_cinit)
+                  008352e0    00000020                     : pre_init.c.obj (.text:_system_pre_init)
+                  00835300    00000020                     : exit.c.obj (.text:abort)
+                  00835320    00000020     objectdetection.obj (.text:compare)
+                  00835340    00000020     rts6600_elf.lib : copy_decompress_none.c.obj (.text:decompress:none:__TI_decompress_none)
+                  00835360    00000020                     : copy_decompress_rle.c.obj (.text:decompress:rle24:__TI_decompress_rle24)
+                  00835380    00000020     freertos.awr294x.c66.ti-c6000.debug.lib : port_hwi_vectors_freertos_asm.obj (.text)
+                  008353a0    00000020     rts6600_elf.lib : memory.c.obj (.text:malloc)
+                  008353c0    00000020     mathlib.ae66 : sqrtsp.oe66 (.text:optasm)
+                  008353e0    00000020     freertos.awr294x.c66.ti-c6000.debug.lib : port.obj (.text:prvTaskExitError)
+                  00835400    00000020     ti_dpl_config.obj (.text:putchar_)
+                  00835420    00000020     freertos.awr294x.c66.ti-c6000.debug.lib : port.obj (.text:uiPortGetRunTimeCounterValue)
+                  00835440    00000020                                             : HeapP_internal.obj (.text:vHeapDelete)
+                  00835460    00000020                                             : list.obj (.text:vListInitialiseItem)
+                  00835480    00000020                                             : port.obj (.text:vPortConfigTimerForRunTimeStats)
+                  008354a0    00000020                                             : port.obj (.text:vPortEnterCritical)
+                  008354c0    00000020                                             : port.obj (.text:vPortExitCritical)
+                  008354e0    00000020                                             : port.obj (.text:vPortRestoreTaskContext)
+                  00835500    00000020                                             : port.obj (.text:vPortSuppressTicksAndSleep)
+                  00835520    00000020                                             : port.obj (.text:vPortValidateInterruptPriority)
+                  00835540    00000020                                             : tasks.obj (.text:vTaskMissedYield)
+                  00835560    00000020                                             : tasks.obj (.text:vTaskSuspendAll)
+                  00835580    00000020                                             : tasks.obj (.text:xTaskGetCurrentTaskHandle)
+                  008355a0    00000020                                             : tasks.obj (.text:xTaskGetTickCount)
 
 .far       0    008355c0    00013440     UNINITIALIZED
                   008355c0    000064f0     objectdetection.obj (.far:gObjectDetectionHeapMem)
@@ -1207,15 +1207,15 @@ section   page    origin      length       input sections
                   00859f7a    00000006     --HOLE-- [fill = 0]
 
 .cinit     0    0085dbb8    00000608     
-                  0085dbb8    00000544     (.cinit..fardata.load) [load image, compression = rle]
-                  0085e0fc    00000032     (.cinit..neardata.load) [load image, compression = rle]
-                  0085e12e    0000000d     (.cinit..far.load) [load image, compression = rle]
-                  0085e13b    0000000d     (.cinit..l3ram.load) [load image, compression = rle]
-                  0085e148    0000000b     (.cinit..demoSharedMem.load) [load image, compression = rle]
-                  0085e153    0000000b     (.cinit..dpc_l2Heap.load) [load image, compression = rle]
-                  0085e15e    0000000a     (.cinit..rodata.load) [load image, compression = rle]
-                  0085e168    00000009     (.cinit..bss.load) [load image, compression = rle]
-                  0085e171    00000003     --HOLE-- [fill = 0]
+                  0085dbb8    00000546     (.cinit..fardata.load) [load image, compression = rle]
+                  0085e0fe    00000032     (.cinit..neardata.load) [load image, compression = rle]
+                  0085e130    0000000d     (.cinit..far.load) [load image, compression = rle]
+                  0085e13d    0000000d     (.cinit..l3ram.load) [load image, compression = rle]
+                  0085e14a    0000000b     (.cinit..demoSharedMem.load) [load image, compression = rle]
+                  0085e155    0000000b     (.cinit..dpc_l2Heap.load) [load image, compression = rle]
+                  0085e160    0000000a     (.cinit..rodata.load) [load image, compression = rle]
+                  0085e16a    00000009     (.cinit..bss.load) [load image, compression = rle]
+                  0085e173    00000001     --HOLE-- [fill = 0]
                   0085e174    00000008     (__TI_handler_table)
                   0085e17c    00000004     --HOLE-- [fill = 0]
                   0085e180    00000040     (__TI_cinit_table)
@@ -1304,7 +1304,7 @@ MODULE SUMMARY
        Total:                              3040     918       1631820
                                                                      
     .\dss\dssgenerated\
-       ti_drivers_config.obj               416      140       3680   
+       ti_drivers_config.obj               448      140       3680   
        ti_drivers_open_close.obj           672      338       42     
        ti_power_clock_config.obj           256      0         20     
        ti_pinmux_config.obj                64       0         184    
@@ -1312,7 +1312,7 @@ MODULE SUMMARY
        ti_board_config.obj                 32       0         0      
        ti_board_open_close.obj             32       0         0      
     +--+-----------------------------------+--------+---------+---------+
-       Total:                              1600     478       3990   
+       Total:                              1632     478       3990   
                                                                      
     C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mathlib_c66x_3_1_2_1/packages/ti/mathlib/lib/mathlib.ae66
        sqrtsp.oe66                         160      0         0      
@@ -1485,22 +1485,22 @@ MODULE SUMMARY
                                                                      
        Heap:                               0        0         4096   
        Stack:                              0        0         8192   
-       Linker Generated:                   0        1537      0      
+       Linker Generated:                   0        1539      0      
     +--+-----------------------------------+--------+---------+---------+
-       Grand Total:                        218528   17845     1720224
+       Grand Total:                        218560   17847     1720224
 
 
 LINKER GENERATED COPY TABLES
 
 __TI_cinit_table @ 0085e180 records: 8, size/record: 8, table size: 64
-	.fardata: load addr=0085dbb8, load size=00000544 bytes, run addr=0085cf80, run size=00000c38 bytes, compression=rle
-	.neardata: load addr=0085e0fc, load size=00000032 bytes, run addr=00848da8, run size=000000b0 bytes, compression=rle
-	.far: load addr=0085e12e, load size=0000000d bytes, run addr=008355c0, run size=00013440 bytes, compression=rle
-	.l3ram: load addr=0085e13b, load size=0000000d bytes, run addr=88000000, run size=00178000 bytes, compression=rle
-	.demoSharedMem: load addr=0085e148, load size=0000000b bytes, run addr=88178000, run size=00008000 bytes, compression=rle
-	.dpc_l2Heap: load addr=0085e153, load size=0000000b bytes, run addr=00849000, run size=0000d000 bytes, compression=rle
-	.rodata: load addr=0085e15e, load size=0000000a bytes, run addr=00848d88, run size=00000008 bytes, compression=rle
-	.bss: load addr=0085e168, load size=00000009 bytes, run addr=00848d90, run size=00000018 bytes, compression=rle
+	.fardata: load addr=0085dbb8, load size=00000546 bytes, run addr=0085cf80, run size=00000c38 bytes, compression=rle
+	.neardata: load addr=0085e0fe, load size=00000032 bytes, run addr=00848da8, run size=000000b0 bytes, compression=rle
+	.far: load addr=0085e130, load size=0000000d bytes, run addr=008355c0, run size=00013440 bytes, compression=rle
+	.l3ram: load addr=0085e13d, load size=0000000d bytes, run addr=88000000, run size=00178000 bytes, compression=rle
+	.demoSharedMem: load addr=0085e14a, load size=0000000b bytes, run addr=88178000, run size=00008000 bytes, compression=rle
+	.dpc_l2Heap: load addr=0085e155, load size=0000000b bytes, run addr=00849000, run size=0000d000 bytes, compression=rle
+	.rodata: load addr=0085e160, load size=0000000a bytes, run addr=00848d88, run size=00000008 bytes, compression=rle
+	.bss: load addr=0085e16a, load size=00000009 bytes, run addr=00848d90, run size=00000018 bytes, compression=rle
 
 
 LINKER GENERATED HANDLER TABLE
@@ -1514,9 +1514,9 @@ GLOBAL SYMBOLS: SORTED ALPHABETICALLY BY Name
 
 address   name                                           
 -------   ----                                           
-00834920  Board_driversOpen                              
-00834940  Board_init                                     
-008352e0  C$$EXIT                                        
+00834960  Board_driversOpen                              
+00834980  Board_init                                     
+00835300  C$$EXIT                                        
 00832ad8  C$$IO$$                                        
 008215e0  CFARHWA_cfarRange_AND_cfarDoppler              
 00829620  CFARHWA_config_EDMA                            
@@ -1533,11 +1533,11 @@ address   name
 00831880  CacheP_wbAll                                   
 008332c0  CacheP_wbInv                                   
 008318e0  CacheP_wbInvAll                                
-00834aa0  ClockP_getTicks                                
+00834ae0  ClockP_getTicks                                
 00828240  ClockP_getTimeUsec                             
-00834ac0  ClockP_getTimerCount                           
+00834b00  ClockP_getTimerCount                           
 00819000  ClockP_init                                    
-00834b00  ClockP_timerClearOverflowInt                   
+00834b40  ClockP_timerClearOverflowInt                   
 00831940  ClockP_timerTickIsr                            
 00833300  ClockP_usecToTicks                             
 0082b2c0  ClockP_usleep                                  
@@ -1545,8 +1545,8 @@ address   name
 0081d7a0  Context_save                                   
 0082f680  Context_sleepHook                              
 008230a0  Context_triggerSleep                           
-00834b20  CycleCounterP_getCount32                       
-00834b40  CycleCounterP_reset                            
+00834b60  CycleCounterP_getCount32                       
+00834b80  CycleCounterP_reset                            
 00820260  DPEDMAHWA_configOneHotSignature                
 0081db60  DPEDMAHWA_configTwoHotSignature                
 00823200  DPEDMA_allocateEDMAChannel                     
@@ -1561,7 +1561,7 @@ address   name
 00816b20  DPM_init                                       
 008299a0  DPM_initDeviceHook                             
 00821760  DPM_ioctl                                      
-00834b80  DPM_isMSSOperational                           
+00834bc0  DPM_isMSSOperational                           
 008333c0  DPM_listAdd                                    
 00831ac0  DPM_listCat                                    
 00833400  DPM_listRemove                                 
@@ -1577,17 +1577,17 @@ address   name
 0082d240  DPM_synch                                      
 00812060  DPU_AoAProcHWA_config                          
 00823620  DPU_AoAProcHWA_control                         
-00834be0  DPU_AoAProcHWA_deinit                          
+00834c20  DPU_AoAProcHWA_deinit                          
 008335c0  DPU_AoAProcHWA_getNumHwaParamSets              
 0081e4c0  DPU_AoAProcHWA_init                            
 0080e9e0  DPU_AoAProcHWA_process                         
 0081dd40  DPU_CFARProcHWA_config                         
 008218e0  DPU_CFARProcHWA_control                        
-00834c00  DPU_CFARProcHWA_deinit                         
+00834c40  DPU_CFARProcHWA_deinit                         
 00826980  DPU_CFARProcHWA_init                           
 00814e80  DPU_CFARProcHWA_process                        
 00804860  DPU_DopplerProcHWA_config                      
-00834c20  DPU_DopplerProcHWA_deinit                      
+00834c60  DPU_DopplerProcHWA_deinit                      
 0081e680  DPU_DopplerProcHWA_init                        
 0081a220  DPU_DopplerProcHWA_process                     
 0080c9c0  DPU_RangeProcHWA_config                        
@@ -1601,7 +1601,7 @@ address   name
 0082d2e0  Drivers_edmaOpen                               
 0082d380  Drivers_esmClose                               
 00828440  Drivers_esmOpen                                
-00834c80  Drivers_open                                   
+00834cc0  Drivers_open                                   
 0082d420  EDMA_allocDmaChannel                           
 0082d4c0  EDMA_allocParam                                
 0082d560  EDMA_allocTcc                                  
@@ -1651,7 +1651,7 @@ address   name
 00829ee0  EDMA_unmapChToEvtQ                             
 00830000  ESM_close                                      
 00826e00  ESM_deregisterNotifier                         
-00834ca0  ESM_init                                       
+00834ce0  ESM_init                                       
 00818240  ESM_open                                       
 00821be0  ESM_registerNotifier                           
 00848e3c  EdmaCallbackcnt                                
@@ -1674,7 +1674,7 @@ address   name
 00828840  HWA_getDMAChanIndex                            
 0082a260  HWA_getDMAconfig                               
 0082dc40  HWA_getHWAMemInfo                              
-00834cc0  HWA_init                                       
+00834d00  HWA_init                                       
 0080c0e0  HWA_open                                       
 0082dce0  HWA_readCFARPeakCountReg                       
 00831dc0  HWA_reset                                      
@@ -1684,7 +1684,7 @@ address   name
 0081c0e0  HWAutil_configCFAR                             
 00833b80  HeapP_alloc                                    
 00831e80  HeapP_construct                                
-00834d60  HeapP_destruct                                 
+00834da0  HeapP_destruct                                 
 00833bc0  HeapP_free                                     
 00833c00  HeapP_getHeapStats                             
 00847c60  HwaParamsetIntr                                
@@ -1694,9 +1694,9 @@ address   name
 00827160  HwiP_clearInt                                  
 00815840  HwiP_construct                                 
 0081ef40  HwiP_destruct                                  
-00834d80  HwiP_disable                                   
+00834dc0  HwiP_disable                                   
 00820740  HwiP_disableInt                                
-00834da0  HwiP_enable                                    
+00834de0  HwiP_enable                                    
 008253a0  HwiP_enableInt                                 
 00831f40  HwiP_inISR                                     
 008208e0  HwiP_init                                      
@@ -1714,55 +1714,55 @@ address   name
 00822514  HwiP_intcInterruptEnable                       
 00822570  HwiP_intcInterruptRestore                      
 00822564  HwiP_intcInterruptSet                          
-00835360  HwiP_intcIvpSet                                
+00835380  HwiP_intcIvpSet                                
 00823fc0  HwiP_intcNmiDispatcher                         
 00822588  HwiP_intcQueryInterruptStatus                  
 00831fa0  HwiP_registerNmiHandler                        
-00834f40  HwiP_restore                                   
+00834f80  HwiP_restore                                   
 00832000  HwiP_unregisterNmiHandler                      
 0085daa8  Hwi_Module__state__V                           
 00833c80  Hwi_Module_startup                             
 0081d3a0  Hwi_dispatchAlways                             
 00832060  Hwi_dispatchC__I                               
-00834f60  Hwi_dispatchCore__I                            
+00834fa0  Hwi_dispatchCore__I                            
 00833cc0  Hwi_getIsrStackAddress                         
 008329c0  Hwi_switchAndDispatch__I                       
-00834f80  Hwi_switchFromBootStack                        
+00834fc0  Hwi_switchFromBootStack                        
 00828a40  IpcNotify_Params_init                          
-00834fa0  IpcNotify_allocSwQueue                         
-00834fc0  IpcNotify_getConfig                            
+00833d00  IpcNotify_allocSwQueue                         
+00834fe0  IpcNotify_getConfig                            
 00830280  IpcNotify_getMemoryToRead                      
 00830300  IpcNotify_getMemoryToWrite                     
-00834fe0  IpcNotify_getSelfCoreId                        
+00835000  IpcNotify_getSelfCoreId                        
 0080d260  IpcNotify_init                                 
-00833d00  IpcNotify_isCoreEnabled                        
-00835000  IpcNotify_isCustomIpcConfigEnabled             
+00833d40  IpcNotify_isCoreEnabled                        
+00835020  IpcNotify_isCustomIpcConfigEnabled             
 008124a0  IpcNotify_isr                                  
 00827280  IpcNotify_readAckCallback                      
 0082a340  IpcNotify_registerClient                       
-00835040  IpcNotify_registerNonNotifyCallback            
+00835060  IpcNotify_registerNonNotifyCallback            
 00820a80  IpcNotify_sendMsg                              
 008322a0  IpcNotify_syncCallback                         
 00832300  IpcNotify_syncCustomIpcConfig                  
 00820c20  IpcNotify_trigInterrupt                        
 0081f100  IpcNotify_trigInterrupt_ack                    
 00830500  IpcNotify_unregisterClient                     
-00833dc0  IpcNotify_wait                                 
-00835060  Mailbox_Params_init                            
+00833e00  IpcNotify_wait                                 
+00835080  Mailbox_Params_init                            
 00832360  Mailbox_getRemoteCoreObj                       
 008273a0  Mailbox_init                                   
-00833e00  Mailbox_isCoreEnabled                          
+00833e40  Mailbox_isCoreEnabled                          
 00830580  Mailbox_readCallback                           
 0082c040  MmwDemo_dataPathOpen                           
-00833e40  MmwDemo_dssSECCallBack                         
+00833e80  MmwDemo_dssSECCallBack                         
 00832480  Module_clockEnable                             
 00830600  Module_clockSetFrequency                       
 0082e5a0  Pinmux_config                                  
-00833e80  Pinmux_init                                    
-00835080  PowerClock_init                                
+00833ec0  Pinmux_init                                    
+008350a0  PowerClock_init                                
 0082c940  Power_Down                                     
 0082c998  Power_Up                                       
-00833ec0  RPMessage_CreateParams_init                    
+00833f00  RPMessage_CreateParams_init                    
 00828b40  RPMessage_Params_init                          
 00830680  RPMessage_allocEndPtMsg                        
 008274c0  RPMessage_construct                            
@@ -1793,38 +1793,38 @@ address   name
 00845d40  RangeObj                                       
 0081d1a0  SOC_controlModuleLockMMR                       
 0081a4a0  SOC_controlModuleUnlockMMR                     
-008350e0  SOC_moduleClockEnable                          
-00835100  SOC_moduleSetClockFrequency                    
-00833f80  SOC_rcmGetHwaIPVer                             
+00835100  SOC_moduleClockEnable                          
+00835120  SOC_moduleSetClockFrequency                    
+00833fc0  SOC_rcmGetHwaIPVer                             
 00832840  SOC_rcmIsPadDisableRequired                    
 0082a5e0  SOC_rcmSetPeripheralClock                      
 00827820  SOC_virtToPhy                                  
 00828d40  SemaphoreP_constructBinary                     
 0082e8c0  SemaphoreP_constructCounting                   
 0082e960  SemaphoreP_constructMutex                      
-00834000  SemaphoreP_destruct                            
+00834040  SemaphoreP_destruct                            
 0082c1c0  SemaphoreP_pend                                
 0082ea00  SemaphoreP_post                                
 008246a0  System_init                                    
 008328a0  TaskP_loadGetTotalCpuLoad                      
 0082eaa0  TaskP_loadResetAll                             
 008221e0  TaskP_loadUpdateAll                            
-00834200  TaskSupport_buildTaskStack                     
-00835160  TaskSupport_glue                               
+00834240  TaskSupport_buildTaskStack                     
+00835180  TaskSupport_glue                               
 00830c00  TaskSupport_swap__E                            
-00834080  Task_Func                                      
-00835120  Task_enter                                     
-00835140  Task_exit                                      
+008340c0  Task_Func                                      
+00835140  Task_enter                                     
+00835160  Task_exit                                      
 00832900  TimerP_Params_init                             
-008340c0  TimerP_clearOverflowInt                        
+00834100  TimerP_clearOverflowInt                        
 00832960  TimerP_getCount                                
-00834100  TimerP_getReloadCount                          
+00834140  TimerP_getReloadCount                          
 00818500  TimerP_setup                                   
-00834140  TimerP_start                                   
-00834180  TimerP_stop                                    
+00834180  TimerP_start                                   
+008341c0  TimerP_stop                                    
 0082c280  _DPC_Objdet_Assert                             
 0082c340  _DebugP_assert                                 
-008341c0  _DebugP_assertNoLog                            
+00834200  _DebugP_assertNoLog                            
 0082c400  _DebugP_logZone                                
 00848c68  __CIOBUF_                                      
 0085e180  __TI_CINIT_Base                                
@@ -1842,8 +1842,8 @@ UNDEFED   __TI_TLS_INIT_Limit
 0082eb40  __TI_cleanup                                   
 0085db6c  __TI_cleanup_ptr                               
 00828e40  __TI_closefile                                 
-00835320  __TI_decompress_none                           
-00835340  __TI_decompress_rle24                          
+00835340  __TI_decompress_none                           
+00835360  __TI_decompress_rle24                          
 0082ebe0  __TI_doflush                                   
 0085db70  __TI_dtors_ptr                                 
 0085db74  __TI_enable_exit_profile_output                
@@ -1866,48 +1866,48 @@ ffffffff  __binit__
 0082c640  __c6xabi_divu                                  
 0081f640  __c6xabi_divul                                 
 0081ba40  __c6xabi_divull                                
-00835180  __c6xabi_errno_addr                            
+008351a0  __c6xabi_errno_addr                            
 00830d00  __c6xabi_fixdu                                 
 0082ec80  __c6xabi_fixfu                                 
-00834240  __c6xabi_isinf                                 
+00834280  __c6xabi_isinf                                 
 00830d80  __c6xabi_llshl                                 
 00832ae0  __c6xabi_llshru                                
 0082c580  __c6xabi_nround                                
-008351c0  __c6xabi_pop_rts                               
-008351e0  __c6xabi_push_rts                              
+008351e0  __c6xabi_pop_rts                               
+00835200  __c6xabi_push_rts                              
 0082c700  __c6xabi_remi                                  
 0082ed20  __c6xabi_remu                                  
 00832b40  __c6xabi_remull                                
 0082c580  __c6xabi_roundl                                
-00834280  __c6xabi_strasgi_64plus                        
-008351a0  __c6xabi_trunc                                 
-008351a0  __c6xabi_truncl                                
+008342c0  __c6xabi_strasgi_64plus                        
+008351c0  __c6xabi_trunc                                 
+008351c0  __c6xabi_truncl                                
 ffffffff  __c_args__                                     
 0082a880  __divi                                         
 0082c640  __divu                                         
 0085da64  __errno                                        
-008351c0  __pop_rts                                      
-008351e0  __push_rts                                     
+008351e0  __pop_rts                                      
+00835200  __push_rts                                     
 0082c700  __remi                                         
 0082ed20  __remu                                         
-00834280  __strasgi_64plus                               
-008342c0  _args_main                                     
+008342c0  __strasgi_64plus                               
+00834300  _args_main                                     
 00830e80  _c_int00                                       
 008584d0  _ctypes_                                       
 0085d7c8  _device                                        
 0085cf80  _ftable                                        
 0085d59c  _lock                                          
-00835200  _nop                                           
-00835280  _signbit                                       
+00835220  _nop                                           
+008352a0  _signbit                                       
 00859f80  _stack                                         
 0085d5a0  _stream                                        
 00832c60  _subcull                                       
 0085bf80  _sys_memory                                    
-008352a0  _system_post_cinit                             
-008352c0  _system_pre_init                               
+008352c0  _system_post_cinit                             
+008352e0  _system_pre_init                               
 0085d6c4  _unlock                                        
 00800000  _vectors                                       
-008352e0  abort                                          
+00835300  abort                                          
 008187c0  aligned_alloc                                  
 00844ac0  aoaProcObjPool                                 
 0081c740  atan                                           
@@ -1994,13 +1994,13 @@ c5000200  gIpcSharedMem
 00822660  ldexpl                                         
 00832cc0  lseek                                          
 0082ca00  main                                           
-00835380  malloc                                         
-00834340  mathUtils_ceilLog2                             
+008353a0  malloc                                         
+00834380  mathUtils_ceilLog2                             
 00829240  mathUtils_countSetBits                         
-00834380  mathUtils_floorLog2                            
+008343c0  mathUtils_floorLog2                            
 0081d5a0  mathUtils_genWindow                            
 008187c0  memalign                                       
-008343c0  memccpy                                        
+00834400  memccpy                                        
 0082ee60  memcpy                                         
 0082ab20  memset                                         
 0082ef00  modf                                           
@@ -2008,9 +2008,9 @@ c5000200  gIpcSharedMem
 0083fab0  parmbuf                                        
 0082ac00  printf                                         
 0081f800  putc                                           
-008353e0  putchar_                                       
+00835400  putchar_                                       
 0081b5a0  pvHeapMalloc                                   
-00834540  pvTaskIncrementMutexHeldCount                  
+00834580  pvTaskIncrementMutexHeldCount                  
 00848da8  pxCurrentTCB                                   
 00832ea0  pxPortInitialiseStack                          
 0081bc80  qsort                                          
@@ -2024,8 +2024,8 @@ c5000200  gIpcSharedMem
 0081a720  sinl                                           
 00824960  sqrt                                           
 00824960  sqrtl                                          
-008353a0  sqrtsp                                         
-00835400  uiPortGetRunTimeCounterValue                   
+008353c0  sqrtsp                                         
+00835420  uiPortGetRunTimeCounterValue                   
 00848de8  ulCriticalNesting                              
 00848df4  ulPortInterruptNesting                         
 00848df8  ulPortSchedularRunning                         
@@ -2039,26 +2039,26 @@ c5000200  gIpcSharedMem
 00832f60  vApplicationGetIdleTaskMemory                  
 00832fc0  vApplicationGetTimerTaskMemory                 
 00833020  vApplicationStackOverflowHook                  
-008345c0  vHeapCreateStatic                              
-00835420  vHeapDelete                                    
+00834600  vHeapCreateStatic                              
+00835440  vHeapDelete                                    
 00827ee0  vHeapFree                                      
 0082aea0  vHeapGetHeapStats                              
-00834600  vListInitialise                                
-00835440  vListInitialiseItem                            
+00834640  vListInitialise                                
+00835460  vListInitialiseItem                            
 0082cd00  vListInsert                                    
 00831480  vListInsertEnd                                 
 00831500  vPortAssertIfInISR                             
-00835460  vPortConfigTimerForRunTimeStats                
-00835480  vPortEnterCritical                             
-008354a0  vPortExitCritical                              
-00834640  vPortFree                                      
-008354c0  vPortRestoreTaskContext                        
-008354e0  vPortSuppressTicksAndSleep                     
-00834680  vPortTimerTickHandler                          
-00835500  vPortValidateInterruptPriority                 
-008346c0  vPortYeildFromISR                              
+00835480  vPortConfigTimerForRunTimeStats                
+008354a0  vPortEnterCritical                             
+008354c0  vPortExitCritical                              
+00834680  vPortFree                                      
+008354e0  vPortRestoreTaskContext                        
+00835500  vPortSuppressTicksAndSleep                     
+008346c0  vPortTimerTickHandler                          
+00835520  vPortValidateInterruptPriority                 
+00834700  vPortYeildFromISR                              
 00831580  vPortYield                                     
-00834700  vPortYieldAsyncFromISR                         
+00834740  vPortYieldAsyncFromISR                         
 00831600  vQueueAddToRegistry                            
 00831680  vQueueDelete                                   
 0082f180  vQueueUnregisterQueue                          
@@ -2067,21 +2067,21 @@ c5000200  gIpcSharedMem
 00833080  vTaskEnterCritical                             
 008330e0  vTaskExitCritical                              
 00826020  vTaskGetInfo                                   
-00834740  vTaskInternalSetTimeOutState                   
-00835520  vTaskMissedYield                               
+00834780  vTaskInternalSetTimeOutState                   
+00835540  vTaskMissedYield                               
 00831780  vTaskPlaceOnEventList                          
 00831800  vTaskPlaceOnEventListRestricted                
 0081e100  vTaskPriorityDisinheritAfterTimeout            
 00828000  vTaskStartScheduler                            
-00835540  vTaskSuspendAll                                
+00835560  vTaskSuspendAll                                
 008212a0  vTaskSwitchContext                             
-00834780  vprintf_                                       
-008347c0  wcslen                                         
+008347c0  vprintf_                                       
+00834800  wcslen                                         
 00833140  write                                          
-00834800  xPortInIsrContext                              
-00834840  xPortStartScheduler                            
+00834840  xPortInIsrContext                              
+00834880  xPortStartScheduler                            
 0082cdc0  xQueueCreateCountingSemaphoreStatic            
-00834880  xQueueCreateMutexStatic                        
+008348c0  xQueueCreateMutexStatic                        
 00821440  xQueueGenericCreateStatic                      
 00826160  xQueueGenericReset                             
 00818d40  xQueueGenericSend                              
@@ -2095,10 +2095,10 @@ c5000200  gIpcSharedMem
 0082f360  xQueueTakeMutexRecursive                       
 008262a0  xTaskCheckForTimeOut                           
 00824ac0  xTaskCreateStatic                              
-00835560  xTaskGetCurrentTaskHandle                      
+00835580  xTaskGetCurrentTaskHandle                      
 008331a0  xTaskGetIdleTaskHandle                         
-008348c0  xTaskGetSchedulerState                         
-00835580  xTaskGetTickCount                              
+00834900  xTaskGetSchedulerState                         
+008355a0  xTaskGetTickCount                              
 0081fd40  xTaskIncrementTick                             
 00822ae0  xTaskPriorityDisinherit                        
 00822c60  xTaskPriorityInherit                           
@@ -2496,106 +2496,106 @@ address   name
 00833c00  HeapP_getHeapStats                             
 00833c80  Hwi_Module_startup                             
 00833cc0  Hwi_getIsrStackAddress                         
-00833d00  IpcNotify_isCoreEnabled                        
-00833dc0  IpcNotify_wait                                 
-00833e00  Mailbox_isCoreEnabled                          
-00833e40  MmwDemo_dssSECCallBack                         
-00833e80  Pinmux_init                                    
-00833ec0  RPMessage_CreateParams_init                    
-00833f80  SOC_rcmGetHwaIPVer                             
-00834000  SemaphoreP_destruct                            
-00834080  Task_Func                                      
-008340c0  TimerP_clearOverflowInt                        
-00834100  TimerP_getReloadCount                          
-00834140  TimerP_start                                   
-00834180  TimerP_stop                                    
-008341c0  _DebugP_assertNoLog                            
-00834200  TaskSupport_buildTaskStack                     
-00834240  __c6xabi_isinf                                 
-00834280  __c6xabi_strasgi_64plus                        
-00834280  __strasgi_64plus                               
-008342c0  _args_main                                     
-00834340  mathUtils_ceilLog2                             
-00834380  mathUtils_floorLog2                            
-008343c0  memccpy                                        
-00834540  pvTaskIncrementMutexHeldCount                  
-008345c0  vHeapCreateStatic                              
-00834600  vListInitialise                                
-00834640  vPortFree                                      
-00834680  vPortTimerTickHandler                          
-008346c0  vPortYeildFromISR                              
-00834700  vPortYieldAsyncFromISR                         
-00834740  vTaskInternalSetTimeOutState                   
-00834780  vprintf_                                       
-008347c0  wcslen                                         
-00834800  xPortInIsrContext                              
-00834840  xPortStartScheduler                            
-00834880  xQueueCreateMutexStatic                        
-008348c0  xTaskGetSchedulerState                         
-00834920  Board_driversOpen                              
-00834940  Board_init                                     
-00834aa0  ClockP_getTicks                                
-00834ac0  ClockP_getTimerCount                           
-00834b00  ClockP_timerClearOverflowInt                   
-00834b20  CycleCounterP_getCount32                       
-00834b40  CycleCounterP_reset                            
-00834b80  DPM_isMSSOperational                           
-00834be0  DPU_AoAProcHWA_deinit                          
-00834c00  DPU_CFARProcHWA_deinit                         
-00834c20  DPU_DopplerProcHWA_deinit                      
-00834c80  Drivers_open                                   
-00834ca0  ESM_init                                       
-00834cc0  HWA_init                                       
-00834d60  HeapP_destruct                                 
-00834d80  HwiP_disable                                   
-00834da0  HwiP_enable                                    
-00834f40  HwiP_restore                                   
-00834f60  Hwi_dispatchCore__I                            
-00834f80  Hwi_switchFromBootStack                        
-00834fa0  IpcNotify_allocSwQueue                         
-00834fc0  IpcNotify_getConfig                            
-00834fe0  IpcNotify_getSelfCoreId                        
-00835000  IpcNotify_isCustomIpcConfigEnabled             
-00835040  IpcNotify_registerNonNotifyCallback            
-00835060  Mailbox_Params_init                            
-00835080  PowerClock_init                                
-008350e0  SOC_moduleClockEnable                          
-00835100  SOC_moduleSetClockFrequency                    
-00835120  Task_enter                                     
-00835140  Task_exit                                      
-00835160  TaskSupport_glue                               
-00835180  __c6xabi_errno_addr                            
-008351a0  __c6xabi_trunc                                 
-008351a0  __c6xabi_truncl                                
-008351c0  __c6xabi_pop_rts                               
-008351c0  __pop_rts                                      
-008351e0  __c6xabi_push_rts                              
-008351e0  __push_rts                                     
-00835200  _nop                                           
-00835280  _signbit                                       
-008352a0  _system_post_cinit                             
-008352c0  _system_pre_init                               
-008352e0  C$$EXIT                                        
-008352e0  abort                                          
-00835320  __TI_decompress_none                           
-00835340  __TI_decompress_rle24                          
-00835360  HwiP_intcIvpSet                                
-00835380  malloc                                         
-008353a0  sqrtsp                                         
-008353e0  putchar_                                       
-00835400  uiPortGetRunTimeCounterValue                   
-00835420  vHeapDelete                                    
-00835440  vListInitialiseItem                            
-00835460  vPortConfigTimerForRunTimeStats                
-00835480  vPortEnterCritical                             
-008354a0  vPortExitCritical                              
-008354c0  vPortRestoreTaskContext                        
-008354e0  vPortSuppressTicksAndSleep                     
-00835500  vPortValidateInterruptPriority                 
-00835520  vTaskMissedYield                               
-00835540  vTaskSuspendAll                                
-00835560  xTaskGetCurrentTaskHandle                      
-00835580  xTaskGetTickCount                              
+00833d00  IpcNotify_allocSwQueue                         
+00833d40  IpcNotify_isCoreEnabled                        
+00833e00  IpcNotify_wait                                 
+00833e40  Mailbox_isCoreEnabled                          
+00833e80  MmwDemo_dssSECCallBack                         
+00833ec0  Pinmux_init                                    
+00833f00  RPMessage_CreateParams_init                    
+00833fc0  SOC_rcmGetHwaIPVer                             
+00834040  SemaphoreP_destruct                            
+008340c0  Task_Func                                      
+00834100  TimerP_clearOverflowInt                        
+00834140  TimerP_getReloadCount                          
+00834180  TimerP_start                                   
+008341c0  TimerP_stop                                    
+00834200  _DebugP_assertNoLog                            
+00834240  TaskSupport_buildTaskStack                     
+00834280  __c6xabi_isinf                                 
+008342c0  __c6xabi_strasgi_64plus                        
+008342c0  __strasgi_64plus                               
+00834300  _args_main                                     
+00834380  mathUtils_ceilLog2                             
+008343c0  mathUtils_floorLog2                            
+00834400  memccpy                                        
+00834580  pvTaskIncrementMutexHeldCount                  
+00834600  vHeapCreateStatic                              
+00834640  vListInitialise                                
+00834680  vPortFree                                      
+008346c0  vPortTimerTickHandler                          
+00834700  vPortYeildFromISR                              
+00834740  vPortYieldAsyncFromISR                         
+00834780  vTaskInternalSetTimeOutState                   
+008347c0  vprintf_                                       
+00834800  wcslen                                         
+00834840  xPortInIsrContext                              
+00834880  xPortStartScheduler                            
+008348c0  xQueueCreateMutexStatic                        
+00834900  xTaskGetSchedulerState                         
+00834960  Board_driversOpen                              
+00834980  Board_init                                     
+00834ae0  ClockP_getTicks                                
+00834b00  ClockP_getTimerCount                           
+00834b40  ClockP_timerClearOverflowInt                   
+00834b60  CycleCounterP_getCount32                       
+00834b80  CycleCounterP_reset                            
+00834bc0  DPM_isMSSOperational                           
+00834c20  DPU_AoAProcHWA_deinit                          
+00834c40  DPU_CFARProcHWA_deinit                         
+00834c60  DPU_DopplerProcHWA_deinit                      
+00834cc0  Drivers_open                                   
+00834ce0  ESM_init                                       
+00834d00  HWA_init                                       
+00834da0  HeapP_destruct                                 
+00834dc0  HwiP_disable                                   
+00834de0  HwiP_enable                                    
+00834f80  HwiP_restore                                   
+00834fa0  Hwi_dispatchCore__I                            
+00834fc0  Hwi_switchFromBootStack                        
+00834fe0  IpcNotify_getConfig                            
+00835000  IpcNotify_getSelfCoreId                        
+00835020  IpcNotify_isCustomIpcConfigEnabled             
+00835060  IpcNotify_registerNonNotifyCallback            
+00835080  Mailbox_Params_init                            
+008350a0  PowerClock_init                                
+00835100  SOC_moduleClockEnable                          
+00835120  SOC_moduleSetClockFrequency                    
+00835140  Task_enter                                     
+00835160  Task_exit                                      
+00835180  TaskSupport_glue                               
+008351a0  __c6xabi_errno_addr                            
+008351c0  __c6xabi_trunc                                 
+008351c0  __c6xabi_truncl                                
+008351e0  __c6xabi_pop_rts                               
+008351e0  __pop_rts                                      
+00835200  __c6xabi_push_rts                              
+00835200  __push_rts                                     
+00835220  _nop                                           
+008352a0  _signbit                                       
+008352c0  _system_post_cinit                             
+008352e0  _system_pre_init                               
+00835300  C$$EXIT                                        
+00835300  abort                                          
+00835340  __TI_decompress_none                           
+00835360  __TI_decompress_rle24                          
+00835380  HwiP_intcIvpSet                                
+008353a0  malloc                                         
+008353c0  sqrtsp                                         
+00835400  putchar_                                       
+00835420  uiPortGetRunTimeCounterValue                   
+00835440  vHeapDelete                                    
+00835460  vListInitialiseItem                            
+00835480  vPortConfigTimerForRunTimeStats                
+008354a0  vPortEnterCritical                             
+008354c0  vPortExitCritical                              
+008354e0  vPortRestoreTaskContext                        
+00835500  vPortSuppressTicksAndSleep                     
+00835520  vPortValidateInterruptPriority                 
+00835540  vTaskMissedYield                               
+00835560  vTaskSuspendAll                                
+00835580  xTaskGetCurrentTaskHandle                      
+008355a0  xTaskGetTickCount                              
 0083bab0  uxHwiStack                                     
 0083fab0  parmbuf                                        
 0083fab8  gEdmaHandle                                    

@@ -253,7 +253,9 @@ void IpcNotify_allocSwQueue(IpcNotify_MailboxConfig *mailboxConfig)
     IpcNotify_MailboxConfig (*mailboxConfigPtr)[CSL_CORE_ID_MAX] = (void *)mailboxConfig;
 
     mailboxConfigPtr[CSL_CORE_ID_C66SS0][CSL_CORE_ID_R5FSS0_0].swQ = C66SS0_TO_R5FSS0_0_SW_QUEUE;
+    mailboxConfigPtr[CSL_CORE_ID_C66SS0][CSL_CORE_ID_R5FSS0_1].swQ = C66SS0_TO_R5FSS0_1_SW_QUEUE;
     mailboxConfigPtr[CSL_CORE_ID_R5FSS0_0][CSL_CORE_ID_C66SS0].swQ = R5FSS0_0_TO_C66SS0_SW_QUEUE;
+    mailboxConfigPtr[CSL_CORE_ID_R5FSS0_1][CSL_CORE_ID_C66SS0].swQ = R5FSS0_1_TO_C66SS0_SW_QUEUE;
 }
 
 
@@ -303,8 +305,9 @@ void System_init(void)
         /* list the cores that will do IPC Notify with this core
         * Make sure to NOT list 'self' core in the list below
         */
-        notifyParams.numCores = 1;
+        notifyParams.numCores = 2;
         notifyParams.coreIdList[0] = CSL_CORE_ID_R5FSS0_0;
+        notifyParams.coreIdList[1] = CSL_CORE_ID_R5FSS0_1;
 
         notifyParams.isMailboxIpcEnabled = 1;
 

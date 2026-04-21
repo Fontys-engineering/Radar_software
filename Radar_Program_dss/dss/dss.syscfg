@@ -50,10 +50,12 @@ esm1.configDirIntr.$name                    = "ESM_DIR_INTR_MAP0";
 hwa1.$name               = "CONFIG_HWA0";
 hwa1.configDirIntr.$name = "HWA_DIR_INTR_MAP0";
 
-ipc.vringNumBuf         = 1;
-ipc.vringMsgSize        = 1152;
-ipc.r5fss0_1            = "NONE";
-ipc.configDirIntr.$name = "IPC_DIR_INTR_MAP0";
+ipc.vringNumBuf                = 1;
+ipc.vringMsgSize               = 1152;
+ipc.r5fss0_1                   = "notify";
+ipc.rx_mailbox_offset_r5fss0_0 = 2304;
+ipc.rx_mailbox_offset_r5fss0_1 = 1280;
+ipc.configDirIntr.$name        = "IPC_DIR_INTR_MAP0";
 
 cache_c6x.marRegionConfig.create(2);
 cache_c6x.marRegionConfig[0].$name          = "kernel_dpl_cache_c6x_mar0";
