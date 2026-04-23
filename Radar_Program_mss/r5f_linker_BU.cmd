@@ -10,13 +10,14 @@
 --retain="*(.abortStack)"
 --retain="*(.undStack)"
 --retain="*(.svcStack)"
--stack  0x4000                              /* SOFTWARE STACK SIZE           */
--heap   0x4000                              /* HEAP AREA SIZE                */
+--retain="*(.intvecs)"
+-stack  0x10000                              /* SOFTWARE STACK SIZE           */
+-heap   0x20000                              /* HEAP AREA SIZE                */
 
 -e_vectors  /* Entry point */
 
 /* Stack Sizes for various modes */
-__IRQ_STACK_SIZE = 256;
+__IRQ_STACK_SIZE = 3072;
 __FIQ_STACK_SIZE = 256;
 __ABORT_STACK_SIZE = 256;
 __UNDEFINED_STACK_SIZE = 256;
@@ -51,8 +52,9 @@ SECTIONS{
 
     /* Vector table */
     .vectors:{} palign(8) > RESET_VECTORS
-
-
+    systemHeap :  {} >  MSS_L2
+//     //.demoSharedMem: { } >> DSS_L3
+     .l3ram: { } >> DSS_L3
 
 
     /* Boot / critical code */
@@ -77,9 +79,9 @@ SECTIONS{
 
     GROUP {
         .stack:  {} palign(8)
-        .sysmem: {} palign(8)
-
     } >SBL_RESERVED_L2_RAM
+
+    .sysmem: > DSS_L3
 
     /* lwIP pools */
     .lwip.pools (NOLOAD) :
@@ -90,6 +92,15 @@ SECTIONS{
         "C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/lwip/lib/lwip-freertos.awr294x.r5f.ti-arm-clang.debug.lib"(.bss*)
     } > DSS_L3
 
+    GROUP {
+    .bss:.common:memp_memory_POOL_1792_base:  (NOLOAD)  {} palign(128)
+    .bss:.common:memp_memory_POOL_1024_base:  (NOLOAD)  {} palign(128)
+    .bss:.common:memp_memory_POOL_256_base:  (NOLOAD)  {} palign(128)
+    .bss:.common:memp_memory_POOL_512_base:  (NOLOAD)  {} palign(128)
+    .bss:.common:memp_memory_POOL_4096_base:  (NOLOAD)  {} palign(128)
+    .bss:.common:memp_memory_POOL_128_base:  (NOLOAD)  {} palign(128)
+    .bss:.common:memp_memory_PBUF_POOL_base:  (NOLOAD)  {} palign(128)
+} > DSS_L3
 
     
 

@@ -62,7 +62,16 @@ void putchar_(char character)
 {
     /* Output to CCS console */
     putchar(character);
+    /* Output to memory trace buffer */
+    DebugP_memLogWriterPutChar(character);
 }
+
+/* DebugP log buffer memory and size
+ * - This log can be viewed via ROV in CCS
+ * - When linux is enabled, this log can also be viewed via linux debugfs
+ */
+char gDebugMemLog[DebugP_MEM_LOG_SIZE] __attribute__ ((section (".bss.debug_mem_trace_buf"), aligned (128)));
+uint32_t gDebugMemLogSize = DebugP_MEM_LOG_SIZE;
 
 
 #define RODATA_CFG_SECTION __attribute__((section(".rodata.cfg")))
@@ -144,10 +153,10 @@ const MpuP_RegionConfig gMpuRegionConfig[CONFIG_MPU_NUM_REGIONS] RODATA_CFG_SECT
         .size = MpuP_RegionSize_4M,
         .attrs = {
             .isEnable = 1,
-            .isCacheable = 1,
-            .isBufferable = 1,
+            .isCacheable = 0,
+            .isBufferable = 0,
             .isSharable = 0,
-            .isExecuteNever = 0,
+            .isExecuteNever = 1,
             .tex = 1,
             .accessPerm = MpuP_AP_ALL_RW,
             .subregionDisableMask = 0x0u
@@ -161,7 +170,7 @@ const MpuP_RegionConfig gMpuRegionConfig[CONFIG_MPU_NUM_REGIONS] RODATA_CFG_SECT
             .isCacheable = 0,
             .isBufferable = 0,
             .isSharable = 1,
-            .isExecuteNever = 0,
+            .isExecuteNever = 1,
             .tex = 1,
             .accessPerm = MpuP_AP_ALL_RW,
             .subregionDisableMask = 0x0u
@@ -187,8 +196,8 @@ void Dpl_init(void)
 
     /* init debug log zones early */
     /* Debug log init */
-    DebugP_logZoneEnable(DebugP_LOG_ZONE_ERROR);
-    DebugP_logZoneEnable(DebugP_LOG_ZONE_WARN);
+    /* Initialize linux trace log writer */
+    DebugP_memLogWriterInit(CSL_CORE_ID_R5FSS0_0);
 
 
     /* set timer clock source */

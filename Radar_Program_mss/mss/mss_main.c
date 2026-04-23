@@ -761,17 +761,17 @@ MmwDemo_enetStreamObjData gEnetStreamObjData;
 
 #define MMWDEMO_INIT_TASK_STACK_SIZE  (4*1024U)
 #define MMWDEMO_MMWAVE_CTRL_TASK_STACK_SIZE (3*1024U)
-#define MMWDEMO_DPC_OBJDET_DPM_TASK_STACK_SIZE (4*1024U)
+#define MMWDEMO_DPC_OBJDET_DPM_TASK_STACK_SIZE (6*1024U)
 #define MMWDEMO_UART_DATA_EXPORT_TASK_STACK_SIZE (4*1024U)
 #ifdef ENET_STREAM
 #define MMWDEMO_MMWAVE_ENET_TASK_STACK_SIZE (4*1024U)
 #endif
 
 /* Application task stack variables */
-StackType_t gAppMainTskStack[MMWDEMO_INIT_TASK_STACK_SIZE] __attribute__((aligned(32)));
-StackType_t gMmwCtrlTskStack[MMWDEMO_MMWAVE_CTRL_TASK_STACK_SIZE] __attribute__((aligned(32)));
-StackType_t gDpmTskStack[MMWDEMO_DPC_OBJDET_DPM_TASK_STACK_SIZE] __attribute__((aligned(32)));
-StackType_t gUartTskStack[MMWDEMO_UART_DATA_EXPORT_TASK_STACK_SIZE] __attribute__((aligned(32)));
+StackType_t gAppMainTskStack[MMWDEMO_INIT_TASK_STACK_SIZE] __attribute__((aligned(32), section(".bss.dll.l3")));
+StackType_t gMmwCtrlTskStack[MMWDEMO_MMWAVE_CTRL_TASK_STACK_SIZE] __attribute__((aligned(32), section(".bss.dll.l3")));
+StackType_t gDpmTskStack[MMWDEMO_DPC_OBJDET_DPM_TASK_STACK_SIZE] __attribute__((aligned(32), section(".bss.dll.l3")));
+StackType_t gUartTskStack[MMWDEMO_UART_DATA_EXPORT_TASK_STACK_SIZE] __attribute__((aligned(32), section(".bss.dll.l3")));
 #ifdef ENET_STREAM
 StackType_t gMmwEnetTskStack[MMWDEMO_MMWAVE_ENET_TASK_STACK_SIZE] __attribute__((aligned(32)));
 #endif
@@ -2426,7 +2426,6 @@ static int32_t MmwDemo_eventCallbackFxn(uint8_t devIndex, uint16_t msgId, uint16
                 }
                 case RL_RF_AE_FRAME_TRIGGER_RDY_SB:
                 {
-                    //DebugP_log("Frame Trigger\n");
                     gMmwMssMCB.stats.frameTriggerReady++;
                     break;
                 }
@@ -3260,7 +3259,6 @@ void mmwDemo_mssUartDataExportTask(void* args)
 
     while (1)
     {
-        //DebugP_log("UART TX\n");
         /* Export the Data: */
         SemaphoreP_pend(&gMmwMssMCB.UartExportSemHandle, SystemP_WAIT_FOREVER);
         if ((gMmwMssMCB.ptrResult.size[0]) == sizeof(DPC_ObjectDetection_ExecuteResult)){
