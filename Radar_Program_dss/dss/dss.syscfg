@@ -64,4 +64,5 @@ cache_c6x.marRegionConfig[1].$name          = "kernel_dpl_cache_c6x_mar1";
 cache_c6x.marRegionConfig[1].baseAddr       = 0x88000000;
 cache_c6x.marRegionConfig[1].enablePrefetch = true;
 
-debug_log.enableCssLog = false;
+debug_log.enableLogZoneWarning = false;
+debug_log.enableLogZoneInfo    = true;

@@ -101,9 +101,9 @@ edma1.edmaRmReservedDmaCh[0].$name      = "CONFIG_EDMA_RM4";
 edma1.edmaRmReservedDmaCh[0].startIndex = 0;
 edma1.edmaRmReservedDmaCh[0].endIndex   = 0;
 
-debug_log.enableLogZoneWarning = false;
-debug_log.enableLogZoneError   = false;
 debug_log.enableMemLog         = true;
+debug_log.enableLogZoneInfo    = true;
+debug_log.enableLogZoneWarning = false;
 
 mpu_armv71.$name        = "CONFIG_MPU_REGION0";
 mpu_armv71.attributes   = "Device";

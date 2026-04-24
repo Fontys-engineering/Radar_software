@@ -1506,27 +1506,27 @@ static void MmwDemo_transmitProcessedOutput
         tlvIdx++;
     }
 
-#ifdef ENET_STREAM
-if (gMmwMssMCB.enetCfg.streamEnable)
-{
-    // 🔴 If previous data not yet sent → DROP frame
-    if (gEnetStreamObjData.ready == 1)
+    #ifdef ENET_STREAM
+    if (gMmwMssMCB.enetCfg.streamEnable)
     {
-        return;
+        // 🔴 If previous data not yet sent → DROP frame
+        if (gEnetStreamObjData.ready == 1)
+        {
+            return;
+        }
+
+        gEnetStreamObjData.numObj = result->numObjOut;
+        gEnetStreamObjData.dummy  = 0x0U;
+
+        memcpy((void *)gEnetStreamObjData.objData,
+            (void*)objOut,
+            sizeof(DPIF_PointCloudCartesian) * gEnetStreamObjData.numObj);
+
+        gEnetStreamObjData.ready = 1;   // 🔴 mark as ready
+
+        SemaphoreP_post(&objDataSemaphoreHandle);
     }
-
-    gEnetStreamObjData.numObj = result->numObjOut;
-    gEnetStreamObjData.dummy  = 0x0U;
-
-    memcpy((void *)gEnetStreamObjData.objData,
-           (void*)objOut,
-           sizeof(DPIF_PointCloudCartesian) * gEnetStreamObjData.numObj);
-
-    gEnetStreamObjData.ready = 1;   // 🔴 mark as ready
-
-    SemaphoreP_post(&objDataSemaphoreHandle);
-}
-#endif
+    #endif
 
     /* Send detected Objects Side Info */
     if ((pGuiMonSel->detectedObjects == 1) && (result->numObjOut > 0))

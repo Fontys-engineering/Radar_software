@@ -56,6 +56,8 @@ ClockP_Config gClockConfig = {
 /* ----------- DebugP ----------- */
 void putchar_(char character)
 {
+    /* Output to CCS console */
+    putchar(character);
 }
 
 
@@ -97,7 +99,7 @@ void Dpl_init(void)
     /* init debug log zones early */
     /* Debug log init */
     DebugP_logZoneEnable(DebugP_LOG_ZONE_ERROR);
-    DebugP_logZoneEnable(DebugP_LOG_ZONE_WARN);
+    DebugP_logZoneEnable(DebugP_LOG_ZONE_INFO);
 
 
     /* set timer clock source */

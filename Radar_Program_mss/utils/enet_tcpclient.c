@@ -101,6 +101,7 @@ static void AppTcp_simpleclient(void *pArg)
         else
         {
             DebugP_log("Connection with the server is established\r\n");
+            netconn_set_sendtimeout(pConn, 5);   // 5 ms timeout
 
         while(1)
         {
@@ -108,6 +109,11 @@ static void AppTcp_simpleclient(void *pArg)
 
             uint32_t numObj = gEnetStreamObjData.numObj;
             uint32_t len = sizeof(DPIF_PointCloudCartesian) * numObj;
+            if (len > 4000)   // tune this threshold ADDED
+            {
+                    gEnetStreamObjData.ready = 0;
+                    continue;   // skip this frame entirely
+            }
 
             if (numObj == 0)
             {
@@ -118,28 +124,30 @@ static void AppTcp_simpleclient(void *pArg)
             err = netconn_write(pConn,
                                 &(gEnetStreamObjData.numObj),
                                 sizeof(uint32_t) + 2,
-                                NETCONN_COPY);
+                                NETCONN_COPY | NETCONN_DONTBLOCK); //DONTBLOCK ADDED
 
             if (err != ERR_OK)
             {
                 DebugP_log("write header failed: %s\n", lwip_strerr(err));
                 gEnetStreamObjData.ready = 0;
+                ClockP_usleep(1000);   // ADDED
                 continue;
             }
 
             err = netconn_write(pConn,
                                 gEnetStreamObjData.objData,
                                 len,
-                                NETCONN_COPY);
+                                NETCONN_COPY | NETCONN_DONTBLOCK); //DONTBLOCK ADDED
 
             if (err != ERR_OK)
             {
                 DebugP_log("write data failed: %s\n", lwip_strerr(err));
                 gEnetStreamObjData.ready = 0;
+                ClockP_usleep(1000);   // ADDED
                 continue;
             }
 
-            // 🔴 CRITICAL: release buffer
+            // ADDED
             gEnetStreamObjData.ready = 0;
         }
         }
