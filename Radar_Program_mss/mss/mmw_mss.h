@@ -657,6 +657,7 @@ typedef struct MmwDemo_enetStreamObjData_t
     /*! @brief      2 bytes dummy to make first ethernet
                    packet as min 60-bytes*/
     uint16_t    dummy;
+    volatile uint8_t ready;   // ADDITION
 } MmwDemo_enetStreamObjData;
 #endif
 

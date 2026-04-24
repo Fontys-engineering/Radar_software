@@ -102,23 +102,46 @@ static void AppTcp_simpleclient(void *pArg)
         {
             DebugP_log("Connection with the server is established\r\n");
 
-            while(1)
+        while(1)
+        {
+            SemaphoreP_pend(&objDataSemaphoreHandle, SystemP_WAIT_FOREVER);
+
+            uint32_t numObj = gEnetStreamObjData.numObj;
+            uint32_t len = sizeof(DPIF_PointCloudCartesian) * numObj;
+
+            if (numObj == 0)
             {
-                /* Pending on the semaphore: Waiting for events to be received */
-                SemaphoreP_pend (&objDataSemaphoreHandle, SystemP_WAIT_FOREVER);
-
-                err = netconn_write(pConn, &(gEnetStreamObjData.numObj), (sizeof(uint32_t) + 2), NETCONN_COPY);
-                if (err != ERR_OK)
-                {
-                    DebugP_log("tcpecho: netconn_write: error \"%s\"\r\n", lwip_strerr(err));
-                }
-
-                err = netconn_write(pConn, (gEnetStreamObjData.objData), (sizeof(DPIF_PointCloudCartesian) * gEnetStreamObjData.numObj), NETCONN_COPY);
-                if (err != ERR_OK)
-                {
-                    DebugP_log("tcpecho: netconn_write: error \"%s\"\r\n", lwip_strerr(err));
-                }
+                gEnetStreamObjData.ready = 0;
+                continue;
             }
+
+            err = netconn_write(pConn,
+                                &(gEnetStreamObjData.numObj),
+                                sizeof(uint32_t) + 2,
+                                NETCONN_COPY);
+
+            if (err != ERR_OK)
+            {
+                DebugP_log("write header failed: %s\n", lwip_strerr(err));
+                gEnetStreamObjData.ready = 0;
+                continue;
+            }
+
+            err = netconn_write(pConn,
+                                gEnetStreamObjData.objData,
+                                len,
+                                NETCONN_COPY);
+
+            if (err != ERR_OK)
+            {
+                DebugP_log("write data failed: %s\n", lwip_strerr(err));
+                gEnetStreamObjData.ready = 0;
+                continue;
+            }
+
+            // 🔴 CRITICAL: release buffer
+            gEnetStreamObjData.ready = 0;
+        }
         }
     }
 }

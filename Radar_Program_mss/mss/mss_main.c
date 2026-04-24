@@ -1507,12 +1507,25 @@ static void MmwDemo_transmitProcessedOutput
     }
 
 #ifdef ENET_STREAM
-    if(gMmwMssMCB.enetCfg.streamEnable){
-        gEnetStreamObjData.numObj = result->numObjOut;
-        gEnetStreamObjData.dummy  = 0x0U;
-        memcpy((void *)gEnetStreamObjData.objData, (void*)objOut, sizeof(DPIF_PointCloudCartesian) * gEnetStreamObjData.numObj);
-        SemaphoreP_post(&objDataSemaphoreHandle);
+if (gMmwMssMCB.enetCfg.streamEnable)
+{
+    // 🔴 If previous data not yet sent → DROP frame
+    if (gEnetStreamObjData.ready == 1)
+    {
+        return;
     }
+
+    gEnetStreamObjData.numObj = result->numObjOut;
+    gEnetStreamObjData.dummy  = 0x0U;
+
+    memcpy((void *)gEnetStreamObjData.objData,
+           (void*)objOut,
+           sizeof(DPIF_PointCloudCartesian) * gEnetStreamObjData.numObj);
+
+    gEnetStreamObjData.ready = 1;   // 🔴 mark as ready
+
+    SemaphoreP_post(&objDataSemaphoreHandle);
+}
 #endif
 
     /* Send detected Objects Side Info */

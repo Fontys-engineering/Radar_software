@@ -58,8 +58,8 @@
 #endif
 
 extern MmwDemo_MSS_MCB    gMmwMssMCB;
-uint8_t gUserDataHeader[8] __attribute__((aligned(32)));
-uint8_t gHwDataHeader[256] __attribute__((aligned(32)));
+uint8_t gUserDataHeader[8] __attribute__((aligned(32),section(".bss.dll.l3")));
+uint8_t gHwDataHeader[256] __attribute__((aligned(32),section(".bss.dll.l3")));
 
 
 /**
