@@ -37,6 +37,7 @@
 "./utils/rl_driver.o"
 "./utils/rl_monitoring.o"
 "./utils/rl_sensor.o"
+"./utils/stats.o"
 "./utils/tasks.o"
 "../r5f_linker_BU.cmd"
 "../mss/mmw_mss_linker.cmd"

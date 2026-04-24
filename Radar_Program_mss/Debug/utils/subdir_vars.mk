@@ -27,6 +27,7 @@ C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_dfp_02_04_18_01/ti/control/mmwavelin
 C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_dfp_02_04_18_01/ti/control/mmwavelink/src/rl_driver.c \
 C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_dfp_02_04_18_01/ti/control/mmwavelink/src/rl_monitoring.c \
 C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_dfp_02_04_18_01/ti/control/mmwavelink/src/rl_sensor.c \
+C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/lwip/lwip-stack/src/core/stats.c \
 C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/freertos/FreeRTOS-Kernel/tasks.c 
 
 C_DEPS += \
@@ -51,6 +52,7 @@ C_DEPS += \
 ./utils/rl_driver.d \
 ./utils/rl_monitoring.d \
 ./utils/rl_sensor.d \
+./utils/stats.d \
 ./utils/tasks.d 
 
 OBJS += \
@@ -75,6 +77,7 @@ OBJS += \
 ./utils/rl_driver.o \
 ./utils/rl_monitoring.o \
 ./utils/rl_sensor.o \
+./utils/stats.o \
 ./utils/tasks.o 
 
 OBJS__QUOTED += \
@@ -99,6 +102,7 @@ OBJS__QUOTED += \
 "utils\rl_driver.o" \
 "utils\rl_monitoring.o" \
 "utils\rl_sensor.o" \
+"utils\stats.o" \
 "utils\tasks.o" 
 
 C_DEPS__QUOTED += \
@@ -123,6 +127,7 @@ C_DEPS__QUOTED += \
 "utils\rl_driver.d" \
 "utils\rl_monitoring.d" \
 "utils\rl_sensor.d" \
+"utils\stats.d" \
 "utils\tasks.d" 
 
 C_SRCS__QUOTED += \
@@ -147,6 +152,7 @@ C_SRCS__QUOTED += \
 "C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_dfp_02_04_18_01/ti/control/mmwavelink/src/rl_driver.c" \
 "C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_dfp_02_04_18_01/ti/control/mmwavelink/src/rl_monitoring.c" \
 "C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_dfp_02_04_18_01/ti/control/mmwavelink/src/rl_sensor.c" \
+"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/lwip/lwip-stack/src/core/stats.c" \
 "C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/freertos/FreeRTOS-Kernel/tasks.c" 
 
 

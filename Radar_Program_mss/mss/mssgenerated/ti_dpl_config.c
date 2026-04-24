@@ -62,16 +62,7 @@ void putchar_(char character)
 {
     /* Output to CCS console */
     putchar(character);
-    /* Output to memory trace buffer */
-    DebugP_memLogWriterPutChar(character);
 }
-
-/* DebugP log buffer memory and size
- * - This log can be viewed via ROV in CCS
- * - When linux is enabled, this log can also be viewed via linux debugfs
- */
-char gDebugMemLog[DebugP_MEM_LOG_SIZE] __attribute__ ((section (".bss.debug_mem_trace_buf"), aligned (128)));
-uint32_t gDebugMemLogSize = DebugP_MEM_LOG_SIZE;
 
 
 #define RODATA_CFG_SECTION __attribute__((section(".rodata.cfg")))
@@ -196,10 +187,7 @@ void Dpl_init(void)
 
     /* init debug log zones early */
     /* Debug log init */
-    DebugP_logZoneEnable(DebugP_LOG_ZONE_ERROR);
     DebugP_logZoneEnable(DebugP_LOG_ZONE_INFO);
-    /* Initialize linux trace log writer */
-    DebugP_memLogWriterInit(CSL_CORE_ID_R5FSS0_0);
 
 
     /* set timer clock source */

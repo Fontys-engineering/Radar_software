@@ -894,6 +894,7 @@ void _MmwDemo_debugAssert(int32_t expression, const char *file, int32_t line)
 {
     if (!expression) {
         CLI_write ("Exception: %s, line %d.\n",file,line);
+        DebugP_logInfo("Exception: %s, line %d.\n",file,line);
     }
 }
 
@@ -1384,7 +1385,6 @@ static void MmwDemo_transmitProcessedOutput
         objOutSideInfo = (DPIF_PointCloudSideInfo *) AddrTranslateP_getLocalAddr((uint32_t)result->objOutSideInfo);
 
         stats = (DPC_ObjectDetection_Stats *) AddrTranslateP_getLocalAddr((uint32_t)result->stats);
-
 #ifdef MMWDEMO_TDM
         result->radarCube.data = (void *) AddrTranslateP_getLocalAddr((uint32_t)result->radarCube.data);
 #endif
@@ -2578,21 +2578,21 @@ static void MmwDemo_DPC_ObjectDetection_reportFxn
 
                 memUsage = &cfg->memUsage;
 
-                test_print("============ Heap Memory Stats ============\n");
-                test_print("%20s %12s %12s %12s %12s\n", " ", "Size", "Used", "Free", "DPCUsed");
+                DebugP_logInfo("============ Heap Memory Stats ============\n");
+                DebugP_logInfo("%20s %12s %12s %12s %12s\n", " ", "Size", "Used", "Free", "DPCUsed");
 #ifdef MMWDEMO_TDM
-                test_print("%20s %12d %12d %12d %12d\n", "System Heap(L2)",
+                DebugP_logInfo("%20s %12d %12d %12d %12d\n", "System Heap(L2)",
                               memUsage->SystemHeapTotal, memUsage->SystemHeapUsed,
                               memUsage->SystemHeapTotal - memUsage->SystemHeapUsed,
                               memUsage->SystemHeapDPCUsed);
 #endif
 
-                test_print("%20s %12d %12d %12d\n", "L3",
+                DebugP_logInfo("%20s %12d %12d %12d\n", "L3",
                               memUsage->L3RamTotal,
                               memUsage->L3RamUsage,
                               memUsage->L3RamTotal - memUsage->L3RamUsage);
 
-                test_print("%20s %12d %12d %12d\n", "localRam(L2)",
+                DebugP_logInfo("%20s %12d %12d %12d\n", "localRam(L2)",
                               memUsage->CoreLocalRamTotal,
                               memUsage->CoreLocalRamUsage,
                               memUsage->CoreLocalRamTotal - memUsage->CoreLocalRamUsage);

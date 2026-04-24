@@ -101,7 +101,6 @@ static void AppTcp_simpleclient(void *pArg)
         else
         {
             DebugP_log("Connection with the server is established\r\n");
-            netconn_set_sendtimeout(pConn, 5);   // 5 ms timeout
 
         while(1)
         {
@@ -121,14 +120,35 @@ static void AppTcp_simpleclient(void *pArg)
                 continue;
             }
 
-            err = netconn_write(pConn,
-                                &(gEnetStreamObjData.numObj),
-                                sizeof(uint32_t) + 2,
-                                NETCONN_COPY | NETCONN_DONTBLOCK); //DONTBLOCK ADDED
+            // err = netconn_write(pConn,
+            //                     &(gEnetStreamObjData.numObj),
+            //                     sizeof(uint32_t) + 2,
+            //                     NETCONN_COPY | NETCONN_DONTBLOCK); //DONTBLOCK ADDED
+
+            do {
+                err = netconn_write(pConn,
+                                    &(gEnetStreamObjData.numObj),
+                                    sizeof(uint32_t) + 2,
+                                    NETCONN_COPY);   // 🔴 REMOVE DONTBLOCK
+
+                if (err == ERR_MEM)
+                {
+                    /* lwIP buffer full → wait and retry */
+                    ClockP_usleep(2000);
+                }
+
+            } while (err == ERR_MEM);
 
             if (err != ERR_OK)
             {
                 DebugP_log("write header failed: %s\n", lwip_strerr(err));
+                gEnetStreamObjData.ready = 0;
+                continue;
+            }            
+
+            if (err != ERR_OK)
+            {
+                    DebugP_logInfo("WRITE HEADER FAIL: %d (%s)\n", err, lwip_strerr(err));
                 gEnetStreamObjData.ready = 0;
                 ClockP_usleep(1000);   // ADDED
                 continue;
@@ -141,7 +161,7 @@ static void AppTcp_simpleclient(void *pArg)
 
             if (err != ERR_OK)
             {
-                DebugP_log("write data failed: %s\n", lwip_strerr(err));
+                    DebugP_logInfo("WRITE DATA FAIL: %d (%s)\n", err, lwip_strerr(err));
                 gEnetStreamObjData.ready = 0;
                 ClockP_usleep(1000);   // ADDED
                 continue;
