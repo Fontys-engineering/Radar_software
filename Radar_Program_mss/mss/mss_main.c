@@ -4216,15 +4216,15 @@ static void MmwDemo_initTask(void* args)
     /* Create Enet configuration done semaphore */
     SemaphoreP_constructBinary(&gMmwMssMCB.enetCfg.EnetCfgDoneSemHandle, 0);
 
-    gMmwMssMCB.taskHandles.enetTask = xTaskCreateStatic( enetTask,
-                                      "enet_task",
-                                      MMWDEMO_MMWAVE_ENET_TASK_STACK_SIZE,
-                                      NULL,
-                                      MMWDEMO_MMWAVE_ENET_TASK_PRIORITY,
-                                      gMmwEnetTskStack,
-                                      &gMmwMssMCB.taskHandles.enetTaskObj );
+    // gMmwMssMCB.taskHandles.enetTask = xTaskCreateStatic( enetTask,
+    //                                   "enet_task",
+    //                                   MMWDEMO_MMWAVE_ENET_TASK_STACK_SIZE,
+    //                                   NULL,
+    //                                   MMWDEMO_MMWAVE_ENET_TASK_PRIORITY,
+    //                                   gMmwEnetTskStack,
+    //                                   &gMmwMssMCB.taskHandles.enetTaskObj );
 
-    configASSERT(gMmwMssMCB.taskHandles.enetTask != NULL);
+    // configASSERT(gMmwMssMCB.taskHandles.enetTask != NULL);
 #endif
 
     /*****************************************************************************

@@ -187,7 +187,8 @@ void Dpl_init(void)
 
     /* init debug log zones early */
     /* Debug log init */
-    DebugP_logZoneEnable(DebugP_LOG_ZONE_INFO);
+    DebugP_logZoneEnable(DebugP_LOG_ZONE_ERROR);
+    DebugP_logZoneEnable(DebugP_LOG_ZONE_WARN);
 
 
     /* set timer clock source */
