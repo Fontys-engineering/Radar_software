@@ -280,6 +280,24 @@ ESM_Config gEsmConfig[CONFIG_ESM_NUM_INSTANCES] =
 
 uint32_t gEsmConfigNum = CONFIG_ESM_NUM_INSTANCES;
 
+
+/*
+ * GPIO
+ */
+
+/* ----------- GPIO Direction, Trigger, Interrupt initialization ----------- */
+
+void GPIO_init()
+{
+    GPIO_moduleEnable(GPIO_LED_BASE_ADDR);
+}
+
+/* ----------- GPIO Interrupt de-initialization ----------- */
+void GPIO_deinit()
+{
+
+}
+
 /*
  * IPC Notify
  */
@@ -447,6 +465,7 @@ void System_init(void)
     EDMA_init();
     ADCBuf_init(SystemP_WAIT_FOREVER);
     ESM_init();
+    GPIO_init();
 
 
     /* IPC Notify */
@@ -521,6 +540,7 @@ void System_deinit(void)
     EDMA_deinit();
     ADCBuf_deinit();
     ESM_deinit();
+    GPIO_deinit();
     RPMessage_deInit();
     IpcNotify_deInit();
 

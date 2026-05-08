@@ -169,6 +169,13 @@ static Pinmux_PerCfg_t gPinMuxMainDomainCfg[] = {
         ( PIN_MODE(1) | PIN_PULL_DISABLE | PIN_SLEW_RATE_LOW )
     },
 
+            /* GPIO pin config */
+    /* GPIO26 -> PAD_AZ (G15) */
+    {
+        PIN_PAD_AZ,
+        ( PIN_MODE(0) | PIN_PULL_DISABLE | PIN_SLEW_RATE_LOW )
+    },
+
             /* UARTB pin config */
     /* UARTB_TX -> PAD_DE (A14) */
     {

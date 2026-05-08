@@ -42,6 +42,7 @@ void Drivers_open(void)
     Drivers_edmaOpen();
     Drivers_qspiOpen();
     Drivers_esmOpen();
+    Drivers_gpioOpen();
     Drivers_uartOpen();
 }
 
@@ -285,6 +286,23 @@ void Drivers_esmClose(void)
     return;
 }
 
+
+/*
+ * GPIO
+ */
+#include <drivers/gpio.h>
+#include <drivers/soc.h>
+
+
+void Drivers_gpioOpen(void)
+{
+    uint32_t    baseAddr;
+
+    /* Instance 0 */
+    /* Get address after translation translate */
+    baseAddr = (uint32_t) AddrTranslateP_getLocalAddr(GPIO_LED_BASE_ADDR);
+    GPIO_setDirMode(baseAddr, GPIO_LED_PIN, GPIO_LED_DIR);
+}
 /*
  * UART
  */

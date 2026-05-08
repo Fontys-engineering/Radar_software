@@ -22,6 +22,8 @@ const edma1      = edma.addInstance();
 const edma2      = edma.addInstance();
 const esm        = scripting.addModule("/drivers/esm/esm", {}, false);
 const esm1       = esm.addInstance();
+const gpio       = scripting.addModule("/drivers/gpio/gpio", {}, false);
+const gpio1      = gpio.addInstance();
 const ipc        = scripting.addModule("/drivers/ipc/ipc");
 const uart       = scripting.addModule("/drivers/uart/uart", {}, false);
 const uart1      = uart.addInstance();
@@ -54,6 +56,10 @@ esm1.esmNotifier[0].$name                   = "CONFIG_ESM_NOTIFY0";
 esm1.esmNotifier[0].errorNumber             = 18;
 esm1.esmNotifier[0].enableInfluenceOnErrPin = false;
 esm1.esmNotifier[0].notify                  = "MmwDemo_mssSECCallBack";
+
+gpio1.$name                = "GPIO_LED";
+gpio1.pinDir               = "OUTPUT";
+gpio1.GPIO.gpioPin.$assign = "PAD_AZ";
 
 ipc.vringNumBuf                = 1;
 ipc.vringMsgSize               = 1152;
@@ -157,6 +163,7 @@ flash1.peripheralDriver.QSPI["3"].$suggestSolution = "PAD_AO";
 flash1.peripheralDriver.QSPI.$suggestSolution      = "QSPI0";
 flash1.peripheralDriver.QSPI.CLK.$suggestSolution  = "PAD_AP";
 flash1.peripheralDriver.QSPI.CS.$suggestSolution   = "PAD_AQ";
+gpio1.GPIO.$suggestSolution                        = "GPIO";
 enet_cpsw1.pinmux[0].CPTS.$suggestSolution         = "CPTS0";
 enet_cpsw1.pinmux[0].MDIO.$suggestSolution         = "MDIO0";
 enet_cpsw1.pinmux[0].MDIO.DATA.$suggestSolution    = "PAD_CM";

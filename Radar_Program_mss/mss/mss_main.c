@@ -715,13 +715,15 @@
 #define MMWDEMO_UART_EXPORT_TASK_PRIORITY         8
 #define MMWDEMO_DPC_OBJDET_DPM_TASK_PRIORITY      9
 #define MMWDEMO_MMWAVE_CTRL_TASK_PRIORITY         10
-#define MMWDEMO_MMWAVE_ENET_TASK_PRIORITY         1
+#define MMWDEMO_MMWAVE_ENET_TASK_PRIORITY         2
 #else
 #define MMWDEMO_CLI_TASK_PRIORITY                 3
 #define MMWDEMO_UART_EXPORT_TASK_PRIORITY         4
 #define MMWDEMO_DPC_OBJDET_DPM_TASK_PRIORITY      5
 #define MMWDEMO_MMWAVE_CTRL_TASK_PRIORITY         6
 #endif
+
+#define MMWDEMO_LED_TASK_PRIORITY 1
 
 #if (MMWDEMO_CLI_TASK_PRIORITY >= MMWDEMO_DPC_OBJDET_DPM_TASK_PRIORITY)
 #error CLI task priority must be < Object Detection DPM task priority
@@ -772,6 +774,9 @@ StackType_t gAppMainTskStack[MMWDEMO_INIT_TASK_STACK_SIZE] __attribute__((aligne
 StackType_t gMmwCtrlTskStack[MMWDEMO_MMWAVE_CTRL_TASK_STACK_SIZE] __attribute__((aligned(32), section(".bss.dll.l3")));
 StackType_t gDpmTskStack[MMWDEMO_DPC_OBJDET_DPM_TASK_STACK_SIZE] __attribute__((aligned(32), section(".bss.dll.l3")));
 StackType_t gUartTskStack[MMWDEMO_UART_DATA_EXPORT_TASK_STACK_SIZE] __attribute__((aligned(32), section(".bss.dll.l3")));
+
+StackType_t gLedTskStack[1024U] __attribute__((aligned(32), section(".bss.dll.l3")));
+
 #ifdef ENET_STREAM
 StackType_t gMmwEnetTskStack[MMWDEMO_MMWAVE_ENET_TASK_STACK_SIZE] __attribute__((aligned(32)));
 #endif
@@ -820,6 +825,8 @@ extern void MmwDemo_CLIInit(uint8_t taskPriority);
 extern MmwDemo_RFParserHwAttr MmwDemo_RFParserHwCfg;
 #endif
 
+// Extern Definition for GPIO LED Test
+extern void led_task(void *args);
 /**************************************************************************
  ************************* Millimeter Wave Demo Functions prototype *************
  **************************************************************************/
@@ -4301,6 +4308,18 @@ static void MmwDemo_initTask(void* args)
                                            &gMmwMssMCB.taskHandles.uartDataExportTaskObj );
 
     configASSERT(gMmwMssMCB.taskHandles.uartDataExportTask != NULL);
+
+
+    /*LED TEST TASK*/
+    gMmwMssMCB.taskHandles.ledTask = xTaskCreateStatic(led_task,
+    "Led_Demo_Task",
+    512,
+    NULL,
+    1,
+    gLedTskStack,
+    &gMmwMssMCB.taskHandles.ledTaskObj);
+    configASSERT(gMmwMssMCB.taskHandles.ledTask != NULL);
+
 
     /*****************************************************************************
      * Initialize the Profiler
