@@ -4310,15 +4310,7 @@ static void MmwDemo_initTask(void* args)
     configASSERT(gMmwMssMCB.taskHandles.uartDataExportTask != NULL);
 
 
-    /*LED TEST TASK*/
-    gMmwMssMCB.taskHandles.ledTask = xTaskCreateStatic(led_task,
-    "Led_Demo_Task",
-    512,
-    NULL,
-    1,
-    gLedTskStack,
-    &gMmwMssMCB.taskHandles.ledTaskObj);
-    configASSERT(gMmwMssMCB.taskHandles.ledTask != NULL);
+
 
 
     /*****************************************************************************
@@ -4330,6 +4322,18 @@ static void MmwDemo_initTask(void* args)
      * Initialize the CLI Module:
      *****************************************************************************/
     MmwDemo_CLIInit(MMWDEMO_CLI_TASK_PRIORITY);
+
+
+    /*LED TEST TASK*/
+    gMmwMssMCB.taskHandles.ledTask = xTaskCreateStatic(led_task,
+    "Led_Demo_Task",
+    512,
+    NULL,
+    MMWDEMO_LED_TASK_PRIORITY,
+    gLedTskStack,
+    &gMmwMssMCB.taskHandles.ledTaskObj);
+    configASSERT(gMmwMssMCB.taskHandles.ledTask != NULL);
+
 
     /* Never return for this task. */
     SemaphoreP_pend(&gMmwMssMCB.demoInitTaskCompleteSemHandle, SystemP_WAIT_FOREVER);

@@ -96,11 +96,11 @@ static void AppTcp_simpleclient(void *pArg)
         if (connectError != ERR_OK)
         {
             netconn_close(pConn);
-            DebugP_log("Connection with the server isn't established\r\n");
+            DebugP_logInfo("Connection with the server isn't established\r\n");
         }
         else
         {
-            DebugP_log("Connection with the server is established\r\n");
+            DebugP_logInfo("Connection with the server is established\r\n");
 
         while(1)
         {

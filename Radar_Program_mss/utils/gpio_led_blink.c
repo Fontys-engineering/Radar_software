@@ -51,21 +51,15 @@
 
 void led_task(void *args)
 {
-    uint32_t gpioBaseAddr, pinNum;
 
-    gpioBaseAddr = (uint32_t)AddrTranslateP_getLocalAddr(GPIO_LED_BASE_ADDR);
-
-    pinNum = GPIO_LED_PIN;
-
-    GPIO_setDirMode(gpioBaseAddr, pinNum, GPIO_LED_DIR);
 
     while (1)
     {
-        GPIO_pinWriteHigh(gpioBaseAddr, pinNum);
+        GPIO_pinWriteHigh(GPIO_LED_BASE_ADDR, GPIO_LED_PIN);
 
         vTaskDelay(pdMS_TO_TICKS(500));
 
-        GPIO_pinWriteLow(gpioBaseAddr, pinNum);
+        GPIO_pinWriteLow(GPIO_LED_BASE_ADDR, GPIO_LED_PIN);
 
         vTaskDelay(pdMS_TO_TICKS(500));
     }

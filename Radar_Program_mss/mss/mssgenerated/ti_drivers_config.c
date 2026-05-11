@@ -91,14 +91,14 @@ static EDMA_Attrs gEdmaAttrs[CONFIG_EDMA_NUM_INSTANCES] =
         .errIntrNumber      = CSL_MSS_INTR_DSS_TPCC_B_ERRAGG,
         .errIntrNumberDirMap      = 0,
         .intrAggEnableAddr  = CSL_DSS_CTRL_U_BASE + CSL_DSS_CTRL_DSS_TPCC_B_INTAGG_MASK,
-        .intrAggEnableMask  = 0x1FF & (~(2U << 2)),
+        .intrAggEnableMask  = 0x1FF & (~(2U << 0)),
         .intrAggStatusAddr  = CSL_DSS_CTRL_U_BASE + CSL_DSS_CTRL_DSS_TPCC_B_INTAGG_STATUS,
-        .intrAggClearMask   = (2U << 2),
+        .intrAggClearMask   = (2U << 0),
         .errIntrAggEnableAddr  = CSL_DSS_CTRL_U_BASE + CSL_DSS_CTRL_DSS_TPCC_B_ERRAGG_MASK,
         .errIntrAggStatusAddr  = CSL_DSS_CTRL_U_BASE + CSL_DSS_CTRL_DSS_TPCC_B_ERRAGG_STATUS,
         .initPrms           =
         {
-            .regionId     = 2,
+            .regionId     = 0,
             .queNum       = 0,
             .initParamSet = FALSE,
             .ownResource    =
@@ -280,24 +280,6 @@ ESM_Config gEsmConfig[CONFIG_ESM_NUM_INSTANCES] =
 
 uint32_t gEsmConfigNum = CONFIG_ESM_NUM_INSTANCES;
 
-
-/*
- * GPIO
- */
-
-/* ----------- GPIO Direction, Trigger, Interrupt initialization ----------- */
-
-void GPIO_init()
-{
-    GPIO_moduleEnable(GPIO_LED_BASE_ADDR);
-}
-
-/* ----------- GPIO Interrupt de-initialization ----------- */
-void GPIO_deinit()
-{
-
-}
-
 /*
  * IPC Notify
  */
@@ -373,9 +355,7 @@ void IpcNotify_allocSwQueue(IpcNotify_MailboxConfig *mailboxConfig)
 {
     IpcNotify_MailboxConfig (*mailboxConfigPtr)[CSL_CORE_ID_MAX] = (void *)mailboxConfig;
 
-    mailboxConfigPtr[CSL_CORE_ID_R5FSS0_0][CSL_CORE_ID_R5FSS0_1].swQ = R5FSS0_0_TO_R5FSS0_1_SW_QUEUE;
     mailboxConfigPtr[CSL_CORE_ID_R5FSS0_0][CSL_CORE_ID_C66SS0].swQ = R5FSS0_0_TO_C66SS0_SW_QUEUE;
-    mailboxConfigPtr[CSL_CORE_ID_R5FSS0_1][CSL_CORE_ID_R5FSS0_0].swQ = R5FSS0_1_TO_R5FSS0_0_SW_QUEUE;
     mailboxConfigPtr[CSL_CORE_ID_C66SS0][CSL_CORE_ID_R5FSS0_0].swQ = C66SS0_TO_R5FSS0_0_SW_QUEUE;
 }
 
@@ -465,7 +445,6 @@ void System_init(void)
     EDMA_init();
     ADCBuf_init(SystemP_WAIT_FOREVER);
     ESM_init();
-    GPIO_init();
 
 
     /* IPC Notify */
@@ -485,9 +464,8 @@ void System_init(void)
         /* list the cores that will do IPC Notify with this core
         * Make sure to NOT list 'self' core in the list below
         */
-        notifyParams.numCores = 2;
-        notifyParams.coreIdList[0] = CSL_CORE_ID_R5FSS0_1;
-        notifyParams.coreIdList[1] = CSL_CORE_ID_C66SS0;
+        notifyParams.numCores = 1;
+        notifyParams.coreIdList[0] = CSL_CORE_ID_C66SS0;
 
         notifyParams.isMailboxIpcEnabled = 1;
 
@@ -540,7 +518,6 @@ void System_deinit(void)
     EDMA_deinit();
     ADCBuf_deinit();
     ESM_deinit();
-    GPIO_deinit();
     RPMessage_deInit();
     IpcNotify_deInit();
 
