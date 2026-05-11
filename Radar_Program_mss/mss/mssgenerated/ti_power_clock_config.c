@@ -54,6 +54,9 @@ uint32_t gSocModules[] = {
     SOC_RcmPeripheralId_MSS_SCIB,
     SOC_RcmPeripheralId_MSS_SCIA,
 
+    SOC_RcmPeripheralId_MSS_CPSW,
+    SOC_RcmPeripheralId_MSS_CPTS,
+
     SOC_MODULES_END,
 };
 
@@ -63,6 +66,9 @@ SOC_ModuleClockFrequency gSocModulesClockFrequency[] = {
 
     { SOC_RcmPeripheralId_MSS_SCIB, SOC_RcmPeripheralClockSource_SYS_CLK, 150000000 },
     { SOC_RcmPeripheralId_MSS_SCIA, SOC_RcmPeripheralClockSource_SYS_CLK, 150000000 },
+
+    { SOC_RcmPeripheralId_MSS_CPSW, SOC_RcmPeripheralClockSource_SYS_CLK, 150000000 },
+    { SOC_RcmPeripheralId_MSS_CPTS, SOC_RcmPeripheralClockSource_DPLL_CORE_HSDIV0_CLKOUT1, 200000000 },
 
     { SOC_MODULES_END, SOC_MODULES_END, SOC_MODULES_END },
 };

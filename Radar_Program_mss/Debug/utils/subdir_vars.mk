@@ -6,6 +6,7 @@ SHELL = cmd.exe
 
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
+../utils/MotionDetectDemo.c \
 ../utils/TaskP_freertos.c \
 C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/utils/cli/src/cli_mmwave.c \
 C:/ti/backups/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/utils/enet_apputils.c \
@@ -32,6 +33,7 @@ C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/net
 C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/freertos/FreeRTOS-Kernel/tasks.c 
 
 C_DEPS += \
+./utils/MotionDetectDemo.d \
 ./utils/TaskP_freertos.d \
 ./utils/cli_mmwave.d \
 ./utils/enet_apputils.d \
@@ -58,6 +60,7 @@ C_DEPS += \
 ./utils/tasks.d 
 
 OBJS += \
+./utils/MotionDetectDemo.o \
 ./utils/TaskP_freertos.o \
 ./utils/cli_mmwave.o \
 ./utils/enet_apputils.o \
@@ -84,6 +87,7 @@ OBJS += \
 ./utils/tasks.o 
 
 OBJS__QUOTED += \
+"utils\MotionDetectDemo.o" \
 "utils\TaskP_freertos.o" \
 "utils\cli_mmwave.o" \
 "utils\enet_apputils.o" \
@@ -110,6 +114,7 @@ OBJS__QUOTED += \
 "utils\tasks.o" 
 
 C_DEPS__QUOTED += \
+"utils\MotionDetectDemo.d" \
 "utils\TaskP_freertos.d" \
 "utils\cli_mmwave.d" \
 "utils\enet_apputils.d" \
@@ -136,6 +141,7 @@ C_DEPS__QUOTED += \
 "utils\tasks.d" 
 
 C_SRCS__QUOTED += \
+"../utils/MotionDetectDemo.c" \
 "../utils/TaskP_freertos.c" \
 "C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/utils/cli/src/cli_mmwave.c" \
 "C:/ti/backups/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/utils/enet_apputils.c" \

@@ -776,6 +776,7 @@ StackType_t gDpmTskStack[MMWDEMO_DPC_OBJDET_DPM_TASK_STACK_SIZE] __attribute__((
 StackType_t gUartTskStack[MMWDEMO_UART_DATA_EXPORT_TASK_STACK_SIZE] __attribute__((aligned(32), section(".bss.dll.l3")));
 
 StackType_t gLedTskStack[1024U] __attribute__((aligned(32), section(".bss.dll.l3")));
+StackType_t gMotionTskStack[1024U] __attribute__((aligned(32), section(".bss.dll.l3")));
 
 #ifdef ENET_STREAM
 StackType_t gMmwEnetTskStack[MMWDEMO_MMWAVE_ENET_TASK_STACK_SIZE] __attribute__((aligned(32)));
@@ -825,8 +826,20 @@ extern void MmwDemo_CLIInit(uint8_t taskPriority);
 extern MmwDemo_RFParserHwAttr MmwDemo_RFParserHwCfg;
 #endif
 
-// Extern Definition for GPIO LED Test
+// Custom Definitions + Variables
+extern volatile bool gMotionDetected;
+
+extern bool MotionDetection_detectMotion(
+    DPIF_PointCloudCartesian *objOut,
+    uint32_t numObjOut);
+extern void motion_led_task(void *args);
 extern void led_task(void *args);
+
+
+
+
+
+
 /**************************************************************************
  ************************* Millimeter Wave Demo Functions prototype *************
  **************************************************************************/
@@ -1365,6 +1378,7 @@ static void MmwDemo_transmitProcessedOutput
 
     UART_Transaction_init(&trans);
 
+
     /* Get subframe configuration */
     subFrameCfg = &gMmwMssMCB.subFrameCfg[result->subFrameIdx];
 
@@ -1649,6 +1663,12 @@ static void MmwDemo_transmitProcessedOutput
         UART_write(uartHandle, &trans);
         tlvIdx++;
     }
+
+/*Motion Detect Demo Code*/
+    gMotionDetected =
+    MotionDetection_detectMotion(
+        objOut,
+        result->numObjOut);
 
     /* Send padding bytes */
     numPaddingBytes = MMWDEMO_OUTPUT_MSG_SEGMENT_LEN - (packetLen & (MMWDEMO_OUTPUT_MSG_SEGMENT_LEN-1));
@@ -4325,15 +4345,27 @@ static void MmwDemo_initTask(void* args)
 
 
     /*LED TEST TASK*/
-    gMmwMssMCB.taskHandles.ledTask = xTaskCreateStatic(led_task,
-    "Led_Demo_Task",
-    512,
-    NULL,
-    MMWDEMO_LED_TASK_PRIORITY,
-    gLedTskStack,
-    &gMmwMssMCB.taskHandles.ledTaskObj);
-    configASSERT(gMmwMssMCB.taskHandles.ledTask != NULL);
+    // gMmwMssMCB.taskHandles.ledTask = xTaskCreateStatic(led_task,
+    // "Led_Demo_Task",
+    // 512,
+    // NULL,
+    // MMWDEMO_LED_TASK_PRIORITY,
+    // gLedTskStack,
+    // &gMmwMssMCB.taskHandles.ledTaskObj);
+    // configASSERT(gMmwMssMCB.taskHandles.ledTask != NULL);
 
+
+    gMmwMssMCB.taskHandles.motionTask =
+    xTaskCreateStatic(
+        motion_led_task,
+        "motion_task",
+        512,
+        NULL,
+        1,
+        gMotionTskStack,
+        &gMmwMssMCB.taskHandles.motionTaskObj);
+
+configASSERT(gMmwMssMCB.taskHandles.motionTask != NULL);
 
     /* Never return for this task. */
     SemaphoreP_pend(&gMmwMssMCB.demoInitTaskCompleteSemHandle, SystemP_WAIT_FOREVER);

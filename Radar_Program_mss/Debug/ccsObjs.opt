@@ -16,6 +16,7 @@
 "./mss/mssgenerated/excluded/ti_enet_lwipif.o"
 "./mss/mssgenerated/excluded/ti_enet_open_close.o"
 "./mss/mssgenerated/excluded/ti_enet_soc.o"
+"./utils/MotionDetectDemo.o"
 "./utils/TaskP_freertos.o"
 "./utils/cli_mmwave.o"
 "./utils/enet_apputils.o"
