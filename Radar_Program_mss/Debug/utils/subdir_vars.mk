@@ -7,6 +7,7 @@ SHELL = cmd.exe
 # Add inputs and outputs from these tool invocations to the build variables 
 C_SRCS += \
 ../utils/MotionDetectDemo.c \
+../utils/RadarSetup.c \
 ../utils/TaskP_freertos.c \
 C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/utils/cli/src/cli_mmwave.c \
 C:/ti/backups/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/utils/enet_apputils.c \
@@ -34,6 +35,7 @@ C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/ker
 
 C_DEPS += \
 ./utils/MotionDetectDemo.d \
+./utils/RadarSetup.d \
 ./utils/TaskP_freertos.d \
 ./utils/cli_mmwave.d \
 ./utils/enet_apputils.d \
@@ -61,6 +63,7 @@ C_DEPS += \
 
 OBJS += \
 ./utils/MotionDetectDemo.o \
+./utils/RadarSetup.o \
 ./utils/TaskP_freertos.o \
 ./utils/cli_mmwave.o \
 ./utils/enet_apputils.o \
@@ -88,6 +91,7 @@ OBJS += \
 
 OBJS__QUOTED += \
 "utils\MotionDetectDemo.o" \
+"utils\RadarSetup.o" \
 "utils\TaskP_freertos.o" \
 "utils\cli_mmwave.o" \
 "utils\enet_apputils.o" \
@@ -115,6 +119,7 @@ OBJS__QUOTED += \
 
 C_DEPS__QUOTED += \
 "utils\MotionDetectDemo.d" \
+"utils\RadarSetup.d" \
 "utils\TaskP_freertos.d" \
 "utils\cli_mmwave.d" \
 "utils\enet_apputils.d" \
@@ -142,6 +147,7 @@ C_DEPS__QUOTED += \
 
 C_SRCS__QUOTED += \
 "../utils/MotionDetectDemo.c" \
+"../utils/RadarSetup.c" \
 "../utils/TaskP_freertos.c" \
 "C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/utils/cli/src/cli_mmwave.c" \
 "C:/ti/backups/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/utils/enet_apputils.c" \
