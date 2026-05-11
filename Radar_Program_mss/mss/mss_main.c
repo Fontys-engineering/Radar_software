@@ -1,8 +1,27 @@
+/*
+* Radar Embedded Programming Project Code
+* Worked on by: Petri Miettinen
+* as part of third year internship project for DSS
+* 
+* The below code is a boiled down, edited version of the Out of Box demo for
+* AWR2944EVM radar board by Texas Instruments
+* Code still mostly uses the same infrastructure of the TI, so public distribution
+* Of the code at the time is not likely allowed. Further customization is warranted beforehand.
+*
+* The main code file has been altered for readability.
+* This is meant to make it easier to focus on implementing more custom implementations without browsing through
+* 4000 Lines of comments first. 
+* Instead, the original main code of the OOB Demo has been moved into RadarSetup.c
+* This file should be referred to for the base functionality of the radar, as well as when implementing
+* Code that may need to refer to the main code or alter it in any way.
+* Eg, the motion detection code also refers to the ProcessedOutput function in the main code itself.
+*/
+
+
 
 /**************************************************************************
  *************************** Include Files ********************************
  **************************************************************************/
-
 /* Standard Include Files. */
 #include <stdint.h>
 #include <stdlib.h>
@@ -49,41 +68,19 @@
 /* Profiler Include Files */
 #include <kernel/dpl/CycleCounterP.h>
 
-/**
- * @brief Task Priority settings:
- * Mmwave task is at higher priority because of potential async messages from BSS
- * that need quick action in real-time.
- *
- * CLI task must be at a lower priority than object detection
- * dpm task priority because the dynamic CLI command handling in the objection detection
- * dpm task assumes CLI task is held back during this processing. The alternative
- * is to use a semaphore between the two tasks.
- */
 
-/* Demo tasks should have priority higher than enet/lwip tasks */
 #define MMWDEMO_INIT_TASK_PRI         (1U)
 
 #define MMWDEMO_INIT_TASK_STACK_SIZE  (4*1024U)
 #define MMWDEMO_CLI_TASK_PRIORITY                 7
 #define MMWDEMO_LED_TASK_PRIORITY                 1
 
-
-
-
-
 StackType_t gAppMainTskStack[MMWDEMO_INIT_TASK_STACK_SIZE] __attribute__((aligned(32), section(".bss.dll.l3")));
 StackType_t gLedTskStack[1024U] __attribute__((aligned(32), section(".bss.dll.l3")));
 StackType_t gMotionTskStack[1024U] __attribute__((aligned(32), section(".bss.dll.l3")));
 
 
-
-/**
- * @brief
- *  Global Variable for tracking information required by the mmw Demo
- */
 extern MmwDemo_MSS_MCB    gMmwMssMCB;
-
-
 
 /**
  * @brief
@@ -111,8 +108,6 @@ extern MmwDemo_RFParserHwAttr MmwDemo_RFParserHwCfg;
 
 // Custom Definitions + Variables
 extern volatile bool gMotionDetected;
-
-
 extern void motion_led_task(void *args);
 extern void led_task(void *args);
 
@@ -129,35 +124,22 @@ extern void led_task(void *args);
 
 static void MmwDemo_initTask(void* args)
 {
-setupInit();
-initCtrlTask();
-#ifdef ENET_STREAM
-initEnetTask();
-#endif
-initDPMTask(); 
-initUartTask();
+    setupInit();
+    initCtrlTask();
+    #ifdef ENET_STREAM
+    //initEnetTask();
+    #endif
+    initDPMTask(); 
+    initUartTask();
 
     /*****************************************************************************
      * Initialize the Profiler
      *****************************************************************************/
     CycleCounterP_reset();
-
     /*****************************************************************************
      * Initialize the CLI Module:
      *****************************************************************************/
     MmwDemo_CLIInit(MMWDEMO_CLI_TASK_PRIORITY);
-
-
-    /*LED TEST TASK*/
-    // gMmwMssMCB.taskHandles.ledTask = xTaskCreateStatic(led_task,
-    // "Led_Demo_Task",
-    // 512,
-    // NULL,
-    // MMWDEMO_LED_TASK_PRIORITY,
-    // gLedTskStack,
-    // &gMmwMssMCB.taskHandles.ledTaskObj);
-    // configASSERT(gMmwMssMCB.taskHandles.ledTask != NULL);
-
 
     gMmwMssMCB.taskHandles.motionTask =
     xTaskCreateStatic(
@@ -169,7 +151,7 @@ initUartTask();
         gMotionTskStack,
         &gMmwMssMCB.taskHandles.motionTaskObj);
 
-configASSERT(gMmwMssMCB.taskHandles.motionTask != NULL);
+    configASSERT(gMmwMssMCB.taskHandles.motionTask != NULL);
 
     /* Never return for this task. */
     SemaphoreP_pend(&gMmwMssMCB.demoInitTaskCompleteSemHandle, SystemP_WAIT_FOREVER);

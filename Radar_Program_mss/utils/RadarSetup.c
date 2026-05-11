@@ -51,6 +51,19 @@ The original commentblock from the main code will be included at the bottom of t
 /* Profiler Include Files */
 #include <kernel/dpl/CycleCounterP.h>
 
+/**
+ * @brief Task Priority settings:
+ * Mmwave task is at higher priority because of potential async messages from BSS
+ * that need quick action in real-time.
+ *
+ * CLI task must be at a lower priority than object detection
+ * dpm task priority because the dynamic CLI command handling in the objection detection
+ * dpm task assumes CLI task is held back during this processing. The alternative
+ * is to use a semaphore between the two tasks.
+ */
+
+/* Demo tasks should have priority higher than enet/lwip tasks */
+
 #ifdef ENET_STREAM
 #define MMWDEMO_UART_EXPORT_TASK_PRIORITY         8
 #define MMWDEMO_DPC_OBJDET_DPM_TASK_PRIORITY      9
@@ -67,6 +80,10 @@ The original commentblock from the main code will be included at the bottom of t
 #error CLI task priority must be < Object Detection DPM task priority
 #endif
 
+/**
+ * @brief
+ *  Global Variable for tracking information required by the mmw Demo
+ */
 MmwDemo_MSS_MCB    gMmwMssMCB;
 
 #define DPC_OBJDET_INSTANCEID       (0xFEEDFEED)
