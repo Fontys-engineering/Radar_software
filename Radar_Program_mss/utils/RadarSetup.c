@@ -157,9 +157,12 @@ StackType_t gMmwEnetTskStack[MMWDEMO_MMWAVE_ENET_TASK_STACK_SIZE] __attribute__(
 /**************************************************************************
  ************************* Millimeter Wave Demo Functions prototype *************
  **************************************************************************/
+#ifdef MOTION_TASK
 extern bool MotionDetection_detectMotion(
     DPIF_PointCloudCartesian *objOut,
     uint32_t numObjOut);
+    extern volatile bool gMotionDetected;
+#endif
 
 static void MmwDemo_checkEdmaErrors(void);
 static void MmwDemo_clearEccAggrs(void);
@@ -196,7 +199,8 @@ static int32_t MmwDemo_DPM_ioctl_blocking
     uint32_t argLen
 );
 
-extern volatile bool gMotionDetected;
+
+
 /* Mmwave demo init functions */
 static void MmwDemo_initTask(void* args);
 static void MmwDemo_platformInit(MmwDemo_platformCfg *config);

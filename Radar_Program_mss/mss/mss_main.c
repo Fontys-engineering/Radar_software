@@ -15,6 +15,13 @@
 * This file should be referred to for the base functionality of the radar, as well as when implementing
 * Code that may need to refer to the main code or alter it in any way.
 * Eg, the motion detection code also refers to the ProcessedOutput function in the main code itself.
+*
+* For additional information refer to DSS Radar Program Custom Function manual available through DSS Teams
+*
+*
+*
+*
+
 */
 
 
@@ -76,9 +83,14 @@
 #define MMWDEMO_LED_TASK_PRIORITY                 1
 
 StackType_t gAppMainTskStack[MMWDEMO_INIT_TASK_STACK_SIZE] __attribute__((aligned(32), section(".bss.dll.l3")));
-StackType_t gLedTskStack[1024U] __attribute__((aligned(32), section(".bss.dll.l3")));
-StackType_t gMotionTskStack[1024U] __attribute__((aligned(32), section(".bss.dll.l3")));
 
+
+
+#ifdef MOTION_TASK
+StackType_t gMotionTskStack[1024U] __attribute__((aligned(32), section(".bss.dll.l3")));
+extern volatile bool gMotionDetected;
+extern void motion_led_task(void *args);
+#endif
 
 extern MmwDemo_MSS_MCB    gMmwMssMCB;
 
@@ -107,9 +119,6 @@ extern MmwDemo_RFParserHwAttr MmwDemo_RFParserHwCfg;
 #endif
 
 // Custom Definitions + Variables
-extern volatile bool gMotionDetected;
-extern void motion_led_task(void *args);
-extern void led_task(void *args);
 
 
 /**
@@ -140,7 +149,7 @@ static void MmwDemo_initTask(void* args)
      * Initialize the CLI Module:
      *****************************************************************************/
     MmwDemo_CLIInit(MMWDEMO_CLI_TASK_PRIORITY);
-
+    #ifdef MOTION_TASK
     gMmwMssMCB.taskHandles.motionTask =
     xTaskCreateStatic(
         motion_led_task,
@@ -152,7 +161,7 @@ static void MmwDemo_initTask(void* args)
         &gMmwMssMCB.taskHandles.motionTaskObj);
 
     configASSERT(gMmwMssMCB.taskHandles.motionTask != NULL);
-
+    #endif
     /* Never return for this task. */
     SemaphoreP_pend(&gMmwMssMCB.demoInitTaskCompleteSemHandle, SystemP_WAIT_FOREVER);
 
