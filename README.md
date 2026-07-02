@@ -5,8 +5,11 @@ Original date: 12/05/26
 This is the radar software project made for 3rd Year Fontys Eectrical Engineering internship
 as part of Distributed Sensor Systems Plasma Boundary project research.
 
-For importing and running the code, refer to AWR2944EVM Out of Box Manual by Petri Miettinen, accessible through DSS Teams channel.
-This manual was written to be used for the base Out of Box code, but will also effectively work with enabling these project files as well.
+Refer to DSS Radar Program Manual for exact steps in setting up the project.
+
+This is an alternate branch of the DSS Radar Program which already includes all the relevant SDK dependencies required for running the mmWave Program.
+Warning: Due to size limitations, not all of the original files are present in this repository, and errors could occur as new functionality is enabled. 
+In this case, the full dependency folders may need to be downloaded so missing components can be compared and re-added into the Dependency folder of this repo.
 
 Notice: Due to the code still utilizing much of code written by Texas Instruments, external distribution of this code is likely not adviced.
 But, the program should be fine to use for DSS internal usage.
