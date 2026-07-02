@@ -166,6 +166,65 @@ dss/dss_main.obj: C:/Git/Radar_software/Dependencies/mcu_plus_sdk_awr294x_10_02_
 dss/dss_main.obj: C:/Git/Radar_software/Dependencies/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/freertos/FreeRTOS-Kernel/include/mpu_wrappers.h
 dss/dss_main.obj: C:/Git/Radar_software/Dependencies/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/freertos/FreeRTOS-Kernel/include/task.h
 dss/dss_main.obj: C:/Git/Radar_software/Dependencies/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/freertos/FreeRTOS-Kernel/include/list.h
+dss/dss_main.obj: C:/Git/Radar_software/Dependencies/mmwave_mcuplus_sdk_04_07_02_01/ti/common/syscommon.h
+dss/dss_main.obj: C:/Git/Radar_software/Dependencies/mmwave_mcuplus_sdk_04_07_02_01/ti/common/sys_types.h
+dss/dss_main.obj: C:/Git/Radar_software/Dependencies/mmwave_mcuplus_sdk_04_07_02_01/ti/common/sys_defs.h
+dss/dss_main.obj: C:/Git/Radar_software/Dependencies/mmwave_mcuplus_sdk_04_07_02_01/ti/common/sys_common_awr2944.h
+dss/dss_main.obj: C:/Git/Radar_software/Dependencies/mmwave_mcuplus_sdk_04_07_02_01/ti/common/mmwavesdk_version.h
+dss/dss_main.obj: C:/Git/Radar_software/Dependencies/mmwave_mcuplus_sdk_04_07_02_01/ti/control/dpm/dpm.h
+dss/dss_main.obj: C:/Git/Radar_software/Dependencies/mmwave_mcuplus_sdk_04_07_02_01/ti/common/mmwave_error.h
+dss/dss_main.obj: C:/Git/Radar_software/Dependencies/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/dpl/SemaphoreP.h
+dss/dss_main.obj: C:/Git/Radar_software/Dependencies/mmwave_mcuplus_sdk_04_07_02_01/ti/datapath/dpc/objectdetection/objdethwa/objectdetection.h
+dss/dss_main.obj: C:/Git/Radar_software/Dependencies/mmwave_mcuplus_sdk_04_07_02_01/ti/datapath/dpu/rangeproc/rangeprochwa.h
+dss/dss_main.obj: C:/ti/ccs2041/ccs/tools/compiler/ti-cgt-c6000_8.5.0.LTS/include/stdlib.h
+dss/dss_main.obj: C:/Git/Radar_software/Dependencies/mmwave_mcuplus_sdk_04_07_02_01/ti/datapath/dpif/dpif_adcdata.h
+dss/dss_main.obj: C:/Git/Radar_software/Dependencies/mmwave_mcuplus_sdk_04_07_02_01/ti/datapath/dpif/dpif_types.h
+dss/dss_main.obj: C:/Git/Radar_software/Dependencies/mmwave_mcuplus_sdk_04_07_02_01/ti/datapath/dpif/dpif_radarcube.h
+dss/dss_main.obj: C:/Git/Radar_software/Dependencies/mmwave_mcuplus_sdk_04_07_02_01/ti/datapath/dpif/dp_error.h
+dss/dss_main.obj: C:/Git/Radar_software/Dependencies/mmwave_mcuplus_sdk_04_07_02_01/ti/datapath/dpedma/dpedmahwa.h
+dss/dss_main.obj: C:/Git/Radar_software/Dependencies/mmwave_mcuplus_sdk_04_07_02_01/ti/datapath/dpedma/dpedma.h
+dss/dss_main.obj: C:/Git/Radar_software/Dependencies/mmwave_mcuplus_sdk_04_07_02_01/ti/datapath/dpu/rangeproc/rangeproc_common.h
+dss/dss_main.obj: C:/ti/ccs2041/ccs/tools/compiler/ti-cgt-c6000_8.5.0.LTS/include/stdlib.h
+dss/dss_main.obj: C:/Git/Radar_software/Dependencies/mmwave_mcuplus_sdk_04_07_02_01/ti/datapath/dpu/cfarproc/cfarprochwa.h
+dss/dss_main.obj: C:/ti/ccs2041/ccs/tools/compiler/ti-cgt-c6000_8.5.0.LTS/include/stdlib.h
+dss/dss_main.obj: C:/Git/Radar_software/Dependencies/mmwave_mcuplus_sdk_04_07_02_01/ti/datapath/dpif/dpif_detmatrix.h
+dss/dss_main.obj: C:/Git/Radar_software/Dependencies/mmwave_mcuplus_sdk_04_07_02_01/ti/datapath/dpif/dpif_pointcloud.h
+dss/dss_main.obj: C:/Git/Radar_software/Dependencies/mmwave_mcuplus_sdk_04_07_02_01/ti/datapath/dpu/cfarproc/cfarproccommon.h
+dss/dss_main.obj: C:/ti/ccs2041/ccs/tools/compiler/ti-cgt-c6000_8.5.0.LTS/include/stdlib.h
+dss/dss_main.obj: C:/Git/Radar_software/Dependencies/mmwave_mcuplus_sdk_04_07_02_01/ti/datapath/dpu/aoaproc/aoaprochwa.h
+dss/dss_main.obj: C:/ti/ccs2041/ccs/tools/compiler/ti-cgt-c6000_8.5.0.LTS/include/stdlib.h
+dss/dss_main.obj: C:/Git/Radar_software/Dependencies/mmwave_mcuplus_sdk_04_07_02_01/ti/board/antenna_geometry.h
+dss/dss_main.obj: C:/ti/ccs2041/ccs/tools/compiler/ti-cgt-c6000_8.5.0.LTS/include/stdlib.h
+dss/dss_main.obj: C:/Git/Radar_software/Dependencies/mmwave_mcuplus_sdk_04_07_02_01/ti/board/antenna_geometry.h
+dss/dss_main.obj: C:/Git/Radar_software/Dependencies/mmwave_mcuplus_sdk_04_07_02_01/ti/datapath/dpu/aoaproc/aoaproc_common.h
+dss/dss_main.obj: C:/ti/ccs2041/ccs/tools/compiler/ti-cgt-c6000_8.5.0.LTS/include/stdlib.h
+dss/dss_main.obj: C:/Git/Radar_software/Dependencies/mmwave_mcuplus_sdk_04_07_02_01/ti/utils/mathutils/mathutils.h
+dss/dss_main.obj: C:/Git/Radar_software/Dependencies/mmwave_mcuplus_sdk_04_07_02_01/ti/demo/awr294x/mmw/include/mmw_config.h
+dss/dss_main.obj: C:/Git/Radar_software/Dependencies/mmwave_mcuplus_sdk_04_07_02_01/ti/control/mmwave/mmwave.h
+dss/dss_main.obj: C:/Git/Radar_software/Dependencies/mmwave_dfp_02_04_18_01/ti/control/mmwavelink/mmwavelink.h
+dss/dss_main.obj: C:/Git/Radar_software/Dependencies/mmwave_dfp_02_04_18_01/ti/control/mmwavelink/include/rl_datatypes.h
+dss/dss_main.obj: C:/Git/Radar_software/Dependencies/mmwave_dfp_02_04_18_01/ti/control/mmwavelink/include/rl_device.h
+dss/dss_main.obj: C:/Git/Radar_software/Dependencies/mmwave_dfp_02_04_18_01/ti/control/mmwavelink/include/rl_protocol.h
+dss/dss_main.obj: C:/Git/Radar_software/Dependencies/mmwave_dfp_02_04_18_01/ti/control/mmwavelink/include/rl_sensor.h
+dss/dss_main.obj: C:/Git/Radar_software/Dependencies/mmwave_dfp_02_04_18_01/ti/control/mmwavelink/include/rl_monitoring.h
+dss/dss_main.obj: C:/Git/Radar_software/Dependencies/mmwave_dfp_02_04_18_01/ti/control/mmwavelink/include/rl_messages.h
+dss/dss_main.obj: C:/Git/Radar_software/Dependencies/mmwave_mcuplus_sdk_04_07_02_01/ti/demo/awr294x/mmw/dss/mmw_dss.h
+dss/dss_main.obj: C:/Git/Radar_software/Dependencies/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/dpl/HeapP.h
+dss/dss_main.obj: C:/ti/ccs2041/ccs/tools/compiler/ti-cgt-c6000_8.5.0.LTS/include/sys/types.h
+dss/dss_main.obj: C:/ti/ccs2041/ccs/tools/compiler/ti-cgt-c6000_8.5.0.LTS/include/machine/endian.h
+dss/dss_main.obj: C:/ti/ccs2041/ccs/tools/compiler/ti-cgt-c6000_8.5.0.LTS/include/sys/select.h
+dss/dss_main.obj: C:/ti/ccs2041/ccs/tools/compiler/ti-cgt-c6000_8.5.0.LTS/include/sys/_sigset.h
+dss/dss_main.obj: C:/ti/ccs2041/ccs/tools/compiler/ti-cgt-c6000_8.5.0.LTS/include/sys/_timeval.h
+dss/dss_main.obj: C:/ti/ccs2041/ccs/tools/compiler/ti-cgt-c6000_8.5.0.LTS/include/sys/timespec.h
+dss/dss_main.obj: C:/ti/ccs2041/ccs/tools/compiler/ti-cgt-c6000_8.5.0.LTS/include/sys/_timespec.h
+dss/dss_main.obj: C:/Git/Radar_software/Dependencies/mmwave_mcuplus_sdk_04_07_02_01/ti/demo/awr294x/mmw/mmw_resTDM.h
+dss/dss_main.obj: C:/Git/Radar_software/Dependencies/mmwave_mcuplus_sdk_04_07_02_01/ti/datapath/dpu/dopplerproc/dopplerprochwa.h
+dss/dss_main.obj: C:/ti/ccs2041/ccs/tools/compiler/ti-cgt-c6000_8.5.0.LTS/include/stdlib.h
+dss/dss_main.obj: C:/Git/Radar_software/Dependencies/mmwave_mcuplus_sdk_04_07_02_01/ti/datapath/dpu/dopplerproc/dopplerproccommon.h
+dss/dss_main.obj: C:/ti/ccs2041/ccs/tools/compiler/ti-cgt-c6000_8.5.0.LTS/include/stdlib.h
+dss/dss_main.obj: C:/Git/Radar_software/Dependencies/mmwave_mcuplus_sdk_04_07_02_01/ti/demo/awr294x/mmw/include/mmw_output.h
+dss/dss_main.obj: C:/Git/Radar_software/Dependencies/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/dpl/TaskP.h
+dss/dss_main.obj: C:/Git/Radar_software/Dependencies/mcu_plus_sdk_awr294x_10_02_00_04/source/drivers/hw_include/hw_types.h
 
 ../dss/dss_main.c:
 
@@ -498,4 +557,122 @@ C:/Git/Radar_software/Dependencies/mcu_plus_sdk_awr294x_10_02_00_04/source/kerne
 C:/Git/Radar_software/Dependencies/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/freertos/FreeRTOS-Kernel/include/task.h:
 
 C:/Git/Radar_software/Dependencies/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/freertos/FreeRTOS-Kernel/include/list.h:
+
+C:/Git/Radar_software/Dependencies/mmwave_mcuplus_sdk_04_07_02_01/ti/common/syscommon.h:
+
+C:/Git/Radar_software/Dependencies/mmwave_mcuplus_sdk_04_07_02_01/ti/common/sys_types.h:
+
+C:/Git/Radar_software/Dependencies/mmwave_mcuplus_sdk_04_07_02_01/ti/common/sys_defs.h:
+
+C:/Git/Radar_software/Dependencies/mmwave_mcuplus_sdk_04_07_02_01/ti/common/sys_common_awr2944.h:
+
+C:/Git/Radar_software/Dependencies/mmwave_mcuplus_sdk_04_07_02_01/ti/common/mmwavesdk_version.h:
+
+C:/Git/Radar_software/Dependencies/mmwave_mcuplus_sdk_04_07_02_01/ti/control/dpm/dpm.h:
+
+C:/Git/Radar_software/Dependencies/mmwave_mcuplus_sdk_04_07_02_01/ti/common/mmwave_error.h:
+
+C:/Git/Radar_software/Dependencies/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/dpl/SemaphoreP.h:
+
+C:/Git/Radar_software/Dependencies/mmwave_mcuplus_sdk_04_07_02_01/ti/datapath/dpc/objectdetection/objdethwa/objectdetection.h:
+
+C:/Git/Radar_software/Dependencies/mmwave_mcuplus_sdk_04_07_02_01/ti/datapath/dpu/rangeproc/rangeprochwa.h:
+
+C:/ti/ccs2041/ccs/tools/compiler/ti-cgt-c6000_8.5.0.LTS/include/stdlib.h:
+
+C:/Git/Radar_software/Dependencies/mmwave_mcuplus_sdk_04_07_02_01/ti/datapath/dpif/dpif_adcdata.h:
+
+C:/Git/Radar_software/Dependencies/mmwave_mcuplus_sdk_04_07_02_01/ti/datapath/dpif/dpif_types.h:
+
+C:/Git/Radar_software/Dependencies/mmwave_mcuplus_sdk_04_07_02_01/ti/datapath/dpif/dpif_radarcube.h:
+
+C:/Git/Radar_software/Dependencies/mmwave_mcuplus_sdk_04_07_02_01/ti/datapath/dpif/dp_error.h:
+
+C:/Git/Radar_software/Dependencies/mmwave_mcuplus_sdk_04_07_02_01/ti/datapath/dpedma/dpedmahwa.h:
+
+C:/Git/Radar_software/Dependencies/mmwave_mcuplus_sdk_04_07_02_01/ti/datapath/dpedma/dpedma.h:
+
+C:/Git/Radar_software/Dependencies/mmwave_mcuplus_sdk_04_07_02_01/ti/datapath/dpu/rangeproc/rangeproc_common.h:
+
+C:/ti/ccs2041/ccs/tools/compiler/ti-cgt-c6000_8.5.0.LTS/include/stdlib.h:
+
+C:/Git/Radar_software/Dependencies/mmwave_mcuplus_sdk_04_07_02_01/ti/datapath/dpu/cfarproc/cfarprochwa.h:
+
+C:/ti/ccs2041/ccs/tools/compiler/ti-cgt-c6000_8.5.0.LTS/include/stdlib.h:
+
+C:/Git/Radar_software/Dependencies/mmwave_mcuplus_sdk_04_07_02_01/ti/datapath/dpif/dpif_detmatrix.h:
+
+C:/Git/Radar_software/Dependencies/mmwave_mcuplus_sdk_04_07_02_01/ti/datapath/dpif/dpif_pointcloud.h:
+
+C:/Git/Radar_software/Dependencies/mmwave_mcuplus_sdk_04_07_02_01/ti/datapath/dpu/cfarproc/cfarproccommon.h:
+
+C:/ti/ccs2041/ccs/tools/compiler/ti-cgt-c6000_8.5.0.LTS/include/stdlib.h:
+
+C:/Git/Radar_software/Dependencies/mmwave_mcuplus_sdk_04_07_02_01/ti/datapath/dpu/aoaproc/aoaprochwa.h:
+
+C:/ti/ccs2041/ccs/tools/compiler/ti-cgt-c6000_8.5.0.LTS/include/stdlib.h:
+
+C:/Git/Radar_software/Dependencies/mmwave_mcuplus_sdk_04_07_02_01/ti/board/antenna_geometry.h:
+
+C:/ti/ccs2041/ccs/tools/compiler/ti-cgt-c6000_8.5.0.LTS/include/stdlib.h:
+
+C:/Git/Radar_software/Dependencies/mmwave_mcuplus_sdk_04_07_02_01/ti/board/antenna_geometry.h:
+
+C:/Git/Radar_software/Dependencies/mmwave_mcuplus_sdk_04_07_02_01/ti/datapath/dpu/aoaproc/aoaproc_common.h:
+
+C:/ti/ccs2041/ccs/tools/compiler/ti-cgt-c6000_8.5.0.LTS/include/stdlib.h:
+
+C:/Git/Radar_software/Dependencies/mmwave_mcuplus_sdk_04_07_02_01/ti/utils/mathutils/mathutils.h:
+
+C:/Git/Radar_software/Dependencies/mmwave_mcuplus_sdk_04_07_02_01/ti/demo/awr294x/mmw/include/mmw_config.h:
+
+C:/Git/Radar_software/Dependencies/mmwave_mcuplus_sdk_04_07_02_01/ti/control/mmwave/mmwave.h:
+
+C:/Git/Radar_software/Dependencies/mmwave_dfp_02_04_18_01/ti/control/mmwavelink/mmwavelink.h:
+
+C:/Git/Radar_software/Dependencies/mmwave_dfp_02_04_18_01/ti/control/mmwavelink/include/rl_datatypes.h:
+
+C:/Git/Radar_software/Dependencies/mmwave_dfp_02_04_18_01/ti/control/mmwavelink/include/rl_device.h:
+
+C:/Git/Radar_software/Dependencies/mmwave_dfp_02_04_18_01/ti/control/mmwavelink/include/rl_protocol.h:
+
+C:/Git/Radar_software/Dependencies/mmwave_dfp_02_04_18_01/ti/control/mmwavelink/include/rl_sensor.h:
+
+C:/Git/Radar_software/Dependencies/mmwave_dfp_02_04_18_01/ti/control/mmwavelink/include/rl_monitoring.h:
+
+C:/Git/Radar_software/Dependencies/mmwave_dfp_02_04_18_01/ti/control/mmwavelink/include/rl_messages.h:
+
+C:/Git/Radar_software/Dependencies/mmwave_mcuplus_sdk_04_07_02_01/ti/demo/awr294x/mmw/dss/mmw_dss.h:
+
+C:/Git/Radar_software/Dependencies/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/dpl/HeapP.h:
+
+C:/ti/ccs2041/ccs/tools/compiler/ti-cgt-c6000_8.5.0.LTS/include/sys/types.h:
+
+C:/ti/ccs2041/ccs/tools/compiler/ti-cgt-c6000_8.5.0.LTS/include/machine/endian.h:
+
+C:/ti/ccs2041/ccs/tools/compiler/ti-cgt-c6000_8.5.0.LTS/include/sys/select.h:
+
+C:/ti/ccs2041/ccs/tools/compiler/ti-cgt-c6000_8.5.0.LTS/include/sys/_sigset.h:
+
+C:/ti/ccs2041/ccs/tools/compiler/ti-cgt-c6000_8.5.0.LTS/include/sys/_timeval.h:
+
+C:/ti/ccs2041/ccs/tools/compiler/ti-cgt-c6000_8.5.0.LTS/include/sys/timespec.h:
+
+C:/ti/ccs2041/ccs/tools/compiler/ti-cgt-c6000_8.5.0.LTS/include/sys/_timespec.h:
+
+C:/Git/Radar_software/Dependencies/mmwave_mcuplus_sdk_04_07_02_01/ti/demo/awr294x/mmw/mmw_resTDM.h:
+
+C:/Git/Radar_software/Dependencies/mmwave_mcuplus_sdk_04_07_02_01/ti/datapath/dpu/dopplerproc/dopplerprochwa.h:
+
+C:/ti/ccs2041/ccs/tools/compiler/ti-cgt-c6000_8.5.0.LTS/include/stdlib.h:
+
+C:/Git/Radar_software/Dependencies/mmwave_mcuplus_sdk_04_07_02_01/ti/datapath/dpu/dopplerproc/dopplerproccommon.h:
+
+C:/ti/ccs2041/ccs/tools/compiler/ti-cgt-c6000_8.5.0.LTS/include/stdlib.h:
+
+C:/Git/Radar_software/Dependencies/mmwave_mcuplus_sdk_04_07_02_01/ti/demo/awr294x/mmw/include/mmw_output.h:
+
+C:/Git/Radar_software/Dependencies/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/dpl/TaskP.h:
+
+C:/Git/Radar_software/Dependencies/mcu_plus_sdk_awr294x_10_02_00_04/source/drivers/hw_include/hw_types.h:
 

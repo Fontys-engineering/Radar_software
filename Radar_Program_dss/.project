@@ -20,11 +20,11 @@
 	<variableList>
 		<variable>
 			<name>C66x_DSPLIB_INSTALL_PATH</name>
-			<value>$%7BDEPENDROOT%7D/mmwave_mcuplus_sdk_04_07_02_01/dsplib_c66x_3_4_0_0</value>
+			<value>$%7BDEPENDROOT%7D/dsplib_c66x_3_4_0_0</value>
 		</variable>
 		<variable>
 			<name>C66x_MATHLIB_INSTALL_PATH</name>
-			<value>$%7BDEPENDROOT%7D/mmwave_mcuplus_sdk_04_07_02_01/mathlib_c66x_3_1_2_1</value>
+			<value>$%7BDEPENDROOT%7D/mathlib_c66x_3_1_2_1</value>
 		</variable>
 		<variable>
 			<name>DEPENDROOT</name>

@@ -15,7 +15,7 @@ C:/ti/backups/mmwave_mcuplus_sdk_04_07_02_01/ti/demo/utils/enet_cpswconfighandle
 C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/demo/utils/enet_stream.c \
 ../utils/enet_tcpclient.c \
 C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/drivers/ipc_notify/v1/ipc_notify_v1.c \
-C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/drivers/mailbox/v0/mailbox.c \
+C:/Git/Radar_software/Dependencies/mcu_plus_sdk_awr294x_10_02_00_04/source/drivers/mailbox/v0/mailbox.c \
 C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/control/mmwave/src/mmwave.c \
 C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/control/mmwave/src/mmwave_fullcfg.c \
 C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/control/mmwave/src/mmwave_link_common.c \
@@ -29,8 +29,8 @@ C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_dfp_02_04_18_01/ti/control/mmwavelin
 C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_dfp_02_04_18_01/ti/control/mmwavelink/src/rl_driver.c \
 C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_dfp_02_04_18_01/ti/control/mmwavelink/src/rl_monitoring.c \
 C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_dfp_02_04_18_01/ti/control/mmwavelink/src/rl_sensor.c \
-C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/lwip/lwip-stack/src/core/stats.c \
-C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/freertos/FreeRTOS-Kernel/tasks.c 
+C:/Git/Radar_software/Dependencies/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/lwip/lwip-stack/src/core/stats.c \
+C:/Git/Radar_software/Dependencies/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/freertos/FreeRTOS-Kernel/tasks.c 
 
 C_DEPS += \
 ./utils/MotionDetectDemo.d \
@@ -150,7 +150,7 @@ C_SRCS__QUOTED += \
 "C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/demo/utils/enet_stream.c" \
 "../utils/enet_tcpclient.c" \
 "C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/drivers/ipc_notify/v1/ipc_notify_v1.c" \
-"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/drivers/mailbox/v0/mailbox.c" \
+"C:/Git/Radar_software/Dependencies/mcu_plus_sdk_awr294x_10_02_00_04/source/drivers/mailbox/v0/mailbox.c" \
 "C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/control/mmwave/src/mmwave.c" \
 "C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/control/mmwave/src/mmwave_fullcfg.c" \
 "C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/control/mmwave/src/mmwave_link_common.c" \
@@ -164,7 +164,7 @@ C_SRCS__QUOTED += \
 "C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_dfp_02_04_18_01/ti/control/mmwavelink/src/rl_driver.c" \
 "C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_dfp_02_04_18_01/ti/control/mmwavelink/src/rl_monitoring.c" \
 "C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_dfp_02_04_18_01/ti/control/mmwavelink/src/rl_sensor.c" \
-"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/lwip/lwip-stack/src/core/stats.c" \
-"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/freertos/FreeRTOS-Kernel/tasks.c" 
+"C:/Git/Radar_software/Dependencies/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/lwip/lwip-stack/src/core/stats.c" \
+"C:/Git/Radar_software/Dependencies/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/freertos/FreeRTOS-Kernel/tasks.c" 
 
 

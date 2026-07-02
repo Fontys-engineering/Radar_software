@@ -120,16 +120,20 @@
 			<value>file:/C:/Git/Radar_software/$%7BProjName%7D/Debug</value>
 		</variable>
 		<variable>
+			<name>DEPENDROOT</name>
+			<value>file:/C:/Git/Radar_software/Dependencies</value>
+		</variable>
+		<variable>
 			<name>MCU_PLUS_SDK_PATH</name>
-			<value>file:/C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04</value>
+			<value>$%7BDEPENDROOT%7D/mcu_plus_sdk_awr294x_10_02_00_04</value>
 		</variable>
 		<variable>
 			<name>MMWAVE_AWR294X_DFP_INSTALL_PATH</name>
-			<value>file:/C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_dfp_02_04_18_01</value>
+			<value>$%7BDEPENDROOT%7D/mmwave_dfp_02_04_18_01</value>
 		</variable>
 		<variable>
 			<name>MMWAVE_SDK_INSTALL_PATH</name>
-			<value>file:/C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01</value>
+			<value>$%7BDEPENDROOT%7D/mmwave_mcuplus_sdk_04_07_02_01</value>
 		</variable>
 		<variable>
 			<name>NETWORK_PATH</name>
