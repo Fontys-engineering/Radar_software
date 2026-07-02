@@ -117,17 +117,6 @@ void Drivers_esmOpen(void);
 void Drivers_esmClose(void);
 
 /*
- * GPIO
- */
-#include <drivers/gpio.h>
-
-/* GPIO Driver open/close - can be used by application when Driver_open() and
- * is not used directly and app wants to control the various driver
- * open sequences */
-void Drivers_gpioOpen(void);
-
-
-/*
  * UART
  */
 #include <drivers/uart.h>

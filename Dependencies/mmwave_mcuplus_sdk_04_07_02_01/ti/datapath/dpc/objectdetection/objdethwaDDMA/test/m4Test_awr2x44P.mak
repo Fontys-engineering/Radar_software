@@ -1,0 +1,98 @@
+###################################################################################
+# Object Detection DPC Test
+###################################################################################
+.PHONY: m4Test m4TestClean
+
+###################################################################################
+# Setup the VPATH:
+###################################################################################
+vpath %.c $(MMWAVE_SDK_INSTALL_PATH)/ti/datapath/dpc/objectdetection/common \
+          $(MMWAVE_SDK_INSTALL_PATH)/ti/datapath/dpc/objectdetection/objdethwaDDMA/src \
+          $(MMWAVE_SDK_INSTALL_PATH)/ti/datapath/dpu/dopplerprocDDMA/src \
+          $(MMWAVE_SDK_INSTALL_PATH)/ti/datapath/dpu/rangeprocDDMA/src \
+          $(MMWAVE_SDK_INSTALL_PATH)/ti/datapath/dpedma/src \
+          $(MMWAVE_SDK_INSTALL_PATH)/ti/datapath/dpu/rangecfarprocDDMA/src \
+          $(MMWAVE_SDK_INSTALL_PATH)/ti/utils/mathutils/src \
+          $(MMWAVE_SDK_INSTALL_PATH)/ti/datapath/dpc/objectdetection/objdethwaDDMA/test \
+          $(MMWAVE_SDK_INSTALL_PATH)/ti/board
+
+ifneq ($(filter $(MMWAVE_SDK_DEVICE_TYPE), awr2x44P), )
+M4_CPU := M4
+endif
+
+M4_INCLUDE += -I$(MMWAVE_SDK_INSTALL_PATH)/ti/datapath/dpc/objectdetection/objdethwaDDMA/test/m4generated \
+
+###################################################################################
+# The Object Detection DPC Test requires additional libraries
+###################################################################################
+OBJECTDETECTION_TEST_M4_STD_LIBS = $($(M4_CPU)_COMMON_STD_LIB) 
+OBJECTDETECTION_TEST_M4_LOC_LIBS = $($(M4_CPU)_COMMON_LOC_LIB)
+
+
+###################################################################################
+# Unit Test Files
+###################################################################################
+OBJECTDETECTION_TEST_M4_CMD       = $(MMWAVE_SDK_INSTALL_PATH)/ti/platform/$(MMWAVE_SDK_DEVICE_TYPE)
+OBJECTDETECTION_TEST_M4_MAP       = test/$(MMWAVE_SDK_DEVICE_TYPE)$(MMWAVE_SDK_LIB_BUILD_OPTION)_objectdetectionDDMA_test_m4.map
+OBJECTDETECTION_TEST_M4_OUT       = test/$(MMWAVE_SDK_DEVICE_TYPE)$(MMWAVE_SDK_LIB_BUILD_OPTION)_objectdetectionDDMA_test_m4.$($(M4_CPU)_EXE_EXT)
+OBJECTDETECTION_TEST_M4_APP_CMD   = test/m4_objectdetection_test_linker_awr2x44P.cmd
+
+MSS_AOA_ENABLED?=1
+
+OBJECTDETECTION_TEST_M4_SOURCES   = objectdetection.c \
+                                    rangeprochwaDDMA.c \
+                                    dopplerprochwaDDMA.c \
+                                    rangecfarprochwa.c \
+                                    dpedmahwa.c \
+                                    dpedma.c \
+                                    main.c \
+                                    antenna_geometry.c \
+                                    mathutils.c
+
+OBJECTDETECTION_TEST_M4_SOURCES_GEN  = ti_board_config.c	\
+										ti_board_open_close.c	\
+										ti_dpl_config.c	\
+										ti_drivers_config.c	\
+										ti_pinmux_config.c	\
+										ti_power_clock_config.c	\
+										ti_drivers_open_close.c
+
+OBJECTDETECTION_TEST_M4_DEPENDS 	 = $(addprefix $(PLATFORM_OBJDIR)/, $(OBJECTDETECTION_TEST_M4_SOURCES:.c=.$($(M4_CPU)_DEP_EXT)))
+OBJECTDETECTION_TEST_M4_OBJECTS 	 = $(addprefix $(PLATFORM_OBJDIR)/, $(OBJECTDETECTION_TEST_M4_SOURCES:.c=.$($(M4_CPU)_OBJ_EXT)))
+
+OBJECTDETECTION_TEST_M4_OBJECTS_GEN = $(addprefix $(PLATFORM_OBJDIR)/m4generated/, $(OBJECTDETECTION_TEST_M4_SOURCES_GEN:.c=.$($(M4_CPU)_OBJ_EXT)))
+
+#OPTIMIZE_FOR_SPEED_OPTIONS := -o1 -o2 -o3 -O1 -O2 -O3
+
+###################################################################################
+# Build Unit Test:
+###################################################################################
+
+m4Test: $(M4_CPU)_CFLAGS += -DAPP_RESOURCE_FILE='<ti/demo/$(MMWAVE_SDK_DEVICE_TYPE)/mmw_ddm/mmw_resDDM.h>' \
+                            -DOBJ_DETECTION_DDMA_TEST \
+                            -DDATAPATH_TEST \
+                            -DMSS_AOA_ENABLED=$(MSS_AOA_ENABLED)
+		$(M4_CPU)_LDFLAGS += -Wl,--define=MSS_AOA_ENABLED=$(MSS_AOA_ENABLED)
+
+m4Test: buildDirectories m4buildDirectories $(OBJECTDETECTION_TEST_M4_OBJECTS) $(OBJECTDETECTION_TEST_M4_OBJECTS_GEN)
+	$($(M4_CPU)_LD) $($(M4_CPU)_LDFLAGS) $(OBJECTDETECTION_TEST_M4_LOC_LIBS) -Wl,-m=$(OBJECTDETECTION_TEST_M4_MAP) \
+    -o $(OBJECTDETECTION_TEST_M4_OUT) $(OBJECTDETECTION_TEST_M4_OBJECTS) $(OBJECTDETECTION_TEST_M4_OBJECTS_GEN) \
+    $(OBJECTDETECTION_TEST_M4_STD_LIBS) $(PLATFORM_$(M4_CPU)_LINK_CMD) $(OBJECTDETECTION_TEST_M4_APP_CMD)
+	@echo "******************************************************************************"
+	@echo 'Built the Object Detection HWA DDMA DPC M4 Unit Test '
+	@echo "******************************************************************************"
+
+###################################################################################
+# Cleanup Unit Test:
+###################################################################################
+m4TestClean:
+	@echo 'Cleaning the Object Detection HWA DDMA DPC M4 Unit Test objects'
+	@$(DEL) $(OBJECTDETECTION_TEST_M4_OBJECTS) $(OBJECTDETECTION_TEST_M4_OBJECTS_GEN)
+	@$(DEL) $(OBJECTDETECTION_TEST_M4_OUT) $(OBJECTDETECTION_TEST_M4_BIN)
+	@$(DEL) $(OBJECTDETECTION_TEST_M4_MAP) $(OBJECTDETECTION_TEST_M4_DEPENDS)
+	@$(DEL) $(PLATFORM_OBJDIR)
+
+###################################################################################
+# Dependency handling
+###################################################################################
+-include $(OBJECTDETECTION_TEST_M4_DEPENDS)

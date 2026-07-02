@@ -1,0 +1,21 @@
+\_form#0=526x29:\[ x_{k,m,l}(n)=A \exp (j2\pi\frac{f_R}{N_{RFFT}}n + j2\pi\frac{f_A}{N_{AFFT}}(m+m_{azim}(l)) + j\varphi_{elev}(l)+j2\pi\frac{f_D}{N_{Tx}N_{DFFT}}k) + noise \]
+\_form#1=106x14:\[ m_{azim}(l) = \{0,4,2\} \]
+\_form#2=229x31:\[ \varphi_{elev}(l) = \left\{ \begin{array}{lr} 0 & : l=0,1\\ \pi\sin(\phi_{deg} / 180 \cdot \pi) & : l=2 \end{array} \right. \]
+\_form#3=6x10:$k$
+\_form#4=138x13:$k=0,...,N_{Tx}N_{DFFT}-1$
+\_form#5=13x6:$m$
+\_form#6=101x13:$m=0,...,N_{Rx}-1$
+\_form#7=4x10:$l$
+\_form#8=93x13:$l=0,...,N_{Tx}-1$
+\_form#9=9x6:$n$
+\_form#10=108x13:$n=0,...,N_{ADC}-1$
+\_form#11=14x13:$f_{R}$
+\_form#12=14x13:$f_{D}$
+\_form#13=14x13:$f_{A}$
+\_form#14=23x14:$\phi_{deg}$
+\_form#15=34x13:$N_{ADC}$
+\_form#16=40x13:$N_{RFFT}$
+\_form#17=40x13:$N_{AFFT}$
+\_form#18=23x13:$N_{Tx}$
+\_form#19=23x13:$N_{Rx}$
+\_form#20=41x13:$N_{DFFT}$

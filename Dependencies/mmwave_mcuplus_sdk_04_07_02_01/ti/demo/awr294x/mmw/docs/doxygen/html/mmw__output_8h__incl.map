@@ -1,0 +1,9 @@
+<map id="awr294x/mmw/include/mmw_output.h" name="awr294x/mmw/include/mmw_output.h">
+<area shape="rect" id="node1" title="This is the interface/message header file for the Millimeter Wave Demo." alt="" coords="224,5,395,47"/>
+<area shape="rect" id="node2" href="$syscommon_8h.html" title="This is the common header file used by the various mmWave SDK modules." alt="" coords="95,102,281,129"/>
+<area shape="rect" id="node7" href="/nightlybuilds/mmwave_app_sdk/ti/datapath/dpc/objectdetection/objdethwaDDMA/docs/objdethwaDDMA.tag$objectdetection_8h.html.html" title=" " alt="" coords="306,95,558,136"/>
+<area shape="rect" id="node3" href="$sys__types_8h.html" title="This is the common header file that contains types for mmwave SDK." alt="" coords="5,184,179,211"/>
+<area shape="rect" id="node6" title=" " alt="" coords="203,184,368,211"/>
+<area shape="rect" id="node4" title=" " alt="" coords="6,259,77,285"/>
+<area shape="rect" id="node5" title=" " alt="" coords="101,259,184,285"/>
+</map>

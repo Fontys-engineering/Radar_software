@@ -1,0 +1,13 @@
+{
+	"name": "TI SysConfig",
+	"main": "desktopServer.js",
+	"window": {
+		"width": 1280,
+		"height": 800,
+		"icon": "icons/sysconfig.png"
+	},
+	"node-remote": "http://localhost:*",
+	"icons": {
+		"256": "icons/sysconfig.png"
+	}
+}

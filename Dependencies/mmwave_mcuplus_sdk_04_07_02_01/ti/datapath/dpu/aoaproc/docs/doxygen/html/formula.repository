@@ -1,0 +1,63 @@
+\_form#0=537x19:$N_{TxAnt}*N_{RxAnt}*N_{DopplerChirps}*sizeof(cmplx16ImRe\_t) \leq 32\;KB$
+\_form#1=523x19:$N_{TxAnt}*N_{RxAnt}*N_{DopplerBins}*sizeof(cmplx16ImRe\_t) \leq 32\;KB$
+\_form#2=154x28:$\Delta\varphi_{dop}=2\pi\frac{l_d}{N_{DopFFT}}$
+\_form#3=12x18:$l_d$
+\_form#4=32x18:$N_{Tx}$
+\_form#5=23x18:$H_n$
+\_form#6=128x18:$ n=0,...N_{Tx}-1$
+\_form#7=35x18:$\Delta\varphi_n$
+\_form#8=383x46:\[ \Delta\varphi_n= \left\{ \begin{array}{lr} \Delta\varphi_{dop}+2\pi(n-\frac{N_{Tx}}{2}) & : \Delta\varphi_{dop} \ge 0\\ \Delta\varphi_{dop}+2\pi(n-\frac{N_{Tx}}{2}+1) & : \Delta\varphi_{dop} < 0 \end{array}\right. \]
+\_form#9=245x39:\[ \Delta\varphi_n= \Delta\varphi_{dop}+2\pi(n- \lfloor\frac{N_{Tx}}{2}\rfloor) \]
+\_form#10=47x19:$\Delta\varphi_{dop}$
+\_form#11=21x16:$i^{th}$
+\_form#12=278x40:\[ \Delta\varphi_i= i \cdot \frac{\Delta\varphi_n}{N_{Tx}}, \;\; i=0,1,...,N_{Tx} - 1 \]
+\_form#13=19x18:$S_n$
+\_form#14=112x19:$P_n = max(Sn)$
+\_form#15=19x18:$P_n$
+\_form#16=23x18:$S_m$
+\_form#17=21x12:$w_x$
+\_form#18=21x12:$w_z$
+\_form#19=112x25:$AB = \frac{\lambda}{2} \sin (\phi)$
+\_form#20=131x19:$AB = 0.8 \lambda \sin (\phi)$
+\_form#21=33x14:$0.5\lambda$
+\_form#22=33x14:$0.8\lambda$
+\_form#23=107x23:$W_z = \frac{2\pi}{\lambda} \cdot AB$
+\_form#24=105x19:$W_z = \pi \sin (\phi)$
+\_form#25=128x19:$W_z = 1.6 \pi \sin (\phi)$
+\_form#26=159x25:$CD = \frac{\lambda}{2} \sin (\theta) \cos (\phi)$
+\_form#27=107x23:$w_x = \frac{2\pi}{\lambda} \cdot CD$
+\_form#28=152x19:$w_x = \pi \sin (\theta) \cos (\phi)$
+\_form#29=21x18:$A_1$
+\_form#30=12x18:$\psi$
+\_form#31=373x23:\[ A_1 e^{j\psi} [ 1 \; e^{jw_x} \; e^{j2w_x} \; e^{j3w_x} \; e^{j4w_x} \; e^{j5w_x} \; e^{j6w_x} \; e^{j7w_x} ] \]
+\_form#32=18x18:$P_1$
+\_form#33=88x21:\[ P_1 = A_1 e^{j\psi} \]
+\_form#34=46x18:$k_{MAX}$
+\_form#35=93x23:$[-\frac{N}{2}, \frac{N}{2}-1]$
+\_form#36=21x12:$ w_x $
+\_form#37=116x37:\[ w_x = \frac{2\pi}{N}k_{MAX} \]
+\_form#38=266x23:\[ A_2 e^{j(\psi + 2 w_x - w_z)} [ 1 \; e^{jw_x} \; e^{j2w_x} \; e^{j3w_x}] \]
+\_form#39=18x18:$P_2$
+\_form#40=105x18:$\psi + 2w_x - w_z$
+\_form#41=161x21:\[ P_2 = A_2 e^{j(\psi+ 2 w_x - w_z)} \]
+\_form#42=261x23:\[ P_1 \cdot P_2^* = A_1 \cdot A_2 e^{j(\psi - (\psi+ 2 w_x - w_z))} \]
+\_form#43=175x23:\[ w_z=\angle (P_1 \cdot P_2^* \cdot e^{j2w_x}) \]
+\_form#44=9x14:$\theta$
+\_form#45=11x18:$\phi$
+\_form#46=93x18:$\phi_{min},\;\phi_{max},$
+\_form#47=84x18:$\theta_{min},\;\theta_{max}$
+\_form#48=23x18:$W_z$
+\_form#49=25x18:$W_x$
+\_form#50=88x19:$W_z = w_z/\pi$
+\_form#51=89x19:$W_x = w_x/\pi$
+\_form#52=11x12:$\ni$
+\_form#53=105x19:$W_z = \nu \sin(\phi)$
+\_form#54=140x19:$W_x = \cos(\phi) \sin(\theta)$
+\_form#55=242x19:\[ \nu \sin(\phi_{min}) \leq W_z \leq \nu \sin(\phi_{max}) \]
+\_form#56=47x19:$\cos(\phi)$
+\_form#57=313x19:\[ \cos(\phi)\sin(\theta_{min}) \leq W_x \leq \cos(\phi) \sin(\theta_{max}) \]
+\_form#58=271x23:$\cos(\phi) = \sqrt{1 - \sin(\phi)^2} = \sqrt{1 - W_z^2}$
+\_form#59=72x19:$\sin(\phi_{min})$
+\_form#60=75x19:$\sin(\phi_{max})$
+\_form#61=70x19:$\sin(\theta_{min})$
+\_form#62=72x19:$\sin(\theta_{max})$

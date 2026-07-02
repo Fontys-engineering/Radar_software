@@ -1,0 +1,15 @@
+<map id="utils/mmwdemo_adcconfig.c" name="utils/mmwdemo_adcconfig.c">
+<area shape="rect" id="node1" title="Implements High level ADC open/config APIs." alt="" coords="252,5,460,32"/>
+<area shape="rect" id="node2" title=" " alt="" coords="43,244,114,271"/>
+<area shape="rect" id="node3" title=" " alt="" coords="32,87,103,114"/>
+<area shape="rect" id="node4" title=" " alt="" coords="128,87,202,114"/>
+<area shape="rect" id="node5" title=" " alt="" coords="227,87,298,114"/>
+<area shape="rect" id="node6" title=" " alt="" coords="322,87,389,114"/>
+<area shape="rect" id="node7" title=" " alt="" coords="414,87,482,114"/>
+<area shape="rect" id="node8" href="$syscommon_8h.html" title="This is the common header file used by the various mmWave SDK modules." alt="" coords="506,87,693,114"/>
+<area shape="rect" id="node12" title=" " alt="" coords="751,169,878,196"/>
+<area shape="rect" id="node13" href="$mmwdemo__adcconfig_8h.html" title="API header for adc open/config functions." alt="" coords="768,80,951,121"/>
+<area shape="rect" id="node9" href="$sys__types_8h.html" title="This is the common header file that contains types for mmwave SDK." alt="" coords="176,169,349,196"/>
+<area shape="rect" id="node11" title=" " alt="" coords="517,169,682,196"/>
+<area shape="rect" id="node10" title=" " alt="" coords="221,244,304,271"/>
+</map>

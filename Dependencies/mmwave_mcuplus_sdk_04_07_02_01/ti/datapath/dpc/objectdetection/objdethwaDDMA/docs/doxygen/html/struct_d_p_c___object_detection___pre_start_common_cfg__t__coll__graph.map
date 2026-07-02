@@ -1,0 +1,7 @@
+<map id="DPC_ObjectDetection_PreStartCommonCfg_t" name="DPC_ObjectDetection_PreStartCommonCfg_t">
+<area shape="rect" id="node1" title="Configuration related to IOCTL API for command DPC_OBJDET_IOCTL__STATIC_PRE_START_COMMON_CFG...." alt="" coords="452,104,627,145"/>
+<area shape="rect" id="node2" href="/nightlybuilds/mmwave_app_sdk/ti/datapath/dpu/rangeprocDDMA/docs/rangeprocDDMA.tag$struct_d_p_u___range_proc_h_w_a_d_d_m_a__range_proc_cfg__t.html" title=" " alt="" coords="15,5,213,47"/>
+<area shape="rect" id="node3" href="$struct_d_p_c___object_detection___zero_insrt_mask_cfg__t.html" title=" " alt="" coords="33,71,195,112"/>
+<area shape="rect" id="node4" href="$struct_d_p_c___object_detection___antenna_spacing__t.html" title=" " alt="" coords="33,136,195,177"/>
+<area shape="rect" id="node5" href="$struct_d_p_c___object_detection___measure_rx_channel_bias_cfg__t.html" title="RX channel gain/phase measurement configuration." alt="" coords="5,201,223,243"/>
+</map>

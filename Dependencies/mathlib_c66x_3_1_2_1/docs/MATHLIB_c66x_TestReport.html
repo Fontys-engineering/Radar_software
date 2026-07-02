@@ -1,0 +1,2454 @@
+<html><head> 
+    <meta http-equiv="Content-Language" content="en-us"> 
+    <meta http-equiv="Content-Type" content="text/html; charset=windows-1252"> 
+    <title>Project Runner Data</title> 
+  </head>  
+
+  <body>  
+    <a name="HOME"></a> 
+
+    <h1 align="center">Texas Instruments Test Results</h1>
+<h1 align="center">MATHLIB 3.1.2.1 c66x</h1>
+<h1></h1>   
+    
+    <div> 
+      <h1>&nbsp;</h1>
+      <h1>Session Summary</h1>   
+      <table bgcolor="#ffffff" border="1" cellpadding="4" cellspacing="2" width="50%"> 
+
+        <tbody><tr align="center" bgcolor="#999999"> 
+          <th>Precision</th> 
+          <th>Endianness</th> 
+          <th>Object Format</th> 
+          <th>Link</th> 
+        </tr>
+<tr align="left"> 
+          <td rowspan="4">Double Float</td> 
+          <td rowspan="2">Big Endian</td> 
+          <td>COFF Format</td> 
+          <td><a href="#DBC">View Results</a></td> 
+        </tr>  
+
+        <tr align="left"> 
+          <td>ELF Format</td> 
+          <td><a href="#DBE">View Results</a></td> 
+        </tr>  
+
+        <tr align="left"> 
+          <td rowspan="2">Little Endian</td> 
+          <td>COFF Format</td> 
+          <td><a href="#DLC">View Results</a></td> 
+        </tr>  
+
+        <tr align="left"> 
+          <td>ELF Format</td> 
+          <td><a href="#DLE">View Results</a></td> 
+        </tr>  
+
+        <tr align="left"> 
+          <td rowspan="4">Single Float</td> 
+          <td rowspan="2">Big Endian</td> 
+          <td>COFF Format</td> 
+          <td><a href="#SBC">View Results</a></td> 
+        </tr>  
+
+        <tr align="left"> 
+          <td>ELF Format</td> 
+          <td><a href="#SBE">View Results</a></td> 
+        </tr>  
+
+        <tr align="left"> 
+          <td rowspan="2">Little Endian</td> 
+          <td>COFF Format</td> 
+          <td><a href="#SLC">View Results</a></td> 
+        </tr>  
+
+        <tr align="left"> 
+          <td>ELF Format</td> 
+          <td><a href="#SLE">View Results</a></td> 
+        </tr>
+</tbody></table>  
+      
+      <p>
+      </p><p>
+    
+    
+      <table frame="box" rules="none" bgcolor="#ffff99" border="1" cellpadding="4" cellspacing="2" width="50%"> 
+
+        <tbody><tr> 
+          <td rowspan="2" align="left">Notes:</td> 
+          <td align="left">
+<li>Vector cycles are calculated for 128-iteration loop.</li>
+		  </td>
+        </tr>  
+
+      </tbody></table>  
+    </p>
+</div>
+<html><head>
+<meta http-equiv="Content-Language" content="en-us">
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
+<title>Project Runner Data</title>
+</head>
+
+<div>
+<h1>&nbsp;</h1>
+<a name="DBC"></a>
+<table bgcolor="#ffffff" border="1" cellpadding="4" cellspacing="2" width="75%">
+<tr bgcolor="#999999" align="left">
+<th colspan="8"><big>Test Parameters</big></th>
+</tr>
+<tr align="left" bgcolor="#ffffcc">
+<th colspan="2">Precision:</th>
+<th colspan="6">Double Float</th>
+</tr>
+<tr align="left" bgcolor="#ffffcc">
+<th colspan="2">Endianness:</th>
+<th colspan="6">BE</th>
+</tr>
+<tr align="left" bgcolor="#ffffcc">
+<th colspan="2">Object File Format:</th>
+<th colspan="6">COFF</th>
+</tr>
+<tr align="left" bgcolor="#ffffcc">
+<th colspan="2">Simulator:</th>
+<th colspan="6">TCI6608 Device Functional Simulator, Big Endian</th>
+</tr>
+<tr align="left" bgcolor="#ffffcc">
+<th colspan="2">Cores Used:</th>
+<th colspan="6">1</th>
+</tr>
+<tr align="left" bgcolor="#ffffcc">
+<th colspan="2">CCS Version:</th>
+<th colspan="6">5.5.0.00077</th>
+</tr>
+<tr align="left" bgcolor="#ffffcc">
+<th colspan="2">CG TOOLS Version:</th>
+<th colspan="6">7.4.2</th>
+</tr>
+<tr align="center">
+<th rowspan="2" bgcolor="#cccccc">Kernel</th>
+<th rowspan="2" bgcolor="#cccccc">Result</th>
+<th colspan="4" bgcolor="#cccccc">Profile (Cycles)</th>
+<th colspan="2" bgcolor="#cccccc">Memory (Bytes)</th>
+</tr>
+<tr align="center">
+
+<th bgcolor="#cccccc">&nbsp;&nbsp;RTS&nbsp;&nbsp;</th>
+<th bgcolor="#cccccc">&nbsp;&nbsp;C&nbsp;&nbsp;</th>
+<th bgcolor="#cccccc">&nbsp;&nbsp;Inline&nbsp;&nbsp;</th>
+<th bgcolor="#cccccc">&nbsp;&nbsp;Vector&nbsp;&nbsp;</th>
+<th bgcolor="#cccccc">&nbsp;&nbsp;C&nbsp;&nbsp;</th>
+<th bgcolor="#cccccc">&nbsp;&nbsp;Vector&nbsp;&nbsp;</th>
+</tr>
+
+<tr align="center">
+<td > acosdp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 183 </td>
+<td align="right" > 131 </td>
+<td align="right" > 89 </td>
+<td align="right" > 59 </td>
+<td align="right" > 2624 </td>
+<td align="right" > 2432 </td>
+</tr>
+<tr align="center">
+<td > acoshdp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 813 </td>
+<td align="right" > 254 </td>
+<td align="right" > 241 </td>
+<td align="right" > 71 </td>
+<td align="right" > 1728 </td>
+<td align="right" > 3296 </td>
+</tr>
+<tr align="center">
+<td > asindp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 180 </td>
+<td align="right" > 123 </td>
+<td align="right" > 86 </td>
+<td align="right" > 57 </td>
+<td align="right" > 2688 </td>
+<td align="right" > 2432 </td>
+</tr>
+<tr align="center">
+<td > asinhdp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 811 </td>
+<td align="right" > 257 </td>
+<td align="right" > 265 </td>
+<td align="right" > 93 </td>
+<td align="right" > 1920 </td>
+<td align="right" > 4736 </td>
+</tr>
+<tr align="center">
+<td > atan2dp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 807 </td>
+<td align="right" > 262 </td>
+<td align="right" > 244 </td>
+<td align="right" > 207 </td>
+<td align="right" > 1920 </td>
+<td align="right" > 1152 </td>
+</tr>
+<tr align="center">
+<td > atandp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 483 </td>
+<td align="right" > 198 </td>
+<td align="right" > 166 </td>
+<td align="right" > 93 </td>
+<td align="right" > 1280 </td>
+<td align="right" > 3712 </td>
+</tr>
+<tr align="center">
+<td > atanhdp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 122 </td>
+<td align="right" > 198 </td>
+<td align="right" > 175 </td>
+<td align="right" > 89 </td>
+<td align="right" > 1728 </td>
+<td align="right" > 4320 </td>
+</tr>
+<tr align="center">
+<td > cosdp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 214 </td>
+<td align="right" > 108 </td>
+<td align="right" > 87 </td>
+<td align="right" > 30 </td>
+<td align="right" > 768 </td>
+<td align="right" > 448 </td>
+</tr>
+<tr align="center">
+<td > coshdp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 770 </td>
+<td align="right" > 141 </td>
+<td align="right" > 128 </td>
+<td align="right" > 56 </td>
+<td align="right" > 2432 </td>
+<td align="right" > 1120 </td>
+</tr>
+<tr align="center">
+<td > divdp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 281 </td>
+<td align="right" > 60 </td>
+<td align="right" > 48 </td>
+<td align="right" > 7 </td>
+<td align="right" > 256 </td>
+<td align="right" > 1248 </td>
+</tr>
+<tr align="center">
+<td > exp10dp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 482 </td>
+<td align="right" > 132 </td>
+<td align="right" > 111 </td>
+<td align="right" > 28 </td>
+<td align="right" > 832 </td>
+<td align="right" > 1280 </td>
+</tr>
+<tr align="center">
+<td > exp2dp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 480 </td>
+<td align="right" > 132 </td>
+<td align="right" > 111 </td>
+<td align="right" > 25 </td>
+<td align="right" > 832 </td>
+<td align="right" > 1824 </td>
+</tr>
+<tr align="center">
+<td > expdp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 460 </td>
+<td align="right" > 135 </td>
+<td align="right" > 111 </td>
+<td align="right" > 27 </td>
+<td align="right" > 832 </td>
+<td align="right" > 704 </td>
+</tr>
+<tr align="center">
+<td > log10dp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 669 </td>
+<td align="right" > 166 </td>
+<td align="right" > 157 </td>
+<td align="right" > 155 </td>
+<td align="right" > 1216 </td>
+<td align="right" > 768 </td>
+</tr>
+<tr align="center">
+<td > log2dp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 678 </td>
+<td align="right" > 165 </td>
+<td align="right" > 154 </td>
+<td align="right" > 152 </td>
+<td align="right" > 1152 </td>
+<td align="right" > 736 </td>
+</tr>
+<tr align="center">
+<td > logdp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 652 </td>
+<td align="right" > 166 </td>
+<td align="right" > 153 </td>
+<td align="right" > 149 </td>
+<td align="right" > 1152 </td>
+<td align="right" > 736 </td>
+</tr>
+<tr align="center">
+<td > powdp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 971 </td>
+<td align="right" > 285 </td>
+<td align="right" > 275 </td>
+<td align="right" > 269 </td>
+<td align="right" > 2112 </td>
+<td align="right" > 1312 </td>
+</tr>
+<tr align="center">
+<td > recipdp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 287 </td>
+<td align="right" > 61 </td>
+<td align="right" > 35 </td>
+<td align="right" > 7 </td>
+<td align="right" > 256 </td>
+<td align="right" > 224 </td>
+</tr>
+<tr align="center">
+<td > rsqrtdp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 198 </td>
+<td align="right" > 83 </td>
+<td align="right" > 52 </td>
+<td align="right" > 10 </td>
+<td align="right" > 384 </td>
+<td align="right" > 1376 </td>
+</tr>
+<tr align="center">
+<td > sindp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 193 </td>
+<td align="right" > 101 </td>
+<td align="right" > 84 </td>
+<td align="right" > 27 </td>
+<td align="right" > 704 </td>
+<td align="right" > 640 </td>
+</tr>
+<tr align="center">
+<td > sinhdp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 772 </td>
+<td align="right" > 146 </td>
+<td align="right" > 132 </td>
+<td align="right" > 60 </td>
+<td align="right" > 2432 </td>
+<td align="right" > 4224 </td>
+</tr>
+<tr align="center">
+<td > sqrtdp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 118 </td>
+<td align="right" > 89 </td>
+<td align="right" > 71 </td>
+<td align="right" > 11 </td>
+<td align="right" > 256 </td>
+<td align="right" > 1600 </td>
+</tr>
+<tr align="center">
+<td > tandp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 459 </td>
+<td align="right" > 153 </td>
+<td align="right" > 129 </td>
+<td align="right" > 51 </td>
+<td align="right" > 1472 </td>
+<td align="right" > 2400 </td>
+</tr>
+<tr align="center">
+<td > tanhdp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 720 </td>
+<td align="right" > 218 </td>
+<td align="right" > 159 </td>
+<td align="right" > 56 </td>
+<td align="right" > 1536 </td>
+<td align="right" > 960 </td>
+</tr>
+</tbody></table>
+<p><a href="#HOME">Top</a>
+</p></div>
+
+<div>
+<h1>&nbsp;</h1>
+<a name="DBE"></a>
+<table bgcolor="#ffffff" border="1" cellpadding="4" cellspacing="2" width="75%">
+<tr bgcolor="#999999" align="left">
+<th colspan="8"><big>Test Parameters</big></th>
+</tr>
+<tr align="left" bgcolor="#ffffcc">
+<th colspan="2">Precision:</th>
+<th colspan="6">Double Float</th>
+</tr>
+<tr align="left" bgcolor="#ffffcc">
+<th colspan="2">Endianness:</th>
+<th colspan="6">BE</th>
+</tr>
+<tr align="left" bgcolor="#ffffcc">
+<th colspan="2">Object File Format:</th>
+<th colspan="6">ELF</th>
+</tr>
+<tr align="left" bgcolor="#ffffcc">
+<th colspan="2">Simulator:</th>
+<th colspan="6">TCI6608 Device Functional Simulator, Big Endian</th>
+</tr>
+<tr align="left" bgcolor="#ffffcc">
+<th colspan="2">Cores Used:</th>
+<th colspan="6">1</th>
+</tr>
+<tr align="left" bgcolor="#ffffcc">
+<th colspan="2">CCS Version:</th>
+<th colspan="6">5.5.0.00077</th>
+</tr>
+<tr align="left" bgcolor="#ffffcc">
+<th colspan="2">CG TOOLS Version:</th>
+<th colspan="6">7.4.2</th>
+</tr>
+<tr align="center">
+<th rowspan="2" bgcolor="#cccccc">Kernel</th>
+<th rowspan="2" bgcolor="#cccccc">Result</th>
+<th colspan="4" bgcolor="#cccccc">Profile (Cycles)</th>
+<th colspan="2" bgcolor="#cccccc">Memory (Bytes)</th>
+</tr>
+<tr align="center">
+
+<th bgcolor="#cccccc">&nbsp;&nbsp;RTS&nbsp;&nbsp;</th>
+<th bgcolor="#cccccc">&nbsp;&nbsp;C&nbsp;&nbsp;</th>
+<th bgcolor="#cccccc">&nbsp;&nbsp;Inline&nbsp;&nbsp;</th>
+<th bgcolor="#cccccc">&nbsp;&nbsp;Vector&nbsp;&nbsp;</th>
+<th bgcolor="#cccccc">&nbsp;&nbsp;C&nbsp;&nbsp;</th>
+<th bgcolor="#cccccc">&nbsp;&nbsp;Vector&nbsp;&nbsp;</th>
+</tr>
+
+<tr align="center">
+<td > acosdp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 182 </td>
+<td align="right" > 137 </td>
+<td align="right" > 89 </td>
+<td align="right" > 59 </td>
+<td align="right" > 2624 </td>
+<td align="right" > 2432 </td>
+</tr>
+<tr align="center">
+<td > acoshdp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 812 </td>
+<td align="right" > 260 </td>
+<td align="right" > 241 </td>
+<td align="right" > 71 </td>
+<td align="right" > 1728 </td>
+<td align="right" > 3296 </td>
+</tr>
+<tr align="center">
+<td > asindp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 177 </td>
+<td align="right" > 129 </td>
+<td align="right" > 86 </td>
+<td align="right" > 57 </td>
+<td align="right" > 2688 </td>
+<td align="right" > 2432 </td>
+</tr>
+<tr align="center">
+<td > asinhdp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 808 </td>
+<td align="right" > 263 </td>
+<td align="right" > 265 </td>
+<td align="right" > 93 </td>
+<td align="right" > 1920 </td>
+<td align="right" > 4736 </td>
+</tr>
+<tr align="center">
+<td > atan2dp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 827 </td>
+<td align="right" > 268 </td>
+<td align="right" > 244 </td>
+<td align="right" > 207 </td>
+<td align="right" > 1920 </td>
+<td align="right" > 1152 </td>
+</tr>
+<tr align="center">
+<td > atandp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 483 </td>
+<td align="right" > 204 </td>
+<td align="right" > 166 </td>
+<td align="right" > 93 </td>
+<td align="right" > 1280 </td>
+<td align="right" > 3712 </td>
+</tr>
+<tr align="center">
+<td > atanhdp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 130 </td>
+<td align="right" > 204 </td>
+<td align="right" > 175 </td>
+<td align="right" > 89 </td>
+<td align="right" > 1760 </td>
+<td align="right" > 4320 </td>
+</tr>
+<tr align="center">
+<td > cosdp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 214 </td>
+<td align="right" > 114 </td>
+<td align="right" > 87 </td>
+<td align="right" > 30 </td>
+<td align="right" > 768 </td>
+<td align="right" > 448 </td>
+</tr>
+<tr align="center">
+<td > coshdp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 771 </td>
+<td align="right" > 147 </td>
+<td align="right" > 128 </td>
+<td align="right" > 56 </td>
+<td align="right" > 2432 </td>
+<td align="right" > 1120 </td>
+</tr>
+<tr align="center">
+<td > divdp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 281 </td>
+<td align="right" > 66 </td>
+<td align="right" > 48 </td>
+<td align="right" > 7 </td>
+<td align="right" > 256 </td>
+<td align="right" > 1248 </td>
+</tr>
+<tr align="center">
+<td > exp10dp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 483 </td>
+<td align="right" > 138 </td>
+<td align="right" > 111 </td>
+<td align="right" > 28 </td>
+<td align="right" > 832 </td>
+<td align="right" > 1280 </td>
+</tr>
+<tr align="center">
+<td > exp2dp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 481 </td>
+<td align="right" > 138 </td>
+<td align="right" > 111 </td>
+<td align="right" > 25 </td>
+<td align="right" > 832 </td>
+<td align="right" > 1824 </td>
+</tr>
+<tr align="center">
+<td > expdp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 461 </td>
+<td align="right" > 141 </td>
+<td align="right" > 111 </td>
+<td align="right" > 27 </td>
+<td align="right" > 832 </td>
+<td align="right" > 704 </td>
+</tr>
+<tr align="center">
+<td > log10dp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 672 </td>
+<td align="right" > 172 </td>
+<td align="right" > 157 </td>
+<td align="right" > 155 </td>
+<td align="right" > 1216 </td>
+<td align="right" > 768 </td>
+</tr>
+<tr align="center">
+<td > log2dp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 681 </td>
+<td align="right" > 171 </td>
+<td align="right" > 154 </td>
+<td align="right" > 152 </td>
+<td align="right" > 1184 </td>
+<td align="right" > 736 </td>
+</tr>
+<tr align="center">
+<td > logdp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 655 </td>
+<td align="right" > 172 </td>
+<td align="right" > 153 </td>
+<td align="right" > 149 </td>
+<td align="right" > 1152 </td>
+<td align="right" > 736 </td>
+</tr>
+<tr align="center">
+<td > powdp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 1002 </td>
+<td align="right" > 291 </td>
+<td align="right" > 275 </td>
+<td align="right" > 269 </td>
+<td align="right" > 2112 </td>
+<td align="right" > 1312 </td>
+</tr>
+<tr align="center">
+<td > recipdp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 287 </td>
+<td align="right" > 67 </td>
+<td align="right" > 35 </td>
+<td align="right" > 7 </td>
+<td align="right" > 256 </td>
+<td align="right" > 224 </td>
+</tr>
+<tr align="center">
+<td > rsqrtdp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 221 </td>
+<td align="right" > 89 </td>
+<td align="right" > 52 </td>
+<td align="right" > 10 </td>
+<td align="right" > 384 </td>
+<td align="right" > 1376 </td>
+</tr>
+<tr align="center">
+<td > sindp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 193 </td>
+<td align="right" > 107 </td>
+<td align="right" > 84 </td>
+<td align="right" > 27 </td>
+<td align="right" > 704 </td>
+<td align="right" > 640 </td>
+</tr>
+<tr align="center">
+<td > sinhdp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 773 </td>
+<td align="right" > 152 </td>
+<td align="right" > 132 </td>
+<td align="right" > 60 </td>
+<td align="right" > 2464 </td>
+<td align="right" > 4224 </td>
+</tr>
+<tr align="center">
+<td > sqrtdp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 112 </td>
+<td align="right" > 95 </td>
+<td align="right" > 71 </td>
+<td align="right" > 11 </td>
+<td align="right" > 256 </td>
+<td align="right" > 1600 </td>
+</tr>
+<tr align="center">
+<td > tandp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 459 </td>
+<td align="right" > 159 </td>
+<td align="right" > 129 </td>
+<td align="right" > 51 </td>
+<td align="right" > 1472 </td>
+<td align="right" > 2400 </td>
+</tr>
+<tr align="center">
+<td > tanhdp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 721 </td>
+<td align="right" > 224 </td>
+<td align="right" > 159 </td>
+<td align="right" > 56 </td>
+<td align="right" > 1536 </td>
+<td align="right" > 960 </td>
+</tr>
+</tbody></table>
+<p><a href="#HOME">Top</a>
+</p></div>
+
+<div>
+<h1>&nbsp;</h1>
+<a name="DLC"></a>
+<table bgcolor="#ffffff" border="1" cellpadding="4" cellspacing="2" width="75%">
+<tr bgcolor="#999999" align="left">
+<th colspan="8"><big>Test Parameters</big></th>
+</tr>
+<tr align="left" bgcolor="#ffffcc">
+<th colspan="2">Precision:</th>
+<th colspan="6">Double Float</th>
+</tr>
+<tr align="left" bgcolor="#ffffcc">
+<th colspan="2">Endianness:</th>
+<th colspan="6">LE</th>
+</tr>
+<tr align="left" bgcolor="#ffffcc">
+<th colspan="2">Object File Format:</th>
+<th colspan="6">COFF</th>
+</tr>
+<tr align="left" bgcolor="#ffffcc">
+<th colspan="2">Simulator:</th>
+<th colspan="6">TCI6608 Device Functional Simulator, Little Endian</th>
+</tr>
+<tr align="left" bgcolor="#ffffcc">
+<th colspan="2">Cores Used:</th>
+<th colspan="6">1</th>
+</tr>
+<tr align="left" bgcolor="#ffffcc">
+<th colspan="2">CCS Version:</th>
+<th colspan="6">5.5.0.00077</th>
+</tr>
+<tr align="left" bgcolor="#ffffcc">
+<th colspan="2">CG TOOLS Version:</th>
+<th colspan="6">7.4.2</th>
+</tr>
+<tr align="center">
+<th rowspan="2" bgcolor="#cccccc">Kernel</th>
+<th rowspan="2" bgcolor="#cccccc">Result</th>
+<th colspan="4" bgcolor="#cccccc">Profile (Cycles)</th>
+<th colspan="2" bgcolor="#cccccc">Memory (Bytes)</th>
+</tr>
+<tr align="center">
+
+<th bgcolor="#cccccc">&nbsp;&nbsp;RTS&nbsp;&nbsp;</th>
+<th bgcolor="#cccccc">&nbsp;&nbsp;C&nbsp;&nbsp;</th>
+<th bgcolor="#cccccc">&nbsp;&nbsp;Inline&nbsp;&nbsp;</th>
+<th bgcolor="#cccccc">&nbsp;&nbsp;Vector&nbsp;&nbsp;</th>
+<th bgcolor="#cccccc">&nbsp;&nbsp;C&nbsp;&nbsp;</th>
+<th bgcolor="#cccccc">&nbsp;&nbsp;Vector&nbsp;&nbsp;</th>
+</tr>
+
+<tr align="center">
+<td > acosdp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 183 </td>
+<td align="right" > 131 </td>
+<td align="right" > 89 </td>
+<td align="right" > 59 </td>
+<td align="right" > 2624 </td>
+<td align="right" > 2432 </td>
+</tr>
+<tr align="center">
+<td > acoshdp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 813 </td>
+<td align="right" > 254 </td>
+<td align="right" > 241 </td>
+<td align="right" > 71 </td>
+<td align="right" > 1728 </td>
+<td align="right" > 3296 </td>
+</tr>
+<tr align="center">
+<td > asindp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 180 </td>
+<td align="right" > 123 </td>
+<td align="right" > 86 </td>
+<td align="right" > 57 </td>
+<td align="right" > 2688 </td>
+<td align="right" > 2432 </td>
+</tr>
+<tr align="center">
+<td > asinhdp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 811 </td>
+<td align="right" > 257 </td>
+<td align="right" > 265 </td>
+<td align="right" > 93 </td>
+<td align="right" > 1920 </td>
+<td align="right" > 4736 </td>
+</tr>
+<tr align="center">
+<td > atan2dp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 807 </td>
+<td align="right" > 262 </td>
+<td align="right" > 244 </td>
+<td align="right" > 207 </td>
+<td align="right" > 1920 </td>
+<td align="right" > 1152 </td>
+</tr>
+<tr align="center">
+<td > atandp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 483 </td>
+<td align="right" > 198 </td>
+<td align="right" > 166 </td>
+<td align="right" > 93 </td>
+<td align="right" > 1280 </td>
+<td align="right" > 3712 </td>
+</tr>
+<tr align="center">
+<td > atanhdp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 122 </td>
+<td align="right" > 198 </td>
+<td align="right" > 175 </td>
+<td align="right" > 89 </td>
+<td align="right" > 1728 </td>
+<td align="right" > 4320 </td>
+</tr>
+<tr align="center">
+<td > cosdp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 214 </td>
+<td align="right" > 108 </td>
+<td align="right" > 87 </td>
+<td align="right" > 30 </td>
+<td align="right" > 768 </td>
+<td align="right" > 448 </td>
+</tr>
+<tr align="center">
+<td > coshdp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 770 </td>
+<td align="right" > 141 </td>
+<td align="right" > 128 </td>
+<td align="right" > 56 </td>
+<td align="right" > 2432 </td>
+<td align="right" > 1120 </td>
+</tr>
+<tr align="center">
+<td > divdp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 281 </td>
+<td align="right" > 60 </td>
+<td align="right" > 48 </td>
+<td align="right" > 7 </td>
+<td align="right" > 256 </td>
+<td align="right" > 1248 </td>
+</tr>
+<tr align="center">
+<td > exp10dp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 482 </td>
+<td align="right" > 132 </td>
+<td align="right" > 111 </td>
+<td align="right" > 28 </td>
+<td align="right" > 832 </td>
+<td align="right" > 1280 </td>
+</tr>
+<tr align="center">
+<td > exp2dp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 480 </td>
+<td align="right" > 132 </td>
+<td align="right" > 111 </td>
+<td align="right" > 25 </td>
+<td align="right" > 832 </td>
+<td align="right" > 1824 </td>
+</tr>
+<tr align="center">
+<td > expdp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 460 </td>
+<td align="right" > 135 </td>
+<td align="right" > 111 </td>
+<td align="right" > 27 </td>
+<td align="right" > 832 </td>
+<td align="right" > 704 </td>
+</tr>
+<tr align="center">
+<td > log10dp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 669 </td>
+<td align="right" > 166 </td>
+<td align="right" > 157 </td>
+<td align="right" > 155 </td>
+<td align="right" > 1216 </td>
+<td align="right" > 768 </td>
+</tr>
+<tr align="center">
+<td > log2dp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 678 </td>
+<td align="right" > 165 </td>
+<td align="right" > 154 </td>
+<td align="right" > 152 </td>
+<td align="right" > 1152 </td>
+<td align="right" > 736 </td>
+</tr>
+<tr align="center">
+<td > logdp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 652 </td>
+<td align="right" > 166 </td>
+<td align="right" > 153 </td>
+<td align="right" > 149 </td>
+<td align="right" > 1152 </td>
+<td align="right" > 736 </td>
+</tr>
+<tr align="center">
+<td > powdp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 971 </td>
+<td align="right" > 285 </td>
+<td align="right" > 275 </td>
+<td align="right" > 269 </td>
+<td align="right" > 2112 </td>
+<td align="right" > 1312 </td>
+</tr>
+<tr align="center">
+<td > recipdp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 287 </td>
+<td align="right" > 61 </td>
+<td align="right" > 35 </td>
+<td align="right" > 7 </td>
+<td align="right" > 256 </td>
+<td align="right" > 224 </td>
+</tr>
+<tr align="center">
+<td > rsqrtdp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 198 </td>
+<td align="right" > 83 </td>
+<td align="right" > 52 </td>
+<td align="right" > 10 </td>
+<td align="right" > 384 </td>
+<td align="right" > 1376 </td>
+</tr>
+<tr align="center">
+<td > sindp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 193 </td>
+<td align="right" > 101 </td>
+<td align="right" > 84 </td>
+<td align="right" > 27 </td>
+<td align="right" > 704 </td>
+<td align="right" > 640 </td>
+</tr>
+<tr align="center">
+<td > sinhdp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 772 </td>
+<td align="right" > 146 </td>
+<td align="right" > 132 </td>
+<td align="right" > 60 </td>
+<td align="right" > 2432 </td>
+<td align="right" > 4224 </td>
+</tr>
+<tr align="center">
+<td > sqrtdp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 118 </td>
+<td align="right" > 89 </td>
+<td align="right" > 71 </td>
+<td align="right" > 11 </td>
+<td align="right" > 256 </td>
+<td align="right" > 1600 </td>
+</tr>
+<tr align="center">
+<td > tandp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 459 </td>
+<td align="right" > 153 </td>
+<td align="right" > 129 </td>
+<td align="right" > 51 </td>
+<td align="right" > 1472 </td>
+<td align="right" > 2400 </td>
+</tr>
+<tr align="center">
+<td > tanhdp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 720 </td>
+<td align="right" > 218 </td>
+<td align="right" > 159 </td>
+<td align="right" > 56 </td>
+<td align="right" > 1536 </td>
+<td align="right" > 960 </td>
+</tr>
+</tbody></table>
+<p><a href="#HOME">Top</a>
+</p></div>
+
+<div>
+<h1>&nbsp;</h1>
+<a name="DLE"></a>
+<table bgcolor="#ffffff" border="1" cellpadding="4" cellspacing="2" width="75%">
+<tr bgcolor="#999999" align="left">
+<th colspan="8"><big>Test Parameters</big></th>
+</tr>
+<tr align="left" bgcolor="#ffffcc">
+<th colspan="2">Precision:</th>
+<th colspan="6">Double Float</th>
+</tr>
+<tr align="left" bgcolor="#ffffcc">
+<th colspan="2">Endianness:</th>
+<th colspan="6">LE</th>
+</tr>
+<tr align="left" bgcolor="#ffffcc">
+<th colspan="2">Object File Format:</th>
+<th colspan="6">ELF</th>
+</tr>
+<tr align="left" bgcolor="#ffffcc">
+<th colspan="2">Simulator:</th>
+<th colspan="6">TCI6608 Device Functional Simulator, Little Endian</th>
+</tr>
+<tr align="left" bgcolor="#ffffcc">
+<th colspan="2">Cores Used:</th>
+<th colspan="6">1</th>
+</tr>
+<tr align="left" bgcolor="#ffffcc">
+<th colspan="2">CCS Version:</th>
+<th colspan="6">5.5.0.00077</th>
+</tr>
+<tr align="left" bgcolor="#ffffcc">
+<th colspan="2">CG TOOLS Version:</th>
+<th colspan="6">7.4.2</th>
+</tr>
+<tr align="center">
+<th rowspan="2" bgcolor="#cccccc">Kernel</th>
+<th rowspan="2" bgcolor="#cccccc">Result</th>
+<th colspan="4" bgcolor="#cccccc">Profile (Cycles)</th>
+<th colspan="2" bgcolor="#cccccc">Memory (Bytes)</th>
+</tr>
+<tr align="center">
+
+<th bgcolor="#cccccc">&nbsp;&nbsp;RTS&nbsp;&nbsp;</th>
+<th bgcolor="#cccccc">&nbsp;&nbsp;C&nbsp;&nbsp;</th>
+<th bgcolor="#cccccc">&nbsp;&nbsp;Inline&nbsp;&nbsp;</th>
+<th bgcolor="#cccccc">&nbsp;&nbsp;Vector&nbsp;&nbsp;</th>
+<th bgcolor="#cccccc">&nbsp;&nbsp;C&nbsp;&nbsp;</th>
+<th bgcolor="#cccccc">&nbsp;&nbsp;Vector&nbsp;&nbsp;</th>
+</tr>
+
+<tr align="center">
+<td > acosdp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 182 </td>
+<td align="right" > 137 </td>
+<td align="right" > 89 </td>
+<td align="right" > 59 </td>
+<td align="right" > 2624 </td>
+<td align="right" > 2432 </td>
+</tr>
+<tr align="center">
+<td > acoshdp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 812 </td>
+<td align="right" > 260 </td>
+<td align="right" > 241 </td>
+<td align="right" > 71 </td>
+<td align="right" > 1728 </td>
+<td align="right" > 3296 </td>
+</tr>
+<tr align="center">
+<td > asindp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 177 </td>
+<td align="right" > 129 </td>
+<td align="right" > 86 </td>
+<td align="right" > 57 </td>
+<td align="right" > 2688 </td>
+<td align="right" > 2432 </td>
+</tr>
+<tr align="center">
+<td > asinhdp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 808 </td>
+<td align="right" > 263 </td>
+<td align="right" > 265 </td>
+<td align="right" > 93 </td>
+<td align="right" > 1920 </td>
+<td align="right" > 4736 </td>
+</tr>
+<tr align="center">
+<td > atan2dp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 827 </td>
+<td align="right" > 268 </td>
+<td align="right" > 244 </td>
+<td align="right" > 207 </td>
+<td align="right" > 1920 </td>
+<td align="right" > 1152 </td>
+</tr>
+<tr align="center">
+<td > atandp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 483 </td>
+<td align="right" > 204 </td>
+<td align="right" > 166 </td>
+<td align="right" > 93 </td>
+<td align="right" > 1280 </td>
+<td align="right" > 3712 </td>
+</tr>
+<tr align="center">
+<td > atanhdp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 130 </td>
+<td align="right" > 204 </td>
+<td align="right" > 175 </td>
+<td align="right" > 89 </td>
+<td align="right" > 1760 </td>
+<td align="right" > 4320 </td>
+</tr>
+<tr align="center">
+<td > cosdp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 214 </td>
+<td align="right" > 114 </td>
+<td align="right" > 87 </td>
+<td align="right" > 30 </td>
+<td align="right" > 768 </td>
+<td align="right" > 448 </td>
+</tr>
+<tr align="center">
+<td > coshdp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 771 </td>
+<td align="right" > 147 </td>
+<td align="right" > 128 </td>
+<td align="right" > 56 </td>
+<td align="right" > 2432 </td>
+<td align="right" > 1120 </td>
+</tr>
+<tr align="center">
+<td > divdp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 281 </td>
+<td align="right" > 66 </td>
+<td align="right" > 48 </td>
+<td align="right" > 7 </td>
+<td align="right" > 256 </td>
+<td align="right" > 1248 </td>
+</tr>
+<tr align="center">
+<td > exp10dp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 483 </td>
+<td align="right" > 138 </td>
+<td align="right" > 111 </td>
+<td align="right" > 28 </td>
+<td align="right" > 832 </td>
+<td align="right" > 1280 </td>
+</tr>
+<tr align="center">
+<td > exp2dp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 481 </td>
+<td align="right" > 138 </td>
+<td align="right" > 111 </td>
+<td align="right" > 25 </td>
+<td align="right" > 832 </td>
+<td align="right" > 1824 </td>
+</tr>
+<tr align="center">
+<td > expdp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 461 </td>
+<td align="right" > 141 </td>
+<td align="right" > 111 </td>
+<td align="right" > 27 </td>
+<td align="right" > 832 </td>
+<td align="right" > 704 </td>
+</tr>
+<tr align="center">
+<td > log10dp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 672 </td>
+<td align="right" > 172 </td>
+<td align="right" > 157 </td>
+<td align="right" > 155 </td>
+<td align="right" > 1216 </td>
+<td align="right" > 768 </td>
+</tr>
+<tr align="center">
+<td > log2dp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 681 </td>
+<td align="right" > 171 </td>
+<td align="right" > 154 </td>
+<td align="right" > 152 </td>
+<td align="right" > 1184 </td>
+<td align="right" > 736 </td>
+</tr>
+<tr align="center">
+<td > logdp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 655 </td>
+<td align="right" > 172 </td>
+<td align="right" > 153 </td>
+<td align="right" > 149 </td>
+<td align="right" > 1152 </td>
+<td align="right" > 736 </td>
+</tr>
+<tr align="center">
+<td > powdp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 1002 </td>
+<td align="right" > 291 </td>
+<td align="right" > 275 </td>
+<td align="right" > 269 </td>
+<td align="right" > 2112 </td>
+<td align="right" > 1312 </td>
+</tr>
+<tr align="center">
+<td > recipdp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 287 </td>
+<td align="right" > 67 </td>
+<td align="right" > 35 </td>
+<td align="right" > 7 </td>
+<td align="right" > 256 </td>
+<td align="right" > 224 </td>
+</tr>
+<tr align="center">
+<td > rsqrtdp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 221 </td>
+<td align="right" > 89 </td>
+<td align="right" > 52 </td>
+<td align="right" > 10 </td>
+<td align="right" > 384 </td>
+<td align="right" > 1376 </td>
+</tr>
+<tr align="center">
+<td > sindp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 193 </td>
+<td align="right" > 107 </td>
+<td align="right" > 84 </td>
+<td align="right" > 27 </td>
+<td align="right" > 704 </td>
+<td align="right" > 640 </td>
+</tr>
+<tr align="center">
+<td > sinhdp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 773 </td>
+<td align="right" > 152 </td>
+<td align="right" > 132 </td>
+<td align="right" > 60 </td>
+<td align="right" > 2464 </td>
+<td align="right" > 4224 </td>
+</tr>
+<tr align="center">
+<td > sqrtdp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 112 </td>
+<td align="right" > 95 </td>
+<td align="right" > 71 </td>
+<td align="right" > 11 </td>
+<td align="right" > 256 </td>
+<td align="right" > 1600 </td>
+</tr>
+<tr align="center">
+<td > tandp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 459 </td>
+<td align="right" > 159 </td>
+<td align="right" > 129 </td>
+<td align="right" > 51 </td>
+<td align="right" > 1472 </td>
+<td align="right" > 2400 </td>
+</tr>
+<tr align="center">
+<td > tanhdp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 721 </td>
+<td align="right" > 224 </td>
+<td align="right" > 159 </td>
+<td align="right" > 56 </td>
+<td align="right" > 1536 </td>
+<td align="right" > 960 </td>
+</tr>
+</tbody></table>
+<p><a href="#HOME">Top</a>
+</p></div>
+
+<div>
+<h1>&nbsp;</h1>
+<a name="SBC"></a>
+<table bgcolor="#ffffff" border="1" cellpadding="4" cellspacing="2" width="75%">
+<tr bgcolor="#999999" align="left">
+<th colspan="8"><big>Test Parameters</big></th>
+</tr>
+<tr align="left" bgcolor="#ffffcc">
+<th colspan="2">Precision:</th>
+<th colspan="6">Single Float</th>
+</tr>
+<tr align="left" bgcolor="#ffffcc">
+<th colspan="2">Endianness:</th>
+<th colspan="6">BE</th>
+</tr>
+<tr align="left" bgcolor="#ffffcc">
+<th colspan="2">Object File Format:</th>
+<th colspan="6">COFF</th>
+</tr>
+<tr align="left" bgcolor="#ffffcc">
+<th colspan="2">Simulator:</th>
+<th colspan="6">TCI6608 Device Functional Simulator, Big Endian</th>
+</tr>
+<tr align="left" bgcolor="#ffffcc">
+<th colspan="2">Cores Used:</th>
+<th colspan="6">1</th>
+</tr>
+<tr align="left" bgcolor="#ffffcc">
+<th colspan="2">CCS Version:</th>
+<th colspan="6">5.5.0.00077</th>
+</tr>
+<tr align="left" bgcolor="#ffffcc">
+<th colspan="2">CG TOOLS Version:</th>
+<th colspan="6">7.4.2</th>
+</tr>
+<tr align="center">
+<th rowspan="2" bgcolor="#cccccc">Kernel</th>
+<th rowspan="2" bgcolor="#cccccc">Result</th>
+<th colspan="4" bgcolor="#cccccc">Profile (Cycles)</th>
+<th colspan="2" bgcolor="#cccccc">Memory (Bytes)</th>
+</tr>
+<tr align="center">
+
+<th bgcolor="#cccccc">&nbsp;&nbsp;RTS&nbsp;&nbsp;</th>
+<th bgcolor="#cccccc">&nbsp;&nbsp;C&nbsp;&nbsp;</th>
+<th bgcolor="#cccccc">&nbsp;&nbsp;Inline&nbsp;&nbsp;</th>
+<th bgcolor="#cccccc">&nbsp;&nbsp;Vector&nbsp;&nbsp;</th>
+<th bgcolor="#cccccc">&nbsp;&nbsp;C&nbsp;&nbsp;</th>
+<th bgcolor="#cccccc">&nbsp;&nbsp;Vector&nbsp;&nbsp;</th>
+</tr>
+
+<tr align="center">
+<td > acoshsp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 169 </td>
+<td align="right" > 131 </td>
+<td align="right" > 103 </td>
+<td align="right" > 18 </td>
+<td align="right" > 832 </td>
+<td align="right" > 2304 </td>
+</tr>
+<tr align="center">
+<td > acossp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 73 </td>
+<td align="right" > 78 </td>
+<td align="right" > 48 </td>
+<td align="right" > 21 </td>
+<td align="right" > 1024 </td>
+<td align="right" > 608 </td>
+</tr>
+<tr align="center">
+<td > asinhsp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 171 </td>
+<td align="right" > 129 </td>
+<td align="right" > 103 </td>
+<td align="right" > 23 </td>
+<td align="right" > 960 </td>
+<td align="right" > 3328 </td>
+</tr>
+<tr align="center">
+<td > asinsp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 68 </td>
+<td align="right" > 70 </td>
+<td align="right" > 45 </td>
+<td align="right" > 21 </td>
+<td align="right" > 960 </td>
+<td align="right" > 2880 </td>
+</tr>
+<tr align="center">
+<td > atan2sp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 339 </td>
+<td align="right" > 102 </td>
+<td align="right" > 87 </td>
+<td align="right" > 23 </td>
+<td align="right" > 832 </td>
+<td align="right" > 1536 </td>
+</tr>
+<tr align="center">
+<td > atanhsp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 76 </td>
+<td align="right" > 110 </td>
+<td align="right" > 76 </td>
+<td align="right" > 19 </td>
+<td align="right" > 832 </td>
+<td align="right" > 2560 </td>
+</tr>
+<tr align="center">
+<td > atansp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 191 </td>
+<td align="right" > 95 </td>
+<td align="right" > 68 </td>
+<td align="right" > 14 </td>
+<td align="right" > 704 </td>
+<td align="right" > 2560 </td>
+</tr>
+<tr align="center">
+<td > coshsp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 297 </td>
+<td align="right" > 99 </td>
+<td align="right" > 93 </td>
+<td align="right" > 23 </td>
+<td align="right" > 1472 </td>
+<td align="right" > 2176 </td>
+</tr>
+<tr align="center">
+<td > cossp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 171 </td>
+<td align="right" > 98 </td>
+<td align="right" > 66 </td>
+<td align="right" > 11 </td>
+<td align="right" > 576 </td>
+<td align="right" > 1440 </td>
+</tr>
+<tr align="center">
+<td > divsp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 99 </td>
+<td align="right" > 51 </td>
+<td align="right" > 34 </td>
+<td align="right" > 7 </td>
+<td align="right" > 320 </td>
+<td align="right" > 256 </td>
+</tr>
+<tr align="center">
+<td > exp10sp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 215 </td>
+<td align="right" > 84 </td>
+<td align="right" > 67 </td>
+<td align="right" > 11 </td>
+<td align="right" > 576 </td>
+<td align="right" > 2464 </td>
+</tr>
+<tr align="center">
+<td > exp2sp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 214 </td>
+<td align="right" > 111 </td>
+<td align="right" > 91 </td>
+<td align="right" > 11 </td>
+<td align="right" > 640 </td>
+<td align="right" > 1856 </td>
+</tr>
+<tr align="center">
+<td > expsp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 188 </td>
+<td align="right" > 79 </td>
+<td align="right" > 54 </td>
+<td align="right" > 10 </td>
+<td align="right" > 512 </td>
+<td align="right" > 1568 </td>
+</tr>
+<tr align="center">
+<td > log10sp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 163 </td>
+<td align="right" > 71 </td>
+<td align="right" > 50 </td>
+<td align="right" > 12 </td>
+<td align="right" > 576 </td>
+<td align="right" > 1504 </td>
+</tr>
+<tr align="center">
+<td > log2sp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 163 </td>
+<td align="right" > 72 </td>
+<td align="right" > 50 </td>
+<td align="right" > 13 </td>
+<td align="right" > 576 </td>
+<td align="right" > 1536 </td>
+</tr>
+<tr align="center">
+<td > logsp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 144 </td>
+<td align="right" > 70 </td>
+<td align="right" > 46 </td>
+<td align="right" > 11 </td>
+<td align="right" > 512 </td>
+<td align="right" > 1280 </td>
+</tr>
+<tr align="center">
+<td > powsp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 616 </td>
+<td align="right" > 149 </td>
+<td align="right" > 133 </td>
+<td align="right" > 50 </td>
+<td align="right" > 1280 </td>
+<td align="right" > 2816 </td>
+</tr>
+<tr align="center">
+<td > recipsp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 99 </td>
+<td align="right" > 52 </td>
+<td align="right" > 22 </td>
+<td align="right" > 4 </td>
+<td align="right" > 192 </td>
+<td align="right" > 192 </td>
+</tr>
+<tr align="center">
+<td > rsqrtsp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 176 </td>
+<td align="right" > 68 </td>
+<td align="right" > 38 </td>
+<td align="right" > 6 </td>
+<td align="right" > 256 </td>
+<td align="right" > 256 </td>
+</tr>
+<tr align="center">
+<td > sinhsp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 306 </td>
+<td align="right" > 107 </td>
+<td align="right" > 99 </td>
+<td align="right" > 21 </td>
+<td align="right" > 1600 </td>
+<td align="right" > 2048 </td>
+</tr>
+<tr align="center">
+<td > sinsp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 152 </td>
+<td align="right" > 88 </td>
+<td align="right" > 70 </td>
+<td align="right" > 10 </td>
+<td align="right" > 448 </td>
+<td align="right" > 1376 </td>
+</tr>
+<tr align="center">
+<td > sqrtsp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 106 </td>
+<td align="right" > 69 </td>
+<td align="right" > 46 </td>
+<td align="right" > 7 </td>
+<td align="right" > 256 </td>
+<td align="right" > 1056 </td>
+</tr>
+<tr align="center">
+<td > tanhsp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 299 </td>
+<td align="right" > 143 </td>
+<td align="right" > 102 </td>
+<td align="right" > 22 </td>
+<td align="right" > 1152 </td>
+<td align="right" > 1952 </td>
+</tr>
+<tr align="center">
+<td > tansp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 225 </td>
+<td align="right" > 129 </td>
+<td align="right" > 88 </td>
+<td align="right" > 19 </td>
+<td align="right" > 896 </td>
+<td align="right" > 2112 </td>
+</tr>
+</tbody></table>
+<p><a href="#HOME">Top</a>
+</p></div>
+
+<div>
+<h1>&nbsp;</h1>
+<a name="SBE"></a>
+<table bgcolor="#ffffff" border="1" cellpadding="4" cellspacing="2" width="75%">
+<tr bgcolor="#999999" align="left">
+<th colspan="8"><big>Test Parameters</big></th>
+</tr>
+<tr align="left" bgcolor="#ffffcc">
+<th colspan="2">Precision:</th>
+<th colspan="6">Single Float</th>
+</tr>
+<tr align="left" bgcolor="#ffffcc">
+<th colspan="2">Endianness:</th>
+<th colspan="6">BE</th>
+</tr>
+<tr align="left" bgcolor="#ffffcc">
+<th colspan="2">Object File Format:</th>
+<th colspan="6">ELF</th>
+</tr>
+<tr align="left" bgcolor="#ffffcc">
+<th colspan="2">Simulator:</th>
+<th colspan="6">TCI6608 Device Functional Simulator, Big Endian</th>
+</tr>
+<tr align="left" bgcolor="#ffffcc">
+<th colspan="2">Cores Used:</th>
+<th colspan="6">1</th>
+</tr>
+<tr align="left" bgcolor="#ffffcc">
+<th colspan="2">CCS Version:</th>
+<th colspan="6">5.5.0.00077</th>
+</tr>
+<tr align="left" bgcolor="#ffffcc">
+<th colspan="2">CG TOOLS Version:</th>
+<th colspan="6">7.4.2</th>
+</tr>
+<tr align="center">
+<th rowspan="2" bgcolor="#cccccc">Kernel</th>
+<th rowspan="2" bgcolor="#cccccc">Result</th>
+<th colspan="4" bgcolor="#cccccc">Profile (Cycles)</th>
+<th colspan="2" bgcolor="#cccccc">Memory (Bytes)</th>
+</tr>
+<tr align="center">
+
+<th bgcolor="#cccccc">&nbsp;&nbsp;RTS&nbsp;&nbsp;</th>
+<th bgcolor="#cccccc">&nbsp;&nbsp;C&nbsp;&nbsp;</th>
+<th bgcolor="#cccccc">&nbsp;&nbsp;Inline&nbsp;&nbsp;</th>
+<th bgcolor="#cccccc">&nbsp;&nbsp;Vector&nbsp;&nbsp;</th>
+<th bgcolor="#cccccc">&nbsp;&nbsp;C&nbsp;&nbsp;</th>
+<th bgcolor="#cccccc">&nbsp;&nbsp;Vector&nbsp;&nbsp;</th>
+</tr>
+
+<tr align="center">
+<td > acoshsp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 171 </td>
+<td align="right" > 137 </td>
+<td align="right" > 103 </td>
+<td align="right" > 18 </td>
+<td align="right" > 864 </td>
+<td align="right" > 2304 </td>
+</tr>
+<tr align="center">
+<td > acossp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 75 </td>
+<td align="right" > 84 </td>
+<td align="right" > 48 </td>
+<td align="right" > 21 </td>
+<td align="right" > 1024 </td>
+<td align="right" > 608 </td>
+</tr>
+<tr align="center">
+<td > asinhsp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 171 </td>
+<td align="right" > 135 </td>
+<td align="right" > 103 </td>
+<td align="right" > 23 </td>
+<td align="right" > 960 </td>
+<td align="right" > 3328 </td>
+</tr>
+<tr align="center">
+<td > asinsp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 69 </td>
+<td align="right" > 76 </td>
+<td align="right" > 45 </td>
+<td align="right" > 21 </td>
+<td align="right" > 960 </td>
+<td align="right" > 2880 </td>
+</tr>
+<tr align="center">
+<td > atan2sp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 352 </td>
+<td align="right" > 108 </td>
+<td align="right" > 87 </td>
+<td align="right" > 23 </td>
+<td align="right" > 832 </td>
+<td align="right" > 1536 </td>
+</tr>
+<tr align="center">
+<td > atanhsp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 75 </td>
+<td align="right" > 116 </td>
+<td align="right" > 76 </td>
+<td align="right" > 19 </td>
+<td align="right" > 832 </td>
+<td align="right" > 2560 </td>
+</tr>
+<tr align="center">
+<td > atansp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 191 </td>
+<td align="right" > 101 </td>
+<td align="right" > 68 </td>
+<td align="right" > 14 </td>
+<td align="right" > 704 </td>
+<td align="right" > 2560 </td>
+</tr>
+<tr align="center">
+<td > coshsp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 297 </td>
+<td align="right" > 105 </td>
+<td align="right" > 93 </td>
+<td align="right" > 23 </td>
+<td align="right" > 1472 </td>
+<td align="right" > 2176 </td>
+</tr>
+<tr align="center">
+<td > cossp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 171 </td>
+<td align="right" > 104 </td>
+<td align="right" > 66 </td>
+<td align="right" > 11 </td>
+<td align="right" > 576 </td>
+<td align="right" > 1440 </td>
+</tr>
+<tr align="center">
+<td > divsp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 99 </td>
+<td align="right" > 57 </td>
+<td align="right" > 34 </td>
+<td align="right" > 7 </td>
+<td align="right" > 320 </td>
+<td align="right" > 256 </td>
+</tr>
+<tr align="center">
+<td > exp10sp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 211 </td>
+<td align="right" > 90 </td>
+<td align="right" > 67 </td>
+<td align="right" > 11 </td>
+<td align="right" > 576 </td>
+<td align="right" > 2464 </td>
+</tr>
+<tr align="center">
+<td > exp2sp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 210 </td>
+<td align="right" > 117 </td>
+<td align="right" > 91 </td>
+<td align="right" > 11 </td>
+<td align="right" > 640 </td>
+<td align="right" > 1856 </td>
+</tr>
+<tr align="center">
+<td > expsp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 185 </td>
+<td align="right" > 85 </td>
+<td align="right" > 54 </td>
+<td align="right" > 10 </td>
+<td align="right" > 512 </td>
+<td align="right" > 1568 </td>
+</tr>
+<tr align="center">
+<td > log10sp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 163 </td>
+<td align="right" > 77 </td>
+<td align="right" > 50 </td>
+<td align="right" > 12 </td>
+<td align="right" > 576 </td>
+<td align="right" > 1504 </td>
+</tr>
+<tr align="center">
+<td > log2sp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 163 </td>
+<td align="right" > 78 </td>
+<td align="right" > 50 </td>
+<td align="right" > 13 </td>
+<td align="right" > 608 </td>
+<td align="right" > 1536 </td>
+</tr>
+<tr align="center">
+<td > logsp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 144 </td>
+<td align="right" > 76 </td>
+<td align="right" > 46 </td>
+<td align="right" > 11 </td>
+<td align="right" > 512 </td>
+<td align="right" > 1280 </td>
+</tr>
+<tr align="center">
+<td > powsp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 631 </td>
+<td align="right" > 155 </td>
+<td align="right" > 133 </td>
+<td align="right" > 50 </td>
+<td align="right" > 1280 </td>
+<td align="right" > 2816 </td>
+</tr>
+<tr align="center">
+<td > recipsp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 99 </td>
+<td align="right" > 58 </td>
+<td align="right" > 22 </td>
+<td align="right" > 4 </td>
+<td align="right" > 192 </td>
+<td align="right" > 192 </td>
+</tr>
+<tr align="center">
+<td > rsqrtsp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 171 </td>
+<td align="right" > 74 </td>
+<td align="right" > 38 </td>
+<td align="right" > 6 </td>
+<td align="right" > 288 </td>
+<td align="right" > 256 </td>
+</tr>
+<tr align="center">
+<td > sinhsp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 302 </td>
+<td align="right" > 113 </td>
+<td align="right" > 99 </td>
+<td align="right" > 21 </td>
+<td align="right" > 1600 </td>
+<td align="right" > 2048 </td>
+</tr>
+<tr align="center">
+<td > sinsp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 152 </td>
+<td align="right" > 94 </td>
+<td align="right" > 70 </td>
+<td align="right" > 10 </td>
+<td align="right" > 448 </td>
+<td align="right" > 1376 </td>
+</tr>
+<tr align="center">
+<td > sqrtsp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 105 </td>
+<td align="right" > 75 </td>
+<td align="right" > 46 </td>
+<td align="right" > 7 </td>
+<td align="right" > 256 </td>
+<td align="right" > 1056 </td>
+</tr>
+<tr align="center">
+<td > tanhsp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 295 </td>
+<td align="right" > 149 </td>
+<td align="right" > 102 </td>
+<td align="right" > 22 </td>
+<td align="right" > 1152 </td>
+<td align="right" > 1952 </td>
+</tr>
+<tr align="center">
+<td > tansp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 225 </td>
+<td align="right" > 135 </td>
+<td align="right" > 88 </td>
+<td align="right" > 19 </td>
+<td align="right" > 896 </td>
+<td align="right" > 2112 </td>
+</tr>
+</tbody></table>
+<p><a href="#HOME">Top</a>
+</p></div>
+
+<div>
+<h1>&nbsp;</h1>
+<a name="SLC"></a>
+<table bgcolor="#ffffff" border="1" cellpadding="4" cellspacing="2" width="75%">
+<tr bgcolor="#999999" align="left">
+<th colspan="8"><big>Test Parameters</big></th>
+</tr>
+<tr align="left" bgcolor="#ffffcc">
+<th colspan="2">Precision:</th>
+<th colspan="6">Single Float</th>
+</tr>
+<tr align="left" bgcolor="#ffffcc">
+<th colspan="2">Endianness:</th>
+<th colspan="6">LE</th>
+</tr>
+<tr align="left" bgcolor="#ffffcc">
+<th colspan="2">Object File Format:</th>
+<th colspan="6">COFF</th>
+</tr>
+<tr align="left" bgcolor="#ffffcc">
+<th colspan="2">Simulator:</th>
+<th colspan="6">TCI6608 Device Functional Simulator, Little Endian</th>
+</tr>
+<tr align="left" bgcolor="#ffffcc">
+<th colspan="2">Cores Used:</th>
+<th colspan="6">1</th>
+</tr>
+<tr align="left" bgcolor="#ffffcc">
+<th colspan="2">CCS Version:</th>
+<th colspan="6">5.5.0.00077</th>
+</tr>
+<tr align="left" bgcolor="#ffffcc">
+<th colspan="2">CG TOOLS Version:</th>
+<th colspan="6">7.4.2</th>
+</tr>
+<tr align="center">
+<th rowspan="2" bgcolor="#cccccc">Kernel</th>
+<th rowspan="2" bgcolor="#cccccc">Result</th>
+<th colspan="4" bgcolor="#cccccc">Profile (Cycles)</th>
+<th colspan="2" bgcolor="#cccccc">Memory (Bytes)</th>
+</tr>
+<tr align="center">
+
+<th bgcolor="#cccccc">&nbsp;&nbsp;RTS&nbsp;&nbsp;</th>
+<th bgcolor="#cccccc">&nbsp;&nbsp;C&nbsp;&nbsp;</th>
+<th bgcolor="#cccccc">&nbsp;&nbsp;Inline&nbsp;&nbsp;</th>
+<th bgcolor="#cccccc">&nbsp;&nbsp;Vector&nbsp;&nbsp;</th>
+<th bgcolor="#cccccc">&nbsp;&nbsp;C&nbsp;&nbsp;</th>
+<th bgcolor="#cccccc">&nbsp;&nbsp;Vector&nbsp;&nbsp;</th>
+</tr>
+
+<tr align="center">
+<td > acoshsp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 169 </td>
+<td align="right" > 131 </td>
+<td align="right" > 103 </td>
+<td align="right" > 18 </td>
+<td align="right" > 832 </td>
+<td align="right" > 2304 </td>
+</tr>
+<tr align="center">
+<td > acossp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 73 </td>
+<td align="right" > 78 </td>
+<td align="right" > 48 </td>
+<td align="right" > 21 </td>
+<td align="right" > 1024 </td>
+<td align="right" > 608 </td>
+</tr>
+<tr align="center">
+<td > asinhsp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 171 </td>
+<td align="right" > 130 </td>
+<td align="right" > 103 </td>
+<td align="right" > 23 </td>
+<td align="right" > 960 </td>
+<td align="right" > 3328 </td>
+</tr>
+<tr align="center">
+<td > asinsp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 68 </td>
+<td align="right" > 70 </td>
+<td align="right" > 45 </td>
+<td align="right" > 21 </td>
+<td align="right" > 960 </td>
+<td align="right" > 2880 </td>
+</tr>
+<tr align="center">
+<td > atan2sp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 339 </td>
+<td align="right" > 102 </td>
+<td align="right" > 87 </td>
+<td align="right" > 23 </td>
+<td align="right" > 832 </td>
+<td align="right" > 1536 </td>
+</tr>
+<tr align="center">
+<td > atanhsp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 76 </td>
+<td align="right" > 110 </td>
+<td align="right" > 76 </td>
+<td align="right" > 19 </td>
+<td align="right" > 832 </td>
+<td align="right" > 2560 </td>
+</tr>
+<tr align="center">
+<td > atansp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 191 </td>
+<td align="right" > 95 </td>
+<td align="right" > 68 </td>
+<td align="right" > 14 </td>
+<td align="right" > 704 </td>
+<td align="right" > 2560 </td>
+</tr>
+<tr align="center">
+<td > coshsp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 297 </td>
+<td align="right" > 99 </td>
+<td align="right" > 93 </td>
+<td align="right" > 23 </td>
+<td align="right" > 1472 </td>
+<td align="right" > 2176 </td>
+</tr>
+<tr align="center">
+<td > cossp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 171 </td>
+<td align="right" > 98 </td>
+<td align="right" > 66 </td>
+<td align="right" > 11 </td>
+<td align="right" > 576 </td>
+<td align="right" > 1440 </td>
+</tr>
+<tr align="center">
+<td > divsp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 99 </td>
+<td align="right" > 51 </td>
+<td align="right" > 34 </td>
+<td align="right" > 7 </td>
+<td align="right" > 320 </td>
+<td align="right" > 256 </td>
+</tr>
+<tr align="center">
+<td > exp10sp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 215 </td>
+<td align="right" > 84 </td>
+<td align="right" > 67 </td>
+<td align="right" > 11 </td>
+<td align="right" > 576 </td>
+<td align="right" > 2464 </td>
+</tr>
+<tr align="center">
+<td > exp2sp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 214 </td>
+<td align="right" > 111 </td>
+<td align="right" > 91 </td>
+<td align="right" > 11 </td>
+<td align="right" > 640 </td>
+<td align="right" > 1856 </td>
+</tr>
+<tr align="center">
+<td > expsp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 188 </td>
+<td align="right" > 79 </td>
+<td align="right" > 54 </td>
+<td align="right" > 10 </td>
+<td align="right" > 512 </td>
+<td align="right" > 1568 </td>
+</tr>
+<tr align="center">
+<td > log10sp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 163 </td>
+<td align="right" > 71 </td>
+<td align="right" > 50 </td>
+<td align="right" > 12 </td>
+<td align="right" > 576 </td>
+<td align="right" > 1504 </td>
+</tr>
+<tr align="center">
+<td > log2sp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 163 </td>
+<td align="right" > 72 </td>
+<td align="right" > 50 </td>
+<td align="right" > 13 </td>
+<td align="right" > 576 </td>
+<td align="right" > 1536 </td>
+</tr>
+<tr align="center">
+<td > logsp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 144 </td>
+<td align="right" > 70 </td>
+<td align="right" > 46 </td>
+<td align="right" > 11 </td>
+<td align="right" > 512 </td>
+<td align="right" > 1280 </td>
+</tr>
+<tr align="center">
+<td > powsp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 616 </td>
+<td align="right" > 149 </td>
+<td align="right" > 133 </td>
+<td align="right" > 50 </td>
+<td align="right" > 1280 </td>
+<td align="right" > 2816 </td>
+</tr>
+<tr align="center">
+<td > recipsp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 99 </td>
+<td align="right" > 52 </td>
+<td align="right" > 22 </td>
+<td align="right" > 4 </td>
+<td align="right" > 192 </td>
+<td align="right" > 192 </td>
+</tr>
+<tr align="center">
+<td > rsqrtsp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 176 </td>
+<td align="right" > 68 </td>
+<td align="right" > 38 </td>
+<td align="right" > 6 </td>
+<td align="right" > 256 </td>
+<td align="right" > 256 </td>
+</tr>
+<tr align="center">
+<td > sinhsp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 306 </td>
+<td align="right" > 107 </td>
+<td align="right" > 100 </td>
+<td align="right" > 21 </td>
+<td align="right" > 1600 </td>
+<td align="right" > 2048 </td>
+</tr>
+<tr align="center">
+<td > sinsp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 152 </td>
+<td align="right" > 88 </td>
+<td align="right" > 70 </td>
+<td align="right" > 10 </td>
+<td align="right" > 448 </td>
+<td align="right" > 1376 </td>
+</tr>
+<tr align="center">
+<td > sqrtsp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 106 </td>
+<td align="right" > 69 </td>
+<td align="right" > 46 </td>
+<td align="right" > 7 </td>
+<td align="right" > 256 </td>
+<td align="right" > 1056 </td>
+</tr>
+<tr align="center">
+<td > tanhsp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 299 </td>
+<td align="right" > 143 </td>
+<td align="right" > 102 </td>
+<td align="right" > 22 </td>
+<td align="right" > 1152 </td>
+<td align="right" > 1952 </td>
+</tr>
+<tr align="center">
+<td > tansp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 225 </td>
+<td align="right" > 129 </td>
+<td align="right" > 88 </td>
+<td align="right" > 19 </td>
+<td align="right" > 896 </td>
+<td align="right" > 2112 </td>
+</tr>
+</tbody></table>
+<p><a href="#HOME">Top</a>
+</p></div>
+
+<div>
+<h1>&nbsp;</h1>
+<a name="SLE"></a>
+<table bgcolor="#ffffff" border="1" cellpadding="4" cellspacing="2" width="75%">
+<tr bgcolor="#999999" align="left">
+<th colspan="8"><big>Test Parameters</big></th>
+</tr>
+<tr align="left" bgcolor="#ffffcc">
+<th colspan="2">Precision:</th>
+<th colspan="6">Single Float</th>
+</tr>
+<tr align="left" bgcolor="#ffffcc">
+<th colspan="2">Endianness:</th>
+<th colspan="6">LE</th>
+</tr>
+<tr align="left" bgcolor="#ffffcc">
+<th colspan="2">Object File Format:</th>
+<th colspan="6">ELF</th>
+</tr>
+<tr align="left" bgcolor="#ffffcc">
+<th colspan="2">Simulator:</th>
+<th colspan="6">TCI6608 Device Functional Simulator, Little Endian</th>
+</tr>
+<tr align="left" bgcolor="#ffffcc">
+<th colspan="2">Cores Used:</th>
+<th colspan="6">1</th>
+</tr>
+<tr align="left" bgcolor="#ffffcc">
+<th colspan="2">CCS Version:</th>
+<th colspan="6">5.5.0.00077</th>
+</tr>
+<tr align="left" bgcolor="#ffffcc">
+<th colspan="2">CG TOOLS Version:</th>
+<th colspan="6">7.4.2</th>
+</tr>
+<tr align="center">
+<th rowspan="2" bgcolor="#cccccc">Kernel</th>
+<th rowspan="2" bgcolor="#cccccc">Result</th>
+<th colspan="4" bgcolor="#cccccc">Profile (Cycles)</th>
+<th colspan="2" bgcolor="#cccccc">Memory (Bytes)</th>
+</tr>
+<tr align="center">
+
+<th bgcolor="#cccccc">&nbsp;&nbsp;RTS&nbsp;&nbsp;</th>
+<th bgcolor="#cccccc">&nbsp;&nbsp;C&nbsp;&nbsp;</th>
+<th bgcolor="#cccccc">&nbsp;&nbsp;Inline&nbsp;&nbsp;</th>
+<th bgcolor="#cccccc">&nbsp;&nbsp;Vector&nbsp;&nbsp;</th>
+<th bgcolor="#cccccc">&nbsp;&nbsp;C&nbsp;&nbsp;</th>
+<th bgcolor="#cccccc">&nbsp;&nbsp;Vector&nbsp;&nbsp;</th>
+</tr>
+
+<tr align="center">
+<td > acoshsp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 171 </td>
+<td align="right" > 137 </td>
+<td align="right" > 103 </td>
+<td align="right" > 18 </td>
+<td align="right" > 864 </td>
+<td align="right" > 2304 </td>
+</tr>
+<tr align="center">
+<td > acossp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 75 </td>
+<td align="right" > 84 </td>
+<td align="right" > 48 </td>
+<td align="right" > 21 </td>
+<td align="right" > 1024 </td>
+<td align="right" > 608 </td>
+</tr>
+<tr align="center">
+<td > asinhsp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 171 </td>
+<td align="right" > 136 </td>
+<td align="right" > 103 </td>
+<td align="right" > 23 </td>
+<td align="right" > 960 </td>
+<td align="right" > 3328 </td>
+</tr>
+<tr align="center">
+<td > asinsp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 69 </td>
+<td align="right" > 76 </td>
+<td align="right" > 45 </td>
+<td align="right" > 21 </td>
+<td align="right" > 960 </td>
+<td align="right" > 2880 </td>
+</tr>
+<tr align="center">
+<td > atan2sp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 352 </td>
+<td align="right" > 108 </td>
+<td align="right" > 87 </td>
+<td align="right" > 23 </td>
+<td align="right" > 832 </td>
+<td align="right" > 1536 </td>
+</tr>
+<tr align="center">
+<td > atanhsp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 75 </td>
+<td align="right" > 116 </td>
+<td align="right" > 76 </td>
+<td align="right" > 19 </td>
+<td align="right" > 832 </td>
+<td align="right" > 2560 </td>
+</tr>
+<tr align="center">
+<td > atansp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 191 </td>
+<td align="right" > 101 </td>
+<td align="right" > 68 </td>
+<td align="right" > 14 </td>
+<td align="right" > 704 </td>
+<td align="right" > 2560 </td>
+</tr>
+<tr align="center">
+<td > coshsp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 297 </td>
+<td align="right" > 105 </td>
+<td align="right" > 93 </td>
+<td align="right" > 23 </td>
+<td align="right" > 1472 </td>
+<td align="right" > 2176 </td>
+</tr>
+<tr align="center">
+<td > cossp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 171 </td>
+<td align="right" > 104 </td>
+<td align="right" > 66 </td>
+<td align="right" > 11 </td>
+<td align="right" > 576 </td>
+<td align="right" > 1440 </td>
+</tr>
+<tr align="center">
+<td > divsp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 99 </td>
+<td align="right" > 57 </td>
+<td align="right" > 34 </td>
+<td align="right" > 7 </td>
+<td align="right" > 320 </td>
+<td align="right" > 256 </td>
+</tr>
+<tr align="center">
+<td > exp10sp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 211 </td>
+<td align="right" > 90 </td>
+<td align="right" > 67 </td>
+<td align="right" > 11 </td>
+<td align="right" > 576 </td>
+<td align="right" > 2464 </td>
+</tr>
+<tr align="center">
+<td > exp2sp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 210 </td>
+<td align="right" > 117 </td>
+<td align="right" > 91 </td>
+<td align="right" > 11 </td>
+<td align="right" > 640 </td>
+<td align="right" > 1856 </td>
+</tr>
+<tr align="center">
+<td > expsp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 185 </td>
+<td align="right" > 85 </td>
+<td align="right" > 54 </td>
+<td align="right" > 10 </td>
+<td align="right" > 512 </td>
+<td align="right" > 1568 </td>
+</tr>
+<tr align="center">
+<td > log10sp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 163 </td>
+<td align="right" > 77 </td>
+<td align="right" > 50 </td>
+<td align="right" > 12 </td>
+<td align="right" > 576 </td>
+<td align="right" > 1504 </td>
+</tr>
+<tr align="center">
+<td > log2sp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 163 </td>
+<td align="right" > 78 </td>
+<td align="right" > 50 </td>
+<td align="right" > 13 </td>
+<td align="right" > 608 </td>
+<td align="right" > 1536 </td>
+</tr>
+<tr align="center">
+<td > logsp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 144 </td>
+<td align="right" > 76 </td>
+<td align="right" > 46 </td>
+<td align="right" > 11 </td>
+<td align="right" > 512 </td>
+<td align="right" > 1280 </td>
+</tr>
+<tr align="center">
+<td > powsp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 631 </td>
+<td align="right" > 155 </td>
+<td align="right" > 133 </td>
+<td align="right" > 50 </td>
+<td align="right" > 1280 </td>
+<td align="right" > 2816 </td>
+</tr>
+<tr align="center">
+<td > recipsp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 99 </td>
+<td align="right" > 58 </td>
+<td align="right" > 22 </td>
+<td align="right" > 4 </td>
+<td align="right" > 192 </td>
+<td align="right" > 192 </td>
+</tr>
+<tr align="center">
+<td > rsqrtsp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 171 </td>
+<td align="right" > 74 </td>
+<td align="right" > 38 </td>
+<td align="right" > 6 </td>
+<td align="right" > 288 </td>
+<td align="right" > 256 </td>
+</tr>
+<tr align="center">
+<td > sinhsp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 302 </td>
+<td align="right" > 113 </td>
+<td align="right" > 100 </td>
+<td align="right" > 21 </td>
+<td align="right" > 1600 </td>
+<td align="right" > 2048 </td>
+</tr>
+<tr align="center">
+<td > sinsp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 152 </td>
+<td align="right" > 94 </td>
+<td align="right" > 70 </td>
+<td align="right" > 10 </td>
+<td align="right" > 448 </td>
+<td align="right" > 1376 </td>
+</tr>
+<tr align="center">
+<td > sqrtsp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 105 </td>
+<td align="right" > 75 </td>
+<td align="right" > 46 </td>
+<td align="right" > 7 </td>
+<td align="right" > 256 </td>
+<td align="right" > 1056 </td>
+</tr>
+<tr align="center">
+<td > tanhsp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 295 </td>
+<td align="right" > 149 </td>
+<td align="right" > 102 </td>
+<td align="right" > 22 </td>
+<td align="right" > 1152 </td>
+<td align="right" > 1952 </td>
+</tr>
+<tr align="center">
+<td > tansp </td>
+<td bgcolor="#66cc66" > Passed </td>
+<td align="right" > 225 </td>
+<td align="right" > 135 </td>
+<td align="right" > 88 </td>
+<td align="right" > 19 </td>
+<td align="right" > 896 </td>
+<td align="right" > 2112 </td>
+</tr>
+</tbody></table>
+<p><a href="#HOME">Top</a>
+</p></div>
+
+</body></html>

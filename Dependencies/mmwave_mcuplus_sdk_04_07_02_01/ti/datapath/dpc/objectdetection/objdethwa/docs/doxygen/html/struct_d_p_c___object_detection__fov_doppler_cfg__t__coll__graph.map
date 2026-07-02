@@ -1,0 +1,4 @@
+<map id="DPC_ObjectDetection_fovDopplerCfg_t" name="DPC_ObjectDetection_fovDopplerCfg_t">
+<area shape="rect" id="node1" title="Field of view configuration in Doppler domain." alt="" coords="16,95,177,136"/>
+<area shape="rect" id="node2" href="/nightlybuilds/mmwave_app_sdk/ti/datapath/dpu/cfarproc/docs/cfarproc.tag$struct_d_p_u___c_f_a_r_proc___fov_cfg__t.html" title=" " alt="" coords="5,5,188,32"/>
+</map>

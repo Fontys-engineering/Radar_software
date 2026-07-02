@@ -1,0 +1,6 @@
+<map id="DPC_ObjectDetection_PreStartCommonCfg_t" name="DPC_ObjectDetection_PreStartCommonCfg_t">
+<area shape="rect" id="node1" title=" " alt="" coords="459,71,633,112"/>
+<area shape="rect" id="node2" href="/nightlybuilds/mmwave_app_sdk/ti/datapath/dpu/aoaproc/docs/aoaproc.tag$struct_d_p_u___ao_a_proc__comp_rx_channel_bias_cfg__t.html" title=" " alt="" coords="5,5,229,47"/>
+<area shape="rect" id="node3" href="$struct_d_p_c___object_detection___ant_geometry_cfg__t.html" title=" " alt="" coords="37,71,198,112"/>
+<area shape="rect" id="node4" href="$struct_d_p_c___object_detection___measure_rx_channel_bias_cfg__t.html" title="Range Bias and rx channel gain/phase measurement configuration." alt="" coords="9,136,226,177"/>
+</map>

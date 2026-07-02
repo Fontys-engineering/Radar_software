@@ -1,0 +1,18 @@
+[
+    {
+        "metadataVersion": "3.01.00",
+        "id": "com.ti.MCU_PLUS_SDK_AWR294X",
+        "name": "MCU+ SDK for AWR2944",
+        "rootCategory": [ "MCU+ SDK", "MCU+ SDK for AWR2944" ],
+        "version": "10.02.00.04",
+        "type": "software",
+        "image": "./mcu_plus_sdk.png",
+        "devices": ["AWR2944"],
+        "tags": ["SDK", "Baremetal", "FreeRTOS"],
+        "description": "Welcome to MCU+ SDK for AWR2944. This SDK contains examples, libraries and tools to develop RTOS and no-RTOS based applications for ARM R5F, ARM M4F CPUs and related peripherals.",
+        "dependencies": [
+            { "packageId": "sysconfig", "version": "1.23.0", "require": "mandatory" },
+            { "packageId": "ti_cgt_tiarmclang", "version": "4.0.2", "require": "mandatory" }
+        ]
+    }
+]

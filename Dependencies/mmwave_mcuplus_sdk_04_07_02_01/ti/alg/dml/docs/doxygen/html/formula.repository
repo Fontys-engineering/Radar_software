@@ -1,0 +1,25 @@
+\_form#0=11x9:$x$
+\_form#1=12x18:$\theta_{i}$
+\_form#2=14x19:$\theta_{j}$
+\_form#3=35x19:$A(\theta)$
+\_form#4=144x19:\[ A(\theta) = [a(\theta_{i}) { } a(\theta_{j})] \]
+\_form#5=173x19:$x = [a(\theta_{m}) a(\theta_{n})].s + n$
+\_form#6=7x9:$s$
+\_form#7=12x9:$n$
+\_form#8=343x47:\[ argmax_{i,j} (C_{ij}) = \frac{|r_{i}|^{2} + |r_{j}|^2 - 2Re(r_{i}r_{j}^{*}b_{ij})}{1 - |b_{ij}|^{2}} \]
+\_form#9=23x19:$C_{ij}$
+\_form#10=7x12:$i$
+\_form#11=9x16:$j$
+\_form#12=102x21:$r_{i} = x^{H}.a(\theta_{i})$
+\_form#13=135x21:$b_{ij} = a(\theta_{i})^{H}.a(\theta_{j})$
+\_form#14=86x19:$i,{ }j \in [1,N]$
+\_form#15=16x14:$N$
+\_form#16=65x19:$b_{ij} = b_{ab}$
+\_form#17=98x18:$i - j = a - b$
+\_form#18=18x23:$b^1_{ij}$
+\_form#19=53x28:$\frac{2_{k}}{1 - |b_{ij}|^{2}}$
+\_form#20=9x14:$k$
+\_form#21=18x19:$b_{ij}$
+\_form#22=74x19:$max(C_{ij})$
+\_form#23=56x19:$C_{ij} { }\forall i,j$
+\_form#24=72x19:$C_{ij} = C_{ji}$

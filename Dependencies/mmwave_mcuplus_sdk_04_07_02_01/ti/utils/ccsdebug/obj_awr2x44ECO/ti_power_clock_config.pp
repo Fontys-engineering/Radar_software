@@ -1,0 +1,17 @@
+obj_awr2x44ECO/dssgenerated/ti_power_clock_config.oe66: dssgenerated/ti_power_clock_config.c
+obj_awr2x44ECO/dssgenerated/ti_power_clock_config.oe66: /opt/ti/mcu_plus_sdk_awr2x44p_10_02_00_04/source/kernel/dpl/DebugP.h
+obj_awr2x44ECO/dssgenerated/ti_power_clock_config.oe66: /opt/ti/ccs2010/ccs/tools/compiler/ti-cgt-c6000_8.3.13/include/stdint.h
+obj_awr2x44ECO/dssgenerated/ti_power_clock_config.oe66: /opt/ti/ccs2010/ccs/tools/compiler/ti-cgt-c6000_8.3.13/include/_ti_config.h
+obj_awr2x44ECO/dssgenerated/ti_power_clock_config.oe66: /opt/ti/ccs2010/ccs/tools/compiler/ti-cgt-c6000_8.3.13/include/linkage.h
+obj_awr2x44ECO/dssgenerated/ti_power_clock_config.oe66: /opt/ti/ccs2010/ccs/tools/compiler/ti-cgt-c6000_8.3.13/include/_stdint40.h
+obj_awr2x44ECO/dssgenerated/ti_power_clock_config.oe66: /opt/ti/ccs2010/ccs/tools/compiler/ti-cgt-c6000_8.3.13/include/sys/stdint.h
+obj_awr2x44ECO/dssgenerated/ti_power_clock_config.oe66: /opt/ti/ccs2010/ccs/tools/compiler/ti-cgt-c6000_8.3.13/include/sys/cdefs.h
+obj_awr2x44ECO/dssgenerated/ti_power_clock_config.oe66: /opt/ti/ccs2010/ccs/tools/compiler/ti-cgt-c6000_8.3.13/include/sys/_types.h
+obj_awr2x44ECO/dssgenerated/ti_power_clock_config.oe66: /opt/ti/ccs2010/ccs/tools/compiler/ti-cgt-c6000_8.3.13/include/machine/_types.h
+obj_awr2x44ECO/dssgenerated/ti_power_clock_config.oe66: /opt/ti/ccs2010/ccs/tools/compiler/ti-cgt-c6000_8.3.13/include/machine/_stdint.h
+obj_awr2x44ECO/dssgenerated/ti_power_clock_config.oe66: /opt/ti/ccs2010/ccs/tools/compiler/ti-cgt-c6000_8.3.13/include/sys/_stdint.h
+obj_awr2x44ECO/dssgenerated/ti_power_clock_config.oe66: /opt/ti/ccs2010/ccs/tools/compiler/ti-cgt-c6000_8.3.13/include/stdbool.h
+obj_awr2x44ECO/dssgenerated/ti_power_clock_config.oe66: /opt/ti/mcu_plus_sdk_awr2x44p_10_02_00_04/source/drivers/soc.h
+obj_awr2x44ECO/dssgenerated/ti_power_clock_config.oe66: /opt/ti/mcu_plus_sdk_awr2x44p_10_02_00_04/source/drivers/soc/awr2x44p/soc.h
+obj_awr2x44ECO/dssgenerated/ti_power_clock_config.oe66: /opt/ti/mcu_plus_sdk_awr2x44p_10_02_00_04/source/kernel/dpl/SystemP.h
+obj_awr2x44ECO/dssgenerated/ti_power_clock_config.oe66: /opt/ti/mcu_plus_sdk_awr2x44p_10_02_00_04/source/drivers/soc/awr2x44p/soc_rcm.h

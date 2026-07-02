@@ -1,0 +1,2441 @@
+******************************************************************************
+            TI ARM Clang Linker Unix v4.0.2                    
+******************************************************************************
+>> Linked Fri Feb 20 19:21:07 2026
+
+OUTPUT FILE NAME:   <awr2943_mmw_demo_mssTDM.xer5f>
+ENTRY POINT SYMBOL: "_vectors"  address: 00000000
+
+
+MEMORY CONFIGURATION
+
+         name            origin    length      used     unused   attr    fill
+----------------------  --------  ---------  --------  --------  ----  --------
+  RESET_VECTORS         00000000   00000100  00000040  000000c0     X
+  TCMA_RAM              00000100   0000ff00  00000000  0000ff00  R  X
+  TCMB_RAM              00080000   00010000  00000000  00010000  RW  
+  SBL_RESERVED_L2_RAM   10200000   00020000  00000000  00020000  RW  
+  MSS_L2                10220000   000c8000  0004d360  0007aca0  RW  
+  HWA_RAM               82000000   00020000  00000000  00020000  RW  
+  DSS_L3                88000000   00200000  00000000  00200000  RW  
+  RTOS_NORTOS_IPC_SHM_M c5000200   00001d40  00000980  000013c0  RWIX
+
+
+SEGMENT ALLOCATION MAP
+
+run origin  load origin   length   init length attrs members
+----------  ----------- ---------- ----------- ----- -------
+00000000    00000000    00000040   00000040    r-x
+  00000000    00000000    00000040   00000040    r-x .vectors
+10220000    10220000    00023b20   00023b20    r-x
+  10220000    10220000    0001bd80   0001bd80    r-x .text
+  1023bd80    1023bd80    00007da0   00007da0    r-- .rodata
+10243b40    10243b40    0001e780   00000000    rw-
+  10243b40    10243b40    0001b780   00000000    rw- .bss
+  1025f2c0    1025f2c0    00001000   00000000    rw- .sysmem
+  102602c0    102602c0    00002000   00000000    rw- .stack
+102622c0    102622c0    00008d80   00008d80    rw-
+  102622c0    102622c0    00008d80   00008d80    rw- .data
+1026b040    1026b040    00000f40   00000f40    r-x
+  1026b040    1026b040    00000828   00000828    r-x .text.hwi
+  1026b868    1026b868    00000428   00000428    r-x .text.cache
+  1026bc90    1026bc90    000000f0   000000f0    r-x .text.mpu
+  1026bd80    1026bd80    000001f8   000001f8    r-x .text.boot
+  1026bf78    1026bf78    00000008   00000008    r-x .text:abort
+1026bf80    1026bf80    00001400   00000000    rw-
+  1026bf80    1026bf80    00000100   00000000    rw- .irqstack
+  1026c080    1026c080    00000100   00000000    rw- .fiqstack
+  1026c180    1026c180    00001000   00000000    rw- .svcstack
+  1026d180    1026d180    00000100   00000000    rw- .abortstack
+  1026d280    1026d280    00000100   00000000    rw- .undefinedstack
+
+
+SECTION ALLOCATION MAP
+
+ output                                  attributes/
+section   page    origin      length       input sections
+--------  ----  ----------  ----------   ----------------
+.vectors   0    00000000    00000040     
+                  00000000    00000040     freertos.awr294x.r5f.ti-arm-clang.release.lib : HwiP_armv7r_vectors_freertos_asm.obj (.vectors)
+
+.text      0    10220000    0001bd80     
+                  10220000    000017f4     TI4IuijNcfY (.text.MmwDemo_initTask)
+                  102217f4    00000004     drivers.awr294x.r5f.ti-arm-clang.release.lib : cbuff_lvds.obj (.text.CBUFF_deinitLVDS)
+                  102217f8    000012a4     mss_main.oer5f (.text.MmwDemo_configSensor)
+                  10222a9c    0000107c     TI4IuijNcfY (.text.__TI_scanfi)
+                  10223b18    00000d38     mss_main.oer5f (.text.main)
+                  10224850    00000cec     TI4IuijNcfY (.text:__TI_printfi)
+                  1022553c    00000004     TI4IuijNcfY (.text.MMWave_disableDevice)
+                  10225540    00000a40     mss_main.oer5f (.text.MmwDemo_handleObjectDetResult)
+                  10225f80    000009e0     mmw_lvds_stream.oer5f (.text.MmwDemo_configLVDSHwData)
+                  10226960    000006c6     mmwavelink_r5f.lib : rl_driver.oer5f (.text.rlDriverMsgRead)
+                  10227026    00000008     board.awr294x.r5f.ti-arm-clang.release.lib : flash_nor_qspi.obj (.text.Flash_norQspiClose)
+                  1022702e    00000002     TI4IuijNcfY (.text.MMWave_maskHostIRQ)
+                  10227030    000005b4     mmwavelink_r5f.lib : rl_driver.oer5f (.text.rlDriverCmdSendRetry)
+                  102275e4    00000004     TI4IuijNcfY (.text.MMWave_enableDevice)
+                  102275e8    00000510     TI4IuijNcfY (.text.CLI_MMWaveAdvChirpCfg)
+                  10227af8    000004d8     libc.a : strtod.c.obj (.text.strtod)
+                  10227fd0    000004d4     mss_main.oer5f (.text.MmwDemo_openSensor)
+                  102284a4    000004cc     freertos.awr294x.r5f.ti-arm-clang.release.lib : DebugP_freertos.obj (.text._DebugP_logZone)
+                  10228970    000004a8     TI4IuijNcfY (.text.CLI_task)
+                  10228e18    00000464     drivers.awr294x.r5f.ti-arm-clang.release.lib : uart_sci.obj (.text.UART_open)
+                  1022927c    00000416     board.awr294x.r5f.ti-arm-clang.release.lib : flash_nor_qspi.obj (.text.Flash_norQspiOpen)
+                  10229692    00000002     --HOLE-- [fill = 0]
+                  10229694    00000408     drivers.awr294x.r5f.ti-arm-clang.release.lib : adcbuf.obj (.text.ADCBuf_control)
+                  10229a9c    00000004     TI4IuijNcfY (.text.MMWave_mboxClose)
+                  10229aa0    00000390     libc.a : strcmp32.S.obj (.text:strcmp)
+                  10229e30    00000368     libmmwave_awr2943.aer5f : mmwave_link_common.oer5f (.text.MMWave_asyncEventHandler)
+                  1022a198    0000034c     drivers.awr294x.r5f.ti-arm-clang.release.lib : qspi.obj (.text.QSPI_open)
+                  1022a4e4    0000031c     TI4IuijNcfY (.text.prvTimerTask)
+                  1022a800    000002ec     ti_dpl_config.oer5f (.text.Dpl_init)
+                  1022aaec    000002ec     drivers.awr294x.r5f.ti-arm-clang.release.lib : qspi.obj (.text.QSPI_close)
+                  1022add8    000002e8                                                  : uart_sci.obj (.text.UART_write)
+                  1022b0c0    000002dc                                                  : ipc_notify_v1.obj (.text.IpcNotify_isr)
+                  1022b39c    00000004     TI4IuijNcfY (.text.MMWave_waitIRQStatus)
+                  1022b3a0    000002d8     TI4IuijNcfY (.text._etoa)
+                  1022b678    000002d0     libc.a : _printfi.c.obj (.text:__TI_printfi)
+                  1022b948    000002bc     TI4IuijNcfY (.text.CLI_MMWaveLUTDataCfg)
+                  1022bc04    00000004     libclang_rt.builtins.a : aeabi_div0.c.obj (.text.__aeabi_idiv0)
+                  1022bc08    000002bc     TI4IuijNcfY (.text._ftoa)
+                  1022bec4    000002b0     TI4IuijNcfY (.text.SOC_rcmGetFreqLeafNode)
+                  1022c174    000002a0     drivers.awr294x.r5f.ti-arm-clang.release.lib : qspi.obj (.text.QSPI_readMemMapMode)
+                  1022c414    00000004     libclang_rt.builtins.a : aeabi_div0.c.obj (.text.__aeabi_ldiv0)
+                  1022c418    00000294     TI4IuijNcfY (.text.CLI_MMWaveProfileCfg)
+                  1022c6ac    00000004     libclang_rt.builtins.a : aeabi_memcpy.S.obj (.text.__aeabi_memcpy)
+                  1022c6b0    00000288     TI4IuijNcfY (.text.CLI_MMWaveChirpCfg)
+                  1022c938    00000288     drivers.awr294x.r5f.ti-arm-clang.release.lib : ipc_rpmsg.obj (.text.RPMessage_notifyCallback)
+                  1022cbc0    00000278     TI4IuijNcfY (.text._pconv_a)
+                  1022ce38    0000025c     mss_main.oer5f (.text.MmwDemo_startSensor)
+                  1022d094    0000000c     libmmwave_awr2943.aer5f : mmwave_osal.oer5f (.text.MMWave_osalMutexDelete)
+                  1022d0a0    00000246     mmwavelink_r5f.lib : rl_driver.oer5f (.text.rlDriverInit)
+                  1022d2e6    00000002     --HOLE-- [fill = 0]
+                  1022d2e8    0000023c     TI4IuijNcfY (.text.MmwDemo_DPC_ObjectDetection_reportFxn)
+                  1022d524    00000238     TI4IuijNcfY (.text.DPM_mboxMsgSend)
+                  1022d75c    00000004     TI4IuijNcfY (.text._outc.14)
+                  1022d760    00000238     mmwavelink_r5f.lib : rl_driver.oer5f (.text.rlDriverExecuteSetApi)
+                  1022d998    00000230     TI4IuijNcfY (.text._pconv_g)
+                  1022dbc8    0000022c     drivers.awr294x.r5f.ti-arm-clang.release.lib : cbuff_lvds.obj (.text.CBUFF_openLVDS)
+                  1022ddf4    00000224     TI4IuijNcfY (.text.IpcNotify_sendMsg)
+                  1022e018    00000224     TI4IuijNcfY (.text.MMWave_configureAdvChirp)
+                  1022e23c    00000004     TI4IuijNcfY (.text._outc.270)
+                  1022e240    0000021a     mmwavelink_r5f.lib : rl_driver.oer5f (.text.rlDriverCmdInvoke)
+                  1022e45a    00000006     TI4IuijNcfY (.text.atof.933)
+                  1022e460    0000021a     mmwavelink_r5f.lib : rl_driver.oer5f (.text.rlDriverExecuteGetApi)
+                  1022e67a    00000002     --HOLE-- [fill = 0]
+                  1022e67c    0000020c     TI4IuijNcfY (.text.CBUFF_configEDMA)
+                  1022e888    00000208     mss_main.oer5f (.text.MmwDemo_stopSensor)
+                  1022ea90    00000204     TI4IuijNcfY (.text.MmwDemo_eventCallbackFxn)
+                  1022ec94    000001e8     TI4IuijNcfY (.text.MmwDemo_CLISensorStart)
+                  1022ee7c    00000004     TI4IuijNcfY (.text._outs.15)
+                  1022ee80    000001e8     libc.a : s_exp2.c.obj (.text.exp2)
+                  1022f068    00000008     libsysbm.a : hostexit.c.obj (.text.HOSTexit)
+                  1022f070    000001e4     mmwavelink_r5f.lib : rl_driver.oer5f (.text.rlDriverMsgReadSpawnCtx)
+                  1022f254    000001e0     drivers.awr294x.r5f.ti-arm-clang.release.lib : cbuff.obj (.text.CBUFF_close)
+                  1022f434    000001d8     TI4IuijNcfY (.text.mmwDemo_mssDPMTask)
+                  1022f60c    00000004     TI4IuijNcfY (.text._outs.271)
+                  1022f610    000001d8     mmwavelink_r5f.lib : rl_device.oer5f (.text.rlDevSetFillLUTBuff)
+                  1022f7e8    000001d8     TI4IuijNcfY (.text.strtoll)
+                  1022f9c0    000001d0     libclang_rt.builtins.a : udivsi3.S.obj (.text.__udivsi3)
+                  1022fb90    000001c8     libc.a : memory.c.obj (.text.malloc)
+                  1022fd58    000001c0     freertos.awr294x.r5f.ti-arm-clang.release.lib : queue.obj (.text.xQueueSemaphoreTake)
+                  1022ff18    00000008     TI4IuijNcfY (.text._out_char)
+                  1022ff20    000001a8     mmwavelink_r5f.lib : rl_sensor.oer5f (.text.rlRfPhShiftCalibDataStore)
+                  102300c8    000001a0     TI4IuijNcfY (.text.MmwDemo_CLISSCConfig)
+                  10230268    00000190     TI4IuijNcfY (.text.MMWave_configPhaseShift)
+                  102303f8    0000018c     libmmwave_awr2943.aer5f : mmwave_link_common.oer5f (.text.MMWave_computeCRC)
+                  10230584    0000000c                             : mmwave_osal.oer5f (.text.MMWave_osalMutexUnlock)
+                  10230590    0000018c     mmwavelink_r5f.lib : rl_sensor.oer5f (.text.rlRfPhShiftCalibDataRestore)
+                  1023071c    00000188     libc.a : memory.c.obj (.text.free)
+                  102308a4    00000184     TI4IuijNcfY (.text.fopen)
+                  10230a28    00000180     libc.a : memcpy32.S.obj (.text:memcpy)
+                  10230ba8    0000017c            : fputs.c.obj (.text.fputs)
+                  10230d24    00000178     TI4IuijNcfY (.text.xQueueGenericSend)
+                  10230e9c    00000174     TI4IuijNcfY (.text.MMWave_configBPM)
+                  10231010    00000174     drivers.awr294x.r5f.ti-arm-clang.release.lib : uart_sci.obj (.text.UART_close)
+                  10231184    00000170     TI4IuijNcfY (.text.computeSscFactCtrlVal)
+                  102312f4    0000016e     board.awr294x.r5f.ti-arm-clang.release.lib : flash_nor_qspi.obj (.text.Flash_norQspiWrite)
+                  10231462    00000002     --HOLE-- [fill = 0]
+                  10231464    0000016c     TI4IuijNcfY (.text.strtol)
+                  102315d0    0000016c     TI4IuijNcfY (.text.strtoull)
+                  1023173c    00000168     TI4IuijNcfY (.text.CBUFF_addLinkedList)
+                  102318a4    0000000c     libmmwave_awr2943.aer5f : mmwave_osal.oer5f (.text.MMWave_osalSemDelete)
+                  102318b0    00000166     mmwavelink_r5f.lib : rl_sensor.oer5f (.text.rlRfSetPhaseShiftConfig)
+                  10231a16    00000006     TI4IuijNcfY (.text.atof)
+                  10231a1c    00000004     TI4IuijNcfY (.text.fclose)
+                  10231a20    00000166     mmwavelink_r5f.lib : rl_sensor.oer5f (.text.rlSetChirpConfig)
+                  10231b86    00000006     TI4IuijNcfY (.text.prvTaskExitError)
+                  10231b8c    00000004     ti_dpl_config.oer5f (.text.putchar_)
+                  10231b90    00000166     mmwavelink_r5f.lib : rl_sensor.oer5f (.text.rlSetMultiBpmChirpConfig)
+                  10231cf6    00000164     drivers.awr294x.r5f.ti-arm-clang.release.lib : qspi.obj (.text.QSPI_readCmd)
+                  10231e5a    00000006     --HOLE-- [fill = 0]
+                  10231e60    00000154     libc.a : s_floor.c.obj (.text.floor)
+                  10231fb4    00000148     TI4IuijNcfY (.text.CLI_MMWaveVersion)
+                  102320fc    00000148     TI4IuijNcfY (.text.MmwDemo_RFParser_setAoAParamsTDM)
+                  10232244    00000004     --HOLE-- [fill = 0]
+                  10232248    00000148     TI4IuijNcfY (.text.fcvt)
+                  10232390    00000144     TI4IuijNcfY (.text.DPM_msgResultHandler)
+                  102324d4    00000140     TI4IuijNcfY (.text.EDMA_transferCompletionMasterIsrFxn)
+                  10232614    00000004     --HOLE-- [fill = 0]
+                  10232618    00000140     TI4IuijNcfY (.text._pconv_e)
+                  10232758    00000008     TI4IuijNcfY (.tramp.putchar.1)
+                  10232760    00000140     mmwavelink_r5f.lib : rl_sensor.oer5f (.text.rlRfCalibDataStore)
+                  102328a0    0000013c     TI4IuijNcfY (.text.UART_controllerIsr)
+                  102329dc    0000013c     libc.a : _io_perm.c.obj (.text.__TI_wrt_ok)
+                  10232b18    0000013c            : s_scalbn.c.obj (.text.ldexp)
+                  10232c54    00000130     drivers.awr294x.r5f.ti-arm-clang.release.lib : cbuff_lvds.obj (.text.CBUFF_initLVDS)
+                  10232d84    00000130     freertos.awr294x.r5f.ti-arm-clang.release.lib : SemaphoreP_freertos.obj (.text.SemaphoreP_pend)
+                  10232eb4    00000130                                                   : SemaphoreP_freertos.obj (.text.SemaphoreP_post)
+                  10232fe4    0000000c     libmmwave_awr2943.aer5f : mmwave_osal.oer5f (.text.MMWave_osalSemSignal)
+                  10232ff0    0000012c     mmwavelink_r5f.lib : rl_sensor.oer5f (.text.rlRfCalibDataRestore)
+                  1023311c    0000012c     TI4IuijNcfY (.text.strtoul)
+                  10233248    00000128     TI4IuijNcfY (.text.MMWave_configureProfileChirp)
+                  10233370    00000128     freertos.awr294x.r5f.ti-arm-clang.release.lib : queue.obj (.text.xQueueGenericCreateStatic)
+                  10233498    00000008     TI4IuijNcfY (.tramp.strtod.1)
+                  102334a0    00000120     mmwavelink_r5f.lib : rl_device.oer5f (.text.rlDevicePowerOn)
+                  102335c0    0000011c     freertos.awr294x.r5f.ti-arm-clang.release.lib : tasks.obj (.text.vTaskStartScheduler)
+                  102336dc    00000118     TI4IuijNcfY (.text.Alloc_resource)
+                  102337f4    00000118     TI4IuijNcfY (.text.CLI_MMWaveFlushCfg)
+                  1023390c    00000118     libclang_rt.builtins.a : udivmoddi4.S.obj (.text)
+                  10233a24    0000000c     TI4IuijNcfY (.text.QSPI_isr)
+                  10233a30    00000112     mmwavelink_r5f.lib : rl_sensor.oer5f (.text.rlSetMultiAdvChirpLUTConfig)
+                  10233b42    00000002     --HOLE-- [fill = 0]
+                  10233b44    0000010c     TI4IuijNcfY (.text.MmwDemo_mmWaveCtrlTask)
+                  10233c50    0000010a     TI4IuijNcfY (.text._ntoa_format)
+                  10233d5a    00000002     --HOLE-- [fill = 0]
+                  10233d5c    00000108     TI4IuijNcfY (.text.CLI_MMWaveSubFrameCfg)
+                  10233e64    00000108     board.awr294x.r5f.ti-arm-clang.release.lib : flash_nor_qspi.obj (.text.Flash_norQspiReset)
+                  10233f6c    00000108     TI4IuijNcfY (.text.SOC_rcmGetFreq)
+                  10234074    00000104     libc.a : getdevice.c.obj (.text.getdevice)
+                  10234178    00000100     TI4IuijNcfY (.text.ESM_processInterrupt)
+                  10234278    000000fc     TI4IuijNcfY (.text.prvAddNewTaskToReadyList)
+                  10234374    000000f8     freertos.awr294x.r5f.ti-arm-clang.release.lib : tasks.obj (.text.vTaskSwitchContext)
+                  1023446c    000000f0                                                   : port.obj (.text.vApplicationIdleHook)
+                  1023455c    000000ec     TI4IuijNcfY (.text.CLI_MMWaveFrameCfg)
+                  10234648    000000ec     drivers.awr294x.r5f.ti-arm-clang.release.lib : ipc_rpmsg_vring.obj (.text.RPMessage_vringReset)
+                  10234734    000000e8     freertos.awr294x.r5f.ti-arm-clang.release.lib : HeapP_freertos.obj (.text.HeapP_alloc)
+                  1023481c    000000e8     drivers.awr294x.r5f.ti-arm-clang.release.lib : soc.obj (.text.SOC_virtToPhy)
+                  10234904    000000e8     mmw_lvds_stream.oer5f (.text.allocateEDMAChannel)
+                  102349ec    000000e4     TI4IuijNcfY (.text.__TI_closefile)
+                  10234ad0    000000e0     drivers.awr294x.r5f.ti-arm-clang.release.lib : qspi.obj (.text.QSPI_writeCmd)
+                  10234bb0    000000e0     TI4IuijNcfY (.text.strtok)
+                  10234c90    000000e0     freertos.awr294x.r5f.ti-arm-clang.release.lib : tasks.obj (.text.xTaskIncrementTick)
+                  10234d70    000000d4     TI4IuijNcfY (.text.CLI_MMWaveBPMCfgAdvanced)
+                  10234e44    000000cc     TI4IuijNcfY (.text.CLI_MMWaveAdvFrameCfg)
+                  10234f10    000000cc     board.awr294x.r5f.ti-arm-clang.release.lib : flash_nor_qspi.obj (.text.Flash_norQspiSet4ByteAddrMode)
+                  10234fdc    000000cc     TI4IuijNcfY (.text.MMWave_mboxWrite)
+                  102350a8    000000cc     freertos.awr294x.r5f.ti-arm-clang.release.lib : tasks.obj (.text.xTaskResumeAll)
+                  10235174    000000c8     TI4IuijNcfY (.text.MmwDemo_CLIConfigDataPort)
+                  1023523c    000000c8     TI4IuijNcfY (.text.MmwDemo_setSubFramePendingState)
+                  10235304    000000c8     libc.a : s_floorf.c.obj (.text.floorf)
+                  102353cc    000000c4     libmmwave_awr2943.aer5f : mmwave_fullcfg.oer5f (.text.MMWave_getChirpHandle)
+                  10235490    000000c0     TI4IuijNcfY (.text.MmwDemo_CLICfarCfg)
+                  10235550    000000c0     freertos.awr294x.r5f.ti-arm-clang.release.lib : tasks.obj (.text.xTaskCreateStatic)
+                  10235610    000000be     drivers.awr294x.r5f.ti-arm-clang.release.lib : cbuff_transfer.obj (.text.CBUFF_setupNonInterleaved_CP_ADC_CQ_USER)
+                  102356ce    00000002     --HOLE-- [fill = 0]
+                  102356d0    000000bc     TI4IuijNcfY (.text._mcpy)
+                  1023578c    000000bc     libc.a : fputc.c.obj (.text.fputc)
+                  10235848    000000ba     drivers.awr294x.r5f.ti-arm-clang.release.lib : cbuff_transfer.obj (.text.CBUFF_setupNonInterleaved_CP_ADC)
+                  10235902    000000ba     mmwdemo_adcconfig.oer5f (.text.MmwDemo_ADCBufConfig)
+                  102359bc    00000004     --HOLE-- [fill = 0]
+                  102359c0    000000b8     mmwavelink_r5f.lib : rl_device.oer5f (.text.rlDeviceGetVersion)
+                  10235a78    000000b4     drivers.awr294x.r5f.ti-arm-clang.release.lib : cbuff_transfer.obj (.text.CBUFF_setupInterleaved_CP_ADC_CQ_USER)
+                  10235b2c    000000b4                                                  : cbuff_transfer.obj (.text.CBUFF_setupNonInterleaved_ADC_CP)
+                  10235be0    000000b4     board.awr294x.r5f.ti-arm-clang.release.lib : flash_nor_qspi.obj (.text.Flash_norQspiErase)
+                  10235c94    000000b4                                                : flash_nor_qspi.obj (.text.Flash_norQspiEraseSector)
+                  10235d48    000000b4     TI4IuijNcfY (.text.prvSampleTimeNow)
+                  10235dfc    000000b0     libc.a : s_ceilf.c.obj (.text.ceilf)
+                  10235eac    00000004     --HOLE-- [fill = 0]
+                  10235eb0    000000b0     mmwavelink_r5f.lib : rl_sensor.oer5f (.text.rlSetProfileConfig)
+                  10235f60    000000ae     drivers.awr294x.r5f.ti-arm-clang.release.lib : cbuff_transfer.obj (.text.CBUFF_setupNonInterleaved_CP_ADC_CQ)
+                  1023600e    00000002     --HOLE-- [fill = 0]
+                  10236010    000000ac                                                  : cbuff.obj (.text.CBUFF_deactivateSession)
+                  102360bc    00000004     --HOLE-- [fill = 0]
+                  102360c0    000000ac     mmwavelink_r5f.lib : rl_driver.oer5f (.text.rlDriverConstructInMsg)
+                  1023616c    00000004     --HOLE-- [fill = 0]
+                  10236170    000000ac                        : rl_driver.oer5f (.text.rlDriverDeInit)
+                  1023621c    000000ac     freertos.awr294x.r5f.ti-arm-clang.release.lib : tasks.obj (.text.vTaskPriorityDisinheritAfterTimeout)
+                  102362c8    000000aa     TI4IuijNcfY (.text._ntoa_long_long)
+                  10236372    00000006     --HOLE-- [fill = 0]
+                  10236378    000000a8     TI4IuijNcfY (.text.MmwDemo_CLICompRangeBiasAndRxChanPhaseCfg)
+                  10236420    000000a8     TI4IuijNcfY (.text.QSPI_spiConfigWrite)
+                  102364c8    000000a8     freertos.awr294x.r5f.ti-arm-clang.release.lib : tasks.obj (.text.xTaskPriorityDisinherit)
+                  10236570    000000a6     drivers.awr294x.r5f.ti-arm-clang.release.lib : cbuff_transfer.obj (.text.CBUFF_setupInterleaved_CP_ADC_CQ)
+                  10236616    00000002     --HOLE-- [fill = 0]
+                  10236618    000000a4     TI4IuijNcfY (.text.DPM_msgResponseHandler)
+                  102366bc    000000a4     libmmwave_awr2943.aer5f : mmwave_link_common.oer5f (.text.MMWave_spawn)
+                  10236760    000000a4     TI4IuijNcfY (.text.MmwDemo_CLIAntGeometryCfg)
+                  10236804    000000a4     mmw_lvds_stream.oer5f (.text.MmwDemo_LVDSStreamDeleteHwSession)
+                  102368a8    000000a0     TI4IuijNcfY (.text.CLI_MMWaveContModeCfg)
+                  10236948    000000a0     drivers.awr294x.r5f.ti-arm-clang.release.lib : edma.obj (.text.EDMA_freeDmaChannel)
+                  102369e8    000000a0                                                  : edma.obj (.text.EDMA_freeParam)
+                  10236a88    000000a0                                                  : edma.obj (.text.EDMA_freeTcc)
+                  10236b28    000000a0     mss_main.oer5f (.text.MMWDemo_configSSC)
+                  10236bc8    000000a0     libmmwave_awr2943.aer5f : mmwave_fullcfg.oer5f (.text.MMWave_getChirpCfg)
+                  10236c68    000000a0     TI4IuijNcfY (.text.MmwDemo_CLICalibDcRangeSig)
+                  10236d08    000000a0     libc.a : memset32.S.obj (.text:memset)
+                  10236da8    0000009c     TI4IuijNcfY (.text.CBUFF_configUserBufferEDMA)
+                  10236e44    0000009c     drivers.awr294x.r5f.ti-arm-clang.release.lib : ipc_notify_v1.obj (.text.IpcNotify_readAckCallback)
+                  10236ee0    0000009c     TI4IuijNcfY (.text.MmwDemo_CLIChirpQualityRxSatMonCfg)
+                  10236f7c    00000098     TI4IuijNcfY (.text.CLI_help)
+                  10237014    00000098     freertos.awr294x.r5f.ti-arm-clang.release.lib : SemaphoreP_freertos.obj (.text.SemaphoreP_constructCounting)
+                  102370ac    00000098     libc.a : _ltoa.c.obj (.text.__TI_ltoa)
+                  10237144    00000098     freertos.awr294x.r5f.ti-arm-clang.release.lib : tasks.obj (.text.xTaskCheckForTimeOut)
+                  102371dc    00000094     drivers.awr294x.r5f.ti-arm-clang.release.lib : cbuff_transfer.obj (.text.CBUFF_setupInterleaved_ADC_CP)
+                  10237270    00000094                                                  : cbuff_transfer.obj (.text.CBUFF_setupInterleaved_CP_ADC)
+                  10237304    00000094     freertos.awr294x.r5f.ti-arm-clang.release.lib : HeapP_freertos.obj (.text.HeapP_free)
+                  10237398    00000094     TI4IuijNcfY (.text.MmwDemo_LVDSStream_EDMAAllocateCBUFFHwChannel)
+                  1023742c    00000092     TI4IuijNcfY (.text.prvInitialiseNewTask)
+                  102374be    00000002     --HOLE-- [fill = 0]
+                  102374c0    00000090     libmmwave_awr2943.aer5f : mmwave_fullcfg.oer5f (.text.MMWave_getAdvChirpHandle)
+                  10237550    00000090     drivers.awr294x.r5f.ti-arm-clang.release.lib : ipc_rpmsg_vring.obj (.text.RPMessage_vringPutEmptyRxBuf)
+                  102375e0    0000008c     TI4IuijNcfY (.text.EDMA_configureChannelRegion)
+                  1023766c    0000008c     freertos.awr294x.r5f.ti-arm-clang.release.lib : tasks.obj (.text.eTaskGetState)
+                  102376f8    00000088     TI4IuijNcfY (.text.CLI_MMWaveAdvFrameDataCfg)
+                  10237780    00000088     TI4IuijNcfY (.text.CLI_MMWaveApllSynthBwConfig)
+                  10237808    00000088     TI4IuijNcfY (.text.MmwDemo_CLIADCDataDitherCfg)
+                  10237890    00000088     TI4IuijNcfY (.text.MmwDemo_CLILvdsStreamCfg)
+                  10237918    00000088     libc.a : fflush.c.obj (.text.__TI_doflush)
+                  102379a0    00000088     TI4IuijNcfY (.text._ecpy)
+                  10237a28    00000088     freertos.awr294x.r5f.ti-arm-clang.release.lib : port.obj (.text.pxPortInitialiseStack)
+                  10237ab0    00000084     drivers.awr294x.r5f.ti-arm-clang.release.lib : adcbuf.obj (.text.ADCBuf_getChanBufAddr)
+                  10237b34    00000084                                                  : edma.obj (.text.EDMA_registerIntr)
+                  10237bb8    00000084     TI4IuijNcfY (.text.MmwDemo_CLIADCBufCfg)
+                  10237c3c    00000082     drivers.awr294x.r5f.ti-arm-clang.release.lib : cbuff_transfer.obj (.text.CBUFF_setupNonInterleaved_ADC)
+                  10237cbe    00000082     TI4IuijNcfY (.text._ntoa_long)
+                  10237d40    00000080     TI4IuijNcfY (.text.CBUFF_ISR)
+                  10237dc0    00000080     drivers.awr294x.r5f.ti-arm-clang.release.lib : cbuff_lvds.obj (.text.CBUFF_initLVDSLinkListParams)
+                  10237e40    00000080                                                  : cbuff_transfer.obj (.text.CBUFF_setupNonInterleaved_ADC_USER)
+                  10237ec0    00000080     TI4IuijNcfY (.text._pconv_f)
+                  10237f40    00000080     freertos.awr294x.r5f.ti-arm-clang.release.lib : tasks.obj (.text.xTaskPriorityInherit)
+                  10237fc0    00000080                                                   : tasks.obj (.text.xTaskRemoveFromEventList)
+                  10238040    0000007c     drivers.awr294x.r5f.ti-arm-clang.release.lib : cbuff_transfer.obj (.text.CBUFF_setupInterleaved_ADC_USER)
+                  102380bc    0000007c     TI4IuijNcfY (.text.DPM_pipeSend)
+                  10238138    0000007c     board.awr294x.r5f.ti-arm-clang.release.lib : flash_nor_qspi.obj (.text.Flash_norQspiWaitReady)
+                  102381b4    0000007c     libsysbm.a : hostrename.c.obj (.text.HOSTrename)
+                  10238230    0000007c     libmmwave_awr2943.aer5f : mmwave_fullcfg.oer5f (.text.MMWave_getProfileCfg)
+                  102382ac    0000007c     TI4IuijNcfY (.text.MMWave_mboxRead)
+                  10238328    0000007c     TI4IuijNcfY (.text.UART_txEdmaIsrFxn)
+                  102383a4    00000004     --HOLE-- [fill = 0]
+                  102383a8    0000007c     libc.a : s_frexp.c.obj (.text.frexp)
+                  10238424    0000007c     freertos.awr294x.r5f.ti-arm-clang.release.lib : tasks.obj (.text.vTaskGetInfo)
+                  102384a0    00000078     libsysbm.a : hostopen.c.obj (.text.HOSTopen)
+                  10238518    00000078     TI4IuijNcfY (.text.MmwDemo_CLIAoAFovCfg)
+                  10238590    00000078     TI4IuijNcfY (.text.SOC_rcmGetXTALFrequency)
+                  10238608    00000078     TI4IuijNcfY (.text.UART_rxEdmaIsrFxn)
+                  10238680    00000078     mmwavelink_r5f.lib : rl_driver.oer5f (.text.rlDriverHostIrqHandler)
+                  102386f8    00000076     TI4IuijNcfY (.text._out_rev)
+                  1023876e    00000002     --HOLE-- [fill = 0]
+                  10238770    00000074     TI4IuijNcfY (.text.DPM_msgDPCCfgHandler)
+                  102387e4    00000074     libmmwave_awr2943.aer5f : mmwave_fullcfg.oer5f (.text.MMWave_getNumChirps)
+                  10238858    00000074     TI4IuijNcfY (.text.MmwDemo_CLICalibDataSaveRestore)
+                  102388cc    00000074     TI4IuijNcfY (.text.MmwDemo_CLIChirpQualitySigImgMonCfg)
+                  10238940    00000074     TI4IuijNcfY (.text.MmwDemo_LVDSStream_EDMAFreeCBUFFHwChannel)
+                  102389b4    00000074     TI4IuijNcfY (.text.MmwDemo_checkEdmaErrors)
+                  10238a28    00000070     TI4IuijNcfY (.text.MmwDemo_convertCfarToLinear)
+                  10238a98    00000070     mss_main.oer5f (.text.MmwDemo_isAllCfgInPendingState)
+                  10238b08    00000070     TI4IuijNcfY (.text.prvUnlockQueue)
+                  10238b78    0000006c     TI4IuijNcfY (.text.MmwDemo_CLIGuiMonSel)
+                  10238be4    0000006c     mss_main.oer5f (.text.MmwDemo_CfgUpdate)
+                  10238c50    0000006c     TI4IuijNcfY (.text.MmwDemo_LVDSStream_HwTriggerFrameDone)
+                  10238cbc    0000006c     libc.a : atoi.c.obj (.text.atoi)
+                  10238d28    0000006a     drivers.awr294x.r5f.ti-arm-clang.release.lib : cbuff_transfer.obj (.text.CBUFF_setupInterleaved_ADC)
+                  10238d92    00000002     --HOLE-- [fill = 0]
+                  10238d94    00000068     libsysbm.a : hostlseek.c.obj (.text.HOSTlseek)
+                  10238dfc    00000068     TI4IuijNcfY (.text.MmwDemo_CLIMeasureRangeBiasAndRxChanPhaseCfg)
+                  10238e64    00000066     TI4IuijNcfY (.text.EDMA_enableTransferRegion)
+                  10238eca    00000066     board.awr294x.r5f.ti-arm-clang.release.lib : flash.obj (.text.Flash_offsetToBlkPage)
+                  10238f30    00000064     TI4IuijNcfY (.text.CLI_MMWaveDataOutputMode)
+                  10238f94    00000064     TI4IuijNcfY (.text.prvAddCurrentTaskToDelayedList)
+                  10238ff8    00000008     libclang_rt.builtins.a : aeabi_memcpy.S.obj (.tramp.__aeabi_memcpy.1)
+                  10239000    00000062     mmwavelink_r5f.lib : rl_device.oer5f (.text.rlDeviceAdvFrameConfigApply)
+                  10239062    0000000e     board.awr294x.r5f.ti-arm-clang.release.lib : flash.obj (.text.Flash_close)
+                  10239070    00000062     mmwavelink_r5f.lib : rl_device.oer5f (.text.rlDeviceFrameConfigApply)
+                  102390d2    00000002     --HOLE-- [fill = 0]
+                  102390d4    00000060     libhsiheader_awr2943.aer5f : hsiheader.oer5f (.text.HSIHeader_deleteHeader)
+                  10239134    00000060     TI4IuijNcfY (.text.MMWave_configureProfile)
+                  10239194    00000060     drivers.awr294x.r5f.ti-arm-clang.release.lib : soc.obj (.text.SOC_getSelfCpuClk)
+                  102391f4    00000060     TI4IuijNcfY (.text._fcpy)
+                  10239254    00000060     TI4IuijNcfY (.text.fprintf)
+                  102392b4    0000000c     TI4IuijNcfY (.text.SOC_rcmGetPeripheralClockFrequency)
+                  102392c0    00000060     mmwavelink_r5f.lib : rl_controller.oer5f (.text.rlGetSubBlock)
+                  10239320    00000060                        : rl_sensor.oer5f (.text.rlSetFrameConfig)
+                  10239380    0000005c     libdpm_awr2943.aer5f : dpm_core.oer5f (.text.DPM_ioctl)
+                  102393dc    0000005c     TI4IuijNcfY (.text.DPM_mboxDeinit)
+                  10239438    0000005c     TI4IuijNcfY (.text.MmwDemo_CLIAnalogMonitorCfg)
+                  10239494    0000005c     freertos.awr294x.r5f.ti-arm-clang.release.lib : SemaphoreP_freertos.obj (.text.SemaphoreP_destruct)
+                  102394f0    0000005c                                                   : DebugP_log.obj (.text._DebugP_assert)
+                  1023954c    0000005c     TI4IuijNcfY (.text.printf)
+                  102395a8    0000005a     TI4IuijNcfY (.text.DPM_mboxSendResult)
+                  10239602    0000005a     TI4IuijNcfY (.text.MmwDemo_CLICfarFovCfg)
+                  1023965c    00000058     libsysbm.a : hostread.c.obj (.text.HOSTread)
+                  102396b4    00000058                : hostwrite.c.obj (.text.HOSTwrite)
+                  1023970c    00000058     mss_main.oer5f (.text.MmwDemo_isAllCfgInNonPendingState)
+                  10239764    00000058     libc.a : fopen.c.obj (.text.__TI_cleanup)
+                  102397bc    00000058     libsysbm.a : trgmsg.c.obj (.text.__TI_readmsg)
+                  10239814    00000058                : trgmsg.c.obj (.text.__TI_writemsg)
+                  1023986c    00000058     TI4IuijNcfY (.text._outs)
+                  102398c4    00000058     libc.a : sprintf.c.obj (.text.sprintf)
+                  1023991c    00000054     TI4IuijNcfY (.text.CBUFF_ErrorISR)
+                  10239970    00000054     libmmwave_awr2943.aer5f : mmwave_fullcfg.oer5f (.text.MMWave_getAdvChirpParams)
+                  102399c4    00000054     drivers.awr294x.r5f.ti-arm-clang.release.lib : ipc_rpmsg.obj (.text.RPMessage_construct)
+                  10239a18    00000054     TI4IuijNcfY (.text.SOC_rcmADPLLJGetFOut)
+                  10239a6c    00000054     libc.a : autoinit.c.obj (.text:__TI_auto_init_nobinit_nopinit)
+                  10239ac0    00000050     ti_board_open_close.oer5f (.text.Board_flashOpen)
+                  10239b10    00000050     TI4IuijNcfY (.text.CLI_MMWaveSetLdoBypassConfig)
+                  10239b60    00000050     drivers.awr294x.r5f.ti-arm-clang.release.lib : edma.obj (.text.EDMA_allocDmaChannel)
+                  10239bb0    00000050                                                  : edma.obj (.text.EDMA_allocParam)
+                  10239c00    00000050                                                  : edma.obj (.text.EDMA_allocTcc)
+                  10239c50    00000050     libsysbm.a : hostunlink.c.obj (.text.HOSTunlink)
+                  10239ca0    00000050     TI4IuijNcfY (.text.IpcNotify_registerClient)
+                  10239cf0    00000050     mmwavelink_r5f.lib : rl_controller.oer5f (.text.rlAppendSubBlock)
+                  10239d40    00000050                        : rl_sensor.oer5f (.text.rlSetAdvFrameConfig)
+                  10239d90    00000050     freertos.awr294x.r5f.ti-arm-clang.release.lib : tasks.obj (.text.vTaskPlaceOnEventListRestricted)
+                  10239de0    00000050     TI4IuijNcfY (.text.vsnprintf)
+                  10239e30    00000050     TI4IuijNcfY (.text.xTimerGenericCommand)
+                  10239e80    0000004c     TI4IuijNcfY (.text.DPM_mboxInit)
+                  10239ecc    0000004c     TI4IuijNcfY (.text.MMWave_unmaskHostIRQ)
+                  10239f18    0000004c     TI4IuijNcfY (.text.MmwDemo_CLIMultiObjBeamForming)
+                  10239f64    0000004c     drivers.awr294x.r5f.ti-arm-clang.release.lib : qspi.obj (.text.QSPI_init)
+                  10239fb0    0000004c     TI4IuijNcfY (.text.prvIdleTask)
+                  10239ffc    0000004c     freertos.awr294x.r5f.ti-arm-clang.release.lib : tasks.obj (.text.vTaskDelay)
+                  1023a048    00000048     TI4IuijNcfY (.text.CLI_MMWaveChannelCfg)
+                  1023a090    00000048     libcli_awr2943.aer5f : cli.oer5f (.text.CLI_write)
+                  1023a0d8    00000048     freertos.awr294x.r5f.ti-arm-clang.release.lib : SemaphoreP_freertos.obj (.text.SemaphoreP_constructMutex)
+                  1023a120    00000048                                                   : tasks.obj (.text.vTaskPlaceOnEventList)
+                  1023a168    00000044                                                   : SemaphoreP_freertos.obj (.text.SemaphoreP_constructBinary)
+                  1023a1ac    00000044     TI4IuijNcfY (.text.free_list_insert)
+                  1023a1f0    00000044     TI4IuijNcfY (.text.prvDeleteTCB)
+                  1023a234    00000040     TI4IuijNcfY (.text.ESM_configErrorGating)
+                  1023a274    00000040     TI4IuijNcfY (.text.MmwDemo_RFParser_getFramePeriod_ms)
+                  1023a2b4    0000003e     TI4IuijNcfY (.text.DPM_msgStartHandler)
+                  1023a2f2    0000003e     TI4IuijNcfY (.text.DPM_msgStopHandler)
+                  1023a330    0000003c     TI4IuijNcfY (.text.CLI_MMWaveADCCfg)
+                  1023a36c    0000003c     drivers.awr294x.r5f.ti-arm-clang.release.lib : edma.obj (.text.EDMA_getBaseAddr)
+                  1023a3a8    0000003c     board.awr294x.r5f.ti-arm-clang.release.lib : flash_nor_qspi.obj (.text.Flash_norQspiRead)
+                  1023a3e4    0000003c     freertos.awr294x.r5f.ti-arm-clang.release.lib : HeapP_freertos.obj (.text.HeapP_construct)
+                  1023a420    0000003c     libmmwave_awr2943.aer5f : mmwave_osal.oer5f (.text.MMWave_osalSemCreate)
+                  1023a45c    0000003c     mss_main.oer5f (.text.MmwDemo_mssSECCallBack)
+                  1023a498    0000003c     TI4IuijNcfY (.text.prvInsertTimerInActiveList)
+                  1023a4d4    0000003a     board.awr294x.r5f.ti-arm-clang.release.lib : flash.obj (.text.Flash_open)
+                  1023a50e    0000003a     TI4IuijNcfY (.text.prvInsertBlockIntoFreeList)
+                  1023a548    00000038     TI4IuijNcfY (.text.CBUFF_configCQEDMA)
+                  1023a580    00000038     freertos.awr294x.r5f.ti-arm-clang.release.lib : ClockP_freertos.obj (.text.ClockP_getTimeUsec)
+                  1023a5b8    00000038     libsysbm.a : hostclose.c.obj (.text.HOSTclose)
+                  1023a5f0    00000038     libmmwave_awr2943.aer5f : mmwave_osal.oer5f (.text.MMWave_osalMutexCreate)
+                  1023a628    00000038     TI4IuijNcfY (.text.MmwDemo_CLIGetSubframe)
+                  1023a660    00000038     mss_main.oer5f (.text.MmwDemo_resetStaticCfgPendingState)
+                  1023a698    00000038     TI4IuijNcfY (.text.Pinmux_config)
+                  1023a6d0    00000038     drivers.awr294x.r5f.ti-arm-clang.release.lib : qspi.obj (.text.QSPI_writeConfigMode)
+                  1023a708    00000038     TI4IuijNcfY (.text.RPMessage_freeEndPtMsg)
+                  1023a740    00000038     TI4IuijNcfY (.text._outs.264)
+                  1023a778    00000038     TI4IuijNcfY (.text.memccpy)
+                  1023a7b0    00000038     mmwavelink_r5f.lib : rl_sensor.oer5f (.text.rlEnableContMode)
+                  1023a7e8    00000008     freertos.awr294x.r5f.ti-arm-clang.release.lib : PmuP_armv7r_asm.obj (.tramp.PmuP_enableCounters.1)
+                  1023a7f0    00000038     mmwavelink_r5f.lib : rl_monitoring.oer5f (.text.rlRfAnaMonConfig)
+                  1023a828    00000008     freertos.awr294x.r5f.ti-arm-clang.release.lib : HwiP_armv7r_asm.obj (.tramp.HwiP_restore.1)
+                  1023a830    00000038     mmwavelink_r5f.lib : rl_sensor.oer5f (.text.rlRfApllSynthBwCtlConfig)
+                  1023a868    00000008     freertos.awr294x.r5f.ti-arm-clang.release.lib : HwiP_armv7r_asm.obj (.tramp.HwiP_enable.1)
+                  1023a870    00000038     mmwavelink_r5f.lib : rl_sensor.oer5f (.text.rlRfGetTemperatureReport)
+                  1023a8a8    00000008     TI4IuijNcfY (.tramp.printf.1)
+                  1023a8b0    00000038     mmwavelink_r5f.lib : rl_sensor.oer5f (.text.rlRfInitCalibConfig)
+                  1023a8e8    00000008     --HOLE-- [fill = 0]
+                  1023a8f0    00000038                        : rl_sensor.oer5f (.text.rlRfRunTimeCalibConfig)
+                  1023a928    00000008     --HOLE-- [fill = 0]
+                  1023a930    00000038                        : rl_monitoring.oer5f (.text.rlRfRxIfSatMonConfig)
+                  1023a968    00000008     --HOLE-- [fill = 0]
+                  1023a970    00000038                        : rl_monitoring.oer5f (.text.rlRfRxSigImgMonConfig)
+                  1023a9a8    00000008     --HOLE-- [fill = 0]
+                  1023a9b0    00000038                        : rl_sensor.oer5f (.text.rlRfSetCalMonFreqLimitConfig)
+                  1023a9e8    00000008     --HOLE-- [fill = 0]
+                  1023a9f0    00000038                        : rl_sensor.oer5f (.text.rlRfSetCalMonTimeUnitConfig)
+                  1023aa28    00000008     --HOLE-- [fill = 0]
+                  1023aa30    00000038                        : rl_sensor.oer5f (.text.rlRfSetDeviceCfg)
+                  1023aa68    00000008     --HOLE-- [fill = 0]
+                  1023aa70    00000038                        : rl_sensor.oer5f (.text.rlRfSetLdoBypassConfig)
+                  1023aaa8    00000008     --HOLE-- [fill = 0]
+                  1023aab0    00000038                        : rl_sensor.oer5f (.text.rlRfSetMiscConfig)
+                  1023aae8    00000008     --HOLE-- [fill = 0]
+                  1023aaf0    00000038                        : rl_sensor.oer5f (.text.rlRfSetProgFiltCoeffRam)
+                  1023ab28    00000008     --HOLE-- [fill = 0]
+                  1023ab30    00000038                        : rl_sensor.oer5f (.text.rlRfSetProgFiltConfig)
+                  1023ab68    00000008     --HOLE-- [fill = 0]
+                  1023ab70    00000038                        : rl_sensor.oer5f (.text.rlSetAdcOutConfig)
+                  1023aba8    00000008     --HOLE-- [fill = 0]
+                  1023abb0    00000038                        : rl_sensor.oer5f (.text.rlSetAdvChirpConfig)
+                  1023abe8    00000008     --HOLE-- [fill = 0]
+                  1023abf0    00000038                        : rl_sensor.oer5f (.text.rlSetBpmCommonConfig)
+                  1023ac28    00000008     --HOLE-- [fill = 0]
+                  1023ac30    00000038                        : rl_sensor.oer5f (.text.rlSetChannelConfig)
+                  1023ac68    00000008     --HOLE-- [fill = 0]
+                  1023ac70    00000038                        : rl_sensor.oer5f (.text.rlSetContModeConfig)
+                  1023aca8    00000008     --HOLE-- [fill = 0]
+                  1023acb0    00000038                        : rl_sensor.oer5f (.text.rlSetLowPowerModeConfig)
+                  1023ace8    00000036     drivers.awr294x.r5f.ti-arm-clang.release.lib : edma.obj (.text.EDMA_clrMissEvtRegion)
+                  1023ad1e    00000036     TI4IuijNcfY (.text.MmwDemo_CLIClutterRemoval)
+                  1023ad54    00000036     TI4IuijNcfY (.text.MmwDemo_CLIExtendedMaxVelocity)
+                  1023ad8a    00000002     --HOLE-- [fill = 0]
+                  1023ad8c    00000034     freertos.awr294x.r5f.ti-arm-clang.release.lib : ClockP_freertos.obj (.text.ClockP_usleep)
+                  1023adc0    00000034     TI4IuijNcfY (.text.MmwDemo_CLISensorStop)
+                  1023adf4    00000034     TI4IuijNcfY (.text.QSPI_edmaIsrFxn)
+                  1023ae28    00000034     drivers.awr294x.r5f.ti-arm-clang.release.lib : qspi.obj (.text.QSPI_setPreScaler)
+                  1023ae5c    00000034     TI4IuijNcfY (.text.free_list_remove)
+                  1023ae90    00000034     mss_main.oer5f (.text.mmwDemo_mssUartDataExportTask)
+                  1023aec4    00000034     libsysbm.a : write.c.obj (.text.write)
+                  1023aef8    00000030     TI4IuijNcfY (.text.CBUFF_addUserBufferLLEntry)
+                  1023af28    00000030     drivers.awr294x.r5f.ti-arm-clang.release.lib : cbuff_lvds.obj (.text.CBUFF_closeLVDS)
+                  1023af58    00000030     TI4IuijNcfY (.text.MmwDemo_RFParser_getNumLoops)
+                  1023af88    00000030     freertos.awr294x.r5f.ti-arm-clang.release.lib : PmuP_armv7r_asm.obj (.text.pmu)
+                  1023afb8    00000008     --HOLE-- [fill = 0]
+                  1023afc0    00000030     mmwavelink_r5f.lib : rl_sensor.oer5f (.text.rlSensorStart)
+                  1023aff0    00000030                        : rl_sensor.oer5f (.text.rlSensorStop)
+                  1023b020    00000030     freertos.awr294x.r5f.ti-arm-clang.release.lib : tasks.obj (.text.xTaskGetIdleTaskHandle)
+                  1023b050    0000002e     TI4IuijNcfY (.text.CBUFF_addCQLLEntry)
+                  1023b07e    0000002e     drivers.awr294x.r5f.ti-arm-clang.release.lib : crc.obj (.text.CRC_channelReset)
+                  1023b0ac    0000002e     freertos.awr294x.r5f.ti-arm-clang.release.lib : list.obj (.text.vListInsert)
+                  1023b0da    00000002     --HOLE-- [fill = 0]
+                  1023b0dc    0000002c     TI4IuijNcfY (.text.CLI_MMWaveLowPowerCfg)
+                  1023b108    0000002c     freertos.awr294x.r5f.ti-arm-clang.release.lib : ClockP_freertos.obj (.text.ClockP_timerTickIsr)
+                  1023b134    0000002c     TI4IuijNcfY (.text.MmwDPC_chirpAvailISR)
+                  1023b160    0000002c     drivers.awr294x.r5f.ti-arm-clang.release.lib : ipc_rpmsg.obj (.text.RPMessage_controlEndPtHandler)
+                  1023b18c    00000004     --HOLE-- [fill = 0]
+                  1023b190    0000002c     libclang_rt.builtins.a : divsi3.S.obj (.text.__divsi3)
+                  1023b1bc    0000002c     TI4IuijNcfY (.text._outc)
+                  1023b1e8    0000002c     libc.a : exit.c.obj (.text.exit)
+                  1023b214    0000002c     TI4IuijNcfY (.text.puts)
+                  1023b240    0000002a     TI4IuijNcfY (.text.CBUFF_clearStatus)
+                  1023b26a    0000002a     TI4IuijNcfY (.text.CBUFF_setupHeader)
+                  1023b294    0000000c     libclang_rt.builtins.a : aeabi_memset.S.obj (.text.__aeabi_memclr)
+                  1023b2a0    0000002a     mmwavelink_r5f.lib : rl_sensor.oer5f (.text.rlRfInit)
+                  1023b2ca    00000002     --HOLE-- [fill = 0]
+                  1023b2cc    00000028     TI4IuijNcfY (.text.DPM_mboxRemoteMailboxCallbackFxn)
+                  1023b2f4    00000028     board.awr294x.r5f.ti-arm-clang.release.lib : flash_nor_qspi.obj (.text.Flash_norQspiSetOpCodeModeDummy)
+                  1023b31c    00000028     drivers.awr294x.r5f.ti-arm-clang.release.lib : mailbox.obj (.text.Mailbox_readCallback)
+                  1023b344    00000028     TI4IuijNcfY (.text.MmwDemo_CLIQueryDemoStatus)
+                  1023b36c    00000028     TI4IuijNcfY (.text.allocateEDMAShadowChannel)
+                  1023b394    00000028     libc.a : rand.c.obj (.text.rand)
+                  1023b3bc    00000028     TI4IuijNcfY (.text.sscanf)
+                  1023b3e4    00000028     TI4IuijNcfY (.text.strchr)
+                  1023b40c    00000028     freertos.awr294x.r5f.ti-arm-clang.release.lib : port.obj (.text.vApplicationStackOverflowHook)
+                  1023b434    00000026     TI4IuijNcfY (.text.ADCBUFcheckForTimeout)
+                  1023b45a    00000026     drivers.awr294x.r5f.ti-arm-clang.release.lib : edma.obj (.text.EDMA_setPaRAM)
+                  1023b480    00000026     libmmwave_awr2943.aer5f : mmwave_listlib.oer5f (.text.MMWave_listCat)
+                  1023b4a6    00000026     TI4IuijNcfY (.text.UART_txChar)
+                  1023b4cc    00000024     TI4IuijNcfY (.text.DPM_pipeQueueFree)
+                  1023b4f0    00000024     drivers.awr294x.r5f.ti-arm-clang.release.lib : edma.obj (.text.EDMA_getHandle)
+                  1023b514    00000024                                                  : edma.obj (.text.EDMA_readIntrStatusRegion)
+                  1023b538    00000024     TI4IuijNcfY (.text.UART_rxChar)
+                  1023b55c    00000024     libclang_rt.builtins.a : aeabi_uldivmod.S.obj (.text.__aeabi_uldivmod)
+                  1023b580    00000024     TI4IuijNcfY (.text._atoi)
+                  1023b5a4    00000024     freertos.awr294x.r5f.ti-arm-clang.release.lib : PmuP_armv7r.obj (.text.pmu)
+                  1023b5c8    00000024     TI4IuijNcfY (.text.prvCopyDataFromQueue)
+                  1023b5ec    00000024     TI4IuijNcfY (.text.prvResetNextTaskUnblockTime)
+                  1023b610    00000024     freertos.awr294x.r5f.ti-arm-clang.release.lib : port.obj (.text.vPortTimerTickHandler)
+                  1023b634    00000024                                                   : queue.obj (.text.vQueueAddToRegistry)
+                  1023b658    00000024                                                   : tasks.obj (.text.vTaskExitCritical)
+                  1023b67c    00000022     drivers.awr294x.r5f.ti-arm-clang.release.lib : edma.obj (.text.EDMA_linkChannel)
+                  1023b69e    00000022     TI4IuijNcfY (.text.MMWave_listRemoveNode)
+                  1023b6c0    00000022     TI4IuijNcfY (.text.uxListRemove)
+                  1023b6e2    00000020     TI4IuijNcfY (.text.CBUFF_initLinkedList)
+                  1023b702    00000020     TI4IuijNcfY (.text.ESM_highpriority_interrupt)
+                  1023b722    00000020     TI4IuijNcfY (.text.HSIHeader_processCQ)
+                  1023b742    00000002     --HOLE-- [fill = 0]
+                  1023b744    00000020     TI4IuijNcfY (.text.MmwDemo_DPM_ioctl_blocking)
+                  1023b764    00000020     drivers.awr294x.r5f.ti-arm-clang.release.lib : qspi.obj (.text.QSPI_getHandle)
+                  1023b784    0000000c     freertos.awr294x.r5f.ti-arm-clang.release.lib : CpuId_armv7r_asm.obj (.text)
+                  1023b790    00000020     mmwavelink_r5f.lib : rl_sensor.oer5f (.text.rlGetRfDieId)
+                  1023b7b0    00000020     TI4IuijNcfY (.text.strlen.267)
+                  1023b7d0    00000020     TI4IuijNcfY (.text.strlen)
+                  1023b7f0    00000020     freertos.awr294x.r5f.ti-arm-clang.release.lib : heap_3.obj (.text.vPortFree)
+                  1023b810    0000001e     TI4IuijNcfY (.text.DPM_pipeDequeue)
+                  1023b82e    0000001e     TI4IuijNcfY (.text.ESM_lowpriority_interrupt)
+                  1023b84c    0000001e     board.awr294x.r5f.ti-arm-clang.release.lib : flash.obj (.text.Flash_read)
+                  1023b86a    0000001e                                                : flash.obj (.text.Flash_write)
+                  1023b888    0000001e     libmmwave_awr2943.aer5f : mmwave_link_common.oer5f (.text.MMWave_internalLinkSync)
+                  1023b8a6    0000001e     libmathutils.aer5f : mathutils.oer5f (.text.mathUtils_ceilLog2)
+                  1023b8c4    0000001c     TI4IuijNcfY (.text.DPM_chirpISR)
+                  1023b8e0    0000001c     TI4IuijNcfY (.text.DPM_frameStartISR)
+                  1023b8fc    0000001c     drivers.awr294x.r5f.ti-arm-clang.release.lib : ipc_notify_v1.obj (.text.IpcNotify_syncCallback)
+                  1023b918    0000001c     TI4IuijNcfY (.text.MMWave_mboxOpen)
+                  1023b934    0000001c     TI4IuijNcfY (.text.SOC_rcmGetClkSrcFromClkSelVal)
+                  1023b950    0000001c     TI4IuijNcfY (.text.strcpy)
+                  1023b96c    0000001c     libc.a : wcslen.c.obj (.text.wcslen)
+                  1023b988    0000001a     drivers.awr294x.r5f.ti-arm-clang.release.lib : cbuff_lvds.obj (.text.CBUFF_finalizeLVDSLinkListParams)
+                  1023b9a2    0000001a     TI4IuijNcfY (.text.DPM_msgAssertHandler)
+                  1023b9bc    0000001a     TI4IuijNcfY (.text.DPM_msgBSSFaultHandler)
+                  1023b9d6    0000001a     TI4IuijNcfY (.text.DPM_msgDPCInfoHandler)
+                  1023b9f0    0000001a     mmwavelink_r5f.lib : rl_driver.oer5f (.text.rlDriverIsDeviceMapValid)
+                  1023ba0a    00000002     --HOLE-- [fill = 0]
+                  1023ba0c    00000018     ti_board_open_close.oer5f (.text.Board_flashClose)
+                  1023ba24    00000018     libdpm_awr2943.aer5f : dpm_listlib.oer5f (.text.DPM_listRemove)
+                  1023ba3c    00000018     drivers.awr294x.r5f.ti-arm-clang.release.lib : ipc_notify_v1_cfg.obj (.text.IpcNotify_wait)
+                  1023ba54    00000018     libmmwave_awr2943.aer5f : mmwave_listlib.oer5f (.text.MMWave_listRemove)
+                  1023ba6c    00000018                             : mmwave_osal.oer5f (.text.MMWave_osalMutexLock)
+                  1023ba84    00000018     mss_main.oer5f (.text.MmwDemo_getTemperatureReport)
+                  1023ba9c    00000018     drivers.awr294x.r5f.ti-arm-clang.release.lib : qspi.obj (.text.QSPI_readCmdParams_init)
+                  1023bab4    00000018                                                  : qspi.obj (.text.QSPI_writeCmdParams_init)
+                  1023bacc    00000018     TI4IuijNcfY (.text.memcmp.963)
+                  1023bae4    00000018     TI4IuijNcfY (.text.memcmp)
+                  1023bafc    00000018     TI4IuijNcfY (.text.prvIsQueueEmpty)
+                  1023bb14    00000018     freertos.awr294x.r5f.ti-arm-clang.release.lib : tasks.obj (.text.pvTaskIncrementMutexHeldCount)
+                  1023bb2c    00000004     --HOLE-- [fill = 0]
+                  1023bb30    00000018     mmwavelink_r5f.lib : rl_driver.oer5f (.text.rlDriverFillPayload)
+                  1023bb48    00000018     freertos.awr294x.r5f.ti-arm-clang.release.lib : list.obj (.text.vListInsertEnd)
+                  1023bb60    00000018                                                   : tasks.obj (.text.vTaskEnterCritical)
+                  1023bb78    00000018                                                   : port.obj (.text.xPortStartScheduler)
+                  1023bb90    00000018                                                   : tasks.obj (.text.xTaskGetTickCount)
+                  1023bba8    00000016     TI4IuijNcfY (.text.QSPI_waitIdle)
+                  1023bbbe    00000014     drivers.awr294x.r5f.ti-arm-clang.release.lib : edma.obj (.text.EDMA_getRegionId)
+                  1023bbd2    00000014                                                  : qspi.obj (.text.QSPI_transaction_init)
+                  1023bbe6    00000002     --HOLE-- [fill = 0]
+                  1023bbe8    00000014     TI4IuijNcfY (.text._outc.263)
+                  1023bbfc    00000012     board.awr294x.r5f.ti-arm-clang.release.lib : flash.obj (.text.Flash_eraseBlk)
+                  1023bc0e    00000012     libmmwave_awr2943.aer5f : mmwave_osal.oer5f (.text.MMWave_osalSemWait)
+                  1023bc20    00000012     mmwavelink_r5f.lib : rl_controller.oer5f (.text.rlAppendDummy)
+                  1023bc32    00000002     --HOLE-- [fill = 0]
+                  1023bc34    00000010     TI4IuijNcfY (.text.DPM_mboxSynch)
+                  1023bc44    00000010     TI4IuijNcfY (.text.MMWave_mboxCallbackFxn)
+                  1023bc54    00000010     TI4IuijNcfY (.text.MMWave_registerInterruptHandler)
+                  1023bc64    00000010     TI4IuijNcfY (.text.MmwDemo_CLIProcChain)
+                  1023bc74    00000010     drivers.awr294x.r5f.ti-arm-clang.release.lib : qspi.obj (.text.QSPI_setAddressByteCount)
+                  1023bc84    00000010                                                  : qspi.obj (.text.QSPI_setDummyBitCount)
+                  1023bc94    00000010                                                  : qspi.obj (.text.QSPI_setReadCmd)
+                  1023bca4    00000010                                                  : qspi.obj (.text.QSPI_setRxLines)
+                  1023bcb4    00000010                                                  : qspi.obj (.text.QSPI_setWriteCmd)
+                  1023bcc4    00000010     mss_main.oer5f (.text._MmwDemo_debugAssert)
+                  1023bcd4    00000010     libclang_rt.builtins.a : aeabi_memset.S.obj (.text.__aeabi_memset)
+                  1023bce4    00000010     TI4IuijNcfY (.text.putchar)
+                  1023bcf4    0000000e     libmathutils.aer5f : mathutils.oer5f (.text.mathUtils_pow2roundup)
+                  1023bd02    0000000e     --HOLE-- [fill = 0]
+                  1023bd10    0000000e     mmwavelink_r5f.lib : rl_driver.oer5f (.text.rlDriverGetPlatformId)
+                  1023bd1e    00000002     --HOLE-- [fill = 0]
+                  1023bd20    0000000c     libc.a : strcmp32.S.obj (.text)
+                  1023bd2c    00000004     --HOLE-- [fill = 0]
+                  1023bd30    0000000a     mmwavelink_r5f.lib : rl_driver.oer5f (.text.rlDriverConstructOutMsg)
+                  1023bd3a    00000006     --HOLE-- [fill = 0]
+                  1023bd40    0000000a                        : rl_driver.oer5f (.text.rlDriverGetHandle)
+                  1023bd4a    00000006     --HOLE-- [fill = 0]
+                  1023bd50    00000006                        : rl_controller.oer5f (.text.rlGetSubBlockId)
+                  1023bd56    0000000a     --HOLE-- [fill = 0]
+                  1023bd60    00000006                        : rl_controller.oer5f (.text.rlGetSubBlockLen)
+                  1023bd66    0000001a     --HOLE-- [fill = 0]
+
+.rodata    0    1023bd80    00007da0     
+                  1023bd80    00001000     TI4IuijNcfY (.rodata.tbl)
+                  1023cd80    00000188     TI4IuijNcfY (.rodata.gSocRcmADPLLJConfigTbl)
+                  1023cf08    00000152     TI4IuijNcfY (.rodata.str1.5867393545191441450.1)
+                  1023d05a    00000006     TI4IuijNcfY (.rodata._sproc_int.barr)
+                  1023d060    00000101     libc.a : aeabi_ctype.S.obj (.rodata:__aeabi_ctype_table_)
+                  1023d161    00000003     TI4IuijNcfY (.rodata.str1.11254166407403963999.1)
+                  1023d164    000000e4     libcli_awr2943.aer5f : cli_mmwave.oer5f (.rodata.gCLIMMWaveExtensionTable)
+                  1023d248    000000cb     TI4IuijNcfY (.rodata.str1.11315684441409680091.1)
+                  1023d313    000000b8     TI4IuijNcfY (.rodata.str1.3124872561325811995.1)
+                  1023d3cb    000000ac     TI4IuijNcfY (.rodata.str1.17428236416126380220.1)
+                  1023d477    000000a7     TI4IuijNcfY (.rodata.str1.9857435039156408742.1)
+                  1023d51e    00000002     TI4IuijNcfY (.rodata.str1.14718024076616831114.1)
+                  1023d520    00000094     ti_dpl_config.oer5f (.rodata.cfg)
+                  1023d5b4    00000085     TI4IuijNcfY (.rodata.str1.18298366676390901967.1)
+                  1023d639    00000082     TI4IuijNcfY (.rodata.str1.8577305616664360084.1)
+                  1023d6bb    00000005     TI4IuijNcfY (.rodata.gSocRcmR5ClkSrcInfoMap)
+                  1023d6c0    00000080     TI4IuijNcfY (.rodata.digits)
+                  1023d740    00000080     TI4IuijNcfY (.rodata.str1.3333703915057270637.1)
+                  1023d7c0    0000007f     TI4IuijNcfY (.rodata.str1.10081687482406618459.1)
+                  1023d83f    0000007f     TI4IuijNcfY (.rodata.str1.1626931243026078941.1)
+                  1023d8be    0000007f     TI4IuijNcfY (.rodata.str1.385751312461953237.1)
+                  1023d93d    0000007d     TI4IuijNcfY (.rodata.str1.1044545615155908598.1)
+                  1023d9ba    0000007c     TI4IuijNcfY (.rodata.str1.7757559354223736432.1)
+                  1023da36    0000007b     TI4IuijNcfY (.rodata.str1.16252101767919590317.1)
+                  1023dab1    0000007a     TI4IuijNcfY (.rodata.str1.11873008611621117058.1)
+                  1023db2b    0000007a     TI4IuijNcfY (.rodata.str1.2920504002684656390.1)
+                  1023dba5    00000078     TI4IuijNcfY (.rodata.str1.1979194743265794462.1)
+                  1023dc1d    00000075     TI4IuijNcfY (.rodata.str1.15339365801218572284.1)
+                  1023dc92    00000075     TI4IuijNcfY (.rodata.str1.1682779340199279369.1)
+                  1023dd07    0000006f     TI4IuijNcfY (.rodata.str1.15457199830599106514.1)
+                  1023dd76    0000006b     TI4IuijNcfY (.rodata.str1.10796057106237665174.1)
+                  1023dde1    0000006b     TI4IuijNcfY (.rodata.str1.11998009474902282106.1)
+                  1023de4c    00000069     TI4IuijNcfY (.rodata.gSocRcmClkSrcInfoMap)
+                  1023deb5    00000069     TI4IuijNcfY (.rodata.str1.10277562541090766604.1)
+                  1023df1e    00000062     TI4IuijNcfY (.rodata.str1.6980496342521816418.1)
+                  1023df80    00000061     TI4IuijNcfY (.rodata.str1.16071435804821978397.1)
+                  1023dfe1    0000005f     TI4IuijNcfY (.rodata.str1.5046378322846617601.1)
+                  1023e040    0000005f     TI4IuijNcfY (.rodata.str1.6228944371988287761.1)
+                  1023e09f    0000005e     TI4IuijNcfY (.rodata.str1.7069132031597598338.1)
+                  1023e0fd    0000005d     TI4IuijNcfY (.rodata.str1.15760165705294526757.1)
+                  1023e15a    0000005c     TI4IuijNcfY (.rodata.str1.10219839173252852407.1)
+                  1023e1b6    0000005a     TI4IuijNcfY (.rodata.str1.17599496658784870677.1)
+                  1023e210    0000005a     TI4IuijNcfY (.rodata.str1.969418867180371076.1)
+                  1023e26a    00000059     TI4IuijNcfY (.rodata.str1.6110327007545880668.1)
+                  1023e2c3    00000058     TI4IuijNcfY (.rodata.str1.15569989397790407436.1)
+                  1023e31b    00000057     TI4IuijNcfY (.rodata.str1.15008180995940510463.1)
+                  1023e372    00000057     TI4IuijNcfY (.rodata.str1.16702262279737877274.1)
+                  1023e3c9    00000057     TI4IuijNcfY (.rodata.str1.5611770117044346465.1)
+                  1023e420    00000056     TI4IuijNcfY (.rodata.str1.5494904264648955676.1)
+                  1023e476    00000056     TI4IuijNcfY (.rodata.str1.5803705791972515518.1)
+                  1023e4cc    00000055     TI4IuijNcfY (.rodata.str1.14487092576800130242.1)
+                  1023e521    00000054     TI4IuijNcfY (.rodata.str1.1076079159434987122.1)
+                  1023e575    00000053     TI4IuijNcfY (.rodata.str1.14737458252614661782.1)
+                  1023e5c8    00000052     TI4IuijNcfY (.rodata.str1.1375163480924693024.1)
+                  1023e61a    00000052     TI4IuijNcfY (.rodata.str1.16479713258582062462.1)
+                  1023e66c    00000052     TI4IuijNcfY (.rodata.str1.9869489410500201435.1)
+                  1023e6be    00000051     TI4IuijNcfY (.rodata.str1.11124147777645770577.1)
+                  1023e70f    00000051     TI4IuijNcfY (.rodata.str1.8099193010116447652.1)
+                  1023e760    00000050     TI4IuijNcfY (.rodata._ftoa.pow10)
+                  1023e7b0    00000050     TI4IuijNcfY (.rodata.str1.11219078755986640830.1)
+                  1023e800    00000050     TI4IuijNcfY (.rodata.str1.18000647102707809571.1)
+                  1023e850    00000050     TI4IuijNcfY (.rodata.str1.3174076801874662293.1)
+                  1023e8a0    00000050     TI4IuijNcfY (.rodata.str1.9648035973509646738.1)
+                  1023e8f0    0000004d     TI4IuijNcfY (.rodata.str1.13194850222456742880.1)
+                  1023e93d    0000004d     TI4IuijNcfY (.rodata.str1.14112179281453740596.1)
+                  1023e98a    0000004c     TI4IuijNcfY (.rodata.str1.13133611134468152779.1)
+                  1023e9d6    0000004c     TI4IuijNcfY (.rodata.str1.347121454328148561.1)
+                  1023ea22    0000004c     TI4IuijNcfY (.rodata.str1.8538180226659074573.1)
+                  1023ea6e    0000004b     TI4IuijNcfY (.rodata.str1.12936859210060264069.1)
+                  1023eab9    0000004b     TI4IuijNcfY (.rodata.str1.7230865083730739403.1)
+                  1023eb04    0000004a     TI4IuijNcfY (.rodata.str1.11465586134152338507.1)
+                  1023eb4e    0000004a     TI4IuijNcfY (.rodata.str1.12342462637832470618.1)
+                  1023eb98    0000004a     TI4IuijNcfY (.rodata.str1.5396375535916193481.1)
+                  1023ebe2    0000004a     TI4IuijNcfY (.rodata.str1.9546861304103036129.1)
+                  1023ec2c    00000049     TI4IuijNcfY (.rodata.str1.17538956706961595502.1)
+                  1023ec75    00000049     TI4IuijNcfY (.rodata.str1.17596063225074015729.1)
+                  1023ecbe    00000049     TI4IuijNcfY (.rodata.str1.1826048499110642856.1)
+                  1023ed07    00000049     TI4IuijNcfY (.rodata.str1.2254589651314588332.1)
+                  1023ed50    00000049     TI4IuijNcfY (.rodata.str1.7428817257063380338.1)
+                  1023ed99    00000007     TI4IuijNcfY (.rodata._sproc_int.flit)
+                  1023eda0    00000048     TI4IuijNcfY (.rodata.powerof10)
+                  1023ede8    00000047     TI4IuijNcfY (.rodata.str1.13658857479975559879.1)
+                  1023ee2f    00000047     TI4IuijNcfY (.rodata.str1.17455090444457246135.1)
+                  1023ee76    00000046     TI4IuijNcfY (.rodata.str1.1551959526465703800.1)
+                  1023eebc    00000046     TI4IuijNcfY (.rodata.str1.16525086170441851750.1)
+                  1023ef02    00000046     TI4IuijNcfY (.rodata.str1.6001353451819648014.1)
+                  1023ef48    00000045     TI4IuijNcfY (.rodata.str1.15717368741879931105.1)
+                  1023ef8d    00000045     TI4IuijNcfY (.rodata.str1.838415124178022004.1)
+                  1023efd2    00000045     TI4IuijNcfY (.rodata.str1.9277163316951966810.1)
+                  1023f017    00000045     TI4IuijNcfY (.rodata.str1.9484550435968672216.1)
+                  1023f05c    00000044     TI4IuijNcfY (.rodata.str1.10914152457598134795.1)
+                  1023f0a0    00000044     TI4IuijNcfY (.rodata.str1.1351255214227149382.1)
+                  1023f0e4    00000044     TI4IuijNcfY (.rodata.str1.1655805592949693178.1)
+                  1023f128    00000044     TI4IuijNcfY (.rodata.str1.2313067358576425875.1)
+                  1023f16c    00000044     TI4IuijNcfY (.rodata.str1.3891873402160198633.1)
+                  1023f1b0    00000044     TI4IuijNcfY (.rodata.str1.4366966997947193220.1)
+                  1023f1f4    00000044     TI4IuijNcfY (.rodata.str1.474610846682953203.1)
+                  1023f238    00000042     TI4IuijNcfY (.rodata.str1.10655714292172933417.1)
+                  1023f27a    00000042     TI4IuijNcfY (.rodata.str1.12696609690778419271.1)
+                  1023f2bc    00000042     TI4IuijNcfY (.rodata.str1.13249513756867321298.1)
+                  1023f2fe    00000042     TI4IuijNcfY (.rodata.str1.13341988216064122737.1)
+                  1023f340    00000042     TI4IuijNcfY (.rodata.str1.3321332630626607183.1)
+                  1023f382    00000042     TI4IuijNcfY (.rodata.str1.3589505857843037893.1)
+                  1023f3c4    00000041     TI4IuijNcfY (.rodata.str1.12313990073048955323.1)
+                  1023f405    00000041     TI4IuijNcfY (.rodata.str1.15950791238691830479.1)
+                  1023f446    00000041     TI4IuijNcfY (.rodata.str1.17982705213412610383.1)
+                  1023f487    00000041     TI4IuijNcfY (.rodata.str1.1982783284352038559.1)
+                  1023f4c8    00000041     TI4IuijNcfY (.rodata.str1.4218828604981661578.1)
+                  1023f509    00000041     TI4IuijNcfY (.rodata.str1.6926081707043172967.1)
+                  1023f54a    00000041     TI4IuijNcfY (.rodata.str1.7016476302031679968.1)
+                  1023f58b    00000041     TI4IuijNcfY (.rodata.str1.8394993227128659014.1)
+                  1023f5cc    00000040     TI4IuijNcfY (.rodata.str1.10940151803029016034.1)
+                  1023f60c    00000040     TI4IuijNcfY (.rodata.str1.16788403996177227123.1)
+                  1023f64c    00000040     TI4IuijNcfY (.rodata.str1.3101092524749294070.1)
+                  1023f68c    00000040     TI4IuijNcfY (.rodata.str1.663343867604145904.1)
+                  1023f6cc    00000040     TI4IuijNcfY (.rodata.str1.7386842857917517018.1)
+                  1023f70c    0000003f     TI4IuijNcfY (.rodata.str1.10271777717534793632.1)
+                  1023f74b    0000003f     TI4IuijNcfY (.rodata.str1.11368091575163943735.1)
+                  1023f78a    0000003f     TI4IuijNcfY (.rodata.str1.12864867985835924696.1)
+                  1023f7c9    0000003f     TI4IuijNcfY (.rodata.str1.13043738062513274410.1)
+                  1023f808    0000003f     TI4IuijNcfY (.rodata.str1.4171610430055252062.1)
+                  1023f847    0000003f     TI4IuijNcfY (.rodata.str1.4236700571835601856.1)
+                  1023f886    0000003f     TI4IuijNcfY (.rodata.str1.6581800389856563546.1)
+                  1023f8c5    0000003f     TI4IuijNcfY (.rodata.str1.9902677686857772598.1)
+                  1023f904    0000003e     TI4IuijNcfY (.rodata.str1.1031259399062702492.1)
+                  1023f942    0000003e     TI4IuijNcfY (.rodata.str1.11123191961068663169.1)
+                  1023f980    0000003e     TI4IuijNcfY (.rodata.str1.11943285976596075467.1)
+                  1023f9be    0000003d     TI4IuijNcfY (.rodata.str1.13285560517416293236.1)
+                  1023f9fb    0000003d     TI4IuijNcfY (.rodata.str1.17964532818586700616.1)
+                  1023fa38    0000003d     TI4IuijNcfY (.rodata.str1.1997494709855037499.1)
+                  1023fa75    0000003d     TI4IuijNcfY (.rodata.str1.2633714735175720201.1)
+                  1023fab2    0000003d     TI4IuijNcfY (.rodata.str1.6383693276176255683.1)
+                  1023faef    0000003d     TI4IuijNcfY (.rodata.str1.8805056400167535012.1)
+                  1023fb2c    0000003c     TI4IuijNcfY (.rodata.str1.12887372310759138122.1)
+                  1023fb68    0000003c     TI4IuijNcfY (.rodata.str1.15100807609882203426.1)
+                  1023fba4    0000003c     TI4IuijNcfY (.rodata.str1.5416904693846397676.1)
+                  1023fbe0    0000003c     TI4IuijNcfY (.rodata.str1.5567019463477091251.1)
+                  1023fc1c    0000003c     TI4IuijNcfY (.rodata.str1.7249031335691421559.1)
+                  1023fc58    0000003b     TI4IuijNcfY (.rodata.str1.11549517222160279497.1)
+                  1023fc93    0000003b     TI4IuijNcfY (.rodata.str1.6288479931933378117.1)
+                  1023fcce    0000003b     TI4IuijNcfY (.rodata.str1.9623344707187641491.1)
+                  1023fd09    0000003a     TI4IuijNcfY (.rodata.str1.11029106695729248539.1)
+                  1023fd43    0000003a     TI4IuijNcfY (.rodata.str1.12503699251542906247.1)
+                  1023fd7d    0000003a     TI4IuijNcfY (.rodata.str1.14294933786373848137.1)
+                  1023fdb7    0000003a     TI4IuijNcfY (.rodata.str1.14565454044524346494.1)
+                  1023fdf1    0000003a     TI4IuijNcfY (.rodata.str1.15129440088085962651.1)
+                  1023fe2b    0000003a     TI4IuijNcfY (.rodata.str1.15345649495432727579.1)
+                  1023fe65    0000003a     TI4IuijNcfY (.rodata.str1.16561843361437551862.1)
+                  1023fe9f    0000003a     TI4IuijNcfY (.rodata.str1.17464543836734668705.1)
+                  1023fed9    0000003a     TI4IuijNcfY (.rodata.str1.5792171729746354803.1)
+                  1023ff13    0000003a     TI4IuijNcfY (.rodata.str1.6738617963847505361.1)
+                  1023ff4d    00000039     TI4IuijNcfY (.rodata.str1.5146013031334299827.1)
+                  1023ff86    00000039     TI4IuijNcfY (.rodata.str1.8573608878067215121.1)
+                  1023ffbf    00000038     TI4IuijNcfY (.rodata.str1.10843303851342507824.1)
+                  1023fff7    00000038     TI4IuijNcfY (.rodata.str1.13957737806124936715.1)
+                  1024002f    00000038     TI4IuijNcfY (.rodata.str1.15048237529378705392.1)
+                  10240067    00000038     TI4IuijNcfY (.rodata.str1.5428387830711012528.1)
+                  1024009f    00000037     board.awr294x.r5f.ti-arm-clang.release.lib : flash_nor_qspi.obj (.rodata.str1.1090204387703719400.1)
+                  102400d6    00000037     TI4IuijNcfY (.rodata.str1.14125975553772259746.1)
+                  1024010d    00000037     TI4IuijNcfY (.rodata.str1.9649132459979817960.1)
+                  10240144    00000036     TI4IuijNcfY (.rodata.str1.12784684631564009252.1)
+                  1024017a    00000036     TI4IuijNcfY (.rodata.str1.15352195472358372385.1)
+                  102401b0    00000036     TI4IuijNcfY (.rodata.str1.2521467358435543289.1)
+                  102401e6    00000036     TI4IuijNcfY (.rodata.str1.6460367372354237271.1)
+                  1024021c    00000036     TI4IuijNcfY (.rodata.str1.6882633919992508468.1)
+                  10240252    00000036     TI4IuijNcfY (.rodata.str1.9189034100457215257.1)
+                  10240288    00000035     TI4IuijNcfY (.rodata.str1.13074374749625280297.1)
+                  102402bd    00000035     TI4IuijNcfY (.rodata.str1.13235574507606527908.1)
+                  102402f2    00000035     TI4IuijNcfY (.rodata.str1.6050818275924864593.1)
+                  10240327    00000035     TI4IuijNcfY (.rodata.str1.7432536162264419503.1)
+                  1024035c    00000035     TI4IuijNcfY (.rodata.str1.8444591333503635538.1)
+                  10240391    00000034     TI4IuijNcfY (.rodata.str1.15822862272180945438.1)
+                  102403c5    00000034     TI4IuijNcfY (.rodata.str1.16851486938855213335.1)
+                  102403f9    00000034     TI4IuijNcfY (.rodata.str1.6608676988901983920.1)
+                  1024042d    00000034     TI4IuijNcfY (.rodata.str1.7245728340037469361.1)
+                  10240461    00000033     TI4IuijNcfY (.rodata.str1.2540699159836490786.1)
+                  10240494    00000033     TI4IuijNcfY (.rodata.str1.3102116721608139389.1)
+                  102404c7    00000033     TI4IuijNcfY (.rodata.str1.6247135929770233208.1)
+                  102404fa    00000032     TI4IuijNcfY (.rodata.str1.14287829655512542338.1)
+                  1024052c    00000032     TI4IuijNcfY (.rodata.str1.16010060773373771313.1)
+                  1024055e    00000032     TI4IuijNcfY (.rodata.str1.16588277560957714930.1)
+                  10240590    00000032     TI4IuijNcfY (.rodata.str1.7407794463648387989.1)
+                  102405c2    00000031     TI4IuijNcfY (.rodata.str1.1413262665521803798.1)
+                  102405f3    00000031     TI4IuijNcfY (.rodata.str1.14298957883892159575.1)
+                  10240624    00000031     TI4IuijNcfY (.rodata.str1.1508116953801278908.1)
+                  10240655    00000031     TI4IuijNcfY (.rodata.str1.7863191810415442840.1)
+                  10240686    00000002     TI4IuijNcfY (.rodata.str1.14910211538453313543.1)
+                  10240688    00000030     ti_power_clock_config.oer5f (.rodata.gSocModulesClockFrequency)
+                  102406b8    00000030     TI4IuijNcfY (.rodata.str1.11425647496509834311.1)
+                  102406e8    00000030     TI4IuijNcfY (.rodata.str1.12268873216441623881.1)
+                  10240718    00000030     TI4IuijNcfY (.rodata.str1.12699646050707138636.1)
+                  10240748    00000030     TI4IuijNcfY (.rodata.str1.13145643248078626753.1)
+                  10240778    00000030     TI4IuijNcfY (.rodata.str1.15563171834052584602.1)
+                  102407a8    00000030     TI4IuijNcfY (.rodata.str1.18440546119026155383.1)
+                  102407d8    0000002f     TI4IuijNcfY (.rodata.str1.10871835236015878447.1)
+                  10240807    0000002f     TI4IuijNcfY (.rodata.str1.14827646635861093665.1)
+                  10240836    0000002f     TI4IuijNcfY (.rodata.str1.17921384114282169992.1)
+                  10240865    0000002f     TI4IuijNcfY (.rodata.str1.17989380451589465427.1)
+                  10240894    0000002f     TI4IuijNcfY (.rodata.str1.1962637341214038451.1)
+                  102408c3    0000002f     TI4IuijNcfY (.rodata.str1.7420614542962252157.1)
+                  102408f2    0000002f     TI4IuijNcfY (.rodata.str1.7715550820314486595.1)
+                  10240921    0000002e     TI4IuijNcfY (.rodata.str1.14508742328915887119.1)
+                  1024094f    0000002e     TI4IuijNcfY (.rodata.str1.15446088197944052528.1)
+                  1024097d    0000002e     TI4IuijNcfY (.rodata.str1.18374184327077633974.1)
+                  102409ab    0000002e     TI4IuijNcfY (.rodata.str1.7508794191923278343.1)
+                  102409d9    0000002e     TI4IuijNcfY (.rodata.str1.9120994330014841194.1)
+                  10240a07    0000002d     TI4IuijNcfY (.rodata.str1.15502027811268994724.1)
+                  10240a34    0000002d     TI4IuijNcfY (.rodata.str1.2359510329124140832.1)
+                  10240a61    0000002d     TI4IuijNcfY (.rodata.str1.9453198459939368297.1)
+                  10240a8e    0000002c     TI4IuijNcfY (.rodata.str1.1018129870371427542.1)
+                  10240aba    0000002c     TI4IuijNcfY (.rodata.str1.12480909068843566388.1)
+                  10240ae6    0000002c     TI4IuijNcfY (.rodata.str1.13618749533293707422.1)
+                  10240b12    0000002c     TI4IuijNcfY (.rodata.str1.14395741232546963719.1)
+                  10240b3e    0000002c     TI4IuijNcfY (.rodata.str1.17106798690456472603.1)
+                  10240b6a    0000002c     TI4IuijNcfY (.rodata.str1.17624875374945707181.1)
+                  10240b96    0000002c     TI4IuijNcfY (.rodata.str1.17897070345867513873.1)
+                  10240bc2    0000002c     TI4IuijNcfY (.rodata.str1.4629719751662257779.1)
+                  10240bee    0000002c     TI4IuijNcfY (.rodata.str1.675024336802365683.1)
+                  10240c1a    0000002c     TI4IuijNcfY (.rodata.str1.8415021360456044128.1)
+                  10240c46    0000002c     TI4IuijNcfY (.rodata.str1.9187428440483605644.1)
+                  10240c72    0000002b     TI4IuijNcfY (.rodata.str1.5327108039060329729.1)
+                  10240c9d    0000002b     TI4IuijNcfY (.rodata.str1.7097403473375955744.1)
+                  10240cc8    0000002a     TI4IuijNcfY (.rodata.str1.1094236437505786352.1)
+                  10240cf2    0000002a     TI4IuijNcfY (.rodata.str1.11704984100509287937.1)
+                  10240d1c    0000002a     TI4IuijNcfY (.rodata.str1.14149935708113880204.1)
+                  10240d46    0000002a     TI4IuijNcfY (.rodata.str1.14967600877387220592.1)
+                  10240d70    0000002a     TI4IuijNcfY (.rodata.str1.15234010390597350431.1)
+                  10240d9a    0000002a     TI4IuijNcfY (.rodata.str1.2400215645038835919.1)
+                  10240dc4    0000002a     TI4IuijNcfY (.rodata.str1.4769201392388100943.1)
+                  10240dee    0000002a     TI4IuijNcfY (.rodata.str1.7260120516945316552.1)
+                  10240e18    0000002a     TI4IuijNcfY (.rodata.str1.8411890276295004707.1)
+                  10240e42    0000002a     TI4IuijNcfY (.rodata.str1.8524335538594073780.1)
+                  10240e6c    00000029     TI4IuijNcfY (.rodata.str1.11530018347112102795.1)
+                  10240e95    00000029     TI4IuijNcfY (.rodata.str1.12855725908347678575.1)
+                  10240ebe    00000029     TI4IuijNcfY (.rodata.str1.13336384997827107721.1)
+                  10240ee7    00000029     TI4IuijNcfY (.rodata.str1.17519334159246120509.1)
+                  10240f10    00000029     TI4IuijNcfY (.rodata.str1.3501010736695847825.1)
+                  10240f39    00000029     TI4IuijNcfY (.rodata.str1.3793564378508163575.1)
+                  10240f62    00000029     TI4IuijNcfY (.rodata.str1.5360598976887875215.1)
+                  10240f8b    00000029     TI4IuijNcfY (.rodata.str1.6803675834451283066.1)
+                  10240fb4    00000029     TI4IuijNcfY (.rodata.str1.8552216521300404706.1)
+                  10240fdd    00000029     TI4IuijNcfY (.rodata.str1.9580643901021383502.1)
+                  10241006    00000002     TI4IuijNcfY (.rodata.str1.9705409407822275522.1)
+                  10241008    00000028     TI4IuijNcfY (.rodata.gSocRcmFixedClocksTbl)
+                  10241030    00000028     TI4IuijNcfY (.rodata.str1.10067501270763811621.1)
+                  10241058    00000028     TI4IuijNcfY (.rodata.str1.11050288205038025517.1)
+                  10241080    00000028     TI4IuijNcfY (.rodata.str1.15146193936761953874.1)
+                  102410a8    00000028     TI4IuijNcfY (.rodata.str1.16634814001936082045.1)
+                  102410d0    00000028     TI4IuijNcfY (.rodata.str1.17052822694813908646.1)
+                  102410f8    00000028     TI4IuijNcfY (.rodata.str1.18273454616159447216.1)
+                  10241120    00000028     TI4IuijNcfY (.rodata.str1.18275577064137351195.1)
+                  10241148    00000028     TI4IuijNcfY (.rodata.str1.2130613127071179727.1)
+                  10241170    00000028     TI4IuijNcfY (.rodata.str1.2241578066416712840.1)
+                  10241198    00000028     TI4IuijNcfY (.rodata.str1.3359842309199604046.1)
+                  102411c0    00000028     TI4IuijNcfY (.rodata.str1.6850170874972852100.1)
+                  102411e8    00000027     TI4IuijNcfY (.rodata.str1.11497486687993898941.1)
+                  1024120f    00000027     TI4IuijNcfY (.rodata.str1.12628506111519718761.1)
+                  10241236    00000027     TI4IuijNcfY (.rodata.str1.12958876839706385564.1)
+                  1024125d    00000027     TI4IuijNcfY (.rodata.str1.1464966499086709236.1)
+                  10241284    00000027     TI4IuijNcfY (.rodata.str1.17612685415375011100.1)
+                  102412ab    00000027     TI4IuijNcfY (.rodata.str1.1788947614641536594.1)
+                  102412d2    00000027     TI4IuijNcfY (.rodata.str1.2647423828166757539.1)
+                  102412f9    00000027     TI4IuijNcfY (.rodata.str1.3332280520457062810.1)
+                  10241320    00000027     TI4IuijNcfY (.rodata.str1.4981843088125859238.1)
+                  10241347    00000027     TI4IuijNcfY (.rodata.str1.6854980706996286037.1)
+                  1024136e    00000027     TI4IuijNcfY (.rodata.str1.8495242617752253947.1)
+                  10241395    00000027     TI4IuijNcfY (.rodata.str1.9937505106561637215.1)
+                  102413bc    00000026     TI4IuijNcfY (.rodata.str1.12704654110334754481.1)
+                  102413e2    00000026     TI4IuijNcfY (.rodata.str1.13239109852824203298.1)
+                  10241408    00000026     TI4IuijNcfY (.rodata.str1.15192318246204924588.1)
+                  1024142e    00000026     TI4IuijNcfY (.rodata.str1.16713759636307665357.1)
+                  10241454    00000026     TI4IuijNcfY (.rodata.str1.5883753264564860950.1)
+                  1024147a    00000026     TI4IuijNcfY (.rodata.str1.8735448429455419288.1)
+                  102414a0    00000025     TI4IuijNcfY (.rodata.str1.10666583300457568009.1)
+                  102414c5    00000025     TI4IuijNcfY (.rodata.str1.13920968178874175368.1)
+                  102414ea    00000025     TI4IuijNcfY (.rodata.str1.17809049958821053371.1)
+                  1024150f    00000025     TI4IuijNcfY (.rodata.str1.216209331926963302.1)
+                  10241534    00000025     TI4IuijNcfY (.rodata.str1.332629628962035262.1)
+                  10241559    00000025     TI4IuijNcfY (.rodata.str1.4753070955741349472.1)
+                  1024157e    00000025     TI4IuijNcfY (.rodata.str1.7194626331180367240.1)
+                  102415a3    00000025     TI4IuijNcfY (.rodata.str1.9891790415796816505.1)
+                  102415c8    00000024     TI4IuijNcfY (.rodata..L__const.MMWave_configProgFiltCoeff.coeff)
+                  102415ec    00000024     libdpm_awr2943.aer5f : dpm_msg.oer5f (.rodata.gDPMMessageFxnTable)
+                  10241610    00000024     TI4IuijNcfY (.rodata.str1.13299031372502791579.1)
+                  10241634    00000024     TI4IuijNcfY (.rodata.str1.15799003472535448386.1)
+                  10241658    00000024     TI4IuijNcfY (.rodata.str1.16203577344880422369.1)
+                  1024167c    00000024     TI4IuijNcfY (.rodata.str1.2648263266535345130.1)
+                  102416a0    00000024     TI4IuijNcfY (.rodata.str1.286917804250050828.1)
+                  102416c4    00000024     TI4IuijNcfY (.rodata.str1.4997141485742364797.1)
+                  102416e8    00000024     TI4IuijNcfY (.rodata.str1.5576301878652872598.1)
+                  1024170c    00000024     TI4IuijNcfY (.rodata.str1.5591415790324492410.1)
+                  10241730    00000024     TI4IuijNcfY (.rodata.str1.6996906944161170968.1)
+                  10241754    00000024     TI4IuijNcfY (.rodata.str1.8093479130749737125.1)
+                  10241778    00000024     TI4IuijNcfY (.rodata.str1.8117200712553805357.1)
+                  1024179c    00000024     TI4IuijNcfY (.rodata.str1.906144131007236690.1)
+                  102417c0    00000023     TI4IuijNcfY (.rodata.str1.10776381537055213084.1)
+                  102417e3    00000023     TI4IuijNcfY (.rodata.str1.13038808409779939214.1)
+                  10241806    00000023     TI4IuijNcfY (.rodata.str1.2872319222019981346.1)
+                  10241829    00000023     TI4IuijNcfY (.rodata.str1.4121351355051849248.1)
+                  1024184c    00000023     TI4IuijNcfY (.rodata.str1.5002068805171123455.1)
+                  1024186f    00000023     TI4IuijNcfY (.rodata.str1.6898209673265334278.1)
+                  10241892    00000023     TI4IuijNcfY (.rodata.str1.8223659030037034620.1)
+                  102418b5    00000023     TI4IuijNcfY (.rodata.str1.901514652914745324.1)
+                  102418d8    00000022     TI4IuijNcfY (.rodata.str1.11431976895283351506.1)
+                  102418fa    00000022     TI4IuijNcfY (.rodata.str1.12571659620215795728.1)
+                  1024191c    00000022     TI4IuijNcfY (.rodata.str1.15289909654581660122.1)
+                  1024193e    00000022     TI4IuijNcfY (.rodata.str1.6702642723930166213.1)
+                  10241960    00000022     TI4IuijNcfY (.rodata.str1.841820257002259756.1)
+                  10241982    00000022     TI4IuijNcfY (.rodata.str1.8618228106542989139.1)
+                  102419a4    00000022     TI4IuijNcfY (.rodata.str1.9642229951503733554.1)
+                  102419c6    00000022     TI4IuijNcfY (.rodata.str1.9939732530945836080.1)
+                  102419e8    00000021     TI4IuijNcfY (.rodata.str1.10157181597931316924.1)
+                  10241a09    00000021     TI4IuijNcfY (.rodata.str1.1382837489183708560.1)
+                  10241a2a    00000021     TI4IuijNcfY (.rodata.str1.14261759258300112551.1)
+                  10241a4b    00000021     TI4IuijNcfY (.rodata.str1.1582503520411322174.1)
+                  10241a6c    00000021     TI4IuijNcfY (.rodata.str1.15955216707546259222.1)
+                  10241a8d    00000021     TI4IuijNcfY (.rodata.str1.8686530950258634898.1)
+                  10241aae    00000020     TI4IuijNcfY (.rodata.str1.10600635088944167401.1)
+                  10241ace    00000020     TI4IuijNcfY (.rodata.str1.11910709361724015879.1)
+                  10241aee    00000020     TI4IuijNcfY (.rodata.str1.14295567860848356384.1)
+                  10241b0e    00000020     TI4IuijNcfY (.rodata.str1.14941228894063464460.1)
+                  10241b2e    00000020     TI4IuijNcfY (.rodata.str1.1654285526368977296.1)
+                  10241b4e    00000020     TI4IuijNcfY (.rodata.str1.18134813149662314356.1)
+                  10241b6e    00000020     TI4IuijNcfY (.rodata.str1.2639600016038678010.1)
+                  10241b8e    00000020     TI4IuijNcfY (.rodata.str1.3223463285459973556.1)
+                  10241bae    00000020     TI4IuijNcfY (.rodata.str1.4188818854221878621.1)
+                  10241bce    00000020     TI4IuijNcfY (.rodata.str1.5720779329688503406.1)
+                  10241bee    00000020     TI4IuijNcfY (.rodata.str1.5918765658181053709.1)
+                  10241c0e    0000001f     TI4IuijNcfY (.rodata.str1.11072381668396047406.1)
+                  10241c2d    0000001f     TI4IuijNcfY (.rodata.str1.11945753692843601015.1)
+                  10241c4c    0000001f     TI4IuijNcfY (.rodata.str1.12331083278160554799.1)
+                  10241c6b    0000001f     TI4IuijNcfY (.rodata.str1.12360313528184866706.1)
+                  10241c8a    0000001f     TI4IuijNcfY (.rodata.str1.1355917426401294966.1)
+                  10241ca9    0000001f     TI4IuijNcfY (.rodata.str1.15702388248140896605.1)
+                  10241cc8    0000001f     TI4IuijNcfY (.rodata.str1.15873781657072682288.1)
+                  10241ce7    0000001f     TI4IuijNcfY (.rodata.str1.17418253557342323689.1)
+                  10241d06    0000001f     TI4IuijNcfY (.rodata.str1.18247132988187897593.1)
+                  10241d25    0000001f     TI4IuijNcfY (.rodata.str1.2597105173412941594.1)
+                  10241d44    0000001f     TI4IuijNcfY (.rodata.str1.6047945580254537550.1)
+                  10241d63    0000001f     TI4IuijNcfY (.rodata.str1.6713545087300948882.1)
+                  10241d82    0000001f     TI4IuijNcfY (.rodata.str1.794855482520131148.1)
+                  10241da1    0000001f     TI4IuijNcfY (.rodata.str1.9116329052289265795.1)
+                  10241dc0    0000001e     TI4IuijNcfY (.rodata.str1.13656164527851919890.1)
+                  10241dde    0000001e     TI4IuijNcfY (.rodata.str1.17589291097549694582.1)
+                  10241dfc    0000001e     TI4IuijNcfY (.rodata.str1.3998464287976889528.1)
+                  10241e1a    0000001e     TI4IuijNcfY (.rodata.str1.4251391335045240180.1)
+                  10241e38    0000001e     TI4IuijNcfY (.rodata.str1.9312406182590939958.1)
+                  10241e56    0000001e     TI4IuijNcfY (.rodata.str1.9359344146428295718.1)
+                  10241e74    0000001e     TI4IuijNcfY (.rodata.str1.9813970133906442626.1)
+                  10241e92    0000001d     TI4IuijNcfY (.rodata.str1.10880188199143997636.1)
+                  10241eaf    0000001d     TI4IuijNcfY (.rodata.str1.12429527165725751756.1)
+                  10241ecc    0000001d     TI4IuijNcfY (.rodata.str1.13056057682170246798.1)
+                  10241ee9    0000001d     TI4IuijNcfY (.rodata.str1.1345206698858701367.1)
+                  10241f06    0000001d     TI4IuijNcfY (.rodata.str1.17841286453608977318.1)
+                  10241f23    0000001d     TI4IuijNcfY (.rodata.str1.18141897402865331925.1)
+                  10241f40    0000001d     TI4IuijNcfY (.rodata.str1.4186843274097872972.1)
+                  10241f5d    0000001d     TI4IuijNcfY (.rodata.str1.8252759334661331841.1)
+                  10241f7a    0000001d     TI4IuijNcfY (.rodata.str1.9702119820682248265.1)
+                  10241f97    0000001c     TI4IuijNcfY (.rodata.str1.1041731421546837405.1)
+                  10241fb3    0000001c     TI4IuijNcfY (.rodata.str1.12217519052751969195.1)
+                  10241fcf    0000001c     TI4IuijNcfY (.rodata.str1.13638165433259614356.1)
+                  10241feb    0000001c     TI4IuijNcfY (.rodata.str1.13702327503983131884.1)
+                  10242007    0000001c     TI4IuijNcfY (.rodata.str1.17875700140606015372.1)
+                  10242023    0000001c     TI4IuijNcfY (.rodata.str1.18283708506288787338.1)
+                  1024203f    0000001c     TI4IuijNcfY (.rodata.str1.2366042276735951415.1)
+                  1024205b    0000001c     TI4IuijNcfY (.rodata.str1.3784921012555184974.1)
+                  10242077    0000001c     TI4IuijNcfY (.rodata.str1.4063252510904657871.1)
+                  10242093    0000001c     board.awr294x.r5f.ti-arm-clang.release.lib : flash_nor_qspi.obj (.rodata.str1.4812005773357475951.1)
+                  102420af    0000001c     TI4IuijNcfY (.rodata.str1.8618302507608316298.1)
+                  102420cb    0000001c     TI4IuijNcfY (.rodata.str1.8802348346048620877.1)
+                  102420e7    0000001c     TI4IuijNcfY (.rodata.str1.9852878850469227389.1)
+                  10242103    0000001b     TI4IuijNcfY (.rodata.str1.10878982976941460661.1)
+                  1024211e    0000001b     TI4IuijNcfY (.rodata.str1.11228017274813470373.1)
+                  10242139    0000001b     TI4IuijNcfY (.rodata.str1.12511401013976273597.1)
+                  10242154    0000001b     TI4IuijNcfY (.rodata.str1.15177783430554577237.1)
+                  1024216f    0000001b     TI4IuijNcfY (.rodata.str1.15339785711354971805.1)
+                  1024218a    0000001b     TI4IuijNcfY (.rodata.str1.16348481043507759976.1)
+                  102421a5    0000001b     TI4IuijNcfY (.rodata.str1.17723527540385808112.1)
+                  102421c0    0000001b     TI4IuijNcfY (.rodata.str1.17778338440716408248.1)
+                  102421db    0000001b     TI4IuijNcfY (.rodata.str1.2513218245551521182.1)
+                  102421f6    0000001b     TI4IuijNcfY (.rodata.str1.2741760460988209836.1)
+                  10242211    00000001     TI4IuijNcfY (.rodata.str1.13287573791958166451.1)
+                  10242212    0000001a     TI4IuijNcfY (.rodata.gSocRcmCpswClkSrcValMap)
+                  1024222c    0000001a     TI4IuijNcfY (.rodata.gSocRcmCptsClkSrcValMap)
+                  10242246    0000001a     TI4IuijNcfY (.rodata.gSocRcmDssHwaClkSrcValMap)
+                  10242260    0000001a     TI4IuijNcfY (.rodata.gSocRcmDssRtiClkSrcValMap)
+                  1024227a    0000001a     TI4IuijNcfY (.rodata.gSocRcmDssSciClkSrcValMap)
+                  10242294    0000001a     TI4IuijNcfY (.rodata.gSocRcmI2CClkSrcValMap)
+                  102422ae    0000001a     TI4IuijNcfY (.rodata.gSocRcmMcanClkSrcValMap)
+                  102422c8    0000001a     TI4IuijNcfY (.rodata.str1.11043531187034137316.1)
+                  102422e2    0000001a     TI4IuijNcfY (.rodata.str1.11309401770802222900.1)
+                  102422fc    0000001a     TI4IuijNcfY (.rodata.str1.14021114992537045528.1)
+                  10242316    0000001a     TI4IuijNcfY (.rodata.str1.15556241473236214864.1)
+                  10242330    0000001a     TI4IuijNcfY (.rodata.str1.16162182320437005592.1)
+                  1024234a    0000001a     TI4IuijNcfY (.rodata.str1.16739129939462765771.1)
+                  10242364    0000001a     TI4IuijNcfY (.rodata.str1.3627367391154595005.1)
+                  1024237e    0000001a     TI4IuijNcfY (.rodata.str1.429003052504343208.1)
+                  10242398    0000001a     TI4IuijNcfY (.rodata.str1.4851856484563158680.1)
+                  102423b2    0000001a     TI4IuijNcfY (.rodata.str1.555148032199499482.1)
+                  102423cc    0000001a     TI4IuijNcfY (.rodata.str1.5759803068011400137.1)
+                  102423e6    0000001a     TI4IuijNcfY (.rodata.str1.6467260064515921039.1)
+                  10242400    0000001a     TI4IuijNcfY (.rodata.str1.6778076060421305916.1)
+                  1024241a    0000001a     TI4IuijNcfY (.rodata.str1.6821486333739956405.1)
+                  10242434    0000001a     TI4IuijNcfY (.rodata.str1.6830549780028784333.1)
+                  1024244e    0000001a     TI4IuijNcfY (.rodata.str1.7112164155980294202.1)
+                  10242468    0000001a     TI4IuijNcfY (.rodata.str1.8410398936806601292.1)
+                  10242482    0000001a     TI4IuijNcfY (.rodata.str1.9046612046459245137.1)
+                  1024249c    0000001a     TI4IuijNcfY (.rodata.str2.15449887785647069546.2)
+                  102424b6    0000001a     TI4IuijNcfY (.rodata.str2.16330950469769673087.2)
+                  102424d0    0000001a     TI4IuijNcfY (.rodata.str2.17491713184182106461.2)
+                  102424ea    00000019     TI4IuijNcfY (.rodata.str1.10472513456044638740.1)
+                  10242503    00000019     TI4IuijNcfY (.rodata.str1.11482254753575062166.1)
+                  1024251c    00000019     TI4IuijNcfY (.rodata.str1.12569477605740922340.1)
+                  10242535    00000019     TI4IuijNcfY (.rodata.str1.12925569628196988038.1)
+                  1024254e    00000019     TI4IuijNcfY (.rodata.str1.14541566532736291531.1)
+                  10242567    00000019     TI4IuijNcfY (.rodata.str1.14622646807818978783.1)
+                  10242580    00000019     TI4IuijNcfY (.rodata.str1.16241921416000430840.1)
+                  10242599    00000019     TI4IuijNcfY (.rodata.str1.17864448010432796329.1)
+                  102425b2    00000019     TI4IuijNcfY (.rodata.str1.4290245590090113626.1)
+                  102425cb    00000019     TI4IuijNcfY (.rodata.str1.4704083674140000892.1)
+                  102425e4    00000019     TI4IuijNcfY (.rodata.str1.519891376166537351.1)
+                  102425fd    00000019     TI4IuijNcfY (.rodata.str1.533968011475677397.1)
+                  10242616    00000019     TI4IuijNcfY (.rodata.str1.6612369845074025095.1)
+                  1024262f    00000019     TI4IuijNcfY (.rodata.str1.6926542549466748358.1)
+                  10242648    00000019     TI4IuijNcfY (.rodata.str1.7155110993672121671.1)
+                  10242661    00000019     TI4IuijNcfY (.rodata.str1.7220982907478437940.1)
+                  1024267a    00000019     TI4IuijNcfY (.rodata.str1.7641074805947165841.1)
+                  10242693    00000019     TI4IuijNcfY (.rodata.str1.7903011986906535575.1)
+                  102426ac    00000019     TI4IuijNcfY (.rodata.str1.837005130791003557.1)
+                  102426c5    00000019     TI4IuijNcfY (.rodata.str1.9033669599189598307.1)
+                  102426de    00000002     --HOLE-- [fill = 0]
+                  102426e0    00000018     ti_drivers_open_close.oer5f (.rodata.gConfigEsm0Params)
+                  102426f8    00000018     drivers.awr294x.r5f.ti-arm-clang.release.lib : cbuff.obj (.rodata.gInterleavedTransferFxn)
+                  10242710    00000018                                                  : cbuff.obj (.rodata.gMultipleChirpNonInterleavedTransferFxn)
+                  10242728    00000018                                                  : cbuff.obj (.rodata.gNonInterleavedTransferFxn)
+                  10242740    00000018     TI4IuijNcfY (.rodata.str1.10353173682375914702.1)
+                  10242758    00000018     TI4IuijNcfY (.rodata.str1.10723609335080493239.1)
+                  10242770    00000018     TI4IuijNcfY (.rodata.str1.11088000410010800117.1)
+                  10242788    00000018     TI4IuijNcfY (.rodata.str1.11119126529231924280.1)
+                  102427a0    00000018     TI4IuijNcfY (.rodata.str1.13386556404661153854.1)
+                  102427b8    00000018     TI4IuijNcfY (.rodata.str1.13880280241163632150.1)
+                  102427d0    00000018     TI4IuijNcfY (.rodata.str1.13946402690740376245.1)
+                  102427e8    00000018     TI4IuijNcfY (.rodata.str1.14138745428871690903.1)
+                  10242800    00000018     TI4IuijNcfY (.rodata.str1.15165731353115083700.1)
+                  10242818    00000018     TI4IuijNcfY (.rodata.str1.15412796604338819888.1)
+                  10242830    00000018     TI4IuijNcfY (.rodata.str1.16468734219210511133.1)
+                  10242848    00000018     TI4IuijNcfY (.rodata.str1.16939677913589532559.1)
+                  10242860    00000018     TI4IuijNcfY (.rodata.str1.17047869117118708511.1)
+                  10242878    00000018     TI4IuijNcfY (.rodata.str1.3348811043807446789.1)
+                  10242890    00000018     TI4IuijNcfY (.rodata.str1.38829911299005673.1)
+                  102428a8    00000018     TI4IuijNcfY (.rodata.str1.3983252475877277491.1)
+                  102428c0    00000018     TI4IuijNcfY (.rodata.str1.4169507991591417700.1)
+                  102428d8    00000018     TI4IuijNcfY (.rodata.str1.598285622138841860.1)
+                  102428f0    00000018     TI4IuijNcfY (.rodata.str1.6357230130926404065.1)
+                  10242908    00000018     TI4IuijNcfY (.rodata.str1.9527365809109290011.1)
+                  10242920    00000018     TI4IuijNcfY (.rodata.str1.9706820957026098334.1)
+                  10242938    00000017     TI4IuijNcfY (.rodata.str1.1082226673338014833.1)
+                  1024294f    00000017     TI4IuijNcfY (.rodata.str1.11571398541439133444.1)
+                  10242966    00000017     TI4IuijNcfY (.rodata.str1.12779213242064706982.1)
+                  1024297d    00000017     TI4IuijNcfY (.rodata.str1.13952796436832295301.1)
+                  10242994    00000017     TI4IuijNcfY (.rodata.str1.1450755676137631203.1)
+                  102429ab    00000017     TI4IuijNcfY (.rodata.str1.14967749969920143964.1)
+                  102429c2    00000017     TI4IuijNcfY (.rodata.str1.16970515092811955896.1)
+                  102429d9    00000017     TI4IuijNcfY (.rodata.str1.17650278880441451781.1)
+                  102429f0    00000017     TI4IuijNcfY (.rodata.str1.18280375125941940330.1)
+                  10242a07    00000017     TI4IuijNcfY (.rodata.str1.2520410604157605384.1)
+                  10242a1e    00000017     TI4IuijNcfY (.rodata.str1.2904664172485529942.1)
+                  10242a35    00000017     TI4IuijNcfY (.rodata.str1.463269366410365557.1)
+                  10242a4c    00000017     TI4IuijNcfY (.rodata.str1.4752143452612668843.1)
+                  10242a63    00000017     TI4IuijNcfY (.rodata.str1.4811637743505033217.1)
+                  10242a7a    00000017     TI4IuijNcfY (.rodata.str1.5072913632053408168.1)
+                  10242a91    00000017     TI4IuijNcfY (.rodata.str1.7495993629739101352.1)
+                  10242aa8    00000016     TI4IuijNcfY (.rodata.gSocRcmPllCoreOut2HSDivClkSrcValMap)
+                  10242abe    00000016     TI4IuijNcfY (.rodata.gSocRcmPllDspOut1HSDivClkSrcValMap)
+                  10242ad4    00000016     TI4IuijNcfY (.rodata.gSocRcmPllDspOut2HSDivClkSrcValMap)
+                  10242aea    00000016     TI4IuijNcfY (.rodata.gSocRcmPllPerOut1HSDivClkSrcValMap)
+                  10242b00    00000016     TI4IuijNcfY (.rodata.str1.10431877328095229296.1)
+                  10242b16    00000016     TI4IuijNcfY (.rodata.str1.11023427119531892047.1)
+                  10242b2c    00000016     TI4IuijNcfY (.rodata.str1.12204705308574425848.1)
+                  10242b42    00000016     TI4IuijNcfY (.rodata.str1.12495465736450467174.1)
+                  10242b58    00000016     TI4IuijNcfY (.rodata.str1.13698248491874633978.1)
+                  10242b6e    00000016     TI4IuijNcfY (.rodata.str1.14320890106470575530.1)
+                  10242b84    00000016     TI4IuijNcfY (.rodata.str1.14947426036342224263.1)
+                  10242b9a    00000016     TI4IuijNcfY (.rodata.str1.15211281974140599961.1)
+                  10242bb0    00000016     TI4IuijNcfY (.rodata.str1.16185342292263333971.1)
+                  10242bc6    00000016     TI4IuijNcfY (.rodata.str1.17543024122183071878.1)
+                  10242bdc    00000016     TI4IuijNcfY (.rodata.str1.5022684844706301902.1)
+                  10242bf2    00000016     TI4IuijNcfY (.rodata.str1.5900864050493640017.1)
+                  10242c08    00000016     TI4IuijNcfY (.rodata.str1.6022691232737196611.1)
+                  10242c1e    00000016     TI4IuijNcfY (.rodata.str1.6913768572802239193.1)
+                  10242c34    00000016     TI4IuijNcfY (.rodata.str1.7473879755323532466.1)
+                  10242c4a    00000016     TI4IuijNcfY (.rodata.str1.8127116811824607546.1)
+                  10242c60    00000016     TI4IuijNcfY (.rodata.str1.9499994679616434620.1)
+                  10242c76    00000015     TI4IuijNcfY (.rodata.str1.10475633746340383773.1)
+                  10242c8b    00000015     TI4IuijNcfY (.rodata.str1.10661837744392405360.1)
+                  10242ca0    00000015     TI4IuijNcfY (.rodata.str1.11381212777099264645.1)
+                  10242cb5    00000015     TI4IuijNcfY (.rodata.str1.11860267932707521240.1)
+                  10242cca    00000015     TI4IuijNcfY (.rodata.str1.12107863789759961344.1)
+                  10242cdf    00000015     TI4IuijNcfY (.rodata.str1.12330321239265618341.1)
+                  10242cf4    00000015     TI4IuijNcfY (.rodata.str1.14145053875304485454.1)
+                  10242d09    00000015     TI4IuijNcfY (.rodata.str1.14422016587543244811.1)
+                  10242d1e    00000015     TI4IuijNcfY (.rodata.str1.14638444076008188119.1)
+                  10242d33    00000015     TI4IuijNcfY (.rodata.str1.14784179298843722144.1)
+                  10242d48    00000015     TI4IuijNcfY (.rodata.str1.15019811327762303508.1)
+                  10242d5d    00000015     TI4IuijNcfY (.rodata.str1.15240606673886188378.1)
+                  10242d72    00000015     TI4IuijNcfY (.rodata.str1.15514745194818893840.1)
+                  10242d87    00000015     TI4IuijNcfY (.rodata.str1.16115990495187715012.1)
+                  10242d9c    00000015     TI4IuijNcfY (.rodata.str1.1664922618514934191.1)
+                  10242db1    00000015     TI4IuijNcfY (.rodata.str1.17575529871608490992.1)
+                  10242dc6    00000015     TI4IuijNcfY (.rodata.str1.2931888729808738643.1)
+                  10242ddb    00000015     TI4IuijNcfY (.rodata.str1.9028971719722895961.1)
+                  10242df0    00000014     TI4IuijNcfY (.rodata.str1.10268417008932647915.1)
+                  10242e04    00000014     TI4IuijNcfY (.rodata.str1.10379736520766965205.1)
+                  10242e18    00000014     TI4IuijNcfY (.rodata.str1.10737756309782859127.1)
+                  10242e2c    00000014     TI4IuijNcfY (.rodata.str1.11228745045382352225.1)
+                  10242e40    00000014     TI4IuijNcfY (.rodata.str1.12754232730999659401.1)
+                  10242e54    00000014     TI4IuijNcfY (.rodata.str1.12756518268791500831.1)
+                  10242e68    00000014     board.awr294x.r5f.ti-arm-clang.release.lib : flash_nor_qspi.obj (.rodata.str1.13632382004875020299.1)
+                  10242e7c    00000014     TI4IuijNcfY (.rodata.str1.14297158526808322806.1)
+                  10242e90    00000014     TI4IuijNcfY (.rodata.str1.15002593207859911217.1)
+                  10242ea4    00000014     TI4IuijNcfY (.rodata.str1.15118581604574122458.1)
+                  10242eb8    00000014     TI4IuijNcfY (.rodata.str1.15283741340217394288.1)
+                  10242ecc    00000014     TI4IuijNcfY (.rodata.str1.15426528940170683713.1)
+                  10242ee0    00000014     TI4IuijNcfY (.rodata.str1.15975177559105840753.1)
+                  10242ef4    00000014     TI4IuijNcfY (.rodata.str1.16117683358604649010.1)
+                  10242f08    00000014     TI4IuijNcfY (.rodata.str1.16500252600488099316.1)
+                  10242f1c    00000014     TI4IuijNcfY (.rodata.str1.17042560790312885893.1)
+                  10242f30    00000014     TI4IuijNcfY (.rodata.str1.18055206109503375798.1)
+                  10242f44    00000014     TI4IuijNcfY (.rodata.str1.3470851711592649868.1)
+                  10242f58    00000014     TI4IuijNcfY (.rodata.str1.4655298498583899628.1)
+                  10242f6c    00000014     TI4IuijNcfY (.rodata.str1.5149402518039267639.1)
+                  10242f80    00000014     TI4IuijNcfY (.rodata.str1.7054422597390788453.1)
+                  10242f94    00000014     TI4IuijNcfY (.rodata.str1.8951858603315313282.1)
+                  10242fa8    00000014     TI4IuijNcfY (.rodata.str1.950828170850503336.1)
+                  10242fbc    00000014     TI4IuijNcfY (.rodata.str1.9548277276986908150.1)
+                  10242fd0    00000014     TI4IuijNcfY (.rodata.str1.9996394156533634723.1)
+                  10242fe4    00000013     TI4IuijNcfY (.rodata.str1.10895666467965629481.1)
+                  10242ff7    00000013     TI4IuijNcfY (.rodata.str1.11269397906528188870.1)
+                  1024300a    00000013     TI4IuijNcfY (.rodata.str1.11809412673575560896.1)
+                  1024301d    00000013     TI4IuijNcfY (.rodata.str1.12438250614932712395.1)
+                  10243030    00000013     TI4IuijNcfY (.rodata.str1.12522974929307350974.1)
+                  10243043    00000013     TI4IuijNcfY (.rodata.str1.14344872170819188268.1)
+                  10243056    00000013     TI4IuijNcfY (.rodata.str1.14410209256994626197.1)
+                  10243069    00000013     TI4IuijNcfY (.rodata.str1.15364286958033490316.1)
+                  1024307c    00000013     TI4IuijNcfY (.rodata.str1.15963917243319758752.1)
+                  1024308f    00000013     TI4IuijNcfY (.rodata.str1.17759762762748327403.1)
+                  102430a2    00000013     TI4IuijNcfY (.rodata.str1.1872972088586678441.1)
+                  102430b5    00000013     TI4IuijNcfY (.rodata.str1.2691032914511146553.1)
+                  102430c8    00000013     TI4IuijNcfY (.rodata.str1.3882368634016448475.1)
+                  102430db    00000013     TI4IuijNcfY (.rodata.str1.4495174347548729327.1)
+                  102430ee    00000013     TI4IuijNcfY (.rodata.str1.5397832342893090276.1)
+                  10243101    00000013     TI4IuijNcfY (.rodata.str1.569384432618220437.1)
+                  10243114    00000013     TI4IuijNcfY (.rodata.str1.9112201447341555242.1)
+                  10243127    00000012     TI4IuijNcfY (.rodata.str1.10734333863565261386.1)
+                  10243139    00000012     TI4IuijNcfY (.rodata.str1.10761216771355474595.1)
+                  1024314b    00000012     TI4IuijNcfY (.rodata.str1.11994334580763937415.1)
+                  1024315d    00000012     TI4IuijNcfY (.rodata.str1.12618535470030441786.1)
+                  1024316f    00000012     TI4IuijNcfY (.rodata.str1.13962278305027080259.1)
+                  10243181    00000012     TI4IuijNcfY (.rodata.str1.14020819955200883595.1)
+                  10243193    00000012     TI4IuijNcfY (.rodata.str1.1447782762348183399.1)
+                  102431a5    00000012     TI4IuijNcfY (.rodata.str1.1552299189446888038.1)
+                  102431b7    00000012     TI4IuijNcfY (.rodata.str1.16214066057953287343.1)
+                  102431c9    00000012     TI4IuijNcfY (.rodata.str1.16329871980696407470.1)
+                  102431db    00000012     TI4IuijNcfY (.rodata.str1.17068150352865207890.1)
+                  102431ed    00000012     TI4IuijNcfY (.rodata.str1.2024844538095763398.1)
+                  102431ff    00000012     TI4IuijNcfY (.rodata.str1.3013208206170678045.1)
+                  10243211    00000012     TI4IuijNcfY (.rodata.str1.3636552808282009429.1)
+                  10243223    00000012     TI4IuijNcfY (.rodata.str1.4394029497464350538.1)
+                  10243235    00000012     TI4IuijNcfY (.rodata.str1.4474387771635240956.1)
+                  10243247    00000012     TI4IuijNcfY (.rodata.str1.4681062250852622617.1)
+                  10243259    00000012     TI4IuijNcfY (.rodata.str1.5405488239239229397.1)
+                  1024326b    00000012     TI4IuijNcfY (.rodata.str1.5913400195805739130.1)
+                  1024327d    00000012     TI4IuijNcfY (.rodata.str1.6846684568567736618.1)
+                  1024328f    00000012     TI4IuijNcfY (.rodata.str1.7622050848555842705.1)
+                  102432a1    00000012     TI4IuijNcfY (.rodata.str1.7784760175319601761.1)
+                  102432b3    00000012     TI4IuijNcfY (.rodata.str1.8266012073279823095.1)
+                  102432c5    00000011     TI4IuijNcfY (.rodata.str1.10334463233400022110.1)
+                  102432d6    00000011     TI4IuijNcfY (.rodata.str1.10352861294503411345.1)
+                  102432e7    00000011     TI4IuijNcfY (.rodata.str1.11075949463804063910.1)
+                  102432f8    00000011     TI4IuijNcfY (.rodata.str1.11155118594582584592.1)
+                  10243309    00000011     TI4IuijNcfY (.rodata.str1.11813260288213002843.1)
+                  1024331a    00000011     TI4IuijNcfY (.rodata.str1.12727382648234054986.1)
+                  1024332b    00000011     TI4IuijNcfY (.rodata.str1.12829888597536717747.1)
+                  1024333c    00000011     TI4IuijNcfY (.rodata.str1.13034758174705013457.1)
+                  1024334d    00000011     TI4IuijNcfY (.rodata.str1.14670615243729012694.1)
+                  1024335e    00000011     TI4IuijNcfY (.rodata.str1.15703269695654130683.1)
+                  1024336f    00000011     TI4IuijNcfY (.rodata.str1.15937429710827639465.1)
+                  10243380    00000011     TI4IuijNcfY (.rodata.str1.17199893358300601969.1)
+                  10243391    00000011     TI4IuijNcfY (.rodata.str1.17613845320409267871.1)
+                  102433a2    00000011     TI4IuijNcfY (.rodata.str1.2803563164035443775.1)
+                  102433b3    00000011     TI4IuijNcfY (.rodata.str1.5643444539541420416.1)
+                  102433c4    00000011     TI4IuijNcfY (.rodata.str1.6231548338826649988.1)
+                  102433d5    00000011     TI4IuijNcfY (.rodata.str1.6485732985054422078.1)
+                  102433e6    00000011     TI4IuijNcfY (.rodata.str1.8050988222572122730.1)
+                  102433f7    00000011     TI4IuijNcfY (.rodata.str1.8929246036205116268.1)
+                  10243408    00000010     TI4IuijNcfY (.rodata.cst16)
+                  10243418    00000010     drivers.awr294x.r5f.ti-arm-clang.release.lib : ipc_notify_v1_cfg.obj (.rodata.cst16)
+                  10243428    00000010     mmwavelink_r5f.lib : rl_driver.oer5f (.rodata.cst16)
+                  10243438    00000010     ti_drivers_open_close.oer5f (.rodata.gEdmaParams)
+                  10243448    00000010     TI4IuijNcfY (.rodata.str1.10874215294138764598.1)
+                  10243458    00000010     TI4IuijNcfY (.rodata.str1.11150930312139499219.1)
+                  10243468    00000010     TI4IuijNcfY (.rodata.str1.136271992643107624.1)
+                  10243478    00000010     TI4IuijNcfY (.rodata.str1.1434401603080430563.1)
+                  10243488    00000010     TI4IuijNcfY (.rodata.str1.14607499679368514414.1)
+                  10243498    00000010     TI4IuijNcfY (.rodata.str1.16064754050472685933.1)
+                  102434a8    00000010     TI4IuijNcfY (.rodata.str1.1614597563855717119.1)
+                  102434b8    00000010     TI4IuijNcfY (.rodata.str1.17217284624020134997.1)
+                  102434c8    00000010     TI4IuijNcfY (.rodata.str1.1908566594241602197.1)
+                  102434d8    00000010     TI4IuijNcfY (.rodata.str1.2374930628651260105.1)
+                  102434e8    00000010     TI4IuijNcfY (.rodata.str1.2856607675007355532.1)
+                  102434f8    00000010     TI4IuijNcfY (.rodata.str1.3584466958566497331.1)
+                  10243508    00000010     TI4IuijNcfY (.rodata.str1.3596260302821201274.1)
+                  10243518    00000010     TI4IuijNcfY (.rodata.str1.4052584694810566009.1)
+                  10243528    00000010     TI4IuijNcfY (.rodata.str1.5834011817295453226.1)
+                  10243538    00000010     TI4IuijNcfY (.rodata.str1.7779363918016891795.1)
+                  10243548    00000010     TI4IuijNcfY (.rodata.str1.881570309355321155.1)
+                  10243558    00000010     TI4IuijNcfY (.rodata.str1.9594672233626986489.1)
+                  10243568    0000000f     TI4IuijNcfY (.rodata.str1.1059888165808144638.1)
+                  10243577    0000000f     TI4IuijNcfY (.rodata.str1.112419443582986138.1)
+                  10243586    0000000f     TI4IuijNcfY (.rodata.str1.11258728134430462441.1)
+                  10243595    0000000f     TI4IuijNcfY (.rodata.str1.12255302421072760439.1)
+                  102435a4    0000000f     TI4IuijNcfY (.rodata.str1.12891373260530382329.1)
+                  102435b3    0000000f     TI4IuijNcfY (.rodata.str1.13672068688881053988.1)
+                  102435c2    0000000f     TI4IuijNcfY (.rodata.str1.14144237492009350508.1)
+                  102435d1    0000000f     TI4IuijNcfY (.rodata.str1.14664222851482774677.1)
+                  102435e0    0000000f     TI4IuijNcfY (.rodata.str1.15055559261138273007.1)
+                  102435ef    0000000f     TI4IuijNcfY (.rodata.str1.15308428742607653305.1)
+                  102435fe    0000000f     TI4IuijNcfY (.rodata.str1.1647177643344896048.1)
+                  1024360d    0000000f     TI4IuijNcfY (.rodata.str1.16620919952707023528.1)
+                  1024361c    0000000f     TI4IuijNcfY (.rodata.str1.17064018865340256410.1)
+                  1024362b    0000000f     TI4IuijNcfY (.rodata.str1.17858689245711282412.1)
+                  1024363a    0000000f     TI4IuijNcfY (.rodata.str1.4849320247351443864.1)
+                  10243649    0000000f     TI4IuijNcfY (.rodata.str1.5467205657143217712.1)
+                  10243658    0000000f     TI4IuijNcfY (.rodata.str1.6262713116577458247.1)
+                  10243667    0000000f     TI4IuijNcfY (.rodata.str1.6389525500660512020.1)
+                  10243676    0000000f     TI4IuijNcfY (.rodata.str1.7372164014786225208.1)
+                  10243685    0000000f     TI4IuijNcfY (.rodata.str1.8161545930214414963.1)
+                  10243694    0000000f     TI4IuijNcfY (.rodata.str1.8816496650237075255.1)
+                  102436a3    0000000e     TI4IuijNcfY (.rodata.str1.12018577112937200632.1)
+                  102436b1    0000000e     TI4IuijNcfY (.rodata.str1.13177631423844230879.1)
+                  102436bf    0000000e     TI4IuijNcfY (.rodata.str1.14113309401621242316.1)
+                  102436cd    0000000e     TI4IuijNcfY (.rodata.str1.16291040065538789717.1)
+                  102436db    0000000e     TI4IuijNcfY (.rodata.str1.16474028304892206165.1)
+                  102436e9    0000000e     TI4IuijNcfY (.rodata.str1.17965717290300120618.1)
+                  102436f7    0000000e     TI4IuijNcfY (.rodata.str1.2863538033050985925.1)
+                  10243705    0000000e     TI4IuijNcfY (.rodata.str1.3097059134915910140.1)
+                  10243713    0000000e     TI4IuijNcfY (.rodata.str1.8127035207146621109.1)
+                  10243721    0000000e     TI4IuijNcfY (.rodata.str1.830671646664648402.1)
+                  1024372f    0000000d     TI4IuijNcfY (.rodata.gSocRcmPeripheralClkSrcInfoMap)
+                  1024373c    0000000d     TI4IuijNcfY (.rodata.str1.11453209001042775015.1)
+                  10243749    0000000d     TI4IuijNcfY (.rodata.str1.12331516558555237361.1)
+                  10243756    0000000d     TI4IuijNcfY (.rodata.str1.17710300975712776097.1)
+                  10243763    0000000d     TI4IuijNcfY (.rodata.str1.1883496898182645038.1)
+                  10243770    0000000d     TI4IuijNcfY (.rodata.str1.4510054875572497861.1)
+                  1024377d    0000000d     TI4IuijNcfY (.rodata.str1.6288818108787358825.1)
+                  1024378a    0000000d     TI4IuijNcfY (.rodata.str1.6622793211384505057.1)
+                  10243797    0000000d     TI4IuijNcfY (.rodata.str1.7377125470334371581.1)
+                  102437a4    0000000d     TI4IuijNcfY (.rodata.str1.8168189017949407481.1)
+                  102437b1    0000000d     TI4IuijNcfY (.rodata.str1.8451115526150144341.1)
+                  102437be    0000000d     TI4IuijNcfY (.rodata.str1.8648969753521434015.1)
+                  102437cb    0000000d     TI4IuijNcfY (.rodata.str1.9273362903525893015.1)
+                  102437d8    0000000c     TI4IuijNcfY (.rodata..Lswitch.table.ADCBuf_control)
+                  102437e4    0000000c     TI4IuijNcfY (.rodata..Lswitch.table.MMWave_computeCRC.40)
+                  102437f0    0000000c     TI4IuijNcfY (.rodata..Lswitch.table.MMWave_computeCRC)
+                  102437fc    0000000c     TI4IuijNcfY (.rodata.str1.11784268553153003905.1)
+                  10243808    0000000c     TI4IuijNcfY (.rodata.str1.14933117048159870932.1)
+                  10243814    0000000c     TI4IuijNcfY (.rodata.str1.178902939051053331.1)
+                  10243820    0000000c     TI4IuijNcfY (.rodata.str1.18000584088544161916.1)
+                  1024382c    0000000c     TI4IuijNcfY (.rodata.str1.2048203139510587861.1)
+                  10243838    0000000c     TI4IuijNcfY (.rodata.str1.2581089427867522809.1)
+                  10243844    0000000c     TI4IuijNcfY (.rodata.str1.3645137696483406543.1)
+                  10243850    0000000c     TI4IuijNcfY (.rodata.str1.3663540598872331492.1)
+                  1024385c    0000000c     TI4IuijNcfY (.rodata.str1.3986637904122420256.1)
+                  10243868    0000000c     TI4IuijNcfY (.rodata.str1.7117352114534261319.1)
+                  10243874    0000000c     TI4IuijNcfY (.rodata.str1.7370039379764261063.1)
+                  10243880    0000000c     TI4IuijNcfY (.rodata.str1.7628898710153582048.1)
+                  1024388c    0000000c     TI4IuijNcfY (.rodata.str1.9988308924276366575.1)
+                  10243898    0000000b     TI4IuijNcfY (.rodata.gSocRcmHsDivMuxClkSrcInfoMap)
+                  102438a3    0000000b     TI4IuijNcfY (.rodata.str1.10246716168874613976.1)
+                  102438ae    0000000b     TI4IuijNcfY (.rodata.str1.10350524931211299861.1)
+                  102438b9    0000000b     TI4IuijNcfY (.rodata.str1.16006027880663865168.1)
+                  102438c4    0000000b     TI4IuijNcfY (.rodata.str1.18048502197637819171.1)
+                  102438cf    0000000b     TI4IuijNcfY (.rodata.str1.344888736716487961.1)
+                  102438da    0000000b     TI4IuijNcfY (.rodata.str1.355269870974073169.1)
+                  102438e5    0000000b     TI4IuijNcfY (.rodata.str1.3610013284557629492.1)
+                  102438f0    0000000b     TI4IuijNcfY (.rodata.str1.3882893625095973699.1)
+                  102438fb    0000000b     TI4IuijNcfY (.rodata.str1.515507356055128359.1)
+                  10243906    0000000b     TI4IuijNcfY (.rodata.str1.5277168725375368415.1)
+                  10243911    0000000b     TI4IuijNcfY (.rodata.str1.5487084172370186406.1)
+                  1024391c    0000000b     TI4IuijNcfY (.rodata.str1.645189807905667992.1)
+                  10243927    0000000b     TI4IuijNcfY (.rodata.str1.6636696325618806278.1)
+                  10243932    0000000b     TI4IuijNcfY (.rodata.str1.666638709540304919.1)
+                  1024393d    0000000b     TI4IuijNcfY (.rodata.str1.8707888724538752075.1)
+                  10243948    0000000a     TI4IuijNcfY (.rodata.gSocRcmR5ClkSrcValMap)
+                  10243952    0000000a     TI4IuijNcfY (.rodata.str1.10081576319107575478.1)
+                  1024395c    0000000a     TI4IuijNcfY (.rodata.str1.11104786266827355840.1)
+                  10243966    0000000a     TI4IuijNcfY (.rodata.str1.11338298938697813446.1)
+                  10243970    0000000a     TI4IuijNcfY (.rodata.str1.11556136066388248970.1)
+                  1024397a    0000000a     TI4IuijNcfY (.rodata.str1.13428351632245108295.1)
+                  10243984    0000000a     TI4IuijNcfY (.rodata.str1.14307407630686866267.1)
+                  1024398e    0000000a     TI4IuijNcfY (.rodata.str1.14576459472166816906.1)
+                  10243998    0000000a     TI4IuijNcfY (.rodata.str1.14748825288752092928.1)
+                  102439a2    0000000a     TI4IuijNcfY (.rodata.str1.15069284380964204351.1)
+                  102439ac    0000000a     TI4IuijNcfY (.rodata.str1.15239035082736509822.1)
+                  102439b6    0000000a     TI4IuijNcfY (.rodata.str1.15930884653750501365.1)
+                  102439c0    0000000a     TI4IuijNcfY (.rodata.str1.17688423127415691162.1)
+                  102439ca    0000000a     TI4IuijNcfY (.rodata.str1.207644150805284252.1)
+                  102439d4    0000000a     TI4IuijNcfY (.rodata.str1.3365946214868326618.1)
+                  102439de    0000000a     TI4IuijNcfY (.rodata.str1.4206727780196517765.1)
+                  102439e8    0000000a     TI4IuijNcfY (.rodata.str1.5754647968708619920.1)
+                  102439f2    0000000a     TI4IuijNcfY (.rodata.str1.636376324489740032.1)
+                  102439fc    0000000a     TI4IuijNcfY (.rodata.str1.6706344321362108256.1)
+                  10243a06    00000009     TI4IuijNcfY (.rodata.str1.10661338200653481984.1)
+                  10243a0f    00000009     TI4IuijNcfY (.rodata.str1.11173067696476592328.1)
+                  10243a18    00000009     TI4IuijNcfY (.rodata.str1.14614968216481266383.1)
+                  10243a21    00000009     TI4IuijNcfY (.rodata.str1.16405675266526133846.1)
+                  10243a2a    00000009     TI4IuijNcfY (.rodata.str1.17392138502404820346.1)
+                  10243a33    00000009     TI4IuijNcfY (.rodata.str1.2061112648444578709.1)
+                  10243a3c    00000009     TI4IuijNcfY (.rodata.str1.4038356755423426951.1)
+                  10243a45    00000009     TI4IuijNcfY (.rodata.str1.4258436712142997123.1)
+                  10243a4e    00000009     TI4IuijNcfY (.rodata.str1.5740628644060251990.1)
+                  10243a57    00000009     TI4IuijNcfY (.rodata.str1.8245995922520588706.1)
+                  10243a60    00000009     TI4IuijNcfY (.rodata.str1.8319336631407148602.1)
+                  10243a69    00000003     TI4IuijNcfY (.rodata.str1.6293841632836314218.1)
+                  10243a6c    00000008     TI4IuijNcfY (.rodata..L__const._sproc_float.special)
+                  10243a74    00000008     TI4IuijNcfY (.rodata.cst8)
+                  10243a7c    00000008     TI4IuijNcfY (.rodata.str1.14014798254469960823.1)
+                  10243a84    00000008     TI4IuijNcfY (.rodata.str1.15269054916493918820.1)
+                  10243a8c    00000008     TI4IuijNcfY (.rodata.str1.3393181869858020406.1)
+                  10243a94    00000008     TI4IuijNcfY (.rodata.str1.5116971269547624983.1)
+                  10243a9c    00000008     TI4IuijNcfY (.rodata.str1.5341038980311254883.1)
+                  10243aa4    00000008     TI4IuijNcfY (.rodata.str1.7631917146446908294.1)
+                  10243aac    00000007     TI4IuijNcfY (.rodata.str1.17560321986964211665.1)
+                  10243ab3    00000007     TI4IuijNcfY (.rodata.str1.3069278930637593228.1)
+                  10243aba    00000007     TI4IuijNcfY (.rodata.str1.9051095335640113883.1)
+                  10243ac1    00000006     TI4IuijNcfY (.rodata.str1.11901300548166937177.1)
+                  10243ac7    00000006     TI4IuijNcfY (.rodata.str1.12808434074953219711.1)
+                  10243acd    00000005     TI4IuijNcfY (.rodata.str1.11315205097892556202.1)
+                  10243ad2    00000005     TI4IuijNcfY (.rodata.str1.15560014301001620539.1)
+                  10243ad7    00000005     TI4IuijNcfY (.rodata.str1.17019444638696088425.1)
+                  10243adc    00000005     TI4IuijNcfY (.rodata.str1.2553816214819901167.1)
+                  10243ae1    00000005     TI4IuijNcfY (.rodata.str1.3317784939798232748.1)
+                  10243ae6    00000005     TI4IuijNcfY (.rodata.str1.4560888637047524298.1)
+                  10243aeb    00000005     TI4IuijNcfY (.rodata.str1.4791359573944769002.1)
+                  10243af0    00000005     TI4IuijNcfY (.rodata.str1.6334176233899610153.1)
+                  10243af5    00000005     TI4IuijNcfY (.rodata.str1.8675182048848689801.1)
+                  10243afa    00000005     TI4IuijNcfY (.rodata.str1.9238955429423287950.1)
+                  10243aff    00000001     --HOLE-- [fill = 0]
+                  10243b00    00000004     freertos.awr294x.r5f.ti-arm-clang.release.lib : CacheP_armv7r.obj (.rodata.gCacheL1dCacheLineSize)
+                  10243b04    00000004                                                   : CacheP_armv7r.obj (.rodata.gCacheL1pCacheLineSize)
+                  10243b08    00000004     TI4IuijNcfY (.rodata.str1.14937969790252741276.1)
+                  10243b0c    00000004     TI4IuijNcfY (.rodata.str1.15203803326170040611.1)
+                  10243b10    00000004     TI4IuijNcfY (.rodata.str1.1603943046589719479.1)
+                  10243b14    00000004     TI4IuijNcfY (.rodata.str1.2547534719280722321.1)
+                  10243b18    00000004     TI4IuijNcfY (.rodata.str1.7625746389422823826.1)
+                  10243b1c    00000004     freertos.awr294x.r5f.ti-arm-clang.release.lib : tasks.obj (.rodata.uxTopUsedPriority)
+
+.bss       0    10243b40    0001b780     UNINITIALIZED
+                  10243b40    00004000     libcli_awr2943.aer5f : cli.oer5f (.bss.gCliTskStack)
+                  10247b40    00004000     (.common:gAppMainTskStack)
+                  1024bb40    00004000     (.common:gDpmTskStack)
+                  1024fb40    00004000     (.common:gUartTskStack)
+                  10253b40    00003000     (.common:gMmwCtrlTskStack)
+                  10256b40    00002000     TI4IuijNcfY (.bss.gDpmHeapMem)
+                  10258b40    00001008     freertos.awr294x.r5f.ti-arm-clang.release.lib : HwiP_armv7r_vim.obj (.bss.gHwiCtrl)
+                  10259b48    00001000     TI4IuijNcfY (.bss.uxIdleTaskStack)
+                  1025ab48    00000e40     (.common:gMmwMssMCB)
+                  1025b988    00000018     drivers.awr294x.r5f.ti-arm-clang.release.lib : mailbox.obj (.bss.gMailbox_ctrl)
+                  1025b9a0    00000010     (.common:gFlashObject_GD25B64C)
+                  1025b9b0    00000008     libsysbm.a : hostopen.c.obj (.bss.parmbuf)
+                  1025b9b8    00000004     TI4IuijNcfY (.bss.gADCBufObjects)
+                  1025b9bc    00000004     TI4IuijNcfY (.bss.gdummy)
+                  1025b9c0    00000800     TI4IuijNcfY (.bss.gBpmHeapMem)
+                  1025c1c0    00000730     drivers.awr294x.r5f.ti-arm-clang.release.lib : ipc_rpmsg.obj (.bss.gIpcRpmsgCtrl)
+                  1025c8f0    00000568     TI4IuijNcfY (.bss.gUartObjects)
+                  1025ce58    000004e4     (.common:gCalibDataStorage)
+                  1025d33c    00000400     TI4IuijNcfY (.bss.uxTimerTaskStack)
+                  1025d73c    000003c8     TI4IuijNcfY (.bss.gEdmaObjects)
+                  1025db04    00000004     TI4IuijNcfY (.bss.sys_free)
+                  1025db08    00000380     libmmwave_awr2943.aer5f : mmwave.oer5f (.bss.gMMWave_MCB)
+                  1025de88    0000029c     libcli_awr2943.aer5f : cli.oer5f (.bss.gCLI)
+                  1025e124    00000280     TI4IuijNcfY (.bss.pxReadyTasksLists)
+                  1025e3a4    00000234     TI4IuijNcfY (.bss.gQspiObjects)
+                  1025e5d8    00000120     libsysbm.a : trgmsg.c.obj (.bss:_CIOBUF_)
+                  1025e6f8    00000004     (.common:gFlashHandle)
+                  1025e6fc    00000004     --HOLE--
+                  1025e700    00000100     mmw_lvds_stream.oer5f (.bss.gHwDataHeader)
+                  1025e800    00000100     TI4IuijNcfY (.bss.prvCheckForValidListAndQueue.ucStaticTimerQueueStorage)
+                  1025e900    00000100     freertos.awr294x.r5f.ti-arm-clang.release.lib : queue.obj (.bss.xQueueRegistry)
+                  1025ea00    000000d4     libcli_awr2943.aer5f : cli_mmwave.oer5f (.bss.gCLIMMWaveControlCfg)
+                  1025ead4    000000c8     TI4IuijNcfY (.bss.gEsmObjects)
+                  1025eb9c    000000a0     libc.a : defs.c.obj (.bss.__TI_tmpnams)
+                  1025ec3c    00000004     --HOLE--
+                  1025ec40    000000a0     freertos.awr294x.r5f.ti-arm-clang.release.lib : TaskP_freertos.obj (.bss.gTaskP_ctrl)
+                  1025ece0    00000098     TI4IuijNcfY (.bss.gDebugLogLockObj)
+                  1025ed78    00000090     libhsiheader_awr2943.aer5f : hsiheader.oer5f (.bss.gHSIHeaderMCB)
+                  1025ee08    0000008c     libcli_awr2943.aer5f : cli.oer5f (.bss.gCliTaskObj)
+                  1025ee94    0000008c     TI4IuijNcfY (.bss.xIdleTaskTCB)
+                  1025ef20    0000008c     TI4IuijNcfY (.bss.xTimerTaskTCB)
+                  1025efac    00000080     TI4IuijNcfY (.bss.gBpmHeapObj)
+                  1025f02c    00000004     --HOLE--
+                  1025f030    00000080     ti_drivers_config.oer5f (.bss.gCbuffObject)
+                  1025f0b0    00000080     TI4IuijNcfY (.bss.gDpmHeapObj)
+                  1025f130    00000080     TI4IuijNcfY (.bss.gMmwHeapObj)
+                  1025f1b0    00000050     TI4IuijNcfY (.bss.prvCheckForValidListAndQueue.xStaticTimerQueue)
+                  1025f200    00000050     (.common:gRovDummyQueue)
+                  1025f250    00000044     libcli_awr2943.aer5f : cli_mmwave.oer5f (.bss.gCLIMMWaveOpenCfg)
+                  1025f294    0000002c     --HOLE--
+
+.sysmem    0    1025f2c0    00001000     UNINITIALIZED
+                  1025f2c0    00000010     libc.a : memory.c.obj (.sysmem)
+                  1025f2d0    00000ff0     --HOLE--
+
+.stack     0    102602c0    00002000     UNINITIALIZED
+                  102602c0    00000004     freertos.awr294x.r5f.ti-arm-clang.release.lib : boot_armv7r_asm.obj (.stack)
+                  102602c4    00001ffc     --HOLE--
+
+.data      0    102622c0    00008d80     
+                  102622c0    00003000     libmmwave_awr2943.aer5f : mmwave_link_common.oer5f (.data.advChirpLUTBuf)
+                  102652c0    00002afc     drivers.awr294x.r5f.ti-arm-clang.release.lib : cbuff.obj (.data.gCbuffSession)
+                  10267dbc    00000004     libc.a : aeabi_portable.c.obj (.data.__aeabi_errno)
+                  10267dc0    00002000     TI4IuijNcfY (.data.gMmwHeapMem)
+                  10269dc0    000001ec     mmwavelink_r5f.lib : rl_driver.oer5f (.data.rl_driverData)
+                  10269fac    000001c0     drivers.awr294x.r5f.ti-arm-clang.release.lib : ipc_notify_v1_cfg.obj (.data.gIpcNotifyMailboxConfig)
+                  1026a16c    00000100     TI4IuijNcfY (.data.gEdmaAttrs)
+                  1026a26c    00000100     mmwavelink_r5f.lib : rl_driver.oer5f (.data.rl_rxMsg)
+                  1026a36c    00000100                        : rl_driver.oer5f (.data.rl_txMsg)
+                  1026a46c    000000fc     drivers.awr294x.r5f.ti-arm-clang.release.lib : ipc_notify_v1.obj (.data.gIpcNotifyCtrl)
+                  1026a568    000000f0     libc.a : defs.c.obj (.data._ftable)
+                  1026a658    000000c8     TI4IuijNcfY (.data.gPinMuxMainDomainCfg)
+                  1026a720    000000c0     drivers.awr294x.r5f.ti-arm-clang.release.lib : mailbox_cfg.obj (.data.gMailboxRemoteCoreObj_c66ss0_to_rss_r4)
+                  1026a7e0    000000c0                                                  : mailbox_cfg.obj (.data.gMailboxRemoteCoreObj_r5ss0_0_to_rss_r4)
+                  1026a8a0    0000009c     TI4IuijNcfY (.data.gQspiDrvObj)
+                  1026a93c    0000009c     TI4IuijNcfY (.data.gUartDrvObj)
+                  1026a9d8    00000084     ti_board_open_close.oer5f (.data.gFlashDevCfg_GD25B64C)
+                  1026aa5c    00000080     ti_drivers_config.oer5f (.data.gCbuffAttrs)
+                  1026aadc    0000007c     TI4IuijNcfY (.data..L_MergedGlobals)
+                  1026ab58    00000078     TI4IuijNcfY (.data..L_MergedGlobals.984)
+                  1026abd0    00000078     libsysbm.a : host_device.c.obj (.data._device)
+                  1026ac48    00000070     TI4IuijNcfY (.data..L_MergedGlobals.982)
+                  1026acb8    00000008     ti_drivers_config.oer5f (.data.gQspiConfig)
+                  1026acc0    00000070     TI4IuijNcfY (.data..L_MergedGlobals.983)
+                  1026ad30    00000070     drivers.awr294x.r5f.ti-arm-clang.release.lib : ipc_notify_v1_cfg.obj (.data.gIpcNotifyInterruptConfig_r5fss0_0)
+                  1026ada0    00000070     ti_drivers_open_close.oer5f (.data.gUartParams)
+                  1026ae10    0000006c     TI4IuijNcfY (.data..L_MergedGlobals.980)
+                  1026ae7c    00000060     TI4IuijNcfY (.data..L_MergedGlobals.981)
+                  1026aedc    00000004     libdpm_awr2943.aer5f : dpm_mailbox.oer5f (.data.gDPM)
+                  1026aee0    00000050     TI4IuijNcfY (.data..L_MergedGlobals.985)
+                  1026af30    00000050     libsysbm.a : host_device.c.obj (.data._stream)
+                  1026af80    00000038     TI4IuijNcfY (.data.gQspiAttrs)
+                  1026afb8    0000001c     board.awr294x.r5f.ti-arm-clang.release.lib : flash_nor_qspi.obj (.data.gFlashNorQspiFxns)
+                  1026afd4    00000018     TI4IuijNcfY (.data.gEsmAttrs)
+                  1026afec    00000010     TI4IuijNcfY (.data.gADCBufAttrs)
+                  1026affc    00000010     board.awr294x.r5f.ti-arm-clang.release.lib : flash_nor_qspi.obj (.data.gFlashToSpiProtocolMap)
+                  1026b00c    00000004     ti_board_open_close.oer5f (.data.gFlashConfigNum)
+                  1026b010    00000004     TI4IuijNcfY (.data.last_end)
+                  1026b014    00000004     libmmwave_awr2943.aer5f : mmwave_link_mailbox.oer5f (.data.mailbox_dummy_handle)
+                  1026b018    00000004     TI4IuijNcfY (.data.next)
+                  1026b01c    00000004     TI4IuijNcfY (.data.prvSampleTimeNow.xLastTime)
+                  1026b020    00000004     mss_main.oer5f (.data.transmitStartTime)
+                  1026b024    00000004     freertos.awr294x.r5f.ti-arm-clang.release.lib : port.obj (.data.ulPortTaskHasFPUContext)
+                  1026b028    00000001     TI4IuijNcfY (.data.isHeapMemAllocated)
+                  1026b029    00000001     TI4IuijNcfY (.data.isMapAvailable)
+                  1026b02a    00000002     --HOLE-- [fill = 0]
+                  1026b02c    00000001     TI4IuijNcfY (.data.memory_is_initialized)
+                  1026b02d    00000013     --HOLE-- [fill = 0]
+
+.text.hwi 
+*          0    1026b040    00000828     
+                  1026b040    000002aa     freertos.awr294x.r5f.ti-arm-clang.release.lib : HwiP_armv7r_handlers_freertos.obj (.text.hwi)
+                  1026b2ea    00000002     --HOLE-- [fill = 0]
+                  1026b2ec    000001ec                                                   : portASM.obj (.text.hwi)
+                  1026b4d8    00000168     TI4IuijNcfY (.text.hwi)
+                  1026b640    00000104     freertos.awr294x.r5f.ti-arm-clang.release.lib : HwiP_armv7r_handlers_freertos_asm.obj (.text.hwi)
+                  1026b744    000000b2                                                   : HwiP_armv7r_vim.obj (.text.hwi)
+                  1026b7f6    00000002     --HOLE-- [fill = 0]
+                  1026b7f8    00000070                                                   : HwiP_armv7r_asm.obj (.text.hwi)
+
+.text.cache 
+*          0    1026b868    00000428     
+                  1026b868    00000340     freertos.awr294x.r5f.ti-arm-clang.release.lib : CacheP_armv7r_asm.obj (.text.cache)
+                  1026bba8    000000ca                                                   : CacheP_armv7r.obj (.text.cache)
+                  1026bc72    00000002     --HOLE-- [fill = 0]
+                  1026bc74    00000008                                                   : CacheP_armv7r_asm.obj (.tramp.CacheP_invL1d.1)
+                  1026bc7c    00000008                                                   : CacheP_armv7r_asm.obj (.tramp.CacheP_enableL1p.1)
+                  1026bc84    00000008                                                   : HwiP_armv7r_asm.obj (.tramp.HwiP_restore.2)
+                  1026bc8c    00000004     --HOLE-- [fill = 0]
+
+.text.mpu 
+*          0    1026bc90    000000f0     
+                  1026bc90    00000078     freertos.awr294x.r5f.ti-arm-clang.release.lib : MpuP_armv7r_asm.obj (.text.mpu)
+                  1026bd08    0000006a                                                   : MpuP_armv7r.obj (.text.mpu)
+                  1026bd72    00000002     --HOLE-- [fill = 0]
+                  1026bd74    00000008                                                   : HwiP_armv7r_asm.obj (.tramp.HwiP_restore.3)
+                  1026bd7c    00000004     --HOLE-- [fill = 0]
+
+.text.boot 
+*          0    1026bd80    000001f8     
+                  1026bd80    000000fc     freertos.awr294x.r5f.ti-arm-clang.release.lib : boot_armv7r_asm.obj (.text.boot)
+                  1026be7c    000000cc     ti_dpl_config.oer5f (.text.boot)
+                  1026bf48    00000018     freertos.awr294x.r5f.ti-arm-clang.release.lib : DebugP_log.obj (.text.boot)
+                  1026bf60    00000018                                                   : boot_armv7r.obj (.text.boot)
+
+.text:abort 
+*          0    1026bf78    00000008     
+                  1026bf78    00000008     libc.a : exit.c.obj (.text:abort)
+
+.irqstack 
+*          0    1026bf80    00000100     UNINITIALIZED
+                  1026bf80    00000100     --HOLE--
+
+.fiqstack 
+*          0    1026c080    00000100     UNINITIALIZED
+                  1026c080    00000100     --HOLE--
+
+.svcstack 
+*          0    1026c180    00001000     UNINITIALIZED
+                  1026c180    00001000     --HOLE--
+
+.abortstack 
+*          0    1026d180    00000100     UNINITIALIZED
+                  1026d180    00000100     --HOLE--
+
+.undefinedstack 
+*          0    1026d280    00000100     UNINITIALIZED
+                  1026d280    00000100     --HOLE--
+
+.bss.ipc_vring_mem 
+*          0    c5000200    00000980     NOLOAD SECTION
+                  c5000200    00000980     ti_drivers_config.oer5f (.bss.ipc_vring_mem)
+
+MODULE SUMMARY
+
+       Module                                  code     ro data   rw data
+       ------                                  ----     -------   -------
+    ./
+       TI4IuijNcfY                             48084    31181     96543  
+    +--+---------------------------------------+--------+---------+---------+
+       Total:                                  48084    31181     96543  
+                                                                         
+    obj_awr2943/
+       mss_main.oer5f                          13816    0         4      
+       mmw_lvds_stream.oer5f                   2924     0         256    
+       mmwdemo_adcconfig.oer5f                 186      0         0      
+    +--+---------------------------------------+--------+---------+---------+
+       Total:                                  16926    0         260    
+                                                                         
+    obj_awr2943/mssgenerated/
+       ti_drivers_config.oer5f                 0        0         2696   
+       ti_dpl_config.oer5f                     956      148       0      
+       ti_board_open_close.oer5f               104      0         136    
+       ti_drivers_open_close.oer5f             0        40        112    
+       ti_power_clock_config.oer5f             0        48        0      
+    +--+---------------------------------------+--------+---------+---------+
+       Total:                                  1060     236       2944   
+                                                                         
+    /nightlybuilds/mmwave_app_sdk/scripts/jenkins/../../ti/control/dpm/lib/libdpm_awr2943.aer5f
+       dpm_core.oer5f                          92       0         0      
+       dpm_msg.oer5f                           0        36        0      
+       dpm_listlib.oer5f                       24       0         0      
+       dpm_mailbox.oer5f                       0        0         4      
+    +--+---------------------------------------+--------+---------+---------+
+       Total:                                  116      36        4      
+                                                                         
+    /nightlybuilds/mmwave_app_sdk/scripts/jenkins/../../ti/control/mmwave/lib/libmmwave_awr2943.aer5f
+       mmwave_link_common.oer5f                1462     0         12288  
+       mmwave.oer5f                            0        0         896    
+       mmwave_fullcfg.oer5f                    824      0         0      
+       mmwave_osal.oer5f                       206      0         0      
+       mmwave_listlib.oer5f                    62       0         0      
+       mmwave_link_mailbox.oer5f               0        0         4      
+    +--+---------------------------------------+--------+---------+---------+
+       Total:                                  2554     0         13188  
+                                                                         
+    /nightlybuilds/mmwave_app_sdk/scripts/jenkins/../../ti/utils/cli/lib/libcli_awr2943.aer5f
+       cli.oer5f                               72       0         17192  
+       cli_mmwave.oer5f                        0        228       280    
+    +--+---------------------------------------+--------+---------+---------+
+       Total:                                  72       228       17472  
+                                                                         
+    /nightlybuilds/mmwave_app_sdk/scripts/jenkins/../../ti/utils/hsiheader/lib/libhsiheader_awr2943.aer5f
+       hsiheader.oer5f                         96       0         144    
+    +--+---------------------------------------+--------+---------+---------+
+       Total:                                  96       0         144    
+                                                                         
+    /nightlybuilds/mmwave_app_sdk/scripts/jenkins/../../ti/utils/mathutils/lib/libmathutils.aer5f
+       mathutils.oer5f                         44       0         0      
+    +--+---------------------------------------+--------+---------+---------+
+       Total:                                  44       0         0      
+                                                                         
+    /opt/ti/ccs2010/ccs/tools/compiler/ti-cgt-armllvm_4.0.2.LTS/lib/armv7r-ti-none-eabihf/c/libc.a
+       strtod.c.obj                            1240     0         0      
+       strcmp32.S.obj                          924      0         0      
+       memory.c.obj                            848      0         0      
+       _printfi.c.obj                          720      0         0      
+       s_exp2.c.obj                            488      0         0      
+       defs.c.obj                              0        0         400    
+       memcpy32.S.obj                          384      0         0      
+       fputs.c.obj                             380      0         0      
+       s_floor.c.obj                           340      0         0      
+       _io_perm.c.obj                          316      0         0      
+       s_scalbn.c.obj                          316      0         0      
+       getdevice.c.obj                         260      0         0      
+       aeabi_ctype.S.obj                       0        257       0      
+       s_floorf.c.obj                          200      0         0      
+       fputc.c.obj                             188      0         0      
+       s_ceilf.c.obj                           176      0         0      
+       memset32.S.obj                          160      0         0      
+       _ltoa.c.obj                             152      0         0      
+       fflush.c.obj                            136      0         0      
+       s_frexp.c.obj                           124      0         0      
+       atoi.c.obj                              108      0         0      
+       fopen.c.obj                             88       0         0      
+       sprintf.c.obj                           88       0         0      
+       autoinit.c.obj                          84       0         0      
+       exit.c.obj                              52       0         0      
+       rand.c.obj                              40       0         0      
+       wcslen.c.obj                            28       0         0      
+       aeabi_portable.c.obj                    0        0         4      
+    +--+---------------------------------------+--------+---------+---------+
+       Total:                                  7840     257       404    
+                                                                         
+    /opt/ti/ccs2010/ccs/tools/compiler/ti-cgt-armllvm_4.0.2.LTS/lib/armv7r-ti-none-eabihf/c/libsysbm.a
+       trgmsg.c.obj                            176      0         288    
+       host_device.c.obj                       0        0         200    
+       hostopen.c.obj                          120      0         8      
+       hostrename.c.obj                        124      0         0      
+       hostlseek.c.obj                         104      0         0      
+       hostread.c.obj                          88       0         0      
+       hostwrite.c.obj                         88       0         0      
+       hostunlink.c.obj                        80       0         0      
+       hostclose.c.obj                         56       0         0      
+       write.c.obj                             52       0         0      
+       hostexit.c.obj                          8        0         0      
+    +--+---------------------------------------+--------+---------+---------+
+       Total:                                  896      0         496    
+                                                                         
+    /opt/ti/ccs2010/ccs/tools/compiler/ti-cgt-armllvm_4.0.2.LTS/lib/armv7r-ti-none-eabihf/libclang_rt.builtins.a
+       udivsi3.S.obj                           464      0         0      
+       udivmoddi4.S.obj                        280      0         0      
+       divsi3.S.obj                            44       0         0      
+       aeabi_uldivmod.S.obj                    36       0         0      
+       aeabi_memset.S.obj                      28       0         0      
+       aeabi_memcpy.S.obj                      12       0         0      
+       aeabi_div0.c.obj                        8        0         0      
+    +--+---------------------------------------+--------+---------+---------+
+       Total:                                  872      0         0      
+                                                                         
+    /opt/ti/mcu_plus_sdk_awr294x_10_02_00_04/source/board/lib/board.awr294x.r5f.ti-arm-clang.release.lib
+       flash_nor_qspi.obj                      2472     103       44     
+       flash.obj                               252      0         0      
+    +--+---------------------------------------+--------+---------+---------+
+       Total:                                  2724     103       44     
+                                                                         
+    /opt/ti/mcu_plus_sdk_awr294x_10_02_00_04/source/drivers/lib/drivers.awr294x.r5f.ti-arm-clang.release.lib
+       cbuff.obj                               652      72        11004  
+       qspi.obj                                3208     0         0      
+       ipc_rpmsg.obj                           776      0         1840   
+       uart_sci.obj                            2240     0         0      
+       cbuff_transfer.obj                      1860     0         0      
+       ipc_notify_v1.obj                       916      0         252    
+       adcbuf.obj                              1164     0         0      
+       edma.obj                                1130     0         0      
+       cbuff_lvds.obj                          1066     0         0      
+       ipc_notify_v1_cfg.obj                   24       16        560    
+       mailbox_cfg.obj                         0        0         384    
+       ipc_rpmsg_vring.obj                     380      0         0      
+       soc.obj                                 328      0         0      
+       mailbox.obj                             40       0         24     
+       crc.obj                                 46       0         0      
+    +--+---------------------------------------+--------+---------+---------+
+       Total:                                  13830    88        14064  
+                                                                         
+    /opt/ti/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/freertos/lib/freertos.awr294x.r5f.ti-arm-clang.release.lib
+       HwiP_armv7r_vim.obj                     178      0         4104   
+       tasks.obj                               2548     4         0      
+       DebugP_freertos.obj                     1228     0         0      
+       queue.obj                               780      0         256    
+       SemaphoreP_freertos.obj                 992      0         0      
+       CacheP_armv7r_asm.obj                   848      0         0      
+       HwiP_armv7r_handlers_freertos.obj       682      0         0      
+       portASM.obj                             492      0         0      
+       port.obj                                476      0         4      
+       HeapP_freertos.obj                      440      0         0      
+       HwiP_armv7r_handlers_freertos_asm.obj   260      0         0      
+       boot_armv7r_asm.obj                     252      0         0      
+       CacheP_armv7r.obj                       202      8         0      
+       TaskP_freertos.obj                      0        0         160    
+       ClockP_freertos.obj                     152      0         0      
+       HwiP_armv7r_asm.obj                     144      0         0      
+       MpuP_armv7r_asm.obj                     120      0         0      
+       DebugP_log.obj                          116      0         0      
+       MpuP_armv7r.obj                         106      0         0      
+       list.obj                                70       0         0      
+       HwiP_armv7r_vectors_freertos_asm.obj    64       0         0      
+       PmuP_armv7r_asm.obj                     56       0         0      
+       PmuP_armv7r.obj                         36       0         0      
+       heap_3.obj                              32       0         0      
+       boot_armv7r.obj                         24       0         0      
+       CpuId_armv7r_asm.obj                    12       0         0      
+    +--+---------------------------------------+--------+---------+---------+
+       Total:                                  10310    12        4524   
+                                                                         
+    /opt/ti/mmwave_dfp_02_04_18_01/ti/control/mmwavelink/lib/mmwavelink_r5f.lib
+       rl_driver.oer5f                         6452     16        1004   
+       rl_sensor.oer5f                         4318     0         0      
+       rl_device.oer5f                         1140     0         0      
+       rl_controller.oer5f                     206      0         0      
+       rl_monitoring.oer5f                     168      0         0      
+    +--+---------------------------------------+--------+---------+---------+
+       Total:                                  12284    16        1004   
+                                                                         
+       Heap:                                   0        0         4096   
+       Stack:                                  0        0         8192   
+    +--+---------------------------------------+--------+---------+---------+
+       Grand Total:                            117708   32157     163379 
+
+VENEERS
+
+callee name               veneer name
+   callee addr  veneer addr  call addr  call info
+--------------  -----------  ---------  ----------------
+CacheP_invL1d             $Ven$TA$L$PI$$CacheP_invL1d
+   1026b8d8     1026bc74     1026bc6e   freertos.awr294x.r5f.ti-arm-clang.release.lib : CacheP_armv7r.obj (.text.cache)
+CacheP_enableL1p          $Ven$TA$L$PI$$CacheP_enableL1p
+   1026b8c0     1026bc7c     1026bc48   freertos.awr294x.r5f.ti-arm-clang.release.lib : CacheP_armv7r.obj (.text.cache)
+HwiP_restore              $Ven$TA$L$PI$$HwiP_restore
+   1026b838     1026bc84     1026bc28   freertos.awr294x.r5f.ti-arm-clang.release.lib : CacheP_armv7r.obj (.text.cache)
+HwiP_restore              $Ven$TA$L$PI$$HwiP_restore
+   1026b838     1026bd74     1026bd34   freertos.awr294x.r5f.ti-arm-clang.release.lib : MpuP_armv7r.obj (.text.mpu)
+                             1026bd6e                                                 : MpuP_armv7r.obj (.text.mpu)
+putchar                   $Ven$TA$L$PI$$putchar
+   1023bce4     10232758     10231b8c   ti_dpl_config.oer5f (.text.putchar_)
+strtod                    $Ven$TA$L$PI$$strtod
+   10227af8     10233498     1022e45c   TI4IuijNcfY (.text.atof.933)
+                             10231a18   TI4IuijNcfY (.text.atof)
+__aeabi_memcpy            $Ven$TA$L$PI$$__aeabi_memcpy
+   1022c6ac     10238ff8     1023b5e6   TI4IuijNcfY (.text.prvCopyDataFromQueue)
+PmuP_enableCounters       $Ven$TA$L$PI$$PmuP_enableCounters
+   1023af98     1023a7e8     1023b5c4   freertos.awr294x.r5f.ti-arm-clang.release.lib : PmuP_armv7r.obj (.text.pmu)
+HwiP_restore              $Ven$TA$L$PI$$HwiP_restore
+   1026b838     1023a828     10232fba   freertos.awr294x.r5f.ti-arm-clang.release.lib : SemaphoreP_freertos.obj (.text.SemaphoreP_post)
+                             10239cdc   TI4IuijNcfY (.text.IpcNotify_registerClient)
+                             10239f08   TI4IuijNcfY (.text.MMWave_unmaskHostIRQ)
+                             1023a736   TI4IuijNcfY (.text.RPMessage_freeEndPtMsg)
+                             1023b4ec   TI4IuijNcfY (.text.DPM_pipeQueueFree)
+HwiP_enable               $Ven$TA$L$PI$$HwiP_enable
+   1026b818     1023a868     1022aa74   ti_dpl_config.oer5f (.text.Dpl_init)
+printf                    $Ven$TA$L$PI$$printf
+   1023954c     1023a8a8     102205dc   TI4IuijNcfY (.text.MmwDemo_initTask)
+
+[11 trampolines]
+[17 trampoline calls]
+
+
+GLOBAL SYMBOLS: SORTED ALPHABETICALLY BY Name 
+
+address   name                               
+-------   ----                               
+1023ba0d  Board_flashClose                   
+10239ac1  Board_flashOpen                    
+1022f068  C$$EXIT                            
+10239860  C$$IO$$                            
+1023b784  CSL_armR5ReadMpidrReg              
+1026bb78  CacheP_configForceWrThru           
+1026bbf3  CacheP_disable                     
+1026b868  CacheP_disableL1d                  
+1026b890  CacheP_disableL1p                  
+1026bc2d  CacheP_enable                      
+1026b8a8  CacheP_enableL1d                   
+1026b8c0  CacheP_enableL1p                   
+1026bb6c  CacheP_getCacheLevelInfo           
+1026bb34  CacheP_getEnabled                  
+1026bba9  CacheP_init                        
+1026bc4d  CacheP_inv                         
+1026b8d8  CacheP_invL1d                      
+1026b94c  CacheP_invL1dAll                   
+1026b910  CacheP_invL1p                      
+1026b954  CacheP_invL1pAll                   
+1026bb98  CacheP_setDLFO                     
+1026b95c  CacheP_wb                          
+1026b9d4  CacheP_wbAll                       
+1026b998  CacheP_wbInv                       
+1026ba7c  CacheP_wbInvAll                    
+1026ba94  CacheP_wbInvAllAsm                 
+1023af88  CycleCounterP_getCount32           
+1022a801  Dpl_init                           
+10239063  Flash_close                        
+1023bbfd  Flash_eraseBlk                     
+10238ecb  Flash_offsetToBlkPage              
+1023a4d5  Flash_open                         
+1023b84d  Flash_read                         
+1023b86b  Flash_write                        
+1026ab14  FreeRTOS_errno                     
+1026b708  GET_ADFSR                          
+1026b720  GET_AIFSR                          
+1026b710  GET_DFAR                           
+1026b700  GET_DFSR                           
+1026b728  GET_IFAR                           
+1026b718  GET_IFSR                           
+1026b730  GET_SPSR                           
+1026b640  HwiP_data_abort_handler            
+1026b25f  HwiP_data_abort_handler_c          
+1026b7f8  HwiP_disable                       
+1026b808  HwiP_disableFIQ                    
+1026b850  HwiP_disableVIC                    
+1026b818  HwiP_enable                        
+1026b828  HwiP_enableFIQ                     
+1026b840  HwiP_enableVIC                     
+1026b0d5  HwiP_fiq_handler                   
+1026b860  HwiP_getCPSR                       
+1026b394  HwiP_irq_handler                   
+1026b041  HwiP_irq_handler_c                 
+1026b684  HwiP_prefetch_abort_handler        
+1026b1db  HwiP_prefetch_abort_handler_c      
+1026b185  HwiP_reserved_handler              
+1026b838  HwiP_restore                       
+1026b324  HwiP_svc_handler                   
+1026b6d0  HwiP_undefined_handler             
+1026b1ab  HwiP_undefined_handler_c           
+1026b2db  HwiP_user_data_abort_handler_c     
+1026b24f  HwiP_user_prefetch_abort_handler_c 
+1026b1c7  HwiP_user_undefined_handler_c      
+10236b29  MMWDemo_configSSC                  
+10238be5  MmwDemo_CfgUpdate                  
+102217f9  MmwDemo_configSensor               
+1023ba85  MmwDemo_getTemperatureReport       
+10225541  MmwDemo_handleObjectDetResult      
+1023970d  MmwDemo_isAllCfgInNonPendingState  
+10238a99  MmwDemo_isAllCfgInPendingState     
+1023a45d  MmwDemo_mssSECCallBack             
+10227fd1  MmwDemo_openSensor                 
+1023a661  MmwDemo_resetStaticCfgPendingState 
+1022ce39  MmwDemo_startSensor                
+1022e889  MmwDemo_stopSensor                 
+1026bc90  MpuP_disableAsm                    
+1026bca8  MpuP_disableBRAsm                  
+1026bcb8  MpuP_enableAsm                     
+1026bcd0  MpuP_enableBRAsm                   
+1026bce0  MpuP_isEnableAsm                   
+1026bcf4  MpuP_setRegionAsm                  
+1023afb0  PmuP_clearOverflowStatus           
+1023afa0  PmuP_disableCounters               
+1023af98  PmuP_enableCounters                
+1023afa8  PmuP_getOverflowStatus             
+1023af90  PmuP_setup                         
+1022aaed  QSPI_close                         
+1023b765  QSPI_getHandle                     
+10239f65  QSPI_init                          
+1022a199  QSPI_open                          
+10231cf7  QSPI_readCmd                       
+1023ba9d  QSPI_readCmdParams_init            
+1022c175  QSPI_readMemMapMode                
+1023bc75  QSPI_setAddressByteCount           
+1023bc85  QSPI_setDummyBitCount              
+1023ae29  QSPI_setPreScaler                  
+1023bc95  QSPI_setReadCmd                    
+1023bca5  QSPI_setRxLines                    
+1023bcb5  QSPI_setWriteCmd                   
+1023bbd3  QSPI_transaction_init              
+10234ad1  QSPI_writeCmd                      
+1023bab5  QSPI_writeCmdParams_init           
+1023a6d1  QSPI_writeConfigMode               
+1023a169  SemaphoreP_constructBinary         
+10237015  SemaphoreP_constructCounting       
+1023a0d9  SemaphoreP_constructMutex          
+10239495  SemaphoreP_destruct                
+10232d85  SemaphoreP_pend                    
+10232eb5  SemaphoreP_post                    
+1025e5d8  _CIOBUF_                           
+102394f1  _DebugP_assert                     
+1026bf49  _DebugP_assertNoLog                
+1023bcc5  _MmwDemo_debugAssert               
+1026d280  __ABORT_STACK_END                  
+00000100  __ABORT_STACK_SIZE                 
+1026d180  __ABORT_STACK_START                
+1025f2c0  __BSS_END                          
+10243b40  __BSS_START                        
+1025e5d8  __CIOBUF_                          
+1026c180  __FIQ_STACK_END                    
+00000100  __FIQ_STACK_SIZE                   
+1026c080  __FIQ_STACK_START                  
+1026c080  __IRQ_STACK_END                    
+00000100  __IRQ_STACK_SIZE                   
+1026bf80  __IRQ_STACK_START                  
+102622c0  __STACK_END                        
+00002000  __STACK_SIZE                       
+1026d180  __SVC_STACK_END                    
+00001000  __SVC_STACK_SIZE                   
+1026c180  __SVC_STACK_START                  
+00001000  __SYSMEM_SIZE                      
+00000000  __TI_ATRegion0_region_sz           
+00000000  __TI_ATRegion0_src_addr            
+00000000  __TI_ATRegion0_trg_addr            
+00000000  __TI_ATRegion1_region_sz           
+00000000  __TI_ATRegion1_src_addr            
+00000000  __TI_ATRegion1_trg_addr            
+00000000  __TI_ATRegion2_region_sz           
+00000000  __TI_ATRegion2_src_addr            
+00000000  __TI_ATRegion2_trg_addr            
+UNDEFED   __TI_CINIT_Base                    
+UNDEFED   __TI_CINIT_Limit                   
+UNDEFED   __TI_Handler_Table_Base            
+UNDEFED   __TI_Handler_Table_Limit           
+10239a6c  __TI_auto_init_nobinit_nopinit     
+1026aaf4  __TI_cleanup_ptr                   
+1026aaf0  __TI_dtors_ptr                     
+ffffffff  __TI_pprof_out_hndl                
+1022b678  __TI_printfi                       
+ffffffff  __TI_prof_data_size                
+ffffffff  __TI_prof_data_start               
+102397bc  __TI_readmsg                       
+00000000  __TI_static_base__                 
+10239814  __TI_writemsg                      
+1026d380  __UNDEFINED_STACK_END              
+00000100  __UNDEFINED_STACK_SIZE             
+1026d280  __UNDEFINED_STACK_START            
+1023d060  __aeabi_ctype_table_               
+1023d060  __aeabi_ctype_table_C              
+1023b190  __aeabi_idiv                       
+1022bc04  __aeabi_idiv0                      
+1022c414  __aeabi_ldiv0                      
+1023b294  __aeabi_memclr                     
+1023b294  __aeabi_memclr4                    
+1023b294  __aeabi_memclr8                    
+1022c6ac  __aeabi_memcpy                     
+1022c6ac  __aeabi_memcpy4                    
+1022c6ac  __aeabi_memcpy8                    
+1023bcd4  __aeabi_memset                     
+1023bcd4  __aeabi_memset4                    
+1023bcd4  __aeabi_memset8                    
+1022f9c0  __aeabi_uidiv                      
+1023b55c  __aeabi_uldivmod                   
+ffffffff  __binit__                          
+1023b190  __divsi3                           
+1026be7d  __mpu_init                         
+102602c0  __stack                            
+1023390c  __udivmoddi4                       
+1022f9c0  __udivsi3                          
+1026bda4  _c_int00                           
+1026bd80  _c_int00_sbl                       
+UNDEFED   _system_post_cinit                 
+1026bf61  _system_pre_init                   
+00000000  _vectors                           
+1026bf78  abort                              
+ffffffff  binit                              
+10235dfc  ceilf                              
+1023766d  eTaskGetState                      
+1023b1e8  exit                               
+1022ee80  exp2                               
+1022ee80  exp2l                              
+10231e60  floor                              
+10235304  floorf                             
+10231e60  floorl                             
+102383a8  frexp                              
+102383a8  frexpl                             
+10247b40  gAppMainTskStack                   
+1023d520  gCacheConfig                       
+10243b00  gCacheL1dCacheLineSize             
+10243b04  gCacheL1pCacheLineSize             
+1025ce58  gCalibDataStorage                  
+1026ae90  gClockConfig                       
+1026ab50  gDebugLogZone                      
+1024bb40  gDpmTskStack                       
+1026aea8  gFlashAttrs_GD25B64C               
+1026ae7c  gFlashConfig                       
+1026b00c  gFlashConfigNum                    
+1026a9d8  gFlashDevCfg_GD25B64C              
+1025e6f8  gFlashHandle                       
+1026afb8  gFlashNorQspiFxns                  
+1025b9a0  gFlashObject_GD25B64C              
+1026ae30  gFlashParams                       
+1026affc  gFlashToSpiProtocolMap             
+1026ae14  gHwiConfig                         
+10253b40  gMmwCtrlTskStack                   
+1025ab48  gMmwMssMCB                         
+1023d528  gMpuConfig                         
+1023d534  gMpuRegionConfig                   
+1025f200  gRovDummyQueue                     
+1024fb40  gUartTskStack                      
+10232b18  ldexp                              
+10232b18  ldexpl                             
+10223b19  main                               
+10230a28  memcpy                             
+10236d08  memset                             
+1023ae91  mmwDemo_mssUartDataExportTask      
+10231b8d  putchar_                           
+1023bb15  pvTaskIncrementMutexHeldCount      
+1026ab10  pxCurrentTCB                       
+10237a29  pxPortInitialiseStack              
+1023bc21  rlAppendDummy                      
+10239cf1  rlAppendSubBlock                   
+1022f611  rlDevSetFillLUTBuff                
+10239001  rlDeviceAdvFrameConfigApply        
+10239071  rlDeviceFrameConfigApply           
+102359c1  rlDeviceGetVersion                 
+102334a1  rlDevicePowerOn                    
+1022e241  rlDriverCmdInvoke                  
+10227031  rlDriverCmdSendRetry               
+102360c1  rlDriverConstructInMsg             
+1023bd31  rlDriverConstructOutMsg            
+10236171  rlDriverDeInit                     
+1022e461  rlDriverExecuteGetApi              
+1022d761  rlDriverExecuteSetApi              
+1023bb31  rlDriverFillPayload                
+1023bd41  rlDriverGetHandle                  
+1023bd11  rlDriverGetPlatformId              
+10238681  rlDriverHostIrqHandler             
+1022d0a1  rlDriverInit                       
+1023b9f1  rlDriverIsDeviceMapValid           
+10226961  rlDriverMsgRead                    
+1022f071  rlDriverMsgReadSpawnCtx            
+1023a7b1  rlEnableContMode                   
+1023b791  rlGetRfDieId                       
+102392c1  rlGetSubBlock                      
+1023bd51  rlGetSubBlockId                    
+1023bd61  rlGetSubBlockLen                   
+1023a7f1  rlRfAnaMonConfig                   
+1023a831  rlRfApllSynthBwCtlConfig           
+10232ff1  rlRfCalibDataRestore               
+10232761  rlRfCalibDataStore                 
+1023a871  rlRfGetTemperatureReport           
+1023b2a1  rlRfInit                           
+1023a8b1  rlRfInitCalibConfig                
+10230591  rlRfPhShiftCalibDataRestore        
+1022ff21  rlRfPhShiftCalibDataStore          
+1023a8f1  rlRfRunTimeCalibConfig             
+1023a931  rlRfRxIfSatMonConfig               
+1023a971  rlRfRxSigImgMonConfig              
+1023a9b1  rlRfSetCalMonFreqLimitConfig       
+1023a9f1  rlRfSetCalMonTimeUnitConfig        
+1023aa31  rlRfSetDeviceCfg                   
+1023aa71  rlRfSetLdoBypassConfig             
+1023aab1  rlRfSetMiscConfig                  
+102318b1  rlRfSetPhaseShiftConfig            
+1023aaf1  rlRfSetProgFiltCoeffRam            
+1023ab31  rlRfSetProgFiltConfig              
+1023afc1  rlSensorStart                      
+1023aff1  rlSensorStop                       
+1023ab71  rlSetAdcOutConfig                  
+1023abb1  rlSetAdvChirpConfig                
+10239d41  rlSetAdvFrameConfig                
+1023abf1  rlSetBpmCommonConfig               
+1023ac31  rlSetChannelConfig                 
+10231a21  rlSetChirpConfig                   
+1023ac71  rlSetContModeConfig                
+10239321  rlSetFrameConfig                   
+1023acb1  rlSetLowPowerModeConfig            
+10233a31  rlSetMultiAdvChirpLUTConfig        
+10231b91  rlSetMultiBpmChirpConfig           
+10235eb1  rlSetProfileConfig                 
+1026a26c  rl_rxMsg                           
+1026a36c  rl_txMsg                           
+102398c4  sprintf                            
+10229aa0  strcmp                             
+1026b020  transmitStartTime                  
+1026aaf8  ulCriticalNesting                  
+1026ab00  ulPortInterruptNesting             
+1026ab04  ulPortSchedularRunning             
+1026b024  ulPortTaskHasFPUContext            
+1026aafc  ulPortYieldRequired                
+10243b1c  uxTopUsedPriority                  
+1023446d  vApplicationIdleHook               
+1023b40d  vApplicationStackOverflowHook      
+1026b2ec  vPortRestoreTaskContext            
+1023b611  vPortTimerTickHandler              
+10239ffd  vTaskDelay                         
+1023bb61  vTaskEnterCritical                 
+1023b659  vTaskExitCritical                  
+10238425  vTaskGetInfo                       
+1023a121  vTaskPlaceOnEventList              
+10239d91  vTaskPlaceOnEventListRestricted    
+1023621d  vTaskPriorityDisinheritAfterTimeout
+102335c1  vTaskStartScheduler                
+10234375  vTaskSwitchContext                 
+1023bb79  xPortStartScheduler                
+10237145  xTaskCheckForTimeOut               
+10235551  xTaskCreateStatic                  
+1023b021  xTaskGetIdleTaskHandle             
+1023bb91  xTaskGetTickCount                  
+10234c91  xTaskIncrementTick                 
+102364c9  xTaskPriorityDisinherit            
+10237f41  xTaskPriorityInherit               
+10237fc1  xTaskRemoveFromEventList           
+102350a9  xTaskResumeAll                     
+
+
+GLOBAL SYMBOLS: SORTED BY Symbol Address 
+
+address   name                               
+-------   ----                               
+00000000  __TI_ATRegion0_region_sz           
+00000000  __TI_ATRegion0_src_addr            
+00000000  __TI_ATRegion0_trg_addr            
+00000000  __TI_ATRegion1_region_sz           
+00000000  __TI_ATRegion1_src_addr            
+00000000  __TI_ATRegion1_trg_addr            
+00000000  __TI_ATRegion2_region_sz           
+00000000  __TI_ATRegion2_src_addr            
+00000000  __TI_ATRegion2_trg_addr            
+00000000  __TI_static_base__                 
+00000000  _vectors                           
+00000100  __ABORT_STACK_SIZE                 
+00000100  __FIQ_STACK_SIZE                   
+00000100  __IRQ_STACK_SIZE                   
+00000100  __UNDEFINED_STACK_SIZE             
+00001000  __SVC_STACK_SIZE                   
+00001000  __SYSMEM_SIZE                      
+00002000  __STACK_SIZE                       
+102217f9  MmwDemo_configSensor               
+10223b19  main                               
+10225541  MmwDemo_handleObjectDetResult      
+10226961  rlDriverMsgRead                    
+10227031  rlDriverCmdSendRetry               
+10227fd1  MmwDemo_openSensor                 
+10229aa0  strcmp                             
+1022a199  QSPI_open                          
+1022a801  Dpl_init                           
+1022aaed  QSPI_close                         
+1022b678  __TI_printfi                       
+1022bc04  __aeabi_idiv0                      
+1022c175  QSPI_readMemMapMode                
+1022c414  __aeabi_ldiv0                      
+1022c6ac  __aeabi_memcpy                     
+1022c6ac  __aeabi_memcpy4                    
+1022c6ac  __aeabi_memcpy8                    
+1022ce39  MmwDemo_startSensor                
+1022d0a1  rlDriverInit                       
+1022d761  rlDriverExecuteSetApi              
+1022e241  rlDriverCmdInvoke                  
+1022e461  rlDriverExecuteGetApi              
+1022e889  MmwDemo_stopSensor                 
+1022ee80  exp2                               
+1022ee80  exp2l                              
+1022f068  C$$EXIT                            
+1022f071  rlDriverMsgReadSpawnCtx            
+1022f611  rlDevSetFillLUTBuff                
+1022f9c0  __aeabi_uidiv                      
+1022f9c0  __udivsi3                          
+1022ff21  rlRfPhShiftCalibDataStore          
+10230591  rlRfPhShiftCalibDataRestore        
+10230a28  memcpy                             
+102318b1  rlRfSetPhaseShiftConfig            
+10231a21  rlSetChirpConfig                   
+10231b8d  putchar_                           
+10231b91  rlSetMultiBpmChirpConfig           
+10231cf7  QSPI_readCmd                       
+10231e60  floor                              
+10231e60  floorl                             
+10232761  rlRfCalibDataStore                 
+10232b18  ldexp                              
+10232b18  ldexpl                             
+10232d85  SemaphoreP_pend                    
+10232eb5  SemaphoreP_post                    
+10232ff1  rlRfCalibDataRestore               
+102334a1  rlDevicePowerOn                    
+102335c1  vTaskStartScheduler                
+1023390c  __udivmoddi4                       
+10233a31  rlSetMultiAdvChirpLUTConfig        
+10234375  vTaskSwitchContext                 
+1023446d  vApplicationIdleHook               
+10234ad1  QSPI_writeCmd                      
+10234c91  xTaskIncrementTick                 
+102350a9  xTaskResumeAll                     
+10235304  floorf                             
+10235551  xTaskCreateStatic                  
+102359c1  rlDeviceGetVersion                 
+10235dfc  ceilf                              
+10235eb1  rlSetProfileConfig                 
+102360c1  rlDriverConstructInMsg             
+10236171  rlDriverDeInit                     
+1023621d  vTaskPriorityDisinheritAfterTimeout
+102364c9  xTaskPriorityDisinherit            
+10236b29  MMWDemo_configSSC                  
+10236d08  memset                             
+10237015  SemaphoreP_constructCounting       
+10237145  xTaskCheckForTimeOut               
+1023766d  eTaskGetState                      
+10237a29  pxPortInitialiseStack              
+10237f41  xTaskPriorityInherit               
+10237fc1  xTaskRemoveFromEventList           
+102383a8  frexp                              
+102383a8  frexpl                             
+10238425  vTaskGetInfo                       
+10238681  rlDriverHostIrqHandler             
+10238a99  MmwDemo_isAllCfgInPendingState     
+10238be5  MmwDemo_CfgUpdate                  
+10238ecb  Flash_offsetToBlkPage              
+10239001  rlDeviceAdvFrameConfigApply        
+10239063  Flash_close                        
+10239071  rlDeviceFrameConfigApply           
+102392c1  rlGetSubBlock                      
+10239321  rlSetFrameConfig                   
+10239495  SemaphoreP_destruct                
+102394f1  _DebugP_assert                     
+1023970d  MmwDemo_isAllCfgInNonPendingState  
+102397bc  __TI_readmsg                       
+10239814  __TI_writemsg                      
+10239860  C$$IO$$                            
+102398c4  sprintf                            
+10239a6c  __TI_auto_init_nobinit_nopinit     
+10239ac1  Board_flashOpen                    
+10239cf1  rlAppendSubBlock                   
+10239d41  rlSetAdvFrameConfig                
+10239d91  vTaskPlaceOnEventListRestricted    
+10239f65  QSPI_init                          
+10239ffd  vTaskDelay                         
+1023a0d9  SemaphoreP_constructMutex          
+1023a121  vTaskPlaceOnEventList              
+1023a169  SemaphoreP_constructBinary         
+1023a45d  MmwDemo_mssSECCallBack             
+1023a4d5  Flash_open                         
+1023a661  MmwDemo_resetStaticCfgPendingState 
+1023a6d1  QSPI_writeConfigMode               
+1023a7b1  rlEnableContMode                   
+1023a7f1  rlRfAnaMonConfig                   
+1023a831  rlRfApllSynthBwCtlConfig           
+1023a871  rlRfGetTemperatureReport           
+1023a8b1  rlRfInitCalibConfig                
+1023a8f1  rlRfRunTimeCalibConfig             
+1023a931  rlRfRxIfSatMonConfig               
+1023a971  rlRfRxSigImgMonConfig              
+1023a9b1  rlRfSetCalMonFreqLimitConfig       
+1023a9f1  rlRfSetCalMonTimeUnitConfig        
+1023aa31  rlRfSetDeviceCfg                   
+1023aa71  rlRfSetLdoBypassConfig             
+1023aab1  rlRfSetMiscConfig                  
+1023aaf1  rlRfSetProgFiltCoeffRam            
+1023ab31  rlRfSetProgFiltConfig              
+1023ab71  rlSetAdcOutConfig                  
+1023abb1  rlSetAdvChirpConfig                
+1023abf1  rlSetBpmCommonConfig               
+1023ac31  rlSetChannelConfig                 
+1023ac71  rlSetContModeConfig                
+1023acb1  rlSetLowPowerModeConfig            
+1023ae29  QSPI_setPreScaler                  
+1023ae91  mmwDemo_mssUartDataExportTask      
+1023af88  CycleCounterP_getCount32           
+1023af90  PmuP_setup                         
+1023af98  PmuP_enableCounters                
+1023afa0  PmuP_disableCounters               
+1023afa8  PmuP_getOverflowStatus             
+1023afb0  PmuP_clearOverflowStatus           
+1023afc1  rlSensorStart                      
+1023aff1  rlSensorStop                       
+1023b021  xTaskGetIdleTaskHandle             
+1023b190  __aeabi_idiv                       
+1023b190  __divsi3                           
+1023b1e8  exit                               
+1023b294  __aeabi_memclr                     
+1023b294  __aeabi_memclr4                    
+1023b294  __aeabi_memclr8                    
+1023b2a1  rlRfInit                           
+1023b40d  vApplicationStackOverflowHook      
+1023b55c  __aeabi_uldivmod                   
+1023b611  vPortTimerTickHandler              
+1023b659  vTaskExitCritical                  
+1023b765  QSPI_getHandle                     
+1023b784  CSL_armR5ReadMpidrReg              
+1023b791  rlGetRfDieId                       
+1023b84d  Flash_read                         
+1023b86b  Flash_write                        
+1023b9f1  rlDriverIsDeviceMapValid           
+1023ba0d  Board_flashClose                   
+1023ba85  MmwDemo_getTemperatureReport       
+1023ba9d  QSPI_readCmdParams_init            
+1023bab5  QSPI_writeCmdParams_init           
+1023bb15  pvTaskIncrementMutexHeldCount      
+1023bb31  rlDriverFillPayload                
+1023bb61  vTaskEnterCritical                 
+1023bb79  xPortStartScheduler                
+1023bb91  xTaskGetTickCount                  
+1023bbd3  QSPI_transaction_init              
+1023bbfd  Flash_eraseBlk                     
+1023bc21  rlAppendDummy                      
+1023bc75  QSPI_setAddressByteCount           
+1023bc85  QSPI_setDummyBitCount              
+1023bc95  QSPI_setReadCmd                    
+1023bca5  QSPI_setRxLines                    
+1023bcb5  QSPI_setWriteCmd                   
+1023bcc5  _MmwDemo_debugAssert               
+1023bcd4  __aeabi_memset                     
+1023bcd4  __aeabi_memset4                    
+1023bcd4  __aeabi_memset8                    
+1023bd11  rlDriverGetPlatformId              
+1023bd31  rlDriverConstructOutMsg            
+1023bd41  rlDriverGetHandle                  
+1023bd51  rlGetSubBlockId                    
+1023bd61  rlGetSubBlockLen                   
+1023d060  __aeabi_ctype_table_               
+1023d060  __aeabi_ctype_table_C              
+1023d520  gCacheConfig                       
+1023d528  gMpuConfig                         
+1023d534  gMpuRegionConfig                   
+10243b00  gCacheL1dCacheLineSize             
+10243b04  gCacheL1pCacheLineSize             
+10243b1c  uxTopUsedPriority                  
+10243b40  __BSS_START                        
+10247b40  gAppMainTskStack                   
+1024bb40  gDpmTskStack                       
+1024fb40  gUartTskStack                      
+10253b40  gMmwCtrlTskStack                   
+1025ab48  gMmwMssMCB                         
+1025b9a0  gFlashObject_GD25B64C              
+1025ce58  gCalibDataStorage                  
+1025e5d8  _CIOBUF_                           
+1025e5d8  __CIOBUF_                          
+1025e6f8  gFlashHandle                       
+1025f200  gRovDummyQueue                     
+1025f2c0  __BSS_END                          
+102602c0  __stack                            
+102622c0  __STACK_END                        
+1026a26c  rl_rxMsg                           
+1026a36c  rl_txMsg                           
+1026a9d8  gFlashDevCfg_GD25B64C              
+1026aaf0  __TI_dtors_ptr                     
+1026aaf4  __TI_cleanup_ptr                   
+1026aaf8  ulCriticalNesting                  
+1026aafc  ulPortYieldRequired                
+1026ab00  ulPortInterruptNesting             
+1026ab04  ulPortSchedularRunning             
+1026ab10  pxCurrentTCB                       
+1026ab14  FreeRTOS_errno                     
+1026ab50  gDebugLogZone                      
+1026ae14  gHwiConfig                         
+1026ae30  gFlashParams                       
+1026ae7c  gFlashConfig                       
+1026ae90  gClockConfig                       
+1026aea8  gFlashAttrs_GD25B64C               
+1026afb8  gFlashNorQspiFxns                  
+1026affc  gFlashToSpiProtocolMap             
+1026b00c  gFlashConfigNum                    
+1026b020  transmitStartTime                  
+1026b024  ulPortTaskHasFPUContext            
+1026b041  HwiP_irq_handler_c                 
+1026b0d5  HwiP_fiq_handler                   
+1026b185  HwiP_reserved_handler              
+1026b1ab  HwiP_undefined_handler_c           
+1026b1c7  HwiP_user_undefined_handler_c      
+1026b1db  HwiP_prefetch_abort_handler_c      
+1026b24f  HwiP_user_prefetch_abort_handler_c 
+1026b25f  HwiP_data_abort_handler_c          
+1026b2db  HwiP_user_data_abort_handler_c     
+1026b2ec  vPortRestoreTaskContext            
+1026b324  HwiP_svc_handler                   
+1026b394  HwiP_irq_handler                   
+1026b640  HwiP_data_abort_handler            
+1026b684  HwiP_prefetch_abort_handler        
+1026b6d0  HwiP_undefined_handler             
+1026b700  GET_DFSR                           
+1026b708  GET_ADFSR                          
+1026b710  GET_DFAR                           
+1026b718  GET_IFSR                           
+1026b720  GET_AIFSR                          
+1026b728  GET_IFAR                           
+1026b730  GET_SPSR                           
+1026b7f8  HwiP_disable                       
+1026b808  HwiP_disableFIQ                    
+1026b818  HwiP_enable                        
+1026b828  HwiP_enableFIQ                     
+1026b838  HwiP_restore                       
+1026b840  HwiP_enableVIC                     
+1026b850  HwiP_disableVIC                    
+1026b860  HwiP_getCPSR                       
+1026b868  CacheP_disableL1d                  
+1026b890  CacheP_disableL1p                  
+1026b8a8  CacheP_enableL1d                   
+1026b8c0  CacheP_enableL1p                   
+1026b8d8  CacheP_invL1d                      
+1026b910  CacheP_invL1p                      
+1026b94c  CacheP_invL1dAll                   
+1026b954  CacheP_invL1pAll                   
+1026b95c  CacheP_wb                          
+1026b998  CacheP_wbInv                       
+1026b9d4  CacheP_wbAll                       
+1026ba7c  CacheP_wbInvAll                    
+1026ba94  CacheP_wbInvAllAsm                 
+1026bb34  CacheP_getEnabled                  
+1026bb6c  CacheP_getCacheLevelInfo           
+1026bb78  CacheP_configForceWrThru           
+1026bb98  CacheP_setDLFO                     
+1026bba9  CacheP_init                        
+1026bbf3  CacheP_disable                     
+1026bc2d  CacheP_enable                      
+1026bc4d  CacheP_inv                         
+1026bc90  MpuP_disableAsm                    
+1026bca8  MpuP_disableBRAsm                  
+1026bcb8  MpuP_enableAsm                     
+1026bcd0  MpuP_enableBRAsm                   
+1026bce0  MpuP_isEnableAsm                   
+1026bcf4  MpuP_setRegionAsm                  
+1026bd80  _c_int00_sbl                       
+1026bda4  _c_int00                           
+1026be7d  __mpu_init                         
+1026bf49  _DebugP_assertNoLog                
+1026bf61  _system_pre_init                   
+1026bf78  abort                              
+1026bf80  __IRQ_STACK_START                  
+1026c080  __FIQ_STACK_START                  
+1026c080  __IRQ_STACK_END                    
+1026c180  __FIQ_STACK_END                    
+1026c180  __SVC_STACK_START                  
+1026d180  __ABORT_STACK_START                
+1026d180  __SVC_STACK_END                    
+1026d280  __ABORT_STACK_END                  
+1026d280  __UNDEFINED_STACK_START            
+1026d380  __UNDEFINED_STACK_END              
+ffffffff  __TI_pprof_out_hndl                
+ffffffff  __TI_prof_data_size                
+ffffffff  __TI_prof_data_start               
+ffffffff  __binit__                          
+ffffffff  binit                              
+UNDEFED   __TI_CINIT_Base                    
+UNDEFED   __TI_CINIT_Limit                   
+UNDEFED   __TI_Handler_Table_Base            
+UNDEFED   __TI_Handler_Table_Limit           
+UNDEFED   _system_post_cinit                 
+
+[326 symbols]

@@ -1,0 +1,10 @@
+\_form#0=504x17:\[ \mbox{RadarCube}[\mbox{numTxPatterns}][\mbox{numDopplerChirps}][\mbox{numRxAnt}][\mbox{numRangeBins}] \]
+\_form#1=32x14:$i_{Max}$
+\_form#2=611x17:\[ x(i_{Tx},i_{Rx}) = \mbox{RadarCube}(i_{Tx},0,i_{Rx},i_{Max}), \;\;\;\; i_{Tx}=0,...,N_{TxAnt}-1, \;\;\;\; i_{Rx}=0,...,N_{RxAnt}-1 \]
+\_form#3=546x38:\[ c(i_{Tx},i_{Rx}) = \frac{x^*(i_{Tx},i_{Rx})}{|x(i_{Tx},i_{Rx})|^2}\;x_{Min}, \;\;\;\; i_{Tx}=0,...,N_{TxAnt}-1, \;\;\;\; i_{Rx}=0,...,N_{RxAnt}-1 \]
+\_form#4=159x17:\[ x_{Min} = \min{|x(i_{Tx},i_{Rx})|} \]
+\_form#5=15x20:$\frac{1}{2^k}$
+\_form#6=8x12:$k$
+\_form#7=15x20:$\frac{N}{2^k}$
+\_form#8=14x12:$N$
+\_form#9=30x20:$\frac{106.7}{2^k}$

@@ -1,0 +1,17 @@
+<map id="/nightlybuilds/mmwave_app_sdk/ti/common/sys_types.h" name="/nightlybuilds/mmwave_app_sdk/ti/common/sys_types.h">
+<area shape="rect" id="node1" title="This is the common header file that contains types for mmwave SDK." alt="" coords="711,5,893,61"/>
+<area shape="rect" id="node2" href="$syscommon_8h.html" title="This is the common header file used by the various mmWave SDK modules." alt="" coords="676,109,928,151"/>
+<area shape="rect" id="node3" href="$mmwdemo__rfparser_8c.html" title="Implements rf parser." alt="" coords="5,206,201,233"/>
+<area shape="rect" id="node4" href="$mmwdemo__adcconfig_8c.html" title="Implements High level ADC open/config APIs." alt="" coords="226,206,434,233"/>
+<area shape="rect" id="node5" href="$dss__main_8c.html" title="This is the main file which implements the millimeter wave Demo." alt="" coords="386,377,557,419"/>
+<area shape="rect" id="node6" href="$mmw__config_8h.html" title="This is the header file that describes configurations for the Millimeter Wave Demo." alt="" coords="589,199,759,240"/>
+<area shape="rect" id="node7" href="$mmw__cli_8c.html" title=" " alt="" coords="581,377,772,419"/>
+<area shape="rect" id="node8" href="$mmw__mss_8h.html" title="This is the main header file for the Millimeter Wave Demo." alt="" coords="712,288,903,329"/>
+<area shape="rect" id="node9" href="$mmw__lvds__stream_8c.html" title="Implements LVDS stream functionality." alt="" coords="1205,377,1396,419"/>
+<area shape="rect" id="node10" href="$mss__main_8c.html" title="This is the main file which implements the millimeter wave Demo." alt="" coords="797,377,978,419"/>
+<area shape="rect" id="node11" href="$mmw__output_8h.html" title="This is the interface/message header file for the Millimeter Wave Demo." alt="" coords="839,199,1010,240"/>
+<area shape="rect" id="node14" href="$mmw__res_d_d_m_8h.html" title="Defines partitioning of hardware resources (HWA, EDMA etc) among the DPCs and other components in the..." alt="" coords="1035,206,1265,233"/>
+<area shape="rect" id="node15" href="$mmw__res_t_d_m_8h.html" title="Defines partitioning of hardware resources (HWA, EDMA etc) among the DPCs and other components in the..." alt="" coords="1391,206,1621,233"/>
+<area shape="rect" id="node12" href="$mmw__dss_8h.html" title="This is the main header file for the Millimeter Wave Demo." alt="" coords="978,288,1165,329"/>
+<area shape="rect" id="node13" href="$data__path_8c.html" title="Implements Data path processing functionality." alt="" coords="1002,377,1181,419"/>
+</map>

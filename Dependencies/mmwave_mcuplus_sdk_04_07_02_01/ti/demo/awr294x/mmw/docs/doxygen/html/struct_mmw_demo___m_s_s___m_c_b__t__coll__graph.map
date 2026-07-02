@@ -1,0 +1,34 @@
+<map id="MmwDemo_MSS_MCB_t" name="MmwDemo_MSS_MCB_t">
+<area shape="rect" id="node1" title="Millimeter Wave Demo MCB." alt="" coords="1349,366,1531,393"/>
+<area shape="rect" id="node2" href="$struct_mmw_demo___sub_frame_stats__t.html" title="Structure holds message stats information from data path." alt="" coords="917,50,1132,77"/>
+<area shape="rect" id="node3" href="$struct_mmw_demo__output__message__stats__t.html" title="Structure holds message stats information from data path." alt="" coords="479,5,691,47"/>
+<area shape="rect" id="node4" href="$struct_mmw_demo___sub_frame_cfg__t.html" title="Millimeter Wave Demo Data Path Information." alt="" coords="923,118,1126,145"/>
+<area shape="rect" id="node5" href="$struct_mmw_demo___gui_mon_sel__t.html" title="Millimeter Wave Demo Gui Monitor Selection." alt="" coords="492,71,679,98"/>
+<area shape="rect" id="node6" href="$struct_mmw_demo___a_d_c_buf_cfg__t.html" title="ADCBUF configuration (meant for CLI configuration)" alt="" coords="491,122,679,149"/>
+<area shape="rect" id="node7" href="$struct_mmw_demo___lvds_stream_cfg__t.html" title="LVDS streaming configuration." alt="" coords="478,173,693,199"/>
+<area shape="rect" id="node8" href="$struct_mmw_demo__spread_spectrum_config__t.html" title="Structure holds Spread Spectrum configuration." alt="" coords="893,171,1156,198"/>
+<area shape="rect" id="node9" href="$struct_mmw_demo__temperature_stats__t.html" title="Structure holds temperature information from Radar front end." alt="" coords="909,222,1140,249"/>
+<area shape="rect" id="node10" href="$struct_mmw_demo___d_p_c___obj_det___common_cfg__t.html" title=" " alt="" coords="933,273,1116,315"/>
+<area shape="rect" id="node11" href="/nightlybuilds/mmwave_app_sdk/ti/datapath/dpc/objectdetection/objdethwa/docs/objdethwa.tag$struct_d_p_c___object_detection___pre_start_common_cfg__t.html" title=" " alt="" coords="498,236,673,277"/>
+<area shape="rect" id="node12" href="/nightlybuilds/mmwave_app_sdk/ti/datapath/dpu/rangeprocDDMA/docs/rangeprocDDMA.tag$struct_d_p_u___range_proc_h_w_a_d_d_m_a__range_proc_cfg__t.html" title=" " alt="" coords="20,40,219,81"/>
+<area shape="rect" id="node13" href="/nightlybuilds/mmwave_app_sdk/ti/datapath/dpu/aoaproc/docs/aoaproc.tag$struct_d_p_u___ao_a_proc__comp_rx_channel_bias_cfg__t.html" title=" " alt="" coords="7,105,231,147"/>
+<area shape="rect" id="node14" href="/nightlybuilds/mmwave_app_sdk/ti/datapath/dpc/objectdetection/objdethwaDDMA/docs/objdethwaDDMA.tag$struct_d_p_c___object_detection___zero_insrt_mask_cfg__t.html" title=" " alt="" coords="39,171,200,212"/>
+<area shape="rect" id="node15" href="/nightlybuilds/mmwave_app_sdk/ti/datapath/dpc/objectdetection/objdethwaDDMA/docs/objdethwaDDMA.tag$struct_d_p_c___object_detection___antenna_spacing__t.html" title=" " alt="" coords="39,236,200,277"/>
+<area shape="rect" id="node16" href="/nightlybuilds/mmwave_app_sdk/ti/datapath/dpc/objectdetection/objdethwa/docs/objdethwa.tag$struct_d_p_c___object_detection___ant_geometry_cfg__t.html" title=" " alt="" coords="39,301,200,343"/>
+<area shape="rect" id="node17" href="/nightlybuilds/mmwave_app_sdk/ti/datapath/dpc/objectdetection/objdethwa/docs/objdethwa.tag$struct_d_p_c___object_detection___measure_rx_channel_bias_cfg__t.html" title=" " alt="" coords="11,367,228,408"/>
+<area shape="rect" id="node18" href="$struct_mmw_demo__calib_cfg__t.html" title="Structure holds calibration save configuration used during sensor open." alt="" coords="940,339,1109,366"/>
+<area shape="rect" id="node19" href="$struct_mmw_demo__calib_data_header__t.html" title="Structure holds calibration save configuration used during sensor open." alt="" coords="473,334,698,361"/>
+<area shape="rect" id="node20" href="$struct_mmw_demo___cfg__t.html" title="Millimeter Wave Demo configuration." alt="" coords="955,390,1094,417"/>
+<area shape="rect" id="node21" href="/nightlybuilds/mmwave_app_sdk/ti/control/mmwave/docs/mmwave.tag$struct_m_m_wave___open_cfg__t.html" title=" " alt="" coords="507,385,664,411"/>
+<area shape="rect" id="node22" href="/nightlybuilds/mmwave_app_sdk/ti/control/mmwave/docs/mmwave.tag$struct_m_m_wave___ctrl_cfg__t.html" title=" " alt="" coords="512,435,659,462"/>
+<area shape="rect" id="node23" href="/nightlybuilds/mmwave_app_sdk/ti/control/mmwave/docs/mmwave.tag$struct_m_m_wave___frame_cfg__t.html" title=" " alt="" coords="37,433,201,459"/>
+<area shape="rect" id="node24" href="/nightlybuilds/mmwave_app_sdk/ti/control/mmwave/docs/mmwave.tag$struct_m_m_wave___advanced_frame_cfg__t.html" title=" " alt="" coords="5,483,233,510"/>
+<area shape="rect" id="node25" href="/nightlybuilds/mmwave_app_sdk/ti/control/mmwave/docs/mmwave.tag$struct_m_m_wave___cont_mode_cfg__t.html" title=" " alt="" coords="25,534,214,561"/>
+<area shape="rect" id="node26" href="$struct_mmw_demo__platform_cfg__t.html" title="Millimeter Wave Demo Data Path Information." alt="" coords="488,486,683,513"/>
+<area shape="rect" id="node27" href="$struct_mmw_demo___l_v_d_s_stream___m_c_b.html" title="LVDS streaming MCB." alt="" coords="914,441,1135,467"/>
+<area shape="rect" id="node28" href="$struct_mmw_demo___l_v_d_s_user_data_header.html" title="LVDS streaming user data header." alt="" coords="463,537,708,563"/>
+<area shape="rect" id="node29" href="$struct_mmw_demo__adc_data_dith_delay_cfg__t.html" title=" " alt="" coords="913,492,1136,533"/>
+<area shape="rect" id="node30" href="$struct_mmw_demo___task_handles__t.html" title="Task handles storage structure." alt="" coords="925,558,1124,585"/>
+<area shape="rect" id="node31" href="$struct_mmw_demo___m_s_s___stats__t.html" title="Millimeter Wave Demo statistics." alt="" coords="933,609,1117,635"/>
+<area shape="rect" id="node32" href="/nightlybuilds/mmwave_app_sdk/ti/control/dpm/docs/dpm.tag$struct_d_p_m___buffer__t.html" title=" " alt="" coords="969,659,1080,686"/>
+</map>

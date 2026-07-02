@@ -1,0 +1,6 @@
+<map id="MmwDemo_SubFrameCfg_t" name="MmwDemo_SubFrameCfg_t">
+<area shape="rect" id="node1" title="Millimeter Wave Demo Data Path Information." alt="" coords="209,95,412,121"/>
+<area shape="rect" id="node2" href="$struct_mmw_demo___gui_mon_sel__t.html" title="Millimeter Wave Demo Gui Monitor Selection." alt="" coords="5,5,192,32"/>
+<area shape="rect" id="node3" href="$struct_mmw_demo___a_d_c_buf_cfg__t.html" title="ADCBUF configuration (meant for CLI configuration)" alt="" coords="217,5,405,32"/>
+<area shape="rect" id="node4" href="$struct_mmw_demo___lvds_stream_cfg__t.html" title="LVDS streaming configuration." alt="" coords="429,5,643,32"/>
+</map>

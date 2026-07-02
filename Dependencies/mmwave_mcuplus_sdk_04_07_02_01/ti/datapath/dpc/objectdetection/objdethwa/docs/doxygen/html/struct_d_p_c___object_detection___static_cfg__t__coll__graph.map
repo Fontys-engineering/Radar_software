@@ -1,0 +1,6 @@
+<map id="DPC_ObjectDetection_StaticCfg_t" name="DPC_ObjectDetection_StaticCfg_t">
+<area shape="rect" id="node1" title=" " alt="" coords="174,184,335,225"/>
+<area shape="rect" id="node2" href="/nightlybuilds/mmwave_app_sdk/ti/datapath/dpu/rangeproc/docs/rangeproc.tag$struct_d_p_i_f___a_d_c_buf_data__t.html" title=" " alt="" coords="17,95,169,121"/>
+<area shape="rect" id="node3" href="/nightlybuilds/mmwave_app_sdk/ti/datapath/dpu/rangeproc/docs/rangeproc.tag$struct_d_p_i_f___a_d_c_buf_property__t.html" title=" " alt="" coords="5,5,181,32"/>
+<area shape="rect" id="node4" href="/nightlybuilds/mmwave_app_sdk/ti/datapath/dpu/rangeproc/docs/rangeproc.tag$struct_d_p_u___range_proc_h_w_a___f_f_ttuning__t.html" title=" " alt="" coords="193,95,433,121"/>
+</map>

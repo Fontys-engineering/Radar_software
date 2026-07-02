@@ -1,0 +1,12 @@
+<map id="awr294x/mmw/mmw_resDDM.h" name="awr294x/mmw/mmw_resDDM.h">
+<area shape="rect" id="node1" title="Defines partitioning of hardware resources (HWA, EDMA etc) among the DPCs and other components in the..." alt="" coords="351,5,582,32"/>
+<area shape="rect" id="node2" title=" " alt="" coords="5,87,125,114"/>
+<area shape="rect" id="node3" href="$syscommon_8h.html" title="This is the common header file used by the various mmWave SDK modules." alt="" coords="149,87,336,114"/>
+<area shape="rect" id="node8" href="/nightlybuilds/mmwave_app_sdk/ti/datapath/dpu/rangeprocDDMA/docs/rangeprocDDMA.tag$rangeprochwa_d_d_m_a_8h.html.html" title=" " alt="" coords="361,80,573,121"/>
+<area shape="rect" id="node9" href="/nightlybuilds/mmwave_app_sdk/ti/datapath/dpu/dopplerprocDDMA/docs/dopplerprocDDMA.tag$dopplerprochwa_d_d_m_a_8h.html.html" title=" " alt="" coords="596,80,820,121"/>
+<area shape="rect" id="node10" href="/nightlybuilds/mmwave_app_sdk/ti/datapath/dpu/rangecfarprocDDMA/docs/rangecfarprocDDMA.tag$rangecfarprochwa_8h.html.html" title=" " alt="" coords="845,80,1059,121"/>
+<area shape="rect" id="node4" href="$sys__types_8h.html" title="This is the common header file that contains types for mmwave SDK." alt="" coords="60,169,233,196"/>
+<area shape="rect" id="node7" title=" " alt="" coords="257,169,423,196"/>
+<area shape="rect" id="node5" title=" " alt="" coords="61,244,131,271"/>
+<area shape="rect" id="node6" title=" " alt="" coords="156,244,239,271"/>
+</map>

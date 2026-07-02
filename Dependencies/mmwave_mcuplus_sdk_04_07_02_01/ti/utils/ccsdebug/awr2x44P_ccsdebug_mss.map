@@ -1,0 +1,1017 @@
+******************************************************************************
+            TI ARM Clang Linker Unix v4.0.2                    
+******************************************************************************
+>> Linked Fri Feb 20 19:24:56 2026
+
+OUTPUT FILE NAME:   <awr2x44P_ccsdebug_mss.xer5f>
+ENTRY POINT SYMBOL: "_vectors"  address: 00000000
+
+
+MEMORY CONFIGURATION
+
+         name            origin    length      used     unused   attr    fill
+----------------------  --------  ---------  --------  --------  ----  --------
+  RESET_VECTORS         00000000   00000100  00000040  000000c0     X
+  TCMA_RAM              00000100   0000ff00  00000000  0000ff00  R  X
+  TCMB_RAM              00080000   00010000  00000000  00010000  RW  
+  SBL_RESERVED_L2_RAM   10200000   00020000  00000000  00020000  RW  
+  MSS_L2                10220000   000d0000  00012008  000bdff8  RW  
+  HWA_RAM               82000000   00020000  00000000  00020000  RW  
+  DSS_L3                88000000   00300000  00000000  00300000  RW  
+  RTOS_NORTOS_IPC_SHM_M c5000200   00001d40  00000000  00001d40  RWIX
+
+
+SEGMENT ALLOCATION MAP
+
+run origin  load origin   length   init length attrs members
+----------  ----------- ---------- ----------- ----- -------
+00000000    00000000    00000040   00000040    r-x
+  00000000    00000000    00000040   00000040    r-x .vectors
+10220000    10220000    00008280   00000000    rw-
+  10220000    10220000    00005280   00000000    rw- .bss
+  10225280    10225280    00001000   00000000    rw- .sysmem
+  10226280    10226280    00002000   00000000    rw- .stack
+10228280    10228280    00008440   00008440    r-x
+  10228280    10228280    00005ec0   00005ec0    r-x .text
+  1022e140    1022e140    00001648   00001648    r-- .rodata
+  1022f788    1022f788    00000820   00000820    r-x .text.hwi
+  1022ffa8    1022ffa8    00000428   00000428    r-x .text.cache
+  102303d0    102303d0    000000f0   000000f0    r-x .text.mpu
+  102304c0    102304c0    000001f8   000001f8    r-x .text.boot
+  102306b8    102306b8    00000008   00000008    r-x .text:abort
+102306c0    102306c0    00001948   00000548    rw-
+  102306c0    102306c0    00000548   00000548    rw- .data
+  10230c08    10230c08    00000100   00000000    rw- .irqstack
+  10230d08    10230d08    00000100   00000000    rw- .fiqstack
+  10230e08    10230e08    00001000   00000000    rw- .svcstack
+  10231e08    10231e08    00000100   00000000    rw- .abortstack
+  10231f08    10231f08    00000100   00000000    rw- .undefinedstack
+
+
+SECTION ALLOCATION MAP
+
+ output                                  attributes/
+section   page    origin      length       input sections
+--------  ----  ----------  ----------   ----------------
+.vectors   0    00000000    00000040     
+                  00000000    00000040     freertos.awr2x44p.r5f.ti-arm-clang.release.lib : HwiP_armv7r_vectors_freertos_asm.obj (.vectors)
+
+.bss       0    10220000    00005280     UNINITIALIZED
+                  10220000    00002000     (.common:gAppTskStackMain)
+                  10222000    00001008     freertos.awr2x44p.r5f.ti-arm-clang.release.lib : HwiP_armv7r_vim.obj (.bss.gHwiCtrl)
+                  10223008    00001000     TI5TSd0X1D9 (.bss.uxIdleTaskStack)
+                  10224008    00000400     TI5TSd0X1D9 (.bss.uxTimerTaskStack)
+                  10224408    000002b4     TI5TSd0X1D9 (.bss.gUartObjects)
+                  102246bc    00000280     TI5TSd0X1D9 (.bss.pxReadyTasksLists)
+                  1022493c    000001e4     TI5TSd0X1D9 (.bss.gEdmaObjects)
+                  10224b20    00000120     libsysbm.a : trgmsg.c.obj (.bss:_CIOBUF_)
+                  10224c40    00000100     TI5TSd0X1D9 (.bss.prvCheckForValidListAndQueue.ucStaticTimerQueueStorage)
+                  10224d40    00000100     freertos.awr2x44p.r5f.ti-arm-clang.release.lib : queue.obj (.bss.xQueueRegistry)
+                  10224e40    000000a0     libc.a : defs.c.obj (.bss.__TI_tmpnams)
+                  10224ee0    000000a0     freertos.awr2x44p.r5f.ti-arm-clang.release.lib : TaskP_freertos.obj (.bss.gTaskP_ctrl)
+                  10224f80    00000098     TI5TSd0X1D9 (.bss.gDebugLogLockObj)
+                  10225018    0000008c     TI5TSd0X1D9 (.bss.xIdleTaskTCB)
+                  102250a4    0000008c     TI5TSd0X1D9 (.bss.xTimerTaskTCB)
+                  10225130    0000008c     (.common:gAppTaskObj)
+                  102251bc    00000050     TI5TSd0X1D9 (.bss.prvCheckForValidListAndQueue.xStaticTimerQueue)
+                  1022520c    00000050     (.common:gRovDummyQueue)
+                  1022525c    00000008     libsysbm.a : hostopen.c.obj (.bss.parmbuf)
+                  10225264    00000004     TI5TSd0X1D9 (.bss.gdummy)
+                  10225268    00000004     TI5TSd0X1D9 (.bss.sys_free)
+                  1022526c    00000004     (.common:gAppTask)
+                  10225270    00000010     --HOLE--
+
+.sysmem    0    10225280    00001000     UNINITIALIZED
+                  10225280    00000010     libc.a : memory.c.obj (.sysmem)
+                  10225290    00000ff0     --HOLE--
+
+.stack     0    10226280    00002000     UNINITIALIZED
+                  10226280    00000004     freertos.awr2x44p.r5f.ti-arm-clang.release.lib : boot_armv7r_asm.obj (.stack)
+                  10226284    00001ffc     --HOLE--
+
+.text      0    10228280    00005ec0     
+                  10228280    000005e0     main.oer5f (.text.main)
+                  10228860    0000058c     TI5TSd0X1D9 (.text.CcsDebug_initTask)
+                  10228dec    000004cc     freertos.awr2x44p.r5f.ti-arm-clang.release.lib : DebugP_freertos.obj (.text._DebugP_logZone)
+                  102292b8    00000008     libsysbm.a : hostexit.c.obj (.text.HOSTexit)
+                  102292c0    00000390     libc.a : strcmp32.S.obj (.text:strcmp)
+                  10229650    00000350     ti_dpl_config.oer5f (.text.putchar_)
+                  102299a0    0000031c     TI5TSd0X1D9 (.text.prvTimerTask)
+                  10229cbc    00000308     ti_dpl_config.oer5f (.text.Dpl_init)
+                  10229fc4    00000004     libclang_rt.builtins.a : aeabi_div0.c.obj (.text.__aeabi_ldiv0)
+                  10229fc8    000002d8     TI5TSd0X1D9 (.text._etoa)
+                  1022a2a0    000002bc     TI5TSd0X1D9 (.text._ftoa)
+                  1022a55c    000002b0     TI5TSd0X1D9 (.text.SOC_rcmGetFreqLeafNode)
+                  1022a80c    000001c8     TI5TSd0X1D9 (.text.__TI_closefile)
+                  1022a9d4    000001c8     libc.a : memory.c.obj (.text.malloc)
+                  1022ab9c    000001c4     TI5TSd0X1D9 (.text.putchar)
+                  1022ad60    000001c0     freertos.awr2x44p.r5f.ti-arm-clang.release.lib : queue.obj (.text.xQueueSemaphoreTake)
+                  1022af20    00000188     libc.a : memory.c.obj (.text.free)
+                  1022b0a8    00000180            : memcpy32.S.obj (.text:memcpy)
+                  1022b228    00000178     TI5TSd0X1D9 (.text.xQueueGenericSend)
+                  1022b3a0    00000170     drivers.awr2x44p.r5f.ti-arm-clang.release.lib : uart_sci.obj (.text.UART_close)
+                  1022b510    00000150     TI5TSd0X1D9 (.text.UART_controllerIsr)
+                  1022b660    00000140     TI5TSd0X1D9 (.text.EDMA_transferCompletionMasterIsrFxn)
+                  1022b7a0    00000130     freertos.awr2x44p.r5f.ti-arm-clang.release.lib : SemaphoreP_freertos.obj (.text.SemaphoreP_pend)
+                  1022b8d0    00000130                                                    : SemaphoreP_freertos.obj (.text.SemaphoreP_post)
+                  1022ba00    00000128                                                    : queue.obj (.text.xQueueGenericCreateStatic)
+                  1022bb28    00000118     TI5TSd0X1D9 (.text.Alloc_resource)
+                  1022bc40    00000118     freertos.awr2x44p.r5f.ti-arm-clang.release.lib : tasks.obj (.text.vTaskStartScheduler)
+                  1022bd58    00000118     libclang_rt.builtins.a : udivmoddi4.S.obj (.text)
+                  1022be70    0000010a     TI5TSd0X1D9 (.text._ntoa_format)
+                  1022bf7a    00000002     --HOLE-- [fill = 0]
+                  1022bf7c    00000108     TI5TSd0X1D9 (.text.SOC_rcmGetFreq)
+                  1022c084    00000100     TI5TSd0X1D9 (.text.prvAddNewTaskToReadyList)
+                  1022c184    000000f8     freertos.awr2x44p.r5f.ti-arm-clang.release.lib : tasks.obj (.text.vTaskSwitchContext)
+                  1022c27c    000000f0                                                    : port.obj (.text.vApplicationIdleHook)
+                  1022c36c    000000e0                                                    : tasks.obj (.text.xTaskIncrementTick)
+                  1022c44c    000000cc                                                    : tasks.obj (.text.xTaskResumeAll)
+                  1022c518    000000c0                                                    : tasks.obj (.text.xTaskCreateStatic)
+                  1022c5d8    000000b4     TI5TSd0X1D9 (.text.prvSampleTimeNow)
+                  1022c68c    000000ac     freertos.awr2x44p.r5f.ti-arm-clang.release.lib : tasks.obj (.text.vTaskPriorityDisinheritAfterTimeout)
+                  1022c738    000000aa     TI5TSd0X1D9 (.text._ntoa_long_long)
+                  1022c7e2    00000002     --HOLE-- [fill = 0]
+                  1022c7e4    000000a8     freertos.awr2x44p.r5f.ti-arm-clang.release.lib : tasks.obj (.text.xTaskPriorityDisinherit)
+                  1022c88c    000000a0     libc.a : memset32.S.obj (.text:memset)
+                  1022c92c    0000009c     freertos.awr2x44p.r5f.ti-arm-clang.release.lib : tasks.obj (.text.eTaskGetState)
+                  1022c9c8    00000098                                                    : tasks.obj (.text.xTaskCheckForTimeOut)
+                  1022ca60    00000094     TI5TSd0X1D9 (.text.EDMA_freeDmaChannel)
+                  1022caf4    00000094     TI5TSd0X1D9 (.text.EDMA_freeTcc)
+                  1022cb88    00000092     TI5TSd0X1D9 (.text.prvInitialiseNewTask)
+                  1022cc1a    0000008c     TI5TSd0X1D9 (.text.EDMA_configureChannelRegion)
+                  1022cca6    00000002     --HOLE-- [fill = 0]
+                  1022cca8    00000088     libc.a : fflush.c.obj (.text.__TI_doflush)
+                  1022cd30    00000088     freertos.awr2x44p.r5f.ti-arm-clang.release.lib : port.obj (.text.pxPortInitialiseStack)
+                  1022cdb8    00000084     drivers.awr2x44p.r5f.ti-arm-clang.release.lib : edma.obj (.text.EDMA_registerIntr)
+                  1022ce3c    00000082     TI5TSd0X1D9 (.text._ntoa_long)
+                  1022cebe    00000002     --HOLE-- [fill = 0]
+                  1022cec0    00000080     freertos.awr2x44p.r5f.ti-arm-clang.release.lib : tasks.obj (.text.xTaskPriorityInherit)
+                  1022cf40    00000080                                                    : tasks.obj (.text.xTaskRemoveFromEventList)
+                  1022cfc0    0000007c     libsysbm.a : hostrename.c.obj (.text.HOSTrename)
+                  1022d03c    0000007c     TI5TSd0X1D9 (.text.UART_txEdmaIsrFxn)
+                  1022d0b8    0000007c     freertos.awr2x44p.r5f.ti-arm-clang.release.lib : tasks.obj (.text.vTaskGetInfo)
+                  1022d134    00000078     libsysbm.a : hostopen.c.obj (.text.HOSTopen)
+                  1022d1ac    00000078     TI5TSd0X1D9 (.text.SOC_rcmGetXTALFrequency)
+                  1022d224    00000078     TI5TSd0X1D9 (.text.UART_rxEdmaIsrFxn)
+                  1022d29c    00000076     TI5TSd0X1D9 (.text._out_rev)
+                  1022d312    00000002     --HOLE-- [fill = 0]
+                  1022d314    00000070     TI5TSd0X1D9 (.text.prvUnlockQueue)
+                  1022d384    00000068     libsysbm.a : hostlseek.c.obj (.text.HOSTlseek)
+                  1022d3ec    00000064     ti_drivers_open_close.oer5f (.text.Drivers_edmaClose)
+                  1022d450    00000064     drivers.awr2x44p.r5f.ti-arm-clang.release.lib : soc_rcm.obj (.text.SOC_rcmGetPeripheralClock)
+                  1022d4b4    00000060     TI5TSd0X1D9 (.text.prvAddCurrentTaskToDelayedList)
+                  1022d514    0000005c     freertos.awr2x44p.r5f.ti-arm-clang.release.lib : SemaphoreP_freertos.obj (.text.SemaphoreP_destruct)
+                  1022d570    0000005c                                                    : DebugP_log.obj (.text._DebugP_assert)
+                  1022d5cc    00000058     libsysbm.a : hostread.c.obj (.text.HOSTread)
+                  1022d624    00000058                : hostwrite.c.obj (.text.HOSTwrite)
+                  1022d67c    00000058                : trgmsg.c.obj (.text.__TI_readmsg)
+                  1022d6d4    00000058                : trgmsg.c.obj (.text.__TI_writemsg)
+                  1022d72c    00000054     TI5TSd0X1D9 (.text.SOC_rcmADPLLJGetFOut)
+                  1022d780    00000054     libc.a : autoinit.c.obj (.text:__TI_auto_init_nobinit_nopinit)
+                  1022d7d4    00000050     drivers.awr2x44p.r5f.ti-arm-clang.release.lib : edma.obj (.text.EDMA_allocDmaChannel)
+                  1022d824    00000050                                                   : edma.obj (.text.EDMA_allocParam)
+                  1022d874    00000050                                                   : edma.obj (.text.EDMA_allocTcc)
+                  1022d8c4    00000050     libsysbm.a : hostunlink.c.obj (.text.HOSTunlink)
+                  1022d914    00000050     freertos.awr2x44p.r5f.ti-arm-clang.release.lib : tasks.obj (.text.vTaskPlaceOnEventListRestricted)
+                  1022d964    00000050     TI5TSd0X1D9 (.text.xTimerGenericCommand)
+                  1022d9b4    0000004c     TI5TSd0X1D9 (.text.prvIdleTask)
+                  1022da00    00000048     freertos.awr2x44p.r5f.ti-arm-clang.release.lib : SemaphoreP_freertos.obj (.text.SemaphoreP_constructMutex)
+                  1022da48    00000048                                                    : tasks.obj (.text.vTaskPlaceOnEventList)
+                  1022da90    00000044                                                    : SemaphoreP_freertos.obj (.text.SemaphoreP_constructBinary)
+                  1022dad4    00000044     TI5TSd0X1D9 (.text.free_list_insert)
+                  1022db18    00000044     TI5TSd0X1D9 (.text.prvDeleteTCB)
+                  1022db5c    0000003c     libc.a : fopen.c.obj (.text.__TI_cleanup)
+                  1022db98    0000003c     TI5TSd0X1D9 (.text.prvInsertTimerInActiveList)
+                  1022dbd4    00000038     freertos.awr2x44p.r5f.ti-arm-clang.release.lib : ClockP_freertos.obj (.text.ClockP_getTimeUsec)
+                  1022dc0c    00000038     libsysbm.a : hostclose.c.obj (.text.HOSTclose)
+                  1022dc44    00000038     TI5TSd0X1D9 (.text.Pinmux_config)
+                  1022dc7c    00000036     drivers.awr2x44p.r5f.ti-arm-clang.release.lib : edma.obj (.text.EDMA_clrMissEvtRegion)
+                  1022dcb2    00000002     --HOLE-- [fill = 0]
+                  1022dcb4    00000034     TI5TSd0X1D9 (.text.free_list_remove)
+                  1022dce8    00000034     libsysbm.a : write.c.obj (.text.write)
+                  1022dd1c    00000030     freertos.awr2x44p.r5f.ti-arm-clang.release.lib : PmuP_armv7r_asm.obj (.text.pmu)
+                  1022dd4c    00000030                                                    : tasks.obj (.text.xTaskGetIdleTaskHandle)
+                  1022dd7c    0000002e                                                    : list.obj (.text.vListInsert)
+                  1022ddaa    00000002     --HOLE-- [fill = 0]
+                  1022ddac    0000002c                                                    : ClockP_freertos.obj (.text.ClockP_timerTickIsr)
+                  1022ddd8    0000002c     libc.a : exit.c.obj (.text.exit)
+                  1022de04    00000028     freertos.awr2x44p.r5f.ti-arm-clang.release.lib : port.obj (.text.vApplicationStackOverflowHook)
+                  1022de2c    00000026     drivers.awr2x44p.r5f.ti-arm-clang.release.lib : edma.obj (.text.EDMA_setPaRAM)
+                  1022de52    00000026     TI5TSd0X1D9 (.text.UART_txChar)
+                  1022de78    00000024     libclang_rt.builtins.a : aeabi_uldivmod.S.obj (.text.__aeabi_uldivmod)
+                  1022de9c    00000024     TI5TSd0X1D9 (.text._atoi)
+                  1022dec0    00000024     TI5TSd0X1D9 (.text.prvCopyDataFromQueue)
+                  1022dee4    00000024     TI5TSd0X1D9 (.text.prvResetNextTaskUnblockTime)
+                  1022df08    00000024     freertos.awr2x44p.r5f.ti-arm-clang.release.lib : port.obj (.text.vPortTimerTickHandler)
+                  1022df2c    00000024                                                    : queue.obj (.text.vQueueAddToRegistry)
+                  1022df50    00000024                                                    : tasks.obj (.text.vTaskExitCritical)
+                  1022df74    00000022     TI5TSd0X1D9 (.text.uxListRemove)
+                  1022df96    00000002     --HOLE-- [fill = 0]
+                  1022df98    00000020     TI5TSd0X1D9 (.text.DebugP_logZoneEnable)
+                  1022dfb8    00000020     TI5TSd0X1D9 (.text.strlen)
+                  1022dfd8    00000020     freertos.awr2x44p.r5f.ti-arm-clang.release.lib : heap_3.obj (.text.vPortFree)
+                  1022dff8    0000001c     TI5TSd0X1D9 (.text.SOC_rcmGetClkSrcFromClkSelVal)
+                  1022e014    0000001c     TI5TSd0X1D9 (.text.strcpy)
+                  1022e030    00000018     ti_drivers_open_close.oer5f (.text.Drivers_uartClose)
+                  1022e048    00000018     TI5TSd0X1D9 (.text.prvIsQueueEmpty)
+                  1022e060    00000018     freertos.awr2x44p.r5f.ti-arm-clang.release.lib : tasks.obj (.text.pvTaskIncrementMutexHeldCount)
+                  1022e078    00000018                                                    : list.obj (.text.vListInsertEnd)
+                  1022e090    00000018                                                    : tasks.obj (.text.vTaskEnterCritical)
+                  1022e0a8    00000018                                                    : port.obj (.text.xPortStartScheduler)
+                  1022e0c0    00000018                                                    : tasks.obj (.text.xTaskGetTickCount)
+                  1022e0d8    00000010     libclang_rt.builtins.a : aeabi_memset.S.obj (.text.__aeabi_memset)
+                  1022e0e8    0000000c     TI5TSd0X1D9 (.text.SOC_rcmGetPeripheralClockFrequency)
+                  1022e0f4    0000000c     libclang_rt.builtins.a : aeabi_memset.S.obj (.text.__aeabi_memclr)
+                  1022e100    0000000c     libc.a : strcmp32.S.obj (.text)
+                  1022e10c    00000008     TI5TSd0X1D9 (.text._out_char)
+                  1022e114    00000006     TI5TSd0X1D9 (.text.prvTaskExitError)
+                  1022e11a    00000002     --HOLE-- [fill = 0]
+                  1022e11c    00000004     libclang_rt.builtins.a : aeabi_memcpy.S.obj (.text.__aeabi_memcpy)
+                  1022e120    00000008                            : aeabi_memcpy.S.obj (.tramp.__aeabi_memcpy.1)
+                  1022e128    00000008     freertos.awr2x44p.r5f.ti-arm-clang.release.lib : HwiP_armv7r_asm.obj (.tramp.HwiP_restore.1)
+                  1022e130    00000008                                                    : HwiP_armv7r_asm.obj (.tramp.HwiP_enable.1)
+                  1022e138    00000008     --HOLE-- [fill = 0]
+
+.rodata    0    1022e140    00001648     
+                  1022e140    0000024c     TI5TSd0X1D9 (.rodata.gSocRcmADPLLJConfigTbl)
+                  1022e38c    00000082     TI5TSd0X1D9 (.rodata.str1.14298341002452482465.1)
+                  1022e40e    0000006c     TI5TSd0X1D9 (.rodata.gSocRcmClkSrcInfoMap)
+                  1022e47a    0000006b     TI5TSd0X1D9 (.rodata.str1.17960306095800141373.1)
+                  1022e4e5    00000003     --HOLE-- [fill = 0]
+                  1022e4e8    00000064     ti_dpl_config.oer5f (.rodata.cfg)
+                  1022e54c    00000062     TI5TSd0X1D9 (.rodata.str1.1703825812468814951.1)
+                  1022e5ae    0000005f     TI5TSd0X1D9 (.rodata.str1.5867393545191441450.1)
+                  1022e60d    0000005d     TI5TSd0X1D9 (.rodata.str1.11784268553153003905.1)
+                  1022e66a    0000005c     TI5TSd0X1D9 (.rodata.str1.17747993151309206296.1)
+                  1022e6c6    00000002     --HOLE-- [fill = 0]
+                  1022e6c8    00000050     TI5TSd0X1D9 (.rodata._ftoa.pow10)
+                  1022e718    0000004a     TI5TSd0X1D9 (.rodata.str1.12016315241721317477.1)
+                  1022e762    0000004a     TI5TSd0X1D9 (.rodata.str1.12903095196861648983.1)
+                  1022e7ac    0000003f     TI5TSd0X1D9 (.rodata.str1.3637928526474410062.1)
+                  1022e7eb    0000003e     TI5TSd0X1D9 (.rodata.str1.18298366676390901967.1)
+                  1022e829    0000003d     TI5TSd0X1D9 (.rodata.str1.1556970729857819545.1)
+                  1022e866    00000039     TI5TSd0X1D9 (.rodata.str1.14014798254469960823.1)
+                  1022e89f    00000001     --HOLE-- [fill = 0]
+                  1022e8a0    00000038     ti_drivers_open_close.oer5f (.rodata.gUartParams)
+                  1022e8d8    00000035     TI5TSd0X1D9 (.rodata.str1.1540039070075937195.1)
+                  1022e90d    00000035     TI5TSd0X1D9 (.rodata.str1.913524672061877250.1)
+                  1022e942    00000031     TI5TSd0X1D9 (.rodata.str1.12468599891385687991.1)
+                  1022e973    0000002e     TI5TSd0X1D9 (.rodata.str1.16447032601370095524.1)
+                  1022e9a1    0000002e     TI5TSd0X1D9 (.rodata.str1.18411350861882781627.1)
+                  1022e9cf    0000002d     TI5TSd0X1D9 (.rodata.str1.2920504002684656390.1)
+                  1022e9fc    0000002a     TI5TSd0X1D9 (.rodata.str1.13342744221991684669.1)
+                  1022ea26    0000002a     TI5TSd0X1D9 (.rodata.str1.4568391984910503363.1)
+                  1022ea50    0000002a     TI5TSd0X1D9 (.rodata.str1.9857435039156408742.1)
+                  1022ea7a    00000029     TI5TSd0X1D9 (.rodata.str1.11477709987339859837.1)
+                  1022eaa3    00000029     TI5TSd0X1D9 (.rodata.str1.13853237529802445072.1)
+                  1022eacc    00000028     TI5TSd0X1D9 (.rodata.gSocRcmFixedClocksTbl)
+                  1022eaf4    00000028     TI5TSd0X1D9 (.rodata.str1.13855821076286399605.1)
+                  1022eb1c    00000028     TI5TSd0X1D9 (.rodata.str1.4466679349554942473.1)
+                  1022eb44    00000027     TI5TSd0X1D9 (.rodata.str1.11632627094296782136.1)
+                  1022eb6b    00000027     TI5TSd0X1D9 (.rodata.str1.17737887140404892072.1)
+                  1022eb92    00000027     TI5TSd0X1D9 (.rodata.str1.4180236991912653595.1)
+                  1022ebb9    00000025     TI5TSd0X1D9 (.rodata.str1.5669652365403593773.1)
+                  1022ebde    00000025     TI5TSd0X1D9 (.rodata.str1.6040062132667035532.1)
+                  1022ec03    00000024     TI5TSd0X1D9 (.rodata.str1.13299031372502791579.1)
+                  1022ec27    00000024     TI5TSd0X1D9 (.rodata.str1.906144131007236690.1)
+                  1022ec4b    00000023     TI5TSd0X1D9 (.rodata.str1.2789267595524430336.1)
+                  1022ec6e    00000023     TI5TSd0X1D9 (.rodata.str1.7130827372035862466.1)
+                  1022ec91    00000022     TI5TSd0X1D9 (.rodata.str1.18180114033597188379.1)
+                  1022ecb3    00000022     TI5TSd0X1D9 (.rodata.str1.3843726407878455340.1)
+                  1022ecd5    00000022     TI5TSd0X1D9 (.rodata.str1.4503212716540908718.1)
+                  1022ecf7    00000021     TI5TSd0X1D9 (.rodata.str1.16958004791937726077.1)
+                  1022ed18    00000021     TI5TSd0X1D9 (.rodata.str1.17917079891998629008.1)
+                  1022ed39    00000021     TI5TSd0X1D9 (.rodata.str1.5651972586684810859.1)
+                  1022ed5a    00000020     TI5TSd0X1D9 (.rodata.str1.18134813149662314356.1)
+                  1022ed7a    0000001f     TI5TSd0X1D9 (.rodata.str1.12360313528184866706.1)
+                  1022ed99    0000001f     TI5TSd0X1D9 (.rodata.str1.17499801696909856826.1)
+                  1022edb8    0000001e     TI5TSd0X1D9 (.rodata.str1.3998464287976889528.1)
+                  1022edd6    0000001d     TI5TSd0X1D9 (.rodata.str1.12282202085957551955.1)
+                  1022edf3    0000001d     TI5TSd0X1D9 (.rodata.str1.4418357489791823137.1)
+                  1022ee10    0000001c     TI5TSd0X1D9 (.rodata.str1.3784921012555184974.1)
+                  1022ee2c    0000001c     TI5TSd0X1D9 (.rodata.str1.7352097423031393046.1)
+                  1022ee48    0000001b     TI5TSd0X1D9 (.rodata.str1.11549076190623719125.1)
+                  1022ee63    0000001b     TI5TSd0X1D9 (.rodata.str1.15339785711354971805.1)
+                  1022ee7e    0000001b     TI5TSd0X1D9 (.rodata.str1.16348481043507759976.1)
+                  1022ee99    00000001     --HOLE-- [fill = 0]
+                  1022ee9a    0000001a     TI5TSd0X1D9 (.rodata.gSocRcmDssHwaClkSrcValMap)
+                  1022eeb4    0000001a     TI5TSd0X1D9 (.rodata.gSocRcmI2CClkSrcValMap)
+                  1022eece    0000001a     TI5TSd0X1D9 (.rodata.str1.11043531187034137316.1)
+                  1022eee8    0000001a     TI5TSd0X1D9 (.rodata.str1.345066732241590968.1)
+                  1022ef02    0000001a     TI5TSd0X1D9 (.rodata.str1.3627367391154595005.1)
+                  1022ef1c    0000001a     TI5TSd0X1D9 (.rodata.str1.9308218016187675422.1)
+                  1022ef36    0000001a     TI5TSd0X1D9 (.rodata.str2.11044475488397324955.2)
+                  1022ef50    0000001a     TI5TSd0X1D9 (.rodata.str2.15449887785647069546.2)
+                  1022ef6a    0000001a     TI5TSd0X1D9 (.rodata.str2.15946705148703558209.2)
+                  1022ef84    0000001a     TI5TSd0X1D9 (.rodata.str2.16330950469769673087.2)
+                  1022ef9e    0000001a     TI5TSd0X1D9 (.rodata.str2.17491713184182106461.2)
+                  1022efb8    0000001a     TI5TSd0X1D9 (.rodata.str2.18330080200921329664.2)
+                  1022efd2    0000001a     TI5TSd0X1D9 (.rodata.str2.3251207630455203130.2)
+                  1022efec    0000001a     TI5TSd0X1D9 (.rodata.str2.7353480007925523738.2)
+                  1022f006    00000019     TI5TSd0X1D9 (.rodata.str1.13319030964279771264.1)
+                  1022f01f    00000019     TI5TSd0X1D9 (.rodata.str1.14541566532736291531.1)
+                  1022f038    00000019     TI5TSd0X1D9 (.rodata.str1.17864448010432796329.1)
+                  1022f051    00000019     TI5TSd0X1D9 (.rodata.str1.2114086078852188304.1)
+                  1022f06a    00000019     TI5TSd0X1D9 (.rodata.str1.24751555892153112.1)
+                  1022f083    00000019     TI5TSd0X1D9 (.rodata.str1.4188818854221878621.1)
+                  1022f09c    00000019     TI5TSd0X1D9 (.rodata.str1.7220982907478437940.1)
+                  1022f0b5    00000003     --HOLE-- [fill = 0]
+                  1022f0b8    00000018     ti_power_clock_config.oer5f (.rodata.gSocModulesClockFrequency)
+                  1022f0d0    00000018     TI5TSd0X1D9 (.rodata.gSocRcmPllCoreOut1HSDivClkSrcValMap)
+                  1022f0e8    00000018     TI5TSd0X1D9 (.rodata.str1.11072381668396047406.1)
+                  1022f100    00000018     TI5TSd0X1D9 (.rodata.str1.13880280241163632150.1)
+                  1022f118    00000018     TI5TSd0X1D9 (.rodata.str1.14138745428871690903.1)
+                  1022f130    00000018     TI5TSd0X1D9 (.rodata.str1.14357443442536577959.1)
+                  1022f148    00000018     TI5TSd0X1D9 (.rodata.str1.15031962219422767254.1)
+                  1022f160    00000018     TI5TSd0X1D9 (.rodata.str1.3581965809621491186.1)
+                  1022f178    00000018     TI5TSd0X1D9 (.rodata.str1.5222169143683271625.1)
+                  1022f190    00000018     TI5TSd0X1D9 (.rodata.str1.6399368296519151940.1)
+                  1022f1a8    00000018     TI5TSd0X1D9 (.rodata.str1.7117352114534261319.1)
+                  1022f1c0    00000018     TI5TSd0X1D9 (.rodata.str1.9706820957026098334.1)
+                  1022f1d8    00000017     TI5TSd0X1D9 (.rodata.str1.11806798920702651437.1)
+                  1022f1ef    00000017     TI5TSd0X1D9 (.rodata.str1.13952796436832295301.1)
+                  1022f206    00000017     TI5TSd0X1D9 (.rodata.str1.1870031613485001415.1)
+                  1022f21d    00000017     TI5TSd0X1D9 (.rodata.str1.216209331926963302.1)
+                  1022f234    00000017     TI5TSd0X1D9 (.rodata.str1.2520410604157605384.1)
+                  1022f24b    00000017     TI5TSd0X1D9 (.rodata.str1.4752143452612668843.1)
+                  1022f262    00000016     TI5TSd0X1D9 (.rodata.str1.10431877328095229296.1)
+                  1022f278    00000016     TI5TSd0X1D9 (.rodata.str1.11539892540030128751.1)
+                  1022f28e    00000016     TI5TSd0X1D9 (.rodata.str1.12204705308574425848.1)
+                  1022f2a4    00000016     TI5TSd0X1D9 (.rodata.str1.13957737806124936715.1)
+                  1022f2ba    00000015     TI5TSd0X1D9 (.rodata.str1.10661837744392405360.1)
+                  1022f2cf    00000015     TI5TSd0X1D9 (.rodata.str1.11381212777099264645.1)
+                  1022f2e4    00000015     TI5TSd0X1D9 (.rodata.str1.14638444076008188119.1)
+                  1022f2f9    00000015     TI5TSd0X1D9 (.rodata.str1.16115990495187715012.1)
+                  1022f30e    00000015     TI5TSd0X1D9 (.rodata.str1.9028971719722895961.1)
+                  1022f323    00000001     --HOLE-- [fill = 0]
+                  1022f324    00000014     TI5TSd0X1D9 (.rodata.gSocRcmPllCoreOut2HSDivClkSrcValMap)
+                  1022f338    00000014     TI5TSd0X1D9 (.rodata.gSocRcmPllDspOut1HSDivClkSrcValMap)
+                  1022f34c    00000014     TI5TSd0X1D9 (.rodata.gSocRcmPllPerOut1HSDivClkSrcValMap)
+                  1022f360    00000014     TI5TSd0X1D9 (.rodata.str1.10268417008932647915.1)
+                  1022f374    00000014     TI5TSd0X1D9 (.rodata.str1.12699449726192669491.1)
+                  1022f388    00000014     TI5TSd0X1D9 (.rodata.str1.13360317898616185491.1)
+                  1022f39c    00000014     TI5TSd0X1D9 (.rodata.str1.15283741340217394288.1)
+                  1022f3b0    00000014     TI5TSd0X1D9 (.rodata.str1.18223002858906231489.1)
+                  1022f3c4    00000014     TI5TSd0X1D9 (.rodata.str1.3470851711592649868.1)
+                  1022f3d8    00000014     TI5TSd0X1D9 (.rodata.str1.5740628644060251990.1)
+                  1022f3ec    00000014     TI5TSd0X1D9 (.rodata.str1.604755283668855529.1)
+                  1022f400    00000014     TI5TSd0X1D9 (.rodata.str1.8951858603315313282.1)
+                  1022f414    00000014     TI5TSd0X1D9 (.rodata.str1.9548277276986908150.1)
+                  1022f428    00000013     TI5TSd0X1D9 (.rodata.str1.11809412673575560896.1)
+                  1022f43b    00000013     TI5TSd0X1D9 (.rodata.str1.12522974929307350974.1)
+                  1022f44e    00000013     TI5TSd0X1D9 (.rodata.str1.15963917243319758752.1)
+                  1022f461    00000013     TI5TSd0X1D9 (.rodata.str1.17759762762748327403.1)
+                  1022f474    00000013     TI5TSd0X1D9 (.rodata.str1.6581800389856563546.1)
+                  1022f487    00000013     TI5TSd0X1D9 (.rodata.str1.6804240620838107903.1)
+                  1022f49a    00000013     TI5TSd0X1D9 (.rodata.str1.8206442931600834234.1)
+                  1022f4ad    00000012     TI5TSd0X1D9 (.rodata.str1.10761216771355474595.1)
+                  1022f4bf    00000012     TI5TSd0X1D9 (.rodata.str1.11994334580763937415.1)
+                  1022f4d1    00000012     TI5TSd0X1D9 (.rodata.str1.12618535470030441786.1)
+                  1022f4e3    00000012     TI5TSd0X1D9 (.rodata.str1.16214066057953287343.1)
+                  1022f4f5    00000012     TI5TSd0X1D9 (.rodata.str1.17068150352865207890.1)
+                  1022f507    00000012     TI5TSd0X1D9 (.rodata.str1.3636552808282009429.1)
+                  1022f519    00000012     TI5TSd0X1D9 (.rodata.str1.6846684568567736618.1)
+                  1022f52b    00000012     TI5TSd0X1D9 (.rodata.str1.7622050848555842705.1)
+                  1022f53d    00000012     TI5TSd0X1D9 (.rodata.str1.8266012073279823095.1)
+                  1022f54f    00000012     TI5TSd0X1D9 (.rodata.str1.8413605889798767530.1)
+                  1022f561    00000011     TI5TSd0X1D9 (.rodata.str1.11213344761115141324.1)
+                  1022f572    00000011     TI5TSd0X1D9 (.rodata.str1.12829888597536717747.1)
+                  1022f583    00000011     TI5TSd0X1D9 (.rodata.str1.13034758174705013457.1)
+                  1022f594    00000011     TI5TSd0X1D9 (.rodata.str1.15703269695654130683.1)
+                  1022f5a5    00000011     TI5TSd0X1D9 (.rodata.str1.15937429710827639465.1)
+                  1022f5b6    00000002     --HOLE-- [fill = 0]
+                  1022f5b8    00000010     TI5TSd0X1D9 (.rodata.cst16)
+                  1022f5c8    00000010     TI5TSd0X1D9 (.rodata.str1.11150930312139499219.1)
+                  1022f5d8    00000010     TI5TSd0X1D9 (.rodata.str1.7775931810006686431.1)
+                  1022f5e8    0000000f     TI5TSd0X1D9 (.rodata.str1.12255302421072760439.1)
+                  1022f5f7    0000000f     TI5TSd0X1D9 (.rodata.str1.14238256621382050982.1)
+                  1022f606    0000000f     TI5TSd0X1D9 (.rodata.str1.16620919952707023528.1)
+                  1022f615    0000000f     TI5TSd0X1D9 (.rodata.str1.5538224336292840980.1)
+                  1022f624    0000000f     TI5TSd0X1D9 (.rodata.str1.8394993227128659014.1)
+                  1022f633    0000000e     TI5TSd0X1D9 (.rodata.str1.13177631423844230879.1)
+                  1022f641    0000000e     TI5TSd0X1D9 (.rodata.str1.16291040065538789717.1)
+                  1022f64f    0000000e     TI5TSd0X1D9 (.rodata.str1.5284790956019534156.1)
+                  1022f65d    0000000e     TI5TSd0X1D9 (.rodata.str1.8127035207146621109.1)
+                  1022f66b    0000000d     TI5TSd0X1D9 (.rodata.gSocRcmPeripheralClkSrcInfoMap)
+                  1022f678    0000000d     TI5TSd0X1D9 (.rodata.str1.201547095983851370.1)
+                  1022f685    0000000d     TI5TSd0X1D9 (.rodata.str1.4510054875572497861.1)
+                  1022f692    0000000d     TI5TSd0X1D9 (.rodata.str1.7377125470334371581.1)
+                  1022f69f    0000000d     TI5TSd0X1D9 (.rodata.str1.8451115526150144341.1)
+                  1022f6ac    0000000d     TI5TSd0X1D9 (.rodata.str1.9273362903525893015.1)
+                  1022f6b9    0000000c     TI5TSd0X1D9 (.rodata.gSocRcmHsDivMuxClkSrcInfoMap)
+                  1022f6c5    0000000c     TI5TSd0X1D9 (.rodata.str1.7628898710153582048.1)
+                  1022f6d1    0000000c     TI5TSd0X1D9 (.rodata.str1.8270217824279323634.1)
+                  1022f6dd    0000000b     TI5TSd0X1D9 (.rodata.str1.11275597551455926466.1)
+                  1022f6e8    0000000b     TI5TSd0X1D9 (.rodata.str1.355269870974073169.1)
+                  1022f6f3    0000000b     TI5TSd0X1D9 (.rodata.str1.3610013284557629492.1)
+                  1022f6fe    0000000b     TI5TSd0X1D9 (.rodata.str1.666638709540304919.1)
+                  1022f709    00000001     --HOLE-- [fill = 0]
+                  1022f70a    0000000a     TI5TSd0X1D9 (.rodata.gSocRcmR5ClkSrcValMap)
+                  1022f714    0000000a     TI5TSd0X1D9 (.rodata.str1.11556136066388248970.1)
+                  1022f71e    0000000a     TI5TSd0X1D9 (.rodata.str1.207644150805284252.1)
+                  1022f728    0000000a     TI5TSd0X1D9 (.rodata.str1.4206727780196517765.1)
+                  1022f732    0000000a     TI5TSd0X1D9 (.rodata.str1.5487084172370186406.1)
+                  1022f73c    00000008     TI5TSd0X1D9 (.rodata.cst8)
+                  1022f744    00000008     TI5TSd0X1D9 (.rodata.str1.7545647463021371444.1)
+                  1022f74c    00000006     TI5TSd0X1D9 (.rodata.str1.10277562541090766604.1)
+                  1022f752    00000005     TI5TSd0X1D9 (.rodata.gSocRcmR5ClkSrcInfoMap)
+                  1022f757    00000005     TI5TSd0X1D9 (.rodata.str1.10650609077182403871.1)
+                  1022f75c    00000005     TI5TSd0X1D9 (.rodata.str1.111424405254852902.1)
+                  1022f761    00000005     TI5TSd0X1D9 (.rodata.str1.165376421970698108.1)
+                  1022f766    00000005     TI5TSd0X1D9 (.rodata.str1.2183171174887621221.1)
+                  1022f76b    00000005     TI5TSd0X1D9 (.rodata.str1.4791359573944769002.1)
+                  1022f770    00000004     freertos.awr2x44p.r5f.ti-arm-clang.release.lib : CacheP_armv7r.obj (.rodata.gCacheL1dCacheLineSize)
+                  1022f774    00000004                                                    : CacheP_armv7r.obj (.rodata.gCacheL1pCacheLineSize)
+                  1022f778    00000004     TI5TSd0X1D9 (.rodata.str1.15689189384472174473.1)
+                  1022f77c    00000004     TI5TSd0X1D9 (.rodata.str1.4249452160499694016.1)
+                  1022f780    00000004     freertos.awr2x44p.r5f.ti-arm-clang.release.lib : tasks.obj (.rodata.uxTopUsedPriority)
+                  1022f784    00000004     --HOLE-- [fill = 0]
+
+.text.hwi 
+*          0    1022f788    00000820     
+                  1022f788    000002aa     freertos.awr2x44p.r5f.ti-arm-clang.release.lib : HwiP_armv7r_handlers_freertos.obj (.text.hwi)
+                  1022fa32    00000002     --HOLE-- [fill = 0]
+                  1022fa34    000001ec                                                    : portASM.obj (.text.hwi)
+                  1022fc20    00000184     TI5TSd0X1D9 (.text.hwi)
+                  1022fda4    00000104     freertos.awr2x44p.r5f.ti-arm-clang.release.lib : HwiP_armv7r_handlers_freertos_asm.obj (.text.hwi)
+                  1022fea8    0000008a                                                    : HwiP_armv7r_vim.obj (.text.hwi)
+                  1022ff32    00000002     --HOLE-- [fill = 0]
+                  1022ff34    00000070                                                    : HwiP_armv7r_asm.obj (.text.hwi)
+                  1022ffa4    00000004     --HOLE-- [fill = 0]
+
+.text.cache 
+*          0    1022ffa8    00000428     
+                  1022ffa8    00000340     freertos.awr2x44p.r5f.ti-arm-clang.release.lib : CacheP_armv7r_asm.obj (.text.cache)
+                  102302e8    000000ca                                                    : CacheP_armv7r.obj (.text.cache)
+                  102303b2    00000002     --HOLE-- [fill = 0]
+                  102303b4    00000008                                                    : CacheP_armv7r_asm.obj (.tramp.CacheP_invL1d.1)
+                  102303bc    00000008                                                    : CacheP_armv7r_asm.obj (.tramp.CacheP_enableL1p.1)
+                  102303c4    00000008                                                    : HwiP_armv7r_asm.obj (.tramp.HwiP_restore.2)
+                  102303cc    00000004     --HOLE-- [fill = 0]
+
+.text.mpu 
+*          0    102303d0    000000f0     
+                  102303d0    00000078     freertos.awr2x44p.r5f.ti-arm-clang.release.lib : MpuP_armv7r_asm.obj (.text.mpu)
+                  10230448    0000006a                                                    : MpuP_armv7r.obj (.text.mpu)
+                  102304b2    00000002     --HOLE-- [fill = 0]
+                  102304b4    00000008                                                    : HwiP_armv7r_asm.obj (.tramp.HwiP_restore.3)
+                  102304bc    00000004     --HOLE-- [fill = 0]
+
+.text.boot 
+*          0    102304c0    000001f8     
+                  102304c0    000000fc     freertos.awr2x44p.r5f.ti-arm-clang.release.lib : boot_armv7r_asm.obj (.text.boot)
+                  102305bc    000000cc     ti_dpl_config.oer5f (.text.boot)
+                  10230688    00000018     freertos.awr2x44p.r5f.ti-arm-clang.release.lib : DebugP_log.obj (.text.boot)
+                  102306a0    00000018                                                    : boot_armv7r.obj (.text.boot)
+
+.text:abort 
+*          0    102306b8    00000008     
+                  102306b8    00000008     libc.a : exit.c.obj (.text:abort)
+
+.data      0    102306c0    00000548     
+                  102306c0    000000f0     libc.a : defs.c.obj (.data._ftable)
+                  102307b0    0000009c     TI5TSd0X1D9 (.data.gUartDrvObj)
+                  1023084c    00000090     TI5TSd0X1D9 (.data.gPinMuxMainDomainCfg)
+                  102308dc    00000080     TI5TSd0X1D9 (.data.gEdmaAttrs)
+                  1023095c    00000004     TI5TSd0X1D9 (.data.prvSampleTimeNow.xLastTime)
+                  10230960    00000078     TI5TSd0X1D9 (.data..L_MergedGlobals.330)
+                  102309d8    00000078     TI5TSd0X1D9 (.data..L_MergedGlobals)
+                  10230a50    00000078     libsysbm.a : host_device.c.obj (.data._device)
+                  10230ac8    00000074     TI5TSd0X1D9 (.data..L_MergedGlobals.329)
+                  10230b3c    00000004     freertos.awr2x44p.r5f.ti-arm-clang.release.lib : port.obj (.data.ulPortTaskHasFPUContext)
+                  10230b40    00000070     TI5TSd0X1D9 (.data..L_MergedGlobals.328)
+                  10230bb0    00000050     libsysbm.a : host_device.c.obj (.data._stream)
+                  10230c00    00000001     TI5TSd0X1D9 (.data.memory_is_initialized)
+                  10230c01    00000007     --HOLE-- [fill = 0]
+
+.irqstack 
+*          0    10230c08    00000100     UNINITIALIZED
+                  10230c08    00000100     --HOLE--
+
+.fiqstack 
+*          0    10230d08    00000100     UNINITIALIZED
+                  10230d08    00000100     --HOLE--
+
+.svcstack 
+*          0    10230e08    00001000     UNINITIALIZED
+                  10230e08    00001000     --HOLE--
+
+.abortstack 
+*          0    10231e08    00000100     UNINITIALIZED
+                  10231e08    00000100     --HOLE--
+
+.undefinedstack 
+*          0    10231f08    00000100     UNINITIALIZED
+                  10231f08    00000100     --HOLE--
+
+MODULE SUMMARY
+
+       Module                                  code    ro data   rw data
+       ------                                  ----    -------   -------
+    ./
+       TI5TSd0X1D9                             10372   5494      17029  
+    +--+---------------------------------------+-------+---------+---------+
+       Total:                                  10372   5494      17029  
+                                                                        
+    obj_awr2x44P/
+       main.oer5f                              1504    0         0      
+    +--+---------------------------------------+-------+---------+---------+
+       Total:                                  1504    0         0      
+                                                                        
+    obj_awr2x44P/mssgenerated/
+       ti_dpl_config.oer5f                     1828    100       0      
+       ti_drivers_open_close.oer5f             124     56        0      
+       ti_power_clock_config.oer5f             0       24        0      
+    +--+---------------------------------------+-------+---------+---------+
+       Total:                                  1952    180       0      
+                                                                        
+    /opt/ti/ccs2010/ccs/tools/compiler/ti-cgt-armllvm_4.0.2.LTS/lib/armv7r-ti-none-eabihf/c/libc.a
+       strcmp32.S.obj                          924     0         0      
+       memory.c.obj                            848     0         0      
+       defs.c.obj                              0       0         400    
+       memcpy32.S.obj                          384     0         0      
+       memset32.S.obj                          160     0         0      
+       fflush.c.obj                            136     0         0      
+       autoinit.c.obj                          84      0         0      
+       fopen.c.obj                             60      0         0      
+       exit.c.obj                              52      0         0      
+    +--+---------------------------------------+-------+---------+---------+
+       Total:                                  2648    0         400    
+                                                                        
+    /opt/ti/ccs2010/ccs/tools/compiler/ti-cgt-armllvm_4.0.2.LTS/lib/armv7r-ti-none-eabihf/c/libsysbm.a
+       trgmsg.c.obj                            176     0         288    
+       host_device.c.obj                       0       0         200    
+       hostopen.c.obj                          120     0         8      
+       hostrename.c.obj                        124     0         0      
+       hostlseek.c.obj                         104     0         0      
+       hostread.c.obj                          88      0         0      
+       hostwrite.c.obj                         88      0         0      
+       hostunlink.c.obj                        80      0         0      
+       hostclose.c.obj                         56      0         0      
+       write.c.obj                             52      0         0      
+       hostexit.c.obj                          8       0         0      
+    +--+---------------------------------------+-------+---------+---------+
+       Total:                                  896     0         496    
+                                                                        
+    /opt/ti/ccs2010/ccs/tools/compiler/ti-cgt-armllvm_4.0.2.LTS/lib/armv7r-ti-none-eabihf/libclang_rt.builtins.a
+       udivmoddi4.S.obj                        280     0         0      
+       aeabi_uldivmod.S.obj                    36      0         0      
+       aeabi_memset.S.obj                      28      0         0      
+       aeabi_memcpy.S.obj                      12      0         0      
+       aeabi_div0.c.obj                        4       0         0      
+    +--+---------------------------------------+-------+---------+---------+
+       Total:                                  360     0         0      
+                                                                        
+    /opt/ti/mcu_plus_sdk_awr2x44p_10_02_00_04/source/drivers/lib/drivers.awr2x44p.r5f.ti-arm-clang.release.lib
+       edma.obj                                464     0         0      
+       uart_sci.obj                            368     0         0      
+       soc_rcm.obj                             100     0         0      
+    +--+---------------------------------------+-------+---------+---------+
+       Total:                                  932     0         0      
+                                                                        
+    /opt/ti/mcu_plus_sdk_awr2x44p_10_02_00_04/source/kernel/freertos/lib/freertos.awr2x44p.r5f.ti-arm-clang.release.lib
+       HwiP_armv7r_vim.obj                     138     0         4104   
+       tasks.obj                               2484    4         0      
+       DebugP_freertos.obj                     1228    0         0      
+       queue.obj                               780     0         256    
+       CacheP_armv7r_asm.obj                   848     0         0      
+       SemaphoreP_freertos.obj                 840     0         0      
+       HwiP_armv7r_handlers_freertos.obj       682     0         0      
+       portASM.obj                             492     0         0      
+       port.obj                                476     0         4      
+       HwiP_armv7r_handlers_freertos_asm.obj   260     0         0      
+       boot_armv7r_asm.obj                     252     0         0      
+       CacheP_armv7r.obj                       202     8         0      
+       TaskP_freertos.obj                      0       0         160    
+       HwiP_armv7r_asm.obj                     144     0         0      
+       MpuP_armv7r_asm.obj                     120     0         0      
+       DebugP_log.obj                          116     0         0      
+       MpuP_armv7r.obj                         106     0         0      
+       ClockP_freertos.obj                     100     0         0      
+       list.obj                                70      0         0      
+       HwiP_armv7r_vectors_freertos_asm.obj    64      0         0      
+       PmuP_armv7r_asm.obj                     48      0         0      
+       heap_3.obj                              32      0         0      
+       boot_armv7r.obj                         24      0         0      
+    +--+---------------------------------------+-------+---------+---------+
+       Total:                                  9506    12        4524   
+                                                                        
+       Heap:                                   0       0         4096   
+       Stack:                                  0       0         8192   
+    +--+---------------------------------------+-------+---------+---------+
+       Grand Total:                            28170   5686      34737  
+
+VENEERS
+
+callee name               veneer name
+   callee addr  veneer addr  call addr  call info
+--------------  -----------  ---------  ----------------
+CacheP_invL1d             $Ven$TA$L$PI$$CacheP_invL1d
+   10230018     102303b4     102303ae   freertos.awr2x44p.r5f.ti-arm-clang.release.lib : CacheP_armv7r.obj (.text.cache)
+CacheP_enableL1p          $Ven$TA$L$PI$$CacheP_enableL1p
+   10230000     102303bc     10230388   freertos.awr2x44p.r5f.ti-arm-clang.release.lib : CacheP_armv7r.obj (.text.cache)
+HwiP_restore              $Ven$TA$L$PI$$HwiP_restore
+   1022ff74     102303c4     10230368   freertos.awr2x44p.r5f.ti-arm-clang.release.lib : CacheP_armv7r.obj (.text.cache)
+HwiP_restore              $Ven$TA$L$PI$$HwiP_restore
+   1022ff74     102304b4     10230474   freertos.awr2x44p.r5f.ti-arm-clang.release.lib : MpuP_armv7r.obj (.text.mpu)
+                             102304ae                                                  : MpuP_armv7r.obj (.text.mpu)
+__aeabi_memcpy            $Ven$TA$L$PI$$__aeabi_memcpy
+   1022e11c     1022e120     1022dede   TI5TSd0X1D9 (.text.prvCopyDataFromQueue)
+HwiP_restore              $Ven$TA$L$PI$$HwiP_restore
+   1022ff74     1022e128     1022b9d6   freertos.awr2x44p.r5f.ti-arm-clang.release.lib : SemaphoreP_freertos.obj (.text.SemaphoreP_post)
+                             1022cada   TI5TSd0X1D9 (.text.EDMA_freeDmaChannel)
+                             1022cb6e   TI5TSd0X1D9 (.text.EDMA_freeTcc)
+                             1022dfae   TI5TSd0X1D9 (.text.DebugP_logZoneEnable)
+HwiP_enable               $Ven$TA$L$PI$$HwiP_enable
+   1022ff54     1022e130     10229f4a   ti_dpl_config.oer5f (.text.Dpl_init)
+
+[7 trampolines]
+[11 trampoline calls]
+
+
+GLOBAL SYMBOLS: SORTED ALPHABETICALLY BY Name 
+
+address   name                               
+-------   ----                               
+102292b8  C$$EXIT                            
+1022d720  C$$IO$$                            
+102302b8  CacheP_configForceWrThru           
+10230333  CacheP_disable                     
+1022ffa8  CacheP_disableL1d                  
+1022ffd0  CacheP_disableL1p                  
+1023036d  CacheP_enable                      
+1022ffe8  CacheP_enableL1d                   
+10230000  CacheP_enableL1p                   
+102302ac  CacheP_getCacheLevelInfo           
+10230274  CacheP_getEnabled                  
+102302e9  CacheP_init                        
+1023038d  CacheP_inv                         
+10230018  CacheP_invL1d                      
+1023008c  CacheP_invL1dAll                   
+10230050  CacheP_invL1p                      
+10230094  CacheP_invL1pAll                   
+102302d8  CacheP_setDLFO                     
+1023009c  CacheP_wb                          
+10230114  CacheP_wbAll                       
+102300d8  CacheP_wbInv                       
+102301bc  CacheP_wbInvAll                    
+102301d4  CacheP_wbInvAllAsm                 
+1022dd1c  CycleCounterP_getCount32           
+10229cbd  Dpl_init                           
+10230a08  FreeRTOS_errno                     
+1022fe6c  GET_ADFSR                          
+1022fe84  GET_AIFSR                          
+1022fe74  GET_DFAR                           
+1022fe64  GET_DFSR                           
+1022fe8c  GET_IFAR                           
+1022fe7c  GET_IFSR                           
+1022fe94  GET_SPSR                           
+1022fda4  HwiP_data_abort_handler            
+1022f9a7  HwiP_data_abort_handler_c          
+1022ff34  HwiP_disable                       
+1022ff44  HwiP_disableFIQ                    
+1022ff8c  HwiP_disableVIC                    
+1022ff54  HwiP_enable                        
+1022ff64  HwiP_enableFIQ                     
+1022ff7c  HwiP_enableVIC                     
+1022f81d  HwiP_fiq_handler                   
+1022ff9c  HwiP_getCPSR                       
+1022fadc  HwiP_irq_handler                   
+1022f789  HwiP_irq_handler_c                 
+1022fde8  HwiP_prefetch_abort_handler        
+1022f923  HwiP_prefetch_abort_handler_c      
+1022f8cd  HwiP_reserved_handler              
+1022ff74  HwiP_restore                       
+1022fa6c  HwiP_svc_handler                   
+1022fe34  HwiP_undefined_handler             
+1022f8f3  HwiP_undefined_handler_c           
+1022fa23  HwiP_user_data_abort_handler_c     
+1022f997  HwiP_user_prefetch_abort_handler_c 
+1022f90f  HwiP_user_undefined_handler_c      
+102303d0  MpuP_disableAsm                    
+102303e8  MpuP_disableBRAsm                  
+102303f8  MpuP_enableAsm                     
+10230410  MpuP_enableBRAsm                   
+10230420  MpuP_isEnableAsm                   
+10230434  MpuP_setRegionAsm                  
+1022dd44  PmuP_clearOverflowStatus           
+1022dd34  PmuP_disableCounters               
+1022dd2c  PmuP_enableCounters                
+1022dd3c  PmuP_getOverflowStatus             
+1022dd24  PmuP_setup                         
+1022da91  SemaphoreP_constructBinary         
+1022da01  SemaphoreP_constructMutex          
+1022d515  SemaphoreP_destruct                
+1022b7a1  SemaphoreP_pend                    
+1022b8d1  SemaphoreP_post                    
+10224b20  _CIOBUF_                           
+10231f08  __ABORT_STACK_END                  
+00000100  __ABORT_STACK_SIZE                 
+10231e08  __ABORT_STACK_START                
+10225280  __BSS_END                          
+10220000  __BSS_START                        
+10224b20  __CIOBUF_                          
+10230e08  __FIQ_STACK_END                    
+00000100  __FIQ_STACK_SIZE                   
+10230d08  __FIQ_STACK_START                  
+10230d08  __IRQ_STACK_END                    
+00000100  __IRQ_STACK_SIZE                   
+10230c08  __IRQ_STACK_START                  
+10228280  __STACK_END                        
+00002000  __STACK_SIZE                       
+10231e08  __SVC_STACK_END                    
+00001000  __SVC_STACK_SIZE                   
+10230e08  __SVC_STACK_START                  
+00001000  __SYSMEM_SIZE                      
+00000000  __TI_ATRegion0_region_sz           
+00000000  __TI_ATRegion0_src_addr            
+00000000  __TI_ATRegion0_trg_addr            
+00000000  __TI_ATRegion1_region_sz           
+00000000  __TI_ATRegion1_src_addr            
+00000000  __TI_ATRegion1_trg_addr            
+00000000  __TI_ATRegion2_region_sz           
+00000000  __TI_ATRegion2_src_addr            
+00000000  __TI_ATRegion2_trg_addr            
+UNDEFED   __TI_CINIT_Base                    
+UNDEFED   __TI_CINIT_Limit                   
+UNDEFED   __TI_Handler_Table_Base            
+UNDEFED   __TI_Handler_Table_Limit           
+1022d780  __TI_auto_init_nobinit_nopinit     
+102309e8  __TI_cleanup_ptr                   
+102309e4  __TI_dtors_ptr                     
+ffffffff  __TI_pprof_out_hndl                
+ffffffff  __TI_prof_data_size                
+ffffffff  __TI_prof_data_start               
+1022d67c  __TI_readmsg                       
+00000000  __TI_static_base__                 
+1022d6d4  __TI_writemsg                      
+10232008  __UNDEFINED_STACK_END              
+00000100  __UNDEFINED_STACK_SIZE             
+10231f08  __UNDEFINED_STACK_START            
+10229fc4  __aeabi_ldiv0                      
+1022e0f4  __aeabi_memclr                     
+1022e0f4  __aeabi_memclr4                    
+1022e0f4  __aeabi_memclr8                    
+1022e11c  __aeabi_memcpy                     
+1022e11c  __aeabi_memcpy4                    
+1022e11c  __aeabi_memcpy8                    
+1022e0d8  __aeabi_memset                     
+1022e0d8  __aeabi_memset4                    
+1022e0d8  __aeabi_memset8                    
+1022de78  __aeabi_uldivmod                   
+ffffffff  __binit__                          
+102305bd  __mpu_init                         
+10226280  __stack                            
+1022bd58  __udivmoddi4                       
+102304e4  _c_int00                           
+102304c0  _c_int00_sbl                       
+UNDEFED   _system_post_cinit                 
+102306a1  _system_pre_init                   
+00000000  _vectors                           
+102306b8  abort                              
+ffffffff  binit                              
+1022c92d  eTaskGetState                      
+1022ddd8  exit                               
+1022526c  gAppTask                           
+10225130  gAppTaskObj                        
+10220000  gAppTskStackMain                   
+1022e4e8  gCacheConfig                       
+1022f770  gCacheL1dCacheLineSize             
+1022f774  gCacheL1pCacheLineSize             
+10230b60  gClockConfig                       
+10230a4c  gDebug                             
+10230a48  gHwiConfig                         
+1022e4f0  gMpuConfig                         
+1022e4fc  gMpuRegionConfig                   
+1022520c  gRovDummyQueue                     
+10228281  main                               
+1022b0a8  memcpy                             
+1022c88c  memset                             
+10229651  putchar_                           
+1022e061  pvTaskIncrementMutexHeldCount      
+10230a04  pxCurrentTCB                       
+1022cd31  pxPortInitialiseStack              
+102292c0  strcmp                             
+102309ec  ulCriticalNesting                  
+102309f4  ulPortInterruptNesting             
+102309f8  ulPortSchedularRunning             
+10230b3c  ulPortTaskHasFPUContext            
+102309f0  ulPortYieldRequired                
+1022f780  uxTopUsedPriority                  
+1022c27d  vApplicationIdleHook               
+1022de05  vApplicationStackOverflowHook      
+1022fa34  vPortRestoreTaskContext            
+1022df09  vPortTimerTickHandler              
+1022e091  vTaskEnterCritical                 
+1022df51  vTaskExitCritical                  
+1022d0b9  vTaskGetInfo                       
+1022da49  vTaskPlaceOnEventList              
+1022d915  vTaskPlaceOnEventListRestricted    
+1022c68d  vTaskPriorityDisinheritAfterTimeout
+1022bc41  vTaskStartScheduler                
+1022c185  vTaskSwitchContext                 
+1022e0a9  xPortStartScheduler                
+1022c9c9  xTaskCheckForTimeOut               
+1022c519  xTaskCreateStatic                  
+1022dd4d  xTaskGetIdleTaskHandle             
+1022e0c1  xTaskGetTickCount                  
+1022c36d  xTaskIncrementTick                 
+1022c7e5  xTaskPriorityDisinherit            
+1022cec1  xTaskPriorityInherit               
+1022cf41  xTaskRemoveFromEventList           
+1022c44d  xTaskResumeAll                     
+
+
+GLOBAL SYMBOLS: SORTED BY Symbol Address 
+
+address   name                               
+-------   ----                               
+00000000  __TI_ATRegion0_region_sz           
+00000000  __TI_ATRegion0_src_addr            
+00000000  __TI_ATRegion0_trg_addr            
+00000000  __TI_ATRegion1_region_sz           
+00000000  __TI_ATRegion1_src_addr            
+00000000  __TI_ATRegion1_trg_addr            
+00000000  __TI_ATRegion2_region_sz           
+00000000  __TI_ATRegion2_src_addr            
+00000000  __TI_ATRegion2_trg_addr            
+00000000  __TI_static_base__                 
+00000000  _vectors                           
+00000100  __ABORT_STACK_SIZE                 
+00000100  __FIQ_STACK_SIZE                   
+00000100  __IRQ_STACK_SIZE                   
+00000100  __UNDEFINED_STACK_SIZE             
+00001000  __SVC_STACK_SIZE                   
+00001000  __SYSMEM_SIZE                      
+00002000  __STACK_SIZE                       
+10220000  __BSS_START                        
+10220000  gAppTskStackMain                   
+10224b20  _CIOBUF_                           
+10224b20  __CIOBUF_                          
+10225130  gAppTaskObj                        
+1022520c  gRovDummyQueue                     
+1022526c  gAppTask                           
+10225280  __BSS_END                          
+10226280  __stack                            
+10228280  __STACK_END                        
+10228281  main                               
+102292b8  C$$EXIT                            
+102292c0  strcmp                             
+10229651  putchar_                           
+10229cbd  Dpl_init                           
+10229fc4  __aeabi_ldiv0                      
+1022b0a8  memcpy                             
+1022b7a1  SemaphoreP_pend                    
+1022b8d1  SemaphoreP_post                    
+1022bc41  vTaskStartScheduler                
+1022bd58  __udivmoddi4                       
+1022c185  vTaskSwitchContext                 
+1022c27d  vApplicationIdleHook               
+1022c36d  xTaskIncrementTick                 
+1022c44d  xTaskResumeAll                     
+1022c519  xTaskCreateStatic                  
+1022c68d  vTaskPriorityDisinheritAfterTimeout
+1022c7e5  xTaskPriorityDisinherit            
+1022c88c  memset                             
+1022c92d  eTaskGetState                      
+1022c9c9  xTaskCheckForTimeOut               
+1022cd31  pxPortInitialiseStack              
+1022cec1  xTaskPriorityInherit               
+1022cf41  xTaskRemoveFromEventList           
+1022d0b9  vTaskGetInfo                       
+1022d515  SemaphoreP_destruct                
+1022d67c  __TI_readmsg                       
+1022d6d4  __TI_writemsg                      
+1022d720  C$$IO$$                            
+1022d780  __TI_auto_init_nobinit_nopinit     
+1022d915  vTaskPlaceOnEventListRestricted    
+1022da01  SemaphoreP_constructMutex          
+1022da49  vTaskPlaceOnEventList              
+1022da91  SemaphoreP_constructBinary         
+1022dd1c  CycleCounterP_getCount32           
+1022dd24  PmuP_setup                         
+1022dd2c  PmuP_enableCounters                
+1022dd34  PmuP_disableCounters               
+1022dd3c  PmuP_getOverflowStatus             
+1022dd44  PmuP_clearOverflowStatus           
+1022dd4d  xTaskGetIdleTaskHandle             
+1022ddd8  exit                               
+1022de05  vApplicationStackOverflowHook      
+1022de78  __aeabi_uldivmod                   
+1022df09  vPortTimerTickHandler              
+1022df51  vTaskExitCritical                  
+1022e061  pvTaskIncrementMutexHeldCount      
+1022e091  vTaskEnterCritical                 
+1022e0a9  xPortStartScheduler                
+1022e0c1  xTaskGetTickCount                  
+1022e0d8  __aeabi_memset                     
+1022e0d8  __aeabi_memset4                    
+1022e0d8  __aeabi_memset8                    
+1022e0f4  __aeabi_memclr                     
+1022e0f4  __aeabi_memclr4                    
+1022e0f4  __aeabi_memclr8                    
+1022e11c  __aeabi_memcpy                     
+1022e11c  __aeabi_memcpy4                    
+1022e11c  __aeabi_memcpy8                    
+1022e4e8  gCacheConfig                       
+1022e4f0  gMpuConfig                         
+1022e4fc  gMpuRegionConfig                   
+1022f770  gCacheL1dCacheLineSize             
+1022f774  gCacheL1pCacheLineSize             
+1022f780  uxTopUsedPriority                  
+1022f789  HwiP_irq_handler_c                 
+1022f81d  HwiP_fiq_handler                   
+1022f8cd  HwiP_reserved_handler              
+1022f8f3  HwiP_undefined_handler_c           
+1022f90f  HwiP_user_undefined_handler_c      
+1022f923  HwiP_prefetch_abort_handler_c      
+1022f997  HwiP_user_prefetch_abort_handler_c 
+1022f9a7  HwiP_data_abort_handler_c          
+1022fa23  HwiP_user_data_abort_handler_c     
+1022fa34  vPortRestoreTaskContext            
+1022fa6c  HwiP_svc_handler                   
+1022fadc  HwiP_irq_handler                   
+1022fda4  HwiP_data_abort_handler            
+1022fde8  HwiP_prefetch_abort_handler        
+1022fe34  HwiP_undefined_handler             
+1022fe64  GET_DFSR                           
+1022fe6c  GET_ADFSR                          
+1022fe74  GET_DFAR                           
+1022fe7c  GET_IFSR                           
+1022fe84  GET_AIFSR                          
+1022fe8c  GET_IFAR                           
+1022fe94  GET_SPSR                           
+1022ff34  HwiP_disable                       
+1022ff44  HwiP_disableFIQ                    
+1022ff54  HwiP_enable                        
+1022ff64  HwiP_enableFIQ                     
+1022ff74  HwiP_restore                       
+1022ff7c  HwiP_enableVIC                     
+1022ff8c  HwiP_disableVIC                    
+1022ff9c  HwiP_getCPSR                       
+1022ffa8  CacheP_disableL1d                  
+1022ffd0  CacheP_disableL1p                  
+1022ffe8  CacheP_enableL1d                   
+10230000  CacheP_enableL1p                   
+10230018  CacheP_invL1d                      
+10230050  CacheP_invL1p                      
+1023008c  CacheP_invL1dAll                   
+10230094  CacheP_invL1pAll                   
+1023009c  CacheP_wb                          
+102300d8  CacheP_wbInv                       
+10230114  CacheP_wbAll                       
+102301bc  CacheP_wbInvAll                    
+102301d4  CacheP_wbInvAllAsm                 
+10230274  CacheP_getEnabled                  
+102302ac  CacheP_getCacheLevelInfo           
+102302b8  CacheP_configForceWrThru           
+102302d8  CacheP_setDLFO                     
+102302e9  CacheP_init                        
+10230333  CacheP_disable                     
+1023036d  CacheP_enable                      
+1023038d  CacheP_inv                         
+102303d0  MpuP_disableAsm                    
+102303e8  MpuP_disableBRAsm                  
+102303f8  MpuP_enableAsm                     
+10230410  MpuP_enableBRAsm                   
+10230420  MpuP_isEnableAsm                   
+10230434  MpuP_setRegionAsm                  
+102304c0  _c_int00_sbl                       
+102304e4  _c_int00                           
+102305bd  __mpu_init                         
+102306a1  _system_pre_init                   
+102306b8  abort                              
+102309e4  __TI_dtors_ptr                     
+102309e8  __TI_cleanup_ptr                   
+102309ec  ulCriticalNesting                  
+102309f0  ulPortYieldRequired                
+102309f4  ulPortInterruptNesting             
+102309f8  ulPortSchedularRunning             
+10230a04  pxCurrentTCB                       
+10230a08  FreeRTOS_errno                     
+10230a48  gHwiConfig                         
+10230a4c  gDebug                             
+10230b3c  ulPortTaskHasFPUContext            
+10230b60  gClockConfig                       
+10230c08  __IRQ_STACK_START                  
+10230d08  __FIQ_STACK_START                  
+10230d08  __IRQ_STACK_END                    
+10230e08  __FIQ_STACK_END                    
+10230e08  __SVC_STACK_START                  
+10231e08  __ABORT_STACK_START                
+10231e08  __SVC_STACK_END                    
+10231f08  __ABORT_STACK_END                  
+10231f08  __UNDEFINED_STACK_START            
+10232008  __UNDEFINED_STACK_END              
+ffffffff  __TI_pprof_out_hndl                
+ffffffff  __TI_prof_data_size                
+ffffffff  __TI_prof_data_start               
+ffffffff  __binit__                          
+ffffffff  binit                              
+UNDEFED   __TI_CINIT_Base                    
+UNDEFED   __TI_CINIT_Limit                   
+UNDEFED   __TI_Handler_Table_Base            
+UNDEFED   __TI_Handler_Table_Limit           
+UNDEFED   _system_post_cinit                 
+
+[187 symbols]

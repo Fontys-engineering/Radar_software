@@ -1,0 +1,71 @@
+                                   OVERVIEW                                    
+Memory                              Used               Total        Percent Used
+--------------------------------------------------------------------------------
+DSS_L3                                 0             2097152               0.00%
+HWA_RAM                                0              131072               0.00%
+MSS_L2                            319968              819200              39.06%
+RESET_VECTORS                         64                 256              25.00%
+RTOS_NORTOS_IPC_SHM_M                2432                7488              32.48%
+SBL_RESERVED_L2_RAM                    0              131072               0.00%
+TCMA_RAM                               0               65280               0.00%
+TCMB_RAM                               0               65536               0.00%
+
+
+                            Type             DSS_L3      HWA_RAM       MSS_L2  RESET_VECTO.  RTOS_NORTOS.  SBL_RESERVE.     TCMA_RAM     TCMB_RAM
+--------------------------------------------------------------------------------
+(.common:gAppMainTskStack)  data                  0            0        16384            0            0            0            0            0
+(.common:gDpmTskStack)      data                  0            0        16384            0            0            0            0            0
+(.common:gFlashHandle)      data                  0            0            4            0            0            0            0            0
+(.common:gFlashObject_GD25B data                  0            0           16            0            0            0            0            0
+(.common:gMmwCtrlTskStack)  data                  0            0        12288            0            0            0            0            0
+(.common:gMmwMssMCB)        data                  0            0         3688            0            0            0            0            0
+(.common:gRovDummyQueue)    data                  0            0           80            0            0            0            0            0
+(.common:gUartTskStack)     data                  0            0        16384            0            0            0            0            0
+APP                         code                  0            0        14180            0            0            0            0            0
+APP                         data                  0            0         1256            0            0            0            0            0
+DPU                         code                  0            0           86            0            0            0            0            0
+TI4LaPoTdKR                 code                  0            0        48516            0            0            0            0            0
+TI4LaPoTdKR                 data                  0            0        30095            0            0            0            0            0
+TI4LaPoTdKR                 rodata                0            0        31199            0            0            0            0            0
+board.awr294x.r5f.ti-arm-cl code                  0            0         2724            0            0            0            0            0
+board.awr294x.r5f.ti-arm-cl data                  0            0           44            0            0            0            0            0
+board.awr294x.r5f.ti-arm-cl rodata                0            0          103            0            0            0            0            0
+drivers.awr294x.r5f.ti-arm- code                  0            0        13830            0            0            0            0            0
+drivers.awr294x.r5f.ti-arm- data                  0            0        14064            0            0            0            0            0
+drivers.awr294x.r5f.ti-arm- rodata                0            0           88            0            0            0            0            0
+freertos.awr294x.r5f.ti-arm code                  0            0        10246            0            0            0            0            0
+freertos.awr294x.r5f.ti-arm data                  0            0         4524            0            0            0            0            0
+freertos.awr294x.r5f.ti-arm rodata                0            0           12            0            0            0            0            0
+freertos.awr294x.r5f.ti-arm stack                 0            0            4            0            0            0            0            0
+freertos.awr294x.r5f.ti-arm vectors               0            0            0           64            0            0            0            0
+libc.a                      code                  0            0        10708            0            0            0            0            0
+libc.a                      data                  0            0          404            0            0            0            0            0
+libc.a                      rodata                0            0          257            0            0            0            0            0
+libc.a                      sysmem                0            0           16            0            0            0            0            0
+libclang_rt.builtins.a      code                  0            0          912            0            0            0            0            0
+libcli_awr2943.aer5f        code                  0            0           72            0            0            0            0            0
+libcli_awr2943.aer5f        data                  0            0        17472            0            0            0            0            0
+libcli_awr2943.aer5f        rodata                0            0          228            0            0            0            0            0
+libdpm_awr2943.aer5f        code                  0            0          116            0            0            0            0            0
+libdpm_awr2943.aer5f        data                  0            0            4            0            0            0            0            0
+libdpm_awr2943.aer5f        rodata                0            0           36            0            0            0            0            0
+libhsiheader_awr2943.aer5f  code                  0            0           96            0            0            0            0            0
+libhsiheader_awr2943.aer5f  data                  0            0          144            0            0            0            0            0
+libmmwave_awr2943.aer5f     code                  0            0         2698            0            0            0            0            0
+libmmwave_awr2943.aer5f     data                  0            0        13188            0            0            0            0            0
+libsysbm.a                  code                  0            0          896            0            0            0            0            0
+libsysbm.a                  data                  0            0          496            0            0            0            0            0
+linker-generated            linker                0            0        17730            0            0            0            0            0
+mmw_lvds_stream.oer5f       code                  0            0         2928            0            0            0            0            0
+mmw_lvds_stream.oer5f       data                  0            0          256            0            0            0            0            0
+mmwavelink_r5f.lib          code                  0            0        12284            0            0            0            0            0
+mmwavelink_r5f.lib          data                  0            0         1004            0            0            0            0            0
+mmwavelink_r5f.lib          rodata                0            0           16            0            0            0            0            0
+ti_board_open_close.oer5f   code                  0            0          104            0            0            0            0            0
+ti_board_open_close.oer5f   data                  0            0          136            0            0            0            0            0
+ti_dpl_config.oer5f         code                  0            0          956            0            0            0            0            0
+ti_dpl_config.oer5f         rodata                0            0          148            0            0            0            0            0
+ti_drivers_config.oer5f     data                  0            0          264            0         2432            0            0            0
+ti_drivers_open_close.oer5f data                  0            0          112            0            0            0            0            0
+ti_drivers_open_close.oer5f rodata                0            0           40            0            0            0            0            0
+ti_power_clock_config.oer5f rodata                0            0           48            0            0            0            0            0

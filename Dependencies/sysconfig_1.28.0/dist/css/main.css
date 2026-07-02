@@ -1,0 +1,24 @@
+/* styles needed for the layout and column scrollbars */
+html,
+body {
+	height: 100%;
+}
+
+/* default link styling */
+a {
+	text-decoration: none;
+	color: #118899;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+.monaco-aria-container {
+	width: 0px !important;
+}
+
+.infolayer [class^='y'][class$='title'] {
+	transform: rotate(0deg) translate(10px, 0);
+	text-anchor: end;
+}

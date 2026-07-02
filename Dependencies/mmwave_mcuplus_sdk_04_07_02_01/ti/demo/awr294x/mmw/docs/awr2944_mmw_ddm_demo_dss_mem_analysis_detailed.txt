@@ -1,0 +1,69 @@
+                                   OVERVIEW                                    
+Memory                              Used               Total        Percent Used
+--------------------------------------------------------------------------------
+DSS_L2                            370960              393216              94.34%
+DSS_L3                           2621440             2621440             100.00%
+HWA_RAM                                0              131072               0.00%
+RTOS_NORTOS_IPC_SHM_M                2432                7488              32.48%
+
+
+                            Type             DSS_L2       DSS_L3      HWA_RAM  RTOS_NORTOS.
+--------------------------------------------------------------------------------
+(.common:RangeObj)          data                520            0            0            0
+(.common:cfarProcObjPool)   data                396            0            0            0
+(.common:dopplerProcObjPool data               1396            0            0            0
+(.common:gClockCtrl)        data                 56            0            0            0
+(.common:gEdmaHandle)       data                  4            0            0            0
+(.common:gEsmHandle)        data                  4            0            0            0
+(.common:gHwaObject)        data                232            0            0            0
+(.common:gHwiCtrl)          data               2700            0            0            0
+(.common:gHwiIntcIntrTable) data                 68            0            0            0
+(.common:gIpcRpmsgCtrl)     data               1840            0            0            0
+(.common:gMailbox_ctrl)     data                 24            0            0            0
+(.common:gMmwDemo_dpmTaskSt data               4096            0            0            0
+(.common:gMmwDemo_dssInitTa data               4096            0            0            0
+(.common:gTaskP_ctrl)       data                160            0            0            0
+(.common:uxHwiStack)        data              16384            0            0            0
+(.common:xQueueRegistry)    data                512            0            0            0
+ALG                         code               1056            0            0            0
+APP                         code               3024            0            0            0
+APP                         data               1930      2588672            0            0
+APP                         heap              98304        32768            0            0
+C_RUNTIME                   code              32984            0            0            0
+C_RUNTIME                   data               1441            0            0            0
+C_RUNTIME                   heap                  8            0            0            0
+C_RUNTIME                   sysmem                8            0            0            0
+DPC                         code              16880            0            0            0
+DPC                         data               9601            0            0            0
+DPC                         preprocbuf         1536            0            0            0
+DPU                         code               1120            0            0            0
+drivers.awr294x.c66.ti-c600 code              48560            0            0            0
+drivers.awr294x.c66.ti-c600 data               6304            0            0            0
+freertos.awr294x.c66.ti-c60 bss                  16            0            0            0
+freertos.awr294x.c66.ti-c60 code              36676            0            0            0
+freertos.awr294x.c66.ti-c60 data              10173            0            0            0
+freertos.awr294x.c66.ti-c60 rodata                4            0            0            0
+libdopplerproc_hwa_ddma_awr code              17472            0            0            0
+libdopplerproc_hwa_ddma_awr data                140            0            0            0
+libdpedma_hwa_awr2944.ae66  code               4384            0            0            0
+libdpedma_hwa_awr2944.ae66  data                265            0            0            0
+libdpm_awr2944.ae66         code               6952            0            0            0
+libdpm_awr2944.ae66         data               8764            0            0            0
+librangecfarproc_hwa_ddma_a code               4384            0            0            0
+librangecfarproc_hwa_ddma_a data                122            0            0            0
+librangeproc_hwa_ddma_awr29 code               9856            0            0            0
+librangeproc_hwa_ddma_awr29 data                190            0            0            0
+linker-generated            linker            12958            0            0            0
+ti_board_config.oe66        code                 32            0            0            0
+ti_board_open_close.oe66    code                 32            0            0            0
+ti_dpl_config.oe66          code                128            0            0            0
+ti_dpl_config.oe66          data                 64            0            0            0
+ti_drivers_config.oe66      bss                   0            0            0         2432
+ti_drivers_config.oe66      code                416            0            0            0
+ti_drivers_config.oe66      data               1120            0            0            0
+ti_drivers_open_close.oe66  code                672            0            0            0
+ti_drivers_open_close.oe66  data                372            0            0            0
+ti_pinmux_config.oe66       code                 64            0            0            0
+ti_pinmux_config.oe66       data                184            0            0            0
+ti_power_clock_config.oe66  code                256            0            0            0
+ti_power_clock_config.oe66  data                 20            0            0            0

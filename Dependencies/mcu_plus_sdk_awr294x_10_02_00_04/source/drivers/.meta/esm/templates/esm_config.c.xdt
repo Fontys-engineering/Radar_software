@@ -1,0 +1,71 @@
+%%{
+    let module = system.modules['/drivers/esm/esm'];
+    let common = system.getScript("/common");
+%%}
+/*
+ * ESM
+ */
+/* ESM atrributes */
+static ESM_Attrs gEsmAttrs[CONFIG_ESM_NUM_INSTANCES] =
+{
+% for(let i = 0; i < module.$instances.length; i++) {
+    % let instance = module.$instances[i];
+    % let intrConfigs = instance.configDirIntr;
+    % let intNumber;
+    % let config = module.getInstanceConfig(instance);
+    {
+        .ptrESMRegs             = (CSL_esmRegs *)`config.regBaseAddr`,
+        .ptrCtrlRegs            = (CSL_mss_ctrlRegs *)`config.ctrlBaseAddr`,
+        .numGroup1Err           = `config.numGroupErr`,
+        .highPrioIntNum         = `config.highPrioIntNum`,
+        .lowPrioIntNum          = `config.lowPrioIntNum`,
+        % if (common.getSelfSysCfgCoreName().includes("c66")) {
+        % if (intrConfigs.endirmapesmhi == true) {
+        %if (intrConfigs["esmhi"].$solution.peripheralName.length == 9) {
+        % intNumber = intrConfigs["esmhi"].$solution.peripheralName.slice(-1);
+        % }
+        % else {
+        % intNumber = intrConfigs["esmhi"].$solution.peripheralName.slice(-2);
+        % }
+        .highPrioIntNumDirMap   = `intNumber`,
+        % }
+        % else {
+        .highPrioIntNumDirMap   = 0,
+        % }
+        % if (intrConfigs.endirmapesmlo == true) {
+        %if (intrConfigs["esmlo"].$solution.peripheralName.length == 9) {
+        % intNumber = intrConfigs["esmlo"].$solution.peripheralName.slice(-1);
+        % }
+        % else {
+        % intNumber = intrConfigs["esmlo"].$solution.peripheralName.slice(-2);
+        % }
+        .lowPrioIntNumDirMap    = `intNumber`,
+        % }
+        % else {
+        .lowPrioIntNumDirMap    = 0,
+        % }
+        % }
+        % else {
+        .highPrioIntNumDirMap   = 0,
+        .lowPrioIntNumDirMap    = 0,
+        % }
+        .intrHighPriority       = `config.intHighPriority`U,
+        .intrLowPriority        = `config.intLowPriority`U,
+    },
+%}
+};
+/* ESM objects - initialized by the driver */
+static ESM_Object gEsmObjects[CONFIG_ESM_NUM_INSTANCES];
+/* ESM driver configuration */
+ESM_Config gEsmConfig[CONFIG_ESM_NUM_INSTANCES] =
+{
+% for(let i = 0; i < module.$instances.length; i++) {
+    % let instance = module.$instances[i];
+    {
+        &gEsmAttrs[`instance.$name.toUpperCase()`],
+        &gEsmObjects[`instance.$name.toUpperCase()`],
+    },
+% }
+};
+
+uint32_t gEsmConfigNum = CONFIG_ESM_NUM_INSTANCES;

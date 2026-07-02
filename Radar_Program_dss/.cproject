@@ -5,18 +5,19 @@
             <storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="com.ti.ccstudio.buildDefinitions.C6000.Debug.1626576623" moduleId="org.eclipse.cdt.core.settings" name="Debug">
                 <macros>
                     <stringListMacro name="COM_TI_MCU_PLUS_SDK_AWR294X_LIBRARIES" type="VALUE_PATH_FILE_LIST"/>
-                    <stringMacro name="C66x_MATHLIB_INSTALL_PATH" type="VALUE_PATH_ANY" value="C:\ti\mmwave_mcuplus_sdk_04_07_02_01\mathlib_c66x_3_1_2_1"/>
-                    <stringMacro name="COM_TI_MMWAVE_MCUPLUS_SDK_SYSCONFIG_MANIFEST" type="VALUE_PATH_FILE" value="C:\ti\mmwave_mcuplus_sdk_04_07_02_01\mcu_plus_sdk_awr294x_10_02_00_04\.metadata\product.json"/>
-                    <stringMacro name="MMWAVE_AWR294X_DFP_INSTALL_PATH" type="VALUE_PATH_ANY" value="C:\ti\mmwave_mcuplus_sdk_04_07_02_01\mmwave_dfp_02_04_18_01"/>
+                    <stringMacro name="C66x_MATHLIB_INSTALL_PATH" type="VALUE_PATH_ANY" value="${DEPENDROOT}\mmwave_mcuplus_sdk_04_07_02_01\mathlib_c66x_3_1_2_1"/>
+                    <stringMacro name="COM_TI_MMWAVE_MCUPLUS_SDK_SYSCONFIG_MANIFEST" type="VALUE_PATH_FILE" value="${DEPENDROOT}\mcu_plus_sdk_awr294x_10_02_00_04\.metadata\product.json"/>
+                    <stringMacro name="MMWAVE_AWR294X_DFP_INSTALL_PATH" type="VALUE_PATH_ANY" value="${DEPENDROOT}\mmwave_dfp_02_04_18_01"/>
                     <stringListMacro name="COM_TI_MCU_PLUS_SDK_AWR294X_LIBRARY_PATH" type="VALUE_PATH_DIR_LIST"/>
-                    <stringMacro name="MCU_PLUS_SDK_PATH" type="VALUE_PATH_ANY" value="C:\ti\mmwave_mcuplus_sdk_04_07_02_01\mcu_plus_sdk_awr294x_10_02_00_04"/>
-                    <stringMacro name="C66x_DSPLIB_INSTALL_PATH" type="VALUE_PATH_ANY" value="C:\ti\mmwave_mcuplus_sdk_04_07_02_01\dsplib_c66x_3_4_0_0"/>
-                    <stringMacro name="COM_TI_MCU_PLUS_SDK_AWR294X_INSTALL_DIR" type="VALUE_PATH_DIR" value="C:\ti\mmwave_mcuplus_sdk_04_07_02_01\mcu_plus_sdk_awr294x_10_02_00_04"/>
+                    <stringMacro name="MCU_PLUS_SDK_PATH" type="VALUE_PATH_ANY" value="${DEPENDROOT}\mcu_plus_sdk_awr294x_10_02_00_04"/>
+                    <stringMacro name="C66x_DSPLIB_INSTALL_PATH" type="VALUE_PATH_ANY" value="${DEPENDROOT}\mmwave_mcuplus_sdk_04_07_02_01\dsplib_c66x_3_4_0_0"/>
+                    <stringMacro name="COM_TI_MCU_PLUS_SDK_AWR294X_INSTALL_DIR" type="VALUE_PATH_DIR" value="${DEPENDROOT}\mcu_plus_sdk_awr294x_10_02_00_04"/>
+                    <stringMacro name="DEPENDROOT" type="VALUE_PATH_ANY" value="C:\Git\Radar_software\Dependencies"/>
                     <stringListMacro name="COM_TI_MCU_PLUS_SDK_AWR294X_SYMBOLS" type="VALUE_TEXT_LIST"/>
-                    <stringMacro name="COM_TI_MMWAVE_MCUPLUS_SDK_INSTALL_DIR" type="VALUE_PATH_ANY" value="C:\ti\mmwave_mcuplus_sdk_04_07_02_01\mmwave_mcuplus_sdk_04_07_02_01"/>
+                    <stringMacro name="COM_TI_MMWAVE_MCUPLUS_SDK_INSTALL_DIR" type="VALUE_PATH_ANY" value="${DEPENDROOT}\mmwave_mcuplus_sdk_04_07_02_01"/>
                     <stringMacro name="DPU_DATA_PATH" type="VALUE_PATH_ANY" value="${MMWAVE_SDK_INSTALL_PATH}/ti/datapath/dpu"/>
-                    <stringMacro name="COM_TI_MCU_PLUS_SDK_AWR294X_SYSCONFIG_MANIFEST" type="VALUE_PATH_FILE" value="C:\ti\mmwave_mcuplus_sdk_04_07_02_01\mcu_plus_sdk_awr294x_10_02_00_04\.metadata\product.json"/>
-                    <stringMacro name="MMWAVE_SDK_INSTALL_PATH" type="VALUE_PATH_ANY" value="C:\ti\mmwave_mcuplus_sdk_04_07_02_01\mmwave_mcuplus_sdk_04_07_02_01"/>
+                    <stringMacro name="COM_TI_MCU_PLUS_SDK_AWR294X_SYSCONFIG_MANIFEST" type="VALUE_PATH_FILE" value="${DEPENDROOT}\mcu_plus_sdk_awr294x_10_02_00_04\.metadata\product.json"/>
+                    <stringMacro name="MMWAVE_SDK_INSTALL_PATH" type="VALUE_PATH_ANY" value="${DEPENDROOT}\mmwave_mcuplus_sdk_04_07_02_01"/>
                 </macros>
                 <externalSettings/>
                 <extensions>
@@ -37,8 +38,8 @@
                                 <listOptionValue value="CCS_MBS_VERSION=70.0.0"/>
                                 <listOptionValue value="RUNTIME_SUPPORT_LIBRARY="/>
                                 <listOptionValue value="OUTPUT_TYPE=executable"/>
-                                <listOptionValue value="PRODUCTS=sysconfig:1.23.0;com.ti.MCU_PLUS_SDK_AWR294X:10.2.0.04;com.ti.MMWAVE_MCUPLUS_SDK:4.7.2.01;"/>
-                                <listOptionValue value="PRODUCT_MACRO_IMPORTS={&quot;sysconfig&quot;:[&quot;${SYSCONFIG_TOOL_INCLUDE_PATH}&quot;,&quot;${SYSCONFIG_TOOL_LIBRARY_PATH}&quot;,&quot;${SYSCONFIG_TOOL_LIBRARIES}&quot;,&quot;${SYSCONFIG_TOOL_SYMBOLS}&quot;,&quot;${SYSCONFIG_TOOL_SYSCONFIG_MANIFEST}&quot;],&quot;com.ti.MMWAVE_MCUPLUS_SDK&quot;:[&quot;${COM_TI_MMWAVE_MCUPLUS_SDK_INCLUDE_PATH}&quot;,&quot;${COM_TI_MMWAVE_MCUPLUS_SDK_LIBRARY_PATH}&quot;,&quot;${COM_TI_MMWAVE_MCUPLUS_SDK_LIBRARIES}&quot;,&quot;${COM_TI_MMWAVE_MCUPLUS_SDK_SYMBOLS}&quot;,&quot;${COM_TI_MMWAVE_MCUPLUS_SDK_SYSCONFIG_MANIFEST}&quot;],&quot;com.ti.MCU_PLUS_SDK_AWR294X&quot;:[&quot;${COM_TI_MCU_PLUS_SDK_AWR294X_INCLUDE_PATH}&quot;,&quot;${COM_TI_MCU_PLUS_SDK_AWR294X_LIBRARY_PATH}&quot;,&quot;${COM_TI_MCU_PLUS_SDK_AWR294X_LIBRARIES}&quot;,&quot;${COM_TI_MCU_PLUS_SDK_AWR294X_SYMBOLS}&quot;,&quot;${COM_TI_MCU_PLUS_SDK_AWR294X_SYSCONFIG_MANIFEST}&quot;]}"/>
+                                <listOptionValue value="PRODUCTS=sysconfig:1.28.0;com.ti.MCU_PLUS_SDK_AWR294X:10.2.0.04;com.ti.MMWAVE_MCUPLUS_SDK:4.7.2.01;"/>
+                                <listOptionValue value="PRODUCT_MACRO_IMPORTS={&quot;com.ti.MMWAVE_MCUPLUS_SDK&quot;:[&quot;${COM_TI_MMWAVE_MCUPLUS_SDK_INCLUDE_PATH}&quot;,&quot;${COM_TI_MMWAVE_MCUPLUS_SDK_LIBRARY_PATH}&quot;,&quot;${COM_TI_MMWAVE_MCUPLUS_SDK_LIBRARIES}&quot;,&quot;${COM_TI_MMWAVE_MCUPLUS_SDK_SYMBOLS}&quot;,&quot;${COM_TI_MMWAVE_MCUPLUS_SDK_SYSCONFIG_MANIFEST}&quot;],&quot;com.ti.MCU_PLUS_SDK_AWR294X&quot;:[&quot;${COM_TI_MCU_PLUS_SDK_AWR294X_INCLUDE_PATH}&quot;,&quot;${COM_TI_MCU_PLUS_SDK_AWR294X_LIBRARY_PATH}&quot;,&quot;${COM_TI_MCU_PLUS_SDK_AWR294X_LIBRARIES}&quot;,&quot;${COM_TI_MCU_PLUS_SDK_AWR294X_SYMBOLS}&quot;,&quot;${COM_TI_MCU_PLUS_SDK_AWR294X_SYSCONFIG_MANIFEST}&quot;],&quot;sysconfig&quot;:[&quot;${SYSCONFIG_TOOL_INCLUDE_PATH}&quot;,&quot;${SYSCONFIG_TOOL_LIBRARY_PATH}&quot;,&quot;${SYSCONFIG_TOOL_LIBRARIES}&quot;,&quot;${SYSCONFIG_TOOL_SYMBOLS}&quot;,&quot;${SYSCONFIG_TOOL_SYSCONFIG_MANIFEST}&quot;]}"/>
                             </option>
                             <option id="com.ti.ccstudio.buildDefinitions.core.OPT_CODEGEN_VERSION.965708600" superClass="com.ti.ccstudio.buildDefinitions.core.OPT_CODEGEN_VERSION" value="8.5.0.LTS" valueType="string"/>
                             <targetPlatform id="com.ti.ccstudio.buildDefinitions.C6000_8.5.exe.targetPlatformDebug.845989423" name="Platform" superClass="com.ti.ccstudio.buildDefinitions.C6000_8.5.exe.targetPlatformDebug"/>
@@ -51,12 +52,11 @@
                                 </option>
                                 <option id="com.ti.ccstudio.buildDefinitions.C6000_8.5.compilerID.DIAG_WRAP.1736811826" superClass="com.ti.ccstudio.buildDefinitions.C6000_8.5.compilerID.DIAG_WRAP" value="com.ti.ccstudio.buildDefinitions.C6000_8.5.compilerID.DIAG_WRAP.off" valueType="enumerated"/>
                                 <option id="com.ti.ccstudio.buildDefinitions.C6000_8.5.compilerID.INCLUDE_PATH.1731098358" superClass="com.ti.ccstudio.buildDefinitions.C6000_8.5.compilerID.INCLUDE_PATH" valueType="includePath">
-                                    <listOptionValue value="${SYSCONFIG_TOOL_INCLUDE_PATH}"/>
+                                    <listOptionValue value="${DEPENDROOT}/mmwave_mcuplus_sdk_04_07_02_01/mathlib_c66x_3_1_2_1/packages"/>
                                     <listOptionValue value="${COM_TI_MCU_PLUS_SDK_AWR294X_INCLUDE_PATH}"/>
                                     <listOptionValue value="${COM_TI_MMWAVE_MCUPLUS_SDK_INCLUDE_PATH}"/>
                                     <listOptionValue value="${CG_TOOL_ROOT}/include"/>
-                                    <listOptionValue value="${MCU_PLUS_SDK_PATH}/../mathlib_c66x_3_1_2_1/packages"/>
-                                    <listOptionValue value="${MCU_PLUS_SDK_PATH}/../dsplib_c66x_3_4_0_0/packages"/>
+                                    <listOptionValue value="${DEPENDROOT}/mmwave_mcuplus_sdk_04_07_02_01/dsplib_c66x_3_4_0_0/packages"/>
                                     <listOptionValue value="${MCU_PLUS_SDK_PATH}/source"/>
                                     <listOptionValue value="${MCU_PLUS_SDK_PATH}/source/kernel/freertos/FreeRTOS-Kernel/include"/>
                                     <listOptionValue value="${MCU_PLUS_SDK_PATH}/source/kernel/freertos/portable/TI_CGT/DSP_C66"/>
@@ -66,7 +66,6 @@
                                     <listOptionValue value="${MMWAVE_AWR294X_DFP_INSTALL_PATH}"/>
                                     <listOptionValue value="${PROJECT_ROOT}\dss\dssgenerated"/>
                                     <listOptionValue value="${PROJECT_LOC}"/>
-                                    <listOptionValue value="C:\ti\mmwave_mcuplus_sdk_04_07_02_01\mathlib_c66x_3_1_2_1\packages"/>
                                     <listOptionValue value="C:\ti\mmwave_mcuplus_sdk_04_07_02_01\mmwave_dfp_02_04_18_01"/>
                                 </option>
                                 <option id="com.ti.ccstudio.buildDefinitions.C6000_8.5.compilerID.DEFINE.747000050" superClass="com.ti.ccstudio.buildDefinitions.C6000_8.5.compilerID.DEFINE" valueType="definedSymbols">
@@ -134,9 +133,9 @@
                                     <listOptionValue value="${SYSCONFIG_TOOL_LIBRARIES}"/>
                                     <listOptionValue value="${COM_TI_MCU_PLUS_SDK_AWR294X_LIBRARIES}"/>
                                     <listOptionValue value="${COM_TI_MMWAVE_MCUPLUS_SDK_LIBRARIES}"/>
-                                    <listOptionValue value="C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/control/dpm/lib/libdpm_awr2944.ae66"/>
-                                    <listOptionValue value="C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/utils/mathutils/lib/libmathutils.ae66"/>
-                                    <listOptionValue value="C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mathlib_c66x_3_1_2_1/packages/ti/mathlib/lib/mathlib.ae66"/>
+                                    <listOptionValue value="${DEPENDROOT}/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/control/dpm/lib/libdpm_awr2944.ae66"/>
+                                    <listOptionValue value="${DEPENDROOT}/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/utils/mathutils/lib/libmathutils.ae66"/>
+                                    <listOptionValue value="${DEPENDROOT}/mmwave_mcuplus_sdk_04_07_02_01/mathlib_c66x_3_1_2_1/packages/ti/mathlib/lib/mathlib.ae66"/>
                                     <listOptionValue value="C:/ti/mmwave_mcuplus_sdk_04_07_02_01/dsplib_c66x_3_4_0_0/packages/ti/dsplib/lib/dsplib.ae66"/>
                                     <listOptionValue value="C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/freertos/lib/freertos.awr294x.c66.ti-c6000.debug.lib"/>
                                     <listOptionValue value="C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/drivers/lib/drivers.awr294x.c66.ti-c6000.debug.lib"/>

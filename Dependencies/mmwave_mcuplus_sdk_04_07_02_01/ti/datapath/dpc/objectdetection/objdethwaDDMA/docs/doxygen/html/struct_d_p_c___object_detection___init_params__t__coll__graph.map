@@ -1,0 +1,6 @@
+<map id="DPC_ObjectDetection_InitParams_t" name="DPC_ObjectDetection_InitParams_t">
+<area shape="rect" id="node1" title=" " alt="" coords="357,71,519,112"/>
+<area shape="rect" id="node2" href="$struct_d_p_c___object_detection___l3_mem_cfg__t.html" title=" " alt="" coords="10,5,171,47"/>
+<area shape="rect" id="node3" href="$struct_d_p_c___object_detection___process_call_back_cfg__t.html" title="Process call backs configuration." alt="" coords="5,71,176,112"/>
+<area shape="rect" id="node4" href="$struct_d_p_c___object_detection___mem_cfg__t.html" title=" " alt="" coords="10,136,171,177"/>
+</map>

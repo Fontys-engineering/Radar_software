@@ -1,0 +1,10 @@
+<map id="DPC_ObjectDetection_DynCfg_t" name="DPC_ObjectDetection_DynCfg_t">
+<area shape="rect" id="node1" title=" " alt="" coords="485,206,647,247"/>
+<area shape="rect" id="node2" href="/nightlybuilds/mmwave_app_sdk/ti/datapath/dpu/cfarproc/docs/cfarproc.tag$struct_d_p_u___c_f_a_r_proc___fov_cfg__t.html" title=" " alt="" coords="43,27,226,53"/>
+<area shape="rect" id="node3" href="/nightlybuilds/mmwave_app_sdk/ti/datapath/dpu/cfarproc/docs/cfarproc.tag$struct_d_p_u___c_f_a_r_proc___cfar_cfg__t.html" title=" " alt="" coords="41,81,228,108"/>
+<area shape="rect" id="node4" href="/nightlybuilds/mmwave_app_sdk/ti/datapath/dpu/rangeproc/docs/rangeproc.tag$struct_d_p_u___range_proc___calib_dc_range_sig_cfg__t.html" title=" " alt="" coords="23,133,247,174"/>
+<area shape="rect" id="node5" href="$struct_d_p_c___object_detection___static_clutter_removal_cfg___base__t.html" title="Static clutter removal base (subframe agnostic) configuration." alt="" coords="39,199,230,255"/>
+<area shape="rect" id="node6" href="/nightlybuilds/mmwave_app_sdk/ti/datapath/dpu/aoaproc/docs/aoaproc.tag$struct_d_p_u___ao_a_proc___extended_max_velocity_cfg__t.html" title=" " alt="" coords="5,279,264,321"/>
+<area shape="rect" id="node7" href="/nightlybuilds/mmwave_app_sdk/ti/datapath/dpu/aoaproc/docs/aoaproc.tag$struct_d_p_u___ao_a_proc___fov_aoa_cfg__t.html" title=" " alt="" coords="35,345,235,372"/>
+<area shape="rect" id="node8" href="/nightlybuilds/mmwave_app_sdk/ti/datapath/dpu/aoaproc/docs/aoaproc.tag$struct_d_p_u___ao_a_proc___multi_obj_beam_forming_cfg__t.html" title=" " alt="" coords="29,397,240,438"/>
+</map>

@@ -1,0 +1,4 @@
+<map id="DPC_ObjectDetection_CfarCfg_t" name="DPC_ObjectDetection_CfarCfg_t">
+<area shape="rect" id="node1" title="CFAR Configuration." alt="" coords="18,95,179,136"/>
+<area shape="rect" id="node2" href="/nightlybuilds/mmwave_app_sdk/ti/datapath/dpu/cfarproc/docs/cfarproc.tag$struct_d_p_u___c_f_a_r_proc___cfar_cfg__t.html" title=" " alt="" coords="5,5,192,32"/>
+</map>

@@ -1,0 +1,6 @@
+\_form#0=135x17:$\omega_{k} = (2\pi)(k-1)/N_{t}$
+\_form#1=173x17:$\omega_{k} = (2\pi)(k-1)/(N_{t}+1)$
+\_form#2=717x17:\[ x(i_{antIdx}) = \mbox{detObjList}.azimSamples(i_{azimAntIdx}), \;\;\;\; i_{azimAntIdx}=0,...,N_{RxAnt}*N_{AzimTxAnt}-1, \;\;\;\; i_{antIdx}=0,...,N_{RxAnt}*N_{AzimTxAnt}-1 \]
+\_form#3=717x17:\[ x(i_{antIdx}) = \mbox{detObjList}.elevSamples(i_{elevAntIdx}), \;\;\;\; i_{elevAntIdx}=0,...,N_{RxAnt}*N_{ElevTxAnt}-1, \;\;\;\; i_{antIdx}=N_{RxAnt}*N_{AzimTxAnt},...,N_{RxAnt}*N_{TxAnt}-1 \]
+\_form#4=459x38:\[ c(i_{antIdx}) = \frac{x^*(i_{antIdx})}{|x(i_{antIdx})|^2}\;x_{Min}, \;\;\;\; i_{antIdx}=0,...,N_{RxAnt}*N_{TxAnt}-1 \]
+\_form#5=153x17:\[ x_{Min} = \min{|x(i_{antIdx})|} \]

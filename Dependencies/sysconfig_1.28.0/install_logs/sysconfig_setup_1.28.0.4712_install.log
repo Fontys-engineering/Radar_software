@@ -1,0 +1,1873 @@
+Log started 06/30/2026 at 09:20:04
+Preferred installation mode : win32
+Trying to init installer in mode win32
+Mode win32 successfully initialized
+[09:20:06] windowsSoftwareRegistryPrefix = Texas Instruments\TI System Configuration Tool
+[09:20:06] installer_is_root_install value: 0
+Preparing to Install
+Preparing to Install
+Directory already exists: C:\ti\sysconfig_1.28.0
+Creating directory C:\ti\sysconfig_1.28.0\nw
+Creating directory C:\ti\sysconfig_1.28.0\nw\locales
+Creating directory C:\ti\sysconfig_1.28.0\nodejs
+Creating directory C:\ti\sysconfig_1.28.0\app
+Creating directory C:\ti\sysconfig_1.28.0\app\icons
+Creating directory C:\ti\sysconfig_1.28.0\spice64
+Creating directory C:\ti\sysconfig_1.28.0\spice64\lib
+Creating directory C:\ti\sysconfig_1.28.0\spice64\lib\ngspice
+Creating directory C:\ti\sysconfig_1.28.0\spice64\bin
+Creating directory C:\ti\sysconfig_1.28.0\spice64\share
+Creating directory C:\ti\sysconfig_1.28.0\spice64\share\ngspice
+Creating directory C:\ti\sysconfig_1.28.0\spice64\share\ngspice\scripts
+Creating directory C:\ti\sysconfig_1.28.0\dist
+Creating directory C:\ti\sysconfig_1.28.0\dist\fonts
+Creating directory C:\ti\sysconfig_1.28.0\dist\icons
+Creating directory C:\ti\sysconfig_1.28.0\dist\icons\apps
+Creating directory C:\ti\sysconfig_1.28.0\dist\css
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0L110X
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0L110X\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM261x_ZFG
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM261x_ZFG\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\DRA75xP_DRA74xP_SR1.0
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\DRA75xP_DRA74xP_SR1.0\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\J721E_DRA829_TDA4VM_AM752x
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\J721E_DRA829_TDA4VM_AM752x\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\F28P65x
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\F28P65x\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\MSPS003FX
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\MSPS003FX\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC2674R10RSK
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC2674R10RSK\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC3500
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC3500\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC1350RGZ
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC1350RGZ\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\TDA2Px_ABZ_SR1.0
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\TDA2Px_ABZ_SR1.0\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM62Ax
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM62Ax\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM62Ax\templates\csv
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM62Ax\templates\linux
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM62Ax\templates\Platform Development Kit (PDK)
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM62Ax\.metadata
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC2652R7RGZ
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC2652R7RGZ\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM33C321X
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM33C321X\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AWR294X
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AWR294X\.metadata
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC2340R2RGE
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC2340R2RGE\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC2755P207RHA
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC2755P207RHA\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM5766_SR1.0
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM5766_SR1.0\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM5766_SR1.0\templates\SR1.0 - Generic File Formats
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM5766_SR1.0\templates\SR1.0 - Platform Development Kit (PDK)
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC2652R1FSIP
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC2652R1FSIP\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC1312R7RGZ
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC1312R7RGZ\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0G518X
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0G518X\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM5718_SR1.0_beta
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM5718_SR1.0_beta\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\TPLD1202_RWS_TL
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC1352P7RGZ
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC1352P7RGZ\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM5706_SR2.x
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM5706_SR2.x\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AWR18XX
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AWR18XX\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM261x_ZNC
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM261x_ZNC\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\J721S2_TDA4VE_TDA4AL_TDA4VL_AM68x
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\J721S2_TDA4VE_TDA4AL_TDA4VL_AM68x\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\TDA2Px_ACD_SR1.0
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\TDA2Px_ACD_SR1.0\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AWR2944LC
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AWR2944LC\.metadata
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\F2802x
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\F2802x\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC2640R2FRGZ
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC2640R2FRGZ\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC2652P1FRGZ
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC2652P1FRGZ\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\XWRL14XX
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\XWRL14XX\.metadata
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0G150X
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0G150X\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC2340R5MODA
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC2340R5MODA\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM62Lx
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM62Lx\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM62Lx\templates\csv
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM62Lx\templates\linux
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM62Lx\templates\Platform Development Kit (PDK)
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM62Lx\.metadata
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\J742S2
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\J742S2\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\F2803x
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\F2803x\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\F2838x
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\F2838x\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\F28003x
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\F28003x\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC2340R5RHBQ1
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC2340R5RHBQ1\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC2755P105RHA
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC2755P105RHA\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM62Px
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM62Px\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM62Px\templates\csv
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM62Px\templates\linux
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM62Px\templates\Platform Development Kit (PDK)
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM62Px\.metadata
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\DRA77xP_DRA76xP_SR1.0
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\DRA77xP_DRA76xP_SR1.0\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\DRA72x_SR2.0
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\DRA72x_SR2.0\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0L130X
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0L130X\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC2755P207RSL
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC2755P207RSL\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM261x_ZEJ_400
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC2642R1FRTCQ1
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC2642R1FRTCQ1\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\J7200_DRA821_SR1.0_alpha
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\J7200_DRA821_SR1.0_alpha\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\IWR14XX
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\IWR14XX\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC2651R3RGZ
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC2651R3RGZ\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC2340R22RKP
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC2340R22RKP\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC2340R53YBG
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC2340R53YBG\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM261x_ZCZ_400
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC2755R105RHA
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC2755R105RHA\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\F28E12x
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\F28E12x\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC2341R10RKP
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC2341R10RKP\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\TPLD2001_RJY_TL
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\DRA72x_SR1.0
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\DRA72x_SR1.0\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM5726_SR1.1_beta
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM5726_SR1.1_beta\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\TM4C123x
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\TM4C123x\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0L112X
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0L112X\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\F280013x
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\F280013x\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC2640R2FRHB
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC2640R2FRHB\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC1314R10RGZ
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC1314R10RGZ\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\TDA3x_SR2.0_beta
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\TDA3x_SR2.0_beta\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC1354P10RSK
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC1354P10RSK\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC2745P10RHAQ1
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC2745P10RHAQ1\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0C1105_C1106
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0C1105_C1106\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM275x
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM275x\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM275x\templates\csv
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM275x\templates\Platform Development Kit (PDK)
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM275x\.metadata
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC1311R3RKP
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC1311R3RKP\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM261x_ZCZ
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM261x_ZCZ\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM5716_SR2.x
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM5716_SR2.x\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\F28002x
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\F28002x\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\IWR68XXAOP
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\IWR68XXAOP\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM5746_SR1.0
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM5746_SR1.0\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AWR68XX
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AWR68XX\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC2653P10RGZ
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC2653P10RGZ\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM261x_ZFG_400
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AWR2544
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AWR2544\.metadata
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM62x
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM62x\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM62x\templates\csv
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM62x\templates\linux
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM62x\templates\Platform Development Kit (PDK)
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM62x\.metadata
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\IWR18XX
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\IWR18XX\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC1310RGZ
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC1310RGZ\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC2651P3RKP
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC2651P3RKP\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\66AK2G12
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\66AK2G12\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC2642R1FRGZQ1
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC2642R1FRGZQ1\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM261x_ZNC_400
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM3351
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM3351\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM5718_SR2.x
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM5718_SR2.x\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC2340R5RGE
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC2340R5RGE\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\TM4C129x
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\TM4C129x\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\TDA2Ex-17_SR2.x
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\TDA2Ex-17_SR2.x\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\IWR64XX
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\IWR64XX\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC1354R10RSK
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC1354R10RSK\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AWR14XX
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AWR14XX\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AWR2X44P
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AWR2X44P\.metadata
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\MSP32C031CX
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\MSP32C031CX\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC2341R73RHBQ1
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC2341R73RHBQ1\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM243x_ALX_beta
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM243x_ALX_beta\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM243x_ALX_beta\templates\csv
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM243x_ALX_beta\templates\Platform Development Kit (PDK)
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM243x_ALX_beta\.metadata
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AMIC110
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AMIC110\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC2755R207RSL
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC2755R207RSL\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\F2807x
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\F2807x\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC2640R2FRSM
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC2640R2FRSM\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\F28P55x
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\F28P55x\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0L211X
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0L211X\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC2340R5RKP
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC2340R5RKP\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM5716_SR1.0_beta
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM5716_SR1.0_beta\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AWR68XXAOP
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AWR68XXAOP\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM263x_beta
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM263x_beta\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM243x_ALV_beta
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM243x_ALV_beta\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM243x_ALV_beta\templates\csv
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM243x_ALV_beta\templates\Platform Development Kit (PDK)
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM243x_ALV_beta\.metadata
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC2662R1FRGZQ1
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC2662R1FRGZQ1\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC2652RB1FRGZ
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC2652RB1FRGZ\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC1354P10RGZ
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC1354P10RGZ\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM65xx_SR1.0
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM65xx_SR1.0\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC1312R1F3RGZ
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC1312R1F3RGZ\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\J722S_TDA4VEN_TDA4AEN_AM67
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\J722S_TDA4VEN_TDA4AEN_AM67\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0G110X
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0G110X\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM5728_SR1.1_beta
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM5728_SR1.1_beta\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\XWRL64XX
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\XWRL64XX\.metadata
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM273x
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM273x\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM273x\.metadata
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\TDA2x_AAS_SR2.0
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\TDA2x_AAS_SR2.0\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM65xx_SR2.0_beta
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM65xx_SR2.0_beta\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\F28004x
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\F28004x\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC3551E
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC3551E\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0G351X
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0G351X\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0G151X
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0G151X\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\F2833x
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\F2833x\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC2642R1FRGZ
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC2642R1FRGZ\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC2340R53RKP
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC2340R53RKP\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\F2837xS
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\F2837xS\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC2744R7RHAQ1
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC2744R7RHAQ1\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\TPLD1202_RWB_TR
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC1312PSIP
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC1312PSIP\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\DRA78x_SR2.0_beta
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\DRA78x_SR2.0_beta\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM261x_ZEJ
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM261x_ZEJ\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC2651R3RKP
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC2651R3RKP\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC2651R3SIPA
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC2651R3SIPA\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM263Px
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM263Px\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\DM50x_SR2.0_beta
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\DM50x_SR2.0_beta\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\TDA2x_ABC_SR2.0
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\TDA2x_ABC_SR2.0\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AWR16XX
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AWR16XX\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\J784S4_TDA4AP_TDA4VP_TDA4AH_TDA4VH_AM69x
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\J784S4_TDA4AP_TDA4VP_TDA4AH_TDA4VH_AM69x\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM62Dx
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM62Dx\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM62Dx\templates\csv
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM62Dx\templates\linux
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM62Dx\templates\Platform Development Kit (PDK)
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM62Dx\.metadata
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC1311P3RGZ
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC1311P3RGZ\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC1310RHB
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC1310RHB\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\TPLD1201_RWB_TR
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\IWR68XX
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\IWR68XX\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM437x
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM437x\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\F29H85x
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\F29H85x\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\TPLD2001_DGS_TL
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\IWR16XX
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\IWR16XX\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM13E230x
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM13E230x\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC1350RHB
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC1350RHB\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC2651P3RGZ
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC2651P3RGZ\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\TPLD1202_DYY_TL
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\F280015x
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\F280015x\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\TDA2Ex-23_SR2.0
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\TDA2Ex-23_SR2.0\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM62SIP
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM62SIP\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM62SIP\templates\csv
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM62SIP\templates\linux
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM62SIP\templates\Platform Development Kit (PDK)
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM62SIP\.metadata
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0L122X
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0L122X\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0G121X
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0G121X\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC2652P7RGZ
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC2652P7RGZ\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC2652P1FSIP
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC2652P1FSIP\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM438x
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM438x\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM335x
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM335x\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC2674P10RSK
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC2674P10RSK\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC1352R1F3RGZ
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC1352R1F3RGZ\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\TPLD1201_DGS_TL
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0G120X
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0G120X\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC2674P10RGZ
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC2674P10RGZ\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\MSP32G031CX
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\MSP32G031CX\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0G511X
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0G511X\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\TPLD801_DRL_TL
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\F28P551x
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\F28P551x\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM5748_SR1.0
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM5748_SR1.0\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC2340R53RHBQ1
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC2340R53RHBQ1\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0L111X
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0L111X\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\XWRL684X
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\XWRL684X\.metadata
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0G350X
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0G350X\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM64x
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM64x\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM64x\templates\csv
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM64x\templates\linux
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM64x\templates\Platform Development Kit (PDK)
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM64x\.metadata
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\F2805x
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\F2805x\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AMIC120
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AMIC120\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0L222X
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0L222X\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0L134X
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0L134X\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\F2806x
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\F2806x\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC2765R10RTQ
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC2765R10RTQ\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\legacy
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0G310X
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0G310X\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC2674R10RGZ
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC2674R10RGZ\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC2652R1FRGZ
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC2652R1FRGZ\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\DRA71x_SR2.x
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\DRA71x_SR2.x\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0C110X
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0C110X\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC1314R10RSK
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC1314R10RSK\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM5708_SR2.x
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM5708_SR2.x\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC1311R3RGZ
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC1311R3RGZ\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC2745R7RHAQ1
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC2745R7RHAQ1\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM5728_SR2.0
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM5728_SR2.0\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC2755R105YCJ
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC2755R105YCJ\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM5726_SR2.0
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM5726_SR2.0\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC1350RSM
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC1350RSM\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC1354R10RGZ
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC1354R10RGZ\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC1352P1F3RGZ
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC1352P1F3RGZ\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\DRA75x_74x_SR2.0
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\DRA75x_74x_SR2.0\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0G321X
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0G321X\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0H321X
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0H321X\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\F2837xD
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\F2837xD\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC2745R10RHAQ1
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC2745R10RHAQ1\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0G320X
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0G320X\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\DRA79x_SR2.x
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\DRA79x_SR2.x\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM5768_SR1.0
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM5768_SR1.0\templates
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM5768_SR1.0\templates\SR1.0 - Generic File Formats
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\AM5768_SR1.0\templates\SR1.0 - Platform Development Kit (PDK)
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC1310RSM
+Creating directory C:\ti\sysconfig_1.28.0\dist\deviceData\CC1310RSM\templates
+Creating directory C:\ti\sysconfig_1.28.0\tests
+Creating directory C:\ti\sysconfig_1.28.0\tests\jasmine-core
+Creating directory C:\ti\sysconfig_1.28.0\.metadata
+Creating directory C:\ti\sysconfig_1.28.0\.metadata\.tirex
+Unpacking files
+Unpacking C:\ti\sysconfig_1.28.0\sysconfig_cli.bat
+Unpacking C:\ti\sysconfig_1.28.0\sysconfig_gui.bat
+Unpacking C:\ti\sysconfig_1.28.0\nw\node.dll
+Unpacking C:\ti\sysconfig_1.28.0\nw\vulkan-1.dll
+Unpacking C:\ti\sysconfig_1.28.0\nw\nw.dll
+Unpacking C:\ti\sysconfig_1.28.0\nw\nw_200_percent.pak
+Unpacking C:\ti\sysconfig_1.28.0\nw\nw_100_percent.pak
+Unpacking C:\ti\sysconfig_1.28.0\nw\libEGL.dll
+Unpacking C:\ti\sysconfig_1.28.0\nw\nw_elf.dll
+Unpacking C:\ti\sysconfig_1.28.0\nw\d3dcompiler_47.dll
+Unpacking C:\ti\sysconfig_1.28.0\nw\vk_swiftshader.dll
+Unpacking C:\ti\sysconfig_1.28.0\nw\resources.pak
+Unpacking C:\ti\sysconfig_1.28.0\nw\v8_context_snapshot.bin
+Unpacking C:\ti\sysconfig_1.28.0\nw\libGLESv2.dll
+Unpacking C:\ti\sysconfig_1.28.0\nw\nw.exe
+Unpacking C:\ti\sysconfig_1.28.0\nw\vk_swiftshader_icd.json
+Unpacking C:\ti\sysconfig_1.28.0\nw\credits.html
+Unpacking C:\ti\sysconfig_1.28.0\nw\icudtl.dat
+Unpacking C:\ti\sysconfig_1.28.0\nw\notification_helper.exe
+Unpacking C:\ti\sysconfig_1.28.0\nw\ffmpeg.dll
+Unpacking C:\ti\sysconfig_1.28.0\nw\locales\tr.pak
+Unpacking C:\ti\sysconfig_1.28.0\nw\locales\te.pak
+Unpacking C:\ti\sysconfig_1.28.0\nw\locales\ta.pak
+Unpacking C:\ti\sysconfig_1.28.0\nw\locales\am.pak.info
+Unpacking C:\ti\sysconfig_1.28.0\nw\locales\lv.pak
+Unpacking C:\ti\sysconfig_1.28.0\nw\locales\cs.pak
+Unpacking C:\ti\sysconfig_1.28.0\nw\locales\bn.pak.info
+Unpacking C:\ti\sysconfig_1.28.0\nw\locales\th.pak
+Unpacking C:\ti\sysconfig_1.28.0\nw\locales\nb.pak.info
+Unpacking C:\ti\sysconfig_1.28.0\nw\locales\en-GB.pak.info
+Unpacking C:\ti\sysconfig_1.28.0\nw\locales\bg.pak.info
+Unpacking C:\ti\sysconfig_1.28.0\nw\locales\sw.pak.info
+Unpacking C:\ti\sysconfig_1.28.0\nw\locales\lv.pak.info
+Unpacking C:\ti\sysconfig_1.28.0\nw\locales\el.pak
+Unpacking C:\ti\sysconfig_1.28.0\nw\locales\es.pak
+Unpacking C:\ti\sysconfig_1.28.0\nw\locales\ar.pak
+Unpacking C:\ti\sysconfig_1.28.0\nw\locales\ca.pak.info
+Unpacking C:\ti\sysconfig_1.28.0\nw\locales\pt-PT.pak
+Unpacking C:\ti\sysconfig_1.28.0\nw\locales\id.pak
+Unpacking C:\ti\sysconfig_1.28.0\nw\locales\fil.pak
+Unpacking C:\ti\sysconfig_1.28.0\nw\locales\hr.pak
+Unpacking C:\ti\sysconfig_1.28.0\nw\locales\ru.pak.info
+Unpacking C:\ti\sysconfig_1.28.0\nw\locales\fr.pak.info
+Unpacking C:\ti\sysconfig_1.28.0\nw\locales\et.pak
+Unpacking C:\ti\sysconfig_1.28.0\nw\locales\sv.pak.info
+Unpacking C:\ti\sysconfig_1.28.0\nw\locales\en-XA.pak
+Unpacking C:\ti\sysconfig_1.28.0\nw\locales\da.pak.info
+Unpacking C:\ti\sysconfig_1.28.0\nw\locales\ur.pak.info
+Unpacking C:\ti\sysconfig_1.28.0\nw\locales\pt-PT.pak.info
+Unpacking C:\ti\sysconfig_1.28.0\nw\locales\hi.pak
+Unpacking C:\ti\sysconfig_1.28.0\nw\locales\he.pak
+Unpacking C:\ti\sysconfig_1.28.0\nw\locales\el.pak.info
+Unpacking C:\ti\sysconfig_1.28.0\nw\locales\hr.pak.info
+Unpacking C:\ti\sysconfig_1.28.0\nw\locales\th.pak.info
+Unpacking C:\ti\sysconfig_1.28.0\nw\locales\nl.pak
+Unpacking C:\ti\sysconfig_1.28.0\nw\locales\da.pak
+Unpacking C:\ti\sysconfig_1.28.0\nw\locales\cs.pak.info
+Unpacking C:\ti\sysconfig_1.28.0\nw\locales\ar.pak.info
+Unpacking C:\ti\sysconfig_1.28.0\nw\locales\sr.pak.info
+Unpacking C:\ti\sysconfig_1.28.0\nw\locales\sk.pak.info
+Unpacking C:\ti\sysconfig_1.28.0\nw\locales\en-US.pak
+Unpacking C:\ti\sysconfig_1.28.0\nw\locales\he.pak.info
+Unpacking C:\ti\sysconfig_1.28.0\nw\locales\id.pak.info
+Unpacking C:\ti\sysconfig_1.28.0\nw\locales\am.pak
+Unpacking C:\ti\sysconfig_1.28.0\nw\locales\fi.pak.info
+Unpacking C:\ti\sysconfig_1.28.0\nw\locales\sl.pak.info
+Unpacking C:\ti\sysconfig_1.28.0\nw\locales\zh-TW.pak
+Unpacking C:\ti\sysconfig_1.28.0\nw\locales\pl.pak.info
+Unpacking C:\ti\sysconfig_1.28.0\nw\locales\ta.pak.info
+Unpacking C:\ti\sysconfig_1.28.0\nw\locales\it.pak
+Unpacking C:\ti\sysconfig_1.28.0\nw\locales\sv.pak
+Unpacking C:\ti\sysconfig_1.28.0\nw\locales\ms.pak
+Unpacking C:\ti\sysconfig_1.28.0\nw\locales\zh-TW.pak.info
+Unpacking C:\ti\sysconfig_1.28.0\nw\locales\nl.pak.info
+Unpacking C:\ti\sysconfig_1.28.0\nw\locales\es-419.pak
+Unpacking C:\ti\sysconfig_1.28.0\nw\locales\sl.pak
+Unpacking C:\ti\sysconfig_1.28.0\nw\locales\kn.pak.info
+Unpacking C:\ti\sysconfig_1.28.0\nw\locales\af.pak
+Unpacking C:\ti\sysconfig_1.28.0\nw\locales\ro.pak
+Unpacking C:\ti\sysconfig_1.28.0\nw\locales\sr.pak
+Unpacking C:\ti\sysconfig_1.28.0\nw\locales\de.pak.info
+Unpacking C:\ti\sysconfig_1.28.0\nw\locales\hu.pak
+Unpacking C:\ti\sysconfig_1.28.0\nw\locales\en-GB.pak
+Unpacking C:\ti\sysconfig_1.28.0\nw\locales\ko.pak
+Unpacking C:\ti\sysconfig_1.28.0\nw\locales\nb.pak
+Unpacking C:\ti\sysconfig_1.28.0\nw\locales\vi.pak.info
+Unpacking C:\ti\sysconfig_1.28.0\nw\locales\fa.pak
+Unpacking C:\ti\sysconfig_1.28.0\nw\locales\ar-XB.pak
+Unpacking C:\ti\sysconfig_1.28.0\nw\locales\uk.pak.info
+Unpacking C:\ti\sysconfig_1.28.0\nw\locales\mr.pak.info
+Unpacking C:\ti\sysconfig_1.28.0\nw\locales\ms.pak.info
+Unpacking C:\ti\sysconfig_1.28.0\nw\locales\fr.pak
+Unpacking C:\ti\sysconfig_1.28.0\nw\locales\hu.pak.info
+Unpacking C:\ti\sysconfig_1.28.0\nw\locales\zh-CN.pak.info
+Unpacking C:\ti\sysconfig_1.28.0\nw\locales\ur.pak
+Unpacking C:\ti\sysconfig_1.28.0\nw\locales\gu.pak.info
+Unpacking C:\ti\sysconfig_1.28.0\nw\locales\sk.pak
+Unpacking C:\ti\sysconfig_1.28.0\nw\locales\pt-BR.pak.info
+Unpacking C:\ti\sysconfig_1.28.0\nw\locales\pt-BR.pak
+Unpacking C:\ti\sysconfig_1.28.0\nw\locales\af.pak.info
+Unpacking C:\ti\sysconfig_1.28.0\nw\locales\it.pak.info
+Unpacking C:\ti\sysconfig_1.28.0\nw\locales\ja.pak.info
+Unpacking C:\ti\sysconfig_1.28.0\nw\locales\hi.pak.info
+Unpacking C:\ti\sysconfig_1.28.0\nw\locales\ru.pak
+Unpacking C:\ti\sysconfig_1.28.0\nw\locales\ja.pak
+Unpacking C:\ti\sysconfig_1.28.0\nw\locales\de.pak
+Unpacking C:\ti\sysconfig_1.28.0\nw\locales\uk.pak
+Unpacking C:\ti\sysconfig_1.28.0\nw\locales\sw.pak
+Unpacking C:\ti\sysconfig_1.28.0\nw\locales\fil.pak.info
+Unpacking C:\ti\sysconfig_1.28.0\nw\locales\fa.pak.info
+Unpacking C:\ti\sysconfig_1.28.0\nw\locales\es-419.pak.info
+Unpacking C:\ti\sysconfig_1.28.0\nw\locales\te.pak.info
+Unpacking C:\ti\sysconfig_1.28.0\nw\locales\mr.pak
+Unpacking C:\ti\sysconfig_1.28.0\nw\locales\ro.pak.info
+Unpacking C:\ti\sysconfig_1.28.0\nw\locales\ko.pak.info
+Unpacking C:\ti\sysconfig_1.28.0\nw\locales\pl.pak
+Unpacking C:\ti\sysconfig_1.28.0\nw\locales\fi.pak
+Unpacking C:\ti\sysconfig_1.28.0\nw\locales\vi.pak
+Unpacking C:\ti\sysconfig_1.28.0\nw\locales\en-XA.pak.info
+Unpacking C:\ti\sysconfig_1.28.0\nw\locales\tr.pak.info
+Unpacking C:\ti\sysconfig_1.28.0\nw\locales\gu.pak
+Unpacking C:\ti\sysconfig_1.28.0\nw\locales\bg.pak
+Unpacking C:\ti\sysconfig_1.28.0\nw\locales\ca.pak
+Unpacking C:\ti\sysconfig_1.28.0\nw\locales\en-US.pak.info
+Unpacking C:\ti\sysconfig_1.28.0\nw\locales\ml.pak
+Unpacking C:\ti\sysconfig_1.28.0\nw\locales\kn.pak
+Unpacking C:\ti\sysconfig_1.28.0\nw\locales\es.pak.info
+Unpacking C:\ti\sysconfig_1.28.0\nw\locales\bn.pak
+Unpacking C:\ti\sysconfig_1.28.0\nw\locales\lt.pak
+Unpacking C:\ti\sysconfig_1.28.0\nw\locales\zh-CN.pak
+Unpacking C:\ti\sysconfig_1.28.0\nw\locales\et.pak.info
+Unpacking C:\ti\sysconfig_1.28.0\nw\locales\lt.pak.info
+Unpacking C:\ti\sysconfig_1.28.0\nw\locales\ar-XB.pak.info
+Unpacking C:\ti\sysconfig_1.28.0\nw\locales\ml.pak.info
+Unpacking C:\ti\sysconfig_1.28.0\nodejs\node.exe
+Unpacking C:\ti\sysconfig_1.28.0\app\desktopServer.js.map
+Unpacking C:\ti\sysconfig_1.28.0\app\desktopServer.js
+Unpacking C:\ti\sysconfig_1.28.0\app\package.json
+Unpacking C:\ti\sysconfig_1.28.0\spice64\lib\ngspice\analog.cm
+Unpacking C:\ti\sysconfig_1.28.0\spice64\lib\ngspice\xtraevt.cm
+Unpacking C:\ti\sysconfig_1.28.0\spice64\lib\ngspice\digital.cm
+Unpacking C:\ti\sysconfig_1.28.0\spice64\lib\ngspice\spice2poly.cm
+Unpacking C:\ti\sysconfig_1.28.0\spice64\lib\ngspice\xtradev.cm
+Unpacking C:\ti\sysconfig_1.28.0\spice64\bin\vcomp140.dll
+Unpacking C:\ti\sysconfig_1.28.0\spice64\bin\ngspice_con.exe
+Unpacking C:\ti\sysconfig_1.28.0\dist\2060.embed.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\8715.embed.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\2140.embed.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\8401.bundle.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\plotly.js-basic-dist-min.bundle.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\2140.embed.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\4028.bundle.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\525.embed.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\LazyEditor.bundle.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\serviceWorker.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\5880.embed.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\4386.embed.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\6424.embed.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\4456.bundle.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\7637.embed.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\2140.bundle.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\3036.bundle.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\6489.embed.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\4820.bundle.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\2075.bundle.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\8180.bundle.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\3585.bundle.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\5062.bundle.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\migrationValidator.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\6424.embed.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\serviceWorker.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\996.embed.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\1886.embed.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\1120.bundle.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\4912.bundle.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\6082.embed.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\1065.embed.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\8180.bundle.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\7131.bundle.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\2140.bundle.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\6587.embed.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\8424.embed.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\1259.embed.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\7043.embed.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\3760.embed.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\2240.bundle.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\index.html
+Unpacking C:\ti\sysconfig_1.28.0\dist\9400.bundle.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\8715.bundle.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\249.embed.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\1147.embed.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\json.worker.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\editor.worker.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\2814.embed.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\8401.embed.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\3682.embed.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\452.embed.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\911.embed.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\9039.embed.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\6489.embed.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\4820.embed.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\5849.bundle.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\8070.embed.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\8734.embed.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\4902.bundle.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\5062.embed.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\1886.bundle.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\6134.embed.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\9458.embed.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\7287.embed.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\918.embed.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\1960.bundle.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\180.bundle.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\3632.embed.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\6587.bundle.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\migrationValidator.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\5703.embed.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\147.embed.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\2571.bundle.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\2954.embed.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\1471.bundle.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\elk-worker.min.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\4129.embed.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\6717.bundle.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\1156.bundle.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\6449.bundle.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\3145.embed.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\LazyTerminal.bundle.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\3145.bundle.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\8424.bundle.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\7637.bundle.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\1961.bundle.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\3919.bundle.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\9684.bundle.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\ccsProxy.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\1960.embed.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\1471.embed.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\5962.bundle.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\8084.bundle.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\4946.bundle.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\8946.embed.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\4129.bundle.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\9684.embed.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\3682.bundle.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\2060.embed.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\9343.bundle.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\2814.bundle.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\3585.embed.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\5593.bundle.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\854.bundle.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\9400.embed.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\8084.embed.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\2075.embed.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\6449.embed.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\2814.bundle.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\7131.embed.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\927.embed.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\9537.embed.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\8719.bundle.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\2892.embed.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\6130.bundle.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\2240.embed.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\147.bundle.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\1147.bundle.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\8401.bundle.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\4456.bundle.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\6423.bundle.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\5493.bundle.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\9458.embed.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\525.bundle.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\3919.bundle.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\3632.bundle.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\4368.bundle.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\7778.embed.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\7835.bundle.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\1259.bundle.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\4028.embed.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\1886.bundle.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\7562.bundle.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\2240.embed.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\7043.embed.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\5062.bundle.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\9907.bundle.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\6449.bundle.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\8946.bundle.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\7835.embed.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\4946.embed.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\jspdf.bundle.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\180.embed.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\9907.embed.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\4028.embed.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\1065.bundle.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\4456.embed.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\249.bundle.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\1471.embed.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\9400.embed.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\9398.bundle.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\848.embed.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\3682.bundle.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\2892.bundle.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\2892.bundle.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\2060.bundle.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\9684.embed.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\1120.bundle.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\4368.bundle.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\9537.embed.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\9537.bundle.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\1448.embed.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\4912.bundle.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\9907.embed.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\5377.embed.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\4386.embed.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\180.bundle.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\1120.embed.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\4129.embed.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\5288.bundle.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\4386.bundle.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\json.worker.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\embed.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\8734.embed.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\927.embed.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\editor.worker.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\5377.bundle.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\8670.embed.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\5593.bundle.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\2571.embed.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\9537.bundle.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\cli.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\9684.bundle.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\7856.bundle.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\6241.bundle.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\7637.embed.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\8424.bundle.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\4188.embed.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\SysConfig_Core_Tool_1.25.0_manifest.html
+Unpacking C:\ti\sysconfig_1.28.0\dist\8084.embed.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\5880.bundle.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\8906.bundle.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\3585.embed.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\8670.bundle.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\7778.embed.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\848.bundle.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\7287.bundle.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\7562.embed.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\4902.embed.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\5493.embed.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\911.bundle.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\1961.embed.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\7043.bundle.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\2954.bundle.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\5062.embed.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\8906.embed.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\4407.bundle.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\452.bundle.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\6424.bundle.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\6082.bundle.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\5703.bundle.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\5493.bundle.js.map
+Unpacking C:\ti\sysconfig_1.28.0\app\icons\sysconfig.png
+Unpacking C:\ti\sysconfig_1.28.0\spice64\share\ngspice\scripts\spinit
+Unpacking C:\ti\sysconfig_1.28.0\dist\version.txt
+Unpacking C:\ti\sysconfig_1.28.0\dist\sysconfig.png
+Unpacking C:\ti\sysconfig_1.28.0\dist\8719.embed.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\2060.bundle.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\9398.embed.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\8645.embed.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\2911.embed.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\4912.embed.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\4407.bundle.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\3585.bundle.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\665.embed.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\8946.embed.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\2911.bundle.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\4820.bundle.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\911.embed.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\5576.embed.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\4946.embed.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\8645.bundle.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\4188.embed.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\9343.bundle.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\8401.embed.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\147.embed.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\3682.embed.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\5849.bundle.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\8484.embed.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\7562.embed.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\1134.embed.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\3760.embed.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\1448.bundle.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\4912.embed.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\8946.bundle.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\6082.embed.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\ui.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\2571.embed.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\2954.embed.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\848.embed.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\ChatView.bundle.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\4368.embed.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\8734.bundle.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\1065.bundle.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\1471.bundle.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\854.bundle.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\DatePicker.bundle.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\2911.embed.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\4902.bundle.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\cli.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\8719.embed.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\7637.bundle.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\249.bundle.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\3632.embed.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\7562.bundle.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\8645.embed.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\7778.bundle.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\911.bundle.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\996.embed.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\6241.bundle.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\ccsProxy.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\5849.embed.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\2798.bundle.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\9343.embed.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\6241.embed.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\4946.bundle.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\4129.bundle.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\2240.bundle.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\2798.embed.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\sysconfig.ico
+Unpacking C:\ti\sysconfig_1.28.0\dist\embed.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\1120.embed.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\4188.bundle.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\6423.bundle.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\pinmux.ico
+Unpacking C:\ti\sysconfig_1.28.0\dist\1448.embed.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\6489.bundle.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\1147.bundle.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\7287.embed.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\2798.embed.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\1960.bundle.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\runtimeServer.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\LazyTerminal.bundle.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\6423.embed.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\1147.embed.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\5288.embed.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\3760.bundle.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\5849.embed.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\6134.embed.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\9398.embed.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\6424.bundle.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\9400.bundle.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\4902.embed.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\996.bundle.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\3036.bundle.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\854.embed.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\4456.embed.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\8715.embed.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\7835.embed.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\2075.bundle.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\1960.embed.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\6130.embed.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\996.bundle.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\ChatView.bundle.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\5880.bundle.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\8715.bundle.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\1448.bundle.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\5288.embed.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\8180.embed.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\4407.embed.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\848.bundle.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\665.bundle.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\6082.bundle.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\854.embed.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\8906.embed.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\2911.bundle.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\4386.bundle.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\525.embed.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\4820.embed.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\5962.embed.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\3632.bundle.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\2638.bundle.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\9343.embed.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\5288.bundle.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\1961.bundle.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\2075.embed.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\8070.bundle.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\plotly.js-basic-dist-min.bundle.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\5962.embed.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\6489.bundle.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\5703.embed.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\2954.bundle.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\147.bundle.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\2638.bundle.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\7131.embed.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\5962.bundle.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\8084.bundle.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\180.embed.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\3036.embed.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\4407.embed.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\LazyEditor.bundle.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\4188.bundle.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\7856.bundle.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\2571.bundle.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\5377.bundle.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\6241.embed.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\jspdf.bundle.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\7043.bundle.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\9398.bundle.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\6130.bundle.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\runtimeServer.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\DatePicker.bundle.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\8424.embed.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\5377.embed.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\2798.bundle.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\5493.embed.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\7835.bundle.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\1259.embed.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\1134.embed.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\7856.embed.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\9907.bundle.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\8906.bundle.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\license.txt
+Unpacking C:\ti\sysconfig_1.28.0\dist\ui.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\6587.bundle.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\525.bundle.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\665.bundle.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\5593.embed.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\5703.bundle.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\8070.embed.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\8734.bundle.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\8645.bundle.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\6130.embed.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\6717.embed.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\1065.embed.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\665.embed.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\1886.embed.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\452.embed.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\8070.bundle.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\8670.embed.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\4028.bundle.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\7856.embed.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\6717.embed.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\452.bundle.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\3760.bundle.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\1156.embed.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\918.embed.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\5576.embed.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\6717.bundle.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\6449.embed.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\6587.embed.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\7287.bundle.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\3919.embed.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\7778.bundle.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\3036.embed.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\2892.embed.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\6423.embed.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\2814.embed.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\3919.embed.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\1156.bundle.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\7131.bundle.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\1156.embed.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\9039.embed.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\8670.bundle.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\249.embed.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\1259.bundle.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\4368.embed.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\1961.embed.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\8484.embed.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\1134.bundle.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\5593.embed.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\5880.embed.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\1134.bundle.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\8180.embed.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\8719.bundle.js.map
+Unpacking C:\ti\sysconfig_1.28.0\dist\fonts\noto-emoji-0-400-normal.woff
+Unpacking C:\ti\sysconfig_1.28.0\dist\fonts\codicon.ttf
+Unpacking C:\ti\sysconfig_1.28.0\dist\fonts\noto-emoji-4-400-normal.woff
+Unpacking C:\ti\sysconfig_1.28.0\dist\fonts\roboto-all-400-normal.woff
+Unpacking C:\ti\sysconfig_1.28.0\dist\fonts\noto-emoji-1-400-normal.woff
+Unpacking C:\ti\sysconfig_1.28.0\dist\fonts\noto-emoji-9-400-normal.woff
+Unpacking C:\ti\sysconfig_1.28.0\dist\fonts\noto-emoji-0-400-normal.woff2
+Unpacking C:\ti\sysconfig_1.28.0\dist\fonts\noto-emoji-5-400-normal.woff
+Unpacking C:\ti\sysconfig_1.28.0\dist\fonts\noto-emoji-1-400-normal.woff2
+Unpacking C:\ti\sysconfig_1.28.0\dist\fonts\noto-emoji-3-400-normal.woff
+Unpacking C:\ti\sysconfig_1.28.0\dist\fonts\noto-emoji-7-400-normal.woff
+Unpacking C:\ti\sysconfig_1.28.0\dist\fonts\noto-emoji-8-400-normal.woff
+Unpacking C:\ti\sysconfig_1.28.0\dist\fonts\noto-emoji-6-400-normal.woff
+Unpacking C:\ti\sysconfig_1.28.0\dist\fonts\noto-emoji-2-400-normal.woff
+Unpacking C:\ti\sysconfig_1.28.0\dist\icons\apps\bpchecker.png
+Unpacking C:\ti\sysconfig_1.28.0\dist\icons\apps\cloud_tools.png
+Unpacking C:\ti\sysconfig_1.28.0\dist\icons\apps\launchpad-social-e2e.png
+Unpacking C:\ti\sysconfig_1.28.0\dist\icons\apps\pinmux.png
+Unpacking C:\ti\sysconfig_1.28.0\dist\icons\apps\ccs_cloud.png
+Unpacking C:\ti\sysconfig_1.28.0\dist\icons\apps\ti_logo_red.svg
+Unpacking C:\ti\sysconfig_1.28.0\dist\icons\apps\sysconfig.ico
+Unpacking C:\ti\sysconfig_1.28.0\dist\icons\apps\trex.png
+Unpacking C:\ti\sysconfig_1.28.0\dist\icons\apps\TIDesignsLogo.png
+Unpacking C:\ti\sysconfig_1.28.0\dist\css\main.css
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\gpns.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\devices.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\interfaceMap.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\removedDevices.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0L110X\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0L110X\clocktree.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0L110X\MSPM0L110X.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0L110X\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM261x_ZFG\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM261x_ZFG\clocktree.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM261x_ZFG\AM261x_ZFG.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM261x_ZFG\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\DRA75xP_DRA74xP_SR1.0\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\DRA75xP_DRA74xP_SR1.0\DRA75xP_DRA74xP_SR1.0.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\DRA75xP_DRA74xP_SR1.0\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\J721E_DRA829_TDA4VM_AM752x\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\J721E_DRA829_TDA4VM_AM752x\J721E_DRA829_TDA4VM_AM752x.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\J721E_DRA829_TDA4VM_AM752x\version.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\J721E_DRA829_TDA4VM_AM752x\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\J721E_DRA829_TDA4VM_AM752x\templates\version.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\F28P65x\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\F28P65x\F28P65x.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\F28P65x\clocktree.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\F28P65x\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\MSPS003FX\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\MSPS003FX\MSPS003FX.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\MSPS003FX\clocktree.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\MSPS003FX\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2674R10RSK\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2674R10RSK\CC2674R10RSK.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2674R10RSK\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC3500\CC3500.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC3500\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC3500\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC1350RGZ\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC1350RGZ\CC1350RGZ.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC1350RGZ\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\TDA2Px_ABZ_SR1.0\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\TDA2Px_ABZ_SR1.0\TDA2Px_ABZ_SR1.0.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\TDA2Px_ABZ_SR1.0\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM62Ax\clocktree.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM62Ax\AM62Ax.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM62Ax\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM62Ax\.metadata\product.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM62Ax\.metadata\product.json.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2652R7RGZ\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2652R7RGZ\CC2652R7RGZ.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2652R7RGZ\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM33C321X\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM33C321X\clocktree.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM33C321X\MSPM33C321X.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM33C321X\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AWR294X\AWR294X.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AWR294X\.metadata\product.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AWR294X\.metadata\product.json.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2340R2RGE\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2340R2RGE\CC2340R2RGE.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2340R2RGE\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2755P207RHA\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2755P207RHA\CC2755P207RHA.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2755P207RHA\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM5766_SR1.0\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\xdg-open
+Unpacking C:\ti\sysconfig_1.28.0\dist\fonts\roboto-cyrillic-400-normal.woff2
+Unpacking C:\ti\sysconfig_1.28.0\dist\fonts\noto-emoji-3-400-normal.woff2
+Unpacking C:\ti\sysconfig_1.28.0\dist\fonts\roboto-greek-400-normal.woff2
+Unpacking C:\ti\sysconfig_1.28.0\dist\fonts\roboto-latin-ext-400-normal.woff2
+Unpacking C:\ti\sysconfig_1.28.0\dist\fonts\noto-emoji-8-400-normal.woff2
+Unpacking C:\ti\sysconfig_1.28.0\dist\fonts\noto-emoji-7-400-normal.woff2
+Unpacking C:\ti\sysconfig_1.28.0\dist\fonts\roboto-greek-ext-400-normal.woff2
+Unpacking C:\ti\sysconfig_1.28.0\dist\fonts\roboto-cyrillic-ext-400-normal.woff2
+Unpacking C:\ti\sysconfig_1.28.0\dist\fonts\noto-emoji-9-400-normal.woff2
+Unpacking C:\ti\sysconfig_1.28.0\dist\fonts\noto-emoji-4-400-normal.woff2
+Unpacking C:\ti\sysconfig_1.28.0\dist\fonts\noto-emoji-2-400-normal.woff2
+Unpacking C:\ti\sysconfig_1.28.0\dist\fonts\roboto-vietnamese-400-normal.woff2
+Unpacking C:\ti\sysconfig_1.28.0\dist\fonts\noto-emoji-5-400-normal.woff2
+Unpacking C:\ti\sysconfig_1.28.0\dist\fonts\noto-emoji-6-400-normal.woff2
+Unpacking C:\ti\sysconfig_1.28.0\dist\fonts\roboto-latin-400-normal.woff2
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM62Ax\templates\csv\PinmuxConfigSummary.csv.xdt
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM62Ax\templates\linux\devicetree.dtsi.xdt
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM62Ax\templates\Platform Development Kit (PDK)\AM62A_pinmux_data.c.xdt
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM62Ax\templates\Platform Development Kit (PDK)\AM62A_pinmux.h.xdt
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM5766_SR1.0\AM5766_SR1.0.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM5766_SR1.0\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM5766_SR1.0\templates\SR1.0 - Generic File Formats\genericFileFormatIOdelay.txt.xdt.bak
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM5766_SR1.0\templates\SR1.0 - Generic File Formats\genericFileFormatPadConf.txt.xdt.bak
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM5766_SR1.0\templates\SR1.0 - Generic File Formats\devicetree.txt.xdt.bak
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM5766_SR1.0\templates\SR1.0 - Platform Development Kit (PDK)\boardPadDelay.h.xdt.bak
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM5766_SR1.0\templates\SR1.0 - Platform Development Kit (PDK)\boardPadDelayDevice.c.xdt.bak
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM5766_SR1.0\templates\SR1.0 - Platform Development Kit (PDK)\boardPadDelayTune.h.xdt.bak
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM5766_SR1.0\templates\SR1.0 - Platform Development Kit (PDK)\boardPadDelayInit.c.xdt.bak
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2652R1FSIP\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2652R1FSIP\CC2652R1FSIP.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2652R1FSIP\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC1312R7RGZ\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC1312R7RGZ\CC1312R7RGZ.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC1312R7RGZ\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0G518X\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0G518X\clocktree.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0G518X\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM5718_SR1.0_beta\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM5718_SR1.0_beta\AM5718_SR1.0_beta.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM5718_SR1.0_beta\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\TPLD1202_RWS_TL\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC1352P7RGZ\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC1352P7RGZ\CC1352P7RGZ.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC1352P7RGZ\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM5706_SR2.x\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM5706_SR2.x\AM5706_SR2.x.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM5706_SR2.x\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AWR18XX\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AWR18XX\AWR18XX.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AWR18XX\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM261x_ZNC\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM261x_ZNC\AM261x_ZNC.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM261x_ZNC\clocktree.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM261x_ZNC\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\J721S2_TDA4VE_TDA4AL_TDA4VL_AM68x\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\J721S2_TDA4VE_TDA4AL_TDA4VL_AM68x\J721S2_TDA4VE_TDA4AL_TDA4VL_AM68x.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\J721S2_TDA4VE_TDA4AL_TDA4VL_AM68x\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\TDA2Px_ACD_SR1.0\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\TDA2Px_ACD_SR1.0\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AWR2944LC\AWR2944LC.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AWR2944LC\.metadata\product.json.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\F2802x\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\F2802x\F2802x.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\F2802x\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2640R2FRGZ\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2640R2FRGZ\CC2640R2FRGZ.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2640R2FRGZ\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2652P1FRGZ\CC2652P1FRGZ.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2652P1FRGZ\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2652P1FRGZ\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\XWRL14XX\.metadata\product.json.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0G150X\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0G150X\clocktree.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0G150X\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2340R5MODA\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2340R5MODA\CC2340R5MODA.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2340R5MODA\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM62Lx\AM62Lx.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM62Lx\clocktree.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM62Lx\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM62Lx\.metadata\product.json.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\J742S2\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\J742S2\J742S2.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\J742S2\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\F2803x\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\F2803x\F2803x.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\F2803x\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\F2838x\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\F2838x\F2838x.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\F2838x\clocktree.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\F2838x\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\F28003x\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\F28003x\F28003x.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\F28003x\clocktree.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\F28003x\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2340R5RHBQ1\CC2340R5RHBQ1.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2340R5RHBQ1\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2340R5RHBQ1\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2755P105RHA\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2755P105RHA\CC2755P105RHA.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2755P105RHA\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM62Px\AM62Px.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM62Px\clocktree.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM62Px\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM62Px\.metadata\product.json.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\DRA77xP_DRA76xP_SR1.0\DRA77xP_DRA76xP_SR1.0.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\DRA77xP_DRA76xP_SR1.0\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\DRA77xP_DRA76xP_SR1.0\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\DRA72x_SR2.0\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\DRA72x_SR2.0\DRA72x_SR2.0.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\DRA72x_SR2.0\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0L130X\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0L130X\clocktree.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0L130X\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2755P207RSL\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2755P207RSL\CC2755P207RSL.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2755P207RSL\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM261x_ZEJ_400\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM261x_ZEJ_400\AM261x_ZEJ_400.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM261x_ZEJ_400\clocktree.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2642R1FRTCQ1\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2642R1FRTCQ1\CC2642R1FRTCQ1.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2642R1FRTCQ1\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\J7200_DRA821_SR1.0_alpha\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\J7200_DRA821_SR1.0_alpha\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\IWR14XX\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\IWR14XX\IWR14XX.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\IWR14XX\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2651R3RGZ\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2651R3RGZ\CC2651R3RGZ.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2651R3RGZ\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2340R22RKP\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2340R22RKP\CC2340R22RKP.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2340R22RKP\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2340R53YBG\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2340R53YBG\CC2340R53YBG.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2340R53YBG\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM261x_ZCZ_400\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM261x_ZCZ_400\AM261x_ZCZ_400.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM261x_ZCZ_400\clocktree.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2755R105RHA\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2755R105RHA\CC2755R105RHA.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2755R105RHA\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\F28E12x\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\F28E12x\F28E12x.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\F28E12x\clocktree.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\F28E12x\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2341R10RKP\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2341R10RKP\CC2341R10RKP.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2341R10RKP\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\TPLD2001_RJY_TL\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\DRA72x_SR1.0\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\DRA72x_SR1.0\DRA72x_SR1.0.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\DRA72x_SR1.0\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM5726_SR1.1_beta\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM5766_SR1.0\templates\version.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0G518X\MSPM0G518X.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\TPLD1202_RWS_TL\TPLD1202_RWS_TL.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\J721S2_TDA4VE_TDA4AL_TDA4VL_AM68x\version.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\J721S2_TDA4VE_TDA4AL_TDA4VL_AM68x\templates\version.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\TDA2Px_ACD_SR1.0\TDA2Px_ACD_SR1.0.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AWR2944LC\.metadata\product.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\XWRL14XX\XWRL14XX.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\XWRL14XX\.metadata\product.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0G150X\MSPM0G150X.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM62Lx\templates\csv\PinmuxConfigSummary.csv.xdt
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM62Lx\templates\linux\devicetree.dtsi.xdt
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM62Lx\templates\Platform Development Kit (PDK)\AM62L_pinmux.h.xdt
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM62Lx\templates\Platform Development Kit (PDK)\AM62L_pinmux_data.c.xdt
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM62Lx\.metadata\product.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\J742S2\version.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\J742S2\templates\version.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM62Px\templates\csv\PinmuxConfigSummary.csv.xdt
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM62Px\templates\linux\alt_devicetree.dtsi.xdt
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM62Px\templates\linux\devicetree.dtsi.xdt
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM62Px\templates\Platform Development Kit (PDK)\AM62P_pinmux_data.c.xdt
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM62Px\templates\Platform Development Kit (PDK)\alt_AM62P_pinmux.h.xdt
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM62Px\templates\Platform Development Kit (PDK)\AM62P_pinmux.h.xdt
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM62Px\.metadata\product.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0L130X\MSPM0L130X.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\J7200_DRA821_SR1.0_alpha\version.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\J7200_DRA821_SR1.0_alpha\J7200_DRA821_SR1.0_alpha.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\J7200_DRA821_SR1.0_alpha\templates\version.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\TPLD2001_RJY_TL\TPLD2001_RJY_TL.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM5726_SR1.1_beta\AM5726_SR1.1_beta.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM5726_SR1.1_beta\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\TM4C123x\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\TM4C123x\TM4C123x.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\TM4C123x\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0L112X\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0L112X\MSPM0L112X.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0L112X\clocktree.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0L112X\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\F280013x\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\F280013x\clocktree.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\F280013x\F280013x.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\F280013x\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2640R2FRHB\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2640R2FRHB\CC2640R2FRHB.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2640R2FRHB\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC1314R10RGZ\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC1314R10RGZ\CC1314R10RGZ.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC1314R10RGZ\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\TDA3x_SR2.0_beta\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\TDA3x_SR2.0_beta\TDA3x_SR2.0_beta.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\TDA3x_SR2.0_beta\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC1354P10RSK\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC1354P10RSK\CC1354P10RSK.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC1354P10RSK\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2745P10RHAQ1\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2745P10RHAQ1\CC2745P10RHAQ1.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2745P10RHAQ1\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0C1105_C1106\MSPM0C1105_C1106.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0C1105_C1106\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0C1105_C1106\clocktree.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0C1105_C1106\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM275x\AM275x.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM275x\clocktree.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM275x\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM275x\templates\csv\PinmuxConfigSummary.csv.xdt
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM275x\templates\Platform Development Kit (PDK)\AM275x_pinmux.h.xdt
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM275x\templates\Platform Development Kit (PDK)\AM275x_pinmux_data.c.xdt
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM275x\.metadata\product.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM275x\.metadata\product.json.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC1311R3RKP\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC1311R3RKP\CC1311R3RKP.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC1311R3RKP\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM261x_ZCZ\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM261x_ZCZ\AM261x_ZCZ.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM261x_ZCZ\clocktree.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM261x_ZCZ\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM5716_SR2.x\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM5716_SR2.x\AM5716_SR2.x.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM5716_SR2.x\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\F28002x\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\F28002x\clocktree.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\F28002x\F28002x.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\F28002x\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\IWR68XXAOP\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\IWR68XXAOP\IWR68XXAOP.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\IWR68XXAOP\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM5746_SR1.0\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM5746_SR1.0\AM5746_SR1.0.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM5746_SR1.0\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AWR68XX\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AWR68XX\AWR68XX.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AWR68XX\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2653P10RGZ\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2653P10RGZ\CC2653P10RGZ.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2653P10RGZ\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM261x_ZFG_400\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM261x_ZFG_400\clocktree.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM261x_ZFG_400\AM261x_ZFG_400.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AWR2544\AWR2544.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AWR2544\.metadata\product.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AWR2544\.metadata\product.json.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM62x\AM62x.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM62x\clocktree.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM62x\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM62x\templates\csv\PinmuxConfigSummary.csv.xdt
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM62x\templates\linux\devicetree.dtsi.xdt
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM62x\templates\Platform Development Kit (PDK)\AM62x_pinmux.h.xdt
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM62x\templates\Platform Development Kit (PDK)\AM62x_pinmux_data.c.xdt
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM62x\.metadata\product.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM62x\.metadata\product.json.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\IWR18XX\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\IWR18XX\IWR18XX.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\IWR18XX\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC1310RGZ\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC1310RGZ\CC1310RGZ.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC1310RGZ\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2651P3RKP\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2651P3RKP\CC2651P3RKP.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2651P3RKP\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\66AK2G12\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\66AK2G12\66AK2G12.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\66AK2G12\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2642R1FRGZQ1\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2642R1FRGZQ1\CC2642R1FRGZQ1.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2642R1FRGZQ1\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM261x_ZNC_400\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM261x_ZNC_400\AM261x_ZNC_400.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM261x_ZNC_400\clocktree.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM3351\AM3351.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM3351\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM3351\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM5718_SR2.x\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM5718_SR2.x\AM5718_SR2.x.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM5718_SR2.x\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2340R5RGE\CC2340R5RGE.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2340R5RGE\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2340R5RGE\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\TM4C129x\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\TM4C129x\TM4C129x.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\TM4C129x\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\TDA2Ex-17_SR2.x\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\TDA2Ex-17_SR2.x\TDA2Ex-17_SR2.x.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\TDA2Ex-17_SR2.x\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\IWR64XX\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\IWR64XX\IWR64XX.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\IWR64XX\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC1354R10RSK\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC1354R10RSK\CC1354R10RSK.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC1354R10RSK\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AWR14XX\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AWR14XX\AWR14XX.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AWR14XX\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AWR2X44P\AWR2X44P.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AWR2X44P\.metadata\product.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AWR2X44P\.metadata\product.json.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\MSP32C031CX\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\MSP32C031CX\MSP32C031CX.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\MSP32C031CX\clocktree.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\MSP32C031CX\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2341R73RHBQ1\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2341R73RHBQ1\CC2341R73RHBQ1.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2341R73RHBQ1\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM243x_ALX_beta\AM243x_ALX_beta.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM243x_ALX_beta\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM243x_ALX_beta\templates\csv\PinmuxConfigSummary.csv.xdt
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM243x_ALX_beta\templates\Platform Development Kit (PDK)\AM243x_ALX_pinmux_data.c.xdt
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM243x_ALX_beta\templates\Platform Development Kit (PDK)\AM243x_ALX_pinmux.h.xdt
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM243x_ALX_beta\.metadata\product.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM243x_ALX_beta\.metadata\product.json.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AMIC110\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AMIC110\AMIC110.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AMIC110\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2755R207RSL\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2755R207RSL\CC2755R207RSL.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2755R207RSL\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\F2807x\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\F2807x\clocktree.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\F2807x\F2807x.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\F2807x\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2640R2FRSM\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2640R2FRSM\CC2640R2FRSM.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2640R2FRSM\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\F28P55x\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\F28P55x\F28P55x.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\F28P55x\clocktree.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\F28P55x\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0L211X\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0L211X\MSPM0L211X.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0L211X\clocktree.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0L211X\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2340R5RKP\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2340R5RKP\CC2340R5RKP.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2340R5RKP\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM5716_SR1.0_beta\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM5716_SR1.0_beta\AM5716_SR1.0_beta.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM5716_SR1.0_beta\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AWR68XXAOP\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AWR68XXAOP\AWR68XXAOP.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AWR68XXAOP\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM263x_beta\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM263x_beta\AM263x_beta.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM263x_beta\clocktree.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM263x_beta\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM243x_ALV_beta\AM243x_ALV_beta.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM243x_ALV_beta\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM243x_ALV_beta\templates\csv\PinmuxConfigSummary.csv.xdt
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM243x_ALV_beta\templates\Platform Development Kit (PDK)\AM243x_ALV_pinmux_data.c.xdt
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM243x_ALV_beta\templates\Platform Development Kit (PDK)\AM243x_ALV_pinmux.h.xdt
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM243x_ALV_beta\.metadata\product.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM243x_ALV_beta\.metadata\product.json.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2662R1FRGZQ1\CC2662R1FRGZQ1.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2662R1FRGZQ1\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2662R1FRGZQ1\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2652RB1FRGZ\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2652RB1FRGZ\CC2652RB1FRGZ.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2652RB1FRGZ\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC1354P10RGZ\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC1354P10RGZ\CC1354P10RGZ.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC1354P10RGZ\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM65xx_SR1.0\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM65xx_SR1.0\AM65xx_SR1.0.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM65xx_SR1.0\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC1312R1F3RGZ\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC1312R1F3RGZ\CC1312R1F3RGZ.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC1312R1F3RGZ\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\J722S_TDA4VEN_TDA4AEN_AM67\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\J722S_TDA4VEN_TDA4AEN_AM67\J722S_TDA4VEN_TDA4AEN_AM67.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\J722S_TDA4VEN_TDA4AEN_AM67\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0G110X\MSPM0G110X.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0G110X\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0G110X\clocktree.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0G110X\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM5728_SR1.1_beta\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM5728_SR1.1_beta\AM5728_SR1.1_beta.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM5728_SR1.1_beta\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\XWRL64XX\.metadata\product.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\XWRL64XX\.metadata\product.json.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM273x\AM273x.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM273x\.metadata\product.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM273x\.metadata\product.json.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\TDA2x_AAS_SR2.0\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\TDA2x_AAS_SR2.0\TDA2x_AAS_SR2.0.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\TDA2x_AAS_SR2.0\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM65xx_SR2.0_beta\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM65xx_SR2.0_beta\AM65xx_SR2.0_beta.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM65xx_SR2.0_beta\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\F28004x\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\F28004x\F28004x.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\F28004x\clocktree.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\F28004x\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC3551E\CC3551E.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC3551E\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC3551E\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0G351X\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0G351X\clocktree.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0G351X\MSPM0G351X.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0G351X\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0G151X\MSPM0G151X.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0G151X\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0G151X\clocktree.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0G151X\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\F2833x\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\F2833x\F2833x.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\F2833x\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2642R1FRGZ\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2642R1FRGZ\CC2642R1FRGZ.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2642R1FRGZ\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2340R53RKP\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2340R53RKP\CC2340R53RKP.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2340R53RKP\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\F2837xS\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\F2837xS\F2837xS.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\F2837xS\clocktree.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\F2837xS\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2744R7RHAQ1\CC2744R7RHAQ1.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2744R7RHAQ1\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2744R7RHAQ1\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\TPLD1202_RWB_TR\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC1312PSIP\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC1312PSIP\CC1312PSIP.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC1312PSIP\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\DRA78x_SR2.0_beta\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\DRA78x_SR2.0_beta\DRA78x_SR2.0_beta.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\DRA78x_SR2.0_beta\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM261x_ZEJ\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM261x_ZEJ\AM261x_ZEJ.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM261x_ZEJ\clocktree.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM261x_ZEJ\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2651R3RKP\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2651R3RKP\CC2651R3RKP.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2651R3RKP\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2651R3SIPA\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2651R3SIPA\CC2651R3SIPA.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2651R3SIPA\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM263Px\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM263Px\clocktree.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM263Px\AM263Px.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM263Px\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\DM50x_SR2.0_beta\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\DM50x_SR2.0_beta\DM50x_SR2.0_beta.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\DM50x_SR2.0_beta\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\TDA2x_ABC_SR2.0\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\TDA2x_ABC_SR2.0\TDA2x_ABC_SR2.0.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\TDA2x_ABC_SR2.0\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AWR16XX\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AWR16XX\AWR16XX.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AWR16XX\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\J784S4_TDA4AP_TDA4VP_TDA4AH_TDA4VH_AM69x\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\J784S4_TDA4AP_TDA4VP_TDA4AH_TDA4VH_AM69x\J784S4_TDA4AP_TDA4VP_TDA4AH_TDA4VH_AM69x.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\J784S4_TDA4AP_TDA4VP_TDA4AH_TDA4VH_AM69x\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM62Dx\clocktree.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM62Dx\AM62Dx.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM62Dx\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM62Dx\.metadata\product.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM62Dx\.metadata\product.json.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC1311P3RGZ\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC1311P3RGZ\CC1311P3RGZ.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC1311P3RGZ\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC1310RHB\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC1310RHB\CC1310RHB.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC1310RHB\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\TPLD1201_RWB_TR\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\TPLD1201_RWB_TR\TPLD1201_RWB_TR.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\IWR68XX\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\IWR68XX\IWR68XX.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\IWR68XX\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM437x\AM437x.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM437x\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM437x\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\F29H85x\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\F29H85x\F29H85x.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\F29H85x\clocktree.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\F29H85x\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\TPLD2001_DGS_TL\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\IWR16XX\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\IWR16XX\IWR16XX.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\IWR16XX\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM13E230x\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM13E230x\AM13E230x.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM13E230x\clocktree.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM13E230x\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC1350RHB\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC1350RHB\CC1350RHB.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC1350RHB\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2651P3RGZ\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2651P3RGZ\CC2651P3RGZ.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2651P3RGZ\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\TPLD1202_DYY_TL\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\TPLD1202_DYY_TL\TPLD1202_DYY_TL.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\F280015x\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\F280015x\F280015x.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\F280015x\clocktree.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\F280015x\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\TDA2Ex-23_SR2.0\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\TDA2Ex-23_SR2.0\TDA2Ex-23_SR2.0.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\TDA2Ex-23_SR2.0\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM62SIP\AM62SIP.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM62SIP\clocktree.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM62SIP\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM62SIP\.metadata\product.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM62SIP\.metadata\product.json.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0L122X\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0L122X\MSPM0L122X.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0L122X\clocktree.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0L122X\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0G121X\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0G121X\MSPM0G121X.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0G121X\clocktree.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0G121X\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2652P7RGZ\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2652P7RGZ\CC2652P7RGZ.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2652P7RGZ\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2652P1FSIP\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2652P1FSIP\CC2652P1FSIP.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2652P1FSIP\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM438x\AM438x.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM438x\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM438x\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM335x\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM335x\AM335x.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM335x\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2674P10RSK\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2674P10RSK\CC2674P10RSK.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2674P10RSK\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC1352R1F3RGZ\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC1352R1F3RGZ\CC1352R1F3RGZ.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC1352R1F3RGZ\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\TPLD1201_DGS_TL\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\TPLD1201_DGS_TL\TPLD1201_DGS_TL.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0G120X\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0G120X\MSPM0G120X.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0G120X\clocktree.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0G120X\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2674P10RGZ\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2674P10RGZ\CC2674P10RGZ.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2674P10RGZ\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\MSP32G031CX\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\MSP32G031CX\MSP32G031CX.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\MSP32G031CX\clocktree.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\MSP32G031CX\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0G511X\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0G511X\clocktree.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0G511X\MSPM0G511X.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0G511X\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\TPLD801_DRL_TL\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\TPLD801_DRL_TL\TPLD801_DRL_TL.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\F28P551x\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\F28P551x\F28P551x.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\F28P551x\clocktree.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\F28P551x\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM5748_SR1.0\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM65xx_SR1.0\version.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM65xx_SR1.0\templates\version.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\J722S_TDA4VEN_TDA4AEN_AM67\version.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\J722S_TDA4VEN_TDA4AEN_AM67\templates\version.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\XWRL64XX\XWRL64XX.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM273x\templates\AM273x_pinmux_data.c.xdt
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM273x\templates\AM273x_pinmux.h.xdt
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM273x\templates\summary.csv.xdt
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM65xx_SR2.0_beta\version.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM65xx_SR2.0_beta\templates\version.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\TPLD1202_RWB_TR\TPLD1202_RWB_TR.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\J784S4_TDA4AP_TDA4VP_TDA4AH_TDA4VH_AM69x\version.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\J784S4_TDA4AP_TDA4VP_TDA4AH_TDA4VH_AM69x\templates\version.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM62Dx\templates\csv\PinmuxConfigSummary.csv.xdt
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM62Dx\templates\linux\devicetree.dtsi.xdt
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM62Dx\templates\Platform Development Kit (PDK)\AM62D_pinmux.h.xdt
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM62Dx\templates\Platform Development Kit (PDK)\AM62D_pinmux_data.c.xdt
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\TPLD2001_DGS_TL\TPLD2001_DGS_TL.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM62SIP\templates\csv\PinmuxConfigSummary.csv.xdt
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM62SIP\templates\linux\devicetree.dtsi.xdt
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM62SIP\templates\Platform Development Kit (PDK)\AM62x_pinmux.h.xdt
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM62SIP\templates\Platform Development Kit (PDK)\AM62x_pinmux_data.c.xdt
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM5748_SR1.0\AM5748_SR1.0.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM5748_SR1.0\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2340R53RHBQ1\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2340R53RHBQ1\CC2340R53RHBQ1.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2340R53RHBQ1\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0L111X\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0L111X\MSPM0L111X.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0L111X\clocktree.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0L111X\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\XWRL684X\.metadata\product.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\XWRL684X\.metadata\product.json.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0G350X\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0G350X\clocktree.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0G350X\MSPM0G350X.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0G350X\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM64x\clocktree.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM64x\AM64x.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM64x\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM64x\.metadata\product.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM64x\.metadata\product.json.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\F2805x\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\F2805x\F2805x.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\F2805x\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AMIC120\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AMIC120\AMIC120.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AMIC120\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0L222X\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0L222X\MSPM0L222X.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0L222X\clocktree.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0L222X\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0L134X\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0L134X\MSPM0L134X.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0L134X\clocktree.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0L134X\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\F2806x\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\F2806x\F2806x.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\F2806x\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2765R10RTQ\CC2765R10RTQ.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2765R10RTQ\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2765R10RTQ\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\legacy\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\legacy\buildSolution.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\legacy\adapt.js
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0G310X\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0G310X\MSPM0G310X.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0G310X\clocktree.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0G310X\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2674R10RGZ\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2674R10RGZ\CC2674R10RGZ.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2674R10RGZ\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2652R1FRGZ\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2652R1FRGZ\CC2652R1FRGZ.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2652R1FRGZ\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\DRA71x_SR2.x\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\DRA71x_SR2.x\DRA71x_SR2.x.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\DRA71x_SR2.x\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0C110X\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0C110X\MSPM0C110X.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0C110X\clocktree.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0C110X\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC1314R10RSK\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC1314R10RSK\CC1314R10RSK.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC1314R10RSK\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM5708_SR2.x\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM5708_SR2.x\AM5708_SR2.x.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM5708_SR2.x\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC1311R3RGZ\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC1311R3RGZ\CC1311R3RGZ.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC1311R3RGZ\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2745R7RHAQ1\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2745R7RHAQ1\CC2745R7RHAQ1.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2745R7RHAQ1\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM5728_SR2.0\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM5728_SR2.0\AM5728_SR2.0.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM5728_SR2.0\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2755R105YCJ\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2755R105YCJ\CC2755R105YCJ.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2755R105YCJ\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM5726_SR2.0\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM5726_SR2.0\AM5726_SR2.0.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM5726_SR2.0\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC1350RSM\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC1350RSM\CC1350RSM.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC1350RSM\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC1354R10RGZ\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC1354R10RGZ\CC1354R10RGZ.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC1354R10RGZ\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC1352P1F3RGZ\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC1352P1F3RGZ\CC1352P1F3RGZ.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC1352P1F3RGZ\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\DRA75x_74x_SR2.0\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\DRA75x_74x_SR2.0\DRA75x_74x_SR2.0.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\DRA75x_74x_SR2.0\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0G321X\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0G321X\MSPM0G321X.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0G321X\clocktree.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0G321X\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0H321X\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0H321X\MSPM0H321X.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0H321X\clocktree.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0H321X\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\F2837xD\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\F2837xD\F2837xD.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\F2837xD\clocktree.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\F2837xD\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2745R10RHAQ1\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2745R10RHAQ1\CC2745R10RHAQ1.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC2745R10RHAQ1\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0G320X\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0G320X\MSPM0G320X.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0G320X\clocktree.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\MSPM0G320X\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\DRA79x_SR2.x\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\DRA79x_SR2.x\DRA79x_SR2.x.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\DRA79x_SR2.x\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM5768_SR1.0\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM5768_SR1.0\AM5768_SR1.0.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM5768_SR1.0\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM5768_SR1.0\templates\version.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM5768_SR1.0\templates\SR1.0 - Generic File Formats\genericFileFormatIOdelay.txt.xdt.bak
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\XWRL684X\XWRL684X.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM64x\templates\csv\PinmuxConfigSummary.csv.xdt
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM64x\templates\linux\devicetree.dtsi.xdt
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM64x\templates\Platform Development Kit (PDK)\AM64x_pinmux_data.c.xdt
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM64x\templates\Platform Development Kit (PDK)\AM64x_pinmux.h.xdt
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM5768_SR1.0\templates\SR1.0 - Generic File Formats\genericFileFormatPadConf.txt.xdt.bak
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM5768_SR1.0\templates\SR1.0 - Generic File Formats\devicetree.txt.xdt.bak
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM5768_SR1.0\templates\SR1.0 - Platform Development Kit (PDK)\boardPadDelay.h.xdt.bak
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM5768_SR1.0\templates\SR1.0 - Platform Development Kit (PDK)\boardPadDelayDevice.c.xdt.bak
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM5768_SR1.0\templates\SR1.0 - Platform Development Kit (PDK)\boardPadDelayTune.h.xdt.bak
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\AM5768_SR1.0\templates\SR1.0 - Platform Development Kit (PDK)\boardPadDelayInit.c.xdt.bak
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC1310RSM\metadata.bundle
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC1310RSM\CC1310RSM.json
+Unpacking C:\ti\sysconfig_1.28.0\dist\deviceData\CC1310RSM\templates\index.json
+Unpacking C:\ti\sysconfig_1.28.0\tests\runTests.js
+Unpacking C:\ti\sysconfig_1.28.0\tests\sanityTests.js
+Unpacking C:\ti\sysconfig_1.28.0\tests\opns.json
+Unpacking C:\ti\sysconfig_1.28.0\tests\backwardsCompatibilityTests.js
+Unpacking C:\ti\sysconfig_1.28.0\tests\sysConfig.js
+Unpacking C:\ti\sysconfig_1.28.0\tests\jasmine-core\ReadMe.txt
+Unpacking C:\ti\sysconfig_1.28.0\.metadata\.tirex\package.tirex.json
+Directory already exists: C:\ti\sysconfig_1.28.0
+Unpacking files
+Unpacking C:\ti\sysconfig_1.28.0\autoupdate-windows.exe

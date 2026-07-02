@@ -1,0 +1,3 @@
+fa7154c43221e69ad31ae87886ead57d *xwr29xx_radarss_metarprc.bin
+9139f88c9f8ee3eca7a71add370a241c *xwr25xx_radarss_metarprc.bin
+881bae88eb5c5df48018597a092915cb *xwr2x4xp_radarss_metarprc.bin

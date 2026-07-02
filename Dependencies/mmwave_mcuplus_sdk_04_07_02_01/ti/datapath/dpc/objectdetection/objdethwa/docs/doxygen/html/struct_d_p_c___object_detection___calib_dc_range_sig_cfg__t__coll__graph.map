@@ -1,0 +1,4 @@
+<map id="DPC_ObjectDetection_CalibDcRangeSigCfg_t" name="DPC_ObjectDetection_CalibDcRangeSigCfg_t">
+<area shape="rect" id="node1" title="DC range signature compensation." alt="" coords="30,109,205,151"/>
+<area shape="rect" id="node2" href="/nightlybuilds/mmwave_app_sdk/ti/datapath/dpu/rangeproc/docs/rangeproc.tag$struct_d_p_u___range_proc___calib_dc_range_sig_cfg__t.html" title=" " alt="" coords="5,5,229,47"/>
+</map>

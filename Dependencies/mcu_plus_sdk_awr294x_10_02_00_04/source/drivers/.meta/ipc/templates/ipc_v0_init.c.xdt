@@ -1,0 +1,211 @@
+%%{
+    let module = system.modules['/drivers/ipc/ipc'];
+    let common = system.getScript("/common");
+    let instance = module.$static;
+    let selfCpuName = module.getSelfIpcCoreName();
+    let enabledCpus = module.getEnabledCpus(instance);
+    let enabledRPMessageCpus = module.getEnabledRPMessageCpus(instance);
+    let ipcSharedMemData = module.getIpcSharedMemData(instance);
+    let intrConfigs = instance.configDirIntr;
+    let intNumber;
+    let enabledNotifyCpus = [];
+    let isR5_0_notify_enabled = false, isR5_1_notify_enabled = false;
+    let isC66_notify_enabled = false, isM4_1_notify_enabled = false;
+    enabledNotifyCpus = module.getEnabledNotifyCpus(instance);
+    for (let i = 0; i < enabledNotifyCpus.length; i++)
+    {
+       switch(enabledNotifyCpus[i])
+       {
+           case "r5fss0_0" : isR5_0_notify_enabled = true;
+                             break;
+           case "r5fss0_1" : isR5_1_notify_enabled = true;
+                             break;
+           case "c66ss0"   : isC66_notify_enabled = true;
+                             break;
+           case "m4ss0_1"  : isM4_1_notify_enabled = true;
+                             break;
+           default : break;
+       }
+    }
+%%}
+
+
+% if ( enabledCpus.length > 0 || instance.enableLinuxIpc === true || instance.enableMailboxIpc === true) {
+    % if(instance.enableCrc === true) {
+    int32_t `instance.crcHookFxn`(uint8_t *data, uint16_t dataLen, uint8_t crcSize, void* crc);
+    % }
+    /* IPC Notify */
+    {
+        IpcNotify_Params notifyParams;
+        int32_t status;
+
+        /* initialize parameters to default */
+        IpcNotify_Params_init(&notifyParams);
+
+        /* specify the priority of IPC Notify interrupt */
+        notifyParams.intrPriority = `instance.intrPriority`U;
+
+        /* specify the core on which this API is called */
+        notifyParams.selfCoreId = CSL_CORE_ID_`selfCpuName.toUpperCase()`;
+
+        /* list the cores that will do IPC Notify with this core
+        * Make sure to NOT list 'self' core in the list below
+        */
+        % if( instance.enableLinuxIpc === true ) {
+        notifyParams.numCores = `enabledCpus.length+1`;
+        % } else {
+        notifyParams.numCores = `enabledCpus.length`;
+        % }
+        % let i = 0;
+        % for( let cpuName of enabledCpus) {
+        notifyParams.coreIdList[`i`] = CSL_CORE_ID_`cpuName.toUpperCase()`;
+            % i++;
+        % }
+        % if( instance.enableLinuxIpc === true ) {
+        notifyParams.coreIdList[`i`] = CSL_CORE_ID_A53SS0_0;
+        notifyParams.linuxCoreId = CSL_CORE_ID_A53SS0_0;
+        % }
+
+        % if( instance.enableMailboxIpc === true ) {
+        notifyParams.isMailboxIpcEnabled = 1;
+        % }
+        % else {
+        notifyParams.isMailboxIpcEnabled = 0;
+        % }
+
+        % if( instance.enableCrc === true ) {
+        notifyParams.isCrcEnabled = 1;
+        notifyParams.crcHookFxn = `instance.crcHookFxn`;
+        % }
+        % else {
+        notifyParams.isCrcEnabled = 0;
+        % }
+
+        % if(common.getSelfSysCfgCoreName().includes("c66")) {
+        % if (intrConfigs.enDirMapmboxreadreq) {
+        %if (intrConfigs["dspmboxreadreq"].$solution.peripheralName.length == 9) {
+        % intNumber = intrConfigs["dspmboxreadreq"].$solution.peripheralName.slice(-1);
+        % }
+        % else {
+        % intNumber = intrConfigs["dspmboxreadreq"].$solution.peripheralName.slice(-2);
+        % }
+        notifyParams.intrDirMapReq    = `intNumber`;
+        % }
+        % else {
+        notifyParams.intrDirMapReq    = 0U;
+        % }
+        % if (intrConfigs.enDirMapmboxreadack) {
+        %if (intrConfigs["dspmboxreadack"].$solution.peripheralName.length == 9) {
+        % intNumber = intrConfigs["dspmboxreadack"].$solution.peripheralName.slice(-1);
+        % }
+        % else {
+        % intNumber = intrConfigs["dspmboxreadack"].$solution.peripheralName.slice(-2);
+        % }
+        notifyParams.intrDirMapAck    = `intNumber`;
+        % }
+        % else {
+        notifyParams.intrDirMapAck    = 0U;
+        % }
+        % }
+
+        % if(instance.enableCustomIpcConfig === true){
+        notifyParams.isCustomIpcConfigEnabled = 1;
+
+        % if((instance.rx_mailbox_offset_r5fss0_0 > -1) && (selfCpuName != "r5fss0_0") && (isR5_0_notify_enabled)){
+        notifyParams.rxMailboxOffset[CSL_CORE_ID_R5FSS0_0] = `instance.rx_mailbox_offset_r5fss0_0`;
+        notifyParams.rxMailboxSize[CSL_CORE_ID_R5FSS0_0] = `instance.rx_mailboxMemoryR5_0`;
+        % }
+        % if((instance.rx_mailbox_offset_r5fss0_1 > -1) && (selfCpuName != "r5fss0_1") && (isR5_1_notify_enabled)){
+        notifyParams.rxMailboxOffset[CSL_CORE_ID_R5FSS0_1] = `instance.rx_mailbox_offset_r5fss0_1`;
+        notifyParams.rxMailboxSize[CSL_CORE_ID_R5FSS0_1] = `instance.rx_mailboxMemoryR5_1`;
+        % }
+        % if((instance.rx_mailbox_offset_c66ss0 > -1) && (selfCpuName != "c66ss0") && (isC66_notify_enabled)){
+        notifyParams.rxMailboxOffset[CSL_CORE_ID_C66SS0] = `instance.rx_mailbox_offset_c66ss0`;
+        notifyParams.rxMailboxSize[CSL_CORE_ID_C66SS0] = `instance.rx_mailboxMemoryC66`;
+        % }
+        % if((instance.rx_mailbox_offset_m4ss0_1 > -1) && (selfCpuName != "m4ss0_1") && (isM4_1_notify_enabled)){
+        notifyParams.rxMailboxOffset[CSL_CORE_ID_M4SS0_1] = `instance.rx_mailbox_offset_m4ss0_1`;
+        notifyParams.rxMailboxSize[CSL_CORE_ID_M4SS0_1] = `instance.rx_mailboxMemoryM4_1`;
+        % }
+
+        % if((instance.tx_mailbox_offset_r5fss0_0 > -1) && (selfCpuName != "r5fss0_0") && (isR5_0_notify_enabled)){
+        notifyParams.txMailboxOffset[CSL_CORE_ID_R5FSS0_0] = `instance.tx_mailbox_offset_r5fss0_0`;
+        notifyParams.txMailboxSize[CSL_CORE_ID_R5FSS0_0] = `instance.tx_mailboxMemoryR5_0`;
+        % }
+        % if((instance.tx_mailbox_offset_r5fss0_1 > -1) && (selfCpuName != "r5fss0_1") && (isR5_1_notify_enabled)){
+        notifyParams.txMailboxOffset[CSL_CORE_ID_R5FSS0_1] = `instance.tx_mailbox_offset_r5fss0_1`;
+        notifyParams.txMailboxSize[CSL_CORE_ID_R5FSS0_1] = `instance.tx_mailboxMemoryR5_1`;
+        % }
+        % if((instance.tx_mailbox_offset_c66ss0 > -1) && (selfCpuName != "c66ss0") && (isC66_notify_enabled)){
+        notifyParams.txMailboxOffset[CSL_CORE_ID_C66SS0] = `instance.tx_mailbox_offset_c66ss0`;
+        notifyParams.txMailboxSize[CSL_CORE_ID_C66SS0] = `instance.tx_mailboxMemoryC66`;
+        % }
+        % if((instance.tx_mailbox_offset_m4ss0_1 > -1) && (selfCpuName != "m4ss0_1") && (isM4_1_notify_enabled)){
+        notifyParams.txMailboxOffset[CSL_CORE_ID_M4SS0_1] = `instance.tx_mailbox_offset_m4ss0_1`;
+        notifyParams.txMailboxSize[CSL_CORE_ID_M4SS0_1] = `instance.tx_mailboxMemoryM4_1`;
+        % }
+
+        % }
+        % else{
+        notifyParams.isCustomIpcConfigEnabled = 0;
+        % }
+
+        /* initialize the IPC Notify module */
+        status = IpcNotify_init(&notifyParams);
+        DebugP_assert(status==SystemP_SUCCESS);
+
+        % if(instance.enableMailboxIpc === true) {
+        { /* Mailbox driver MUST be initialized after IPC Notify init */
+            Mailbox_Params mailboxInitParams;
+
+            Mailbox_Params_init(&mailboxInitParams);
+            status = Mailbox_init(&mailboxInitParams);
+            DebugP_assert(status == SystemP_SUCCESS);
+        }
+        % }
+    }
+% }
+% if ( enabledRPMessageCpus.length > 0 || instance.enableLinuxIpc === true ) {
+    /* IPC RPMessage */
+    {
+        RPMessage_Params rpmsgParams;
+        int32_t status;
+
+        /* initialize parameters to default */
+        RPMessage_Params_init(&rpmsgParams);
+
+        % if ( enabledRPMessageCpus.length > 0 ) {
+        /* TX VRINGs */
+        % for( let cpuName of enabledRPMessageCpus) {
+        % if(ipcSharedMemData.ipcRpMsgOffsetArr[selfCpuName] !== undefined) {
+        rpmsgParams.vringTxBaseAddr[CSL_CORE_ID_`cpuName.toUpperCase()`] = (uintptr_t)(&gIpcSharedMem[`ipcSharedMemData.ipcRpMsgOffsetArr[selfCpuName][cpuName]`]);
+        % }
+        % }
+        /* RX VRINGs */
+        % for( let cpuName of enabledRPMessageCpus) {
+        % if(ipcSharedMemData.ipcRpMsgOffsetArr[cpuName] !== undefined) {
+        rpmsgParams.vringRxBaseAddr[CSL_CORE_ID_`cpuName.toUpperCase()`] = (uintptr_t)(&gIpcSharedMem[`ipcSharedMemData.ipcRpMsgOffsetArr[cpuName][selfCpuName]`]);
+        % }
+        % }
+        /* Other VRING properties */
+        rpmsgParams.vringSize = IPC_RPMESSAGE_VRING_SIZE;
+        rpmsgParams.vringNumBuf = IPC_RPMESSAGE_NUM_VRING_BUF;
+        rpmsgParams.vringMsgSize = IPC_RPMESSAGE_MAX_VRING_BUF_SIZE;
+        % if( instance.enableCrc === true ) {
+        rpmsgParams.isCrcEnabled = 1;
+        rpmsgParams.crcHookFxn = `instance.crcHookFxn`;
+        % }
+        % else {
+        rpmsgParams.isCrcEnabled = 0;
+        % }
+        % }
+        % if ( instance.enableLinuxIpc === true ) {
+        rpmsgParams.linuxResourceTable = &gRPMessage_linuxResourceTable;
+        rpmsgParams.linuxCoreId = CSL_CORE_ID_A53SS0_0;
+        % }
+
+        /* initialize the IPC RP Message module */
+        status = RPMessage_init(&rpmsgParams);
+        DebugP_assert(status==SystemP_SUCCESS);
+    }
+% }

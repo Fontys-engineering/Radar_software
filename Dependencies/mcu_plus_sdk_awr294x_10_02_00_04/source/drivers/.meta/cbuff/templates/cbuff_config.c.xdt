@@ -1,0 +1,107 @@
+%%{
+    let module = system.modules['/drivers/cbuff/cbuff'];
+    let common = system.getScript("/common");
+%%}
+/*
+ * CBUFF
+ */
+/* CBUFF atrributes */
+CBUFF_Attrs gCbuffAttrs[CONFIG_CBUFF_NUM_INSTANCES] =
+{
+% for(let i = 0; i < module.$instances.length; i++) {
+    % let instance = module.$instances[i];
+    % let intrConfigs = instance.configDirIntr;
+    % let intNumber;
+    % let config = module.getInstanceConfig(instance);
+    {
+        .baseAddr                   = `config.baseAddr`,
+        .fifoBaseAddr               = `config.fifoBaseAddr`,
+        .adcBufBaseAddr             = `config.adcBufBaseAddr`,
+        .maxLVDSLanesSupported      = `config.maxLVDSLanesSupported`,
+        .errorIntrNum               = `config.errorIntrNum`,
+        .intrNum                    = `config.intrNum`,
+        % if (common.getSelfSysCfgCoreName().includes("c66")) {
+        % if (intrConfigs.enDirMapcbuffinterr == true) {
+        %if (intrConfigs["dsscbuffinterr"].$solution.peripheralName.length == 9) {
+        % intNumber = intrConfigs["dsscbuffinterr"].$solution.peripheralName.slice(-1);
+        % }
+        % else {
+        % intNumber = intrConfigs["dsscbuffinterr"].$solution.peripheralName.slice(-2);
+        % }
+        .errorIntrNumDirMap         = `intNumber`,
+        % }
+        % else {
+        .errorIntrNumDirMap         = 0,
+        % }
+        % if (intrConfigs.enDirMapcbuffint == true) {
+        %if (intrConfigs["dsscbuffint"].$solution.peripheralName.length == 9) {
+        % intNumber = intrConfigs["dsscbuffint"].$solution.peripheralName.slice(-1);
+        % }
+        % else {
+        % intNumber = intrConfigs["dsscbuffint"].$solution.peripheralName.slice(-2);
+        % }
+        .intrNumDirMap              = `intNumber`,
+        % }
+        % else {
+        .intrNumDirMap              = 0,
+        % }
+        % }
+        % else {
+        .errorIntrNumDirMap         = 0,
+        .intrNumDirMap              = 0,
+        % }
+        .chirpModeStartIndex        = `config.chirpModeStartIndex`,
+        .chirpModeEndIndex          = `config.chirpModeEndIndex`,
+        .cpSingleChirpInterleavedAddr[0] = `config.cpSingleChirpInterleavedAddr[0]`,
+        .cpSingleChirpInterleavedAddr[1] = `config.cpSingleChirpInterleavedAddr[1]`,
+        .cpSingleChirpInterleavedAddr[2] = `config.cpSingleChirpInterleavedAddr[2]`,
+        .cpSingleChirpInterleavedAddr[3] = `config.cpSingleChirpInterleavedAddr[3]`,
+        .cpSingleChirpNonInterleavedAddr[0] = `config.cpSingleChirpNonInterleavedAddr[0]`,
+        .cpSingleChirpNonInterleavedAddr[1] = `config.cpSingleChirpNonInterleavedAddr[1]`,
+        .cpSingleChirpNonInterleavedAddr[2] = `config.cpSingleChirpNonInterleavedAddr[2]`,
+        .cpSingleChirpNonInterleavedAddr[3] = `config.cpSingleChirpNonInterleavedAddr[3]`,
+        .cpMultipleChirpNonInterleavedAddr[0] = `config.cpMultipleChirpNonInterleavedAddr[0]`,
+        .cpMultipleChirpNonInterleavedAddr[1] = `config.cpMultipleChirpNonInterleavedAddr[1]`,
+        .cpMultipleChirpNonInterleavedAddr[2] = `config.cpMultipleChirpNonInterleavedAddr[2]`,
+        .cpMultipleChirpNonInterleavedAddr[3] = `config.cpMultipleChirpNonInterleavedAddr[3]`,
+        .cpMultipleChirpNonInterleavedAddr[4] = `config.cpMultipleChirpNonInterleavedAddr[4]`,
+        .cpMultipleChirpNonInterleavedAddr[5] = `config.cpMultipleChirpNonInterleavedAddr[5]`,
+        .cpMultipleChirpNonInterleavedAddr[6] = `config.cpMultipleChirpNonInterleavedAddr[6]`,
+        .cpMultipleChirpNonInterleavedAddr[7] = `config.cpMultipleChirpNonInterleavedAddr[7]`,
+        % if(instance.edmaConfig.instance == "EDMA_RSS_A") {
+        .cbuffChannelId[0]             = `config.cbuffChannelIdRssTPCC[0]`,
+        .cbuffChannelId[1]             = `config.cbuffChannelIdRssTPCC[1]`,
+        .cbuffChannelId[2]             = `config.cbuffChannelIdRssTPCC[2]`,
+        .cbuffChannelId[3]             = `config.cbuffChannelIdRssTPCC[3]`,
+        .cbuffChannelId[4]             = `config.cbuffChannelIdRssTPCC[4]`,
+        .cbuffChannelId[5]             = `config.cbuffChannelIdRssTPCC[5]`,
+        .cbuffChannelId[6]             = `config.cbuffChannelIdRssTPCC[6]`,
+        % }
+        % if(instance.edmaConfig.instance == "EDMA_DSS_A" || instance.edmaConfig.instance == "EDMA_DSS_B" || instance.edmaConfig.instance == "EDMA_DSS_C") {
+        .cbuffChannelId[0]             = `config.cbuffChannelIdDssTPCC[0]`,
+        .cbuffChannelId[1]             = `config.cbuffChannelIdDssTPCC[1]`,
+        .cbuffChannelId[2]             = `config.cbuffChannelIdDssTPCC[2]`,
+        .cbuffChannelId[3]             = `config.cbuffChannelIdDssTPCC[3]`,
+        .cbuffChannelId[4]             = `config.cbuffChannelIdDssTPCC[4]`,
+        .cbuffChannelId[5]             = `config.cbuffChannelIdDssTPCC[5]`,
+        .cbuffChannelId[6]             = `config.cbuffChannelIdDssTPCC[6]`,
+        % }
+        % if(instance.edmaConfig.instance == "EDMA_MSS_A") {
+        .cbuffChannelId[0]             = `config.cbuffChannelIdMssTPCC[0]`,
+        .cbuffChannelId[1]             = `config.cbuffChannelIdMssTPCC[1]`,
+        .cbuffChannelId[2]             = `config.cbuffChannelIdMssTPCC[2]`,
+        .cbuffChannelId[3]             = `config.cbuffChannelIdMssTPCC[3]`,
+        .cbuffChannelId[4]             = `config.cbuffChannelIdMssTPCC[4]`,
+        .cbuffChannelId[5]             = `config.cbuffChannelIdMssTPCC[5]`,
+        .cbuffChannelId[6]             = `config.cbuffChannelIdMssTPCC[6]`,
+        % }
+    },
+% }
+};
+
+/* CBUFF objects - initialized by the driver */
+CBUFF_Object gCbuffObject[CONFIG_CBUFF_NUM_INSTANCES];
+/* CBUFF objects - storage for CBUFF driver object handles */
+CBUFF_Object *gCbuffObjectPtr[CONFIG_CBUFF_NUM_INSTANCES] = { NULL };
+/* CBUFF objects count */
+uint32_t gCbuffConfigNum = CONFIG_CBUFF_NUM_INSTANCES;

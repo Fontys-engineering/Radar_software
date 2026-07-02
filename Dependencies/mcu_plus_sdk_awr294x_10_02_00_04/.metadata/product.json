@@ -1,0 +1,42 @@
+{
+    "name": "MCU_PLUS_SDK_AWR2944",
+    "displayName": "MCU+ SDK for AWR2944",
+    "version": "10.02.00",
+    "documentationPath": "../docs",
+    "includePaths": [
+        "../source",
+    ],
+    "components": [
+        "/kernel/dpl",
+        "/drivers/drivers",
+        "/board/board",
+        "/networking/networking",
+        "/security/security",
+    ],
+    "gpns": [
+        "AWR2944",
+    ],
+    "contexts": {
+        "AWR294x": [{
+            "name": "r5fss0-0",
+            "targetdbId": "r5fss0-0"
+        }, {
+            "name": "r5fss0-1",
+            "targetdbId": "r5fss0-1"
+        }, {
+            "name": "c66ss0",
+            "targetdbId": "c66ss0"
+        }, {
+            "name": "hsm0-0",
+            "targetdbId": "hsm0-0"
+        }],
+    },
+    "pinmuxUIOptions": {
+        "group": "merged",
+        "hidePeripheralTab": false,
+        "showPinTable": true,
+        "showSignals": true,
+        "showUsed": true
+    },
+    "minToolVersion" : "1.23.0"
+}

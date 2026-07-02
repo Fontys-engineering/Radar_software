@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<projectSpec>
+    <applicability>
+        <when>
+            <context
+                deviceFamily="C6000"
+                deviceId="TMS320C66XX.AWR2X44P"
+            />
+        </when>
+    </applicability>
+
+    <project
+        title="MUSIC Test"
+        name = "music_test_awr2x44p"
+        products="sysconfig;com.ti.MCU_PLUS_SDK_AWR2X44P;com.ti.MMWAVE_MCUPLUS_SDK"
+        configurations="
+            Release,
+        "
+        connection="TIXDS110_Connection.xml"
+        toolChain="TI"
+        cgtVersion="8.3.13"
+        device="TMS320C66XX.AWR2X44P"
+        deviceCore="C66xx_DSP"
+        ignoreDefaultDeviceSettings="true"
+        ignoreDefaultCCSSettings="true"
+        endianness="little"
+        outputFormat="ELF"
+        outputType="executable"
+
+        compilerBuildOptions="
+            -I${CG_TOOL_ROOT}/include
+            -I${MCU_PLUS_SDK_PATH}/source
+            -I${MCU_PLUS_SDK_PATH}/source/kernel/freertos/FreeRTOS-Kernel/include
+            -I${MCU_PLUS_SDK_PATH}/source/kernel/freertos/portable/TI_CGT/DSP_C66
+            -I${MCU_PLUS_SDK_PATH}/source/kernel/freertos/config/awr2x44p/c66
+            -I${MMWAVE_SDK_INSTALL_PATH}
+            -I${PROJECT_ROOT}/dssgenerated
+            -mv6600
+            --c99
+            -q
+            -mo
+            -pden
+            --emit_warnings_as_errors
+            --mem_model:const=data
+            --mem_model:data=far_aggregates
+            --remove_hooks_when_inlining
+            -on2
+            --disable_push_pop
+            --fp_mode=relaxed
+            --assume_control_regs_read
+            -DSOC_AWR2X44P
+            -DDOWNLOAD_FROM_CCS
+            -DSUBSYS_DSS
+            -D_LITTLE_ENDIAN
+            -DDebugP_LOG_ENABLED
+            -DPRINT_FORMAT_NO_WARNING
+            -DSITARA
+            -DMMWAVE_SDK_DEVICE=awr2x44P
+        "
+        linkerBuildOptions="
+            -i${MCU_PLUS_SDK_PATH}/source/kernel/freertos/lib
+            -i${MCU_PLUS_SDK_PATH}/source/drivers/lib
+            -i${MCU_PLUS_SDK_PATH}/source/board/lib
+            -i${CG_TOOL_ROOT}/lib
+            -i${MMWAVE_SDK_INSTALL_PATH}/ti/alg/music/lib
+            -i${PROJECT_ROOT}/dssgenerated
+            -m=${ProjName}.${ConfigName}.map
+            --warn_sections
+            --emit_warnings_as_errors
+            --ram_model
+            -x
+        "
+        preannouncebuildStep="Deleting old out file"
+        enableSysConfigTool="true"
+        sysConfigBuildOptions="
+            --context c66ss0 --part Default --package ETS --output ${PROJECT_ROOT}\dssgenerated
+        "
+
+        description="MUSIC Test AWR2">
+
+        <configuration name="Release"
+            compilerBuildOptions="
+                -o3
+                -mf2
+            "
+            linkerBuildOptions="
+                -lfreertos.awr2x44p.c66.ti-c6000.release.lib
+                -ldrivers.awr2x44p.c66.ti-c6000.release.lib
+                -lboard.awr2x44p.c66.ti-c6000.release.lib
+                -llibmusic_awr2x44P.ae66
+                -llibc.a
+            "
+        ></configuration>
+        <pathVariable name="MCU_PLUS_SDK_PATH" path="${COM_TI_MCU_PLUS_SDK_AWR2X44P_INSTALL_DIR}" scope="project" />
+        <pathVariable name="MMWAVE_SDK_INSTALL_PATH" path="${COM_TI_MMWAVE_MCUPLUS_SDK_INSTALL_DIR}" scope="project" />
+        <file path="./music_test_main.c" openOnCreation="false" excludeFromBuild="false" action="copy"/>
+        <file path="./music_test.h" openOnCreation="false" excludeFromBuild="false" action="copy"/>
+        <file path="./music_test_awr2x44p.syscfg" openOnCreation="false" excludeFromBuild="false" action="copy"/>
+        <file path="${MMWAVE_SDK_INSTALL_PATH}/ti/platform/awr2x44x/awr2x44P/c66x_linker.cmd" openOnCreation="false" excludeFromBuild="false" action="copy"/>
+        <file path="syscfg_c.rov.xs" openOnCreation="false" excludeFromBuild="false" action="copy">
+        </file>
+    </project>
+</projectSpec>
