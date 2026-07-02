@@ -31,9 +31,9 @@ ORDERED_OBJS += \
 "../c66x_linker.cmd" \
 "../dss/mmw_dss_linker.cmd" \
 $(GEN_CMDS__FLAG) \
--l"C:/Git/Radar_software/Dependencies/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/control/dpm/lib/libdpm_awr2944.ae66" \
--l"C:/Git/Radar_software/Dependencies/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/utils/mathutils/lib/libmathutils.ae66" \
--l"C:/Git/Radar_software/Dependencies/mmwave_mcuplus_sdk_04_07_02_01/mathlib_c66x_3_1_2_1/packages/ti/mathlib/lib/mathlib.ae66" \
+-l"C:/Git/Radar_software/Dependencies/mmwave_mcuplus_sdk_04_07_02_01/ti/control/dpm/lib/libdpm_awr2944.ae66" \
+-l"C:/Git/Radar_software/Dependencies/mmwave_mcuplus_sdk_04_07_02_01/ti/utils/mathutils/lib/libmathutils.ae66" \
+-l"C:/Git/Radar_software/Dependencies/mathlib_c66x_3_1_2_1/packages/ti/mathlib/lib/mathlib.ae66" \
 -l"C:/Git/Radar_software/Dependencies/dsplib_c66x_3_4_0_0/packages/ti/dsplib/lib/dsplib.ae66" \
 -l"C:/Git/Radar_software/Dependencies/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/freertos/lib/freertos.awr294x.c66.ti-c6000.debug.lib" \
 -l"C:/Git/Radar_software/Dependencies/mcu_plus_sdk_awr294x_10_02_00_04/source/drivers/lib/drivers.awr294x.c66.ti-c6000.debug.lib" \
@@ -57,9 +57,11 @@ RMDIR := RMDIR /S/Q
 -include subdir_vars.mk
 -include dss/subdir_vars.mk
 -include dss/dssgenerated/excluded/subdir_vars.mk
+-include dss/dssgenerated/subdir_vars.mk
 -include subdir_rules.mk
 -include dss/subdir_rules.mk
 -include dss/dssgenerated/excluded/subdir_rules.mk
+-include dss/dssgenerated/subdir_rules.mk
 -include objects.mk
 
 ifneq ($(MAKECMDGOALS),clean)
@@ -177,16 +179,17 @@ Radar_Program_dss.xe66: $(OBJS) $(CMD_SRCS) $(GEN_CMDS)
 clean:
 	-$(RM) $(GEN_MISC_FILES__QUOTED)$(GEN_FILES__QUOTED)$(EXE_OUTPUTS__QUOTED)
 	-$(RM) "objectdetection.obj" "dss\data_path.obj" "dss\dssgenerated\ti_dpl_config.obj" "dss\dssgenerated\ti_drivers_config.obj" "dss\dssgenerated\ti_drivers_open_close.obj" "dss\dssgenerated\ti_pinmux_config.obj" "dss\dssgenerated\ti_power_clock_config.obj" "dss\dssgenerated\ti_board_config.obj" "dss\dssgenerated\ti_board_open_close.obj" "dss\dssgenerated\ti_enet_config.obj" "dss\dssgenerated\ti_enet_open_close.obj" "dss\dssgenerated\ti_enet_soc.obj" "dss\dssgenerated\ti_enet_lwipif.obj" "dss\dss_main.obj" "dss\dssgenerated\excluded\ti_enet_config.obj" "dss\dssgenerated\excluded\ti_enet_lwipif.obj" "dss\dssgenerated\excluded\ti_enet_open_close.obj" "dss\dssgenerated\excluded\ti_enet_soc.obj" 
-	-$(RM) "objectdetection.d" "dss\data_path.d" "dss\dssgenerated\ti_dpl_config.d" "dss\dssgenerated\ti_drivers_config.d" "dss\dssgenerated\ti_drivers_open_close.d" "dss\dssgenerated\ti_pinmux_config.d" "dss\dssgenerated\ti_power_clock_config.d" "dss\dssgenerated\ti_board_config.d" "dss\dssgenerated\ti_board_open_close.d" "dss\dssgenerated\ti_enet_config.d" "dss\dssgenerated\ti_enet_open_close.d" "dss\dssgenerated\ti_enet_soc.d" "dss\dssgenerated\ti_enet_lwipif.d" "dss\dss_main.d" "dss\dssgenerated\excluded\ti_enet_config.d" "dss\dssgenerated\excluded\ti_enet_lwipif.d" "dss\dssgenerated\excluded\ti_enet_open_close.d" "dss\dssgenerated\excluded\ti_enet_soc.d" 
+	-$(RM) "objectdetection.d" "dss\data_path.d" "dss\dssgenerated\ti_dpl_config.d" "dss\dssgenerated\ti_drivers_config.d" "dss\dssgenerated\ti_drivers_open_close.d" "dss\dssgenerated\ti_pinmux_config.d" "dss\dssgenerated\ti_power_clock_config.d" "dss\dssgenerated\ti_board_config.d" "dss\dssgenerated\ti_board_open_close.d" "dss\dssgenerated\ti_enet_config.d" "dss\dssgenerated\ti_enet_open_close.d" "dss\dssgenerated\ti_enet_soc.d" "dss\dssgenerated\ti_enet_lwipif.d" "dss\dss_main.d" "dss\dssgenerated\excluded\ti_enet_config.d" "dss\dssgenerated\excluded\ti_enet_lwipif.d" "dss\dssgenerated\excluded\ti_enet_open_close.d" "dss\dssgenerated\excluded\ti_enet_soc.d" "dss\dssgenerated\ti_board_config.d" "dss\dssgenerated\ti_board_open_close.d" "dss\dssgenerated\ti_dpl_config.d" "dss\dssgenerated\ti_drivers_config.d" "dss\dssgenerated\ti_drivers_open_close.d" "dss\dssgenerated\ti_enet_config.d" "dss\dssgenerated\ti_enet_lwipif.d" "dss\dssgenerated\ti_enet_open_close.d" "dss\dssgenerated\ti_enet_soc.d" "dss\dssgenerated\ti_pinmux_config.d" 
+	-$(RM) "dss\dssgenerated\ti_power_clock_config.d" 
 	-@echo ' '
 
 pre-build:
-	-C:/ti/sysconfig_1.28.0/nodejs/node C:/ti/sysconfig_1.28.0/dist/cli.js --product C:\Git\Radar_software\Dependencies\mcu_plus_sdk_awr294x_10_02_00_04/.metadata/product.json --script ../../Radar_Program_mss/mss/mss.syscfg --context r5fss0-0 --output ../../Radar_Program_mss/mss/mssgenerated/ --script ../dss/dss.syscfg --context c66ss0 --output ../dss/dssgenerated/
+	-C:\Git\Radar_software\Dependencies/sysconfig_1.28.0/nodejs/node C:\Git\Radar_software\Dependencies/sysconfig_1.28.0/dist/cli.js --product C:\Git\Radar_software\Dependencies\mcu_plus_sdk_awr294x_10_02_00_04/.metadata/product.json --script ../../Radar_Program_mss/mss/mss.syscfg --context r5fss0-0 --output ../../Radar_Program_mss/mss/mssgenerated/ --script ../dss/dss.syscfg --context c66ss0 --output ../dss/dssgenerated/
 	-@echo ' '
 
 post-build:
 	-C:/ti/ccs2041/ccs/tools/compiler/ti-cgt-c6000_8.5.0.LTS/bin/strip6x -p C:\Git\Radar_software\Radar_Program_dss/Debug/Radar_Program_dss.xe66 -o=C:\Git\Radar_software\Radar_Program_dss/Debug/Radar_Program_dss_strip.xe66
-	-C:/ti/sysconfig_1.28.0/nodejs/node.exe  C:\Git\Radar_software\Dependencies\mcu_plus_sdk_awr294x_10_02_00_04/tools/boot/out2rprc/elf2rprc.js C:\Git\Radar_software\Radar_Program_dss/Debug/Radar_Program_dss_strip.xe66
+	-C:\Git\Radar_software\Dependencies/sysconfig_1.28.0/nodejs/node.exe  C:\Git\Radar_software\Dependencies\mcu_plus_sdk_awr294x_10_02_00_04/tools/boot/out2rprc/elf2rprc.js C:\Git\Radar_software\Radar_Program_dss/Debug/Radar_Program_dss_strip.xe66
 	-C:/ti/ccs2041/ccs//utils/cygwin/mv C:\Git\Radar_software\Radar_Program_dss/Debug/Radar_Program_dss_strip.rprc C:\Git\Radar_software\Radar_Program_dss/Debug/Radar_Program_dss.rprc
 	-C:/ti/ccs2041/ccs//utils/cygwin/rm -f C:\Git\Radar_software\Radar_Program_dss/Debug/Radar_Program_dss_strip.rprc
 	-C:/ti/ccs2041/ccs//utils/cygwin/rm -f C:\Git\Radar_software\Radar_Program_dss/Debug/Radar_Program_dss_strip.xe66

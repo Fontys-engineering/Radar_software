@@ -46,5 +46,13 @@
 			<name>MMWAVE_SDK_INSTALL_PATH</name>
 			<value>$%7BDEPENDROOT%7D/mmwave_mcuplus_sdk_04_07_02_01</value>
 		</variable>
+		<variable>
+			<name>SYSCONFIG_TOOL</name>
+			<value>$%7BDEPENDROOT%7D/sysconfig_1.28.0/sysconfig_cli.bat</value>
+		</variable>
+		<variable>
+			<name>SYSCONFIG_TOOL_ROOT</name>
+			<value>$%7BDEPENDROOT%7D/sysconfig_1.28.0</value>
+		</variable>
 	</variableList>
 </projectDescription>

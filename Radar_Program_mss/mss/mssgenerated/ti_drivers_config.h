@@ -114,6 +114,24 @@ void System_deinit(void);
 #define CONFIG_ESM_NUM_INSTANCES (1U)
 
 /*
+ * GPIO
+ */
+#include <drivers/gpio.h>
+#include <drivers/soc.h>
+#include <kernel/dpl/AddrTranslateP.h>
+
+/* GPIO PIN Macros */
+#define GPIO_LED_BASE_ADDR (CSL_MSS_GIO_U_BASE)
+#define GPIO_LED_PIN (26U)
+#define GPIO_LED_DIR (GPIO_DIRECTION_OUTPUT)
+#define GPIO_LED_TRIG_TYPE (GPIO_TRIG_TYPE_NONE)
+#define GPIO_LED_OPEN_DRAIN (GPIO_OPEN_DRAIN_DISABLE)
+#define GPIO_LED_INTR_LEVEL (GPIO_INTR_LEVEL_LOW)
+#define GPIO_LED_INTR_HIGH (CSL_MSS_INTR_MSS_GIO_INT0)
+#define GPIO_LED_INTR_LOW (CSL_MSS_INTR_MSS_GIO_INT1)
+#define CONFIG_GPIO_NUM_INSTANCES (1U)
+
+/*
  * IPC Notify
  */
 #include <drivers/ipc_notify.h>
@@ -138,6 +156,10 @@ void System_deinit(void);
 #define CONFIG_UART0 (1U)
 #define CONFIG_UART_NUM_INSTANCES (2U)
 #define CONFIG_UART_NUM_DMA_INSTANCES (0U)
+
+/* ENET MACROS */
+
+
 
 #include <drivers/soc.h>
 #include <kernel/dpl/CycleCounterP.h>
