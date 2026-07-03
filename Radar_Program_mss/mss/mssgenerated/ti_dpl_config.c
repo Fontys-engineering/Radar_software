@@ -73,7 +73,7 @@ const CacheP_Config gCacheConfig RODATA_CFG_SECTION = {
 };
 
 /* ----------- MpuP_armv7 ----------- */
-#define CONFIG_MPU_NUM_REGIONS  (6u)
+#define CONFIG_MPU_NUM_REGIONS  (8u)
 
 const MpuP_Config gMpuConfig RODATA_CFG_SECTION = {
     .numRegions = CONFIG_MPU_NUM_REGIONS,
@@ -140,13 +140,27 @@ const MpuP_RegionConfig gMpuRegionConfig[CONFIG_MPU_NUM_REGIONS] RODATA_CFG_SECT
         },
     },
     {
-        .baseAddr = 0x88000000u,
-        .size = MpuP_RegionSize_4M,
+        .baseAddr = 0x102EC000u,
+        .size = MpuP_RegionSize_16K,
         .attrs = {
             .isEnable = 1,
             .isCacheable = 0,
             .isBufferable = 0,
-            .isSharable = 0,
+            .isSharable = 1,
+            .isExecuteNever = 0,
+            .tex = 1,
+            .accessPerm = MpuP_AP_ALL_RW,
+            .subregionDisableMask = 0x0u
+        },
+    },
+    {
+        .baseAddr = 0xC5000000u,
+        .size = MpuP_RegionSize_8K,
+        .attrs = {
+            .isEnable = 1,
+            .isCacheable = 0,
+            .isBufferable = 0,
+            .isSharable = 1,
             .isExecuteNever = 1,
             .tex = 1,
             .accessPerm = MpuP_AP_ALL_RW,
@@ -154,12 +168,26 @@ const MpuP_RegionConfig gMpuRegionConfig[CONFIG_MPU_NUM_REGIONS] RODATA_CFG_SECT
         },
     },
     {
-        .baseAddr = 0x102EC000u,
-        .size = MpuP_RegionSize_16K,
+        .baseAddr = 0xA4030000u,
+        .size = MpuP_RegionSize_4K,
         .attrs = {
             .isEnable = 1,
             .isCacheable = 0,
             .isBufferable = 0,
+            .isSharable = 1,
+            .isExecuteNever = 1,
+            .tex = 1,
+            .accessPerm = MpuP_AP_ALL_RW,
+            .subregionDisableMask = 0x0u
+        },
+    },
+    {
+        .baseAddr = 0x88000000u,
+        .size = MpuP_RegionSize_2M,
+        .attrs = {
+            .isEnable = 1,
+            .isCacheable = 1,
+            .isBufferable = 1,
             .isSharable = 1,
             .isExecuteNever = 1,
             .tex = 1,
