@@ -83,6 +83,6 @@
             "type": "ccs-debug",
             "request": "launch",
             "targetConfig": "${workspaceFolder}\\Radar_Program_dss\\targetConfigs\\AWR2944.ccxml"
-        },
+        }
      ]
   }
