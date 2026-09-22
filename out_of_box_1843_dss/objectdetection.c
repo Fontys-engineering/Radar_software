@@ -875,6 +875,26 @@ int32_t DPC_ObjectDetection_execute
     }
     DebugP_assert(outRangeProc.endOfChirp == true);
 
+    // Insert extra data point in the Radar Cube
+    // Old:
+    // DPIF_RadarCube *radCube_ptr = subFrmObj->dpuRangeObj->rangeHwaCfg->hwaCfg->hwRes->RadarCube;
+    // radCube_ptr->data
+    // New:
+    DPIF_RadarCube mRadCub = result->radarCube;
+    cmplx16ImRe_t *mRadCubData = (cmplx16ImRe_t*)mRadCub.data;
+    DebugP_assert(mRadCub.datafmt == DPIF_RADARCUBE_FORMAT_1); // Make sure the radarCube is in the expected format
+    // Format (1D Range FFT output): cmplx16ImRe_t x[numTXPatterns][numDopplerChirps][numRX][numRangeBins]
+    
+    // Create arbitrary high value
+    cmplx16ImRe_t InsertVal;
+    InsertVal.imag = 0;
+    InsertVal.real = 30000;
+
+    // Insert value
+    // mRadCubData[0][0][0][0] = InsertVal;
+    mRadCubData[0] = InsertVal; // Temp quick fix, TODO: make mRadCubData object actually a multidimensional array
+
+    // Continue with other code
     if (processCallBack->processInterFrameBeginCallBackFxn != NULL)
     {
         (*processCallBack->processInterFrameBeginCallBackFxn)(objDetObj->subFrameIndx);
