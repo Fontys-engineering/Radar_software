@@ -1,0 +1,23 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "out_of_box_1843_mss",
+            "type": "ccs-debug",
+            "request": "launch",
+            "projectInfo": {
+                "name": "out_of_box_1843_mss",
+                "resourceId": "/out_of_box_1843_mss"
+            }
+        },
+        {
+            "name": "out_of_box_1843_dss",
+            "type": "ccs-debug",
+            "request": "launch",
+            "projectInfo": {
+                "name": "out_of_box_1843_dss",
+                "resourceId": "/out_of_box_1843_dss"
+            }
+        }
+    ]
+}
