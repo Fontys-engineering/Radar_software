@@ -11,5 +11,5 @@
 	<filesToOpen value=""/>
 	<connection value="common/targetdb/connections/TIXDS110_Connection.xml"/>
 	<activeTargetConfiguration value="targetConfigs/AWR1843.ccxml"/>
-	<isTargetConfigurationManual value="false"/>
+	<isTargetConfigurationManual value="true"/>
 </projectOptions>

@@ -12,6 +12,29 @@
             <instance XML_version="1.2" href="drivers/tixds510c674x.xml" id="drivers" xml="tixds510c674x.xml" xmlpath="drivers"/>
             <platform XML_version="1.2" id="platform_0">
                 <instance XML_version="1.2" desc="AWR1843" href="devices/awr1843.xml" id="AWR1843" xml="awr1843.xml" xmlpath="devices"/>
+                <device XML_version="1.2" id="AWR1843" partnum="AWR1843" HW_revision="1" description="AWR1843 mmWave Radar">
+                    <router XML_version="1.2" id="DEBUGSSM_0" HW_revision="1.0" isa="DEBUGSSM" description="OneMCU DebugSS top level">
+                        <subpath id="subpath_2">
+                            <router XML_version="1.2" id="CS_DAP_0" HW_revision="1.0" isa="CS_DAP" description="CS_DAP Router">
+                                <subpath id="subpath_3">
+                                    <property id="Initial Configuration" Type="choicelist" Value="1"/>
+                                    <property id="Custom Configuration" Type="choicelist" Value="1"/>
+                                    <property id="Type" Type="choicelist" Value="0"/>
+                                    <property id="Force Configuration" Type="choicelist" Value="0"/>
+                                </subpath>
+                            </router>
+                        </subpath>
+                        <subpath id="subpath_0">
+                            <router XML_version="1.2" id="IcePick_M_0" HW_revision="1.0" isa="ICEPICK_M" description="ICEPick_M Router">
+                                <subpath id="subpath_1">
+                                    <cpu XML_version="1.2" id="C674X_0" HW_revision="1.0" isa="TMS320C674X" description="C674x+ GEM+FP CPU">
+                                        <property id="Domain Power Loss Mode" Type="stringfield" Value="-1"/>
+                                    </cpu>
+                                </subpath>
+                            </router>
+                        </subpath>
+                    </router>
+                </device>
             </platform>
         </connection>
     </configuration>

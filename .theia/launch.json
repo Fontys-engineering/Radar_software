@@ -2,13 +2,61 @@
     "version": "0.2.0",
     "configurations": [
         {
+            "name": "out_of_box_1843_combined",
+            "type": "ccs-debug",
+            "request": "launch",
+            "targetConfig": "${targetConfigFolder}\\AWR1843.ccxml",
+            "connections": [
+                {
+                    "name": "Texas Instruments XDS110 USB Debug Probe",
+                    "cores": [
+                        {
+                            "name": "Cortex_R4_0",
+                            "projectInfo": {
+                                "name": "out_of_box_1843_mss",
+                                "resourceId": "/out_of_box_1843_mss"
+                            },
+                            "program": "${workspaceFolder}/out_of_box_1843_mss/isk/out_of_box_1843_mss_isk.xer4f",
+                            "debuggerSettings": {
+                                "data": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\" ?>\n<PropertyValues/>\n"
+                            }
+                        },
+                        {
+                            "name": "C674X_0",
+                            "projectInfo": {
+                                "name": "out_of_box_1843_dss",
+                                "resourceId": "/out_of_box_1843_dss"
+                            },
+                            "program": "${workspaceFolder}/out_of_box_1843_dss/isk/out_of_box_1843_dss_isk.xe674",
+                            "debuggerSettings": {
+                                "data": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\" ?>\n<PropertyValues/>\n"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
             "name": "out_of_box_1843_mss",
             "type": "ccs-debug",
             "request": "launch",
             "projectInfo": {
                 "name": "out_of_box_1843_mss",
                 "resourceId": "/out_of_box_1843_mss"
-            }
+            },
+            "connections": [
+                {
+                    "name": "Texas Instruments XDS110 USB Debug Probe",
+                    "cores": [
+                        {
+                            "name": "Cortex_R4_0",
+                            "debuggerSettings": {
+                                "data": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\" ?>\n<PropertyValues/>\n"
+                            }
+                        }
+                    ]
+                }
+            ]
         },
         {
             "name": "out_of_box_1843_dss",
@@ -17,7 +65,27 @@
             "projectInfo": {
                 "name": "out_of_box_1843_dss",
                 "resourceId": "/out_of_box_1843_dss"
-            }
+            },
+            "connections": [
+                {
+                    "name": "Texas Instruments XDS110 USB Debug Probe",
+                    "cores": [
+                        {
+                            "name": "Cortex_R4_0",
+                            "debuggerSettings": {
+                                "data": "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\" ?>\n<PropertyValues/>\n"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "AWR1843.ccxml",
+            "type": "ccs-debug",
+            "request": "launch",
+            "targetConfig": "${targetConfigFolder}\\AWR1843.ccxml",
+            "groupInfo": []
         }
     ]
 }
