@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<configurations XML_version="1.2" id="configurations_0">
+    <configuration XML_version="1.2" id="configuration_0">
+        <instance XML_version="1.2" desc="Serial Connection" href="connections/Serial_Connection.xml" id="Serial Connection" xml="Serial_Connection.xml" xmlpath="connections"/>
+        <connection XML_version="1.2" id="Serial Connection">
+            <instance XML_version="1.2" href="drivers/serial_debugssm.xml" id="drivers" xml="serial_debugssm.xml" xmlpath="drivers"/>
+            <instance XML_version="1.2" href="drivers/serial_csdap.xml" id="drivers" xml="serial_csdap.xml" xmlpath="drivers"/>
+            <instance XML_version="1.2" href="drivers/serial_cortexr.xml" id="drivers" xml="serial_cortexr.xml" xmlpath="drivers"/>
+            <instance XML_version="1.2" href="drivers/serial_cschild.xml" id="drivers" xml="serial_cschild.xml" xmlpath="drivers"/>
+            <instance XML_version="1.2" href="drivers/serial_csetb.xml" id="drivers" xml="serial_csetb.xml" xmlpath="drivers"/>
+            <instance XML_version="1.2" href="drivers/serial_icepick_m.xml" id="drivers" xml="serial_icepick_m.xml" xmlpath="drivers"/>
+            <instance XML_version="1.2" href="drivers/serial_c674x.xml" id="drivers" xml="serial_c674x.xml" xmlpath="drivers"/>
+            <property Type="hiddenfield" id="dataFileRequired" desc="Board Data File" Value="No"/>
+            <platform XML_version="1.2" id="platform_0">
+                <instance XML_version="1.2" desc="AWR1843" href="devices/awr1843.xml" id="AWR1843" xml="awr1843.xml" xmlpath="devices"/>
+            </platform>
+        </connection>
+    </configuration>
+</configurations>
