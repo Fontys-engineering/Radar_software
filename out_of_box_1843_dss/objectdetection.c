@@ -875,46 +875,6 @@ int32_t DPC_ObjectDetection_execute
     }
     DebugP_assert(outRangeProc.endOfChirp == true);
 
-    // Insert extra data point in the Radar Cube
-    { // Create a local scope for our variables
-        // Static configuration parameters
-        uint8_t mNumTXPatterns = subFrmObj->staticCfg.numTxAntennas;
-        uint16_t mNumDopplerChirps = subFrmObj->staticCfg.numDopplerChirps;
-        uint8_t mNumRX = subFrmObj->staticCfg.ADCBufData.dataProperty.numRxAntennas;
-        uint16_t mNumRangeBins = subFrmObj->staticCfg.numRangeBins;
-        
-        // Make sure the radarCube is in the expected format
-        DPIF_RadarCube mRadCub = result->radarCube;
-        DebugP_assert(mRadCub.datafmt == DPIF_RADARCUBE_FORMAT_1);
-        // Format (1D Range FFT output): cmplx16ImRe_t x[numTXPatterns][numDopplerChirps][numRX][numRangeBins]
-        
-        // Create radar cube n-D array
-        cmplx16ImRe_t *pRadCubData = (cmplx16ImRe_t*)mRadCub.data;
-        cmplx16ImRe_t (*pRadCubDataArr)[mNumDopplerChirps][mNumRX][mNumRangeBins] = (cmplx16ImRe_t (*)[mNumDopplerChirps][mNumRX][mNumRangeBins]) pRadCubData;
-        
-        // Create arbitrary high value
-        cmplx16ImRe_t InsertVal;
-        InsertVal.imag = 0;
-        InsertVal.real = 30000;
-
-        // Insert value at all places
-        uint8_t txPattern, rx;
-        uint16_t dopplerChirp, rangeBin;
-        for (txPattern = 0; txPattern < mNumTXPatterns; txPattern++)
-        {
-            for (dopplerChirp = 0; dopplerChirp < mNumDopplerChirps; dopplerChirp++)
-            {
-                for (rx = 0; rx < mNumRX; rx++)
-                {
-                    for (rangeBin = 0; rangeBin < mNumRangeBins; rangeBin++)
-                    {
-                        pRadCubDataArr[txPattern][dopplerChirp][rx][rangeBin] = InsertVal;
-                    }
-                }
-            }
-        }
-    }
-
     if (processCallBack->processInterFrameBeginCallBackFxn != NULL)
     {
         (*processCallBack->processInterFrameBeginCallBackFxn)(objDetObj->subFrameIndx);
