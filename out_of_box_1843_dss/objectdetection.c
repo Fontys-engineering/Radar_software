@@ -92,8 +92,10 @@
 #include APP_RESOURCE_FILE
 
 /* Obj Det instance etc */
-#include <ti/datapath/dpc/objectdetection/objdethwa/include/objectdetectioninternal.h>
+#include "objectdetectioninternal.h"
 #include <ti/datapath/dpc/objectdetection/objdethwa/objectdetection.h>
+
+#include "dpu_custom.h"
 
 #ifdef DBG_DPC_OBJDET
 ObjDetObj     *gObjDetObj;
@@ -959,8 +961,33 @@ int32_t DPC_ObjectDetection_execute
         goto exit;
     }
 
+    /* Custom DPU Execution*/
+    DPU_Custom_Config customCfg;
+    DPU_Custom_OutParams customOutParams;
+
+    memset(&customCfg, 0, sizeof(DPU_Custom_Config));
+    customCfg.pInPointCloud  = subFrmObj->dpuCfg.aoaCfg.res.detObjOut;
+    customCfg.pInSideInfo    = subFrmObj->dpuCfg.aoaCfg.res.detObjOutSideInfo;
+    customCfg.numInputPoints = outAoaProc.numAoADetectedPoints;
+
+    /* Write filtered output back to index 0 of the existing result array */
+    customCfg.pOutPointCloud = subFrmObj->dpuCfg.aoaCfg.res.detObjOut;
+    customCfg.pOutSideInfo   = subFrmObj->dpuCfg.aoaCfg.res.detObjOutSideInfo;
+
+    retVal = DPU_Custom_config(subFrmObj->dpuCustomObj, &customCfg);
+    if (retVal != 0)
+    {
+        goto exit;
+    }
+
+    retVal = DPU_Custom_process(subFrmObj->dpuCustomObj, &customOutParams);
+    if (retVal != 0)
+    {
+        goto exit;
+    }
+    
     /* Set DPM result with measure (bias, phase) and detection info */
-    result->numObjOut = outAoaProc.numAoADetectedPoints;
+    result->numObjOut = customOutParams.numOutputElements;
     result->subFrameIdx = objDetObj->subFrameIndx;
     result->objOut               = subFrmObj->dpuCfg.aoaCfg.res.detObjOut;
     result->objOutSideInfo       = subFrmObj->dpuCfg.aoaCfg.res.detObjOutSideInfo;
@@ -2856,6 +2883,7 @@ static DPM_DPCHandle DPC_ObjectDetection_init
     DPU_AoAProcHWA_InitParams aoaInitParams;
     DPU_CFARCAProcHWA_InitParams cfarInitParams;
     DPU_DopplerProcHWA_InitParams dopplerInitParams;
+    DPU_Custom_InitParams customInitParams;
     HWA_MemInfo         hwaMemInfo;
 
     *errCode = 0;
@@ -2964,6 +2992,13 @@ static DPM_DPCHandle DPC_ObjectDetection_init
         {
             goto exit;
         }
+
+        subFrmObj->dpuCustomObj = DPU_Custom_init(&customInitParams, errCode);
+
+        if (*errCode != 0)
+        {
+            goto exit;
+        }
     }
 
 exit:
@@ -3040,6 +3075,13 @@ static int32_t DPC_ObjectDetection_deinit (DPM_DPCHandle handle)
             goto exit;
         }
         retVal = DPU_AoAProcHWA_deinit(subFrmObj->dpuAoAObj);
+
+        if (retVal != 0)
+        {
+            goto exit;
+        }
+
+        retVal = DPU_Custom_deinit(subFrmObj->dpuCustomObj);
 
         if (retVal != 0)
         {

@@ -339,6 +339,8 @@
 #include <ti/control/mmwavelink/mmwavelink.h>
 #include <ti/datapath/dpc/objectdetection/objdethwa/objectdetection.h>
 
+#include "dpu_custom.h"
+
 #ifdef __cplusplus
 extern "C" {
 #endif
@@ -392,6 +394,9 @@ typedef struct SubFrameObj_t
 
     /*! brief   Pointer to hold AoA DPU handle */
     DPU_AoAProcHWA_Handle dpuAoAObj;
+
+    /*! brief   Pointer to hold Custom DPU handle */
+    DPU_Custom_Handle dpuCustomObj;
 
     /*! brief   Static configuration */
     DPC_ObjectDetection_StaticCfg staticCfg;
