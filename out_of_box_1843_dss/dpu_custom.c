@@ -60,8 +60,20 @@ int32_t DPU_Custom_process(
     DPU_Custom_OutParams *outParams
 )
 {
-    DPU_Custom_Obj *dpuObj = (DPU_Custom_Obj *)handle;
-    uint32_t startTime;
+    /* C89 Requirement: All variable declarations must precede executable code */
+    DPU_Custom_Obj           *dpuObj;
+    uint32_t                  startTime;
+    uint32_t                  numInputPoints;
+    DPIF_PointCloudCartesian *pInPoints;
+    DPIF_PointCloudSideInfo  *pInSide;
+    DPIF_PointCloudCartesian *pOutPoints;
+    DPIF_PointCloudSideInfo  *pOutSide;
+    float                     maxDistSq;
+    int32_t                   maxIdx;
+    uint32_t                  i;
+    float                     x, y, z, distSq;
+
+    dpuObj = (DPU_Custom_Obj *)handle;
 
     if ((dpuObj == NULL) || (outParams == NULL))
     {
@@ -75,12 +87,12 @@ int32_t DPU_Custom_process(
 
     startTime = TSCL;
 
-    uint32_t numInputPoints             = dpuObj->cfg.numInputPoints;
-    DPIF_PointCloudCartesian *pInPoints = dpuObj->cfg.pInPointCloud;
-    DPIF_PointCloudSideInfo  *pInSide   = dpuObj->cfg.pInSideInfo;
+    numInputPoints = dpuObj->cfg.numInputPoints;
+    pInPoints      = dpuObj->cfg.pInPointCloud;
+    pInSide        = dpuObj->cfg.pInSideInfo;
 
-    DPIF_PointCloudCartesian *pOutPoints = dpuObj->cfg.pOutPointCloud;
-    DPIF_PointCloudSideInfo  *pOutSide   = dpuObj->cfg.pOutSideInfo;
+    pOutPoints     = dpuObj->cfg.pOutPointCloud;
+    pOutSide       = dpuObj->cfg.pOutSideInfo;
 
     if ((numInputPoints == 0) || (pInPoints == NULL) || (pOutPoints == NULL))
     {
@@ -89,17 +101,16 @@ int32_t DPU_Custom_process(
         return 0;
     }
 
-    float maxDistSq = -1.0f;
-    int32_t maxIdx  = -1;
+    maxDistSq = -1.0f;
+    maxIdx    = -1;
 
-    uint32_t i;
     for (i = 0; i < numInputPoints; i++)
     {
-        float x = pInPoints[i].x;
-        float y = pInPoints[i].y;
-        float z = pInPoints[i].z;
+        x = pInPoints[i].x;
+        y = pInPoints[i].y;
+        z = pInPoints[i].z;
 
-        float distSq = (x * x) + (y * y) + (z * z);
+        distSq = (x * x) + (y * y) + (z * z);
 
         if (distSq > maxDistSq)
         {
