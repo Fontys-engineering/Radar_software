@@ -1,6 +1,6 @@
 /**
  *  \file   dpu_custom.h
- *  \brief  Custom Max-Distance DPU Interface Header with Lateral Filtering
+ *  \brief  Custom DPU Interface Header - Retain 3 Representative Objects
  */
 
 #ifndef DPU_CUSTOM_H
@@ -20,6 +20,8 @@ extern "C" {
 #define DPU_CUSTOM_ENOMEM               (DPU_CUSTOM_ERROR_CODE_BASE - 2)
 #define DPU_CUSTOM_ENOTINITIALIZED      (DPU_CUSTOM_ERROR_CODE_BASE - 3)
 
+#define DPU_CUSTOM_MAX_CANDIDATES       (100U)
+
 typedef void* DPU_Custom_Handle;
 
 typedef struct DPU_Custom_InitParams_t
@@ -27,37 +29,21 @@ typedef struct DPU_Custom_InitParams_t
     uint8_t reserved;
 } DPU_Custom_InitParams;
 
-/**
- * @brief Post-AoA Filter Configuration Parameters
- */
 typedef struct DPU_Custom_Config_t
 {
-    /*! \brief Pointer to input point cloud array from AoAProc */
     DPIF_PointCloudCartesian *pInPointCloud;
-
-    /*! \brief Pointer to input side info (SNR/noise) array from AoAProc */
     DPIF_PointCloudSideInfo  *pInSideInfo;
-
-    /*! \brief Number of detected points passed from AoAProc */
     uint32_t                 numInputPoints;
-
-    /*! \brief Maximum allowed lateral distance (|x|) in meters (e.g. 0.25f for +/- 25 cm) */
     float                    maxLateralDist;
 
-    /*! \brief Pointer to output point cloud buffer */
     DPIF_PointCloudCartesian *pOutPointCloud;
-
-    /*! \brief Pointer to output side info buffer */
     DPIF_PointCloudSideInfo  *pOutSideInfo;
 
 } DPU_Custom_Config;
 
 typedef struct DPU_Custom_OutParams_t
 {
-    /*! \brief Number of output objects retained (0 or 1) */
     uint32_t numOutputElements;
-
-    /*! \brief DSP cycle count for processing */
     uint32_t processingTimeCycles;
 } DPU_Custom_OutParams;
 
