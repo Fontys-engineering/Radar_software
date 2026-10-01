@@ -1,6 +1,6 @@
 /**
  *  \file   dpu_custom.c
- *  \brief  Custom DPU - Retain Furthest Object Post-AoA Processing
+ *  \brief  Custom DPU - Retain Furthest Object within Lateral Bound Post-AoA Processing
  */
 
 #include "dpu_custom.h"
@@ -72,6 +72,7 @@ int32_t DPU_Custom_process(
     int32_t                   maxIdx;
     uint32_t                  i;
     float                     x, y, z, distSq;
+    float                     maxLat;
 
     dpuObj = (DPU_Custom_Obj *)handle;
 
@@ -94,6 +95,8 @@ int32_t DPU_Custom_process(
     pOutPoints     = dpuObj->cfg.pOutPointCloud;
     pOutSide       = dpuObj->cfg.pOutSideInfo;
 
+    maxLat         = dpuObj->cfg.maxLateralDist;
+
     if ((numInputPoints == 0) || (pInPoints == NULL) || (pOutPoints == NULL))
     {
         outParams->numOutputElements    = 0;
@@ -110,12 +113,16 @@ int32_t DPU_Custom_process(
         y = pInPoints[i].y;
         z = pInPoints[i].z;
 
-        distSq = (x * x) + (y * y) + (z * z);
-
-        if (distSq > maxDistSq)
+        /* Filter: Only evaluate candidates within [-maxLat, +maxLat] meters */
+        if ((x >= -maxLat) && (x <= maxLat))
         {
-            maxDistSq = distSq;
-            maxIdx    = (int32_t)i;
+            distSq = (x * x) + (y * y) + (z * z);
+
+            if (distSq > maxDistSq)
+            {
+                maxDistSq = distSq;
+                maxIdx    = (int32_t)i;
+            }
         }
     }
 
@@ -157,6 +164,17 @@ int32_t DPU_Custom_control(
 
     switch (cmd)
     {
+        case DPU_Custom_Cmd_SetMaxLateralDist:
+            if ((arg != NULL) && (argLen == sizeof(float)))
+            {
+                dpuObj->cfg.maxLateralDist = *(float *)arg;
+            }
+            else
+            {
+                return DPU_CUSTOM_EINVAL;
+            }
+            break;
+
         case DPU_Custom_Cmd_ResetStats:
             dpuObj->frameCount = 0;
             break;

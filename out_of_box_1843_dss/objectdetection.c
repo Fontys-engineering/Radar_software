@@ -969,8 +969,10 @@ int32_t DPC_ObjectDetection_execute
     customCfg.pInPointCloud  = subFrmObj->dpuCfg.aoaCfg.res.detObjOut;
     customCfg.pInSideInfo    = subFrmObj->dpuCfg.aoaCfg.res.detObjOutSideInfo;
     customCfg.numInputPoints = outAoaProc.numAoADetectedPoints;
+    
+    /* Default Lateral Distance limit to a +/-0.25 meters window */
+    customCfg.maxLateralDist = 0.25f;
 
-    /* Write filtered output back to index 0 of the existing result array */
     customCfg.pOutPointCloud = subFrmObj->dpuCfg.aoaCfg.res.detObjOut;
     customCfg.pOutSideInfo   = subFrmObj->dpuCfg.aoaCfg.res.detObjOutSideInfo;
 

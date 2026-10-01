@@ -1,6 +1,6 @@
 /**
  *  \file   dpu_custom.h
- *  \brief  Custom Max-Distance DPU Interface Header (Post-AoA Filtering)
+ *  \brief  Custom Max-Distance DPU Interface Header with Lateral Filtering
  */
 
 #ifndef DPU_CUSTOM_H
@@ -41,7 +41,10 @@ typedef struct DPU_Custom_Config_t
     /*! \brief Number of detected points passed from AoAProc */
     uint32_t                 numInputPoints;
 
-    /*! \brief Pointer to output point cloud buffer (allocates for filtered point) */
+    /*! \brief Maximum allowed lateral distance (|x|) in meters (e.g. 0.25f for +/- 25 cm) */
+    float                    maxLateralDist;
+
+    /*! \brief Pointer to output point cloud buffer */
     DPIF_PointCloudCartesian *pOutPointCloud;
 
     /*! \brief Pointer to output side info buffer */
@@ -60,7 +63,8 @@ typedef struct DPU_Custom_OutParams_t
 
 typedef enum DPU_Custom_Cmd_e
 {
-    DPU_Custom_Cmd_ResetStats = 0
+    DPU_Custom_Cmd_SetMaxLateralDist = 0,
+    DPU_Custom_Cmd_ResetStats
 } DPU_Custom_Cmd;
 
 /* Function Prototypes */
