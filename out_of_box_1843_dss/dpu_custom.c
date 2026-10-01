@@ -92,7 +92,8 @@ int32_t DPU_Custom_process(
     float maxDistSq = -1.0f;
     int32_t maxIdx  = -1;
 
-    for (uint32_t i = 0; i < numInputPoints; i++)
+    uint32_t i;
+    for (i = 0; i < numInputPoints; i++)
     {
         float x = pInPoints[i].x;
         float y = pInPoints[i].y;
