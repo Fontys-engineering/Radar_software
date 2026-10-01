@@ -1,6 +1,6 @@
 /**
  *  \file   dpu_custom.c
- *  \brief  Custom DPU - Retain Furthest, Closest, and Middle Objects Post-AoA Processing
+ *  \brief  Optimized Custom DPU - Fast Post-AoA Selection (C674x)
  */
 
 #include "dpu_custom.h"
@@ -22,10 +22,69 @@ typedef struct DPU_Custom_Obj_t
     DPU_Custom_Config cfg;
     bool              isConfigured;
     uint32_t          frameCount;
-
-    /* Candidate buffer stored in handle heap to avoid stack overflow */
-    Candidate         candidates[DPU_CUSTOM_MAX_CANDIDATES];
 } DPU_Custom_Obj;
+
+/**
+ * @brief O(N) Quickselect to partition array and locate median element
+ */
+static void quickselect_partition(Candidate *arr, uint32_t n)
+{
+    uint32_t left;
+    uint32_t right;
+    uint32_t k;
+    uint32_t pivotIdx, i, j;
+    float pivotVal;
+    Candidate tmp;
+
+    left = 0;
+    right = n - 1;
+    k = n / 2;
+
+    while (left < right)
+    {
+        pivotIdx = left + (right - left) / 2;
+        pivotVal = arr[pivotIdx].distSq;
+        i = left;
+        j = right;
+
+        while (i <= j)
+        {
+            while (arr[i].distSq < pivotVal)
+            {
+                i++;
+            }
+            while (arr[j].distSq > pivotVal)
+            {
+                if (j == 0) break;
+                j--;
+            }
+            if (i <= j)
+            {
+                tmp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = tmp;
+                i++;
+                if (j > 0)
+                {
+                    j--;
+                }
+            }
+        }
+
+        if (k <= j)
+        {
+            right = j;
+        }
+        else if (k >= i)
+        {
+            left = i;
+        }
+        else
+        {
+            break;
+        }
+    }
+}
 
 DPU_Custom_Handle DPU_Custom_init(
     DPU_Custom_InitParams *initParams,
@@ -83,11 +142,16 @@ int32_t DPU_Custom_process(
     float                     maxLat;
     uint32_t                  numCandidates;
     uint32_t                  i;
-    int32_t                   j;
-    Candidate                 key;
     float                     x, y, z, distSq;
-    Candidate                *candidates;
+    float                     minDistSq, maxDistSq;
     uint32_t                  closestIdx, middleIdx, furthestIdx;
+
+    /* Stack-allocated candidate buffer: 100 * 8 bytes = 800 bytes (L1D Cache fast RAM) */
+    Candidate                 candidates[DPU_CUSTOM_MAX_CANDIDATES];
+
+    /* Temporary variables to prevent in-place buffer overwrite corruption */
+    DPIF_PointCloudCartesian  tempPoint[3];
+    DPIF_PointCloudSideInfo   tempSide[3];
 
     dpuObj = (DPU_Custom_Obj *)handle;
 
@@ -111,7 +175,6 @@ int32_t DPU_Custom_process(
     pOutSide       = dpuObj->cfg.pOutSideInfo;
 
     maxLat         = dpuObj->cfg.maxLateralDist;
-    candidates     = dpuObj->candidates;
     numCandidates  = 0;
 
     if ((numInputPoints == 0) || (pInPoints == NULL) || (pOutPoints == NULL))
@@ -121,7 +184,12 @@ int32_t DPU_Custom_process(
         return 0;
     }
 
-    /* Step 1: Collect all valid candidates within lateral boundaries */
+    minDistSq   = 1e9f;
+    maxDistSq   = -1.0f;
+    closestIdx  = 0;
+    furthestIdx = 0;
+
+    /* Single-pass candidate filtering + Min/Max distance tracking */
     for (i = 0; i < numInputPoints; i++)
     {
         x = pInPoints[i].x;
@@ -134,8 +202,20 @@ int32_t DPU_Custom_process(
 
             candidates[numCandidates].originalIdx = i;
             candidates[numCandidates].distSq      = distSq;
-            numCandidates++;
 
+            if (distSq < minDistSq)
+            {
+                minDistSq  = distSq;
+                closestIdx = i;
+            }
+
+            if (distSq > maxDistSq)
+            {
+                maxDistSq  = distSq;
+                furthestIdx = i;
+            }
+
+            numCandidates++;
             if (numCandidates >= DPU_CUSTOM_MAX_CANDIDATES)
             {
                 break;
@@ -143,80 +223,74 @@ int32_t DPU_Custom_process(
         }
     }
 
-    /* Step 2: Select 0, 1, 2, or 3 objects based on candidates found */
+    /* Output Selection */
     if (numCandidates == 0)
     {
         outParams->numOutputElements = 0;
     }
     else if (numCandidates == 1)
     {
-        /* Only 1 point found */
-        closestIdx = candidates[0].originalIdx;
-
-        pOutPoints[0] = pInPoints[closestIdx];
+        tempPoint[0] = pInPoints[closestIdx];
         if ((pInSide != NULL) && (pOutSide != NULL))
         {
-            pOutSide[0] = pInSide[closestIdx];
+            tempSide[0] = pInSide[closestIdx];
+        }
+
+        pOutPoints[0] = tempPoint[0];
+        if ((pInSide != NULL) && (pOutSide != NULL))
+        {
+            pOutSide[0] = tempSide[0];
         }
 
         outParams->numOutputElements = 1;
     }
     else if (numCandidates == 2)
     {
-        /* 2 points found: assign closest and furthest */
-        if (candidates[0].distSq <= candidates[1].distSq)
-        {
-            closestIdx  = candidates[0].originalIdx;
-            furthestIdx = candidates[1].originalIdx;
-        }
-        else
-        {
-            closestIdx  = candidates[1].originalIdx;
-            furthestIdx = candidates[0].originalIdx;
-        }
-
-        pOutPoints[0] = pInPoints[closestIdx];
-        pOutPoints[1] = pInPoints[furthestIdx];
+        tempPoint[0] = pInPoints[closestIdx];
+        tempPoint[1] = pInPoints[furthestIdx];
 
         if ((pInSide != NULL) && (pOutSide != NULL))
         {
-            pOutSide[0] = pInSide[closestIdx];
-            pOutSide[1] = pInSide[furthestIdx];
+            tempSide[0] = pInSide[closestIdx];
+            tempSide[1] = pInSide[furthestIdx];
+        }
+
+        pOutPoints[0] = tempPoint[0];
+        pOutPoints[1] = tempPoint[1];
+        if ((pInSide != NULL) && (pOutSide != NULL))
+        {
+            pOutSide[0] = tempSide[0];
+            pOutSide[1] = tempSide[1];
         }
 
         outParams->numOutputElements = 2;
     }
     else
     {
-        /* 3 or more points found: Sort candidates ascending by distance squared */
-        for (i = 1; i < numCandidates; i++)
-        {
-            key = candidates[i];
-            j = (int32_t)i - 1;
+        /* O(N) Quickselect to isolate median element */
+        quickselect_partition(candidates, numCandidates);
+        middleIdx = candidates[numCandidates / 2].originalIdx;
 
-            while ((j >= 0) && (candidates[j].distSq > key.distSq))
-            {
-                candidates[j + 1] = candidates[j];
-                j--;
-            }
-            candidates[j + 1] = key;
-        }
-
-        /* Extract Closest, Middle (Median), and Furthest indices */
-        closestIdx  = candidates[0].originalIdx;
-        middleIdx   = candidates[numCandidates / 2].originalIdx;
-        furthestIdx = candidates[numCandidates - 1].originalIdx;
-
-        /* Assign output array entries */
-        pOutPoints[0] = pInPoints[closestIdx];   /* Index 0: Closest  */
-        pOutPoints[1] = pInPoints[middleIdx];    /* Index 1: Middle   */
-        pOutPoints[2] = pInPoints[furthestIdx];  /* Index 2: Furthest */
+        tempPoint[0] = pInPoints[closestIdx];
+        tempPoint[1] = pInPoints[middleIdx];
+        tempPoint[2] = pInPoints[furthestIdx];
 
         if ((pInSide != NULL) && (pOutSide != NULL))
         {
-            pOutSide[0] = pInSide[closestIdx];
-            pOutSide[1] = pInSide[middleIdx];
-            pOutSide[2] = pInSide[furthestIdx];
+            tempSide[0] = pInSide[closestIdx];
+            tempSide[1] = pInSide[middleIdx];
+            tempSide[2] = pInSide[furthestIdx];
+        }
+
+        pOutPoints[0] = tempPoint[0];
+        pOutPoints[1] = tempPoint[1];
+        pOutPoints[2] = tempPoint[2];
+
+        if ((pInSide != NULL) && (pOutSide != NULL))
+        {
+            pOutSide[0] = tempSide[0];
+            pOutSide[1] = tempSide[1];
+            pOutSide[2] = tempSide[2];
         }
 
         outParams->numOutputElements = 3;
