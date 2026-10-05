@@ -35,6 +35,8 @@ typedef struct DPU_Custom_Config_t
     DPIF_PointCloudSideInfo  *pInSideInfo;
     uint32_t                 numInputPoints;
     float                    maxLateralDist;
+    float                    minDepthDist;
+    float                    maxDepthDist;
 
     DPIF_PointCloudCartesian *pOutPointCloud;
     DPIF_PointCloudSideInfo  *pOutSideInfo;
@@ -50,6 +52,8 @@ typedef struct DPU_Custom_OutParams_t
 typedef enum DPU_Custom_Cmd_e
 {
     DPU_Custom_Cmd_SetMaxLateralDist = 0,
+    DPU_Custom_Cmd_SetMinDepthDist,
+    DPU_Custom_Cmd_SetMaxDepthDist,
     DPU_Custom_Cmd_ResetStats
 } DPU_Custom_Cmd;
 

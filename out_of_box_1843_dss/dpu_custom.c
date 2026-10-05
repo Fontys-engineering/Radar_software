@@ -140,6 +140,8 @@ int32_t DPU_Custom_process(
     DPIF_PointCloudCartesian *pOutPoints;
     DPIF_PointCloudSideInfo  *pOutSide;
     float                     maxLat;
+    float                     minDepth;
+    float                     maxDepth;
     uint32_t                  numCandidates;
     uint32_t                  i;
     float                     x, y, z, distSq;
@@ -175,6 +177,8 @@ int32_t DPU_Custom_process(
     pOutSide       = dpuObj->cfg.pOutSideInfo;
 
     maxLat         = dpuObj->cfg.maxLateralDist;
+    minDepth       = dpuObj->cfg.minDepthDist;
+    maxDepth       = dpuObj->cfg.maxDepthDist;
     numCandidates  = 0;
 
     if ((numInputPoints == 0) || (pInPoints == NULL) || (pOutPoints == NULL))
@@ -189,14 +193,15 @@ int32_t DPU_Custom_process(
     closestIdx  = 0;
     furthestIdx = 0;
 
-    /* Single-pass candidate filtering + Min/Max distance tracking */
+    /* Single-pass lateral and depth filtering + Min/Max distance tracking */
     for (i = 0; i < numInputPoints; i++)
     {
         x = pInPoints[i].x;
+        y = pInPoints[i].y;
 
-        if ((x >= -maxLat) && (x <= maxLat))
+        /* Filter by both Lateral (-maxLat <= x <= maxLat) and Depth (minDepth <= y <= maxDepth) */
+        if ((x >= -maxLat) && (x <= maxLat) && (y >= minDepth) && (y <= maxDepth))
         {
-            y = pInPoints[i].y;
             z = pInPoints[i].z;
             distSq = (x * x) + (y * y) + (z * z);
 
@@ -223,7 +228,7 @@ int32_t DPU_Custom_process(
         }
     }
 
-    /* Output Selection */
+    /* Output Selection (Performed AFTER filtering) */
     if (numCandidates == 0)
     {
         outParams->numOutputElements = 0;
@@ -267,7 +272,7 @@ int32_t DPU_Custom_process(
     }
     else
     {
-        /* O(N) Quickselect to isolate median element */
+        /* Quickselect to isolate median element among filtered candidates */
         quickselect_partition(candidates, numCandidates);
         middleIdx = candidates[numCandidates / 2].originalIdx;
 
@@ -322,6 +327,28 @@ int32_t DPU_Custom_control(
             if ((arg != NULL) && (argLen == sizeof(float)))
             {
                 dpuObj->cfg.maxLateralDist = *(float *)arg;
+            }
+            else
+            {
+                return DPU_CUSTOM_EINVAL;
+            }
+            break;
+
+        case DPU_Custom_Cmd_SetMinDepthDist:
+            if ((arg != NULL) && (argLen == sizeof(float)))
+            {
+                dpuObj->cfg.minDepthDist = *(float *)arg;
+            }
+            else
+            {
+                return DPU_CUSTOM_EINVAL;
+            }
+            break;
+
+        case DPU_Custom_Cmd_SetMaxDepthDist:
+            if ((arg != NULL) && (argLen == sizeof(float)))
+            {
+                dpuObj->cfg.maxDepthDist = *(float *)arg;
             }
             else
             {

@@ -961,7 +961,7 @@ int32_t DPC_ObjectDetection_execute
         goto exit;
     }
 
-    /* Custom DPU Execution*/
+   /* Custom DPU Execution*/
     DPU_Custom_Config customCfg;
     DPU_Custom_OutParams customOutParams;
 
@@ -972,6 +972,10 @@ int32_t DPC_ObjectDetection_execute
     
     /* Default Lateral Distance limit to a +/-0.25 meters window */
     customCfg.maxLateralDist = 0.25f;
+
+    /* Default Depth Distance limits (min/max range in meters) */
+    customCfg.minDepthDist   = 0.10f;
+    customCfg.maxDepthDist   = 5.00f;
 
     customCfg.pOutPointCloud = subFrmObj->dpuCfg.aoaCfg.res.detObjOut;
     customCfg.pOutSideInfo   = subFrmObj->dpuCfg.aoaCfg.res.detObjOutSideInfo;
