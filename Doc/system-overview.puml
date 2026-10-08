@@ -1,0 +1,111 @@
+@startuml system-overview
+
+title Plasma Reflectometer Firmware - System Overview
+
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam defaultFontName "Helvetica"
+skinparam defaultFontSize 14
+skinparam ArrowColor #555555
+skinparam ArrowFontSize 12
+skinparam ArrowFontColor #333333
+skinparam ArrowThickness 1.4
+skinparam roundCorner 14
+skinparam rectangle {
+  BorderThickness 1.5
+}
+skinparam package {
+  BorderThickness 2
+  FontSize 15
+}
+skinparam note {
+  BackgroundColor #FFFFFF
+  BorderColor #999999
+  FontSize 12
+}
+skinparam legend {
+  BackgroundColor #FFFFFF
+  BorderColor #BBBBBB
+  FontSize 12
+}
+
+top to bottom direction
+
+' ---------- colours  ----------
+!$REUSED = "#E8E8E8"
+!$OURS   = "#CFE3FF"
+!$NET    = "#D4F2D2"
+!$BUF    = "#FFF6B3"
+
+' ================= 1. RF =================
+package "Radar subsystem  (TI firmware)" as BSS #F7F7F7 {
+  rectangle "**RF front end**\n76-81 GHz FMCW chirps\nTx / Rx via SMA + waveguide" as RF $REUSED
+}
+
+' ================= 2. DSP =================
+package "DSP core  -  C66x  (FreeRTOS)" as DSS #F4F8FF {
+  rectangle "**Processing task**\nRange FFT  ->  Doppler FFT  ->  **Plasma stage**\n<size:12>distance · velocity · phase · range profile</size>" as PROC $OURS
+}
+
+' ================= 3. R5F =================
+package "Control core  -  R5F  (FreeRTOS)" as MSS #F6FBF4 {
+  rectangle "measurement data" as COLDATA #F6FBF4;line.dashed;line:AAAAAA;text:888888 {
+    rectangle "**Result task**\n<size:12>priority 8 · one record per frame</size>" as RES $OURS
+    database "**Record buffer**\n<size:12>16 frames · never blocks</size>" as RING $BUF
+    rectangle "**Ethernet task**\n<size:12>priority <= 6 · lwIP UDP</size>" as ETH $NET
+  }
+  rectangle "configuration" as COLCFG #F6FBF4;line.dashed;line:AAAAAA;text:888888 {
+    rectangle "**Radar control task**\n<size:12>priority 10 · drives the RF chip</size>" as CTRL $REUSED
+    rectangle "**CLI task**\n<size:12>priority 7 · config commands</size>" as CLI $REUSED
+  }
+}
+
+' ================= 4. Host =================
+package "Host PC" as PC #FFFFFF {
+  rectangle "**Config terminal**\n<size:12>sends CLI commands</size>" as TERM #FFFFFF
+  rectangle "**Data receiver**\n<size:12>live plots · density analysis</size>" as RECV #FFFFFF
+}
+
+' ---------- measurement data path (right column, flows DOWN) ----------
+RF   -down-> PROC : raw ADC samples\n<size:11>int16, per chirp</size>
+PROC -down-> RES  : frame result\n<size:11>via shared memory + IPC</size>
+RES  -down-> RING : Plasma_Record
+note on link
+  **Plasma_Record**
+  ----
+  header (48 B)
+  · sequence nr, timestamp
+  · frame nr, drop count
+  sections
+  · boundary: range, velocity, phase
+  · range profile
+  · raw IQ samples
+end note
+RING -down-> ETH  : next record
+ETH  -down-> RECV : **UDP**  ~1.4 KB / frame\n<size:11>100 frames/s ≈ 1.1 Mbit/s</size>
+
+' ---------- configuration path (left column, flows UP) ----------
+TERM .up.> CLI  : config\n<size:11>UART</size>
+CLI  .up.> CTRL : start / stop
+CTRL .up.> RF   : chirp settings
+
+' ---------- force the two-column layout ----------
+TERM -[hidden]right-> RECV
+
+' ---------- man of stick ----------
+actor " " as HI #FFFFFF
+note right of HI : Hi!
+HI -[hidden]right-> BSS
+
+
+legend bottom
+  |= Colour |= Description |
+  |<back:#E8E8E8>   TI demo code   </back>| reused, unchanged |
+  |<back:#CFE3FF>   Custom implementation code   </back>| plasma measurement |
+  |<back:#D4F2D2>   Ethernet   </back>| Vlad's streaming code |
+  |<back:#FFF6B3>   Buffer   </back>| handoff between the two |
+  | solid arrow | measurement data |
+  | dotted arrow | configuration data|
+endlegend
+
+@enduml
