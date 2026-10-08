@@ -60,7 +60,7 @@
 #include <ti/utils/mathutils/mathutils.h>
 
 /* Demo Include Files */
-#include <ti/demo/xwr18xx/mmw/include/mmw_config.h>
+#include "mmw_config.h"
 #include <ti/demo/xwr18xx/mmw/mss/mmw_mss.h>
 #include <ti/demo/utils/mmwdemo_adcconfig.h>
 #include <ti/demo/utils/mmwdemo_rfparser.h>
@@ -88,6 +88,7 @@ static int32_t MmwDemo_CLIChirpQualitySigImgMonCfg (int32_t argc, char* argv[]);
 static int32_t MmwDemo_CLIAnalogMonitorCfg (int32_t argc, char* argv[]);
 static int32_t MmwDemo_CLILvdsStreamCfg (int32_t argc, char* argv[]);
 static int32_t MmwDemo_CLIConfigDataPort (int32_t argc, char* argv[]);
+static int32_t MmwDemo_CLIDpuCustomCfg (int32_t argc, char* argv[]);
 
 /**************************************************************************
  *************************** Extern Definitions *******************************
@@ -593,6 +594,59 @@ static int32_t MmwDemo_CLIAoAFovCfg (int32_t argc, char* argv[])
     /* Save Configuration to use later */
     MmwDemo_CfgUpdate((void *)&fovCfg, MMWDEMO_FOVAOA_OFFSET,
                       sizeof(fovCfg), subFrameNum);
+    return 0;
+}
+
+/**
+ *  @b Description
+ *  @n
+ *      This is the CLI Handler for Custom DPU Configuration
+ *
+ *  @param[in] argc
+ *      Number of arguments
+ *  @param[in] argv
+ *      Arguments
+ *
+ *  @retval
+ *      Success -   0
+ *  @retval
+ *      Error   -   <0
+ */
+static int32_t MmwDemo_CLIDpuCustomCfg (int32_t argc, char* argv[])
+{
+    DPC_ObjectDetection_DpuCustomCfg cfg;
+    int8_t subFrameNum;
+
+    if (MmwDemo_CLIGetSubframe(argc, argv, 5, &subFrameNum) < 0)
+    {
+        return -1;
+    }
+
+    /* Initialize configuration */
+    memset((void *)&cfg, 0, sizeof(cfg));
+
+    /* Populate configuration */
+    cfg.subFrameNum    = (uint8_t) subFrameNum;
+    cfg.maxLateralDist = (float) atof(argv[2]);
+    cfg.minDepthDist   = (float) atof(argv[3]);
+    cfg.maxDepthDist   = (float) atof(argv[4]);
+
+    if (cfg.maxLateralDist <= 0.0f)
+    {
+        CLI_write("Error: maxLateralDist must be > 0.0\n");
+        return -1;
+    }
+
+    if (cfg.minDepthDist >= cfg.maxDepthDist)
+    {
+        CLI_write("Error: minDepthDist must be < maxDepthDist\n");
+        return -1;
+    }
+
+    /* Save Configuration to use later */
+    MmwDemo_CfgUpdate((void *)&cfg, MMWDEMO_DPUCUSTOM_OFFSET,
+                      sizeof(cfg), subFrameNum);
+
     return 0;
 }
 
@@ -1397,9 +1451,15 @@ void MmwDemo_CLIInit (uint8_t taskPriority)
     cliCfg.tableEntry[cnt].helpString     = "<subFrameIdx> <procDirection> <min (meters or m/s)> <max (meters or m/s)>";
     cliCfg.tableEntry[cnt].cmdHandlerFxn  = MmwDemo_CLICfarFovCfg;
     cnt++;
+
     cliCfg.tableEntry[cnt].cmd            = "extendedMaxVelocity";
     cliCfg.tableEntry[cnt].helpString     = "<subFrameIdx> <enabled>";
     cliCfg.tableEntry[cnt].cmdHandlerFxn  = MmwDemo_CLIExtendedMaxVelocity;
+    cnt++;
+
+    cliCfg.tableEntry[cnt].cmd            = "dpuCustomCfg";
+    cliCfg.tableEntry[cnt].helpString     = "<subFrameIdx> <maxLateralDist> <minDepthDist> <maxDepthDist>";
+    cliCfg.tableEntry[cnt].cmdHandlerFxn  = MmwDemo_CLIDpuCustomCfg;
     cnt++;
 
     cliCfg.tableEntry[cnt].cmd            = "CQRxSatMonitor";

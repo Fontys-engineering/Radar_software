@@ -621,7 +621,7 @@
 #include <ti/utils/mathutils/mathutils.h>
 
 /* Demo Include Files */
-#include <ti/demo/xwr18xx/mmw/include/mmw_config.h>
+#include "mmw_config.h"
 #include <ti/demo/utils/mmwdemo_rfparser.h>
 #include <ti/demo/utils/mmwdemo_adcconfig.h>
 #include <ti/demo/utils/mmwdemo_monitor.h>

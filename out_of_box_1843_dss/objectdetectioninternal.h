@@ -337,7 +337,7 @@
 #include <ti/control/dpm/dpm.h>
 
 #include <ti/control/mmwavelink/mmwavelink.h>
-#include <ti/datapath/dpc/objectdetection/objdethwa/objectdetection.h>
+#include "objectdetection.h"
 
 #include "dpu_custom.h"
 

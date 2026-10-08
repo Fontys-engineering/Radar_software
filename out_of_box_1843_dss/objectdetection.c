@@ -93,7 +93,7 @@
 
 /* Obj Det instance etc */
 #include "objectdetectioninternal.h"
-#include <ti/datapath/dpc/objectdetection/objdethwa/objectdetection.h>
+#include "objectdetection.h"
 
 #include "dpu_custom.h"
 
@@ -361,15 +361,15 @@ static void    DPC_ObjectDetection_frameStart (DPM_DPCHandle handle);
  */
 DPM_ProcChainCfg gDPC_ObjectDetectionCfg =
 {
-    DPC_ObjectDetection_init,            /* Initialization Function:         */
-    DPC_ObjectDetection_start,           /* Start Function:                  */
-    DPC_ObjectDetection_execute,         /* Execute Function:                */
-    DPC_ObjectDetection_ioctl,           /* Configuration Function:          */
-    DPC_ObjectDetection_stop,            /* Stop Function:                   */
-    DPC_ObjectDetection_deinit,          /* Deinitialization Function:       */
-    NULL,                                /* Inject Data Function:            */
-    NULL,                                /* Chirp Available Function:        */
-    DPC_ObjectDetection_frameStart       /* Frame Start Function:            */
+    DPC_ObjectDetection_init,            /* Initialization Function */
+    DPC_ObjectDetection_start,           /* Start Function */
+    DPC_ObjectDetection_execute,         /* Execute Function */
+    DPC_ObjectDetection_ioctl,           /* Configuration Function */
+    DPC_ObjectDetection_stop,            /* Stop Function */
+    DPC_ObjectDetection_deinit,          /* Deinitialization Function */
+    NULL,                                /* Inject Data Function */
+    NULL,                                /* Chirp Available Function */
+    DPC_ObjectDetection_frameStart       /* Frame Start Function */
 };
 
 /* @} */
@@ -848,6 +848,8 @@ int32_t DPC_ObjectDetection_execute
     DPU_DopplerProcHWA_OutParams outDopplerProc;
     DPU_CFARCAProcHWA_OutParams outCfarcaProc;
     DPU_AoAProcHWA_OutParams outAoaProc;
+    DPU_Custom_Config customCfg;
+    DPU_Custom_OutParams customOutParams;
     int32_t retVal;
     DPC_ObjectDetection_ExecuteResult *result;
     DPC_ObjectDetection_ProcessCallBackCfg *processCallBack;
@@ -961,21 +963,32 @@ int32_t DPC_ObjectDetection_execute
         goto exit;
     }
 
-   /* Custom DPU Execution*/
-    DPU_Custom_Config customCfg;
-    DPU_Custom_OutParams customOutParams;
-
+    /* Custom DPU Execution */
     memset(&customCfg, 0, sizeof(DPU_Custom_Config));
     customCfg.pInPointCloud  = subFrmObj->dpuCfg.aoaCfg.res.detObjOut;
     customCfg.pInSideInfo    = subFrmObj->dpuCfg.aoaCfg.res.detObjOutSideInfo;
     customCfg.numInputPoints = outAoaProc.numAoADetectedPoints;
     
-    /* Default Lateral Distance limit to a +/-0.25 meters window */
-    customCfg.maxLateralDist = 0.25f;
+    /* Dynamic configuration with fallback defaults */
+    if (subFrmObj->dynCfg.customCfg.maxLateralDist > 0.0f)
+    {
+        customCfg.maxLateralDist = subFrmObj->dynCfg.customCfg.maxLateralDist;
+    }
+    else
+    {
+        customCfg.maxLateralDist = 0.25f;
+    }
 
-    /* Default Depth Distance limits (min/max range in meters) */
-    customCfg.minDepthDist   = 0.10f;
-    customCfg.maxDepthDist   = 5.00f;
+    if (subFrmObj->dynCfg.customCfg.maxDepthDist > 0.0f)
+    {
+        customCfg.minDepthDist   = subFrmObj->dynCfg.customCfg.minDepthDist;
+        customCfg.maxDepthDist   = subFrmObj->dynCfg.customCfg.maxDepthDist;
+    }
+    else
+    {
+        customCfg.minDepthDist   = 0.10f;
+        customCfg.maxDepthDist   = 5.00f;
+    }
 
     customCfg.pOutPointCloud = subFrmObj->dpuCfg.aoaCfg.res.detObjOut;
     customCfg.pOutSideInfo   = subFrmObj->dpuCfg.aoaCfg.res.detObjOutSideInfo;
