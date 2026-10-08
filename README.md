@@ -1,44 +1,32 @@
-# Radar_software
-By: Petri Miettinen
-Original date: 12/05/26
+# AWR2944 development MEP7_EE02 SEPT26
 
-This is the radar software project made for 3rd Year Fontys Eectrical Engineering internship
-as part of Distributed Sensor Systems Plasma Boundary project research.
+This repository contains the source code of the AWR2944 EVM board for the MEP7_EE02 Plasma boundary detector system design and integration project.
 
-Refer to DSS Radar Program Manual for exact steps in setting up the project.
+Previous work was done by Petri Miettinen. Original README.md moved to [Docs](Doc/README.md).
 
-This is an alternate branch of the DSS Radar Program which already includes all the relevant SDK dependencies required for running the mmWave Program.
-Warning: Due to size limitations, not all of the original files are present in this repository, and errors could occur as new functionality is enabled. 
-In this case, the full dependency folders may need to be downloaded so missing components can be compared and re-added into the Dependency folder of this repo.
+Current work is for september 2026 S7 project. This branch based on Petri's work is being developed towards measurement of magnetized plasma beams.
 
-Notice: Due to the code still utilizing much of code written by Texas Instruments, external distribution of this code is likely not adviced.
-But, the program should be fine to use for DSS internal usage.
+Main project contact :
+* Chris Lee - c.lee@fontys.nl
 
+Current maintainers/developers for this branch:
+* Vlad Nepriakhin - v.nepriakhin@student.fontys.nl
+* Mete Han Keskin - m.keskin@student.fontys.nl
 
-This code was put together by importing the Out of Box demo code for AWR2944EVM radar board into CCS 20
-This was used to import the "project structure", before the source code was replaced from the non-project code file contained
-in the MCUPlus 4.7 SDK.
+Prev maintainers/developers:
+* Petri Miettinen - p.miettinen@student.fontys.nl
 
-Originally the SDK Code was only used as a way to Debug the code when using the premade Binaries and 
-Appdata for the mmWDemo_DDM/DDM and was not intended to be a functional set of code.
+## Getting started (WIP)
+Relevant documentation can be found in Doc directory. This repository will be developed with Windows and Linux systems, therefore some path's may differ. Please open an issue for those.
 
-However, effectively pasting this debug code on top of the Radar Toolbox code made it accessible and usable.
-Following this, the code functioned as a version of the mmWDemo_DDM code.
+---
 
-Following this, by changing the include and define settings within the CCS itself, the TDM Functionality of the code could be enabled.
-Afterwards, the code's linker file was manipulated to better facilitate the memory management, as TDM processing chain required greater deal of memory compared to
-DDM.
+# Architecture Docs
 
-The radar code now compiles and effectively works as a customizable version of the mmWDemo_TDM out of box code.
+These docs explain how the TI derived radar firmware in `Radar_Software` works on commit `e920574aaa4f350b3e5566a57cdbadaebd04d2a5` of `RPS_Fix_Compilation` branch and what they're being developed into.
 
-ENET Functionality has been experimented with and can be enabled and used by uncommenting the initEnetTsk in the main code.
-However, at the time this does not work effectively until the memory of the system can be further played around with.
+Beware that some error's in the structure may exist. Open issue if spotted or contact devs.
 
-Another major change is, much of the "original" code of the OOB Demo was relocated into RadarSetup.c file. 
-With this the idea is that for customizing and personal code, the mss_main.c is still used athe primary location for the code, but with much less bloat
-from the original code.
-
-Thanks to the constructor based approach to their task interrupts, basic functions can be implemented separately in the main code. 
-But some functions may require altering the RadarSetup.c code, depending on functional requirements.
+Relevant technical documentation can be found in the [00_index.md](Doc/00_index.md) file. Pick a nice markdown reader, I recommend using MarkText, its pretty neat.
 
 
