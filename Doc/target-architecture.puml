@@ -1,0 +1,147 @@
+@startuml target-architecture-plantuml
+
+title Plasma Reflectometer Firmware - Target Architecture (AWR2944)\n<size:12>per-frame data path: RF -> DSS processing -> MSS handoff -> Ethernet -> host</size>
+
+skinparam backgroundColor white
+skinparam shadowing false
+skinparam defaultFontName "Helvetica"
+skinparam defaultFontSize 13
+skinparam ArrowColor #555555
+skinparam ArrowFontSize 11
+skinparam ArrowFontColor #333333
+skinparam ArrowThickness 1.3
+skinparam roundCorner 12
+skinparam rectangle {
+  BorderThickness 1.4
+}
+skinparam package {
+  BorderThickness 2
+  FontSize 14
+}
+skinparam database {
+  BorderThickness 1.4
+}
+skinparam note {
+  BackgroundColor #FFFFFF
+  BorderColor #999999
+  FontSize 11
+}
+skinparam legend {
+  BackgroundColor #FFFFFF
+  BorderColor #BBBBBB
+  FontSize 11
+}
+
+top to bottom direction
+
+!$TI     = "#E8E8E8"
+!$HOOK   = "#FFE2C2"
+!$OURS   = "#CFE3FF"
+!$NET    = "#D4F2D2"
+!$MEM    = "#FFF6B3"
+!$OFF    = "#F4F4F4;line.dashed;text:777777"
+
+' ======================= BSS =======================
+package "BSS - Radar subsystem  (TI RF firmware, via mmWaveLink)" as BSS #F7F7F7 {
+  rectangle "**RF front end**\n<size:11>chirps 76-81 GHz · 1 Tx / 1-4 Rx · real ADC</size>" as RF $TI
+  database "**ADC buffer**\n<size:11>16 KB ping/pong</size>" as ADCBUF $MEM
+}
+
+' ======================= DSS =======================
+package "DSS - C66x DSP @ 360 MHz  (FreeRTOS · DPM task, prio 5)" as DSS #F4F8FF {
+  rectangle "objectdetection.c - DPC  (local TI copy, hook edits)" as DPC #FFFAF3;line.dashed;line:D9822B {
+    rectangle "**Range FFT**\n<size:11>rangeprocHWA · during chirps</size>" as RANGE $TI
+    rectangle "**Doppler FFT**\n<size:11>dopplerprocHWA · inter-frame</size>" as DOPPLER $TI
+    rectangle "**PlasmaDsp_process**   <color:#2E6FD8>NEW STAGE</color>\n<size:11>range profile · gated peak + quadFit · R - R_cal</size>\n<size:11>coarse/fine velocity · IQ taps · atan2 + unwrap</size>" as PLASMADSP $OURS;line:2E6FD8;line.bold
+    rectangle "**CFAR + AoA**\n<size:11>optional · objDetEnable = 0 by default</size>" as CFAR $OFF
+  }
+  rectangle "L3 buffers" as L3 #F4F8FF;line.dashed;line:AAAAAA;text:888888 {
+    database "**Detection matrix**\n<size:11>uint16 log2 [range][doppler]</size>" as DETMAT $MEM
+    database "**Radar cube**\n<size:11>cmplx16 [Tx][chirp][Rx][bin]</size>" as CUBE $MEM
+  }
+  rectangle "**dss_main.c**\n<size:11>copy results -> HSRAM · set ptrBuffer[2]</size>" as DSSMAIN $HOOK
+  database "**HSRAM result buffer**  (32 KB, L3)\n<size:11>TI result + stats · <color:#2E6FD8>**Plasma_FrameResult**</color></size>" as HSRAM $MEM
+}
+
+' ======================= MSS =======================
+package "MSS - Cortex-R5F  (FreeRTOS · higher prio number = more important)" as MSS #F6FBF4 {
+  rectangle "measurement data" as COLDATA #F6FBF4;line.dashed;line:AAAAAA;text:888888 {
+    rectangle "**DPM task**  [prio 9]\n<size:11>reportFxn: receive result -> ack</size>" as DPM $TI
+    rectangle "UART export task  [prio 8]  -  RadarSetup.c (hook edit)" as UARTTASK $HOOK {
+      rectangle "**PlasmaMss_onFrameResult**\n<size:11>addr translate · copy from HSRAM</size>\n<size:11>unwrap across frames · timestamp · build Plasma_Record</size>" as PLASMAMSS $OURS;line:2E6FD8;line.bold
+      rectangle "**TI UART TLV output**\n<size:11>debug, optional</size>" as TLV $OFF
+    }
+    database "**PlasmaStream ring**   <color:#2E6FD8>HANDOFF CONTRACT</color>\n<size:11>16 x 4 KB slots · MSS L2 · SPSC</size>\n<size:11>producer never blocks (drop-newest)</size>" as RING $MEM;line:2E6FD8;line.bold
+    rectangle "**Ethernet consumer task**  [prio <= 6]" as ETH $NET
+    rectangle "**lwIP TCP/IP + CPSW driver**\n<size:11>RGMII</size>" as LWIP $NET
+  }
+  rectangle "configuration" as COLCFG #F6FBF4;line.dashed;line:AAAAAA;text:888888 {
+    rectangle "**mmWave control task**  [prio 10]\n<size:11>drives the BSS</size>" as CTRL $TI
+    rectangle "**CLI task**  [prio 7]\n<size:11>profileCfg · frameCfg · sensorStart/Stop</size>\n<size:11><color:#2E6FD8>+ plasma_cli.c: plasmaCfg · plasmaCal · plasmaStats</color></size>" as CLI $HOOK
+  }
+}
+
+' ======================= Host =======================
+package "Host PC" as PC #FFFFFF {
+  rectangle "**Data receiver**\n<size:11>live plots · density inversion (Python)</size>" as RECV #FFFFFF
+  rectangle "**Config terminal**\n<size:11>UART CLI, 115200 baud</size>" as TERM #FFFFFF
+}
+
+' ---------- RF -> DSS ----------
+RF      -down->  ADCBUF  : ADC samples
+ADCBUF  -down->  RANGE   : per chirp (EDMA)
+
+' ---------- DSS processing chain ----------
+RANGE   -down->  DOPPLER
+DOPPLER -down->  PLASMADSP
+PLASMADSP -down-> CFAR
+RANGE   .> CUBE    : writes
+CUBE    .>       DOPPLER : reads
+CUBE    .>       PLASMADSP : reads taps
+DOPPLER .right.> DETMAT : writes
+DETMAT  .>       PLASMADSP : Doppler row k
+PLASMADSP -[#2E6FD8,bold]-> DSSMAIN : Plasma_FrameResult
+DSSMAIN -down->  HSRAM
+
+' ---------- DSS -> MSS ----------
+HSRAM   -[bold]down-> DPM : DPM_sendResult (IPC)
+DPM     .[#B03A2E].>  DSSMAIN : <color:#B03A2E>ack RESULT_EXPORTED</color>\n<color:#B03A2E><size:10>must arrive before next frame</size></color>
+
+' ---------- MSS data path ----------
+DPM       -down-> PLASMAMSS : UartExportSem
+PLASMAMSS -[#2E6FD8,bold]down-> RING : acquireWrite / commit
+note on link
+  **Plasma_Record**  (~1.4 KB)
+  ----
+  header 48 B: seq · frame nr · timestamp · drop count
+  sections: boundary · range profile · IQ taps · diag
+end note
+PLASMAMSS .right.> TLV
+RING      -[#3A9A3A,bold]down-> ETH : acquireRead / release\n<size:10>counting semaphore</size>
+ETH       -down-> LWIP
+LWIP      -[#3A9A3A,bold]down-> RECV : **UDP** Plasma_Record\n<size:10>~1.4 KB @ 100 Hz</size>
+TLV       .down.> RECV : TLVs @ 3.125 Mbaud
+
+' ---------- configuration path (flows up) ----------
+TERM    .up.> CLI  : config commands
+CLI     .up.> CTRL : MMWave_config / start
+CTRL    .up.> RF   : profile / chirp / frame\n<size:10>mmWaveLink</size>
+CLI     .[#2E6FD8].> PLASMADSP : <color:#2E6FD8>DPM ioctl PLASMA_IOCTL_CFG</color>
+
+' ---------- layout hints and formatting----------
+RECV -[hidden]right-> TERM
+
+legend bottom
+  |= Colour / style |= Meaning |
+  |<back:#E8E8E8>   TI, unchanged   </back>| reused from the TI demo |
+  |<back:#FFE2C2>   TI + hook edit   </back>| small call into our code |
+  |<back:#CFE3FF>   Ours (plasma)   </back>| new measurement code |
+  |<back:#D4F2D2>   Ethernet   </back>| colleague's streaming code |
+  |<back:#FFF6B3>   Shared memory   </back>| buffers between stages / cores |
+  | dashed box | optional or switched off |
+  | solid arrow | data / control flow |
+  | dotted arrow | memory access or configuration |
+  | <color:#B03A2E>red dotted</color> | frame-deadline acknowledgement |
+endlegend
+
+@enduml
