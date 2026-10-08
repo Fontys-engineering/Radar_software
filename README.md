@@ -7,16 +7,20 @@ Previous work was done by Petri Miettinen. Original README.md moved to [Docs](Do
 Current work is for september 2026 S7 project. This branch based on Petri's work is being developed towards measurement of magnetized plasma beams.
 
 Main project contact :
+
 * Chris Lee - c.lee@fontys.nl
 
 Current maintainers/developers for this branch:
+
 * Vlad Nepriakhin - v.nepriakhin@student.fontys.nl
 * Mete Han Keskin - m.keskin@student.fontys.nl
 
 Prev maintainers/developers:
+
 * Petri Miettinen - p.miettinen@student.fontys.nl
 
 ## Getting started (WIP)
+
 Relevant documentation can be found in Doc directory. This repository will be developed with Windows and Linux systems, therefore some path's may differ. Please open an issue for those.
 
 ---
