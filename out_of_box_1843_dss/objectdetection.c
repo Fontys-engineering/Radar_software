@@ -964,45 +964,55 @@ int32_t DPC_ObjectDetection_execute
     }
 
     /* Custom DPU Execution */
-    memset(&customCfg, 0, sizeof(DPU_Custom_Config));
-    customCfg.pInPointCloud  = subFrmObj->dpuCfg.aoaCfg.res.detObjOut;
-    customCfg.pInSideInfo    = subFrmObj->dpuCfg.aoaCfg.res.detObjOutSideInfo;
-    customCfg.numInputPoints = outAoaProc.numAoADetectedPoints;
-    
-    /* Dynamic configuration with fallback defaults */
-    if (subFrmObj->dynCfg.customCfg.maxLateralDist > 0.0f)
+    if (subFrmObj->dynCfg.customCfg.enabled == 1)
     {
-        customCfg.maxLateralDist = subFrmObj->dynCfg.customCfg.maxLateralDist;
+        memset(&customCfg, 0, sizeof(DPU_Custom_Config));
+        customCfg.pInPointCloud  = subFrmObj->dpuCfg.aoaCfg.res.detObjOut;
+        customCfg.pInSideInfo    = subFrmObj->dpuCfg.aoaCfg.res.detObjOutSideInfo;
+        customCfg.numInputPoints = outAoaProc.numAoADetectedPoints;
+        
+        /* Dynamic configuration with fallback defaults */
+        if (subFrmObj->dynCfg.customCfg.maxLateralDist > 0.0f)
+        {
+            customCfg.maxLateralDist = subFrmObj->dynCfg.customCfg.maxLateralDist;
+        }
+        else
+        {
+            customCfg.maxLateralDist = 0.25f;
+        }
+
+        if (subFrmObj->dynCfg.customCfg.maxDepthDist > 0.0f)
+        {
+            customCfg.minDepthDist   = subFrmObj->dynCfg.customCfg.minDepthDist;
+            customCfg.maxDepthDist   = subFrmObj->dynCfg.customCfg.maxDepthDist;
+        }
+        else
+        {
+            customCfg.minDepthDist   = 0.10f;
+            customCfg.maxDepthDist   = 5.00f;
+        }
+
+        customCfg.pOutPointCloud = subFrmObj->dpuCfg.aoaCfg.res.detObjOut;
+        customCfg.pOutSideInfo   = subFrmObj->dpuCfg.aoaCfg.res.detObjOutSideInfo;
+
+        retVal = DPU_Custom_config(subFrmObj->dpuCustomObj, &customCfg);
+        if (retVal != 0)
+        {
+            goto exit;
+        }
+
+        retVal = DPU_Custom_process(subFrmObj->dpuCustomObj, &customOutParams);
+        if (retVal != 0)
+        {
+            goto exit;
+        }
+        
+        result->numObjOut = customOutParams.numOutputElements;
     }
     else
     {
-        customCfg.maxLateralDist = 0.25f;
-    }
-
-    if (subFrmObj->dynCfg.customCfg.maxDepthDist > 0.0f)
-    {
-        customCfg.minDepthDist   = subFrmObj->dynCfg.customCfg.minDepthDist;
-        customCfg.maxDepthDist   = subFrmObj->dynCfg.customCfg.maxDepthDist;
-    }
-    else
-    {
-        customCfg.minDepthDist   = 0.10f;
-        customCfg.maxDepthDist   = 5.00f;
-    }
-
-    customCfg.pOutPointCloud = subFrmObj->dpuCfg.aoaCfg.res.detObjOut;
-    customCfg.pOutSideInfo   = subFrmObj->dpuCfg.aoaCfg.res.detObjOutSideInfo;
-
-    retVal = DPU_Custom_config(subFrmObj->dpuCustomObj, &customCfg);
-    if (retVal != 0)
-    {
-        goto exit;
-    }
-
-    retVal = DPU_Custom_process(subFrmObj->dpuCustomObj, &customOutParams);
-    if (retVal != 0)
-    {
-        goto exit;
+        /* Custom DPU disabled: bypass filtering and pass AoA output directly */
+        result->numObjOut = outAoaProc.numAoADetectedPoints;
     }
     
     /* Set DPM result with measure (bias, phase) and detection info */

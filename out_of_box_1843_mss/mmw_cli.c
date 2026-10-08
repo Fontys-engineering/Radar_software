@@ -617,7 +617,8 @@ static int32_t MmwDemo_CLIDpuCustomCfg (int32_t argc, char* argv[])
     DPC_ObjectDetection_DpuCustomCfg cfg;
     int8_t subFrameNum;
 
-    if (MmwDemo_CLIGetSubframe(argc, argv, 5, &subFrameNum) < 0)
+    /* Expecting 6 arguments: dpuCustomCfg <subFrameIdx> <enabled> <maxLateralDist> <minDepthDist> <maxDepthDist> */
+    if (MmwDemo_CLIGetSubframe(argc, argv, 6, &subFrameNum) < 0)
     {
         return -1;
     }
@@ -627,20 +628,30 @@ static int32_t MmwDemo_CLIDpuCustomCfg (int32_t argc, char* argv[])
 
     /* Populate configuration */
     cfg.subFrameNum    = (uint8_t) subFrameNum;
-    cfg.maxLateralDist = (float) atof(argv[2]);
-    cfg.minDepthDist   = (float) atof(argv[3]);
-    cfg.maxDepthDist   = (float) atof(argv[4]);
+    cfg.enabled        = (uint8_t) atoi(argv[2]);
+    cfg.maxLateralDist = (float) atof(argv[3]);
+    cfg.minDepthDist   = (float) atof(argv[4]);
+    cfg.maxDepthDist   = (float) atof(argv[5]);
 
-    if (cfg.maxLateralDist <= 0.0f)
+    if (cfg.enabled > 1)
     {
-        CLI_write("Error: maxLateralDist must be > 0.0\n");
+        CLI_write("Error: enabled flag must be 0 (disabled) or 1 (enabled)\n");
         return -1;
     }
 
-    if (cfg.minDepthDist >= cfg.maxDepthDist)
+    if (cfg.enabled == 1)
     {
-        CLI_write("Error: minDepthDist must be < maxDepthDist\n");
-        return -1;
+        if (cfg.maxLateralDist <= 0.0f)
+        {
+            CLI_write("Error: maxLateralDist must be > 0.0\n");
+            return -1;
+        }
+
+        if (cfg.minDepthDist >= cfg.maxDepthDist)
+        {
+            CLI_write("Error: minDepthDist must be < maxDepthDist\n");
+            return -1;
+        }
     }
 
     /* Save Configuration to use later */
@@ -1458,7 +1469,7 @@ void MmwDemo_CLIInit (uint8_t taskPriority)
     cnt++;
 
     cliCfg.tableEntry[cnt].cmd            = "dpuCustomCfg";
-    cliCfg.tableEntry[cnt].helpString     = "<subFrameIdx> <maxLateralDist> <minDepthDist> <maxDepthDist>";
+    cliCfg.tableEntry[cnt].helpString     = "<subFrameIdx> <enabled> <maxLateralDist> <minDepthDist> <maxDepthDist>";
     cliCfg.tableEntry[cnt].cmdHandlerFxn  = MmwDemo_CLIDpuCustomCfg;
     cnt++;
 

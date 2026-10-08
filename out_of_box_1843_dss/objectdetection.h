@@ -124,6 +124,9 @@ typedef struct DPC_ObjectDetection_DpuCustomCfg_t
     /*! @brief   Subframe number for which this message is applicable. */
     uint8_t subFrameNum;
 
+    /*! @brief   Enable flag: 1 = Enabled, 0 = Disabled (Bypass) */
+    uint8_t enabled;
+
     /*! @brief   Maximum lateral distance in meters (+/- maxLateralDist) */
     float maxLateralDist;
 
