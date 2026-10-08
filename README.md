@@ -4,7 +4,7 @@ This repository contains the source code of the AWR2944 EVM board for the MEP7_E
 
 Previous work was done by Petri Miettinen. Original README.md moved to [Docs](Doc/README.md).
 
-Current work is for september 2026 S7 project. This branch based on Petri's work is being developed towards measurement of magnetized plasma beams.
+Current work is for september 2026 S7 project. This branch based on Petri's work and is being developed towards measurement of magnetized plasma beams.
 
 Main project contact :
 
@@ -29,7 +29,7 @@ Relevant documentation can be found in Doc directory. This repository will be de
 
 These docs explain how the TI derived radar firmware in `Radar_Software` works on commit `e920574aaa4f350b3e5566a57cdbadaebd04d2a5` of `RPS_Fix_Compilation` branch and what they're being developed into.
 
-Beware that some error's in the structure may exist. Open issue if spotted or contact devs.
+Beware that some error's in the structure may exist. Open an issue if spotted or contact devs.
 
 Relevant technical documentation can be found in the [00_index.md](Doc/00_index.md) file. Pick a nice markdown reader, I recommend using MarkText, its pretty neat.
 
