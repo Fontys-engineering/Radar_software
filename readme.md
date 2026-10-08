@@ -7,6 +7,26 @@ For detailed architectural context on Data Processing Modules (DPM), Data Proces
 
 ---
 
+## Usage
+
+### Custom DPU Command (`dpuCustomCfg`)
+
+The custom DPU filtering parameters can be updated dynamically via CLI before or between active radar frames.
+
+```cmd
+dpuCustomCfg <subFrameIdx> <enabled> <maxLateralDist> <minDepthDist> <maxDepthDist>
+```
+
+| Parameter | Type | Description |
+| --- | --- | --- |
+| `<subFrameIdx>` | `int` | Subframe index (0-based; set to `-1` to apply configuration to all subframes, or `0` when advanced frame mode is disabled). |
+| `<enabled>` | `int` | DPU processing toggle (`1` = Enable spatial filtering & target isolation, `0` = Disable/bypass filtering). |
+| `<maxLateralDist>` | `float` | Maximum lateral distance threshold in meters. |
+| `<minDepthDist>` | `float` | Minimum depth distance threshold in meters. |
+| `<maxDepthDist>` | `float` | Maximum depth distance threshold in meters. |
+
+---
+
 ## Prerequisites
 
 * **TI mmWave SDK:** `3.06.00.00-LTS`
