@@ -61,7 +61,7 @@
 
 /* Demo Include Files */
 #include "mmw_config.h"
-#include <ti/demo/xwr18xx/mmw/mss/mmw_mss.h>
+#include "mmw_mss.h"
 #include <ti/demo/utils/mmwdemo_adcconfig.h>
 #include <ti/demo/utils/mmwdemo_rfparser.h>
 
@@ -393,8 +393,6 @@ static int32_t MmwDemo_CLIGetSubframe (int32_t argc, char* argv[], int32_t expec
     return 0;
 }
 
-
-
 /**
  *  @b Description
  *  @n
@@ -655,7 +653,7 @@ static int32_t MmwDemo_CLIDpuCustomCfg (int32_t argc, char* argv[])
     }
 
     /* Save Configuration to use later */
-    MmwDemo_CfgUpdate((void *)&cfg, MMWDEMO_DPUCUSTOM_OFFSET,
+    MmwDemo_CfgUpdate((void *)&cfg, MMWDEMO_DPUCUSTOMCFG_OFFSET,
                       sizeof(cfg), subFrameNum);
 
     return 0;
@@ -893,7 +891,6 @@ static int32_t MmwDemo_CLIADCBufCfg (int32_t argc, char* argv[])
                       sizeof(MmwDemo_ADCBufCfg), subFrameNum);
     return 0;
 }
-
 
 /**
  *  @b Description
@@ -1144,7 +1141,6 @@ static int32_t MmwDemo_CLIAnalogMonitorCfg (int32_t argc, char* argv[])
     return 0;
 }
 
-
 /**
  *  @b Description
  *  @n
@@ -1204,8 +1200,6 @@ static int32_t MmwDemo_CLILvdsStreamCfg (int32_t argc, char* argv[])
 
     return 0;
 }
-
-
 
 /**
  *  @b Description
@@ -1290,10 +1284,6 @@ static int32_t MmwDemo_CLIConfigDataPort (int32_t argc, char* argv[])
 
     return 0;
 }
-
-
-
-
 
 /**
  *  @b Description
@@ -1517,5 +1507,3 @@ void MmwDemo_CLIInit (uint8_t taskPriority)
     System_printf ("Debug: CLI is operational\n");
     return;
 }
-
-

@@ -49,6 +49,8 @@
 #include <ti/datapath/dpc/dpu/staticclutterproc/staticclutterproc.h>
 #include <ti/datapath/dpc/dpu/cfarcaproc/cfarcaprochwa.h>
 
+#include "dpu_custom.h"
+
 #if defined(USE_2D_AOA_DPU)
 #include <ti/datapath/dpc/dpu/aoa2dproc/aoa2dprochwa.h>
 #else
@@ -114,28 +116,6 @@ extern "C" {
 
 /** @addtogroup DPC_OBJDET_IOCTL__DATA_STRUCTURES
  @{ */
-
-/**
- * @brief
- *  Custom DPU Configuration
- */
-typedef struct DPC_ObjectDetection_DpuCustomCfg_t
-{
-    /*! @brief   Subframe number for which this message is applicable. */
-    uint8_t subFrameNum;
-
-    /*! @brief   Enable flag: 1 = Enabled, 0 = Disabled (Bypass) */
-    uint8_t enabled;
-
-    /*! @brief   Maximum lateral distance in meters (+/- maxLateralDist) */
-    float maxLateralDist;
-
-    /*! @brief   Minimum depth distance in meters */
-    float minDepthDist;
-
-    /*! @brief   Maximum depth distance in meters */
-    float maxDepthDist;
-} DPC_ObjectDetection_DpuCustomCfg;
 
 /**
  * @brief

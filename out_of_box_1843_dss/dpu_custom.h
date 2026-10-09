@@ -24,6 +24,16 @@ extern "C" {
 
 typedef void* DPU_Custom_Handle;
 
+/* CLI / Dynamic configuration struct */
+typedef struct DPC_ObjectDetection_DpuCustomCfg_t
+{
+    uint8_t  subFrameNum;
+    uint8_t  enabled;
+    float    maxLateralDist;
+    float    minDepthDist;
+    float    maxDepthDist;
+} DPC_ObjectDetection_DpuCustomCfg;
+
 typedef struct DPU_Custom_InitParams_t
 {
     uint8_t reserved;

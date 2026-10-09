@@ -627,9 +627,12 @@
 #include <ti/demo/utils/mmwdemo_monitor.h>
 #include <ti/demo/xwr18xx/mmw/include/mmw_output.h>
 #include <ti/demo/xwr18xx/mmw/mmw_res.h>
-#include <ti/demo/xwr18xx/mmw/mss/mmw_mss.h>
+#include "mmw_mss.h"
 #include <ti/board/antenna_geometry.h>
 #include <ti/demo/utils/mmwdemo_flash.h>
+
+/* Shared Custom DPU Header */
+#include "../out_of_box_1843_dss/dpu_custom.h"
 
 /* Profiler Include Files */
 #include <ti/utils/cycleprofiler/cycle_profiler.h>
@@ -850,6 +853,9 @@ static void MmwDemo_setSubFramePendingState(MmwDemo_SubFrameCfg *subFrameCfg, ui
         case MMWDEMO_LVDSSTREAMCFG_OFFSET:
             subFrameCfg->isLvdsStreamCfgPending = 1;
         break;
+        case MMWDEMO_DPUCUSTOMCFG_OFFSET:
+            subFrameCfg->isDpuCustomCfgPending = 1;
+        break;
         default:
             MmwDemo_debugAssert(0);
         break;
@@ -1009,6 +1015,7 @@ void MmwDemo_resetStaticCfgPendingState(void)
     {
         gMmwMssMCB.subFrameCfg[indx].isAdcBufCfgPending = 0;
         gMmwMssMCB.subFrameCfg[indx].isLvdsStreamCfgPending = 0;
+        gMmwMssMCB.subFrameCfg[indx].isDpuCustomCfgPending = 0; /* ADDED */
     }
 
     gMmwMssMCB.isAnaMonCfgPending = 0;
@@ -2573,6 +2580,27 @@ static int32_t MmwDemo_processPendingDynamicCfgCommands(uint8_t subFrameIndx)
             goto exit;
         }
         subFrameCfg->isExtMaxVelCfgPending = 0;
+    }
+
+    if (gMmwMssMCB.subFrameCfg[subFrameIndx].isDpuCustomCfgPending == 1)
+    {
+        if (gMmwMssMCB.objDetDpmHandle != NULL)
+        {
+            DPC_ObjectDetection_DpuCustomCfg customCfg;
+
+            customCfg = gMmwMssMCB.subFrameCfg[subFrameIndx].dpuCustomCfg;
+            customCfg.subFrameNum = subFrameIndx;
+
+            retVal = DPM_ioctl (gMmwMssMCB.objDetDpmHandle,
+                                 DPC_OBJDET_IOCTL__DYNAMIC_DPU_CUSTOM_CFG,
+                                 &customCfg,
+                                 sizeof (DPC_ObjectDetection_DpuCustomCfg));
+            if (retVal != 0)
+            {
+                goto exit;
+            }
+        }
+        gMmwMssMCB.subFrameCfg[subFrameIndx].isDpuCustomCfgPending = 0;
     }
 
 exit:

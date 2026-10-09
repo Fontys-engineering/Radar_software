@@ -22,11 +22,9 @@
 #include <ti/demo/xwr18xx/mmw/include/mmw_output.h>
 #include "../out_of_box_1843_dss/objectdetection.h"
 
+#include "../out_of_box_1843_dss/dpu_custom.h"
 #include "mmw_config.h"
 #include <ti/demo/xwr18xx/mmw/mss/mmw_lvds_stream.h>
-
-/* Shared Custom DPU Header */
-#include "dpu_custom.h"
 
 #ifdef __cplusplus
 extern "C" {
@@ -89,18 +87,17 @@ typedef struct MmwDemo_MSS_Stats_t
 
 typedef struct MmwDemo_SubFrameCfg_t
 {
-    MmwDemo_ADCBufCfg adcBufCfg;
-    uint8_t isAdcBufCfgPending : 1;
-
-    MmwDemo_LvdsStreamCfg lvdsStreamCfg;
-    uint8_t isLvdsStreamCfgPending : 1;
-
-    MmwDemo_GuiMonSel guiMonSel;
-
+    MmwDemo_ADCBufCfg       adcBufCfg;
+    MmwDemo_LvdsStreamCfg   lvdsStreamCfg;
+    MmwDemo_GuiMonSel       guiMonSel;
     MmwDemo_DPC_ObjDet_DynCfg objDetDynCfg;
 
-    /* Decoupled Custom DPU Dynamic Configuration */
+    /* Add Custom DPU configuration field */
     DPC_ObjectDetection_DpuCustomCfg dpuCustomCfg;
+
+    /* Add bitfield pending flag */
+    uint8_t isAdcBufCfgPending : 1;
+    uint8_t isLvdsStreamCfgPending : 1;
     uint8_t isDpuCustomCfgPending : 1;
 
     uint16_t    numRangeBins;
