@@ -136,7 +136,7 @@ static void MmwDemo_initTask(void* args)
     setupInit();
     initCtrlTask();
     #ifdef ENET_STREAM
-    //initEnetTask();
+    initEnetTask();
     #endif
     initDPMTask(); 
     initUartTask();
@@ -179,7 +179,7 @@ static void MmwDemo_initTask(void* args)
  *      Not Applicable.
  */
 int32_t main (void)
-{
+ {
     /* init SOC specific modules */
     System_init();
     Board_init();

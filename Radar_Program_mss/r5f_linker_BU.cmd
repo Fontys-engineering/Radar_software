@@ -38,7 +38,7 @@ PAGE 0:
     SBL_RESERVED_L2_RAM (RW)   : origin=0x10200000 length=0x00020000
     MSS_L2 (RW)               : origin=0x10220000 length=0x000CC000
 
-    DSS_L3 (RW)   : origin=0x88000000 length=0x00100000
+    DSS_L3 (RW)   : origin=0x88190000 length=0x000F0000
     HWA_RAM (RW)  : origin=0x82000000 length=0x00020000
 
     RTOS_NORTOS_IPC_SHM_MEM : ORIGIN = 0xC5000200, LENGTH = 0x1D40

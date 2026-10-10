@@ -39,7 +39,7 @@ MEMORY
 {
     DSS_L2:   ORIGIN = 0x800000, LENGTH = 0x60000
     /* Total of 2.5 MB of DSS L3 is available */
-    DSS_L3:   ORIGIN = 0x88000000, LENGTH = 0x00280000
+    DSS_L3:   ORIGIN = 0x88000000, LENGTH = 0x00190000
     HWA_RAM:  ORIGIN = 0x82000000, LENGTH = 0x00020000
 
     /* 1st 512 B of DSS mailbox memory and MSS mailbox memory is used for IPC with R4 and should not be used by application */
