@@ -4,6 +4,8 @@
 
 Glossary can be found in [here](01_1_glossary.md).
 
+TI's terminology page [radar academy terminologies](https://dev.ti.com/tirex/explore/content/radar_academy_3_10_00_1/_build_radar_academy_3_10_00_1/source/introduction/terminology.html).
+
 ## Goal
 
 The client Fontys DSS, together with DIFFER want a plasma boundary reflectometer for the ITER Tokamak system. We're using an automotive radar AWR2944 EVM modified to work as a **plasma boundary reflectometer**. The RF signal is/will be coupled through SMA connectors into a waveguide, and the reflection from the plasma is processed into:
