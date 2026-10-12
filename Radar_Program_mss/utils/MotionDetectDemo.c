@@ -32,7 +32,7 @@
 #include <ti/utils/mathutils/mathutils.h>
 #include <ti/utils/testlogger/logger.h>
 
-#include "ti\datapath\dpif\dpif_pointcloud.h"
+#include <ti/datapath/dpif/dpif_pointcloud.h>
 
 /*
 * Motion Sensor Code
