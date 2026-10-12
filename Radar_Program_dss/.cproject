@@ -4,22 +4,20 @@
         <cconfiguration id="com.ti.ccstudio.buildDefinitions.C6000.Debug.1626576623">
             <storageModule buildSystemId="org.eclipse.cdt.managedbuilder.core.configurationDataProvider" id="com.ti.ccstudio.buildDefinitions.C6000.Debug.1626576623" moduleId="org.eclipse.cdt.core.settings" name="Debug">
                 <macros>
-                    <stringMacro name="SYSCONFIG_TOOL_ROOT" type="VALUE_PATH_DIR" value="${DEPENDROOT}/sysconfig_1.28.0"/>
                     <stringListMacro name="COM_TI_MCU_PLUS_SDK_AWR294X_LIBRARIES" type="VALUE_PATH_FILE_LIST"/>
-                    <stringMacro name="C66x_MATHLIB_INSTALL_PATH" type="VALUE_PATH_ANY" value="${DEPENDROOT}\mathlib_c66x_3_1_2_1"/>
-                    <stringMacro name="COM_TI_MMWAVE_MCUPLUS_SDK_SYSCONFIG_MANIFEST" type="VALUE_PATH_FILE" value="${DEPENDROOT}\mcu_plus_sdk_awr294x_10_02_00_04\.metadata\product.json"/>
-                    <stringMacro name="MMWAVE_AWR294X_DFP_INSTALL_PATH" type="VALUE_PATH_ANY" value="${DEPENDROOT}\mmwave_dfp_02_04_18_01"/>
+                    <stringMacro name="C66x_MATHLIB_INSTALL_PATH" type="VALUE_PATH_ANY" value="${DEPENDROOT}/mathlib_c66x_3_1_2_1"/>
+                    <stringMacro name="COM_TI_MMWAVE_MCUPLUS_SDK_SYSCONFIG_MANIFEST" type="VALUE_PATH_FILE" value="${DEPENDROOT}/mcu_plus_sdk_awr294x_10_02_00_04/.metadata/product.json"/>
+                    <stringMacro name="MMWAVE_AWR294X_DFP_INSTALL_PATH" type="VALUE_PATH_ANY" value="${DEPENDROOT}/mmwave_dfp_02_04_18_01"/>
                     <stringListMacro name="COM_TI_MCU_PLUS_SDK_AWR294X_LIBRARY_PATH" type="VALUE_PATH_DIR_LIST"/>
-                    <stringMacro name="MCU_PLUS_SDK_PATH" type="VALUE_PATH_ANY" value="${DEPENDROOT}\mcu_plus_sdk_awr294x_10_02_00_04"/>
-                    <stringMacro name="C66x_DSPLIB_INSTALL_PATH" type="VALUE_PATH_ANY" value="${DEPENDROOT}\dsplib_c66x_3_4_0_0"/>
-                    <stringMacro name="COM_TI_MCU_PLUS_SDK_AWR294X_INSTALL_DIR" type="VALUE_PATH_DIR" value="${DEPENDROOT}\mcu_plus_sdk_awr294x_10_02_00_04"/>
-                    <stringMacro name="DEPENDROOT" type="VALUE_PATH_ANY" value="C:\Git\Radar_software\Dependencies"/>
+                    <stringMacro name="MCU_PLUS_SDK_PATH" type="VALUE_PATH_ANY" value="${DEPENDROOT}/mcu_plus_sdk_awr294x_10_02_00_04"/>
+                    <stringMacro name="C66x_DSPLIB_INSTALL_PATH" type="VALUE_PATH_ANY" value="${DEPENDROOT}/dsplib_c66x_3_4_0_0"/>
+                    <stringMacro name="COM_TI_MCU_PLUS_SDK_AWR294X_INSTALL_DIR" type="VALUE_PATH_DIR" value="${DEPENDROOT}/mcu_plus_sdk_awr294x_10_02_00_04"/>
+                    <stringMacro name="DEPENDROOT" type="VALUE_PATH_ANY" value="${PROJECT_LOC}/../Dependencies"/>
                     <stringListMacro name="COM_TI_MCU_PLUS_SDK_AWR294X_SYMBOLS" type="VALUE_TEXT_LIST"/>
-                    <stringMacro name="COM_TI_MMWAVE_MCUPLUS_SDK_INSTALL_DIR" type="VALUE_PATH_ANY" value="${DEPENDROOT}\mmwave_mcuplus_sdk_04_07_02_01"/>
+                    <stringMacro name="COM_TI_MMWAVE_MCUPLUS_SDK_INSTALL_DIR" type="VALUE_PATH_ANY" value="${DEPENDROOT}/mmwave_mcuplus_sdk_04_07_02_01"/>
                     <stringMacro name="DPU_DATA_PATH" type="VALUE_PATH_ANY" value="${MMWAVE_SDK_INSTALL_PATH}/ti/datapath/dpu"/>
-                    <stringMacro name="COM_TI_MCU_PLUS_SDK_AWR294X_SYSCONFIG_MANIFEST" type="VALUE_PATH_FILE" value="${DEPENDROOT}\mcu_plus_sdk_awr294x_10_02_00_04\.metadata\product.json"/>
-                    <stringMacro name="MMWAVE_SDK_INSTALL_PATH" type="VALUE_PATH_ANY" value="${DEPENDROOT}\mmwave_mcuplus_sdk_04_07_02_01"/>
-                    <stringMacro name="SYSCONFIG_TOOL" type="VALUE_PATH_FILE" value="${DEPENDROOT}/sysconfig_1.28.0/sysconfig_cli.bat"/>
+                    <stringMacro name="COM_TI_MCU_PLUS_SDK_AWR294X_SYSCONFIG_MANIFEST" type="VALUE_PATH_FILE" value="${DEPENDROOT}/mcu_plus_sdk_awr294x_10_02_00_04/.metadata/product.json"/>
+                    <stringMacro name="MMWAVE_SDK_INSTALL_PATH" type="VALUE_PATH_ANY" value="${DEPENDROOT}/mmwave_mcuplus_sdk_04_07_02_01"/>
                 </macros>
                 <externalSettings/>
                 <extensions>
@@ -29,7 +27,7 @@
                 </extensions>
             </storageModule>
             <storageModule moduleId="cdtBuildSystem" version="4.0.0">
-                <configuration artifactExtension="xe66" artifactName="${ProjName}" buildProperties="" cleanCommand="${CG_CLEAN_CMD}" description="" id="com.ti.ccstudio.buildDefinitions.C6000.Debug.1626576623" name="Debug" parent="com.ti.ccstudio.buildDefinitions.C6000.Debug" postbuildStep="${CG_TOOL_ROOT}/bin/strip6x -p ${CCS_PROJECT_DIR}/${ConfigName}/${ProjName}.xe66 -o=${CCS_PROJECT_DIR}/${ConfigName}/${ProjName}_strip.xe66;                     ${SYSCONFIG_TOOL_ROOT}/nodejs/node.exe  ${COM_TI_MCU_PLUS_SDK_AWR294X_INSTALL_DIR}/tools/boot/out2rprc/elf2rprc.js ${CCS_PROJECT_DIR}/${ConfigName}/${ProjName}_strip.xe66;                     ${CCE_INSTALL_ROOT}/utils/cygwin/mv ${CCS_PROJECT_DIR}/${ConfigName}/${ProjName}_strip.rprc ${CCS_PROJECT_DIR}/${ConfigName}/${ProjName}.rprc;                     ${CCE_INSTALL_ROOT}/utils/cygwin/rm -f ${CCS_PROJECT_DIR}/${ConfigName}/${ProjName}_strip.rprc;                     ${CCE_INSTALL_ROOT}/utils/cygwin/rm -f ${CCS_PROJECT_DIR}/${ConfigName}/${ProjName}_strip.xe66;                     " prebuildStep="${SYSCONFIG_TOOL_ROOT}/nodejs/node ${SYSCONFIG_TOOL_ROOT}/dist/cli.js --product ${COM_TI_MCU_PLUS_SDK_AWR294X_INSTALL_DIR}/.metadata/product.json --script ../../Radar_Program_mss/mss/mss.syscfg --context r5fss0-0 --output ../../Radar_Program_mss/mss/mssgenerated/ --script ../dss/dss.syscfg --context c66ss0 --output ../dss/dssgenerated/">
+                <configuration artifactExtension="xe66" artifactName="${ProjName}" buildProperties="" cleanCommand="${CG_CLEAN_CMD}" description="" id="com.ti.ccstudio.buildDefinitions.C6000.Debug.1626576623" name="Debug" parent="com.ti.ccstudio.buildDefinitions.C6000.Debug" postbuildStep="${CG_TOOL_ROOT}/bin/strip6x -p ${CCS_PROJECT_DIR}/${ConfigName}/${ProjName}.xe66 -o=${CCS_PROJECT_DIR}/${ConfigName}/${ProjName}_strip.xe66;${CCE_INSTALL_ROOT}/tools/node/node ${COM_TI_MCU_PLUS_SDK_AWR294X_INSTALL_DIR}/tools/boot/out2rprc/elf2rprc.js ${CCS_PROJECT_DIR}/${ConfigName}/${ProjName}_strip.xe66 ${CCS_PROJECT_DIR}/${ConfigName}/${ProjName}.rprc" prebuildStep="${CCE_INSTALL_ROOT}/tools/node/node ${SYSCONFIG_TOOL_ROOT}/dist/cli.js --product ${COM_TI_MCU_PLUS_SDK_AWR294X_INSTALL_DIR}/.metadata/product.json --script ../../Radar_Program_mss/mss/mss_enet.syscfg --context r5fss0-0 --output ../../Radar_Program_mss/mss/mssgenerated/ --script ../dss/dss.syscfg --context c66ss0 --output ../dss/dssgenerated/">
                     <folderInfo id="com.ti.ccstudio.buildDefinitions.C6000.Debug.1626576623." name="/" resourcePath="">
                         <toolChain id="com.ti.ccstudio.buildDefinitions.C6000_8.5.exe.DebugToolchain.925894394" name="TI Build Tools" superClass="com.ti.ccstudio.buildDefinitions.C6000_8.5.exe.DebugToolchain" targetTool="com.ti.ccstudio.buildDefinitions.C6000_8.5.exe.linkerDebug.1621708490">
                             <option id="com.ti.ccstudio.buildDefinitions.core.OPT_TAGS.2079540255" superClass="com.ti.ccstudio.buildDefinitions.core.OPT_TAGS" valueType="stringList">
@@ -40,7 +38,7 @@
                                 <listOptionValue value="CCS_MBS_VERSION=70.0.0"/>
                                 <listOptionValue value="RUNTIME_SUPPORT_LIBRARY="/>
                                 <listOptionValue value="OUTPUT_TYPE=executable"/>
-                                <listOptionValue value="PRODUCTS=sysconfig:1.28.0;com.ti.MCU_PLUS_SDK_AWR294X:10.2.0.04;com.ti.MMWAVE_MCUPLUS_SDK:4.7.2.01;"/>
+                                <listOptionValue value="PRODUCTS=sysconfig:1.23.0;com.ti.MCU_PLUS_SDK_AWR294X:10.2.0.04;com.ti.MMWAVE_MCUPLUS_SDK:4.7.2.01;"/>
                                 <listOptionValue value="PRODUCT_MACRO_IMPORTS={&quot;com.ti.MMWAVE_MCUPLUS_SDK&quot;:[&quot;${COM_TI_MMWAVE_MCUPLUS_SDK_INCLUDE_PATH}&quot;,&quot;${COM_TI_MMWAVE_MCUPLUS_SDK_LIBRARY_PATH}&quot;,&quot;${COM_TI_MMWAVE_MCUPLUS_SDK_LIBRARIES}&quot;,&quot;${COM_TI_MMWAVE_MCUPLUS_SDK_SYMBOLS}&quot;,&quot;${COM_TI_MMWAVE_MCUPLUS_SDK_SYSCONFIG_MANIFEST}&quot;],&quot;com.ti.MCU_PLUS_SDK_AWR294X&quot;:[&quot;${COM_TI_MCU_PLUS_SDK_AWR294X_INCLUDE_PATH}&quot;,&quot;${COM_TI_MCU_PLUS_SDK_AWR294X_LIBRARY_PATH}&quot;,&quot;${COM_TI_MCU_PLUS_SDK_AWR294X_LIBRARIES}&quot;,&quot;${COM_TI_MCU_PLUS_SDK_AWR294X_SYMBOLS}&quot;,&quot;${COM_TI_MCU_PLUS_SDK_AWR294X_SYSCONFIG_MANIFEST}&quot;],&quot;sysconfig&quot;:[&quot;${SYSCONFIG_TOOL_INCLUDE_PATH}&quot;,&quot;${SYSCONFIG_TOOL_LIBRARY_PATH}&quot;,&quot;${SYSCONFIG_TOOL_LIBRARIES}&quot;,&quot;${SYSCONFIG_TOOL_SYMBOLS}&quot;,&quot;${SYSCONFIG_TOOL_SYSCONFIG_MANIFEST}&quot;]}"/>
                             </option>
                             <option id="com.ti.ccstudio.buildDefinitions.core.OPT_CODEGEN_VERSION.965708600" superClass="com.ti.ccstudio.buildDefinitions.core.OPT_CODEGEN_VERSION" value="8.5.0.LTS" valueType="string"/>
@@ -66,11 +64,11 @@
                                     <listOptionValue value="${MMWAVE_SDK_INSTALL_PATH}/ti/datapath/dpc/objectdetection/objdethwa/src/"/>
                                     <listOptionValue value="${MMWAVE_SDK_INSTALL_PATH}"/>
                                     <listOptionValue value="${MMWAVE_AWR294X_DFP_INSTALL_PATH}"/>
-                                    <listOptionValue value="${PROJECT_ROOT}\dss\dssgenerated"/>
+                                    <listOptionValue value="${PROJECT_ROOT}/dss/dssgenerated"/>
                                     <listOptionValue value="${PROJECT_LOC}"/>
-                                    <listOptionValue value="${DEPENDROOT}\mmwave_dfp_02_04_18_01"/>
+                                    <listOptionValue value="${DEPENDROOT}/mmwave_dfp_02_04_18_01"/>
                                     <listOptionValue value="${DEPENDROOT}/mathlib_c66x_3_1_2_1/packages"/>
-                                    <listOptionValue value="${DEPENDROOT}\mathlib_c66x_3_1_2_1\packages\ti\mathlib"/>
+                                    <listOptionValue value="${DEPENDROOT}/mathlib_c66x_3_1_2_1/packages/ti/mathlib"/>
                                 </option>
                                 <option id="com.ti.ccstudio.buildDefinitions.C6000_8.5.compilerID.DEFINE.747000050" superClass="com.ti.ccstudio.buildDefinitions.C6000_8.5.compilerID.DEFINE" valueType="definedSymbols">
                                     <listOptionValue value="${SYSCONFIG_TOOL_SYMBOLS}"/>
@@ -129,9 +127,9 @@
                                     <listOptionValue value="${MMWAVE_SDK_INSTALL_PATH}/ti/datapath/dpedma/lib"/>
                                     <listOptionValue value="${PROJECT_LOC}"/>
                                     <listOptionValue value="${PROJECT_LOC}/dss/dssgenerated"/>
-                                    <listOptionValue value="${DEPENDROOT}\mmwave_dfp_02_04_18_01\ti\control\mmwavelink\lib"/>
-                                    <listOptionValue value="${DEPENDROOT}\mathlib_c66x_3_1_2_1\packages\ti\mathlib\lib"/>
-                                    <listOptionValue value="${DEPENDROOT}\dsplib_c66x_3_4_0_0\packages\ti\dsplib\lib"/>
+                                    <listOptionValue value="${DEPENDROOT}/mmwave_dfp_02_04_18_01/ti/control/mmwavelink/lib"/>
+                                    <listOptionValue value="${DEPENDROOT}/mathlib_c66x_3_1_2_1/packages/ti/mathlib/lib"/>
+                                    <listOptionValue value="${DEPENDROOT}/dsplib_c66x_3_4_0_0/packages/ti/dsplib/lib"/>
                                 </option>
                                 <option id="com.ti.ccstudio.buildDefinitions.C6000_8.5.linkerID.LIBRARY.1159335123" superClass="com.ti.ccstudio.buildDefinitions.C6000_8.5.linkerID.LIBRARY" valueType="libs">
                                     <listOptionValue value="${SYSCONFIG_TOOL_LIBRARIES}"/>
@@ -187,8 +185,8 @@
                     <stringMacro name="MMWAVE_AWR294X_DFP_INSTALL_PATH" type="VALUE_PATH_ANY" value="${COM_TI_MMWAVE_MCUPLUS_SDK_INSTALL_DIR}/../mmwave_dfp_02_04_18_01"/>
                     <stringMacro name="MMWAVE_SDK_INSTALL_PATH" type="VALUE_PATH_ANY" value="${COM_TI_MMWAVE_MCUPLUS_SDK_INSTALL_DIR}"/>
                     <stringMacro name="MCU_PLUS_SDK_PATH" type="VALUE_PATH_ANY" value="${COM_TI_MCU_PLUS_SDK_AWR294X_INSTALL_DIR}"/>
-                    <stringMacro name="C66x_DSPLIB_INSTALL_PATH" type="VALUE_PATH_ANY" value="C:/ti/dsplib_c66x_3_4_0_0"/>
-                    <stringMacro name="C66x_MATHLIB_INSTALL_PATH" type="VALUE_PATH_ANY" value="C:/ti/mathlib_c66x_3_1_2_1"/>
+                    <stringMacro name="C66x_DSPLIB_INSTALL_PATH" type="VALUE_PATH_ANY" value="${PROJECT_LOC}/../Dependencies/dsplib_c66x_3_4_0_0"/>
+                    <stringMacro name="C66x_MATHLIB_INSTALL_PATH" type="VALUE_PATH_ANY" value="${PROJECT_LOC}/../Dependencies/mathlib_c66x_3_1_2_1"/>
                 </macros>
                 <externalSettings/>
                 <extensions>
@@ -198,7 +196,7 @@
                 </extensions>
             </storageModule>
             <storageModule moduleId="cdtBuildSystem" version="4.0.0">
-                <configuration artifactExtension="xe66" artifactName="${ProjName}" buildProperties="" cleanCommand="${CG_CLEAN_CMD}" description="" id="com.ti.ccstudio.buildDefinitions.C6000.Release.151930444" name="Release" parent="com.ti.ccstudio.buildDefinitions.C6000.Release" postbuildStep="${CG_TOOL_ROOT}/bin/strip6x -p ${CCS_PROJECT_DIR}/${ConfigName}/${ProjName}.xe66 -o=${CCS_PROJECT_DIR}/${ConfigName}/${ProjName}_strip.xe66;                     ${SYSCONFIG_TOOL_ROOT}/nodejs/node.exe  ${COM_TI_MCU_PLUS_SDK_AWR294X_INSTALL_DIR}/tools/boot/out2rprc/elf2rprc.js ${CCS_PROJECT_DIR}/${ConfigName}/${ProjName}_strip.xe66;                     ${CCE_INSTALL_ROOT}/utils/cygwin/mv ${CCS_PROJECT_DIR}/${ConfigName}/${ProjName}_strip.rprc ${CCS_PROJECT_DIR}/${ConfigName}/${ProjName}.rprc;                     ${CCE_INSTALL_ROOT}/utils/cygwin/rm -f ${CCS_PROJECT_DIR}/${ConfigName}/${ProjName}_strip.rprc;                     ${CCE_INSTALL_ROOT}/utils/cygwin/rm -f ${CCS_PROJECT_DIR}/${ConfigName}/${ProjName}_strip.xe66;                     " prebuildStep="${CCE_INSTALL_ROOT}/utils/cygwin/rm -f ${CCS_PROJECT_DIR}/${ConfigName}/${ProjName}.rprc;                     ${SYSCONFIG_TOOL_ROOT}/nodejs/node ${SYSCONFIG_TOOL_ROOT}/dist/cli.js --product ${COM_TI_MCU_PLUS_SDK_AWR294X_INSTALL_DIR}/.metadata/product.json --script ../../Radar_Program_mss/mss/mss.syscfg --context r5fss0-0 --output ../../Radar_Program_mss/mss/mssgenerated/ --script ../dss/dss.syscfg --context c66ss0 --output ../dss/dssgenerated/;                     ">
+                <configuration artifactExtension="xe66" artifactName="${ProjName}" buildProperties="" cleanCommand="${CG_CLEAN_CMD}" description="" id="com.ti.ccstudio.buildDefinitions.C6000.Release.151930444" name="Release" parent="com.ti.ccstudio.buildDefinitions.C6000.Release" postbuildStep="${CG_TOOL_ROOT}/bin/strip6x -p ${CCS_PROJECT_DIR}/${ConfigName}/${ProjName}.xe66 -o=${CCS_PROJECT_DIR}/${ConfigName}/${ProjName}_strip.xe66;${CCE_INSTALL_ROOT}/tools/node/node ${COM_TI_MCU_PLUS_SDK_AWR294X_INSTALL_DIR}/tools/boot/out2rprc/elf2rprc.js ${CCS_PROJECT_DIR}/${ConfigName}/${ProjName}_strip.xe66 ${CCS_PROJECT_DIR}/${ConfigName}/${ProjName}.rprc" prebuildStep="${CCE_INSTALL_ROOT}/tools/node/node ${SYSCONFIG_TOOL_ROOT}/dist/cli.js --product ${COM_TI_MCU_PLUS_SDK_AWR294X_INSTALL_DIR}/.metadata/product.json --script ../../Radar_Program_mss/mss/mss.syscfg --context r5fss0-0 --output ../../Radar_Program_mss/mss/mssgenerated/ --script ../dss/dss.syscfg --context c66ss0 --output ../dss/dssgenerated/">
                     <folderInfo id="com.ti.ccstudio.buildDefinitions.C6000.Release.151930444." name="/" resourcePath="">
                         <toolChain id="com.ti.ccstudio.buildDefinitions.C6000_8.5.exe.ReleaseToolchain.1238382634" name="TI Build Tools" superClass="com.ti.ccstudio.buildDefinitions.C6000_8.5.exe.ReleaseToolchain" targetTool="com.ti.ccstudio.buildDefinitions.C6000_8.5.exe.linkerRelease.101817286">
                             <option id="com.ti.ccstudio.buildDefinitions.core.OPT_TAGS.1354610264" superClass="com.ti.ccstudio.buildDefinitions.core.OPT_TAGS" valueType="stringList">
@@ -236,7 +234,7 @@
                                     <listOptionValue value="${MMWAVE_SDK_INSTALL_PATH}/ti/datapath/dpc/objectdetection/objdethwaDDMA/src/"/>
                                     <listOptionValue value="${MMWAVE_SDK_INSTALL_PATH}"/>
                                     <listOptionValue value="${MMWAVE_AWR294X_DFP_INSTALL_PATH}"/>
-                                    <listOptionValue value="${PROJECT_ROOT}\dss\dssgenerated"/>
+                                    <listOptionValue value="${PROJECT_ROOT}/dss/dssgenerated"/>
                                     <listOptionValue value="${PROJECT_LOC}"/>
                                 </option>
                                 <option id="com.ti.ccstudio.buildDefinitions.C6000_8.5.compilerID.DEFINE.1667346661" superClass="com.ti.ccstudio.buildDefinitions.C6000_8.5.compilerID.DEFINE" valueType="definedSymbols">
