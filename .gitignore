@@ -5,3 +5,7 @@
 
 # scripts directory for custom things
 /scripts/
+
+# command line build output and per-machine overrides (see host.mk)
+/out/
+/local.mk
