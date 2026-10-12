@@ -87,9 +87,9 @@ SECTIONS{
     .lwip.pools (NOLOAD) :
     {
         *(.bss.memp*)
-        "C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/lib/lwipif-cpsw-freertos.awr294x.r5f.ti-arm-clang.debug.lib"(.bss*)
+        *lwipif*cpsw*freertos*.lib<*>(.bss*)
 
-        "C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/lwip/lib/lwip-freertos.awr294x.r5f.ti-arm-clang.debug.lib"(.bss*)
+        *lwip*freertos*.lib<*>(.bss*)
     } > DSS_L3
 
     GROUP {
