@@ -2,3 +2,6 @@
 /Radar_Program_mss/Debug
 /Radar_Program_mss/mss/mssgenerated
 /Radar_Program_dss/dss/dssgenerated
+
+# scripts directory for custom things
+/scripts/
