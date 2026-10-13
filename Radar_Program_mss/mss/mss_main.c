@@ -180,6 +180,12 @@ static void MmwDemo_initTask(void* args)
  */
 int32_t main (void)
  {
+    /* lwIP's globals live in .lwip.pools (DSS_L3, see linker cmd), which is
+     * outside .bss and not zeroed at boot. Clear it, otherwise a re-run without
+     * power cycle starts lwIP with the previous run's state. */
+    extern uint8_t __LWIP_POOLS_START[], __LWIP_POOLS_END[];
+    memset(__LWIP_POOLS_START, 0, (size_t)(__LWIP_POOLS_END - __LWIP_POOLS_START));
+
     /* init SOC specific modules */
     System_init();
     Board_init();

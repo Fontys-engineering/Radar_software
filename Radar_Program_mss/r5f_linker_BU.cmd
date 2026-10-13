@@ -83,14 +83,14 @@ SECTIONS{
 
     .sysmem: > DSS_L3
 
-    /* lwIP pools */
+    /* lwIP pools. NOLOAD, so startup doesn't zero this: main() does */
     .lwip.pools (NOLOAD) :
     {
         *(.bss.memp*)
         *lwipif*cpsw*freertos*.lib<*>(.bss*)
 
         *lwip*freertos*.lib<*>(.bss*)
-    } > DSS_L3
+    } > DSS_L3, RUN_START(__LWIP_POOLS_START), RUN_END(__LWIP_POOLS_END)
 
     GROUP {
     .bss:.common:memp_memory_POOL_1792_base:  (NOLOAD)  {} palign(128)
