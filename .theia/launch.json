@@ -5,7 +5,7 @@
             "name": "out_of_box_1843_combined",
             "type": "ccs-debug",
             "request": "launch",
-            "targetConfig": "${targetConfigFolder}\\AWR1843.ccxml",
+            "targetConfig": "${workspaceFolder}/AWR1843.ccxml",
             "connections": [
                 {
                     "name": "Texas Instruments XDS110 USB Debug Probe",
