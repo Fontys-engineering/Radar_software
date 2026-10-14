@@ -2807,6 +2807,21 @@ static int32_t DPC_ObjectDetection_ioctl
                 break;
             }
 
+            /* Custom DPU dynamic configuration handler */
+            case DPC_OBJDET_IOCTL__DYNAMIC_DPU_CUSTOM_CFG:
+            {
+                DPC_ObjectDetection_DpuCustomCfg *cfg;
+
+                DebugP_assert(argLen == sizeof(DPC_ObjectDetection_DpuCustomCfg));
+
+                cfg = (DPC_ObjectDetection_DpuCustomCfg*)arg;
+
+                /* Save custom DPU dynamic configuration into sub-frame object */
+                subFrmObj->dynCfg.customCfg = *cfg;
+
+                break;
+            }
+
             /* Related to pre-start configuration */
             case DPC_OBJDET_IOCTL__STATIC_PRE_START_CFG:
             {
