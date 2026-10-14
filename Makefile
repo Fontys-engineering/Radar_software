@@ -80,7 +80,7 @@ MSS_SDK_SRCS := \
     $(MMWAVE_AWR294X_DFP_INSTALL_PATH)/ti/control/mmwavelink/src/rl_monitoring.c \
     $(MMWAVE_AWR294X_DFP_INSTALL_PATH)/ti/control/mmwavelink/src/rl_sensor.c
 
-MSS_SRCS := $(wildcard $(MSS_DIR)/mss/*.c) $(wildcard $(MSS_DIR)/utils/*.c) \
+MSS_SRCS := $(wildcard $(MSS_DIR)/mss/*.c) $(wildcard $(MSS_DIR)/utils/*.c) $(wildcard $(MSS_DIR)/plasma/*.c) \
             $(addprefix $(MSS_GEN)/,$(GEN_SRCS)) $(MSS_SDK_SRCS)
 
 MSS_CMDS := $(MSS_DIR)/r5f_linker_BU.cmd $(MSS_DIR)/mss/mmw_mss_linker.cmd
@@ -111,7 +111,8 @@ MSS_INCS := \
     $(NETWORK_PATH)/enet/core/lwipif/inc \
     $(NETWORK_PATH)/lwip/lwip-stack/src/include/lwip \
     $(MMWAVE_AWR294X_DFP_INSTALL_PATH)/ti/control/mmwavelink \
-    $(C66x_MATHLIB_INSTALL_PATH)/packages
+    $(C66x_MATHLIB_INSTALL_PATH)/packages \
+    Radar_common
 
 MSS_DEFS := DOWNLOAD_FROM_CCS DRIVERS_RADAR_HWA_V2 INCLUDE_DPM MMWDEMO_TDM SOC_AWR294X SOC_AWR2944 \
             _LITTLE_ENDIAN MMWAVE_SDK_DEVICE=awr2944 SUBSYS_MSS DebugP_LOG_ENABLED _DEBUG_=1 ENET_STREAM
@@ -175,7 +176,7 @@ mss: $(OUT)/mss/Radar_Program_mss.rprc
 ###############################################################################
 DSS_CC := $(CGT_C6X_PATH)/bin/cl6x
 
-DSS_SRCS := $(wildcard $(DSS_DIR)/*.c) $(wildcard $(DSS_DIR)/dss/*.c) $(addprefix $(DSS_GEN)/,$(GEN_SRCS))
+DSS_SRCS := $(wildcard $(DSS_DIR)/*.c) $(wildcard $(DSS_DIR)/dss/*.c) $(wildcard $(DSS_DIR)/plasma/*.c) $(addprefix $(DSS_GEN)/,$(GEN_SRCS))
 DSS_CMDS := $(DSS_DIR)/c66x_linker.cmd $(DSS_DIR)/dss/mmw_dss_linker.cmd
 
 DSS_INCS := \
@@ -190,7 +191,8 @@ DSS_INCS := \
     $(DSS_GEN) \
     $(DSS_DIR) \
     $(C66x_MATHLIB_INSTALL_PATH)/packages \
-    $(C66x_MATHLIB_INSTALL_PATH)/packages/ti/mathlib
+    $(C66x_MATHLIB_INSTALL_PATH)/packages/ti/mathlib \
+    Radar_common
 
 DSS_DEFS := SUBSYS_DSS SOC_AWR294X _LITTLE_ENDIAN DebugP_ASSERT_ENABLED INCLUDE_DPM DRIVERS_RADAR_HWA_V2 \
             SOC_AWR2944 _DEBUG_=1 MMWDEMO_TDM ENET_STREAM
