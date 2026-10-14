@@ -149,6 +149,10 @@ static void MmwDemo_initTask(void* args)
      * Initialize the CLI Module:
      *****************************************************************************/
     MmwDemo_CLIInit(MMWDEMO_CLI_TASK_PRIORITY);
+
+    CLI_write("hello world\n\r");
+    test_print("testop print\n\t");
+
     #ifdef MOTION_TASK
     gMmwMssMCB.taskHandles.motionTask =
     xTaskCreateStatic(
