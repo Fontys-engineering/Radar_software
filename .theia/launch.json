@@ -15,7 +15,7 @@
                             "program": "${workspaceFolder}/Radar_Program_dss/Debug/Radar_Program_dss.xe66",
                             "autoRun": false,
                             "debuggerSettings": {
-                                "data": "<?xml version=\"1.0\" encoding=\"UTF-8\"?><PropertyValues><Property id=\"AutoRunToLabelOnRestart\" value=\"false\"/><Property id=\"AutoRunToLabelOnConnect\" value=\"false\"/><Property id=\"ResetOnConnect\" value=\"true\"/></PropertyValues>"
+                                "data": "<?xml version=\"1.0\" encoding=\"UTF-8\"?><PropertyValues><Property id=\"AutoRunToLabelOnRestart\" value=\"false\"/><Property id=\"AutoRunToLabelOnConnect\" value=\"false\"/><Property id=\"AutoResetOnConnect\" value=\"true\"/><Property id=\"ResetOnRestart\" value=\"true\"/></PropertyValues>"
                             }
                         },
                         {
@@ -23,7 +23,7 @@
                             "program": "${workspaceFolder}/Radar_Program_mss/Debug/Radar_Program_mss.xer5f",
                             "autoRun": false,
                             "debuggerSettings": {
-                                "data": "<?xml version=\"1.0\" encoding=\"UTF-8\"?><PropertyValues><Property id=\"AutoRunToLabelOnRestart\" value=\"false\"/><Property id=\"AutoRunToLabelOnConnect\" value=\"false\"/><Property id=\"ResetOnConnect\" value=\"true\"/><Property id=\"HaltOnConnect\" value=\"true\"/></PropertyValues>"
+                                "data": "<?xml version=\"1.0\" encoding=\"UTF-8\"?><PropertyValues><Property id=\"AutoRunToLabelOnRestart\" value=\"false\"/><Property id=\"AutoRunToLabelOnConnect\" value=\"false\"/><Property id=\"AutoResetOnConnect\" value=\"true\"/><Property id=\"ResetOnRestart\" value=\"true\"/><Property id=\"HaltOnConnect\" value=\"true\"/></PropertyValues>"
                             }
                         }
                     ]
