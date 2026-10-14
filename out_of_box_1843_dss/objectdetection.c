@@ -1016,7 +1016,6 @@ int32_t DPC_ObjectDetection_execute
     }
     
     /* Set DPM result with measure (bias, phase) and detection info */
-    result->numObjOut = customOutParams.numOutputElements;
     result->subFrameIdx = objDetObj->subFrameIndx;
     result->objOut               = subFrmObj->dpuCfg.aoaCfg.res.detObjOut;
     result->objOutSideInfo       = subFrmObj->dpuCfg.aoaCfg.res.detObjOutSideInfo;
