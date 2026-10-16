@@ -108,6 +108,7 @@ static void AppTcp_simpleclient(void *pArg)
 
             uint32_t numObj = gEnetStreamObjData.numObj;
             uint32_t len = sizeof(DPIF_PointCloudCartesian) * numObj;
+            gEnetStreamObjData.dummy = 0x2;
             if (len > 4000)   // tune this threshold ADDED
             {
                     gEnetStreamObjData.ready = 0;
@@ -131,6 +132,11 @@ static void AppTcp_simpleclient(void *pArg)
                                     sizeof(uint32_t) + 2,
                                     NETCONN_COPY);   // 🔴 REMOVE DONTBLOCK
 
+                // err = netconn_write(pConn,
+                //                     &(gEnetStreamObjData.numObj),
+                //                     sizeof(uint32_t) + 2,
+                //                     NETCONN_COPY);   // 🔴 REMOVE DONTBLOCK
+
                 if (err == ERR_MEM)
                 {
                     /* lwIP buffer full → wait and retry */
@@ -148,17 +154,20 @@ static void AppTcp_simpleclient(void *pArg)
 
             if (err != ERR_OK)
             {
-                    DebugP_logInfo("WRITE HEADER FAIL: %d (%s)\n", err, lwip_strerr(err));
+                DebugP_logInfo("WRITE HEADER FAIL: %d (%s)\n", err, lwip_strerr(err));
                 gEnetStreamObjData.ready = 0;
                 ClockP_usleep(1000);   // ADDED
                 continue;
             }
 
+            // err = netconn_write(pConn,
+            //                     gEnetStreamObjData.objData,
+            //                     len,
+            //                     NETCONN_COPY | NETCONN_DONTBLOCK); //DONTBLOCK ADDED                   
             err = netconn_write(pConn,
                                 gEnetStreamObjData.objData,
                                 len,
-                                NETCONN_COPY | NETCONN_DONTBLOCK); //DONTBLOCK ADDED
-
+                                NETCONN_COPY); //DONTBLOCK ADDED         
             if (err != ERR_OK)
             {
                     DebugP_logInfo("WRITE DATA FAIL: %d (%s)\n", err, lwip_strerr(err));
