@@ -4,8 +4,13 @@
   },
   "permissions": {
     "allow": [
-      "Read(//C/ti/ccs2041/ccs/theia/resources/ai/**)"
+      "Read(//C/ti/ccs2041/ccs/theia/resources/ai/**)",
+      "mcp__ccs-debug",
+      "mcp__ccs-project",
+      "mcp__ccs-sysconfig"
     ],
-    "ask": []
+    "ask": [
+      "mcp__ccs-project__changeSysConfigVersion"
+    ]
   }
 }

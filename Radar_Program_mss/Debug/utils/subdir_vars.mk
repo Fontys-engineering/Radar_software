@@ -10,8 +10,8 @@ C_SRCS += \
 ../utils/RadarSetup.c \
 ../utils/TaskP_freertos.c \
 C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/utils/cli/src/cli_mmwave.c \
-C:/ti/backups/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/utils/enet_apputils.c \
-C:/ti/backups/mmwave_mcuplus_sdk_04_07_02_01/ti/demo/utils/enet_cpswconfighandler.c \
+C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/utils/enet_apputils.c \
+C:/ti/mmwave_mcuplus_sdk/mmwave_mcuplus_sdk_04_07_02_01/ti/demo/utils/enet_cpswconfighandler.c \
 C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/demo/utils/enet_stream.c \
 ../utils/enet_tcpclient.c \
 C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/drivers/ipc_notify/v1/ipc_notify_v1.c \
@@ -145,8 +145,8 @@ C_SRCS__QUOTED += \
 "../utils/RadarSetup.c" \
 "../utils/TaskP_freertos.c" \
 "C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/utils/cli/src/cli_mmwave.c" \
-"C:/ti/backups/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/utils/enet_apputils.c" \
-"C:/ti/backups/mmwave_mcuplus_sdk_04_07_02_01/ti/demo/utils/enet_cpswconfighandler.c" \
+"C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/utils/enet_apputils.c" \
+"C:/ti/mmwave_mcuplus_sdk/mmwave_mcuplus_sdk_04_07_02_01/ti/demo/utils/enet_cpswconfighandler.c" \
 "C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/ti/demo/utils/enet_stream.c" \
 "../utils/enet_tcpclient.c" \
 "C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/drivers/ipc_notify/v1/ipc_notify_v1.c" \
