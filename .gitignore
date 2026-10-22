@@ -23,3 +23,5 @@
 # Code-completion (clangd) index cache that CCS rebuilds by itself.
 # ---------------------------------------------------------------------------
 .clangd/.cache/
+CLAUDE.md
+.mcp.json
