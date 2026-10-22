@@ -90,11 +90,11 @@ SECTIONS{
     /* lwIP pools */
     .lwip.pools (NOLOAD) :
     {
-        //*(.bss.memp*)
+        *(.bss.memp*)
         /* NOTE: naming a library here also makes the linker pull it in, so these must be the
          * AWR2X44P builds (same files the project links via ${NETWORK_PATH}). */
-        //"C:/Git/Radar_software/Dependencies/mcu_plus_sdk_awr2x44p_10_02_00_04/source/networking/enet/lib/lwipif-cpsw-freertos.awr2x44p.r5f.ti-arm-clang.debug.lib"(.bss*)
-        //"C:/Git/Radar_software/Dependencies/mcu_plus_sdk_awr2x44p_10_02_00_04/source/networking/lwip/lib/lwip-freertos.awr2x44p.r5f.ti-arm-clang.debug.lib"(.bss*)
+        "C:/Git/Radar_software/Dependencies/mcu_plus_sdk_awr2x44p_10_02_00_04/source/networking/enet/lib/lwipif-cpsw-freertos.awr2x44p.r5f.ti-arm-clang.debug.lib"(.bss*)
+        "C:/Git/Radar_software/Dependencies/mcu_plus_sdk_awr2x44p_10_02_00_04/source/networking/lwip/lib/lwip-freertos.awr2x44p.r5f.ti-arm-clang.debug.lib"(.bss*)
     } > DSS_L3
 
     GROUP {
