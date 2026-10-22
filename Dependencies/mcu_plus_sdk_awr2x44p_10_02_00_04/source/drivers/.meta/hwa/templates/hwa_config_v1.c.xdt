@@ -1,0 +1,290 @@
+%%{
+    let module = system.modules['/drivers/hwa/hwa'];
+%%}
+/*
+ * HWA
+ */
+/* HWA atrributes */
+HWA_Attrs gHwaAttrs[CONFIG_HWA_NUM_INSTANCES] =
+{
+% for(let i = 0; i < module.$instances.length; i++) {
+    % let instance = module.$instances[i];
+    % let config = module.getInstanceConfig(instance);
+    {
+        .instanceNum                = `i`U,
+        .ctrlBaseAddr               = `config.ctrlBaseAddr`,
+        .paramBaseAddr              = `config.paramBaseAddr`,
+        .ramBaseAddr                = `config.ramBaseAddr`,
+        .dssBaseAddr                = `config.dssBaseAddr`,
+        .numHwaParamSets            = `config.numHwaParamSets`,
+        .intNum1ParamSet            = `config.intNum1ParamSet`,
+        .intNumDone                 = `config.intNumDone`,
+        .intNumLocalRamErr          = `config.intNumLocalRamErr`,
+        .numDmaChannels             = `config.numDmaChannels`,
+        .accelMemBaseAddr           = `config.accelMemBaseAddr`,
+        .accelMemSize               = `config.accelMemSize`,
+        .isConcurrentAccessAllowed  = `config.isConcurrentAccessAllowed`,
+    },
+% }
+};
+
+% for(let cfgIdx=0; cfgIdx < module.$instances.length; cfgIdx++){
+    % let instance = module.$instances[cfgIdx];
+    % let commonConfigs = instance.configCommon;
+HWA_CommonConfig gHwaCommonConfig[`commonConfigs.length`] =
+{
+    % for(let j = 0; j < commonConfigs.length; j++) {
+    % let commonConfig = commonConfigs[j];
+    {
+        %if(commonConfig.configMask.length >1 ){
+        .configMask = `commonConfig.configMask[0]`
+        %for(let elem = 1; elem < commonConfig.configMask.length-1; elem++) {
+                        | `commonConfig.configMask[elem]`
+        %}
+                        | `commonConfig.configMask[commonConfig.configMask.length-1]`,
+        %}
+        %else{
+        .configMask = `commonConfig.configMask[0]`,
+        %}
+        % if(commonConfig.configMask.indexOf("HWA_COMMONCONFIG_MASK_STATEMACHINE_CFG") > -1) {
+		.numLoops = `commonConfig.numLoops`,
+		.paramStartIdx = `commonConfig.paramStartIdx`,
+		.paramStopIdx = `commonConfig.paramStopIdx`,
+        % }
+        % if(commonConfig.configMask.indexOf("HWA_COMMONCONFIG_MASK_TWIDDITHERENABLE") > -1) {
+		.fftConfig.twidDitherEnable = `commonConfig.twidDitherEnable == true? "HWA_FEATURE_BIT_ENABLE": "HWA_FEATURE_BIT_DISABLE"`,
+        % }
+        % if(commonConfig.configMask.indexOf("HWA_COMMONCONFIG_MASK_LFSRSEED") > -1) {
+		.fftConfig.lfsrSeed = `commonConfig.lfsrSeed`,
+        % }
+        % if(commonConfig.configMask.indexOf("HWA_COMMONCONFIG_MASK_DCEST_SCALESHIFT") > -1) {
+		.dcEstimateConfig =
+        {
+            .scale = `commonConfig.dcEstimateScale`,
+            .shift = `commonConfig.dcEstimateShift`,
+            .scaleProfile2 = `commonConfig.scaleProfile2`,
+            .shiftProfile2 = `commonConfig.shiftProfile2`,
+        },
+        % }
+        % if(commonConfig.configMask.indexOf("HWA_COMMONCONFIG_MASK_DCSUB_SWVAL") > -1) {
+        .dcSubtractionConfig =
+        {
+            %for(let idx =0; idx < 8; idx++){
+            .swIVal[`idx`] = `commonConfig.swIVal_HWA_NUM_RXCHANNELS_2.split(' ').map(Number)[idx]`,
+            .swQVal[`idx`] = `commonConfig.swQVal_HWA_NUM_RXCHANNELS_2.split(' ').map(Number)[idx]`,
+            % }
+        },
+        %}
+        % if((commonConfig.configMask.indexOf("HWA_COMMONCONFIG_MASK_INTERFMAG_THRESHOLD") > -1) || (commonConfig.configMask.indexOf("HWA_COMMONCONFIG_MASK_INTERFMAGDIFF_THRESHOLD") > -1) || (commonConfig.configMask.indexOf("HWA_COMMONCONFIG_MASK_INTERFSUM_MAG") > -1) || (commonConfig.configMask.indexOf("HWA_COMMONCONFIG_MASK_INTERFSUM_MAGDIFF") > -1) || (commonConfig.configMask.indexOf("HWA_COMMONCONFIG_MASK_INTERF_MITG_WINDOW_PARAM") > -1)){
+        .interfConfig = {
+            % if(commonConfig.configMask.indexOf("HWA_COMMONCONFIG_MASK_INTERFMAG_THRESHOLD") > -1) {
+            % for(let idx =0; idx < 4; idx++){
+            .thresholdMagSw[`idx`] = `commonConfig.thresholdMagSw_HWA_NUM_RXCHANNELS.split(' ').map(Number)[idx]`,
+            % }}
+            % if(commonConfig.configMask.indexOf("HWA_COMMONCONFIG_MASK_INTERFMAGDIFF_THRESHOLD") > -1) {
+            % for(let idx =0; idx < 4; idx++){
+            .thresholdMagDiffSw[`idx`] = `commonConfig.thresholdMagDiffSw_HWA_NUM_RXCHANNELS.split(' ').map(Number)[idx]`,
+            % }}
+            % if(commonConfig.configMask.indexOf("HWA_COMMONCONFIG_MASK_INTERFSUM_MAG") > -1) {
+            .sumMagScale = `commonConfig.sumMagScale`,
+            .sumMagShift = `commonConfig.sumMagShift`,
+            % }
+            % if(commonConfig.configMask.indexOf("HWA_COMMONCONFIG_MASK_INTERFSUM_MAGDIFF") > -1) {
+            .sumMagDiffScale = `commonConfig.sumMagDiffScale`,
+            .sumMagDiffShift = `commonConfig.sumMagDiffShift`,
+            % }
+            % if(commonConfig.configMask.indexOf("HWA_COMMONCONFIG_MASK_INTERF_MITG_WINDOW_PARAM") > -1) {
+            %for(let idx = 0; idx<5; idx++){
+            .mitigationWindowParam[`idx`] = `commonConfig.mitigationWindowParam.split(' ').map(Number)[idx]`,
+            %}}
+        },
+        %}
+        % if((commonConfig.configMask.indexOf("HWA_COMMONCONFIG_MASK_COMPLEXMULT_SCALEARRAY") > -1) || (commonConfig.configMask.indexOf("HWA_COMMONCONFIG_MASK_COMPLEXMULT_SCALECONST") > -1) || (commonConfig.configMask.indexOf("HWA_COMMONCONFIG_MASK_TWIDINCR_DELTA_FRAC") > -1)) {
+        .complexMultiplyConfig =
+        {
+            % if((commonConfig.configMask.indexOf("HWA_COMMONCONFIG_MASK_COMPLEXMULT_SCALEARRAY") > -1) || (commonConfig.configMask.indexOf("HWA_COMMONCONFIG_MASK_COMPLEXMULT_SCALECONST") > -1)){
+            %for(let idx =0; idx < 4; idx++){
+            .Iscale[`idx`] = `commonConfig.Iscale_HWA_NUM_RXCHANNELS.split(' ').map(Number)[idx]`,
+            .Qscale[`idx`] = `commonConfig.Qscale_HWA_NUM_RXCHANNELS.split(' ').map(Number)[idx]`,
+            %}}
+            % if(commonConfig.configMask.indexOf("HWA_COMMONCONFIG_MASK_TWIDINCR_DELTA_FRAC") > -1) {
+            .twiddleDeltaFrac = `commonConfig.twiddleDeltaFrac`,
+            %}
+        },
+        %}
+        % if((commonConfig.configMask.indexOf("HWA_COMMONCONFIG_MASK_EGECOMRESS_KPARAM") > -1) || (commonConfig.configMask.indexOf("HWA_COMMONCONFIG_MASK_CMP_LFSRSEED0") > -1) || (commonConfig.configMask.indexOf("HWA_COMMONCONFIG_MASK_CMP_LFSRSEED1") > -1)){
+        .compressConfig =
+        {
+            % if(commonConfig.configMask.indexOf("HWA_COMMONCONFIG_MASK_EGECOMRESS_KPARAM") > -1) {
+            %for(let idx =0; idx < 8; idx++){
+            .EGEKparam[`idx`] = `commonConfig.EGEKparam_HWA_CMP_K_ARR_LEN.split(' ').map(Number)[idx]`,
+            %}}
+            % if(commonConfig.configMask.indexOf("HWA_COMMONCONFIG_MASK_CMP_LFSRSEED0") > -1) {
+            .cmpLfsrSeed0 = `commonConfig.cmpLfsrSeed0`,
+            %}
+            % if(commonConfig.configMask.indexOf("HWA_COMMONCONFIG_MASK_CMP_LFSRSEED1") > -1) {
+            .cmpLfsrSeed1 = `commonConfig.cmpLfsrSeed1`,
+            %}
+        },
+        %}
+    },
+    % }
+};
+%}
+
+% for(let paramIdx=0; paramIdx < module.$instances.length; paramIdx++){
+    % let instance = module.$instances[paramIdx];
+    % let paramConfigs = instance.configParamset;
+
+HWA_ParamConfig gHwaParamConfig[`paramConfigs.length`] =
+{
+    % for(let j = 0; j < paramConfigs.length; j++) {
+    % let paramCfg = paramConfigs[j];
+    {
+		.triggerMode = `paramCfg.triggerMode`,
+        % if(paramCfg.triggerMode == "HWA_TRIG_MODE_DMA"){
+		.triggerSrc = `paramCfg.triggerSrc`,
+        % }
+		.accelMode = `paramCfg.accelMode`,
+        % if((paramCfg.accelMode == "HWA_ACCELMODE_FFT")||(paramCfg.accelMode == "HWA_ACCELMODE_COMPRESS")){
+		.source =
+        {
+            .srcAddr = `paramCfg.srcAddr`,
+            .srcAcnt = `paramCfg.srcAcnt`,
+            .srcAIdx = `paramCfg.srcAIdx`,
+            .srcBcnt = `paramCfg.srcBcnt`,
+            .srcBIdx = `paramCfg.srcBIdx`,
+            .srcAcircShift = `paramCfg.srcAcircShift`,
+            .srcAcircShiftWrap = `paramCfg.srcAcircShiftWrap`,
+            .srcCircShiftWrap3 = `paramCfg.srcCircShiftWrap3 == true? "HWA_FEATURE_BIT_ENABLE": "HWA_FEATURE_BIT_DISABLE"`,
+            .srcRealComplex = `paramCfg.srcRealComplex`,
+            .srcWidth = `paramCfg.srcWidth`,
+            .srcSign = `paramCfg.srcSign`,
+            .srcConjugate = `paramCfg.srcConjugate == true? "HWA_FEATURE_BIT_ENABLE": "HWA_FEATURE_BIT_DISABLE"`,
+            .srcScale = `paramCfg.srcScale`,
+            .srcIQSwap = `paramCfg.srcIQSwap == true? "HWA_FEATURE_BIT_ENABLE": "HWA_FEATURE_BIT_DISABLE"`,
+        },
+		.dest =
+        {
+            .dstAddr = `paramCfg.destAddr`,
+            .dstAcnt = `paramCfg.dstAcnt`,
+            .dstAIdx = `paramCfg.dstAIdx`,
+            .dstBIdx = `paramCfg.dstBIdx`,
+            .dstRealComplex = `paramCfg.dstRealComplex`,
+            .dstWidth = `paramCfg.dstWidth`,
+            .dstSign = `paramCfg.dstSign`,
+            .dstConjugate = `paramCfg.dstConjugate == true? "HWA_FEATURE_BIT_ENABLE": "HWA_FEATURE_BIT_DISABLE"`,
+            .dstScale = `paramCfg.dstScale`,
+            .dstSkipInit = `paramCfg.dstSkipInit`,
+            .dstIQswap = `paramCfg.dstIQSwap == true? "HWA_FEATURE_BIT_ENABLE": "HWA_FEATURE_BIT_DISABLE"`,
+        },
+        % if((paramCfg.accelMode == "HWA_ACCELMODE_FFT") || (paramCfg.accelMode == "HWA_ACCELMODE_COMPRESS")){
+        .accelModeArgs =
+        {
+            % if(paramCfg.accelMode == "HWA_ACCELMODE_FFT"){
+            .fftMode =
+            {
+                .mode2X = `paramCfg.mode2x == true? "HWA_FEATURE_BIT_ENABLE": "HWA_FEATURE_BIT_DISABLE"`,
+                % if(paramCfg.mode2x == true){
+                .conjCombScaling = `paramCfg.conjCombScaling`,
+                .conjCombOutMode = `paramCfg.conjCombOutMode`,
+                %}
+                .fftEn = `paramCfg.fftEn == true? "HWA_FEATURE_BIT_ENABLE": "HWA_FEATURE_BIT_DISABLE"`,
+                % if(paramCfg.fftEn == true){
+                .fftSize = `paramCfg.fftSize`,
+                .butterflyScaling = `paramCfg.butterflyScaling`,
+                .fftSize3xEn = `paramCfg.fftSize3xEn == true? "HWA_FEATURE_BIT_ENABLE": "HWA_FEATURE_BIT_DISABLE"`,
+                .windowEn = `paramCfg.windowEn == true? "HWA_FEATURE_BIT_ENABLE": "HWA_FEATURE_BIT_DISABLE"`,
+                % }
+                % if(paramCfg.fftSize3xEn == true){
+                .butterflyScalingFFT3x = `paramCfg.butterflyScalingFFT3x`,
+                % }
+                % if(paramCfg.windowEn == true){
+                .winSymm = `paramCfg.windowSymm == true? "HWA_FEATURE_BIT_ENABLE": "HWA_FEATURE_BIT_DISABLE"`,
+                .windowStart = `paramCfg.windowStart`,
+                .windowMode = `paramCfg.windowMode`,
+                % }
+                .dcEstProfileSelect = `paramCfg.dcEstProfileSelect`,
+                .preProcCfg =
+                {
+                    .dcEstResetMode = `paramCfg.dcEstResetMode`,
+                    .dcSubEnable = `paramCfg.dcSubEnable == true? "HWA_FEATURE_BIT_ENABLE": "HWA_FEATURE_BIT_DISABLE"`,
+                    % if(paramCfg.dcSubEnable == true){
+                    .dcSubSelect = `paramCfg.dcSubSelect`,
+                    % }
+                    .interfStat.resetMode = `paramCfg.interfEstResetMode`,
+                    .interfLocalize =
+                    {
+                        .thresholdEnable = `paramCfg.interfLocalizeEnable == true? "HWA_FEATURE_BIT_ENABLE": "HWA_FEATURE_BIT_DISABLE"`,
+                        % if(paramCfg.interfLocalizeEnable == true){
+                        .thresholdMode = `paramCfg.interfThresholdMode`,
+                        .thresholdSelect = `paramCfg.interfThresholdSelect`,
+                        % }
+                    },
+                    .interfMitigation =
+                    {
+                        .enable = `paramCfg.interfMitigEnable == true? "HWA_FEATURE_BIT_ENABLE": "HWA_FEATURE_BIT_DISABLE"`,
+                        % if(paramCfg.interfMitigEnable == true){
+                            .countThreshold = `paramCfg.interfMitigCountThreshold`,
+                            .pathSelect = `paramCfg.interfMitigPathSelect`,
+                            .leftHystOrder = `paramCfg.interfMitigLeftHystOrder`,
+                            .rightHystOrder = `paramCfg.interfMitigRightHystOrder`,
+                        %}
+                    },
+                    .complexMultiply.cmultMode = `paramCfg.cmultMode`,
+                    % if(paramCfg.cmultMode == "HWA_COMPLEX_MULTIPLY_MODE_FREQ_SHIFTER"){
+                    .complexMultiply.modeCfg.freqShift.freqShiftTwiddleIncr = `paramCfg.freqShiftTwiddleIncr`,
+                    % }
+                    % else if(paramCfg.cmultMode == "HWA_COMPLEX_MULTIPLY_MODE_SCALAR_MULT"){
+                    .complexMultiply.modeCfg.scalerMultiply.scaleCmultScaleEn = `paramCfg.scaleCmultScaleEn == true? "HWA_FEATURE_BIT_ENABLE": "HWA_FEATURE_BIT_DISABLE"`,
+                    % }
+                    % else if(paramCfg.cmultMode == "HWA_COMPLEX_MULTIPLY_MODE_FREQSHIFT_FREQINCREMENT"){
+                    .complexMultiply.modeCfg.freqShiftWithFreIncrement.twiddleIncr = `paramCfg.twiddleIncrDeltaFrac`,
+                    % }
+                },
+            },
+            %}
+            % else if(paramCfg.accelMode == "HWA_ACCELMODE_COMPRESS"){
+            .compressMode =
+            {
+                .compressDecompress = `paramCfg.compressDecompress`,
+                .method = `paramCfg.cmpMethod`,
+                .scaleFactorBW = `paramCfg.cmpScaleFactorBW`,
+                .passSelect = `paramCfg.cmpPassSelect`,
+                % if(paramCfg.cmpPassSelect == "HWA_COMPRESS_PATHSELECT_SECONDPASS"){
+                .scaleFactor = `paramCfg.cmpScaleFactor`,
+                % }
+                .headerEnable = `paramCfg.cmpHeaderEnable == true? "HWA_FEATURE_BIT_ENABLE": "HWA_FEATURE_BIT_DISABLE"`,
+                .ditherEnable = `paramCfg.cmpDitherEnable == true? "HWA_FEATURE_BIT_ENABLE": "HWA_FEATURE_BIT_DISABLE"`,
+                .cmpRoundEn = `paramCfg.cmpRoundEn == true? "HWA_FEATURE_BIT_ENABLE": "HWA_FEATURE_BIT_DISABLE"`,
+                .selLfsr = `paramCfg.selLfsr == true? "HWA_FEATURE_BIT_ENABLE": "HWA_FEATURE_BIT_DISABLE"`,
+                .overflowProtection = `paramCfg.overflowProtection == true? "HWA_FEATURE_BIT_ENABLE": "HWA_FEATURE_BIT_DISABLE"`,
+                % if(paramCfg.cmpMethod == "HWA_COMPRESS_METHOD_BFP"){
+                .BFPMantissaBW = `paramCfg.BFPMantissaBW`,
+                .decrImagBitw = `paramCfg.cmpDecrImagBitw == true? "HWA_FEATURE_BIT_ENABLE": "HWA_FEATURE_BIT_DISABLE"`,
+                % }
+                % else if(paramCfg.cmpMethod == "HWA_COMPRESS_METHOD_EGE"){
+                .EGEKidx = `paramCfg.EGEKidx`,
+                .EGEKarrayLength = `paramCfg.EGEKarrayLength`,
+                % }
+            },
+            % }
+        },
+        %}
+    %}
+    },
+    %}
+};
+%}
+/* HWA RAM atrributes */
+HWA_RAMAttrs gHwaRamCfg[HWA_NUM_RAMS] =
+{
+    {CSL_DSS_HWA_WINDOW_RAM_U_BASE, CSL_DSS_HWA_WINDOW_RAM_U_SIZE}
+};
+
+/* HWA objects - initialized by the driver */
+HWA_Object gHwaObject[CONFIG_HWA_NUM_INSTANCES];
+/* HWA objects - storage for HWA driver object handles */
+HWA_Object *gHwaObjectPtr[CONFIG_HWA_NUM_INSTANCES] = { NULL };
+/* HWA objects count */
+uint32_t gHwaConfigNum = CONFIG_HWA_NUM_INSTANCES;

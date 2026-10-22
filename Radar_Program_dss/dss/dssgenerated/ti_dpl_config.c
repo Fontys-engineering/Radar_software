@@ -47,7 +47,7 @@
 ClockP_Config gClockConfig = {
     .timerBaseAddr = DSS_RTIA_BASE_ADDR, 
     .timerHwiIntNum = 66,
-    .timerInputClkHz = 150000000,
+    .timerInputClkHz = 200000000,
     .timerInputPreScaler = 1,
     .usecPerTick = 1000,
     .intrPriority = 15,

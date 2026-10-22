@@ -38,13 +38,15 @@
 MEMORY
 {
     DSS_L2:   ORIGIN = 0x800000, LENGTH = 0x60000
-    /* Total of 2.5 MB of DSS L3 is available */
+    /* AWR2X44P: total of 3.0 MB of DSS L3 is available (0x88000000 - 0x882FFFFF).
+     * The DSS keeps the first 2.5 MB (matches DSS_L3_U_SIZE in dss_main.c); the top 512 KB
+     * (0x88280000) is used by the MSS image (see r5f_linker_BU.cmd), so the two never overlap. */
     DSS_L3:   ORIGIN = 0x88000000, LENGTH = 0x00280000
     HWA_RAM:  ORIGIN = 0x82000000, LENGTH = 0x00020000
 
     /* 1st 512 B of DSS mailbox memory and MSS mailbox memory is used for IPC with R4 and should not be used by application */
-    /* MSS mailbox memory is used as shared memory, we dont use bottom 32*6 bytes, since its used as SW queue by ipc_notify */
-    RTOS_NORTOS_IPC_SHM_MEM : ORIGIN = 0xC5000200, LENGTH = 0x1D40
+    /* MSS mailbox memory is used as shared memory, we dont use bottom 32*12 bytes, since its used as SW queue by ipc_notify (AWR2X44P) */
+    RTOS_NORTOS_IPC_SHM_MEM : ORIGIN = 0xC5000200, LENGTH = 0x1C80
 }
 
 

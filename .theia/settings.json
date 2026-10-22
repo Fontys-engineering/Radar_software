@@ -1,3 +1,4 @@
 {
-    "CCS.AI.enableMcpServers": true
+    "CCS.AI.enableMcpServers": true,
+    "git.ignoreLimitWarning": true
 }

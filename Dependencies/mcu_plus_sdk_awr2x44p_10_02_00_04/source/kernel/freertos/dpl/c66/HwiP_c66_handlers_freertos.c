@@ -1,0 +1,205 @@
+/*
+ *  Copyright (C) 2021-2025 Texas Instruments Incorporated
+ *
+ *  Redistribution and use in source and binary forms, with or without
+ *  modification, are permitted provided that the following conditions
+ *  are met:
+ *
+ *    Redistributions of source code must retain the above copyright
+ *    notice, this list of conditions and the following disclaimer.
+ *
+ *    Redistributions in binary form must reproduce the above copyright
+ *    notice, this list of conditions and the following disclaimer in the
+ *    documentation and/or other materials provided with the
+ *    distribution.
+ *
+ *    Neither the name of Texas Instruments Incorporated nor the names of
+ *    its contributors may be used to endorse or promote products derived
+ *    from this software without specific prior written permission.
+ *
+ *  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+ *  "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+ *  LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR
+ *  A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT
+ *  OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+ *  SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+ *  LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+ *  DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+ *  THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+ *  (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+ *  OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+ */
+
+/* ========================================================================== */
+/*                             Include Files                                  */
+/* ========================================================================== */
+
+#include <kernel/dpl/HwiP.h>
+#include <drivers/hw_include/csl_types.h>
+#include <kernel/nortos/dpl/c66/HwiP_c66.h>
+
+/* ========================================================================== */
+/*                           Macros & Typedefs                                */
+/* ========================================================================== */
+
+/* None */
+
+/* ========================================================================== */
+/*                         Structure Declarations                             */
+/* ========================================================================== */
+
+/* None */
+
+/* ========================================================================== */
+/*                            Global Variables                                */
+/* ========================================================================== */
+
+/* None */
+
+/* ========================================================================== */
+/*                          Function Declarations                             */
+/* ========================================================================== */
+
+static void HwiP_intcEcm0Dispatcher(void);
+static void HwiP_intcEcm1Dispatcher(void);
+static void HwiP_intcEcm2Dispatcher(void);
+static void HwiP_intcEcm3Dispatcher(void);
+static void HwiP_intcdm4Dispatcher(void);
+static void HwiP_intcdm5Dispatcher(void);
+static void HwiP_intcdm6Dispatcher(void);
+static void HwiP_intcdm7Dispatcher(void);
+static void HwiP_intcdm8Dispatcher(void);
+static void HwiP_intcdm9Dispatcher(void);
+static void HwiP_intcdm10Dispatcher(void);
+static void HwiP_intcdm11Dispatcher(void);
+static void HwiP_intcReservedDispatcher(void);
+interrupt void HwiP_intcNmiDispatcher(void);
+
+/* ========================================================================== */
+/*                          Function Definitions                              */
+/* ========================================================================== */
+
+void HwiP_assignIntrHandlers(void)
+{
+    uint32_t            loopIdx;
+    HwiP_IntcIsr        ecmIsr[] =
+    {
+        &HwiP_intcEcm0Dispatcher,
+        &HwiP_intcEcm1Dispatcher,
+        &HwiP_intcEcm2Dispatcher,
+        &HwiP_intcEcm3Dispatcher
+    };
+
+    HwiP_IntcIsr directmappedIsr[]=
+    {
+        &HwiP_intcdm4Dispatcher,
+        &HwiP_intcdm5Dispatcher,
+        &HwiP_intcdm6Dispatcher,
+        &HwiP_intcdm7Dispatcher,
+        &HwiP_intcdm8Dispatcher,
+        &HwiP_intcdm9Dispatcher,
+        &HwiP_intcdm10Dispatcher,
+        &HwiP_intcdm11Dispatcher,
+    };
+
+    /* Override for NMI and reserved */
+    gHwiIntcIntrTable.isr[0] = &HwiP_intcReservedDispatcher;
+    gHwiIntcIntrTable.isr[1] = &HwiP_intcNmiDispatcher;
+    gHwiIntcIntrTable.isr[2] = &HwiP_intcReservedDispatcher;
+    gHwiIntcIntrTable.isr[3] = &HwiP_intcReservedDispatcher;
+
+    /* Update ISR table for INT4 - INT11 */
+    for(loopIdx = 0U; loopIdx < 8U; loopIdx++)
+    {
+        gHwiIntcIntrTable.isr[(HwiP_NUM_ECM + loopIdx)] = directmappedIsr[loopIdx];
+    }
+
+    /* Update ISR table for Event Combiners (INT12 - INT15) */
+    for(loopIdx = 0U; loopIdx < HwiP_NUM_ECM; loopIdx++)
+    {
+        gHwiIntcIntrTable.isr[(HwiP_VECTID_ECM_START + loopIdx)] = ecmIsr[loopIdx];
+    }
+
+    return;
+}
+
+static void HwiP_intcEcm0Dispatcher(void)
+{
+    HwiP_intcEcmDispatcher(0U);
+}
+
+static void HwiP_intcEcm1Dispatcher(void)
+{
+    HwiP_intcEcmDispatcher(1U);
+}
+
+static void HwiP_intcEcm2Dispatcher(void)
+{
+    HwiP_intcEcmDispatcher(2U);
+}
+
+static void HwiP_intcEcm3Dispatcher(void)
+{
+    HwiP_intcEcmDispatcher(3U);
+}
+
+static void HwiP_intcdm4Dispatcher(void)
+{
+    HwiP_intcDispatcherCore(4U);
+}
+
+static void HwiP_intcdm5Dispatcher(void)
+{
+    HwiP_intcDispatcherCore(5U);
+}
+
+static void HwiP_intcdm6Dispatcher(void)
+{
+    HwiP_intcDispatcherCore(6U);
+}
+
+static void HwiP_intcdm7Dispatcher(void)
+{
+    HwiP_intcDispatcherCore(7U);
+}
+
+static void HwiP_intcdm8Dispatcher(void)
+{
+    HwiP_intcDispatcherCore(8U);
+}
+
+static void HwiP_intcdm9Dispatcher(void)
+{
+    HwiP_intcDispatcherCore(9U);
+}
+
+static void HwiP_intcdm10Dispatcher(void)
+{
+    HwiP_intcDispatcherCore(10U);
+}
+
+static void HwiP_intcdm11Dispatcher(void)
+{
+    HwiP_intcDispatcherCore(11U);
+}
+
+static void HwiP_intcReservedDispatcher(void)
+{
+     uint32_t loop = 1U;
+     while(loop == 1U) {;}
+}
+
+#ifdef __cplusplus
+#pragma NMI_INTERRUPT
+#else
+#pragma NMI_INTERRUPT( HwiP_intcNmiDispatcher )
+#endif
+void HwiP_intcNmiDispatcher(void)
+{
+    if(gHwiCtrl.nmiHandler != NULL)
+    {
+        /* Call nmi callback */
+        gHwiCtrl.nmiHandler(gHwiCtrl.nmiArgs);
+    }
+    return;
+}

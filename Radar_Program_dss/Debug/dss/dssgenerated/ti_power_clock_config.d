@@ -1,7 +1,7 @@
 # FIXED
 
 dss/dssgenerated/ti_power_clock_config.obj: C:/Git/Radar_software/Radar_Program_dss/dss/dssgenerated/ti_power_clock_config.c
-dss/dssgenerated/ti_power_clock_config.obj: C:/Git/Radar_software/Dependencies/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/dpl/DebugP.h
+dss/dssgenerated/ti_power_clock_config.obj: C:/Git/Radar_software/Dependencies/mcu_plus_sdk_awr2x44p_10_02_00_04/source/kernel/dpl/DebugP.h
 dss/dssgenerated/ti_power_clock_config.obj: C:/ti/ccs2041/ccs/tools/compiler/ti-cgt-c6000_8.5.0.LTS/include/stdint.h
 dss/dssgenerated/ti_power_clock_config.obj: C:/ti/ccs2041/ccs/tools/compiler/ti-cgt-c6000_8.5.0.LTS/include/_ti_config.h
 dss/dssgenerated/ti_power_clock_config.obj: C:/ti/ccs2041/ccs/tools/compiler/ti-cgt-c6000_8.5.0.LTS/include/linkage.h
@@ -13,14 +13,14 @@ dss/dssgenerated/ti_power_clock_config.obj: C:/ti/ccs2041/ccs/tools/compiler/ti-
 dss/dssgenerated/ti_power_clock_config.obj: C:/ti/ccs2041/ccs/tools/compiler/ti-cgt-c6000_8.5.0.LTS/include/machine/_stdint.h
 dss/dssgenerated/ti_power_clock_config.obj: C:/ti/ccs2041/ccs/tools/compiler/ti-cgt-c6000_8.5.0.LTS/include/sys/_stdint.h
 dss/dssgenerated/ti_power_clock_config.obj: C:/ti/ccs2041/ccs/tools/compiler/ti-cgt-c6000_8.5.0.LTS/include/stdbool.h
-dss/dssgenerated/ti_power_clock_config.obj: C:/Git/Radar_software/Dependencies/mcu_plus_sdk_awr294x_10_02_00_04/source/drivers/soc.h
-dss/dssgenerated/ti_power_clock_config.obj: C:/Git/Radar_software/Dependencies/mcu_plus_sdk_awr294x_10_02_00_04/source/drivers/soc/awr294x/soc.h
-dss/dssgenerated/ti_power_clock_config.obj: C:/Git/Radar_software/Dependencies/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/dpl/SystemP.h
-dss/dssgenerated/ti_power_clock_config.obj: C:/Git/Radar_software/Dependencies/mcu_plus_sdk_awr294x_10_02_00_04/source/drivers/soc/awr294x/soc_rcm.h
+dss/dssgenerated/ti_power_clock_config.obj: C:/Git/Radar_software/Dependencies/mcu_plus_sdk_awr2x44p_10_02_00_04/source/drivers/soc.h
+dss/dssgenerated/ti_power_clock_config.obj: C:/Git/Radar_software/Dependencies/mcu_plus_sdk_awr2x44p_10_02_00_04/source/drivers/soc/awr2x44p/soc.h
+dss/dssgenerated/ti_power_clock_config.obj: C:/Git/Radar_software/Dependencies/mcu_plus_sdk_awr2x44p_10_02_00_04/source/kernel/dpl/SystemP.h
+dss/dssgenerated/ti_power_clock_config.obj: C:/Git/Radar_software/Dependencies/mcu_plus_sdk_awr2x44p_10_02_00_04/source/drivers/soc/awr2x44p/soc_rcm.h
 
 C:/Git/Radar_software/Radar_Program_dss/dss/dssgenerated/ti_power_clock_config.c:
 
-C:/Git/Radar_software/Dependencies/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/dpl/DebugP.h:
+C:/Git/Radar_software/Dependencies/mcu_plus_sdk_awr2x44p_10_02_00_04/source/kernel/dpl/DebugP.h:
 
 C:/ti/ccs2041/ccs/tools/compiler/ti-cgt-c6000_8.5.0.LTS/include/stdint.h:
 
@@ -44,11 +44,11 @@ C:/ti/ccs2041/ccs/tools/compiler/ti-cgt-c6000_8.5.0.LTS/include/sys/_stdint.h:
 
 C:/ti/ccs2041/ccs/tools/compiler/ti-cgt-c6000_8.5.0.LTS/include/stdbool.h:
 
-C:/Git/Radar_software/Dependencies/mcu_plus_sdk_awr294x_10_02_00_04/source/drivers/soc.h:
+C:/Git/Radar_software/Dependencies/mcu_plus_sdk_awr2x44p_10_02_00_04/source/drivers/soc.h:
 
-C:/Git/Radar_software/Dependencies/mcu_plus_sdk_awr294x_10_02_00_04/source/drivers/soc/awr294x/soc.h:
+C:/Git/Radar_software/Dependencies/mcu_plus_sdk_awr2x44p_10_02_00_04/source/drivers/soc/awr2x44p/soc.h:
 
-C:/Git/Radar_software/Dependencies/mcu_plus_sdk_awr294x_10_02_00_04/source/kernel/dpl/SystemP.h:
+C:/Git/Radar_software/Dependencies/mcu_plus_sdk_awr2x44p_10_02_00_04/source/kernel/dpl/SystemP.h:
 
-C:/Git/Radar_software/Dependencies/mcu_plus_sdk_awr294x_10_02_00_04/source/drivers/soc/awr294x/soc_rcm.h:
+C:/Git/Radar_software/Dependencies/mcu_plus_sdk_awr2x44p_10_02_00_04/source/drivers/soc/awr2x44p/soc_rcm.h:
 

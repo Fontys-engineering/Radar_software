@@ -1,0 +1,58 @@
+%%{
+    let common = system.getScript("/common");
+    let soc = system.getScript(`/drivers/soc/drivers_${common.getSocName()}`);
+    let driverVer = soc.getDriverVer("hwa");
+    let module = system.modules['/drivers/hwa/hwa'];
+%%}
+/*
+ * HWA
+ */
+/* HWA Driver handles */
+HWA_Handle gHwaHandle[CONFIG_HWA_NUM_INSTANCES];
+
+void Drivers_hwaOpen(void)
+{
+    uint32_t instCnt;
+    int32_t  status = SystemP_SUCCESS;
+
+    for(instCnt = 0U; instCnt < CONFIG_HWA_NUM_INSTANCES; instCnt++)
+    {
+        gHwaHandle[instCnt] = NULL;   /* Init to NULL so that we can exit gracefully */
+    }
+
+    /* Open all instances */
+    for(instCnt = 0U; instCnt < CONFIG_HWA_NUM_INSTANCES; instCnt++)
+    {
+        gHwaHandle[instCnt] = HWA_open(instCnt, NULL, &status);
+        if(NULL == gHwaHandle[instCnt])
+        {
+            DebugP_logError("HWA open failed for instance %d. Error: %d!!!\r\n", instCnt, status);
+            status = SystemP_FAILURE;
+            break;
+        }
+    }
+
+    if(SystemP_FAILURE == status)
+    {
+        Drivers_hwaClose();   /* Exit gracefully */
+    }
+
+    return;
+}
+
+void Drivers_hwaClose(void)
+{
+    uint32_t instCnt;
+
+    /* Close all instances that are open */
+    for(instCnt = 0U; instCnt < CONFIG_HWA_NUM_INSTANCES; instCnt++)
+    {
+        if(gHwaHandle[instCnt] != NULL)
+        {
+            HWA_close(gHwaHandle[instCnt]);
+            gHwaHandle[instCnt] = NULL;
+        }
+    }
+
+    return;
+}

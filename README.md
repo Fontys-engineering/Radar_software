@@ -7,6 +7,12 @@ as part of Distributed Sensor Systems Plasma Boundary project research.
 
 Refer to DSS Radar Program Manual for exact steps in setting up the project.
 
+## AWR2E44PEVM (AWR2X44P) branch
+
+Branch `2E44_Standalone_Test` ports this program to the AWR2E44PEVM (AWR2944P-family, LOP package).
+Before building, run `Dependencies\copy_awr2x44p_dependencies.bat`, then follow `Doc/AWR2E44P_MIGRATION.md`
+(flashing with uart_uniflash.py, new `AWR2X44P.ccxml`, and the .cfg changes for the new antenna layout).
+
 This is an alternate branch of the DSS Radar Program which already includes all the relevant SDK dependencies required for running the mmWave Program.
 Warning: Due to size limitations, not all of the original files are present in this repository, and errors could occur as new functionality is enabled. 
 In this case, the full dependency folders may need to be downloaded so missing components can be compared and re-added into the Dependency folder of this repo.

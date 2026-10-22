@@ -75,15 +75,6 @@ void System_deinit(void);
 #define CONFIG_EDMA0 (0U)
 #define CONFIG_EDMA_NUM_INSTANCES (1U)
 /*
- * ESM
- */
-#include <drivers/esm.h>
-
-/* ESM Instance Macros */
-#define CONFIG_ESM0 (0U)
-#define CONFIG_ESM_NUM_INSTANCES (1U)
-
-/*
  * HWA
  */
 #include <drivers/hwa.h>

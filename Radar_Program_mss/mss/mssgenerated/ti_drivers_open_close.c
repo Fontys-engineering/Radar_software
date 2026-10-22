@@ -41,14 +41,13 @@ void Drivers_open(void)
 {
     Drivers_edmaOpen();
     Drivers_qspiOpen();
-    Drivers_esmOpen();
+    Drivers_gpioOpen();
     Drivers_uartOpen();
 }
 
 void Drivers_close(void)
 {
     Drivers_qspiClose();
-    Drivers_esmClose();
     Drivers_uartClose();
     Drivers_edmaClose();
 }
@@ -182,109 +181,21 @@ void Drivers_edmaClose(void)
 
 
 /*
- * ESM
+ * GPIO
  */
-/* ESM Transfer Callback */
-void MmwDemo_mssSECCallBack(void* arg);
+#include <drivers/gpio.h>
+#include <drivers/soc.h>
 
-/* ESM Driver handles */
-ESM_Handle gEsmHandle[CONFIG_ESM_NUM_INSTANCES];
-/* ESM Driver Open Parameters */
-ESM_OpenParams gEsmOpenParams[CONFIG_ESM_NUM_INSTANCES] =
+
+void Drivers_gpioOpen(void)
 {
-    {
-        .bClearErrors  = FALSE,
-    },
-};
+    uint32_t    baseAddr;
 
-/* ESM Driver Notifier Configurations */
-ESM_NotifyParams gConfigEsm0Params[CONFIG_ESM0_NOTIFIER] =
-{
-    {
-        .groupNumber                = 1U,
-        .errorNumber                = 18U,
-        .setIntrPriorityLvl         = ESM_INTR_PRIORITY_LEVEL_HIGH,
-        .enableInfluenceOnErrPin    = FALSE,
-        .notify                     = MmwDemo_mssSECCallBack,
-    },
-};
-
-void Drivers_esmOpen(void)
-{
-    uint32_t instCnt, index;
-    int32_t errorCode = 0;
-    int32_t  status = SystemP_SUCCESS;
-
-    for(instCnt = 0U; instCnt < CONFIG_ESM_NUM_INSTANCES; instCnt++)
-    {
-        gEsmHandle[instCnt] = NULL;   /* Init to NULL so that we can exit gracefully */
-    }
-
-    /* Open all instances */
-    for(instCnt = 0U; instCnt < CONFIG_ESM_NUM_INSTANCES; instCnt++)
-    {
-        gEsmHandle[instCnt] = ESM_open(instCnt, &gEsmOpenParams[instCnt]);
-        if(NULL == gEsmHandle[instCnt])
-        {
-            DebugP_logError("ESM open failed for instance %d !!!\r\n", instCnt);
-            status = SystemP_FAILURE;
-            break;
-        }
-        /* Register Notifier configuration */
-        for(index = 0U; index < CONFIG_ESM0_NOTIFIER; index++)
-        {
-            status = ESM_registerNotifier(
-                         gEsmHandle[CONFIG_ESM0],
-                         &gConfigEsm0Params[index],
-                         &errorCode);
-            if(status != SystemP_SUCCESS)
-            {
-                DebugP_logError("CONFIG_ESM0 notifier register for %d config with error code %d failed !!!\r\n", index, errorCode);
-                break;
-            }
-        }
-    }
-
-    if(SystemP_FAILURE == status)
-    {
-        Drivers_esmClose();   /* Exit gracefully */
-    }
-
-    return;
+    /* Instance 0 */
+    /* Get address after translation translate */
+    baseAddr = (uint32_t) AddrTranslateP_getLocalAddr(GPIO_LED_BASE_ADDR);
+    GPIO_setDirMode(baseAddr, GPIO_LED_PIN, GPIO_LED_DIR);
 }
-
-void Drivers_esmClose(void)
-{
-    uint32_t instCnt, index;
-    int32_t  errorCode = 0;
-    int32_t  status = SystemP_SUCCESS;
-
-    /* Close all instances that are open */
-    for(instCnt = 0U; instCnt < CONFIG_ESM_NUM_INSTANCES; instCnt++)
-    {
-        if(gEsmHandle[instCnt] != NULL)
-        {
-            /* De Register Notifier configuration */
-            for(index = 0U; index < CONFIG_ESM0_NOTIFIER; index++)
-            {
-                status = ESM_deregisterNotifier(
-                             gEsmHandle[CONFIG_ESM0],
-                             index,
-                             &errorCode);
-                if(status != SystemP_SUCCESS)
-                {
-                    DebugP_logError("CONFIG_ESM0 notifier de register for %d config with error code %d failed !!!\r\n", index, errorCode);
-                    break;
-                }
-            }
-            ESM_close(gEsmHandle[instCnt]);
-            gEsmHandle[instCnt] = NULL;
-        }
-    }
-
-    return;
-}
-
 /*
  * UART
  */

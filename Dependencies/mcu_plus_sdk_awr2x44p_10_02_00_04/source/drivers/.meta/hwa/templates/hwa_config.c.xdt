@@ -1,0 +1,143 @@
+%%{
+    let module = system.modules['/drivers/hwa/hwa'];
+    let common = system.getScript("/common");
+%%}
+/*
+ * HWA
+ */
+/* HWA atrributes */
+HWA_Attrs gHwaAttrs[CONFIG_HWA_NUM_INSTANCES] =
+{
+% for(let i = 0; i < module.$instances.length; i++) {
+    % let instance = module.$instances[i];
+    % let intrConfigs = instance.configDirIntr;
+    % let intNumber;
+    % let config = module.getInstanceConfig(instance);
+    {
+        .instanceNum                = `i`U,
+        .ctrlBaseAddr               = `config.ctrlBaseAddr`,
+        .paramBaseAddr              = `config.paramBaseAddr`,
+        .ramBaseAddr                = `config.ramBaseAddr`,
+        .dssBaseAddr                = `config.dssBaseAddr`,
+        .numHwaParamSets            = `config.numHwaParamSets`,
+        .intNum1ParamSet            = `config.intNum1ParamSet`,
+        .intNum2ParamSet            = `config.intNum2ParamSet`,
+        .intNumDone                 = `config.intNumDone`,
+        .intNumDoneALT              = `config.intNumDoneALT`,
+        .intNumLocalRamErr          = `config.intNumLocalRamErr`,
+        % if (common.getSelfSysCfgCoreName().includes("c66")) {
+        % if (intrConfigs.enDirMaphwaparamdoneintr1) {
+        %if (intrConfigs["dsshwaparamdoneintr1"].$solution.peripheralName.length == 9) {
+        % intNumber = intrConfigs["dsshwaparamdoneintr1"].$solution.peripheralName.slice(-1);
+        % }
+        % else {
+        % intNumber = intrConfigs["dsshwaparamdoneintr1"].$solution.peripheralName.slice(-2);
+        % }
+        .intNum1ParamSetDirMap      = `intNumber`,
+        % }
+        % else {
+        .intNum1ParamSetDirMap      = 0,
+        % }
+        % if (intrConfigs.enDirMaphwaparamdoneintr2) {
+        %if (intrConfigs["dsshwaparamdoneintr2"].$solution.peripheralName.length == 9) {
+        % intNumber = intrConfigs["dsshwaparamdoneintr2"].$solution.peripheralName.slice(-1);
+        % }
+        % else {
+        % intNumber = intrConfigs["dsshwaparamdoneintr2"].$solution.peripheralName.slice(-2);
+        % }
+        .intNum2ParamSetDirMap      = `intNumber`,
+        % }
+        % else {
+        .intNum2ParamSetDirMap      = 0,
+        % }
+        % if (intrConfigs.enDirMaphwaloopintr1) {
+        %if (intrConfigs["dsshwaloopintr1"].$solution.peripheralName.length == 9) {
+        % intNumber = intrConfigs["dsshwaloopintr1"].$solution.peripheralName.slice(-1);
+        % }
+        % else {
+        % intNumber = intrConfigs["dsshwaloopintr1"].$solution.peripheralName.slice(-2);
+        % }
+        .intNumDoneDirMap           = `intNumber`,
+        % }
+        % else {
+        .intNumDoneDirMap           = 0,
+        % }
+        % if (intrConfigs.enDirMaphwaloopintr2) {
+        %if (intrConfigs["dsshwaloopintr2"].$solution.peripheralName.length == 9) {
+        % intNumber = intrConfigs["dsshwaloopintr2"].$solution.peripheralName.slice(-1);
+        % }
+        % else {
+        % intNumber = intrConfigs["dsshwaloopintr2"].$solution.peripheralName.slice(-2);
+        % }
+        .intNumDoneALTDirMap        = `intNumber`,
+        % }
+        % else {
+        .intNumDoneALTDirMap        = 0,
+        % }
+        % if (intrConfigs.enDirMapinthwaLocalRamErr) {
+        %if (intrConfigs["dsshwalocalramerr"].$solution.peripheralName.length == 9) {
+        % intNumber = intrConfigs["dsshwalocalramerr"].$solution.peripheralName.slice(-1);
+        % }
+        % else {
+        % intNumber = intrConfigs["dsshwalocalramerr"].$solution.peripheralName.slice(-2);
+        % }
+        .intNumLocalRamErrDirMap    = `intNumber`,
+        % }
+        % else {
+        .intNumLocalRamErrDirMap    = 0,
+        % }
+        % }
+        % else {
+        .intNum1ParamSetDirMap      = 0,
+        .intNum2ParamSetDirMap      = 0,
+        .intNumDoneDirMap           = 0,
+        .intNumDoneALTDirMap        = 0,
+        .intNumLocalRamErrDirMap    = 0,
+        % }
+        .numDmaChannels             = `config.numDmaChannels`,
+        .accelMemBaseAddr           = `config.accelMemBaseAddr`,
+        .accelMemSize               = `config.accelMemSize`,
+        .isConcurrentAccessAllowed  = `config.isConcurrentAccessAllowed`,
+    },
+% }
+};
+
+% if(common.getSelfSysCfgCoreName().includes("m4")){
+/* HWA RAM atrributes */
+HWA_RAMAttrs gHwaRamCfg[HWA_NUM_RAMS] =
+{
+    {CSL_CM4_DSS_HWA_WINDOW_RAM_U_BASE, CSL_CM4_DSS_HWA_WINDOW_RAM_U_SIZE},
+    {CSL_CM4_DSS_HWA_MULT_RAM_U_BASE, CSL_CM4_DSS_HWA_MULT_RAM_U_SIZE},
+    {CSL_CM4_DSS_HWA_DEROT_RAM_U_BASE, CSL_CM4_DSS_HWA_DEROT_RAM_U_SIZE},
+    {CSL_CM4_DSS_HWA_SHUFFLE_RAM_U_BASE, CSL_CM4_DSS_HWA_SHUFFLE_RAM_U_SIZE},
+    {CSL_CM4_DSS_HWA_HIST_THRESH_RAM_U_BASE, CSL_CM4_DSS_HWA_HIST_THRESH_RAM_U_SIZE},
+    {CSL_CM4_DSS_HWA_2DSTAT_ITER_VAL_RAM_U_BASE, CSL_CM4_DSS_HWA_2DSTAT_ITER_VAL_RAM_U_SIZE},
+    {CSL_CM4_DSS_HWA_2DSTAT_ITER_IDX_RAM_U_BASE, CSL_CM4_DSS_HWA_2DSTAT_ITER_IDX_RAM_U_SIZE},
+    {CSL_CM4_DSS_HWA_2DSTAT_SMPL_VAL_RAM_U_BASE, CSL_CM4_DSS_HWA_2DSTAT_SMPL_VAL_RAM_U_SIZE},
+    {CSL_CM4_DSS_HWA_2DSTAT_SMPL_IDX_RAM_U_BASE, CSL_CM4_DSS_HWA_2DSTAT_SMPL_IDX_RAM_U_SIZE},
+    {CSL_CM4_DSS_HWA_HIST_RAM_U_BASE, CSL_CM4_DSS_HWA_HIST_RAM_U_SIZE}
+};
+% }
+% else{
+/* HWA RAM atrributes */
+HWA_RAMAttrs gHwaRamCfg[HWA_NUM_RAMS] =
+{
+    {CSL_DSS_HWA_WINDOW_RAM_U_BASE, CSL_DSS_HWA_WINDOW_RAM_U_SIZE},
+    {CSL_DSS_HWA_MULT_RAM_U_BASE, CSL_DSS_HWA_MULT_RAM_U_SIZE},
+    {CSL_DSS_HWA_DEROT_RAM_U_BASE, CSL_DSS_HWA_DEROT_RAM_U_SIZE},
+    {CSL_DSS_HWA_SHUFFLE_RAM_U_BASE,CSL_DSS_HWA_SHUFFLE_RAM_U_SIZE},
+    {CSL_DSS_HWA_HIST_THRESH_RAM_U_BASE, CSL_DSS_HWA_HIST_THRESH_RAM_U_SIZE},
+    {CSL_DSS_HWA_2DSTAT_ITER_VAL_RAM_U_BASE, CSL_DSS_HWA_2DSTAT_ITER_VAL_RAM_U_SIZE},
+    {CSL_DSS_HWA_2DSTAT_ITER_IDX_RAM_U_BASE, CSL_DSS_HWA_2DSTAT_ITER_IDX_RAM_U_SIZE},
+    {CSL_DSS_HWA_2DSTAT_SMPL_VAL_RAM_U_BASE, CSL_DSS_HWA_2DSTAT_SMPL_VAL_RAM_U_SIZE},
+    {CSL_DSS_HWA_2DSTAT_SMPL_IDX_RAM_U_BASE, CSL_DSS_HWA_2DSTAT_SMPL_IDX_RAM_U_SIZE},
+    {CSL_DSS_HWA_HIST_RAM_U_BASE, CSL_DSS_HWA_HIST_RAM_U_SIZE}
+};
+% }
+
+/* HWA objects - initialized by the driver */
+HWA_Object gHwaObject[CONFIG_HWA_NUM_INSTANCES];
+/* HWA objects - storage for HWA driver object handles */
+HWA_Object *gHwaObjectPtr[CONFIG_HWA_NUM_INSTANCES] = { NULL };
+/* HWA objects count */
+uint32_t gHwaConfigNum = CONFIG_HWA_NUM_INSTANCES;

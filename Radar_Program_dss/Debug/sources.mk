@@ -121,4 +121,5 @@ SUBDIRS := \
 . \
 dss \
 dss/dssgenerated/excluded \
+dss/dssgenerated \
 

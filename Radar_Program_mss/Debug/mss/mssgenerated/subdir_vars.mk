@@ -31,6 +31,32 @@ C_DEPS += \
 ./mss/mssgenerated/ti_pinmux_config.d \
 ./mss/mssgenerated/ti_power_clock_config.d 
 
+OBJS += \
+./mss/mssgenerated/ti_board_config.o \
+./mss/mssgenerated/ti_board_open_close.o \
+./mss/mssgenerated/ti_dpl_config.o \
+./mss/mssgenerated/ti_drivers_config.o \
+./mss/mssgenerated/ti_drivers_open_close.o \
+./mss/mssgenerated/ti_enet_config.o \
+./mss/mssgenerated/ti_enet_lwipif.o \
+./mss/mssgenerated/ti_enet_open_close.o \
+./mss/mssgenerated/ti_enet_soc.o \
+./mss/mssgenerated/ti_pinmux_config.o \
+./mss/mssgenerated/ti_power_clock_config.o 
+
+OBJS__QUOTED += \
+"mss\mssgenerated\ti_board_config.o" \
+"mss\mssgenerated\ti_board_open_close.o" \
+"mss\mssgenerated\ti_dpl_config.o" \
+"mss\mssgenerated\ti_drivers_config.o" \
+"mss\mssgenerated\ti_drivers_open_close.o" \
+"mss\mssgenerated\ti_enet_config.o" \
+"mss\mssgenerated\ti_enet_lwipif.o" \
+"mss\mssgenerated\ti_enet_open_close.o" \
+"mss\mssgenerated\ti_enet_soc.o" \
+"mss\mssgenerated\ti_pinmux_config.o" \
+"mss\mssgenerated\ti_power_clock_config.o" 
+
 C_DEPS__QUOTED += \
 "mss\mssgenerated\ti_board_config.d" \
 "mss\mssgenerated\ti_board_open_close.d" \

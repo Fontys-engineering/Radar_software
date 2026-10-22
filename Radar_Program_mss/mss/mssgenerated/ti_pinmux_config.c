@@ -133,59 +133,151 @@ static Pinmux_PerCfg_t gPinMuxMainDomainCfg[] = {
     },
     /* Unused PAD registers configuration - End */
             /* QSPI0 pin config */
-    /* QSPI_0 -> PAD_AL (U11) */
+    /* QSPI_0 -> PAD_AL (P2) */
     {
         PIN_PAD_AL,
         ( PIN_MODE(1) | PIN_PULL_DISABLE | PIN_SLEW_RATE_LOW )
     },
     /* QSPI0 pin config */
-    /* QSPI_1 -> PAD_AM (V11) */
+    /* QSPI_1 -> PAD_AM (N2) */
     {
         PIN_PAD_AM,
         ( PIN_MODE(1) | PIN_PULL_DISABLE | PIN_SLEW_RATE_LOW )
     },
     /* QSPI0 pin config */
-    /* QSPI_2 -> PAD_AN (T11) */
+    /* QSPI_2 -> PAD_AN (P1) */
     {
         PIN_PAD_AN,
         ( PIN_MODE(1) | PIN_PULL_DISABLE | PIN_SLEW_RATE_LOW )
     },
     /* QSPI0 pin config */
-    /* QSPI_3 -> PAD_AO (R12) */
+    /* QSPI_3 -> PAD_AO (R1) */
     {
         PIN_PAD_AO,
         ( PIN_MODE(1) | PIN_PULL_DISABLE | PIN_SLEW_RATE_LOW )
     },
     /* QSPI0 pin config */
-    /* QSPI_CLK -> PAD_AP (R10) */
+    /* QSPI_CLK -> PAD_AP (R2) */
     {
         PIN_PAD_AP,
         ( PIN_MODE(1) | PIN_PULL_DISABLE | PIN_SLEW_RATE_LOW )
     },
     /* QSPI0 pin config */
-    /* QSPI_CS -> PAD_AQ (U12) */
+    /* QSPI_CS -> PAD_AQ (T1) */
     {
         PIN_PAD_AQ,
         ( PIN_MODE(1) | PIN_PULL_DISABLE | PIN_SLEW_RATE_LOW )
     },
 
+            /* GPIO2 pin config */
+    /* GPIO2 -> PAD_AZ (C20) */
+    {
+        PIN_PAD_AZ,
+        ( PIN_MODE(1) | PIN_PULL_DISABLE | PIN_SLEW_RATE_LOW )
+    },
+
             /* UARTB pin config */
-    /* UARTB_TX -> PAD_DE (A14) */
+    /* UARTB_TX -> PAD_DE (B7) */
     {
         PIN_PAD_DE,
         ( PIN_MODE(6) | PIN_PULL_DISABLE | PIN_SLEW_RATE_LOW )
     },
             /* UARTA pin config */
-    /* UARTA_RX -> PAD_DA (B16) */
+    /* UARTA_RX -> PAD_DA (A16) */
     {
         PIN_PAD_DA,
         ( PIN_MODE(5) | PIN_PULL_DISABLE | PIN_SLEW_RATE_LOW )
     },
     /* UARTA pin config */
-    /* UARTA_TX -> PAD_DB (C16) */
+    /* UARTA_TX -> PAD_DB (B17) */
     {
         PIN_PAD_DB,
         ( PIN_MODE(5) | PIN_PULL_DISABLE | PIN_SLEW_RATE_LOW )
+    },
+
+            /* MDIO0 pin config */
+    /* MDIO_DATA -> PAD_CM (T2) */
+    {
+        PIN_PAD_CM,
+        ( PIN_MODE(1) | PIN_PULL_DOWN | PIN_SLEW_RATE_HIGH )
+    },
+    /* MDIO0 pin config */
+    /* MDIO_CLK -> PAD_CN (U2) */
+    {
+        PIN_PAD_CN,
+        ( PIN_MODE(1) | PIN_PULL_DOWN | PIN_SLEW_RATE_HIGH )
+    },
+    /* RGMII0 pin config */
+    /* RGMII_TCTL -> PAD_CA (U9) */
+    {
+        PIN_PAD_CA,
+        ( PIN_MODE(3) | PIN_PULL_DOWN | PIN_SLEW_RATE_HIGH )
+    },
+    /* RGMII0 pin config */
+    /* RGMII_RCTL -> PAD_CB (T7) */
+    {
+        PIN_PAD_CB,
+        ( PIN_MODE(3) | PIN_PULL_DOWN | PIN_SLEW_RATE_HIGH )
+    },
+    /* RGMII0 pin config */
+    /* RGMII_TD3 -> PAD_CC (T12) */
+    {
+        PIN_PAD_CC,
+        ( PIN_MODE(3) | PIN_PULL_DOWN | PIN_SLEW_RATE_HIGH )
+    },
+    /* RGMII0 pin config */
+    /* RGMII_TD2 -> PAD_CD (R12) */
+    {
+        PIN_PAD_CD,
+        ( PIN_MODE(3) | PIN_PULL_DOWN | PIN_SLEW_RATE_HIGH )
+    },
+    /* RGMII0 pin config */
+    /* RGMII_TD1 -> PAD_CE (U10) */
+    {
+        PIN_PAD_CE,
+        ( PIN_MODE(3) | PIN_PULL_DOWN | PIN_SLEW_RATE_HIGH )
+    },
+    /* RGMII0 pin config */
+    /* RGMII_TD0 -> PAD_CF (U7) */
+    {
+        PIN_PAD_CF,
+        ( PIN_MODE(3) | PIN_PULL_DOWN | PIN_SLEW_RATE_HIGH )
+    },
+    /* RGMII0 pin config */
+    /* RGMII_TCLK -> PAD_CG (T6) */
+    {
+        PIN_PAD_CG,
+        ( PIN_MODE(3) | PIN_PULL_DOWN | PIN_SLEW_RATE_HIGH )
+    },
+    /* RGMII0 pin config */
+    /* RGMII_RCLK -> PAD_CH (T5) */
+    {
+        PIN_PAD_CH,
+        ( PIN_MODE(3) | PIN_PULL_DOWN | PIN_SLEW_RATE_HIGH )
+    },
+    /* RGMII0 pin config */
+    /* RGMII_RD3 -> PAD_CI (U5) */
+    {
+        PIN_PAD_CI,
+        ( PIN_MODE(3) | PIN_PULL_DOWN | PIN_SLEW_RATE_HIGH )
+    },
+    /* RGMII0 pin config */
+    /* RGMII_RD2 -> PAD_CJ (T4) */
+    {
+        PIN_PAD_CJ,
+        ( PIN_MODE(3) | PIN_PULL_DOWN | PIN_SLEW_RATE_HIGH )
+    },
+    /* RGMII0 pin config */
+    /* RGMII_RD1 -> PAD_CK (U4) */
+    {
+        PIN_PAD_CK,
+        ( PIN_MODE(3) | PIN_PULL_DOWN | PIN_SLEW_RATE_HIGH )
+    },
+    /* RGMII0 pin config */
+    /* RGMII_RD0 -> PAD_CL (T3) */
+    {
+        PIN_PAD_CL,
+        ( PIN_MODE(3) | PIN_PULL_DOWN | PIN_SLEW_RATE_HIGH )
     },
 
     {PINMUX_END, PINMUX_END}
@@ -204,7 +296,7 @@ void Pinmux_init(void)
 
 
     /* Check if additional PAD registers needs to be disabled for this device */
-    if(SOC_rcmIsPadDisableRequired() == 0x1)
+    if(SOC_rcmIsDeviceTypeLOP() == 0x1)
     {
         Pinmux_config(gPinMuxMainDomainCfg1, PINMUX_DOMAIN_ID_MAIN);
     }

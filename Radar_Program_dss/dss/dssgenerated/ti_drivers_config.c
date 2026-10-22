@@ -95,37 +95,6 @@ EDMA_Config gEdmaConfig[CONFIG_EDMA_NUM_INSTANCES] =
 uint32_t gEdmaConfigNum = CONFIG_EDMA_NUM_INSTANCES;
 
 /*
- * ESM
- */
-/* ESM atrributes */
-static ESM_Attrs gEsmAttrs[CONFIG_ESM_NUM_INSTANCES] =
-{
-    {
-        .ptrESMRegs             = (CSL_esmRegs *)CSL_DSS_ESM_U_BASE,
-        .ptrCtrlRegs            = (CSL_mss_ctrlRegs *)CSL_DSS_CTRL_U_BASE,
-        .numGroup1Err           = ESM_NUM_INTR_PER_GROUP,
-        .highPrioIntNum         = CSL_DSS_INTR_DSS_ESM_HI,
-        .lowPrioIntNum          = CSL_DSS_INTR_DSS_ESM_LO,
-        .highPrioIntNumDirMap   = 0,
-        .lowPrioIntNumDirMap    = 0,
-        .intrHighPriority       = 15U,
-        .intrLowPriority        = 1U,
-    },
-};
-/* ESM objects - initialized by the driver */
-static ESM_Object gEsmObjects[CONFIG_ESM_NUM_INSTANCES];
-/* ESM driver configuration */
-ESM_Config gEsmConfig[CONFIG_ESM_NUM_INSTANCES] =
-{
-    {
-        &gEsmAttrs[CONFIG_ESM0],
-        &gEsmObjects[CONFIG_ESM0],
-    },
-};
-
-uint32_t gEsmConfigNum = CONFIG_ESM_NUM_INSTANCES;
-
-/*
  * HWA
  */
 /* HWA atrributes */
@@ -194,16 +163,17 @@ uint32_t gHwaConfigNum = CONFIG_HWA_NUM_INSTANCES;
 * Driver assume this memory is init to zero in bootloader as it's ECC protected and
 * needs to be intialized only once and to ensure that only one core has done the
 * mailbox ram initialization before ipc_init. If SBL is not used then Gel does the initialization.
-* We need 4 SW Q's for the 2x R5F to send messages to C66SS0 and each other, i.e 128 B
-* and we need 2 SW Q's for C66SS0 to send messages to each R5F, i.e 64 B.
+* We need 2 SW Q's for the R5F to send messages to C66SS0 and DSS_M4, i.e 64 B
+* we need 2 SW Q's for C66SS0 to send messages to R5F and DSS_CM4, i.e 64 B
+* and we need 2 SW Q's for DSS_CM4 to send messages to R5F and C66SS0, i.e 64 B.
 *
 * Rest of the mailbox memory can be used for ipc_rpmessage or custom message passing.
 */
-#define C66SS0_TO_R5FSS0_0_SW_QUEUE        (IpcNotify_SwQueue*)((MSS_MBOX_MEM + MSS_MBOX_MEM_SIZE) - (MAILBOX_MAX_SW_QUEUE_SIZE*6U))
-#define C66SS0_TO_R5FSS0_1_SW_QUEUE        (IpcNotify_SwQueue*)((MSS_MBOX_MEM + MSS_MBOX_MEM_SIZE) - (MAILBOX_MAX_SW_QUEUE_SIZE*5U))
-#define R5FSS0_1_TO_R5FSS0_0_SW_QUEUE      (IpcNotify_SwQueue*)((MSS_MBOX_MEM + MSS_MBOX_MEM_SIZE) - (MAILBOX_MAX_SW_QUEUE_SIZE*4U))
-#define R5FSS0_1_TO_C66SS0_SW_QUEUE        (IpcNotify_SwQueue*)((MSS_MBOX_MEM + MSS_MBOX_MEM_SIZE) - (MAILBOX_MAX_SW_QUEUE_SIZE*3U))
-#define R5FSS0_0_TO_R5FSS0_1_SW_QUEUE      (IpcNotify_SwQueue*)((MSS_MBOX_MEM + MSS_MBOX_MEM_SIZE) - (MAILBOX_MAX_SW_QUEUE_SIZE*2U))
+#define M4SS0_1_TO_C66SS0_SW_QUEUE         (IpcNotify_SwQueue*)((MSS_MBOX_MEM + MSS_MBOX_MEM_SIZE) - (MAILBOX_MAX_SW_QUEUE_SIZE*6U))
+#define C66SS0_TO_M4SS0_1_SW_QUEUE         (IpcNotify_SwQueue*)((MSS_MBOX_MEM + MSS_MBOX_MEM_SIZE) - (MAILBOX_MAX_SW_QUEUE_SIZE*5U))
+#define M4SS0_1_TO_R5FSS0_0_SW_QUEUE       (IpcNotify_SwQueue*)((MSS_MBOX_MEM + MSS_MBOX_MEM_SIZE) - (MAILBOX_MAX_SW_QUEUE_SIZE*4U))
+#define R5FSS0_0_TO_M4SS0_1_SW_QUEUE       (IpcNotify_SwQueue*)((MSS_MBOX_MEM + MSS_MBOX_MEM_SIZE) - (MAILBOX_MAX_SW_QUEUE_SIZE*3U))
+#define C66SS0_TO_R5FSS0_0_SW_QUEUE        (IpcNotify_SwQueue*)((MSS_MBOX_MEM + MSS_MBOX_MEM_SIZE) - (MAILBOX_MAX_SW_QUEUE_SIZE*2U))
 #define R5FSS0_0_TO_C66SS0_SW_QUEUE        (IpcNotify_SwQueue*)((MSS_MBOX_MEM + MSS_MBOX_MEM_SIZE) - (MAILBOX_MAX_SW_QUEUE_SIZE*1U))
 
 /*
@@ -253,9 +223,7 @@ void IpcNotify_allocSwQueue(IpcNotify_MailboxConfig *mailboxConfig)
     IpcNotify_MailboxConfig (*mailboxConfigPtr)[CSL_CORE_ID_MAX] = (void *)mailboxConfig;
 
     mailboxConfigPtr[CSL_CORE_ID_C66SS0][CSL_CORE_ID_R5FSS0_0].swQ = C66SS0_TO_R5FSS0_0_SW_QUEUE;
-    mailboxConfigPtr[CSL_CORE_ID_C66SS0][CSL_CORE_ID_R5FSS0_1].swQ = C66SS0_TO_R5FSS0_1_SW_QUEUE;
     mailboxConfigPtr[CSL_CORE_ID_R5FSS0_0][CSL_CORE_ID_C66SS0].swQ = R5FSS0_0_TO_C66SS0_SW_QUEUE;
-    mailboxConfigPtr[CSL_CORE_ID_R5FSS0_1][CSL_CORE_ID_C66SS0].swQ = R5FSS0_1_TO_C66SS0_SW_QUEUE;
 }
 
 
@@ -284,7 +252,6 @@ void System_init(void)
     Pinmux_init();
     /* finally we initialize all peripheral drivers */
     EDMA_init();
-    ESM_init();
     HWA_init();
 
 
@@ -305,9 +272,8 @@ void System_init(void)
         /* list the cores that will do IPC Notify with this core
         * Make sure to NOT list 'self' core in the list below
         */
-        notifyParams.numCores = 2;
+        notifyParams.numCores = 1;
         notifyParams.coreIdList[0] = CSL_CORE_ID_R5FSS0_0;
-        notifyParams.coreIdList[1] = CSL_CORE_ID_R5FSS0_1;
 
         notifyParams.isMailboxIpcEnabled = 1;
 
@@ -358,7 +324,6 @@ void System_init(void)
 void System_deinit(void)
 {
     EDMA_deinit();
-    ESM_deinit();
     HWA_deinit();
     RPMessage_deInit();
     IpcNotify_deInit();

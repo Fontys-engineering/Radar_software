@@ -1,0 +1,25 @@
+# ---------------------------------------------------------------------------
+# Accidental nested copy of the whole TI SDK bundle inside
+# Dependencies/mmwave_mcuplus_sdk_04_07_02_01/. Nothing in Radar_Program_mss/dss
+# uses these folders: the same packages already sit directly under Dependencies/.
+# Some of their files have paths longer than Windows' 260-character limit,
+# which makes git fail with "Filename too long" when committing.
+# ---------------------------------------------------------------------------
+/Dependencies/mmwave_mcuplus_sdk_04_07_02_01/dsplib_c66x_3_4_0_0/
+/Dependencies/mmwave_mcuplus_sdk_04_07_02_01/mathlib_c66x_3_1_2_1/
+/Dependencies/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/
+/Dependencies/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr2x44p_10_02_00_04/
+/Dependencies/mmwave_mcuplus_sdk_04_07_02_01/mmwave_dfp_02_04_18_01/
+/Dependencies/mmwave_mcuplus_sdk_04_07_02_01/mmwave_mcuplus_sdk_04_07_02_01/
+
+# ---------------------------------------------------------------------------
+# Parts of the AWR2X44P MCU+ SDK that are not needed to build the projects
+# (HTML docs and example projects; large).
+# ---------------------------------------------------------------------------
+/Dependencies/mcu_plus_sdk_awr2x44p_10_02_00_04/docs/
+/Dependencies/mcu_plus_sdk_awr2x44p_10_02_00_04/examples/
+
+# ---------------------------------------------------------------------------
+# Code-completion (clangd) index cache that CCS rebuilds by itself.
+# ---------------------------------------------------------------------------
+.clangd/.cache/

@@ -63,6 +63,7 @@ extern Flash_Handle gFlashHandle[CONFIG_FLASH_NUM_INSTANCES];
 int32_t Board_flashOpen(void);
 void Board_flashClose(void);
 
+#include <drivers/soc.h>
 
 #ifdef __cplusplus
 }

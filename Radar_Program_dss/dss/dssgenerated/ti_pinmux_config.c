@@ -148,7 +148,7 @@ void Pinmux_init(void)
 
 
     /* Check if additional PAD registers needs to be disabled for this device */
-    if(SOC_rcmIsPadDisableRequired() == 0x1)
+    if(SOC_rcmIsDeviceTypeLOP() == 0x1)
     {
         Pinmux_config(gPinMuxMainDomainCfg1, PINMUX_DOMAIN_ID_MAIN);
     }

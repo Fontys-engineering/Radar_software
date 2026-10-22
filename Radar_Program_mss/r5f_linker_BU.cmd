@@ -38,10 +38,14 @@ PAGE 0:
     SBL_RESERVED_L2_RAM (RW)   : origin=0x10200000 length=0x00020000
     MSS_L2 (RW)               : origin=0x10220000 length=0x000CC000
 
-    DSS_L3 (RW)   : origin=0x88000000 length=0x00100000
+    /* AWR2X44P: DSS L3 is 3 MB (0x88000000 - 0x882FFFFF). The DSS image uses the first
+     * 2.5 MB (see c66x_linker.cmd / DSS_L3_U_SIZE), so the MSS gets the top 512 KB.
+     * (On AWR2944 this region started at 0x88000000 and overlapped the DSS .l3ram.) */
+    DSS_L3 (RW)   : origin=0x88280000 length=0x00080000
     HWA_RAM (RW)  : origin=0x82000000 length=0x00020000
 
-    RTOS_NORTOS_IPC_SHM_MEM : ORIGIN = 0xC5000200, LENGTH = 0x1D40
+    /* AWR2X44P: ipc_notify uses 32*12 bytes of mailbox memory -> 0x1C80 left for IPC shared memory */
+    RTOS_NORTOS_IPC_SHM_MEM : ORIGIN = 0xC5000200, LENGTH = 0x1C80
 }
 
 
@@ -86,10 +90,11 @@ SECTIONS{
     /* lwIP pools */
     .lwip.pools (NOLOAD) :
     {
-        *(.bss.memp*)
-        "C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/enet/lib/lwipif-cpsw-freertos.awr294x.r5f.ti-arm-clang.debug.lib"(.bss*)
-
-        "C:/ti/mmwave_mcuplus_sdk_04_07_02_01/mcu_plus_sdk_awr294x_10_02_00_04/source/networking/lwip/lib/lwip-freertos.awr294x.r5f.ti-arm-clang.debug.lib"(.bss*)
+        //*(.bss.memp*)
+        /* NOTE: naming a library here also makes the linker pull it in, so these must be the
+         * AWR2X44P builds (same files the project links via ${NETWORK_PATH}). */
+        //"C:/Git/Radar_software/Dependencies/mcu_plus_sdk_awr2x44p_10_02_00_04/source/networking/enet/lib/lwipif-cpsw-freertos.awr2x44p.r5f.ti-arm-clang.debug.lib"(.bss*)
+        //"C:/Git/Radar_software/Dependencies/mcu_plus_sdk_awr2x44p_10_02_00_04/source/networking/lwip/lib/lwip-freertos.awr2x44p.r5f.ti-arm-clang.debug.lib"(.bss*)
     } > DSS_L3
 
     GROUP {

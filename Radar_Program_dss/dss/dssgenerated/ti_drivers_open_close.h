@@ -70,32 +70,6 @@ extern EDMA_Params gEdmaParams[CONFIG_EDMA_NUM_INSTANCES];
 void Drivers_edmaOpen(void);
 void Drivers_edmaClose(void);
 
-/*
- * ESM
- */
-#include <drivers/esm.h>
-
-/* ESM Driver handles */
-extern ESM_Handle gEsmHandle[CONFIG_ESM_NUM_INSTANCES];
-
-/*
- * ESM Driver Advance Parameters - to be used only when Driver_open() and
- * Driver_close() is not used by the application
- */
-/* ESM Driver Open Parameters */
-extern ESM_OpenParams gEsmParams[CONFIG_ESM_NUM_INSTANCES];
-
-/* ESM Notifier Macros */
-#define CONFIG_ESM0_NOTIFIER (1U)
-/* ESM Notifier Configurations */
-extern ESM_NotifyParams gConfigEsm0Params[CONFIG_ESM0_NOTIFIER];
-
-/* ESM Driver open/close - can be used by application when Driver_open() and
- * Driver_close() is not used directly and app wants to control the various driver
- * open/close sequences */
-void Drivers_esmOpen(void);
-void Drivers_esmClose(void);
-
 
 #ifdef __cplusplus
 }

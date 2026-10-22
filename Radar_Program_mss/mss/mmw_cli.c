@@ -2145,9 +2145,14 @@ void MmwDemo_CLIInit (uint8_t taskPriority)
     uint32_t    cnt;
 
     /* Create Demo Banner to be printed out by CLI */
+#ifdef SOC_AWR2X44P
+#define MMWDEMO_BANNER_DEVICE   "AWR2X44P"
+#else
+#define MMWDEMO_BANNER_DEVICE   "AWR294X"
+#endif
     sprintf(&demoBanner[0],
                        "******************************************\r\n" \
-                       "AWR294X MMW Demo %02d.%02d.%02d.%02d\r\n"  \
+                       MMWDEMO_BANNER_DEVICE " MMW Demo %02d.%02d.%02d.%02d\r\n"  \
                        "******************************************\r\n",
                         MMWAVE_SDK_VERSION_MAJOR,
                         MMWAVE_SDK_VERSION_MINOR,

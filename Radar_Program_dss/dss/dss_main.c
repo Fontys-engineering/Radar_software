@@ -79,7 +79,9 @@
 
 #include <drivers/hw_include/hw_types.h>
 
-#ifdef SOC_AWR2944
+#if defined(SOC_AWR2944) || defined(SOC_AWR2X44P)
+/* AWR2X44P has 3 MB of L3: the DSS keeps 2.5 MB (as on AWR2944), the top 512 KB is used by
+ * the MSS image (see c66x_linker.cmd and r5f_linker_BU.cmd) */
 #define DSS_L3_U_SIZE    (0x280000U)
 #else
 #define DSS_L3_U_SIZE    (0x200000U)
@@ -128,11 +130,13 @@ uint8_t gDPC_ObjDetL2Heap[MMWDEMO_OBJDET_L2RAM_SIZE];
 #define MMWDEMO_DPM_TASK_PRI              (5U)
 #define MMWDEMO_DPM_TASK_STACK_SIZE       (1 * 1024u)
 
-/* ECC Macros */
+#if !defined(SOC_AWR2X44P)
+/* ECC Macros (AWR294x silicon errata workaround - not used on AWR2X44P) */
 #define MMWDEMO_DSS_ECC_AGG_ECC_VECTOR_ADDR         (CSL_DSS_ECC_AGG_U_BASE + CSL_DSS_ECC_AGG_ECC_VECTOR)
 #define MMWDEMO_DSS_ECC_AGG_ERROR_STATUS1_ADDR      (CSL_DSS_ECC_AGG_U_BASE + CSL_DSS_ECC_AGG_ERROR_STATUS1)
 
 #define MMWDEMO_DSS_ECC_AGG_RAM_IDS_TOTAL_ENTRIES   5
+#endif
 
 /* Stack for tasks */
 StackType_t gMmwDemo_dssInitTaskStack[MMWDEMO_DSS_INIT_TASK_STACK_SIZE] __attribute__((aligned(64)));
@@ -189,7 +193,9 @@ static int32_t MmwDemo_copyResultToHSRAM
 static void MmwDemo_DPC_ObjectDetection_dpmTask(void* args);
 static void MmwDemo_sensorStopEpilog(void);
 
+#if !defined(SOC_AWR2X44P)
 static void MmwDemo_clearEccAggrs(void);
+#endif
 
 /**************************************************************************
  ************************* Millimeter Wave Demo Functions **********************
@@ -637,6 +643,7 @@ static void MmwDemo_DPC_ObjectDetection_dpmTask(void* args)
  *  @n
  *      Clear all ECC status registers for DSS ECC AGGR
  */
+#if !defined(SOC_AWR2X44P) /* ESM/ECC errata handling is AWR294x only (removed from dss syscfg for AWR2X44P) */
 static void MmwDemo_clearEccAggrs(void)
 {
     uint8_t idx;
@@ -685,6 +692,7 @@ void MmwDemo_dssSECCallBack(void)
         MmwDemo_debugAssert(0);
     }
 }
+#endif /* !SOC_AWR2X44P */
 
 
 /**
@@ -711,11 +719,13 @@ static void MmwDemo_dssInitTask(void* args)
     /* Initialize the Data Path: */
     MmwDemo_dataPathOpen(&gMmwDssMCB.dataPathObj);
 
+#if !defined(SOC_AWR2X44P)
     /* Clear all status registers of DSS AGGR */
     MmwDemo_clearEccAggrs();
 
     /* Enable interrupts (DSS L3 banks and DSS Mailbox memories) */
     HW_WR_REG32((CSL_DSS_ECC_AGG_U_BASE + CSL_DSS_ECC_AGG_SEC_ENABLE_SET_REG0), 0x1F);
+#endif
 
     /* Create binary semaphore to pend Main task, */
     SemaphoreP_constructBinary(&gMmwDssMCB.demoInitTaskCompleteSemHandle, 0);

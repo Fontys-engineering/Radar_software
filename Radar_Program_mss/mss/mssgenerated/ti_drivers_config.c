@@ -128,14 +128,14 @@ static EDMA_Attrs gEdmaAttrs[CONFIG_EDMA_NUM_INSTANCES] =
         .errIntrNumber      = CSL_MSS_INTR_RSS_TPCC_A_ERRAGG,
         .errIntrNumberDirMap      = 0,
         .intrAggEnableAddr  = CSL_RSS_CTRL_U_BASE + CSL_RSS_CTRL_RSS_TPCC_A_INTAGG_MASK,
-        .intrAggEnableMask  = 0x1FF & (~(2U << 2)),
+        .intrAggEnableMask  = 0x1FF & (~(2U << 1)),
         .intrAggStatusAddr  = CSL_RSS_CTRL_U_BASE + CSL_RSS_CTRL_RSS_TPCC_A_INTAGG_STATUS,
-        .intrAggClearMask   = (2U << 2),
+        .intrAggClearMask   = (2U << 1),
         .errIntrAggEnableAddr  = CSL_RSS_CTRL_U_BASE + CSL_RSS_CTRL_RSS_TPCC_A_ERRAGG_MASK,
         .errIntrAggStatusAddr  = CSL_RSS_CTRL_U_BASE + CSL_RSS_CTRL_RSS_TPCC_A_ERRAGG_STATUS,
         .initPrms           =
         {
-            .regionId     = 2,
+            .regionId     = 1,
             .queNum       = 0,
             .initParamSet = FALSE,
             .ownResource    =
@@ -249,36 +249,23 @@ CBUFF_Object *gCbuffObjectPtr[CONFIG_CBUFF_NUM_INSTANCES] = { NULL };
 /* CBUFF objects count */
 uint32_t gCbuffConfigNum = CONFIG_CBUFF_NUM_INSTANCES;
 
-/*
- * ESM
- */
-/* ESM atrributes */
-static ESM_Attrs gEsmAttrs[CONFIG_ESM_NUM_INSTANCES] =
-{
-    {
-        .ptrESMRegs             = (CSL_esmRegs *)CSL_MSS_ESM_U_BASE,
-        .ptrCtrlRegs            = (CSL_mss_ctrlRegs *)CSL_MSS_CTRL_U_BASE,
-        .numGroup1Err           = ESM_NUM_INTR_PER_GROUP,
-        .highPrioIntNum         = CSL_MSS_INTR_MSS_ESM_HI,
-        .lowPrioIntNum          = CSL_MSS_INTR_MSS_ESM_LO,
-        .highPrioIntNumDirMap   = 0,
-        .lowPrioIntNumDirMap    = 0,
-        .intrHighPriority       = 15U,
-        .intrLowPriority        = 8U,
-    },
-};
-/* ESM objects - initialized by the driver */
-static ESM_Object gEsmObjects[CONFIG_ESM_NUM_INSTANCES];
-/* ESM driver configuration */
-ESM_Config gEsmConfig[CONFIG_ESM_NUM_INSTANCES] =
-{
-    {
-        &gEsmAttrs[CONFIG_ESM0],
-        &gEsmObjects[CONFIG_ESM0],
-    },
-};
 
-uint32_t gEsmConfigNum = CONFIG_ESM_NUM_INSTANCES;
+/*
+ * GPIO
+ */
+
+/* ----------- GPIO Direction, Trigger, Interrupt initialization ----------- */
+
+void GPIO_init()
+{
+    GPIO_moduleEnable(GPIO_LED_BASE_ADDR);
+}
+
+/* ----------- GPIO Interrupt de-initialization ----------- */
+void GPIO_deinit()
+{
+
+}
 
 /*
  * IPC Notify
@@ -297,16 +284,17 @@ uint32_t gEsmConfigNum = CONFIG_ESM_NUM_INSTANCES;
 * Driver assume this memory is init to zero in bootloader as it's ECC protected and
 * needs to be intialized only once and to ensure that only one core has done the
 * mailbox ram initialization before ipc_init. If SBL is not used then Gel does the initialization.
-* We need 4 SW Q's for the 2x R5F to send messages to C66SS0 and each other, i.e 128 B
-* and we need 2 SW Q's for C66SS0 to send messages to each R5F, i.e 64 B.
+* We need 2 SW Q's for the R5F to send messages to C66SS0 and DSS_M4, i.e 64 B
+* we need 2 SW Q's for C66SS0 to send messages to R5F and DSS_CM4, i.e 64 B
+* and we need 2 SW Q's for DSS_CM4 to send messages to R5F and C66SS0, i.e 64 B.
 *
 * Rest of the mailbox memory can be used for ipc_rpmessage or custom message passing.
 */
-#define C66SS0_TO_R5FSS0_0_SW_QUEUE        (IpcNotify_SwQueue*)((MSS_MBOX_MEM + MSS_MBOX_MEM_SIZE) - (MAILBOX_MAX_SW_QUEUE_SIZE*6U))
-#define C66SS0_TO_R5FSS0_1_SW_QUEUE        (IpcNotify_SwQueue*)((MSS_MBOX_MEM + MSS_MBOX_MEM_SIZE) - (MAILBOX_MAX_SW_QUEUE_SIZE*5U))
-#define R5FSS0_1_TO_R5FSS0_0_SW_QUEUE      (IpcNotify_SwQueue*)((MSS_MBOX_MEM + MSS_MBOX_MEM_SIZE) - (MAILBOX_MAX_SW_QUEUE_SIZE*4U))
-#define R5FSS0_1_TO_C66SS0_SW_QUEUE        (IpcNotify_SwQueue*)((MSS_MBOX_MEM + MSS_MBOX_MEM_SIZE) - (MAILBOX_MAX_SW_QUEUE_SIZE*3U))
-#define R5FSS0_0_TO_R5FSS0_1_SW_QUEUE      (IpcNotify_SwQueue*)((MSS_MBOX_MEM + MSS_MBOX_MEM_SIZE) - (MAILBOX_MAX_SW_QUEUE_SIZE*2U))
+#define M4SS0_1_TO_C66SS0_SW_QUEUE         (IpcNotify_SwQueue*)((MSS_MBOX_MEM + MSS_MBOX_MEM_SIZE) - (MAILBOX_MAX_SW_QUEUE_SIZE*6U))
+#define C66SS0_TO_M4SS0_1_SW_QUEUE         (IpcNotify_SwQueue*)((MSS_MBOX_MEM + MSS_MBOX_MEM_SIZE) - (MAILBOX_MAX_SW_QUEUE_SIZE*5U))
+#define M4SS0_1_TO_R5FSS0_0_SW_QUEUE       (IpcNotify_SwQueue*)((MSS_MBOX_MEM + MSS_MBOX_MEM_SIZE) - (MAILBOX_MAX_SW_QUEUE_SIZE*4U))
+#define R5FSS0_0_TO_M4SS0_1_SW_QUEUE       (IpcNotify_SwQueue*)((MSS_MBOX_MEM + MSS_MBOX_MEM_SIZE) - (MAILBOX_MAX_SW_QUEUE_SIZE*3U))
+#define C66SS0_TO_R5FSS0_0_SW_QUEUE        (IpcNotify_SwQueue*)((MSS_MBOX_MEM + MSS_MBOX_MEM_SIZE) - (MAILBOX_MAX_SW_QUEUE_SIZE*2U))
 #define R5FSS0_0_TO_C66SS0_SW_QUEUE        (IpcNotify_SwQueue*)((MSS_MBOX_MEM + MSS_MBOX_MEM_SIZE) - (MAILBOX_MAX_SW_QUEUE_SIZE*1U))
 
 /*
@@ -370,11 +358,11 @@ static UART_Attrs gUartAttrs[CONFIG_UART_NUM_INSTANCES] =
 {
     {
         .baseAddr           = CSL_MSS_SCIB_U_BASE,
-        .inputClkFreq       = 150000000U,
+        .inputClkFreq       = 200000000U,
     },
     {
         .baseAddr           = CSL_MSS_SCIA_U_BASE,
-        .inputClkFreq       = 150000000U,
+        .inputClkFreq       = 200000000U,
     },
 };
 /* UART objects - initialized by the driver */
@@ -404,8 +392,6 @@ void Drivers_uartInit(void)
             periphID = SOC_RcmPeripheralId_MSS_SCIA;
         } else if (gUartAttrs[i].baseAddr == CSL_MSS_SCIB_U_BASE) {
             periphID = SOC_RcmPeripheralId_MSS_SCIB;
-        } else if (gUartAttrs[i].baseAddr == CSL_DSS_SCIA_U_BASE) {
-            periphID = SOC_RcmPeripheralId_DSS_SCIA;
         } else {
             continue;
         }
@@ -444,7 +430,7 @@ void System_init(void)
     QSPI_init();
     EDMA_init();
     ADCBuf_init(SystemP_WAIT_FOREVER);
-    ESM_init();
+    GPIO_init();
 
 
     /* IPC Notify */
@@ -517,7 +503,7 @@ void System_deinit(void)
     QSPI_deinit();
     EDMA_deinit();
     ADCBuf_deinit();
-    ESM_deinit();
+    GPIO_deinit();
     RPMessage_deInit();
     IpcNotify_deInit();
 

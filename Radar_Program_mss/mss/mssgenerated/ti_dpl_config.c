@@ -51,7 +51,7 @@ HwiP_Config gHwiConfig = {
 ClockP_Config gClockConfig = {
     .timerBaseAddr = MSS_RTIA_BASE_ADDR, 
     .timerHwiIntNum = 3,
-    .timerInputClkHz = 150000000,
+    .timerInputClkHz = 200000000,
     .timerInputPreScaler = 1,
     .usecPerTick = 1000,
     .intrPriority = 15,
@@ -73,7 +73,7 @@ const CacheP_Config gCacheConfig RODATA_CFG_SECTION = {
 };
 
 /* ----------- MpuP_armv7 ----------- */
-#define CONFIG_MPU_NUM_REGIONS  (8u)
+#define CONFIG_MPU_NUM_REGIONS  (7u)
 
 const MpuP_Config gMpuConfig RODATA_CFG_SECTION = {
     .numRegions = CONFIG_MPU_NUM_REGIONS,
@@ -140,6 +140,20 @@ const MpuP_RegionConfig gMpuRegionConfig[CONFIG_MPU_NUM_REGIONS] RODATA_CFG_SECT
         },
     },
     {
+        .baseAddr = 0x88000000u,
+        .size = MpuP_RegionSize_4M,
+        .attrs = {
+            .isEnable = 1,
+            .isCacheable = 0,
+            .isBufferable = 0,
+            .isSharable = 0,
+            .isExecuteNever = 1,
+            .tex = 1,
+            .accessPerm = MpuP_AP_ALL_RW,
+            .subregionDisableMask = 0x0u
+        },
+    },
+    {
         .baseAddr = 0x102EC000u,
         .size = MpuP_RegionSize_16K,
         .attrs = {
@@ -147,7 +161,7 @@ const MpuP_RegionConfig gMpuRegionConfig[CONFIG_MPU_NUM_REGIONS] RODATA_CFG_SECT
             .isCacheable = 0,
             .isBufferable = 0,
             .isSharable = 1,
-            .isExecuteNever = 0,
+            .isExecuteNever = 1,
             .tex = 1,
             .accessPerm = MpuP_AP_ALL_RW,
             .subregionDisableMask = 0x0u
@@ -160,34 +174,6 @@ const MpuP_RegionConfig gMpuRegionConfig[CONFIG_MPU_NUM_REGIONS] RODATA_CFG_SECT
             .isEnable = 1,
             .isCacheable = 0,
             .isBufferable = 0,
-            .isSharable = 1,
-            .isExecuteNever = 1,
-            .tex = 1,
-            .accessPerm = MpuP_AP_ALL_RW,
-            .subregionDisableMask = 0x0u
-        },
-    },
-    {
-        .baseAddr = 0xA4030000u,
-        .size = MpuP_RegionSize_4K,
-        .attrs = {
-            .isEnable = 1,
-            .isCacheable = 0,
-            .isBufferable = 0,
-            .isSharable = 1,
-            .isExecuteNever = 1,
-            .tex = 1,
-            .accessPerm = MpuP_AP_ALL_RW,
-            .subregionDisableMask = 0x0u
-        },
-    },
-    {
-        .baseAddr = 0x88000000u,
-        .size = MpuP_RegionSize_2M,
-        .attrs = {
-            .isEnable = 1,
-            .isCacheable = 1,
-            .isBufferable = 1,
             .isSharable = 1,
             .isExecuteNever = 1,
             .tex = 1,

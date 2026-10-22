@@ -36,7 +36,7 @@
 		</variable>
 		<variable>
 			<name>MCU_PLUS_SDK_PATH</name>
-			<value>$%7BDEPENDROOT%7D/mcu_plus_sdk_awr294x_10_02_00_04</value>
+			<value>$%7BDEPENDROOT%7D/mcu_plus_sdk_awr2x44p_10_02_00_04</value>
 		</variable>
 		<variable>
 			<name>MMWAVE_AWR294X_DFP_INSTALL_PATH</name>

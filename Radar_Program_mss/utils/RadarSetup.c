@@ -107,11 +107,13 @@ extern SemaphoreP_Object objDataSemaphoreHandle;
 MmwDemo_enetStreamObjData gEnetStreamObjData;
 #endif
 
-/* ECC AGG Macros */
+#if !defined(SOC_AWR2X44P)
+/* ECC AGG Macros (AWR294x silicon errata workaround - not used on AWR2X44P) */
 #define MMWDEMO_MSS_ECC_AGG_MSS_ECC_VECTOR_ADDR             (CSL_MSS_ECC_AGG_MSS_U_BASE + CSL_MSS_ECC_AGG_MSS_ECC_VECTOR)
 #define MMWDEMO_MSS_ECC_AGG_MSS_ERROR_STATUS1_ADDR          (CSL_MSS_ECC_AGG_MSS_U_BASE + CSL_MSS_ECC_AGG_MSS_ERROR_STATUS1)
 
 #define MMWDEMO_MSS_ECC_AGG_RAM_IDS_TOTAL_ENTRIES           4U
+#endif
 /**************************************************************************
  *************************** Global Definitions ***************************
  **************************************************************************/
@@ -165,7 +167,9 @@ extern bool MotionDetection_detectMotion(
 #endif
 
 static void MmwDemo_checkEdmaErrors(void);
+#if !defined(SOC_AWR2X44P)
 static void MmwDemo_clearEccAggrs(void);
+#endif
 /* MMW demo functions for datapath operation */
 static int32_t MmwDemo_dataPathConfig (void);
 static void MmwDemo_dataPathStart (void);
@@ -736,7 +740,8 @@ static void MmwDemo_transmitProcessedOutput
     }
 
     /* Header: */
-#ifdef SOC_AWR2944
+#if defined(SOC_AWR2944) || defined(SOC_AWR2X44P)
+    /* AWR2X44P (AWR2944P/AWR2E44P) reports 0x2944, same as TI's AWR2X44P demo */
     header.platform =  0x2944;
 #else
     header.platform =  0x2943;
@@ -2872,7 +2877,7 @@ int32_t MmwDemo_configPhaseShifterChirps(void){
             phaseShiftCfg.tx2PhaseShift    =
                         ((uint32_t) MATHUTILS_ROUND_FLOAT(((float) ((chirpPhaseMultiplier * phaseShiftMultiplier[2]) % numTxTotalDivisor) / numTxTotalDivisor) * (1U << 6))) << 2;
 
-#ifdef SOC_AWR2944
+#if defined(SOC_AWR2944) || defined(SOC_AWR2X44P) /* 4 TX devices */
             /* 1 LSB of phaseShiftCfg.txPhaseShift = 360/2^6 = 5.625 degrees Valid range: 0 to 63 */
             phaseShiftCfg.tx3PhaseShift    =
                         ((uint32_t) MATHUTILS_ROUND_FLOAT(((float) ((chirpPhaseMultiplier * phaseShiftMultiplier[3]) % numTxTotalDivisor) / numTxTotalDivisor) * (1U << 6))) << 2;
@@ -2919,7 +2924,7 @@ int32_t MmwDemo_configPhaseShifterChirps(void){
                 phaseShiftCfg.tx2PhaseShift    =
                             ((uint32_t) MATHUTILS_ROUND_FLOAT(((float) ((chirpPhaseMultiplier * phaseShiftMultiplier[2]) % numTxTotalDivisor) / numTxTotalDivisor) * (1U << 6))) << 2;
 
-#ifdef SOC_AWR2944
+#if defined(SOC_AWR2944) || defined(SOC_AWR2X44P) /* 4 TX devices */
                 /* 1 LSB of phaseShiftCfg.txPhaseShift = 360/2^6 = 5.625 degrees Valid range: 0 to 63 */
                 phaseShiftCfg.tx3PhaseShift    =
                             ((uint32_t) MATHUTILS_ROUND_FLOAT(((float) ((chirpPhaseMultiplier * phaseShiftMultiplier[3]) % numTxTotalDivisor) / numTxTotalDivisor) * (1U << 6))) << 2;
@@ -3363,6 +3368,7 @@ static int32_t MmwDemo_calibRestore(MmwDemo_calibData  *ptrCalibData)
  *  @retval
  *      Not Applicable.
  */
+#if !defined(SOC_AWR2X44P) /* ESM/ECC errata handling is AWR294x only (removed from mss syscfg for AWR2X44P) */
 void MmwDemo_mssSECCallBack(void)
 {
     CSL_mss_ecc_agg_mssRegs* ptrMssEccAggregs = (CSL_mss_ecc_agg_mssRegs*)CSL_MSS_ECC_AGG_MSS_U_BASE;
@@ -3383,6 +3389,7 @@ void MmwDemo_mssSECCallBack(void)
         MmwDemo_debugAssert(0);
     }
 }
+#endif /* !SOC_AWR2X44P */
     int32_t             errCode;
     MMWave_InitCfg      initCfg;
     DPM_InitCfg         dpmInitCfg;
@@ -3397,11 +3404,13 @@ void setupInit(){
     Drivers_open();
     Board_driversOpen();
 
+#if !defined(SOC_AWR2X44P)
     /* Clear all status registers of MSS AGGRA */
     MmwDemo_clearEccAggrs();
 
     /* Enable ECC and interrupts */
     HW_WR_REG32((CSL_MSS_ECC_AGG_MSS_U_BASE + CSL_MSS_ECC_AGGA_SEC_ENABLE_SET_REG0), 0xF);
+#endif
 
     MmwDemo_BoardInit();
 
@@ -3668,6 +3677,7 @@ static bool MmwDemo_BoardInit(void)
  *  @n
  *      Clear all ECC status registers for MSS AGGRA
  */
+#if !defined(SOC_AWR2X44P)
 static void MmwDemo_clearEccAggrs(void)
 {
     uint8_t idx = 0U;
@@ -3684,6 +3694,7 @@ static void MmwDemo_clearEccAggrs(void)
         ClockP_usleep(100);
     }
 }
+#endif /* !SOC_AWR2X44P */
 
 /**
  *  @b Description
@@ -3760,6 +3771,28 @@ void MMWDemo_configSSC(void)
     uint32_t refClk = 0U;
 
     CSL_mss_toprcmRegs *ptrMssTopRcmRegs = (CSL_mss_toprcmRegs *)CSL_MSS_TOPRCM_U_BASE;
+
+#if defined(SOC_AWR2X44P)
+    /* AWR2X44P supports a 40 MHz or 50 MHz XTAL (AWR2E44PEVM ships with 50 MHz).
+     * Same detection as TI's AWR2X44P demo, from the latched SOP bits:
+     *   00 (0x0) -> 40MHz, 11 (0x3) -> 50MHz, other values are not supported */
+    {
+        uint8_t xtalSopVal = (uint8_t)CSL_FEXTR(ptrMssTopRcmRegs->ANA_REG_WU_MODE_REG_LOWV, 6U, 5U);
+
+        if (xtalSopVal == 0x0U)
+        {
+            finp = 40U;
+        }
+        else if (xtalSopVal == 0x3U)
+        {
+            finp = 50U;
+        }
+        else
+        {
+            DebugP_assert(0);
+        }
+    }
+#endif
 
     if(gMmwMssMCB.coreAdpllSscCfg.isEnable)
     {

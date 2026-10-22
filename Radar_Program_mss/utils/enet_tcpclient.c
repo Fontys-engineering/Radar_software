@@ -48,7 +48,10 @@
 #endif
 
 #ifdef SOC_AWR2X44P
-#include <mmw_mss.h>
+/* AWR2X44P port: keep using the same MSS MCB header as the rest of this project
+ * (RadarSetup.c, mss_main.c, mmw_cli.c). TI's awr2x44P/mmw_tdm|mmw_ddm headers define a
+ * different MmwDemo_MSS_MCB layout, which would silently corrupt gMmwMssMCB accesses. */
+#include <ti/demo/awr294x/mmw/mss/mmw_mss.h>
 #endif
 
 /* ========================================================================== */
