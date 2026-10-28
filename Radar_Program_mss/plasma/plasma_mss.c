@@ -29,6 +29,7 @@
 
 #include <plasma/plasma_mss.h>
 
+/*the global plasma cfg*/
 Plasma_Cfg gPlasmaCfg;
 
 void PlasmaMss_init(void) {
