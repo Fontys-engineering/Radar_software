@@ -39,24 +39,23 @@
 #ifndef MMW_DSS_H
 #define MMW_DSS_H
 
-
-#include <drivers/mailbox.h>
-#include <drivers/hwa.h>
-#include <drivers/edma.h>
-#include <kernel/dpl/SemaphoreP.h>
-#include <kernel/dpl/DebugP.h>
-#include <kernel/dpl/HeapP.h>
 #include "FreeRTOS.h"
 #include "task.h"
+#include <drivers/edma.h>
+#include <drivers/hwa.h>
+#include <drivers/mailbox.h>
+#include <kernel/dpl/DebugP.h>
+#include <kernel/dpl/HeapP.h>
+#include <kernel/dpl/SemaphoreP.h>
 
 #include <ti/common/mmwave_error.h>
 
 #ifdef MMWDEMO_TDM
-#include <ti/demo/awr294x/mmw/mmw_resTDM.h>
 #include <ti/datapath/dpc/objectdetection/objdethwa/objectdetection.h>
+#include <ti/demo/awr294x/mmw/mmw_resTDM.h>
 #else
-#include <ti/demo/awr294x/mmw/mmw_resDDM.h>
 #include <ti/datapath/dpc/objectdetection/objdethwaDDMA/objectdetection.h>
+#include <ti/demo/awr294x/mmw/mmw_resDDM.h>
 #endif
 #include <ti/demo/awr294x/mmw/include/mmw_output.h>
 
@@ -79,19 +78,18 @@ extern "C" {
  *  The structure is used to hold all the relevant information for the
  *  Millimeter Wave demo's data path
  */
-typedef struct MmwDemo_DataPathObj_t
-{
-    /*! @brief Handle to hardware accelerator driver. */
-    HWA_Handle          hwaHandle;
+typedef struct MmwDemo_DataPathObj_t {
+  /*! @brief Handle to hardware accelerator driver. */
+  HWA_Handle hwaHandle;
 
-    /*! @brief dpm Handle */
-    DPM_Handle          objDetDpmHandle;
+  /*! @brief dpm Handle */
+  DPM_Handle objDetDpmHandle;
 
-    /*! @brief   Handle of the EDMA driver. */
-    EDMA_Handle         edmaHandle[EDMA_NUM_CC];
+  /*! @brief   Handle of the EDMA driver. */
+  EDMA_Handle edmaHandle[EDMA_NUM_CC];
 
-    /*! @brief          Processing Stats */
-    MmwDemo_output_message_stats   subFrameStats[RL_MAX_SUBFRAMES];
+  /*! @brief          Processing Stats */
+  MmwDemo_output_message_stats subFrameStats[RL_MAX_SUBFRAMES];
 } MmwDemo_DataPathObj;
 
 /**
@@ -102,27 +100,25 @@ typedef struct MmwDemo_DataPathObj_t
  *  The structure is used to hold all the relevant information for the
  *  Millimeter Wave demo
  */
-typedef struct MmwDemo_DSS_MCB_t
-{       
-    /*! @brief     DPM Handle */
-    TaskHandle_t                 objDetDpmTaskHandle;
+typedef struct MmwDemo_DSS_MCB_t {
+  /*! @brief     DPM Handle */
+  TaskHandle_t objDetDpmTaskHandle;
 
-    /*! @brief     DPM task object */
-    StaticTask_t                 objDetDpmTaskObj;
+  /*! @brief     DPM task object */
+  StaticTask_t objDetDpmTaskObj;
 
-    /*! @brief     init Task Handle */
-    TaskHandle_t                 initTaskHandle;
+  /*! @brief     init Task Handle */
+  TaskHandle_t initTaskHandle;
 
-    /*! @brief     init Task object */
-    StaticTask_t                 initTaskObj;
+  /*! @brief     init Task object */
+  StaticTask_t initTaskObj;
 
-    /*! @brief   Semaphore Object to pend main task */
-    SemaphoreP_Object             demoInitTaskCompleteSemHandle;
-  
-    /*! @brief     Data Path object */
-    MmwDemo_DataPathObj         dataPathObj;
+  /*! @brief   Semaphore Object to pend main task */
+  SemaphoreP_Object demoInitTaskCompleteSemHandle;
+
+  /*! @brief     Data Path object */
+  MmwDemo_DataPathObj dataPathObj;
 } MmwDemo_DSS_MCB;
-
 
 /**************************************************************************
  *************************** Extern Definitions ***************************
@@ -130,16 +126,16 @@ typedef struct MmwDemo_DSS_MCB_t
 extern void MmwDemo_dataPathOpen(MmwDemo_DataPathObj *obj);
 extern void MmwDemo_dataPathClose(MmwDemo_DataPathObj *obj);
 
-
 /* Sensor Management Module Exported API */
-extern void _MmwDemo_debugAssert(int32_t expression, const char *file, int32_t line);
-#define MmwDemo_debugAssert(expression) {                                      \
-                                         DebugP_assert(expression);             \
-                                        }
-                                        
+extern void _MmwDemo_debugAssert(int32_t expression, const char *file,
+                                 int32_t line);
+#define MmwDemo_debugAssert(expression)                                        \
+  {                                                                            \
+    DebugP_assert(expression);                                                 \
+  }
+
 #ifdef __cplusplus
 }
 #endif
 
 #endif /* MMW_DSS_H */
-

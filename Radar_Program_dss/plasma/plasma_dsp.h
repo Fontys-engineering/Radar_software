@@ -2,7 +2,7 @@
  * Copyright (c) 2026,
  *      Fontys University of Applied Sciences
  *          Mete Han Keskin < m.keskin @ student . fontys . nl >
- *          Vlad Nepriakhin < v.nepriakhin @ student . fontys . nl >   
+ *          Vlad Nepriakhin < v.nepriakhin @ student . fontys . nl >
  *      All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -26,7 +26,7 @@
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  * SUCH DAMAGE.
  */
- 
+
 /*Header of DSP operations for the plasma radar detector*/
 
 #ifndef _PLASMA_DSP_H

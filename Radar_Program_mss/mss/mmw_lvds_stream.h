@@ -50,13 +50,13 @@ extern "C" {
  * @brief   This is the maximum number of EDMA Channels which is used by
  * the HW Session
  */
-#define MMWDEMO_LVDS_STREAM_HW_SESSION_MAX_EDMA_CHANNEL             11U
+#define MMWDEMO_LVDS_STREAM_HW_SESSION_MAX_EDMA_CHANNEL 11U
 
 /**
  * @brief   This is the maximum number of EDMA Channels which is used by
  * the SW Session
  */
-#define MMWDEMO_LVDS_STREAM_SW_SESSION_MAX_EDMA_CHANNEL             3U
+#define MMWDEMO_LVDS_STREAM_SW_SESSION_MAX_EDMA_CHANNEL 3U
 
 /**
  * @brief
@@ -65,27 +65,25 @@ extern "C" {
  * @details
  *  The LVDS SW streaming user data header.
  */
-typedef struct MmwDemo_LVDSUserDataHeader
-{
-    /**
-     * @brief   Frame number.
-     */
-    uint32_t     frameNum;
+typedef struct MmwDemo_LVDSUserDataHeader {
+  /**
+   * @brief   Frame number.
+   */
+  uint32_t frameNum;
 
-    /**
-     * @brief   Sub-Frame number. Always 0 when advanced frame is not enabled.
-     *          Note although the subFrameNum does not need to be 16-bits (it needs to be
-     *          only 8-bits), we keep it 16-bit for parsing convenience as compiler
-     *          does not insert holes in this case
-     */
-    uint16_t     subFrameNum;
+  /**
+   * @brief   Sub-Frame number. Always 0 when advanced frame is not enabled.
+   *          Note although the subFrameNum does not need to be 16-bits (it
+   * needs to be only 8-bits), we keep it 16-bit for parsing convenience as
+   * compiler does not insert holes in this case
+   */
+  uint16_t subFrameNum;
 
-    /**
-     * @brief   Number of detected objects.
-     */
-    uint16_t     detObjNum;
+  /**
+   * @brief   Number of detected objects.
+   */
+  uint16_t detObjNum;
 } MmwDemo_LVDSUserDataHeader_t;
-
 
 /**
  * @brief
@@ -94,92 +92,95 @@ typedef struct MmwDemo_LVDSUserDataHeader
  * @details
  *  The LVDS streaming MCB.
  */
-typedef struct MmwDemo_LVDSStream_MCB
-{
-    /**
-    * @brief   Handle to the CBUFF Driver
-    */
-    CBUFF_Handle             cbuffHandle;
+typedef struct MmwDemo_LVDSStream_MCB {
+  /**
+   * @brief   Handle to the CBUFF Driver
+   */
+  CBUFF_Handle cbuffHandle;
 
-    /**
-     * @brief   EDMA Channel Allocator Index for the HW Session
-     */
-    uint8_t                  hwSessionEDMAChannelAllocatorIndex;
+  /**
+   * @brief   EDMA Channel Allocator Index for the HW Session
+   */
+  uint8_t hwSessionEDMAChannelAllocatorIndex;
 
-    /**
-     * @brief   EDMA Channel Resource Table: This is used for creating the CBUFF Session.
-     */
-    CBUFF_EDMAChannelCfg     hwSessionEDMAChannelTable[MMWDEMO_LVDS_STREAM_HW_SESSION_MAX_EDMA_CHANNEL];
+  /**
+   * @brief   EDMA Channel Resource Table: This is used for creating the CBUFF
+   * Session.
+   */
+  CBUFF_EDMAChannelCfg hwSessionEDMAChannelTable
+      [MMWDEMO_LVDS_STREAM_HW_SESSION_MAX_EDMA_CHANNEL];
 
-    /**
-     * @brief   EDMA Channel Allocator Index for the SW Session
-     */
-    uint8_t                  swSessionEDMAChannelAllocatorIndex;
+  /**
+   * @brief   EDMA Channel Allocator Index for the SW Session
+   */
+  uint8_t swSessionEDMAChannelAllocatorIndex;
 
-    /**
-     * @brief   EDMA Channel Resource Table: This is used for creating the CBUFF Session.
-     */
-    CBUFF_EDMAChannelCfg     swSessionEDMAChannelTable[MMWDEMO_LVDS_STREAM_SW_SESSION_MAX_EDMA_CHANNEL];
+  /**
+   * @brief   EDMA Channel Resource Table: This is used for creating the CBUFF
+   * Session.
+   */
+  CBUFF_EDMAChannelCfg swSessionEDMAChannelTable
+      [MMWDEMO_LVDS_STREAM_SW_SESSION_MAX_EDMA_CHANNEL];
 
-    /**
-     * @brief   HW session HSI header.
-     */
-    HSIHeader*               ptrHwSessionHSIHeader;
+  /**
+   * @brief   HW session HSI header.
+   */
+  HSIHeader *ptrHwSessionHSIHeader;
 
-    /**
-     * @brief   True if hw session HSI header is allocated, false otherwise
-     */
-    bool                     isHwSessionHSIHeaderAllocated;
-    
-    /**
-     * @brief   SW session HSI header.
-     */
-    HSIHeader                swSessionHSIHeader;
-    
-    /**
-     * @brief   Handle to the HW CBUFF Session Handle.
-     */
-    CBUFF_SessionHandle      hwSessionHandle;
+  /**
+   * @brief   True if hw session HSI header is allocated, false otherwise
+   */
+  bool isHwSessionHSIHeaderAllocated;
 
-    /**
-     * @brief   Handle to the SW CBUFF Session Handle.
-     */
-    CBUFF_SessionHandle      swSessionHandle;
-    
-    /**
-     * @brief   Number of HW frame done interrupt received.
-     */
-    uint16_t                 hwFrameDoneCount;
-    
-    /**
-     * @brief   Number of SW frame done interrupt received.
-     */
-    uint16_t                 swFrameDoneCount;
-    
-    /**
-     * @brief   Semaphore handle to signal hw session done.
-     */
-    SemaphoreP_Object         hwFrameDoneSemHandle;
+  /**
+   * @brief   SW session HSI header.
+   */
+  HSIHeader swSessionHSIHeader;
 
-    /**
-     * @brief   Semaphore handle to signal sw session done.
-     */
-    SemaphoreP_Object         swFrameDoneSemHandle;
+  /**
+   * @brief   Handle to the HW CBUFF Session Handle.
+   */
+  CBUFF_SessionHandle hwSessionHandle;
 
-    /**
-     * @brief   Pointer to user data header.
-     */
-    MmwDemo_LVDSUserDataHeader_t  *userDataHeader;
+  /**
+   * @brief   Handle to the SW CBUFF Session Handle.
+   */
+  CBUFF_SessionHandle swSessionHandle;
+
+  /**
+   * @brief   Number of HW frame done interrupt received.
+   */
+  uint16_t hwFrameDoneCount;
+
+  /**
+   * @brief   Number of SW frame done interrupt received.
+   */
+  uint16_t swFrameDoneCount;
+
+  /**
+   * @brief   Semaphore handle to signal hw session done.
+   */
+  SemaphoreP_Object hwFrameDoneSemHandle;
+
+  /**
+   * @brief   Semaphore handle to signal sw session done.
+   */
+  SemaphoreP_Object swFrameDoneSemHandle;
+
+  /**
+   * @brief   Pointer to user data header.
+   */
+  MmwDemo_LVDSUserDataHeader_t *userDataHeader;
 } MmwDemo_LVDSStream_MCB_t;
 
-int32_t MmwDemo_LVDSStreamInit (void);
-int32_t MmwDemo_LVDSStreamHwConfig (uint8_t subFrameIndx);
-int32_t MmwDemo_LVDSStreamSwConfig (uint32_t numObjOut,
-                                    DPIF_PointCloudCartesian *objOut,
-                                    DPIF_PointCloudSideInfo *objOutSideInfo);
+int32_t MmwDemo_LVDSStreamInit(void);
+int32_t MmwDemo_LVDSStreamHwConfig(uint8_t subFrameIndx);
+int32_t MmwDemo_LVDSStreamSwConfig(uint32_t numObjOut,
+                                   DPIF_PointCloudCartesian *objOut,
+                                   DPIF_PointCloudSideInfo *objOutSideInfo);
 void MmwDemo_configLVDSHwData(uint8_t subFrameIndx);
-void MmwDemo_LVDSStreamDeleteHwSession (void);
-void MmwDemo_LVDSStreamDeleteSwSession (void);
+void MmwDemo_LVDSStreamDeleteHwSession(void);
+void MmwDemo_LVDSStreamDeleteSwSession(void);
 
 #ifdef __cplusplus
 }
