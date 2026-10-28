@@ -61,6 +61,7 @@
                                     <listOptionValue value="${MMWAVE_SDK_INSTALL_PATH}"/>
                                     <listOptionValue value="${PROJECT_LOC}"/>
                                     <listOptionValue value="${PROJECT_LOC}/mss"/>
+                                    <listOptionValue value="${PROJECT_ROOT}/../Radar_common/"/>
                                     <listOptionValue value="${PROJECT_ROOT}/mss/mssgenerated"/>
                                     <listOptionValue value="${NETWORK_PATH}/enet/core/include/"/>
                                     <listOptionValue value="${NETWORK_PATH}/enet/soc/awr294x/../.."/>
@@ -185,6 +186,44 @@
                             </tool>
                         </toolChain>
                     </folderInfo>
+                    <fileInfo id="com.ti.ccstudio.buildDefinitions.TMS470.Debug.71697660.plasma/plasma_cli.c" name="plasma_cli.c" rcbsApplicability="disable" resourcePath="plasma/plasma_cli.c" toolsToInvoke="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_4.0.exe.compilerDebug.1553528538.1621106255">
+                        <tool id="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_4.0.exe.compilerDebug.1553528538.1621106255" name="Arm Compiler" superClass="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_4.0.exe.compilerDebug.1553528538">
+                            <option id="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_4.0.compilerID.INCLUDE_PATH.43060434" superClass="com.ti.ccstudio.buildDefinitions.TMS470_TICLANG_4.0.compilerID.INCLUDE_PATH" valueType="includePath">
+                                <listOptionValue value="${INHERITED_INCLUDE_PATH}"/>
+                                <listOptionValue value="${CG_TOOL_ROOT}/include/c"/>
+                                <listOptionValue value="${MCU_PLUS_SDK_PATH}"/>
+                                <listOptionValue value="${MCU_PLUS_SDK_PATH}/source"/>
+                                <listOptionValue value="${MCU_PLUS_SDK_PATH}/source/kernel/freertos/FreeRTOS-Kernel/include"/>
+                                <listOptionValue value="${MCU_PLUS_SDK_PATH}/source/kernel/freertos/portable/TI_ARM_CLANG/ARM_CR5F"/>
+                                <listOptionValue value="${MCU_PLUS_SDK_PATH}/source/kernel/freertos/config/awr294x/r5f"/>
+                                <listOptionValue value="${MMWAVE_AWR294X_DFP_INSTALL_PATH}"/>
+                                <listOptionValue value="${MMWAVE_SDK_INSTALL_PATH}"/>
+                                <listOptionValue value="${PROJECT_LOC}"/>
+                                <listOptionValue value="${PROJECT_LOC}/mss"/>
+                                <listOptionValue value="${PROJECT_ROOT}/../Radar_common"/>
+                                <listOptionValue value="${PROJECT_ROOT}/mss/mssgenerated"/>
+                                <listOptionValue value="${NETWORK_PATH}/enet/core/include/"/>
+                                <listOptionValue value="${NETWORK_PATH}/enet/soc/awr294x/../.."/>
+                                <listOptionValue value="${NETWORK_PATH}/enet/soc/awr294x"/>
+                                <listOptionValue value="${NETWORK_PATH}/enet/core"/>
+                                <listOptionValue value="${NETWORK_PATH}/lwip/lwip-stack/src/include"/>
+                                <listOptionValue value="${NETWORK_PATH}/lwip/lwip-config/awr294x"/>
+                                <listOptionValue value="${NETWORK_PATH}/lwip/lwip-port/freertos/include"/>
+                                <listOptionValue value="${NETWORK_PATH}/lwip/lwip-port/include"/>
+                                <listOptionValue value="${NETWORK_PATH}/enet/hw_include"/>
+                                <listOptionValue value="${NETWORK_PATH}/enet/utils/include"/>
+                                <listOptionValue value="${NETWORK_PATH}/enet/core/include/core"/>
+                                <listOptionValue value="${NETWORK_PATH}/enet/core/lwipif/inc"/>
+                                <listOptionValue value="${NETWORK_PATH}/lwip/lwip-stack/src/include/lwip"/>
+                                <listOptionValue value="${NETWORK_PATH}/lwip/lwip-port/freertos/include"/>
+                                <listOptionValue value="${NETWORK_PATH}/lwip/lwip-config/awr294x"/>
+                                <listOptionValue value="${MMWAVE_AWR294X_DFP_INSTALL_PATH}"/>
+                                <listOptionValue value="${MMWAVE_AWR294X_DFP_INSTALL_PATH}/ti/control/mmwavelink"/>
+                                <listOptionValue value="${COM_TI_MMWAVE_MCUPLUS_SDK_INSTALL_DIR}"/>
+                                <listOptionValue value="${MMWAVE_AWR294X_MATH_INSTALL_PATH}/packages"/>
+                            </option>
+                        </tool>
+                    </fileInfo>
                     <sourceEntries>
                         <entry excluding="mss/mss.syscfg|r5f_linker.cmd" flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
                     </sourceEntries>

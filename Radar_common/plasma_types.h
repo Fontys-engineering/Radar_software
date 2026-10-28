@@ -2,7 +2,7 @@
  * Copyright (c) 2026,
  *      Fontys University of Applied Sciences
  *          Mete Han Keskin < m.keskin @ student . fontys . nl >
- *          Vlad Nepriakhin < v.nepriakhin @ student . fontys . nl >   
+ *          Vlad Nepriakhin < v.nepriakhin @ student . fontys . nl >
  *      All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -27,4 +27,28 @@
  * SUCH DAMAGE.
  */
 
+#ifndef _PLASMA_TYPES_H
+#define _PLASMA_TYPES_H
+
+#include <stdint.h>
+
 #define FNTYS_PLASMARAD_VERSION 1
+
+#define PLASMA_OUT_RANGE_PROFILE (1U << 0)
+#define PLASMA_OUT_IQ_TAPS (1U << 1)
+#define PLASMA_OUT_DIAG (1U << 2)
+#define PLASMA_OUT_UART_TLV (1U << 3)
+
+typedef struct {
+  int8_t subFrameIdx;   /* -1 = all */
+  uint8_t nPhaseBins;   /* 1..8, odd */
+  uint8_t objDetEnable; /* run TI CFAR/AoA */
+  uint8_t rsvd;
+  uint32_t outputMask;
+  float gateMinM, gateMaxM;
+  float snrThrDb;
+  float rangeOffsetM; /* R_cal */
+  float phaseOffsetRad;
+} Plasma_Cfg;
+
+#endif

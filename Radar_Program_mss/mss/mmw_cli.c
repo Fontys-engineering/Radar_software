@@ -2147,7 +2147,7 @@ void MmwDemo_CLIInit (uint8_t taskPriority)
     /* Create Demo Banner to be printed out by CLI */
     sprintf(&demoBanner[0],
                        "******************************************\r\n" \
-                       "AWR294X MMW Demo %02d.%02d.%02d.%02d\r\n"  \
+                       "AWR294X MMW Plasma %02d.%02d.%02d.%02d\r\n"  \
                        "******************************************\r\n",
                         MMWAVE_SDK_VERSION_MAJOR,
                         MMWAVE_SDK_VERSION_MINOR,

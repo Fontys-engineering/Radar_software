@@ -2,7 +2,7 @@
  * Copyright (c) 2026,
  *      Fontys University of Applied Sciences
  *          Mete Han Keskin < m.keskin @ student . fontys . nl >
- *          Vlad Nepriakhin < v.nepriakhin @ student . fontys . nl >   
+ *          Vlad Nepriakhin < v.nepriakhin @ student . fontys . nl >
  *      All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -26,4 +26,14 @@
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  * SUCH DAMAGE.
  */
- 
+
+#ifndef _PLASMA_CLI_H
+#define _PLASMA_CLI_H
+
+#include <drivers/uart.h>
+#include <stdint.h>
+#include <ti/utils/cli/cli.h>
+
+int32_t PlasmaCli_register(CLI_Cfg *cfg, uint32_t *cnt);
+
+#endif

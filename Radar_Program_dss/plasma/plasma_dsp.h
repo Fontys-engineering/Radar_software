@@ -28,3 +28,10 @@
  */
  
 /*Header of DSP operations for the plasma radar detector*/
+
+#ifndef _PLASMA_DSP_H
+#define _PLASMA_DSP_H
+
+#include <plasma_types.h>
+
+#endif

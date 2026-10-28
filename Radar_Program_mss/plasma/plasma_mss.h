@@ -2,7 +2,7 @@
  * Copyright (c) 2026,
  *      Fontys University of Applied Sciences
  *          Mete Han Keskin < m.keskin @ student . fontys . nl >
- *          Vlad Nepriakhin < v.nepriakhin @ student . fontys . nl >   
+ *          Vlad Nepriakhin < v.nepriakhin @ student . fontys . nl >
  *      All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -26,4 +26,13 @@
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  * SUCH DAMAGE.
  */
- 
+
+#ifndef _PLASMA_MSS_H
+#define _PLASMA_MSS_H
+
+#include <plasma_types.h>
+
+extern Plasma_Cfg gPlasmaCfg;
+void PlasmaMss_init(void);
+
+#endif

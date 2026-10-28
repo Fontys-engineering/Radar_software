@@ -2,7 +2,7 @@
  * Copyright (c) 2026,
  *      Fontys University of Applied Sciences
  *          Mete Han Keskin < m.keskin @ student . fontys . nl >
- *          Vlad Nepriakhin < v.nepriakhin @ student . fontys . nl >   
+ *          Vlad Nepriakhin < v.nepriakhin @ student . fontys . nl >
  *      All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without
@@ -26,3 +26,21 @@
  * OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
  * SUCH DAMAGE.
  */
+
+#include <plasma/plasma_mss.h>
+
+Plasma_Cfg gPlasmaCfg;
+
+void PlasmaMss_init(void) {
+  /* defaults = Doc/08 reference cfg */
+  gPlasmaCfg.subFrameIdx = -1;
+  gPlasmaCfg.nPhaseBins = 3U;
+  gPlasmaCfg.objDetEnable = 0U;
+  gPlasmaCfg.outputMask =
+      PLASMA_OUT_RANGE_PROFILE | PLASMA_OUT_IQ_TAPS | PLASMA_OUT_DIAG;
+  gPlasmaCfg.gateMinM = 0.3f;
+  gPlasmaCfg.gateMaxM = 8.0f;
+  gPlasmaCfg.snrThrDb = 12.0f;
+  gPlasmaCfg.rangeOffsetM = 0.0f;
+  gPlasmaCfg.phaseOffsetRad = 0.0f;
+}
