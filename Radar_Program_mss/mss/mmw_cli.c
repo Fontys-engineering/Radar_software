@@ -75,7 +75,6 @@ typedef struct Element_t {
 
 /* CUSTOM PLASMA INCLUDES */
 #include <plasma/plasma_cli.h>
-#include <plasma/plasma_mss.h>
 
 /**************************************************************************
  *************************** Local function
