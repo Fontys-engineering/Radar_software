@@ -75,6 +75,8 @@
 /* Profiler Include Files */
 #include <kernel/dpl/CycleCounterP.h>
 
+/*CUSTOM PLASMA INCLUDES*/
+#include <plasma/plasma_mss.h>
 
 #define MMWDEMO_INIT_TASK_PRI         (1U)
 
@@ -135,6 +137,9 @@ static void MmwDemo_initTask(void* args)
 {
     setupInit();
     initCtrlTask();
+    
+    PlasmaMss_init(); // add plasma init
+
     #ifdef ENET_STREAM
     initEnetTask();
     #endif
@@ -149,9 +154,6 @@ static void MmwDemo_initTask(void* args)
      * Initialize the CLI Module:
      *****************************************************************************/
     MmwDemo_CLIInit(MMWDEMO_CLI_TASK_PRIORITY);
-
-    CLI_write("hello world\n\r");
-    test_print("testop print\n\t");
 
     #ifdef MOTION_TASK
     gMmwMssMCB.taskHandles.motionTask =

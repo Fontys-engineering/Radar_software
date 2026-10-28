@@ -72,6 +72,11 @@ typedef struct Element_t {
     int index;
 } Element;
 #endif
+
+/* CUSTOM PLASMA INCLUDES */
+#include <plasma/plasma_cli.h>
+#include <plasma/plasma_mss.h>
+
 /**************************************************************************
  *************************** Local function prototype****************************
  **************************************************************************/
@@ -2355,7 +2360,11 @@ void MmwDemo_CLIInit (uint8_t taskPriority)
     cliCfg.tableEntry[cnt].cmdHandlerFxn  = MmwDemo_CLIADCDataDitherCfg;
     cnt++;
 
+    /*adding table entry for the our CUSTOM plasma code*/
 
+    if (PlasmaCli_register(&cliCfg, &cnt) != 0)
+        test_print("Error: Couldn't add Plasma cli table, full?\n");
+    
     /* Open the CLI: */
     if (CLI_open (&cliCfg) < 0)
     {

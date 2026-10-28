@@ -27,3 +27,29 @@
  * SUCH DAMAGE.
  */
 
+#include <plasma/plasma_cli.h>
+#include <plasma/plasma_mss.h>
+
+/* bump UP as commands are added KEEP IN SYNC W/mmw_cli.c */
+#define PLASMA_CLI_NUM_CMDS 1U
+
+static int32_t PlasmaCli_stats(int32_t argc, char *argv[]) {
+  CLI_write("plasmaCfg: sf=%d nPh=%d objDet=%d mask=0x%x\n",
+            gPlasmaCfg.subFrameIdx, gPlasmaCfg.nPhaseBins,
+            gPlasmaCfg.objDetEnable, gPlasmaCfg.outputMask);
+  return 0;
+}
+
+int32_t PlasmaCli_register(CLI_Cfg *cfg, uint32_t *cnt) {
+  /* CLI_open writes "help" after the last entry, unchecked:
+   keep one slot free */
+  if ((*cnt + PLASMA_CLI_NUM_CMDS) >= CLI_MAX_CMD) {
+    return -1;
+  }
+  cfg->tableEntry[*cnt].cmd = "plasmaStats";
+  cfg->tableEntry[*cnt].helpString = "No arguments";
+  cfg->tableEntry[*cnt].cmdHandlerFxn = PlasmaCli_stats;
+  (*cnt)++;
+
+  return 0;
+}
