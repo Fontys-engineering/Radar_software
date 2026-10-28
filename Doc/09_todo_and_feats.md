@@ -8,8 +8,8 @@ In order. Each phase should build and run on the board before the next starts.
 - [x] MSS CCS include path `${PROJECT_LOC}/../Radar_common`
 - [x] DSS CCS include path `${PROJECT_LOC}/../Radar_common`
 - [x] Fix `plasma_mss.h` include: `<Plasma_common/plasma_types.h>` -> `<plasma_types.h>`
-- [ ] `plasma_types.h`: `Plasma_Cfg` + `outputMask` bits
-- [ ] `plasma_mss.c`: `gPlasmaCfg` + `PlasmaMss_init()` defaults
+- [x] `plasma_types.h`: `Plasma_Cfg` + `outputMask` bits
+- [x] `plasma_mss.c`: `gPlasmaCfg` + `PlasmaMss_init()` defaults
 - [ ] `plasma_cli.c`: `plasmaCfg`, `plasmaCal`, `plasmaStats` handlers + `PlasmaCli_register()` (keep 1 slot free for `help`)
 - [ ] Hook: `PlasmaCli_register(&cliCfg, &cnt)` before `CLI_open` in `mmw_cli.c`
 - [ ] Hook: `PlasmaMss_init()` after `initCtrlTask()` in `mss_main.c`, remove hello-world debug prints
