@@ -7,7 +7,7 @@ This is the interface between the plasma measurement code and the Ethernet strea
 | Item                                                              | Owner                                           |
 | ----------------------------------------------------------------- | ----------------------------------------------- |
 | `plasma_stream.{h,c}` (ring + API), `Plasma_Record` layout        | Producer (Mete)                                 |
-| Ethernet task, lwIP/CPSW, wire framing, UDP vs TCP, host receiver | Consumer (Vlad)                                 |
+| Ethernet task, lwIP/CPSW, TCP connection handling, host receiver  | Consumer (Vlad)                                 |
 | Init order, task priorities, memory placement                     | Shared (this doc + [08](08_init_and_config.md)) |
 
 ## Mechanism
@@ -45,7 +45,7 @@ void                 PlasmaStream_getStats(PlasmaStream_Stats *out);
 - A slot pointer is valid between `acquireRead` and `release`. After `release` it is not.
 - If the consumer passes slot memory to CPSW DMA (zero-copy, e.g. `netbuf_ref` → pbuf), it must `CacheP_wb` the range first and must not `release` until the TX completes. **Recommendation:** use `NETCONN_COPY` / `pbuf_take` at first.
 
-## Record layout (`Radar_common/plasma/plasma_types.h`)
+## Record layout (`Radar_common/plasma_types.h`)
 
 All fields are **little-endian**. The record start is 8-byte aligned. Sections are 4-byte aligned and zero-padded. Floats are IEEE-754 binary32.
 
@@ -57,7 +57,7 @@ All fields are **little-endian**. The record start is 8-byte aligned. Sections a
 | 4   | u16  | `version`      | `PLASMA_RECORD_VERSION`, starts at 1                                                                      |
 | 6   | u16  | `headerBytes`  | 48                                                                                                        |
 | 8   | u32  | `totalBytes`   | header + all sections; ≤ `PLASMA_RECORD_MAX_BYTES`                                                        |
-| 12  | u32  | `seq`          | +1 per committed record. Gaps on the host mean network loss; `dropCount` covers on-device loss.           |
+| 12  | u32  | `seq`          | +1 per committed record. TCP is lossless, so a gap on the host is a bug or a reconnect; `dropCount` covers on-device loss. |
 | 16  | u32  | `frameNumber`  | BSS frame counter (from DPC stats)                                                                        |
 | 20  | u32  | `dropCount`    | cumulative producer drops                                                                                 |
 | 24  | u64  | `timestampUs`  | MSS time at record build                                                                                  |
@@ -66,7 +66,7 @@ All fields are **little-endian**. The record start is 8-byte aligned. Sections a
 | 34  | u16  | `numSections`  |                                                                                                           |
 | 36  | u32  | `fCenterKHz`   | chirp centre frequency of this (sub)frame                                                                 |
 | 40  | u32  | `dspCycles`    | PlasmaDsp_process cycle count                                                                             |
-| 44  | u32  | `flags`        | bit0 `VALID` (peak above SNR threshold), bit1 `CAL_APPLIED`, bit2 `PHASE_UNWRAP_RESET`, bit3 `SATURATION` |
+| 44  | u32  | `flags`        | bit0 `VALID` (peak above SNR threshold), bit1 `CAL_APPLIED`, bit2 `PHASE_UNWRAP_RESET`, bit3 `SATURATION`, bit4 `TRUNCATED` (a section was clamped to fit the slot) |
 
 ### Sections
 
@@ -76,14 +76,16 @@ Each section starts with `{u16 type; u16 rsvd; u32 bytes}`, 8 B, where `bytes` i
 | ---- | --------------- | --------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------- |
 | 1    | `BOUNDARY`      | `f32 rangeM; f32 velCoarseMps; f32 velFineMps; f32 snrDb; f32 phaseRad` (unwrapped across frames); `f32 displacementM; u16 peakBin; u16 rsvd` | 8 + 28 = 36 B                                           |
 | 2    | `RANGE_PROFILE` | `u16 firstBin; u16 numBins; f32 binSizeM; u16 powDbX100[numBins]` (+pad)                                                                      | 8 + 8 + 2·256 = 528 B (256 bins = 512 real ADC samples) |
-| 3    | `IQ_TAPS`       | `u16 firstBin; u16 numBins; u16 numChirps; u16 rsvd; {i16 re; i16 im}[numBins][numChirps]` (Rx-combined)                                      | 8 + 8 + 4·3·64 = 784 B                                  |
+| 3    | `IQ_TAPS`       | `u16 firstBin; u16 numBins; u16 numChirps; u16 chirpPeriodX10ns; {i16 re; i16 im}[numBins][numChirps]` (Rx-combined)                                      | 8 + 8 + 4·3·64 = 784 B                                  |
 | 4    | `DIAG`          | `u32 interFrameMarginUs; i16 tempC; u16 rsvd`                                                                                                 | 16 B                                                    |
 
 - Which sections are present is chosen by `plasmaCfg outputMask` ([08](08_init_and_config.md)). `BOUNDARY` is always present.
 
 - **The host must skip unknown section types** using `bytes`. That gives forward compatibility.
 
-- Typical record (full-band, all sections): 48 + 36 + 528 + 784 + 16 = **1412 B**. That fits one UDP datagram (≤ 1472 B payload at 1500 MTU). D2 subframes (128 bins) are smaller. Keep `numBins × nPhaseBins` within that envelope where possible.
+- Typical record (full-band, all sections): 48 + 36 + 528 + 784 + 16 = **1412 B**. D2 subframes (128 bins) are smaller. The hard limit is the slot size, `PLASMA_RECORD_MAX_BYTES`.
+
+- **Transport is TCP** (Vlad's lwIP stack). TCP is a byte stream, so a record can arrive split or merged with others. Records are written back to back with no extra framing. The host syncs on `magic`, then reads `totalBytes` to find the record end. If `magic` or `version` doesn't match, the host must drop the connection or rescan for `magic`.
 
 - Expected rates:
 
@@ -97,6 +99,6 @@ Each section starts with `{u16 type; u16 rsvd; u32 bytes}`, 8 B, where `bytes` i
 |                  | Requirement                                                                                                                                                   |
 | ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Producer latency | `commit` within ≤ 0.2 ms of the DPM result. The producer never waits on the consumer.                                                                         |
-| Consumer         | Must sustain the average record rate. Bursts up to `PLASMA_RING_SLOTS` are absorbed (16 slots ≈ 160 ms at 100 Hz).                                            |
+| Consumer         | Must sustain the average record rate. Bursts up to `PLASMA_RING_SLOTS` are absorbed (16 slots ≈ 160 ms at 100 Hz). The TCP send may block on the send window or on a reconnect. That only stalls the consumer: the ring fills and the producer drops. |
 | Priorities       | Consumer task and lwIP `tcpip` thread **< 8** (UART/producer) and therefore below DPM (9) and ctrl (10). Suggested: ENET consumer 6, tcpip 6. CLI stays at 7. |
 | Overflow         | Reported in `dropCount` (record header) and `PlasmaStream_getStats`. It is never an assert.                                                                   |

@@ -81,7 +81,7 @@ This refers to the PoA made by our group.
 | Item                                   | Source                      | Value                                                                          |
 | -------------------------------------- | --------------------------- | ------------------------------------------------------------------------------ |
 | Measured quantities                    | PoA §2                      | Boundary distance, "thickness", velocity, "other parameters"                   |
-| Transport                              | PoA                         | TCP (different from prev doc using UDP)                                        |
+| Transport                              | PoA                         | TCP             |
 | Range-profile streaming rate           | EthernetPlasma.pdf (target) | 512–2048 bins × 16 bit at 100–1000 Hz, ≥ 60 FPS without drops                  |
 | Update rate / accuracy / range window  |                             | Best possible. Unknown as of now.                                              |
 | Expected plasma density                |                             | Research from EAST toakmak for ITER development provides somewhat info.        |

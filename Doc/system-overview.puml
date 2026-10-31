@@ -52,7 +52,7 @@ package "Control core  -  R5F  (FreeRTOS)" as MSS #F6FBF4 {
   rectangle "measurement data" as COLDATA #F6FBF4;line.dashed;line:AAAAAA;text:888888 {
     rectangle "**Result task**\n<size:12>priority 8 · one record per frame</size>" as RES $OURS
     database "**Record buffer**\n<size:12>16 frames · never blocks</size>" as RING $BUF
-    rectangle "**Ethernet task**\n<size:12>priority <= 6 · lwIP UDP</size>" as ETH $NET
+    rectangle "**Ethernet task**\n<size:12>priority <= 6 · lwIP TCP</size>" as ETH $NET
   }
   rectangle "configuration" as COLCFG #F6FBF4;line.dashed;line:AAAAAA;text:888888 {
     rectangle "**Radar control task**\n<size:12>priority 10 · drives the RF chip</size>" as CTRL $REUSED
@@ -82,7 +82,7 @@ note on link
   · raw IQ samples
 end note
 RING -down-> ETH  : next record
-ETH  -down-> RECV : **UDP**  ~1.4 KB / frame\n<size:11>100 frames/s ≈ 1.1 Mbit/s</size>
+ETH  -down-> RECV : **TCP**  ~1.4 KB / frame\n<size:11>100 frames/s ≈ 1.1 Mbit/s</size>
 
 ' ---------- configuration path (left column, flows UP) ----------
 TERM .up.> CLI  : config\n<size:11>UART</size>

@@ -119,7 +119,7 @@ end note
 PLASMAMSS .right.> TLV
 RING      -[#3A9A3A,bold]down-> ETH : acquireRead / release\n<size:10>counting semaphore</size>
 ETH       -down-> LWIP
-LWIP      -[#3A9A3A,bold]down-> RECV : **UDP** Plasma_Record\n<size:10>~1.4 KB @ 100 Hz</size>
+LWIP      -[#3A9A3A,bold]down-> RECV : **TCP** Plasma_Record\n<size:10>~1.4 KB @ 100 Hz</size>
 TLV       .down.> RECV : TLVs @ 3.125 Mbaud
 
 ' ---------- configuration path (flows up) ----------

@@ -75,7 +75,7 @@ package "Control core  -  R5F  (FreeRTOS)" as MSS #F6FBF4 {
   rectangle "measurement data" as COLDATA #F6FBF4;line.dashed;line:AAAAAA;text:888888 {
     rectangle "**Result task**\n<size:12>priority 8 · one record per frame</size>" as RES $OURS
     database "**Record buffer**\n<size:12>16 frames · never blocks</size>" as RING $BUF
-    rectangle "**Ethernet task**\n<size:12>priority <= 6 · lwIP UDP</size>" as ETH $NET
+    rectangle "**Ethernet task**\n<size:12>priority <= 6 · lwIP TCP</size>" as ETH $NET
   }
   rectangle "configuration" as COLCFG #F6FBF4;line.dashed;line:AAAAAA;text:888888 {
     rectangle "**Radar control task**\n<size:12>priority 10 · drives the RF chip</size>" as CTRL $REUSED
@@ -105,7 +105,7 @@ note on link
   · raw IQ samples
 end note
 RING -down-> ETH  : next record
-ETH  -down-> RECV : **UDP**  ~1.4 KB / frame\n<size:11>100 frames/s ≈ 1.1 Mbit/s</size>
+ETH  -down-> RECV : **TCP**  ~1.4 KB / frame\n<size:11>100 frames/s ≈ 1.1 Mbit/s</size>
 
 ' ---------- configuration path (left column, flows UP) ----------
 TERM .up.> CLI  : config\n<size:11>UART</size>
@@ -261,7 +261,7 @@ end note
 PLASMAMSS .right.> TLV
 RING      -[#3A9A3A,bold]down-> ETH : acquireRead / release\n<size:10>counting semaphore</size>
 ETH       -down-> LWIP
-LWIP      -[#3A9A3A,bold]down-> RECV : **UDP** Plasma_Record\n<size:10>~1.4 KB @ 100 Hz</size>
+LWIP      -[#3A9A3A,bold]down-> RECV : **TCP** Plasma_Record\n<size:10>~1.4 KB @ 100 Hz</size>
 TLV       .down.> RECV : TLVs @ 3.125 Mbaud
 
 ' ---------- configuration path (flows up) ----------
@@ -293,7 +293,7 @@ endlegend
 
 | File                                           | Core |
 | ---------------------------------------------- | ---- |
-| `Radar_common/plasma/plasma_types.h`           | both |
+| `Radar_common/plasma_types.h`                  | both |
 | `Radar_Program_dss/plasma/plasma_dsp.{h,c}`    | DSS  |
 | `Radar_Program_mss/plasma/plasma_mss.{h,c}`    | MSS  |
 | `Radar_Program_mss/plasma/plasma_cli.{h,c}`    | MSS  |
@@ -325,9 +325,7 @@ endlegend
 2. Peak, SNR and quadFit, minus `R_cal`, giving `rangeM`.
 3. Doppler peak in detMatrix row k, giving `velCoarse`.
 4. Cube taps: `nPhaseBins` × `numDopplerChirps` complex samples, Rx-combined. Then `atan2sp_v`, intra-frame unwrap, and pulse-pair `velFine`.
-5. Fill `Plasma_FrameResult` (layout in [07](07_data_handoff_contract.md) §Payload), with `subFrameIdx` and `fCenterHz` taken from the profile.
-
-
+5. Fill `Plasma_FrameResult` (layout in [07](07_data_handoff_contract.md) §Payload), with `subFrameIdx` and `fCenterKHz` taken from the profile.
 
 ## MSS stage: `PlasmaMss_onFrameResult`
 
