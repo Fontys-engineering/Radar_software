@@ -92,7 +92,7 @@ typedef struct {
 3. Re-send the **complete** config file, including the `plasma*` commands.
 4. `sensorStart` (without `0`).
 
-When changing `channelCfg` or `adcCfg`  after initial bootup start something in mmw_cli.c is supposed to assert. **[TODO TODO check which function]**.
+`channelCfg`, `adcCfg` and `lowPower` (the mmWave "open" config) are applied only on the **first** `sensorStart` after boot. On every later `sensorStart`, `MmwDemo_CLISensorStart` (`mmw_cli.c:166`) compares them with the first ones and asserts if they differ (`Exception: ../mss/mmw_cli.c, line 323` for `channelCfg`). To change them, reset the board (NRST or power cycle) and send the new cfg as the first one.
 
 ## Reference config serial config
 

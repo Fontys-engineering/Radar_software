@@ -125,13 +125,14 @@ Also record references for calibration and subtraction: a **metal plate at a kno
 
 ## 9. Troubleshooting
 
-| Symptom                                    | Cause / fix                                                                                 |
-| ------------------------------------------ | ------------------------------------------------------------------------------------------- |
-| "Unable To Read FPGA Version" / no reply   | Non-gigabit adapter, wrong IP, firewall, SW2.5 not on software config                       |
-| LD7 on (no LVDS data)                      | `lvdsStreamCfg` missing, sent after `sensorStart`, or `dataFmt` 0. Samtec cable not seated. |
-| LD5 on (FPGA buffer overflow)              | Data rate too high for the packet delay. Lower `packetDelay_us` or reduce the chirp data    |
-| LD6 on (DDR full)                          | PC not keeping up. Close other programs, use a wired gigabit link                           |
-| Data only in the first frame               | `enableSW` was 1                                                                            |
-| Board asserts at `sensorStart`             | `dataFmt` not 0/1/4, or `adcCfg` not `2 0`                                                  |
-| Leftover bytes / frames don't line up      | Recording started after `sensorStart`, packets lost, or wrong cfg passed to the parser      |
-| Rubbish after changing the chirp/LVDS rate | Reset the DCA1000 (power cycle, or `dca1000_ctl.py reset`), then `fpga` again               |
+| Symptom                                    | Cause / fix                                                                                                  |
+| ------------------------------------------ | ------------------------------------------------------------------------------------------------------------ |
+| "Unable To Read FPGA Version" / no reply   | Non-gigabit adapter, wrong IP, firewall, SW2.5 not on software config                                        |
+| LD7 on (no LVDS data)                      | `lvdsStreamCfg` missing, sent after `sensorStart`, or `dataFmt` 0. Samtec cable not seated.                  |
+| LD5 on (FPGA buffer overflow)              | Data rate too high for the packet delay. Lower `packetDelay_us` or reduce the chirp data                     |
+| LD6 on (DDR full)                          | PC not keeping up. Close other programs, use a wired gigabit link                                            |
+| Data only in the first frame               | `enableSW` was 1                                                                                             |
+| Board asserts at `sensorStart`             | `dataFmt` not 0/1/4, or `adcCfg` not `2 0`                                                                   |
+| `Exception: ../mss/mmw_cli.c, line 323`    | `channelCfg` differs from the first cfg since boot (e.g. 3 Tx -> 4 Tx). Press NRST, `fpga` again, resend cfg |
+| Leftover bytes / frames don't line up      | Recording started after `sensorStart`, packets lost, or wrong cfg passed to the parser                       |
+| Rubbish after changing the chirp/LVDS rate | Reset the DCA1000 (power cycle, or `dca1000_ctl.py reset`), then `fpga` again                                |
