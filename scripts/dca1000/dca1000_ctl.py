@@ -40,6 +40,7 @@ CONFIG_FPGA_GEN = 0x03
 RECORD_START = 0x05
 RECORD_STOP = 0x06
 SYSTEM_CONNECT = 0x09
+SYSTEM_ERROR = 0x0A
 CONFIG_PACKET_DATA = 0x0B
 READ_FPGA_VERSION = 0x0E
 
@@ -83,15 +84,23 @@ class Dca1000:
     def cmd(self, code, data=b"", name=""):
         pkt = struct.pack("<HHH", HDR, code, len(data)) + data + struct.pack("<H", FTR)
         self.sock.sendto(pkt, self.dca)
-        try:
-            resp, _ = self.sock.recvfrom(2048)
-        except socket.timeout:
-            raise SystemExit(f"error: no reply to {name or hex(code)} "
-                             f"(check IP 192.168.33.30, gigabit link, SW2.5)")
-        hdr, rcode, status, ftr = struct.unpack("<HHHH", resp[:8])
-        if hdr != HDR or ftr != FTR or rcode != code:
-            raise SystemExit(f"error: bad reply to {name}: {resp.hex()}")
-        return status
+        while True:
+            try:
+                resp, _ = self.sock.recvfrom(2048)
+            except socket.timeout:
+                raise SystemExit(f"error: no reply to {name or hex(code)} "
+                                 f"(check IP 192.168.33.30, gigabit link, SW2.5)")
+            hdr, rcode, status, ftr = struct.unpack("<HHHH", resp[:8])
+            if hdr != HDR or ftr != FTR:
+                raise SystemExit(f"error: bad reply to {name}: {resp.hex()}")
+            if rcode == SYSTEM_ERROR and code != SYSTEM_ERROR:
+                # unsolicited status the FPGA sends on its own (e.g. when the
+                # LVDS data stops), queued before our reply: report and skip
+                print(f"  (DCA1000 async status 0x{status:04x})")
+                continue
+            if rcode != code:
+                raise SystemExit(f"error: bad reply to {name}: {resp.hex()}")
+            return status
 
     def ok(self, code, data=b"", name=""):
         status = self.cmd(code, data, name)
@@ -173,13 +182,14 @@ def record(dca, out_dir, prefix, seconds):
                 last_print = now
         f.truncate(end_offset)
     print()
-    dca.ok(RECORD_STOP, name="RECORD_STOP")
     ds.close()
 
+    # log first, so a failing RECORD_STOP can't lose it
     with open(log_path, "w") as lf:
         lf.write("packets,bytes,lost_packets,out_of_order,first_seq,duration_s\n")
         lf.write(f"{packets},{end_offset},{lost},{out_of_order},"
                  f"{first_seq},{time.monotonic() - t0:.3f}\n")
+    dca.ok(RECORD_STOP, name="RECORD_STOP")
     print(f"done: {packets} packets, {end_offset} bytes, lost {lost}, "
           f"out of order {out_of_order}  (log {log_path})")
     if packets == 0:
