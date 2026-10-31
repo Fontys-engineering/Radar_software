@@ -6,6 +6,7 @@
 # scripts directory for custom things
 # /scripts/
 __pycache__/
+record_data/
 
 # command line build output and per-machine overrides (see host.mk)
 /out/
