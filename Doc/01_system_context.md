@@ -62,17 +62,17 @@ This is self researched, not given by client specifically but relevant to how we
 
 Table below focuses mainly on the RF frontend limit. But we also know that Ethernet data format should be raw ADC samples.  
 
-| Parameter    | Limit                                                                                    | Consequence                                               |
-| ------------ | ---------------------------------------------------------------------------------------- | --------------------------------------------------------- |
-| RF band      | 76–81 GHz. One sweep must fit within 76–80.5 or 76.5–81 GHz.                             | B_max ≈ 4.5 GHz, so ΔR = c/2B ≈ 3.3 cm                    |
-| Slope        | ≤ 266 MHz/µs, with restricted codes                                                      | Limits R_max at a given IF                                |
-| ADC          | **Real only**, ≤ 37.5–45 Msps, IF BW 15–20 MHz depending on grade **[VERIFY datasheet]** | `R_max = F_IF·c/(2S)`                                     |
-| ADC buffer   | 16 KB ping/pong: ≤ 2048 real samples at 4 Rx channels used                               | Range FFT ≤ 1024 bins (HWA DPU limit)                     |
-| Chirps       | 512 chirp-RAM entries, `numLoops` 1–255, 4 profiles                                      | Frequency-stepping across chirps or subframes is possible |
-| Subframes    | Up to 4 per advanced frame, each with its own profile                                    | Basis for sub-band sweeps (D2)                            |
-| λ at 77 GHz  | 3.89 mm                                                                                  | Phase sensitivity is about 0.31 mm/rad                    |
-| λ at 81 GHz  | 3.7 mm                                                                                   | Same as above                                             |
-| Frame timing | Active chirp time ≤ 50 % of the frame period (demo rule)                                 | Leaves inter-frame time for DSS processing                |
+| Parameter    | Consequence                                               |
+| ------------ | --------------------------------------------------------- |
+| RF band      | B_max ≈ 4.5 GHz, so ΔR = c/2B ≈ 3.3 cm                    |
+| Slope        | Limits R_max at a given IF                                |
+| ADC          | `R_max = F_IF·c/(2S)`                                     |
+| ADC buffer   | Range FFT ≤ 1024 bins (HWA DPU limit)                     |
+| Chirps       | Frequency-stepping across chirps or subframes is possible |
+| Subframes    | Basis for sub-band sweeps (D2)                            |
+| λ at 77 GHz  | Phase sensitivity is about 0.31 mm/rad                    |
+| λ at 81 GHz  | Same as above                                             |
+| Frame timing | Leaves inter-frame time for DSS processing                |
 
 ## Requirements status
 
@@ -81,7 +81,7 @@ This refers to the PoA made by our group.
 | Item                                   | Source                      | Value                                                                          |
 | -------------------------------------- | --------------------------- | ------------------------------------------------------------------------------ |
 | Measured quantities                    | PoA §2                      | Boundary distance, "thickness", velocity, "other parameters"                   |
-| Transport                              | PoA                         | TCP             |
+| Transport                              | PoA                         | TCP                                                                            |
 | Range-profile streaming rate           | EthernetPlasma.pdf (target) | 512–2048 bins × 16 bit at 100–1000 Hz, ≥ 60 FPS without drops                  |
 | Update rate / accuracy / range window  |                             | Best possible. Unknown as of now.                                              |
 | Expected plasma density                |                             | Research from EAST toakmak for ITER development provides somewhat info.        |

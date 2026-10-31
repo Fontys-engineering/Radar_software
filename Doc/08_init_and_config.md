@@ -106,7 +106,7 @@ sensorStop
 flushCfg
 dfeDataOutputMode 1
 channelCfg 15 1 0                 % 4 Rx, Tx0 only   [CONFIRM which ports are connected]
-adcCfg 2 1                        % 16-bit, real
+adcCfg 2 0                        % 16-bit, real (1 = complex, rejected on AWR294x)
 adcbufCfg -1 1 1 1 1              % real, non-interleaved, chirpThreshold 1
 profileCfg 0 76.5 7 5 50 0 0 80 1 512 12800 0 0 30
 chirpCfg 0 0 0 0 0 0 0 1
@@ -123,7 +123,7 @@ measureRangeBiasAndRxChanPhase 0 1.5 0.2
 aoaFovCfg -1 -90 90 -90 90
 cfarFovCfg -1 0 0 12
 cfarFovCfg -1 1 -17 17
-lvdsStreamCfg -1 0 0 0            % LVDS off
+lvdsStreamCfg -1 0 0 0            % LVDS off. Raw ADC capture: -1 0 1 0, see Doc/10
 plasmaCfg -1 0.3 8.0 12 3 0 7
 plasmaCal 0.000
 sensorStart
