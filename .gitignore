@@ -4,7 +4,8 @@
 /Radar_Program_dss/dss/dssgenerated
 
 # scripts directory for custom things
-/scripts/
+# /scripts/
+__pycache__/
 
 # command line build output and per-machine overrides (see host.mk)
 /out/
