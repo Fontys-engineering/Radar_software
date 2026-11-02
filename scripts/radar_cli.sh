@@ -11,27 +11,32 @@
 #   -b <baud>     baud rate           (default 115200)
 #   -t <seconds>  reply timeout/line  (default 5)
 #   -k            keep going after an Error reply (default: stop)
-#   -d <seconds>  pause after each reply      (default 0.05)
+#   -d <seconds>  pause after each reply      (default 0.1)
+#   -c <seconds>  pause after each character  (default 0.001, 0 = whole line)
 #
 # Every line is sent with '\n' and the script waits for the CLI's reply:
 # "Done", "Error <n>" or "... is not recognized", then pauses before the next
 # line: the board prints its prompt after "Done" and only then reads again, and
 # its SCI UART has a 1 byte RX buffer, so a char sent too early is lost
-# (e.g. "flushCfg" arrives as "lushCfg"). Lines starting with '%' and
-# blank lines are skipped locally, same as the TI Visualizer does.
+# (e.g. "flushCfg" arrives as "lushCfg"). The same overrun can hit mid-line
+# when the CLI task is late reading a char, so chars are paced as well
+# (e.g. "multiObjBeamForming" arrives as "multiObjBeamFrming").
+# Lines starting with '%' and blank lines are skipped locally, same as the
+# TI Visualizer does.
 ###############################################################################
 set -u
 
 PORT=${RADAR_PORT:-/dev/ttyACM0}
 BAUD=115200
 TIMEOUT=5
-DELAY=0.05
+DELAY=0.1
+CHAR_DELAY=0.001
 KEEP_GOING=0
 CFG_FILE=""
 
-usage() { sed -n '3,21p' "$0" | sed 's/^# \{0,1\}//'; exit 1; }
+usage() { sed -n '3,25p' "$0" | sed 's/^# \{0,1\}//'; exit 1; }
 
-while getopts "p:b:t:f:d:kh" opt; do
+while getopts "p:b:t:f:d:c:kh" opt; do
     case $opt in
         p) PORT=$OPTARG ;;
         b) BAUD=$OPTARG ;;
@@ -39,6 +44,7 @@ while getopts "p:b:t:f:d:kh" opt; do
         f) CFG_FILE=$OPTARG ;;
         k) KEEP_GOING=1 ;;
         d) DELAY=$OPTARG ;;
+        c) CHAR_DELAY=$OPTARG ;;
         *) usage ;;
     esac
 done
@@ -64,8 +70,17 @@ while read -r -t 0.2 -u 3 _; do :; done
 
 # send one command, print the board output, return 0 on Done
 send_cmd() {
-    local cmd=$1 line
-    printf '%s\n' "$cmd" >&3
+    local cmd=$1 line i
+    if [[ $CHAR_DELAY == 0 ]]; then
+        printf '%s\n' "$cmd" >&3
+    else
+        # one char at a time so the board's 1 byte RX buffer never overruns
+        for ((i = 0; i < ${#cmd}; i++)); do
+            printf '%s' "${cmd:i:1}" >&3
+            sleep "$CHAR_DELAY"
+        done
+        printf '\n' >&3
+    fi
     while IFS= read -r -t "$TIMEOUT" -u 3 line; do
         line=${line%$'\r'}
         line=${line#mmwDemo:/>}
