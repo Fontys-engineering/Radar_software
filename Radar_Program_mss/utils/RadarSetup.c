@@ -853,22 +853,19 @@ static void MmwDemo_transmitProcessedOutput
     #ifdef ENET_STREAM
     if (gMmwMssMCB.enetCfg.streamEnable)
     {
-        // 🔴 If previous data not yet sent → DROP frame
-        if (gEnetStreamObjData.ready == 1)
+        /* A busy or undersized Ethernet buffer must not interrupt the
+         * remaining UART TLVs for this frame. */
+        if ((gEnetStreamObjData.ready == 0U) &&
+            (result->numObjOut <= sizeof(gEnetStreamObjData.objData) /
+                                  sizeof(DPIF_PointCloudCartesian)))
         {
-            return;
+            gEnetStreamObjData.numObj = result->numObjOut;
+            gEnetStreamObjData.dummy = 0x2U;
+            memcpy((void *)gEnetStreamObjData.objData, (void *)objOut,
+                   sizeof(DPIF_PointCloudCartesian) * result->numObjOut);
+            gEnetStreamObjData.ready = 1U;
+            SemaphoreP_post(&objDataSemaphoreHandle);
         }
-
-        gEnetStreamObjData.numObj = result->numObjOut;
-        gEnetStreamObjData.dummy  = 0x0U;
-
-        memcpy((void *)gEnetStreamObjData.objData,
-            (void*)objOut,
-            sizeof(DPIF_PointCloudCartesian) * gEnetStreamObjData.numObj);
-
-        gEnetStreamObjData.ready = 1;   // 🔴 mark as ready
-
-        SemaphoreP_post(&objDataSemaphoreHandle);
     }
     #endif
 

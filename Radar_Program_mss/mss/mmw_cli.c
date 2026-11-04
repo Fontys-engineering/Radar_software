@@ -75,6 +75,9 @@ typedef struct Element_t {
 
 /* CUSTOM PLASMA INCLUDES */
 #include <plasma/plasma_cli.h>
+#ifdef ENET_STREAM
+#include "../enet/enet_stream_mode.h"
+#endif
 
 /**************************************************************************
  *************************** Local function
@@ -119,6 +122,7 @@ static int32_t MmwDemo_CLIADCDataDitherCfg(int32_t argc, char *argv[]);
 #ifdef ENET_STREAM
 static int32_t MmwDemo_CLIQueryLocalIp(int32_t argc, char *argv[]);
 static int32_t MmwDemo_CLIEnetCfg(int32_t argc, char *argv[]);
+static int32_t MmwDemo_CLIEnetTestMode(int32_t argc, char *argv[]);
 #endif
 
 /**************************************************************************
@@ -1857,6 +1861,29 @@ static int32_t MmwDemo_CLIEnetCfg(int32_t argc, char *argv[]) {
 
   return 0;
 }
+
+/* Select the payload sent on the next Ethernet handoff. No sensor restart is
+ * needed; the TCP sender reads the mode once for each queued radar result. */
+static int32_t MmwDemo_CLIEnetTestMode(int32_t argc, char *argv[]) {
+  uint8_t mode;
+
+  if (argc == 1) {
+    mode = AppTcp_getStreamMode();
+  } else if ((argc == 2) && (strcmp(argv[1], "0") == 0)) {
+    mode = ENET_STREAM_MODE_CARTESIAN;
+    AppTcp_setStreamMode(mode);
+  } else if ((argc == 2) && (strcmp(argv[1], "1") == 0)) {
+    mode = ENET_STREAM_MODE_TEST;
+    AppTcp_setStreamMode(mode);
+  } else {
+    CLI_write("Usage: enetTestMode <0|1> (0=Cartesian, 1=test pattern)\n");
+    return -1;
+  }
+
+  CLI_write("Ethernet stream mode: %u (%s)\n", (unsigned int)mode,
+            (mode == ENET_STREAM_MODE_TEST) ? "test pattern" : "Cartesian");
+  return 0;
+}
 #endif
 
 /**
@@ -2228,6 +2255,15 @@ void MmwDemo_CLIInit(uint8_t taskPriority) {
                                                                       */
   cliCfg.tableEntry[cnt].cmdHandlerFxn = MmwDemo_CLIEnetCfg;
   cnt++;
+
+  if ((cnt + 1U) < CLI_MAX_CMD) {
+    cliCfg.tableEntry[cnt].cmd = "enetTestMode";
+    cliCfg.tableEntry[cnt].helpString = "[0|1] (0=Cartesian, 1=test pattern)";
+    cliCfg.tableEntry[cnt].cmdHandlerFxn = MmwDemo_CLIEnetTestMode;
+    cnt++;
+  } else {
+    test_print("Error: No CLI table space for enetTestMode\n");
+  }
 #endif
 
 #ifdef MMWDEMO_DDM

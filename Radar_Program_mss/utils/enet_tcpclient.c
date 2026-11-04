@@ -42,6 +42,8 @@
 #include "lwip/sys.h"
 #include "lwip/api.h"
 #include "enet_apputils.h"
+#include "enet/enet_stream_mode.h"
+#include "enet/plasma_enet_test.h"
 
 #ifdef SOC_AWR294X
 #include <ti/demo/awr294x/mmw/mss/mmw_mss.h>
@@ -73,6 +75,22 @@ SemaphoreP_Object objDataSemaphoreHandle;
 extern MmwDemo_MSS_MCB gMmwMssMCB;
 extern MmwDemo_enetStreamObjData gEnetStreamObjData;
 
+/* Match the previous ENET_PLASMA_TEST_MODE=0 startup behavior. */
+static volatile uint8_t sEnetStreamMode = ENET_STREAM_MODE_CARTESIAN;
+
+void AppTcp_setStreamMode(uint8_t mode)
+{
+    if (mode <= ENET_STREAM_MODE_TEST)
+    {
+        sEnetStreamMode = mode;
+    }
+}
+
+uint8_t AppTcp_getStreamMode(void)
+{
+    return sEnetStreamMode;
+}
+
 /* ========================================================================== */
 /*                          Function Definitions                              */
 /* ========================================================================== */
@@ -96,74 +114,54 @@ static void AppTcp_simpleclient(void *pArg)
         if (connectError != ERR_OK)
         {
             netconn_close(pConn);
-            DebugP_logInfo("Connection with the server isn't established\r\n");
+            DebugP_log("Connection with the server isn't established\r\n");
         }
         else
         {
-            DebugP_logInfo("Connection with the server is established\r\n");
+            DebugP_log("Connection with the server is established\r\n");
 
-        while(1)
-        {
-            SemaphoreP_pend(&objDataSemaphoreHandle, SystemP_WAIT_FOREVER);
-
-            uint32_t numObj = gEnetStreamObjData.numObj;
-            uint32_t len = sizeof(DPIF_PointCloudCartesian) * numObj;
-            gEnetStreamObjData.dummy = 0x2;
-            if (len > 4000)   // tune this threshold ADDED
+            while(1)
             {
+                /* Pending on the semaphore: Waiting for events to be received */
+                SemaphoreP_pend (&objDataSemaphoreHandle, SystemP_WAIT_FOREVER);
+
+                if (AppTcp_getStreamMode() == ENET_STREAM_MODE_TEST)
+                {
+                    err = PlasmaEnet_sendTestRecord(pConn);
                     gEnetStreamObjData.ready = 0;
-                    continue;   // skip this frame entirely
-            }
-
-            if (numObj == 0)
-            {
-                gEnetStreamObjData.ready = 0;
-                continue;
-            }
-
-            // err = netconn_write(pConn,
-            //                     &(gEnetStreamObjData.numObj),
-            //                     sizeof(uint32_t) + 2,
-            //                     NETCONN_COPY | NETCONN_DONTBLOCK); //DONTBLOCK ADDED
-
-            do {
+                    if (err != ERR_OK)
+                    {
+                        DebugP_logInfo("Plasma test write failed: %d (%s)\n",
+                                err, lwip_strerr(err));
+                    }
+                    continue;
+                }
+                uint32_t numObj = gEnetStreamObjData.numObj;
+                uint32_t len = sizeof(DPIF_PointCloudCartesian) * numObj;
+                if (numObj == 0)
+                {
+                    gEnetStreamObjData.ready = 0;
+                    continue;
+                }
+                do {
                 err = netconn_write(pConn,
                                     &(gEnetStreamObjData.numObj),
                                     sizeof(uint32_t) + 2,
                                     NETCONN_COPY);   // 🔴 REMOVE DONTBLOCK
-
-                // err = netconn_write(pConn,
-                //                     &(gEnetStreamObjData.numObj),
-                //                     sizeof(uint32_t) + 2,
-                //                     NETCONN_COPY);   // 🔴 REMOVE DONTBLOCK
 
                 if (err == ERR_MEM)
                 {
                     /* lwIP buffer full → wait and retry */
                     ClockP_usleep(2000);
                 }
-
             } while (err == ERR_MEM);
-
             if (err != ERR_OK)
             {
                 DebugP_log("write header failed: %s\n", lwip_strerr(err));
                 gEnetStreamObjData.ready = 0;
                 continue;
             }            
-
-            if (err != ERR_OK)
-            {
-                DebugP_logInfo("WRITE HEADER FAIL: %d (%s)\n", err, lwip_strerr(err));
-                gEnetStreamObjData.ready = 0;
-                ClockP_usleep(1000);   // ADDED
-                continue;
-            }
-
-            // err = netconn_write(pConn,
-            //                     gEnetStreamObjData.objData,
-            //                     len,
-            //                     NETCONN_COPY | NETCONN_DONTBLOCK); //DONTBLOCK ADDED                   
+                 
             err = netconn_write(pConn,
                                 gEnetStreamObjData.objData,
                                 len,
@@ -175,10 +173,8 @@ static void AppTcp_simpleclient(void *pArg)
                 ClockP_usleep(1000);   // ADDED
                 continue;
             }
-
-            // ADDED
             gEnetStreamObjData.ready = 0;
-        }
+            }
         }
     }
 }

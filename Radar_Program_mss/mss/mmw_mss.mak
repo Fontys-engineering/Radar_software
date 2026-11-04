@@ -5,7 +5,9 @@
 ###################################################################################
 # Setup the VPATH:
 ###################################################################################
-vpath %.c $(MMWAVE_SDK_INSTALL_PATH)/ti/demo/utils \
+vpath %.c ./utils \
+          ./enet \
+          $(MMWAVE_SDK_INSTALL_PATH)/ti/demo/utils \
           ./mss
 
 MSS_CPU := R5F
@@ -44,6 +46,7 @@ MSS_MMW_ENET_DEMO_LOC_LIBS = $(MSS_MMW_DEMO_LOC_LIBS) \
 							-Wl,-i${MCU_PLUS_INSTALL_PATH}/source/networking/lwip/lib \
 
 R5F_INCLUDE     += -I$(MMWAVE_SDK_INSTALL_PATH)/ti/demo/awr294x/mmw/mss/mssgenerated \
+                   -I../Radar_common \
 
 ###################################################################################
 # Additional Include which are required to build the Enet Stream enabled DEMO:
@@ -86,8 +89,9 @@ MSS_MMW_DEMO_SOURCES     = mmwdemo_adcconfig.c \
 
 MSS_MMW_TDM_DEMO_ENET_SOURCES = $(MSS_MMW_DEMO_SOURCES) \
                                 enet_stream.c \
-                                enet_cpswconfighandler.c \
-                                enet_tcpclient.c
+                                 enet_cpswconfighandler.c \
+                                 enet_tcpclient.c \
+                                 plasma_enet_test.c
 
 MSS_MMW_DEMO_SOURCES_GEN  = ti_board_config.c \
                             ti_board_open_close.c \
